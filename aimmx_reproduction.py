@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import numpy as np
 import nltk
+import time
 from nltk import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
@@ -17,60 +18,76 @@ import matplotlib.pyplot as plt
 #nltk.download('punkt')
 
 #Preprocess data from Papers with code
-data = {'Text':[], 'Label':[]}
-methods = json.load(open("methods.json"))
-urls = []
+
 labels = ['Computer Vision', 'Natural Language Processing']
 
-for i in methods:
-    #if len(i['collections']) == 0 or not i['code_snippet_url'] or i['collections'][0]['area'] not in labels:
-    if len(i['collections']) == 0 or i['collections'][0]['area'] not in labels:
-        continue
-    #urls.append(i['code_snippet_url'].split('#')[0].rsplit('/', 3)[0])
-    text = ''
-    for key, value in i.items():
-        if key != 'collections':
-            text += str(value) + ' '
-    data['Text'].append(text)
-    data['Label'].append(i['collections'][0]['area'])
-#print(json.dumps(data, indent=4))
-
-df_train = pd.DataFrame(data)
+df_train = pd.read_csv('dataset/train_all.csv', sep=';')
 df_train_x = df_train['Text']
 df_train_y = df_train['Label']
-#print(df_train.head())
+print(df_train.shape)
+print(df_train.head())
+
+
 
 #Plot the label's distribution
-unique, counts = np.unique(df_train_y, return_counts=True)
-plt.bar(unique, counts, 1)
-plt.title('Class Frequency')
-plt.xlabel('Class')
-plt.ylabel('Frequency')
-plt.show()
+#unique, counts = np.unique(df_train_y, return_counts=True)
+#plt.bar(unique, counts, 1)
+#plt.title('Class Frequency')
+#plt.xlabel('Class')
+#plt.ylabel('Frequency')
+#plt.show()
 
+
+data_somef = {'Text':[], 'Label':[]}
 
 """
-keys_to_use = ['documentation', 'description']
-data_test = {'Text':[]}
-
-for i in range(10):
-    print(urls[i])
-    os.system("somef describe -r {} -o tmp.json -t 0.8".format(urls[i]))
+for index, i in df_train.iterrows():
+#for j in range(1):
+    repo = i['Repo']
+    label = i['Label']
+    print(repo)
+    os.system("somef describe -r {} -o tmp.json -t 0.8".format(repo))
+    #https://github.com/Sanyuan-Chen/RecAdam
+    #time.sleep(10.0)
     res = json.load(open('tmp.json'))
     text = ''
-    for key in keys_to_use:
-        if key in res:
-            values = [val['excerpt'].replace('\n', ' ') for val in res[key]]
-            text += ' '.join(values) + ' '
-    data_test['Text'].append(text)
+    if 'description' in res:
+        #values = [val['excerpt'].replace('\n', ' ') for val in res[key]]
+        for i in res['description']:
+            if i['technique'] == "Header extraction":
+                #print(i['excerpt'])
+                text += i['excerpt'].replace('\n', ' ').replace(',', ' ')
+                text += ' '
+    if 'installation' in res:
+        for i in res['installation']:
+            #print(i['excerpt'])
+            text += i['excerpt'].replace('\n', ' ').replace(',', ' ')
+            text += ' '
+    if 'usage' in res:
+        for i in res['usage']:
+            if i['technique'] == "Header extraction":
+                text += i['excerpt'].replace('\n', ' ').replace(',', ' ')
+                text += ' '
     #print(text)
+    data_somef['Text'].append(text)
+    data_somef['Label'].append(label)
+    os.remove("tmp.json") 
+    with open("res.txt", "a", encoding='utf8') as f:
+        f.write("Text: {}, \n Label: {} \n\n".format(text, label))
+    #results.write("Text: {}, \nLabel: {}".format(text, label))
+    print("Text: {}, \nLabel: {}".format(text, label))
 
-df_test = pd.DataFrame(data_test)
-#print(df_test.head())
+    
+
+df_somef = pd.DataFrame(data_somef)
+df_somef.to_csv('dataset/train_somef.csv', sep=';', index=False)
+print(df_somef.head())
+
 """
 
+
 #Train test split
-X_train, X_test, y_train, y_test = train_test_split(df_train_x, df_train_y, test_size=0.20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(df_train_x, df_train_y, test_size=0.10, random_state=42)
 
 #Model
 clf = Pipeline([
@@ -81,29 +98,48 @@ clf = Pipeline([
 ])
 
 clf.fit(X_train, y_train)
+pred_y = clf.predict(X_test)
+
 
 
 #Measurements
-pred_y = clf.predict(X_test)
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
+
 print("Accuracy : ", metrics.accuracy_score(y_test, pred_y))
 
-titles_options = [
-    ("Confusion matrix, without normalization", None),
-    ("Normalized confusion matrix", "true"),
-]
+#titles_options = [
+#    ("Confusion matrix, without normalization", None),
+#    ("Normalized confusion matrix", "true"),
+#]
 
-for title, normalize in titles_options:
-    disp = ConfusionMatrixDisplay.from_estimator(
-        clf,
-        X_test,
-        y_test,
-        display_labels=labels,
-        cmap=plt.cm.Blues,
-        normalize=normalize,
-    )
-    disp.ax_.set_title(title)
+cm = confusion_matrix(y_test, pred_y)
+y_unique = y_test.unique()
+cm_df = pd.DataFrame(cm,
+                     index = [y_unique], 
+                     columns = [y_unique])
 
-    print(title)
-    print(disp.confusion_matrix)
+plt.figure(figsize=(5,4))
+sns.heatmap(cm_df, annot=True)
+plt.title('Confusion Matrix')
+plt.ylabel('Actual Values')
+plt.xlabel('Predicted Values')
+plt.show()
+
+
+#for title, normalize in titles_options:
+#    disp = ConfusionMatrixDisplay.from_estimator(
+#        clf,
+#        X_test,
+#        y_test,
+#        display_labels=labels,
+#        cmap=plt.cm.Blues,
+#        normalize=normalize,
+#    )
+#    disp.ax_.set_title(title)
+
+#    print(title)
+#    print(disp.confusion_matrix)
 
 plt.show()
