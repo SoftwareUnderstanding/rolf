@@ -1,0 +1,230 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2012.15712",
+      "https://arxiv.org/abs/2012.15712"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{deng2020voxel,\n  title={Voxel R-CNN: Towards High Performance Voxel-based 3D Object Detection},\n  author={Deng, Jiajun and Shi, Shaoshuai and Li, Peiwei and Zhou, Wengang and Zhang, Yanyong and Li, Houqiang},\n  journal={arXiv:2012.15712},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9869974147871126,
+        0.9999988873925653,
+        0.9987133720959712,
+        0.9664456561658856
+      ],
+      "excerpt": "  title={Voxel R-CNN: Towards High Performance Voxel-based 3D Object Detection}, \n  author={Deng, Jiajun and Shi, Shaoshuai and Li, Peiwei and Zhou, Wengang and Zhang, Yanyong and Li, Houqiang}, \n  journal={arXiv:2012.15712}, \n  year={2020} \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sidu28/Voxel_Self_Attention",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository is implemented by Jiajun Deng (dengjj@mail.ustc.edu.cn).\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-02T04:14:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-08T16:45:15Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.994988029565552
+      ],
+      "excerpt": "This is the official implementation of Voxel R-CNN: Towards High Performance Voxel-based 3D Object Detection, built on OpenPCDet. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sidu28/Voxel_att/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 07 Dec 2021 07:24:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Sidu28/Voxel_Self_Attention/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sidu28/Voxel_Self_Attention",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/Sidu28/Voxel_att/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/slurm_train.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/dist_test.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/slurm_test_mgpu.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/dist_train.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/train_voxel_rcnn.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/slurm_test_single.sh",
+      "https://raw.githubusercontent.com/Sidu28/Voxel_att/main/tools/scripts/eval_voxel_rcnn.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1.  Prepare for the running environment. \r\n\r\n    You can either use the docker image we provide, or follow the installation steps in [`OpenPCDet`](https://github.com/open-mmlab/OpenPCDet). \r\n\r\n    ```\r\n    docker pull djiajun1206/pcdet-pytorch1.5\r\n    ```\r\n\r\n2. Prepare for the data.\r\n\r\n    Please download the official [KITTI 3D object detection](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) dataset and organize the downloaded files as follows (the road planes could be downloaded from [[road plane]](https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing), which are optional for data augmentation in the training):\r\n\r\n\r\n    ```\r\n    Voxel-R-CNN\r\n    \u251c\u2500\u2500 data\r\n    \u2502   \u251c\u2500\u2500 kitti\r\n    \u2502   \u2502   \u2502\u2500\u2500 ImageSets\r\n    \u2502   \u2502   \u2502\u2500\u2500 training\r\n    \u2502   \u2502   \u2502   \u251c\u2500\u2500calib & velodyne & label_2 & image_2 & (optional: planes)\r\n    \u2502   \u2502   \u2502\u2500\u2500 testing\r\n    \u2502   \u2502   \u2502   \u251c\u2500\u2500calib & velodyne & image_2\r\n    \u251c\u2500\u2500 pcdet\r\n    \u251c\u2500\u2500 tools\r\n    ```\r\n    Generate the data infos by running the following command:\r\n    ```\r\n    python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml\r\n    ```\r\n\r\n3. Setup.\r\n\r\n    ```\r\n    python setup.py develop\r\n    ```\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8146688196991635
+      ],
+      "excerpt": "<p align=\"center\"> <img src='docs/voxel_rcnn_framework.jpg' align=\"center\" height=\"270px\"> </p> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Sidu28/Voxel_Self_Attention/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "C",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\r\\n\\r\\nCopyright (c) 2018 \\r\\n\\r\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\r\\nof this software and associated documentation files (the \"Software\"), to deal\\r\\nin the Software without restriction, including without limitation the rights\\r\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\r\\ncopies of the Software, and to permit persons to whom the Software is\\r\\nfurnished to do so, subject to the following conditions:\\r\\n\\r\\nThe above copyright notice and this permission notice shall be included in all\\r\\ncopies or substantial portions of the Software.\\r\\n\\r\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\r\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\r\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\r\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\r\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\r\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\r\\nSOFTWARE.\\r\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Voxel R-CNN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Voxel_Self_Attention",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sidu28",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sidu28/Voxel_Self_Attention/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 07 Dec 2021 07:24:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Training.\r\n    \r\n    The configuration file is in tools/cfgs/voxelrcnn, and the training scripts is in tools/scripts.\r\n\r\n    ```\r\n    cd tools\r\n    sh scripts/train_voxel_rcnn.sh\r\n    ```\r\n\r\n2. Evaluation.\r\n\r\n    The configuration file is in tools/cfgs/voxelrcnn, and the training scripts is in tools/scripts.\r\n\r\n    ```\r\n    cd tools\r\n    sh scripts/eval_voxel_rcnn.sh\r\n    ```\r\n\r\n\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

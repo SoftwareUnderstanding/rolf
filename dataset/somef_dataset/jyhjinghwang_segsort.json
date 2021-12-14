@@ -1,0 +1,252 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1910.06962",
+      "https://arxiv.org/abs/1910.06962"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this code useful for your research, please consider citing our paper [SegSort: Segmentation by Discriminative Sorting of Segments](https://arxiv.org/abs/1910.06962).\n\n```\n@inproceedings{hwang2019segsort,\n  title={SegSort: Segmentation by Discriminative Sorting of Segments},\n  author={Hwang, Jyh-Jing and Yu, Stella X and Shi, Jianbo and Collins, Maxwell D and Yang, Tien-Ju and Zhang, Xiao and Chen, Liang-Chieh},\n  booktitle={Proceedings of the IEEE International Conference on Computer Vision},\n  pages={7334--7344},\n  year={2019}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{hwang2019segsort,\n  title={SegSort: Segmentation by Discriminative Sorting of Segments},\n  author={Hwang, Jyh-Jing and Yu, Stella X and Shi, Jianbo and Collins, Maxwell D and Yang, Tien-Ju and Zhang, Xiao and Chen, Liang-Chieh},\n  booktitle={Proceedings of the IEEE International Conference on Computer Vision},\n  pages={7334--7344},\n  year={2019}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9999166002412523
+      ],
+      "excerpt": "By Jyh-Jing Hwang, Stella X. Yu, Jianbo Shi, Maxwell D. Collins, Tien-Ju Yang, Xiao Zhang, and Liang-Chieh Chen \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jyhjinghwang/SegSort",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-15T21:04:42Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-10T02:11:13Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9909933320273716,
+        0.939128210544454,
+        0.9806639714203801,
+        0.9904787871692041
+      ],
+      "excerpt": "Almost all existing deep learning approaches for semantic segmentation tackle this task as a pixel-wise classification problem.  Yet humans understand a scene not in terms of pixels, but by decomposing it into perceptual groups and structures that are the basic building blocks of recognition.  This motivates us to propose an end-to-end pixel-wise metric learning approach that mimics this process.  In our approach, the optimal visual representation determines the right segmentation within individual images and associates segments with the same semantic classes across images.  The core visual learning problem is therefore to maximize the similarity within segments and minimize  the similarity between segments.  Given a model trained this way, inference is performed consistently by extracting pixel-wise embeddings and clustering, with the semantic label determined by the majority vote of its nearest neighbors from an annotated set. \nAs a result, we present the SegSort, as a first attempt using deep learning for unsupervised semantic segmentation, achieving 76% performance of its supervised counterpart.  When supervision is available, SegSort shows consistent improvements over conventional approaches based on pixel-wise softmax training.  Additionally, our approach produces more precise boundaries and consistent region predictions.  The proposed SegSort further produces an interpretable result, as each choice of label can be easily understood from the retrieved nearest segments. \nSegSort is published in ICCV 2019, see our paper for more details. \nThis release of SegSort is based on our previous published codebase AAF in ECCV 2018.  It is also easy to integrate SegSort modules network/segsort/ with the popular codebase DeepLab. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "SegSort: Segmentation by Discriminative Sorting of Segments",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jyhjinghwang/segsort/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 25,
+      "date": "Sat, 11 Dec 2021 08:48:44 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jyhjinghwang/SegSort/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jyhjinghwang/SegSort",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jyhjinghwang/segsort/master/bashscripts/voc12/train_segsort_unsup.sh",
+      "https://raw.githubusercontent.com/jyhjinghwang/segsort/master/bashscripts/voc12/train_segsort_mgpu.sh",
+      "https://raw.githubusercontent.com/jyhjinghwang/segsort/master/bashscripts/voc12/train_segsort.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [PASCAL VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/)\n* Augmented PASCAL VOC training set by [SBD](http://home.bharathh.info/pubs/codes/SBD/download.html).  We process the ground truth masks, which are placed as [SegSort/dataset/voc12/sbd_clsimg.zip](https://github.com/jyhjinghwang/SegSort/blob/master/dataset/voc12/sbd_clsimg.zip).  Please unzip it and put it besides the VOC2012/ folder as sbd/dataset/clsimg/.\n* The ground truth semantic segmentation masks are reformatted as grayscale images, or you can download them [here](https://www.dropbox.com/sh/fd2m7s87gk7jeyh/AAC6tN6syhFKmEaDYCwUIgnXa?dl=0).  Please put them under the VOC2012/ folder.\n* The oversegmentation masks (from contours) can be produced by combining any contour detectors with gPb-owt-ucm.  We provide the HED-owt-ucm masks [here](https://www.dropbox.com/sh/fd2m7s87gk7jeyh/AAC6tN6syhFKmEaDYCwUIgnXa?dl=0).  Please put them under the VOC2012/ folder.\n* Dataset folder structure:\n\n  sbd/\n    - dataset/\n      - clsimg/\n  \n  VOC2012/\n    - JPEGImages/\n    - segcls/\n    - hed/\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8048897540014565
+      ],
+      "excerpt": "Download ResNet101.v1 from Tensorflow-Slim. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8557079820060629
+      ],
+      "excerpt": "<img align=\"center\" img src=\"misc/main.png\" width=\"1024\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jyhjinghwang/SegSort/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Jyh-Jing Hwang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SegSort: Segmentation by Discriminative Sorting of Segments",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SegSort",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jyhjinghwang",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jyhjinghwang/SegSort/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Linux\n2. Python2.7 or Python3 (>=3.5)\n3. Cuda 8.0 and Cudnn 6\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 146,
+      "date": "Sat, 11 Dec 2021 08:48:44 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "computer-vision",
+      "metric-learning",
+      "deep-learning",
+      "semantic-segmentation",
+      "self-supervised-learning"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* SegSort (Single-GPU and fast training)\n```\nsource bashscripts/voc12/train_segsort.sh\n```\n\n* SegSort (Multi-GPUs)\n```\nsource bashscripts/voc12/train_segsort_mgpu.sh\n```\n\n* Unsupervised SegSort (Single-GPU)\n```\nsource bashscripts/voc12/train_segsort_unsup.sh\n```\n\n* Baseline Models:  Please refer to our previous codebase [AAF](https://github.com/twke18/Adaptive_Affinity_Fields).\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

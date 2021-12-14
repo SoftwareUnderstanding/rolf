@@ -1,0 +1,183 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1808.01244"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/egeonat/MS-CornerNet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-29T18:32:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-25T13:58:50Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9533430223520845
+      ],
+      "excerpt": "This is a pytorch implementation of MS-CornerNet, a Multispectral extension of the CornerNet paper(https://arxiv.org/abs/1808.01244) to work on RGB+T (Thermal) inputs, specifically the kaist dataset. This repository is extended from the base code at: https://github.com/zzzxxxttt/pytorch_simple_CornerNet and the matlab testing code is taken from https://github.com/Li-Chengyang/MSDS-RCNN with slight modifications. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An extension of the CornerNet architecture for RGB+T image inputs",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/egeonat/MS-CornerNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 06 Dec 2021 00:10:08 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/egeonat/MS-CornerNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "egeonat/MS-CornerNet",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8216139382993012
+      ],
+      "excerpt": "python -m torch.distributed.launch --nproc_per_node NUM_GPUS train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9515752551715031
+      ],
+      "excerpt": "python test.py --log_name kaist_hg \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/egeonat/MS-CornerNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "MATLAB",
+      "C++",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MS-CornerNet",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MS-CornerNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "egeonat",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/egeonat/MS-CornerNet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- python>=3.5\n- pytorch==0.4.1 or 1.1.0(DistributedDataParallel training only available using 1.1.0)\n- tensorboardX(optional)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 06 Dec 2021 00:10:08 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Disable cudnn batch normalization.\nOpen `torch/nn/functional.py` and find the line with `torch.batch_norm` and replace the `torch.backends.cudnn.enabled` with `False`.\n\n2. Clone this repo:\n\n3. Compile corner pooling.\n    If you are using pytorch 0.4.1, rename ```$MS_CORNERNET_ROOT/lib/cpool_old``` to ```$MS_CORNERNET_ROOT/lib/cpool```, otherwise rename ```$MS_CORNERNET_ROOT/lib/cpool_new``` to ```$MS_CORNERNET_ROOT/lib/cpool```.\n    ```\n    cd $CornerNet_ROOT/lib/cpool\n    python setup.py install --user\n    ```\n\n4. Compile NMS.\n    ```\n    cd $MS_CORNERNET_ROOT/lib/nms\n    make\n    ```\n\n5. For KAIST training, Download KAIST dataset and put data into ```$CornerNet_ROOT/data/kaist/images``` and ```$CornerNet_ROOT/data/kaist/annotations```. Annotations should then be further separated into two directories ```train_sanitized``` and ```test_improved```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

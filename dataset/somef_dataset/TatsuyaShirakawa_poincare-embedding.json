@@ -1,0 +1,238 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1705.08039",
+      "https://arxiv.org/abs/1705.08039, 2017.](https://arxiv.org/abs/1705.08039)\n\n## Requirements\n\n- C++ compiler that supports c++14 or later\n    - for Windows user, using cygwin is recommended (with CMAKE and gcc/g++ selection) (thanks @patrickgitacc)\n\n## Build\n\n```shell\ncd poincare-embedding\nmkdir work & cd work\ncmake ..\nmake\n```\n\n## Setup python environment\n\nFrom the poincare-embeddings directory...\n\n```shell\npython3 -m venv venv\nsource venv/bin/activate\n```\n\nif using windows:\n\n```shell\npython3 -m venv venv\nvenv\\Scripts\\activate\n```\n\nThen run the following:\n\n```shell\npython3 -m pip install -r requirements.txt\npython3 -c \"import nltk; nltk.download('wordnet')\"\n```\n\n## Tutorial\n\nWe assume that you are in work directory\n\n\n```shell\ncd poincare-embedding\nmkdir work & cd work\n```\n\n### Data Creation\n\nYou can create WordNet noun hypernym pairs as follows\n\n```shell\npython ../scripts/create_wordnet_noun_hierarchy.py ./wordnet_noun_hypernyms.tsv\n```\n\nand mammal subtree is created by\n\n```shell\npython ../scripts/create_mammal_subtree.py ./mammal_subtree.tsv\n```\n\n### Run\n\n```shell\n./poincare_embedding ./mammal_subtree.tsv ./embeddings.tsv -d 2 -t 8 -e 1000 -l 0.1 -L 0.0001 -n 20 -s 0\n```\n### Plot a Mammal Tree\n\n```shell\npython ../scripts/plot_mammal_subtree.py ./embeddings.tsv --center_mammal\n```\n\nNote: if that doesn't work, may need to run the following:\n\n```shell\ntr -d '\\015' < embeddings.tsv > embeddings_clean.tsv\n```\n\nDouble check that the file has removed the character in question, then run\n\n```shell\nmv embeddings_clean.tsv embeddings.tsv\n```\n\n![mammal.png](./misc/mammal.png)"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9998628260977483
+      ],
+      "excerpt": "Maximilian Nickel and Douwe Kiela, \"Poincar\\'e Embeddings for Learning Hierarchical Representations'\", arXiv preprint arXiv:1705.08039, 2017. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TatsuyaShirakawa/poincare-embedding",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-06-23T15:00:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-27T08:08:29Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can create WordNet noun hypernym pairs as follows\n\n```shell\npython ../scripts/create_wordnet_noun_hierarchy.py ./wordnet_noun_hypernyms.tsv\n```\n\nand mammal subtree is created by\n\n```shell\npython ../scripts/create_mammal_subtree.py ./mammal_subtree.tsv\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.909939000126237
+      ],
+      "excerpt": "These codes implement Poincar\\'e Embedding introduced in the following paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Poincar\u00e9 Embedding (unofficial)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TatsuyaShirakawa/poincare-embedding/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 26,
+      "date": "Sun, 05 Dec 2021 05:10:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/TatsuyaShirakawa/poincare-embedding/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TatsuyaShirakawa/poincare-embedding",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "From the poincare-embeddings directory...\n\n```shell\npython3 -m venv venv\nsource venv/bin/activate\n```\n\nif using windows:\n\n```shell\npython3 -m venv venv\nvenv\\Scripts\\activate\n```\n\nThen run the following:\n\n```shell\npython3 -m pip install -r requirements.txt\npython3 -c \"import nltk; nltk.download('wordnet')\"\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9089679367792849,
+        0.9216807250914504
+      ],
+      "excerpt": "cd poincare-embedding \nmkdir work &amp; cd work \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9307227396086177
+      ],
+      "excerpt": "Note: if that doesn't work, may need to run the following: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/TatsuyaShirakawa/poincare-embedding/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "CMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Tatsuya Shirakawa\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "poincare-embedding",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "poincare-embedding",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TatsuyaShirakawa",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TatsuyaShirakawa/poincare-embedding/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- C++ compiler that supports c++14 or later\n    - for Windows user, using cygwin is recommended (with CMAKE and gcc/g++ selection) (thanks @patrickgitacc)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```shell\n./poincare_embedding ./mammal_subtree.tsv ./embeddings.tsv -d 2 -t 8 -e 1000 -l 0.1 -L 0.0001 -n 20 -s 0\n```\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 221,
+      "date": "Sun, 05 Dec 2021 05:10:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "representation-learning",
+      "hyperbolic-geometry"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We assume that you are in work directory\n\n\n```shell\ncd poincare-embedding\nmkdir work & cd work\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

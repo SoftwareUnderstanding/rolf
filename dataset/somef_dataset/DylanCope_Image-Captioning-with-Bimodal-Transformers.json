@@ -1,0 +1,3064 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "fig, axs = plt.subplots(2, 3, figsize=(20, 10)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "if preprocessed_coco_cache_path.exists(): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.994799811898885
+      ],
+      "excerpt": "    prob_mask hyperparams from: https://arxiv.org/pdf/1810.04805.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968592401678916
+      ],
+      "excerpt": "Non-trainable params: 11,683,584 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "if ckpt_manager.latest_checkpoint: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456806903995955
+      ],
+      "excerpt": "        if batch &gt;= BATCHES_IN_EPOCH: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "    if (epoch + 1) % 5 == 0: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.891755158452596,
+        0.9030859728368266
+      ],
+      "excerpt": "Saving checkpoint for epoch 10 at ./outputs/20200424-000059/ckpts\\ckpt-2 \nEpoch 10 Loss 8.2949 Accuracy 0.1455 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "Epoch 12 Loss 8.2331 Accuracy 0.1496 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8179708844694421,
+        0.8356013927728488
+      ],
+      "excerpt": "Saving checkpoint for epoch 30 at ./outputs/20200424-000059/ckpts\\ckpt-6 \nEpoch 30 Loss 7.9217 Accuracy 0.1709 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "Epoch 37 Loss 7.8189 Accuracy 0.1706 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8179708844694421
+      ],
+      "excerpt": "Saving checkpoint for epoch 60 at ./outputs/20200424-000059/ckpts\\ckpt-12 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8179708844694421
+      ],
+      "excerpt": "Saving checkpoint for epoch 150 at ./outputs/20200424-000059/ckpts\\ckpt-30 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8179708844694421
+      ],
+      "excerpt": "Saving checkpoint for epoch 185 at ./outputs/20200424-000059/ckpts\\ckpt-37 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DylanCope/Image-Captioning-with-Bimodal-Transformers",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-23T20:22:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-27T20:16:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9588376670804051,
+        0.8423176221927802,
+        0.9785534153153063
+      ],
+      "excerpt": "In this notebook we are going to be using COCO captioned image data to build a model that produces natural language descriptions of given images. \nWe will be using a InceptionV3 convolutional neural network pretrained on classifying imagenet images and an ALBERT transformer network pretrained on a general language modelling task. \nWe will construct the bimodal transformer to aggregate image and language information. The following is an outline of the model architecture: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9588961022787268
+      ],
+      "excerpt": "Firstly, we are going to load the COCO data. For the sakes of this demonstration I am running this on my limited machine, as such we will only load in the 5000 validation samples.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for item in coco_captions['annotations'] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for img_id in coco_imgs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8405860765054796
+      ],
+      "excerpt": "for i, ax in enumerate(chain(list(axs.flatten()))): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9962888985814674,
+        0.9729520789912262,
+        0.9499046870841046
+      ],
+      "excerpt": "In order to reduce the amount of learning that our model needs to do we are using the pretrained InceptionV3 model. To do this we will pass each of our images through InceptionV3 and extract the activations in the penultimate layers. These extracted tensors are our \"image embeddings\" and they capture the semantic content of the input in a ready-to-use state for downstream tasks.  \nAdditionally, our transformer network, ALBERT, only ingests sentences that have been tokenized. As such, we extract \"caption encodings\" using the tokenizer. This replaces (approximate) morphemes in the sentence with assigned identifiers.  \nOnce we have preprocessed the data we will store it in a cache for retrieval in the future. Additionally this helps relieve memory limitations as we can now discard the InceptionV3 model for the training phase. In order to keep track of the information in the cache we will also store the COCO image identifier (IID).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    return tf.keras.Model(new_input, hidden_layer) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "                          image_feature_extract_model: tf.keras.Model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076,
+        0.9560187895509076,
+        0.9560187895509076,
+        0.9560187895509076
+      ],
+      "excerpt": "    iids = [iid for iid, , _ in coco_batch] \n    imgs = [img for , img, _ in coco_batch] \n    caps = [cap for , , cap in coco_batch] \ncap_encodings = [tokenizer.encode(cap) for cap in caps] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8620007613560474,
+        0.9560187895509076
+      ],
+      "excerpt": "        for coco_batch in batch(coco_data, batch_size) \n        for record in coco_preprocess_batch(coco_batch, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9479069521255303
+      ],
+      "excerpt": "Tensorflow does not have a built-in way to release a model from memory so we have to spin-up a concurrent process using multiprocess that does the preprocessing. When this process terminates it will clear the memory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    coco_preprocessed = [tuple(x) for x in coco_preprocessed] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.958229869475753
+      ],
+      "excerpt": "In order to train our model we will create train and test datasets from our preprocessed data. The training data will be organised in batches where sequences of varying lengths are collected into matrices. The matrices are filled by padding the shorter sequences with a special token defined by the tokenizer. Later the transformer will be instructed to not pay attention to these padding tokens. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9590421742338863
+      ],
+      "excerpt": "In order to train the caption generator we will learn through a masked language modelling (MLM) scheme. This involves arbitrarily removing tokens in a caption and having the model reconstruct the input. This process is inspired by the Cloze deletion test from psychology. MLM was introducted by the authors of BERT. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for special_token in tokenizer.all_special_ids: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9292366257649404
+      ],
+      "excerpt": "    #: concatenate the language and image embeddings \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "Model: \"bimodal_mlm_transformer_1\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8961505307177309
+      ],
+      "excerpt": "For lack of resources, we will not train the model to convergence.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "def train_step(model: tf.keras.Model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319708861235405
+      ],
+      "excerpt": "with tf.GradientTape() as tape: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    logits, *_ = model((img_embs, masked_cap_encs),  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8620007613560474
+      ],
+      "excerpt": "    for batch, inp in enumerate(coco_train): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9567588029116127
+      ],
+      "excerpt": "            with summary_writer.as_default(): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639575526764915,
+        0.8625511883616468
+      ],
+      "excerpt": "WARNING:tensorflow:5 out of the last 5 calls to &lt;function train_step_tf at 0x00000184665671E0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings is likely due to passing python objects instead of tensors. Also, tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. Please refer to https://www.tensorflow.org/tutorials/customization/performance#python_or_tensor_args and https://www.tensorflow.org/api_docs/python/tf/function for more details. \nWARNING:tensorflow:5 out of the last 14 calls to &lt;function train_step_tf at 0x00000184665671E0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings is likely due to passing python objects instead of tensors. Also, tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. Please refer to https://www.tensorflow.org/tutorials/customization/performance#python_or_tensor_args and https://www.tensorflow.org/api_docs/python/tf/function for more details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 212.10938668251038 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.14652180671692 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.461716651916504 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.625213623046875 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 45.481651306152344 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 35.16904425621033 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.767136335372925 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.058943033218384 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.35899996757507 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.14226007461548 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 36.743035078048706 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.16008901596069 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.892055988311768 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.14100193977356 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.36868143081665 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.37559223175049 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.93604588508606 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.19421696662903 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.191648721694946 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.74822497367859 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.30108594894409 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.749001026153564 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.90497159957886 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.182924032211304 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.31268310546875 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.88956332206726 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.573052406311035 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.02155542373657 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.97933578491211 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.65913105010986 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.309035778045654 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.44967031478882 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.957531452178955 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.66273093223572 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.2369430065155 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.97799587249756 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.79442739486694 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.407426595687866 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.07775044441223 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.241352796554565 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.191771507263184 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.3389778137207 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.849573850631714 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.35037922859192 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.21041989326477 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.37504720687866 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.046173334121704 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.732130527496338 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.73463797569275 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.54723358154297 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.120025396347046 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.869300842285156 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.78724646568298 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.754119634628296 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.364585399627686 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9009259008169035
+      ],
+      "excerpt": "Time taken for epoch: 50.343934535980225 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 38.734633922576904 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.541430950164795 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 46.09680962562561 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.78494930267334 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.62576079368591 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.35474634170532 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.210421323776245 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.335460662841797 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.94380211830139 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.802561044692993 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.86418342590332 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.40635895729065 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.013038635253906 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.54997110366821 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.168264389038086 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.91339421272278 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.433276891708374 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.311838150024414 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.36157846450806 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.239744663238525 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.68625807762146 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.45208168029785 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.47214603424072 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.57346820831299 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.19447302818298 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.672118186950684 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373,
+        0.807918360898964
+      ],
+      "excerpt": "Time taken for epoch: 31.61362600326538 secs \nSaving checkpoint for epoch 85 at ./outputs/20200424-000059/ckpts\\ckpt-17 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.345420598983765 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.344053983688354 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.88852143287659 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.86199688911438 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.30452060699463 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.954118490219116 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.96932578086853 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.73863172531128 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.66121816635132 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.995023488998413 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.98035979270935 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.142148733139038 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.925139665603638 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.123523235321045 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.61361622810364 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.51773500442505 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.930673599243164 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.19688034057617 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.31608605384827 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.12481236457825 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.48196268081665 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.12157487869263 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.97261571884155 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.45700001716614 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.51699709892273 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.315000772476196 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.45401167869568 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.16106057167053 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.616071462631226 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.721686601638794 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.52328824996948 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.91475439071655 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.52499842643738 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.756636381149292 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.728952884674072 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.94950032234192 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.71711778640747 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.81719422340393 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.533124923706055 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.083464860916138 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.271514892578125 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.72403931617737 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.26662826538086 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.874056816101074 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.24320316314697 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.718533515930176 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.004881381988525 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.50303912162781 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.43604230880737 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.08204007148743 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.50700283050537 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.4803192615509 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.21754193305969 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.239044427871704 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.961047649383545 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.27643179893494 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.85904669761658 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.26154112815857 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.00368022918701 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.74306845664978 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.76083517074585 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.106603384017944 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.09752058982849 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.46908903121948 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.840595245361328 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.46289777755737 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.20332145690918 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.81657028198242 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.37504196166992 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.780336618423462 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.418598890304565 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.82458972930908 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.63652992248535 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.90452194213867 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.23999762535095 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.4727885723114 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.100038290023804 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.964574337005615 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.70839977264404 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.17646598815918 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.735527515411377 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.63493323326111 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.208568811416626 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.21354818344116 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.823221683502197 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.192790269851685 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.59318518638611 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.49952030181885 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.47866773605347 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.70856595039368 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 35.68169045448303 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.8343825340271 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.829524517059326 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.82399344444275 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.574506282806396 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.426947832107544 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.064918994903564 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.906089067459106 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.43388772010803 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.79444169998169 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.17106866836548 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.21911144256592 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.042030811309814 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.275026082992554 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.16033577919006 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.024157762527466 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 34.382545471191406 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.91306233406067 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.344929933547974 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.509769439697266 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.990769386291504 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.52601170539856 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.59899973869324 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.056419134140015 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.526076316833496 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.501612186431885 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.93623495101929 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.64152383804321 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.4795184135437 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.434808254241943 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.05581045150757 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.18064570426941 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.1080482006073 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.43651556968689 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.85980749130249 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.53573250770569 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.807528257369995 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.41404747962952 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.827518463134766 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.21304678916931 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.11529612541199 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.281551361083984 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.879026889801025 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.80668544769287 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.80838179588318 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.821268558502197 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.70617485046387 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.36755657196045 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.28456354141235 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.70860958099365 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.852805137634277 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.81659483909607 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.69200944900513 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.8305184841156 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.709481716156006 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.85732388496399 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.77073693275452 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.39152240753174 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.74852418899536 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 35.53684735298157 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.673789739608765 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.78073525428772 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.986528158187866 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.80307745933533 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.623878717422485 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.24830627441406 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.996535539627075 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.58451437950134 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.302998781204224 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.95845365524292 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373,
+        0.8280622974119286
+      ],
+      "excerpt": "Time taken for epoch: 31.592703342437744 secs \nSaving checkpoint for epoch 250 at ./outputs/20200424-000059/ckpts\\ckpt-50 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.66682744026184 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.69304084777832 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.10207915306091 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.626872539520264 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.68764352798462 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.205010414123535 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.32252025604248 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.512999296188354 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.463117599487305 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.926247119903564 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.06800627708435 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.46455383300781 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.53307867050171 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.592995405197144 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.52744460105896 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.6013708114624 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.290045738220215 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.31650400161743 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.076684713363647 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.94932532310486 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.21883201599121 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.79451012611389 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.4981324672699 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.395419359207153 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.19995427131653 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.8692741394043 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.85851287841797 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.90205693244934 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.3742151260376 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.67891550064087 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.284619092941284 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.81750965118408 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.53207206726074 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.81239891052246 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.37002968788147 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.96224617958069 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 33.1435112953186 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.89712452888489 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.410616397857666 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.973753213882446 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.78321099281311 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.59153342247009 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.69443893432617 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 31.684515953063965 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.07484006881714 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.61194944381714 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.64351487159729 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.683409214019775 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 35.489052534103394 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.225311517715454 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9058070731196373
+      ],
+      "excerpt": "Time taken for epoch: 32.732651472091675 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Notebook implementing a custom bimodal transformer architecture for masked language modelling in order to learn to caption COCO images.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DylanCope/Image-Captioning-with-Bimodal-Transformers/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 09 Dec 2021 12:02:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DylanCope/Image-Captioning-with-Bimodal-Transformers/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DylanCope/Image-Captioning-with-Bimodal-Transformers",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/DylanCope/Image-Captioning-with-Bimodal-Transformers/master/Image%20Captioning%20with%20Bimodal%20Transformers.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9776749596473341,
+        0.8029096585872566
+      ],
+      "excerpt": " [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')] \nThe tensorboard extension is already loaded. To reload it, use: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8137016388109911
+      ],
+      "excerpt": "    int(path.name.split('.')[0]): cv2.imread(str(path)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057675898656085
+      ],
+      "excerpt": "preprocessed_coco_cache_dir = Path(f'{MSCOCO_PATH}/inception-{PRETRAINED_TRANSFORMER_VERSION}-preprocessed') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "                                name='predictions') \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "<img src=\"bmt_architecture.png\" width=\"600\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from datetime import datetime  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9180062578030207,
+        0.9133368656218674,
+        0.8401558704798054,
+        0.8550650925410873,
+        0.8396948529258378
+      ],
+      "excerpt": "from itertools import chain, cycle \nimport json \nimport multiprocessing \nimport os \nfrom pathlib import Path \nimport time \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8801854956928516,
+        0.9068127677393759
+      ],
+      "excerpt": "import numpy as np \nfrom sklearn.model_selection import train_test_split \nimport matplotlib.pyplot as plt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674,
+        0.925671696398174,
+        0.9133368656218674,
+        0.880946126606519
+      ],
+      "excerpt": "import cv2 \nimport tensorflow as tf \nimport transformers \nprint('Physical Devices:\\n', tf.config.list_physical_devices(), '\\n') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "LOAD_COCO_PREPROC_CACHE_IF_EXISTS = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9274321029790014
+      ],
+      "excerpt": "print('\\nOutput Directory:', OUTPUTS_DIR) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8035641152736667
+      ],
+      "excerpt": " [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "summary_writer = tf.summary.create_file_writer(log_dir) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8405029034889218
+      ],
+      "excerpt": "image_paths = Path(images_path).glob('*.jpg') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.826805298886814
+      ],
+      "excerpt": "    int(path.name.split('.')[0]): cv2.imread(str(path)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8453426051787849
+      ],
+      "excerpt": "coco_data: List[Tuple[np.ndarray, str]] = [ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9080082091262869
+      ],
+      "excerpt": "fig, axs = plt.subplots(2, 3, figsize=(20, 10)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853624333486507,
+        0.9000107903124189,
+        0.8292505407411963
+      ],
+      "excerpt": "    ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)) \n    ax.set_title(f'{img_id}: {cap}') \n    ax.axis('off') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401982677954447
+      ],
+      "excerpt": "    return tf.keras.Model(new_input, hidden_layer) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.919363037574928,
+        0.8519374540429997
+      ],
+      "excerpt": "print('Vocab size:', tokenizer.vocab_size) \nfor (name, token), iden in zip(tokenizer.special_tokens_map.items(),  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.899958589071318,
+        0.9191677993198397,
+        0.936606094659785
+      ],
+      "excerpt": "    print(f'{name}: {token}, ID: {iden}') \nprint('Input:', cap) \nprint('Encoded:', tokenizer.encode(cap)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8172342705654815
+      ],
+      "excerpt": "    l = len(iterable) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8465251479594719
+      ],
+      "excerpt": "                          image_feature_extract_model: tf.keras.Model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8412376360333083
+      ],
+      "excerpt": "x = np.array([inceptionv3_preprocess(img) for img in imgs]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9103340486157772
+      ],
+      "excerpt": "    print('Loading cached preprocessed data...') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "                                     allow_pickle=True)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.929338374656224
+      ],
+      "excerpt": "        np.save(preprocessed_coco_cache_path, np.array(coco_preprocessed)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184394336364812
+      ],
+      "excerpt": " array([[[2.5995767 , 0.        , 0.4370903 , ..., 0.7036782 , \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8336118705418286
+      ],
+      "excerpt": "coco_train = tf.data.Dataset.from_generator(lambda: cycle(coco_train_data), outputs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8336118705418286
+      ],
+      "excerpt": "coco_test = tf.data.Dataset.from_generator(lambda: cycle(coco_test_data), outputs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.811854372964597,
+        0.8141593417041636
+      ],
+      "excerpt": "                          prob_mask=0.15, \n                          seed=None) -> tf.Tensor: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8202561346525306
+      ],
+      "excerpt": "        tf.random.set_seed(seed) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8546541138625192,
+        0.8123763140827432,
+        0.8335088439184365
+      ],
+      "excerpt": "mask_tokens = tf.multiply(tokenizer.mask_token_id,  \n                          tf.cast(where_masked, tf.int32)) \nnot_masked = tf.multiply(tar, 1 - tf.cast(where_masked, tf.int32)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9039412543111729,
+        0.9123036217897816,
+        0.9123036217897816,
+        0.936606094659785
+      ],
+      "excerpt": "    print(f'Batch Item {i}:') \n    print(tokenizer.decode(train_cap_enc[i].numpy())) \n    print(tokenizer.decode(cap_enc[i].numpy())) \n    print() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "<img src=\"bmt_architecture.png\" width=\"600\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8366291313067261
+      ],
+      "excerpt": "class BimodalMLMTransformer(tf.keras.Model): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.810999020541403
+      ],
+      "excerpt": "                                name='predictions') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524
+      ],
+      "excerpt": "    batch_size, batch_seq_len, last_hidden_dim = last_hidden_state.shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524,
+        0.9032147155092225,
+        0.8123763140827432
+      ],
+      "excerpt": "    batch_size, *img_emb_shape = img_embs.shape \n    img_emb_flattened = tf.reshape(img_embs, (batch_size, np.prod(img_emb_shape))) \n    emb_flattened_reps = tf.repeat(tf.expand_dims(img_emb_flattened, 1),  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "    embs_concat = tf.concat([last_hidden_state, emb_flattened_reps], 2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8385816589516547,
+        0.804863248770121
+      ],
+      "excerpt": "    training = transformer_kwargs.get('training', False) \n    prediction_scores = self.predictions(embs_concat, training=training) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.906614234580968
+      ],
+      "excerpt": "Layer (type)                 Output Shape              Param \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.840438666861417
+      ],
+      "excerpt": "Total params: 12,890,848 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289678599447816
+      ],
+      "excerpt": " array([[[[8.2812655e-01, 0.0000000e+00, 2.3744605e+00, ..., \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799
+      ],
+      "excerpt": "          [9.5054090e-01, 6.7353225e-01, 1.2732261e+00, ..., \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799,
+        0.8730921306678799,
+        0.8730921306678799
+      ],
+      "excerpt": "           3.6167808e+00, 8.9541662e-01, 2.8415552e-01], \n          [1.3570967e-01, 4.8285586e-01, 0.0000000e+00, ..., \n           3.6167808e+00, 8.9541662e-01, 2.8415552e-01]], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799
+      ],
+      "excerpt": "           3.6167808e+00, 8.9541662e-01, 2.8415552e-01], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799
+      ],
+      "excerpt": "           3.6167808e+00, 8.9541662e-01, 2.8415552e-01]]], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8361349576714179,
+        0.8730921306678799
+      ],
+      "excerpt": "        [[[0.0000000e+00, 9.2166923e-02, 3.8562089e-01, ..., \n           1.0446195e-01, 5.5479014e-01, 5.7398777e+00], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799
+      ],
+      "excerpt": "           1.0446195e-01, 5.5479014e-01, 5.7398777e+00]], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799,
+        0.8361349576714179,
+        0.8730921306678799
+      ],
+      "excerpt": "           1.0446195e-01, 5.5479014e-01, 5.7398777e+00], \n          [0.0000000e+00, 3.3620727e-01, 3.1173995e-02, ..., \n           1.0446195e-01, 5.5479014e-01, 5.7398777e+00]]], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8730921306678799
+      ],
+      "excerpt": "          [4.0289724e-01, 5.4949260e-01, 1.0056858e+00, ..., \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184394336364812
+      ],
+      "excerpt": "array([[[-0.00255676, -0.28133634,  0.12696652, ...,  0.1115055 , \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8756118683787069
+      ],
+      "excerpt": "loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.826676512146707
+      ],
+      "excerpt": "train_loss = tf.keras.metrics.Mean(name='train_loss') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8882510702113303
+      ],
+      "excerpt": "ckpt = tf.train.Checkpoint(transformer=bm_transformer, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.855184490848454
+      ],
+      "excerpt": "ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8337673446480811
+      ],
+      "excerpt": "    print ('Latest checkpoint restored!!') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8660376659339244
+      ],
+      "excerpt": "<img src=\"loss.PNG\" width=\"600\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8166936229091752,
+        0.8123763140827432
+      ],
+      "excerpt": "def train_step(model: tf.keras.Model, \n               optimizer: tf.keras.optimizers.Optimizer, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8134972907485951,
+        0.8123763140827432,
+        0.8123763140827432
+      ],
+      "excerpt": "with tf.GradientTape() as tape: \n    attention_mask = tf.cast(masked_cap_encs != tokenizer.pad_token_id,  \n                             tf.int32) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.902788463057074
+      ],
+      "excerpt": "                       training=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8718383063938133,
+        0.8186790943648705,
+        0.8718383063938133,
+        0.8186790943648705
+      ],
+      "excerpt": ":     tf.TensorSpec(shape=(BATCH_SIZE, MAX_SEQ_SIZE), \n:                   dtype=tf.int32), \n:     tf.TensorSpec(shape=(BATCH_SIZE, MAX_SEQ_SIZE), \n:                   dtype=tf.int32), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594052430148392,
+        0.8584810051326678
+      ],
+      "excerpt": "            print ('Epoch {} Batch {} Loss {:.4f} Accuracy {:.4f}'.format( \n                epoch + 1, batch, train_loss.result(), train_acc.result())) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301050205557337
+      ],
+      "excerpt": "                tf.summary.scalar('loss', train_loss.result(),  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8948207194810022
+      ],
+      "excerpt": "        print ('Saving checkpoint for epoch {} at {}'.format(epoch+1, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8418267188233782,
+        0.8102780086823556,
+        0.8102780086823556,
+        0.8350402660045098
+      ],
+      "excerpt": "    print ('Epoch {} Loss {:.4f} Accuracy {:.4f}'.format(epoch + 1,  \n                                                         train_loss.result(),  \n                                                         train_acc.result())) \n    print ('Time taken for epoch: {} secs\\n'.format(time.time() - start)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.805724408032375
+      ],
+      "excerpt": "    print('Manual interrupt') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309436414062432
+      ],
+      "excerpt": "Time taken for epoch: 45.481651306152344 secs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100356907382504
+      ],
+      "excerpt": "Saving checkpoint for epoch 15 at ./outputs/20200424-000059/ckpts\\ckpt-3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8342704744634573
+      ],
+      "excerpt": "Saving checkpoint for epoch 45 at ./outputs/20200424-000059/ckpts\\ckpt-9 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8285420584396795
+      ],
+      "excerpt": "Saving checkpoint for epoch 75 at ./outputs/20200424-000059/ckpts\\ckpt-15 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8014326082679784
+      ],
+      "excerpt": "Saving checkpoint for epoch 80 at ./outputs/20200424-000059/ckpts\\ckpt-16 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8192642193511218
+      ],
+      "excerpt": "Saving checkpoint for epoch 100 at ./outputs/20200424-000059/ckpts\\ckpt-20 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8342704744634573
+      ],
+      "excerpt": "Saving checkpoint for epoch 225 at ./outputs/20200424-000059/ckpts\\ckpt-45 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DylanCope/Image-Captioning-with-Bimodal-Transformers/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "CSS"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image Captioning with Bimodal Transformers",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image-Captioning-with-Bimodal-Transformers",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DylanCope",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DylanCope/Image-Captioning-with-Bimodal-Transformers/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The conda environment is provided in the `env.yml`, which should be enough to recreate the set-up. \nNote: the code was written with the GPU version of tensorflow, which has some discrepencies with the CPU-only version. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 09 Dec 2021 12:02:05 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

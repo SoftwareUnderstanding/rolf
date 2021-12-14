@@ -1,0 +1,279 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.02002> suggest applying an additional scale factor which reduces losses of those samples the model is sure of. Hard mining is provoking a classifier to focus on the most difficult cases which are samples of our rare class.\n\n\n$$\np_{\\mathrm{t}}=\\left\\{\\begin{array}{ll}{p} & {\\text { if } y=1} \\\\ {1-p} & {\\text { otherwise }}\\end{array}\\right.\n$$\n\n<!-- ![][1] -->\n\n![loss image][2]\n\nGamma controls decreasing speed for easy cases. If it\u2019s close to 1 and the model is insecure, Focal Loss acts as a standard Softmax loss function.\n\n## Center loss\n\nSoftmax loss only encourages the separation of labels, leaving the discriminative power of features aside. There is a so-called center loss approach, as described in the article <https://arxiv.org/abs/1707.07391>. In addition to CE loss, center loss includes the distance from the sample to a center of the sample\u2019s class.\n\n\n$$\nL=L_{s}+\\lambda L_{c}\n$$\n\n$L_s$ denotes the Softmax loss, $L_c$ denotes the center loss. $\\lambda$ is a scaling factor.\n\n$$\nL_{c}=\\frac{1}{2} \\sum_{i=1}^{m}\\left\\|x_{i}-c_{y_{i}}\\right\\|_{2}^{2}\n$$\n\n<!-- ![][3] -->\n\n<!-- ![][4] -->\n\nWhere $L_c$ denotes the center loss $m$ denotes the number of training samples in a min-batch. $x_i \\in \\mathbb{R}^{d}$ denotes the $i$-th training sample. $y_i$ denotes the label of $i$. $c_{y_i} \\in \\mathbb{R}^{d}$ denotes the $y_i$-th class center of deep features. $d$ is the feature dimension.\n\nThese two approaches give the following results:\n\n![image][5]\n\n## Contrastive center loss\n\nThe center loss only stimulates intra-class compactness. This does not consider inter-class separability. Moreover, as long as the center loss concerns only the distances within a single class, there is a risk that the class centers will be fixed. In order to eliminate these disadvantages, a penalty for small distances between the classes was suggested.\n\n$$\nL_{c t-c}=\\frac{1}{2} \\sum_{i=1}^{m} \\frac{\\left\\|x_{i}-c_{y_{i}}\\right\\|_{2}^{2}}{\\left(\\sum_{j=1, j \\neq y_{i}}^{k}\\left\\|x_{i}-c_{j}\\right\\|_{2}^{2}\\right",
+      "https://arxiv.org/abs/1707.07391>. In addition to CE loss, center loss includes the distance from the sample to a center of the sample\u2019s class.\n\n\n$$\nL=L_{s}+\\lambda L_{c}\n$$\n\n$L_s$ denotes the Softmax loss, $L_c$ denotes the center loss. $\\lambda$ is a scaling factor.\n\n$$\nL_{c}=\\frac{1}{2} \\sum_{i=1}^{m}\\left\\|x_{i}-c_{y_{i}}\\right\\|_{2}^{2}\n$$\n\n<!-- ![][3] -->\n\n<!-- ![][4] -->\n\nWhere $L_c$ denotes the center loss $m$ denotes the number of training samples in a min-batch. $x_i \\in \\mathbb{R}^{d}$ denotes the $i$-th training sample. $y_i$ denotes the label of $i$. $c_{y_i} \\in \\mathbb{R}^{d}$ denotes the $y_i$-th class center of deep features. $d$ is the feature dimension.\n\nThese two approaches give the following results:\n\n![image][5]\n\n## Contrastive center loss\n\nThe center loss only stimulates intra-class compactness. This does not consider inter-class separability. Moreover, as long as the center loss concerns only the distances within a single class, there is a risk that the class centers will be fixed. In order to eliminate these disadvantages, a penalty for small distances between the classes was suggested.\n\n$$\nL_{c t-c}=\\frac{1}{2} \\sum_{i=1}^{m} \\frac{\\left\\|x_{i}-c_{y_{i}}\\right\\|_{2}^{2}}{\\left(\\sum_{j=1, j \\neq y_{i}}^{k}\\left\\|x_{i}-c_{j}\\right\\|_{2}^{2}\\right"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8620667206319087
+      ],
+      "excerpt": "p_{\\mathrm{t}}=\\left{\\begin{array}{ll}{p} & {\\text { if } y=1} \\ {1-p} & {\\text { otherwise }}\\end{array}\\right. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9692620687556014
+      ],
+      "excerpt": "Authors of the article https://arxiv.org/pdf/1803.02988 rely on Bayes\u2019 theorem to solve a classification task. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FLHonker/Losses-in-image-classification-task",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-18T08:35:08Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-07T03:12:52Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9832136858745197
+      ],
+      "excerpt": "Image classification is a dominant task in machine learning. There are lots of competitions for this task. Both good architectures and augmentation techniques are essential, but an appropriate loss is crucial nowadays. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774547359160801,
+        0.9864865011209399
+      ],
+      "excerpt": "In this story, we\u2019ll investigate what losses apply in which case. \nIf there is a rare class in your dataset, its contribution to a summary loss is slight. To cope with this problem, the authors of the article https://arxiv.org/abs/1708.02002 suggest applying an additional scale factor which reduces losses of those samples the model is sure of. Hard mining is provoking a classifier to focus on the most difficult cases which are samples of our rare class. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8296428249251625,
+        0.9267206026845339
+      ],
+      "excerpt": "Gamma controls decreasing speed for easy cases. If it\u2019s close to 1 and the model is insecure, Focal Loss acts as a standard Softmax loss function. \nSoftmax loss only encourages the separation of labels, leaving the discriminative power of features aside. There is a so-called center loss approach, as described in the article https://arxiv.org/abs/1707.07391. In addition to CE loss, center loss includes the distance from the sample to a center of the sample\u2019s class. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9697524296367139,
+        0.8035451708403133
+      ],
+      "excerpt": "Where $L_c$ denotes the center loss $m$ denotes the number of training samples in a min-batch. $x_i \\in \\mathbb{R}^{d}$ denotes the $i$-th training sample. $y_i$ denotes the label of $i$. $c_{y_i} \\in \\mathbb{R}^{d}$ denotes the $y_i$-th class center of deep features. $d$ is the feature dimension. \nThese two approaches give the following results: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8388738057255978
+      ],
+      "excerpt": "The center loss only stimulates intra-class compactness. This does not consider inter-class separability. Moreover, as long as the center loss concerns only the distances within a single class, there is a risk that the class centers will be fixed. In order to eliminate these disadvantages, a penalty for small distances between the classes was suggested. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8430138753068319,
+        0.8861828073408247,
+        0.9506795727242152,
+        0.9031122975740727,
+        0.9512563265293289
+      ],
+      "excerpt": "notes the $i$ th training sample with dimension $d$ is the fea- \nture dimension. $y_{i}$ denotes the label of $x_{i} . c_{y_{i}} \\in R_{d}$ denotes \nthe $y_{i}$ th class center of deep features with dimension $d . k$ de- \nnotes the number of class. $\\delta$ is a constant used for preventing \nthe denominator equal to $0 .$ In our experiments, we set $\\delta=1$ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891613355505688,
+        0.8320635945964636
+      ],
+      "excerpt": "Instead of learning centroids directly, there is a mechanism with a few parameters. In the article \u2018Ring loss\u2019, the authors justified that the maximum angular margin is reached when the norm of feature vectors is the same. Thus, stimulating samples to have the same norm in a feature space, we: \nIncrease the margin for better classification. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9251442972871166,
+        0.9805387544424861
+      ],
+      "excerpt": "where $\\mathcal{F}\\left(\\mathbf{x}{i}\\right)$ is the deep network feature for the sample $\\mathbf{x}{i}$. \nVisualizing features in 2D space we see the ring. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8569706566457106
+      ],
+      "excerpt": "Softmax loss is formulated as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9788590699348751
+      ],
+      "excerpt": "where $x_i \\in \\mathbb{R}^{d}$ denotes the deep feature of the $i$-th sample, belonging to the $y_i$-th class. The embedding feature dimension $d$ is set to 512 in this paper following [38, 46, 18, 37]. $W_j \\in \\mathbb{R}^{d}$ denotes the $j$-th column of the weight $w \\in \\mathbb{R}^{d \\times n}$ and $b_{j} \\in \\mathbb{R}^{n}$ is the bias term. The batch size and the class number are $N$ and $n$, respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.968977035956162
+      ],
+      "excerpt": "They also fix the feature\u2019s vector norm to 1 and scale norm of feature sample to $s$. Now our predictions depend only on the angle between the feature vector and weight vector. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9208059165019797
+      ],
+      "excerpt": "In order to increase intra-class compactness and improve inter-class discrepancy, an angular margin is added to a cosine of $\\theta_{y_i}$. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707561552184819,
+        0.9773399380783864
+      ],
+      "excerpt": "For a comparison, let\u2019s look at the picture above! There are 8 identities there in 2D space. Each identity has its own color. Dots present a sample and lines refer to the center direction for each identity. We see identity points are close to their center and far from other identities. Moreover, the angular distances between each center are equal. These facts prove the authors\u2019 method works. \nThese losses are very close to ArcFace. Instead of performing an additive margin, in SphereFace a multiplication factor is used: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.963042728251485
+      ],
+      "excerpt": "They introduce LGM loss as the sum of classification and likelihood losses. Lambda is a real value playing the role of the scaling factor. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8032298222579503
+      ],
+      "excerpt": "Classification loss is formulated as a usual cross entropy loss, but probabilities are replaced by the posterior distribution: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9144038411778799,
+        0.9188635524988317
+      ],
+      "excerpt": "This term forces features $x_i$ to be sampled from the normal distribution with appropriate mean and covariance matrix. \nIn the picture one can see samples which have the normal distribution in 2D space. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\u56fe\u50cf\u5206\u7c7b\u4efb\u52a1\u4e2d\u7684\u635f\u5931\uff0c losses in image classification task",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FLHonker/Losses-in-image-classification-task/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sat, 11 Dec 2021 17:00:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/FLHonker/Losses-in-image-classification-task/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FLHonker/Losses-in-image-classification-task",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/FLHonker/Losses-in-image-classification-task/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Losses in image classification task",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Losses-in-image-classification-task",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FLHonker",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FLHonker/Losses-in-image-classification-task/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Sat, 11 Dec 2021 17:00:55 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

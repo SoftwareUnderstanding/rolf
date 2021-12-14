@@ -1,0 +1,265 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1605.06211",
+      "https://arxiv.org/abs/1605.06211\n\n    Fully Convolutional Models for Semantic Segmentation\n    Jonathan Long*, Evan Shelhamer*, Trevor Darrell\n    CVPR 2015\n    https://arxiv.org/abs/1411.4038\n\n**Note that this is a work in progress and the final, reference version is coming soon.**\nPlease ask Caffe and FCN usage questions on the [caffe-users mailing list](https://groups.google.com/forum/#!forum/caffe-users).\n\nThese models are compatible with `BVLC/caffe:master`.\nCompatibility has held since `master@8c66fa5` with the merge of PRs #3613 and #3570.\nThe code and models here are available under the same license as Caffe (BSD-2) and the Caffe-bundled models (that is, unrestricted use; see the [BVLC model license](http://caffe.berkeleyvision.org/model_zoo.html#bvlc-model-license)).\n\n**PASCAL VOC models**: trained online with high momentum for a ~5 point boost in mean intersection-over-union over the original models.\nThese models are trained using extra data from [Hariharan et al.](http://www.cs.berkeley.edu/~bharath2/codes/SBD/download.html), but excluding SBD val.\nFCN-32s is fine-tuned from the [ILSVRC-trained VGG-16 model](https://github.com/BVLC/caffe/wiki/Model-Zoo#models-used-by-the-vgg-team-in-ilsvrc-2014), and the finer strides are then fine-tuned in turn.\nThe \"at-once\" FCN-8s is fine-tuned from VGG-16 all-at-once by scaling the skip connections to better condition optimization.\n\n* [FCN-32s PASCAL](voc-fcn32s): single stream, 32 pixel prediction stride net, scoring 63.6 mIU on seg11valid\n* [FCN-16s PASCAL](voc-fcn16s): two stream, 16 pixel prediction stride net, scoring 65.0 mIU on seg11valid\n* [FCN-8s PASCAL](voc-fcn8s): three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test\n* [FCN-8s PASCAL at-once](voc-fcn8s-atonce): all-at-once, three stream, 8 pixel prediction stride net, scoring 65.4 mIU on seg11valid\n\n[FCN-AlexNet PASCAL](voc-fcn-alexnet): AlexNet (CaffeNet) architecture, single stream, 32 pixel prediction stride net, scoring 48.0 mIU on seg11valid.\nUnlike the FCN-32/16/8s models, this network is trained with gradient accumulation, normalized loss, and standard momentum.\n(Note: when both FCN-32s/FCN-VGG16 and FCN-AlexNet are trained in this same way FCN-VGG16 is far better; see Table 1 of the paper.)\n\nTo reproduce the validation scores, use the [seg11valid](https://github.com/shelhamer/fcn.berkeleyvision.org/blob/master/data/pascal/seg11valid.txt) split defined by the paper in footnote 7. Since SBD train and PASCAL VOC 2011 segval intersect, we only evaluate on the non-intersecting set for validation purposes.\n\n**NYUDv2 models**: trained online with high momentum on color, depth, and HHA features (from Gupta et al. https://github.com/s-gupta/rcnn-depth).\nThese models demonstrate FCNs for multi-modal input.\n\n* [FCN-32s NYUDv2 Color](nyud-fcn32s-color): single stream, 32 pixel prediction stride net on color/BGR input\n* [FCN-32s NYUDv2 HHA](nyud-fcn32s-hha): single stream, 32 pixel prediction stride net on HHA input\n* [FCN-32s NYUDv2 Early Color-Depth](nyud-fcn32s-color-d): single stream, 32 pixel prediction stride net on early fusion of color and (log) depth for 4-channel input\n* [FCN-32s NYUDv2 Late Color-HHA](nyud-fcn32s-color-hha): single stream, 32 pixel prediction stride net by late fusion of FCN-32s NYUDv2 Color and FCN-32s NYUDv2 HHA\n\n**SIFT Flow models**: trained online with high momentum for joint semantic class and geometric class segmentation.\nThese models demonstrate FCNs for multi-task output.\n\n* [FCN-32s SIFT Flow](siftflow-fcn32s): single stream stream, 32 pixel prediction stride net\n* [FCN-16s SIFT Flow](siftflow-fcn16s): two stream, 16 pixel prediction stride net\n* [FCN-8s SIFT Flow](siftflow-fcn8s): three stream, 8 pixel prediction stride net\n\n*Note*: in this release, the evaluation of the semantic classes is not quite right at the moment due to an issue with missing classes.\nThis will be corrected soon.\nThe evaluation of the geometric classes is fine.\n\n**PASCAL-Context models**: trained online with high momentum on an object and scene labeling of PASCAL VOC.\n\n* [FCN-32s PASCAL-Context](pascalcontext-fcn32s): single stream, 32 pixel prediction stride net\n* [FCN-16s PASCAL-Context](pascalcontext-fcn16s): two stream, 16 pixel prediction stride net\n* [FCN-8s PASCAL-Context](pascalcontext-fcn8s): three stream, 8 pixel prediction stride net\n\n## Frequently Asked Questions\n\n**Is learning the interpolation necessary?** In our original experiments the interpolation layers were initialized to bilinear kernels and then learned.\nIn follow-up experiments, and this reference implementation, the bilinear kernels are fixed.\nThere is no significant difference in accuracy in our experiments, and fixing these parameters gives a slight speed-up.\nNote that in our networks there is only one interpolation kernel per output class, and results may differ for higher-dimensional and non-linear interpolation, for which learning may help further.\n\n**Why pad the input?**: The 100 pixel input padding guarantees that the network output can be aligned to the input for any input size in the given datasets, for instance PASCAL VOC.\nThe alignment is handled automatically by net specification and the crop layer.\nIt is possible, though less convenient, to calculate the exact offsets necessary and do away with this amount of padding.\n\n**Why are all the outputs/gradients/parameters zero?**: This is almost universally due to not initializing the weights as needed.\nTo reproduce our FCN training, or train your own FCNs, it is crucial to transplant the weights from the corresponding ILSVRC net such as VGG16.\nThe included `surgery.transplant()` method can help with this.\n\n**What about FCN-GoogLeNet?**: a reference FCN-GoogLeNet for PASCAL VOC is coming soon.",
+      "https://arxiv.org/abs/1411.4038\n\n**Note that this is a work in progress and the final, reference version is coming soon.**\nPlease ask Caffe and FCN usage questions on the [caffe-users mailing list](https://groups.google.com/forum/#!forum/caffe-users).\n\nThese models are compatible with `BVLC/caffe:master`.\nCompatibility has held since `master@8c66fa5` with the merge of PRs #3613 and #3570.\nThe code and models here are available under the same license as Caffe (BSD-2) and the Caffe-bundled models (that is, unrestricted use; see the [BVLC model license](http://caffe.berkeleyvision.org/model_zoo.html#bvlc-model-license)).\n\n**PASCAL VOC models**: trained online with high momentum for a ~5 point boost in mean intersection-over-union over the original models.\nThese models are trained using extra data from [Hariharan et al.](http://www.cs.berkeley.edu/~bharath2/codes/SBD/download.html), but excluding SBD val.\nFCN-32s is fine-tuned from the [ILSVRC-trained VGG-16 model](https://github.com/BVLC/caffe/wiki/Model-Zoo#models-used-by-the-vgg-team-in-ilsvrc-2014), and the finer strides are then fine-tuned in turn.\nThe \"at-once\" FCN-8s is fine-tuned from VGG-16 all-at-once by scaling the skip connections to better condition optimization.\n\n* [FCN-32s PASCAL](voc-fcn32s): single stream, 32 pixel prediction stride net, scoring 63.6 mIU on seg11valid\n* [FCN-16s PASCAL](voc-fcn16s): two stream, 16 pixel prediction stride net, scoring 65.0 mIU on seg11valid\n* [FCN-8s PASCAL](voc-fcn8s): three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test\n* [FCN-8s PASCAL at-once](voc-fcn8s-atonce): all-at-once, three stream, 8 pixel prediction stride net, scoring 65.4 mIU on seg11valid\n\n[FCN-AlexNet PASCAL](voc-fcn-alexnet): AlexNet (CaffeNet) architecture, single stream, 32 pixel prediction stride net, scoring 48.0 mIU on seg11valid.\nUnlike the FCN-32/16/8s models, this network is trained with gradient accumulation, normalized loss, and standard momentum.\n(Note: when both FCN-32s/FCN-VGG16 and FCN-AlexNet are trained in this same way FCN-VGG16 is far better; see Table 1 of the paper.)\n\nTo reproduce the validation scores, use the [seg11valid](https://github.com/shelhamer/fcn.berkeleyvision.org/blob/master/data/pascal/seg11valid.txt) split defined by the paper in footnote 7. Since SBD train and PASCAL VOC 2011 segval intersect, we only evaluate on the non-intersecting set for validation purposes.\n\n**NYUDv2 models**: trained online with high momentum on color, depth, and HHA features (from Gupta et al. https://github.com/s-gupta/rcnn-depth).\nThese models demonstrate FCNs for multi-modal input.\n\n* [FCN-32s NYUDv2 Color](nyud-fcn32s-color): single stream, 32 pixel prediction stride net on color/BGR input\n* [FCN-32s NYUDv2 HHA](nyud-fcn32s-hha): single stream, 32 pixel prediction stride net on HHA input\n* [FCN-32s NYUDv2 Early Color-Depth](nyud-fcn32s-color-d): single stream, 32 pixel prediction stride net on early fusion of color and (log) depth for 4-channel input\n* [FCN-32s NYUDv2 Late Color-HHA](nyud-fcn32s-color-hha): single stream, 32 pixel prediction stride net by late fusion of FCN-32s NYUDv2 Color and FCN-32s NYUDv2 HHA\n\n**SIFT Flow models**: trained online with high momentum for joint semantic class and geometric class segmentation.\nThese models demonstrate FCNs for multi-task output.\n\n* [FCN-32s SIFT Flow](siftflow-fcn32s): single stream stream, 32 pixel prediction stride net\n* [FCN-16s SIFT Flow](siftflow-fcn16s): two stream, 16 pixel prediction stride net\n* [FCN-8s SIFT Flow](siftflow-fcn8s): three stream, 8 pixel prediction stride net\n\n*Note*: in this release, the evaluation of the semantic classes is not quite right at the moment due to an issue with missing classes.\nThis will be corrected soon.\nThe evaluation of the geometric classes is fine.\n\n**PASCAL-Context models**: trained online with high momentum on an object and scene labeling of PASCAL VOC.\n\n* [FCN-32s PASCAL-Context](pascalcontext-fcn32s): single stream, 32 pixel prediction stride net\n* [FCN-16s PASCAL-Context](pascalcontext-fcn16s): two stream, 16 pixel prediction stride net\n* [FCN-8s PASCAL-Context](pascalcontext-fcn8s): three stream, 8 pixel prediction stride net\n\n## Frequently Asked Questions\n\n**Is learning the interpolation necessary?** In our original experiments the interpolation layers were initialized to bilinear kernels and then learned.\nIn follow-up experiments, and this reference implementation, the bilinear kernels are fixed.\nThere is no significant difference in accuracy in our experiments, and fixing these parameters gives a slight speed-up.\nNote that in our networks there is only one interpolation kernel per output class, and results may differ for higher-dimensional and non-linear interpolation, for which learning may help further.\n\n**Why pad the input?**: The 100 pixel input padding guarantees that the network output can be aligned to the input for any input size in the given datasets, for instance PASCAL VOC.\nThe alignment is handled automatically by net specification and the crop layer.\nIt is possible, though less convenient, to calculate the exact offsets necessary and do away with this amount of padding.\n\n**Why are all the outputs/gradients/parameters zero?**: This is almost universally due to not initializing the weights as needed.\nTo reproduce our FCN training, or train your own FCNs, it is crucial to transplant the weights from the corresponding ILSVRC net such as VGG16.\nThe included `surgery.transplant()` method can help with this.\n\n**What about FCN-GoogLeNet?**: a reference FCN-GoogLeNet for PASCAL VOC is coming soon."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9104388306336967
+      ],
+      "excerpt": "PAMI 2016 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9554441738822752
+      ],
+      "excerpt": "CVPR 2015 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9168123590112338
+      ],
+      "excerpt": "Please ask Caffe and FCN usage questions on the caffe-users mailing list. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928241608495648,
+        0.8963438693956388,
+        0.9678273440167553
+      ],
+      "excerpt": "FCN-32s PASCAL: single stream, 32 pixel prediction stride net, scoring 63.6 mIU on seg11valid \nFCN-16s PASCAL: two stream, 16 pixel prediction stride net, scoring 65.0 mIU on seg11valid \nFCN-8s PASCAL: three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9776678451082208
+      ],
+      "excerpt": "FCN-AlexNet PASCAL: AlexNet (CaffeNet) architecture, single stream, 32 pixel prediction stride net, scoring 48.0 mIU on seg11valid. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9831568478605578,
+        0.9831568478605578,
+        0.9245499925854462,
+        0.9896236717794047
+      ],
+      "excerpt": "FCN-32s NYUDv2 Color: single stream, 32 pixel prediction stride net on color/BGR input \nFCN-32s NYUDv2 HHA: single stream, 32 pixel prediction stride net on HHA input \nFCN-32s NYUDv2 Early Color-Depth: single stream, 32 pixel prediction stride net on early fusion of color and (log) depth for 4-channel input \nFCN-32s NYUDv2 Late Color-HHA: single stream, 32 pixel prediction stride net by late fusion of FCN-32s NYUDv2 Color and FCN-32s NYUDv2 HHA \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9924850221410872,
+        0.8919412418785159,
+        0.9287913210266059
+      ],
+      "excerpt": "FCN-32s SIFT Flow: single stream stream, 32 pixel prediction stride net \nFCN-16s SIFT Flow: two stream, 16 pixel prediction stride net \nFCN-8s SIFT Flow: three stream, 8 pixel prediction stride net \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9949774332681249,
+        0.9252690500369315,
+        0.9513733337966637
+      ],
+      "excerpt": "FCN-32s PASCAL-Context: single stream, 32 pixel prediction stride net \nFCN-16s PASCAL-Context: two stream, 16 pixel prediction stride net \nFCN-8s PASCAL-Context: three stream, 8 pixel prediction stride net \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LisenDai/Eye-gaze-Point-Detection-Modified-sec-",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-18T22:51:57Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-18T23:08:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9926512311002333
+      ],
+      "excerpt": "This is the reference implementation of the models and code for the fully convolutional networks (FCNs) in the PAMI FCN and CVPR FCN papers: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9190552368680525,
+        0.9223550719921274,
+        0.9535021436291524,
+        0.9688370994803722,
+        0.9680243155278494,
+        0.9382367157845148
+      ],
+      "excerpt": "Note that this is a work in progress and the final, reference version is coming soon. \nPlease ask Caffe and FCN usage questions on the caffe-users mailing list. \nThese models are compatible with BVLC/caffe:master. \nCompatibility has held since master@8c66fa5 with the merge of PRs #3613 and #3570. \nThe code and models here are available under the same license as Caffe (BSD-2) and the Caffe-bundled models (that is, unrestricted use; see the BVLC model license). \nPASCAL VOC models: trained online with high momentum for a ~5 point boost in mean intersection-over-union over the original models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9268155421064436,
+        0.9677819843577286,
+        0.8897636212349593,
+        0.8182878200281786,
+        0.9219770708414597,
+        0.8791714492522956,
+        0.8273937686710245,
+        0.8944923420955073,
+        0.9872031661988193,
+        0.9500444393567438
+      ],
+      "excerpt": "FCN-32s is fine-tuned from the ILSVRC-trained VGG-16 model, and the finer strides are then fine-tuned in turn. \nThe \"at-once\" FCN-8s is fine-tuned from VGG-16 all-at-once by scaling the skip connections to better condition optimization. \nFCN-32s PASCAL: single stream, 32 pixel prediction stride net, scoring 63.6 mIU on seg11valid \nFCN-16s PASCAL: two stream, 16 pixel prediction stride net, scoring 65.0 mIU on seg11valid \nFCN-8s PASCAL: three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test \nFCN-8s PASCAL at-once: all-at-once, three stream, 8 pixel prediction stride net, scoring 65.4 mIU on seg11valid \nFCN-AlexNet PASCAL: AlexNet (CaffeNet) architecture, single stream, 32 pixel prediction stride net, scoring 48.0 mIU on seg11valid. \nUnlike the FCN-32/16/8s models, this network is trained with gradient accumulation, normalized loss, and standard momentum. \n(Note: when both FCN-32s/FCN-VGG16 and FCN-AlexNet are trained in this same way FCN-VGG16 is far better; see Table 1 of the paper.) \nTo reproduce the validation scores, use the seg11valid split defined by the paper in footnote 7. Since SBD train and PASCAL VOC 2011 segval intersect, we only evaluate on the non-intersecting set for validation purposes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8451974227913608
+      ],
+      "excerpt": "FCN-32s NYUDv2 HHA: single stream, 32 pixel prediction stride net on HHA input \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8915463964262254
+      ],
+      "excerpt": "FCN-32s NYUDv2 Late Color-HHA: single stream, 32 pixel prediction stride net by late fusion of FCN-32s NYUDv2 Color and FCN-32s NYUDv2 HHA \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9728549745817139
+      ],
+      "excerpt": "Note: in this release, the evaluation of the semantic classes is not quite right at the moment due to an issue with missing classes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9386497987564635,
+        0.9171519083394964
+      ],
+      "excerpt": "The evaluation of the geometric classes is fine. \nPASCAL-Context models: trained online with high momentum on an object and scene labeling of PASCAL VOC. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DaiLisen/Eye-gaze-Point-Detection-Modified-sec-/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 02:17:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LisenDai/Eye-gaze-Point-Detection-Modified-sec-/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LisenDai/Eye-gaze-Point-Detection-Modified-sec-",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LisenDai/Eye-gaze-Point-Detection-Modified-sec-/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Fully Convolutional Networks for Semantic Segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Eye-gaze-Point-Detection-Modified-sec-",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LisenDai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LisenDai/Eye-gaze-Point-Detection-Modified-sec-/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 02:17:57 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

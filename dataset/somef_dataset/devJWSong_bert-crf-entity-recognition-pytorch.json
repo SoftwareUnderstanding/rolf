@@ -1,0 +1,276 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1907.05339](https://arxiv.org/abs/1907.05339",
+      "https://arxiv.org/abs/1907.05339",
+      "https://arxiv.org/abs/1810.04805*. ([https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805))\n\n<a id=\"2\">[2]</a> Lafferty, J., McCallum, A., & Pereira, F. C. (2001). Conditional random fields: Probabilistic models for segmenting and labeling sequence data. ([https://repository.upenn.edu/cis_papers/159/](https://repository.upenn.edu/cis_papers/159/))\n\n<a id=\"3\">[3]</a> Zhang, H., Lan, Y., Pang, L., Guo, J., & Cheng, X. (2019). Recosa: Detecting the relevant contexts with self-attention for multi-turn dialogue generation. *arXiv preprint https://arxiv.org/abs/1907.05339*. ([https://arxiv.org/abs/1907.05339](https://arxiv.org/abs/1907.05339))\n\n<a id=\"4\">[4]</a> Taskmaster-2 . (2020). ([https://research.google/tools/datasets/taskmaster-2/](https://research.google/tools/datasets/taskmaster-2/))",
+      "https://arxiv.org/abs/1907.05339*. ([https://arxiv.org/abs/1907.05339](https://arxiv.org/abs/1907.05339))\n\n<a id=\"4\">[4]</a> Taskmaster-2 . (2020). ([https://research.google/tools/datasets/taskmaster-2/](https://research.google/tools/datasets/taskmaster-2/))"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<a id=\"1\">[1]</a> Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. *arXiv preprint arXiv:1810.04805*. ([https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805))\n\n<a id=\"2\">[2]</a> Lafferty, J., McCallum, A., & Pereira, F. C. (2001). Conditional random fields: Probabilistic models for segmenting and labeling sequence data. ([https://repository.upenn.edu/cis_papers/159/](https://repository.upenn.edu/cis_papers/159/))\n\n<a id=\"3\">[3]</a> Zhang, H., Lan, Y., Pang, L., Guo, J., & Cheng, X. (2019). Recosa: Detecting the relevant contexts with self-attention for multi-turn dialogue generation. *arXiv preprint arXiv:1907.05339*. ([https://arxiv.org/abs/1907.05339](https://arxiv.org/abs/1907.05339))\n\n<a id=\"4\">[4]</a> Taskmaster-2 . (2020). ([https://research.google/tools/datasets/taskmaster-2/](https://research.google/tools/datasets/taskmaster-2/))\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/devjwsong/bert-crf-entity-recognition-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-30T02:08:50Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T12:00:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9208772835932474,
+        0.8308379923530298,
+        0.9274643022031795,
+        0.9079241697360769,
+        0.9122040462546168
+      ],
+      "excerpt": "This repository is for the entity recognition task using the pre-trained BERT[1] and the additional CRF(Conditional Random Field)[2] layer. \nOriginally, this project has been conducted for dialogue datasets, so it contains both <u>single-turn</u> setting and <u>multi-turn</u> setting. \nThe single-turn setting is the same as the basic entity extraction task, but the multi-turn one is a little bit different since it considers the dialogue contexts(previous histories) to conduct the entity recognition task to current utterance. \nThe multi-turn context application is based on ReCoSa(the Relevant Contexts with Self-attention)[3] structure. \nYou can see the details of each model in below descriptions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885991692949176
+      ],
+      "excerpt": "The description of each variable is as follows. (Those not introduced in below table are set automatically and should not be changed.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8122125042834716,
+        0.9220086577196248,
+        0.832299757662724
+      ],
+      "excerpt": "| entity_dir          | String | The name of the directory under data_dir which contains the processed data with inputs & labels. | \"entity\"             | \n| utter_split         | String | The string symbol for splitting each utterance in one dialogue. | \"[END OF UTTERANCE]\" | \n| dialogue_split_line | String | The line for splitting each dialogue in the preprocessed data files. | \"[END OF DIALOGUE]\"  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8490037945672047,
+        0.9684915575131307,
+        0.9684915575131307
+      ],
+      "excerpt": "| pad_token           | String | The padding token.                                           | \"[PAD]\"              | \n| cls_token           | String | The CLS token for BERT.                                      | \"[CLS]\"              | \n| sep_token           | String | The SEP token for BERT.                                      | \"[SEP]\"              | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8124198360821223
+      ],
+      "excerpt": "| bert_name           | String | The BERT model type.                                         | \"bert-base-cased\"    | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9505400279387433
+      ],
+      "excerpt": "This repository includes the Google's Taskmaster-2[4] dataset which is processed for entity recognition task beforehand. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.987984292201946,
+        0.8093537310584827
+      ],
+      "excerpt": "The description of these formats is as follows. (Make sure that all symbols are compatible with the configurations above.) \n<img src=\"https://user-images.githubusercontent.com/16731987/97839217-121fc700-1d25-11eb-8688-0f3b8b2a63be.png\" alt=\"The description for data processing when using dialogue datasets.\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Entity recognition using BERT + CRF for single-tun / multi-turn setting in dialogues",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/devJWSong/bert-crf-entity-recognition-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Tue, 07 Dec 2021 00:54:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/devjwsong/bert-crf-entity-recognition-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "devjwsong/bert-crf-entity-recognition-pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8061276847966811
+      ],
+      "excerpt": "| inner_split_symbol  | String | The symbol splitting the entity name and the tag in one entity. | \"$$\"                 | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8527703472418863
+      ],
+      "excerpt": "| data_dir            | String | The name of the parent directory where data files are stored. | \"data\"               | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665905641101466
+      ],
+      "excerpt": "| train_name          | String | The prefix of the train data files' name.                    | \"train\"              | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.868466994111206
+      ],
+      "excerpt": "| test_name           | String | The prefix of the test data files' name.                     | \"test\"               | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8087251053269003,
+        0.8349447954603203
+      ],
+      "excerpt": "| num_epochs          | Number(int) | The total number of iterations.                              | 10                   | \n| batch_size          | Number(int) | The batch size.                                              | 8                    | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/devjwsong/bert-crf-entity-recognition-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bert-crf-entity-recognition-pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bert-crf-entity-recognition-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "devjwsong",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/devjwsong/bert-crf-entity-recognition-pytorch/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Install all required packages.\n\n   ```shell\n   pip install -r requirements.txt\n   ```\n\n   <br/>\n\n2. Make the directory `{data_dir}/{original_dir}` and put the sample files or your own data processed like in the previous section.\n\n   In default setting, the structure of whole data directory should be like below.\n\n   - `data`\n     - `original`\n       - `flights.txt`\n       - `food-ordering.txt`\n       - `hotels.txt`\n       - `movies.txt`\n       - `music.txt`\n       - `restaurant-search.txt`\n       - `sports.txt`\n\n   <br/>\n\n3. Run the data processing codes.\n\n   ```shell\n   python src/data_process.py --config_path=PATH_TO_CONFIGURATION_FILE\n   ```\n\n   - `--config_path`: This indicates the path to the configuration file. (default: `config.json`)\n\n   <br/>\n\n4. Run the below command to train the model you want.\n\n   ```shell\n   python src/main.py --mode='train' --config_path=PATH_TO_CONFIGURATION_FILE --ckpt_name=CHECKPOINT_NAME\n   ```\n\n   - `--mode`: You have to specify the mode among two options, `'train'` or `'test'`.\n   - `--ckpt_name`: This specify the checkpoint file name. This would be the name of trained checkpoint and you can continue your training with this model in the case of resuming training. If you want to conduct training from the beginning, this parameter should be omitted. When testing, this would be the name of the checkpoint you want to test. (default: `None`)\n   \n   <br/>\n\n5. After training, you can test your model as follows.\n\n   ```shell\n   python src/main.py --mode='test' --config_path=PATH_TO_CONFIGURATION_FILE --ckpt_name=CHECKPOINT_NAME\n   ```\n\n<br/>\n\n---\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Tue, 07 Dec 2021 00:54:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pytorch",
+      "bert",
+      "natural-language-processing",
+      "natural-language-understanding",
+      "nlp",
+      "entity-recognition",
+      "multi-turn-dialogue",
+      "multi-turn"
+    ],
+    "technique": "GitHub API"
+  }
+}

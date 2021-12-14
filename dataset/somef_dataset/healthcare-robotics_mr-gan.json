@@ -1,0 +1,186 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Z. Erickson, S. Chernova, and C. C. Kemp, [\"Semi-Supervised Haptic Material Recognition for Robots using Generative Adversarial Networks\"](http://proceedings.mlr.press/v78/erickson17a/erickson17a.pdf), [1st Annual Conference on Robot Learning (CoRL 2017)](http://www.robot-learning.org), 2017.\n\nProject webpage: http://healthcare-robotics.com/mr-gan\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1606.03498v1"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Healthcare-Robotics/mr-gan",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-07-03T01:54:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-17T12:21:07Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for the paper \"Semi-Supervised Haptic Material Recognition for Robots using Generative Adversarial Networks\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Compact dataset (1 GB) (can be used to compute tables 1, 2, 3, 4, and 6): https://goo.gl/WiqSjJ  \nFull processed dataset (20 GB) (can be used to compute all tables in paper): https://goo.gl/FnXfgM  \nRaw data collected on the PR2 (10 GB): https://goo.gl/DNqPib  \nDataset details can be found on the [project webpage](http://healthcare-robotics.com/mr-gan).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/healthcare-robotics/mr-gan/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Mon, 13 Dec 2021 04:29:40 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Healthcare-Robotics/mr-gan/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Healthcare-Robotics/mr-gan",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/healthcare-robotics/mr-gan/master/datacollection/control/change_gains_pr2.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Healthcare-Robotics/mr-gan/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Semi-Supervised Haptic Material Recognition using GANs",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mr-gan",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Healthcare-Robotics",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Healthcare-Robotics/mr-gan/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Python 2.7  \nKeras 2.0.9  \nLibrosa 0.5.1  \nTheano 0.9.0  \nNumpy 1.13.3  \nPlotly 2.0.11\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Our generative adversarial network is implemented in Keras and includes the feature matching technique presented by [Salimans et al.](https://arxiv.org/abs/1606.03498v1)  \nGAN results presented in tables 1, 3, and 6 can be recomputed using the command below (requires compact dataset). This takes several hours with a GPU.\n```bash\npython mr_gan.py --tables 1 3 6\n```\nNeural network and SVM results from tables 2 and 4 can be recomputed using the commands below (requires compact dataset).\n```bash\npython mr_nn.py --tables 2 4\npython mr_svm.py --tables 2 4\n```\nRecompute results presented in table 5 (requires full dataset).\n```bash\npython mr_gan.py --tables 5\n```\nGenerate plots. This requires [plotly](https://plot.ly/python/).\n```bash\npython paperplotly.py\n```\nCollect new data with a PR2.\n```bash\nrosrun fingertip_pressure sensor_info.py &\npython contactmicpublisher.py &\npython temperaturepublisher.py &\npython collectdataPoke.py -n fabric_khakishorts -s 100 -w 0.1 -l 0.1 -ht 0.06 -v\npython collectdataPoke.py -n plastic_fullwaterbottle -s 100 -l 0.03 -ht 0.08\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Mon, 13 Dec 2021 04:29:40 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

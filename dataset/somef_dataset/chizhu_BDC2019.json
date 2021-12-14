@@ -1,0 +1,297 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1907.08610",
+      "https://arxiv.org/abs/1609.06038\n        q1 = Input(name='q1', shape=(8,))\n        q2 = Input(name='q2', shape=(20,))\n\n        # Embedding\n        embedding = create_pretrained_embedding(\n        embedding_matrix, mask_zero=False)\n        bn = BatchNormalization(axis=2)\n        q1_embed = bn(embedding(q1))\n        q2_embed = bn(embedding(q2))\n\n        # Encode\n        encode = Bidirectional(CuDNNLSTM(lstm_dim, return_sequences=True))\n        q1_encoded = encode(q1_embed)\n        q2_encoded = encode(q2_embed)\n\n        # Attention\n        q1_aligned, q2_aligned = soft_attention_alignment(q1_encoded, q2_encoded)\n\n        # Compose\n        q1_combined = Concatenate()(\n        [q1_encoded, q2_aligned, submult(q1_encoded, q2_aligned)])\n        q2_combined = Concatenate()(\n        [q2_encoded, q1_aligned, submult(q2_encoded, q1_aligned)])\n\n        compose = Bidirectional(CuDNNLSTM(lstm_dim, return_sequences=True))\n        q1_compare = compose(q1_combined)\n        q2_compare = compose(q2_combined)\n\n        # Aggregate\n        q1_rep = apply_multiple(q1_compare, [GlobalAvgPool1D(), GlobalMaxPool1D()])\n        q2_rep = apply_multiple(q2_compare, [GlobalAvgPool1D(), GlobalMaxPool1D()])\n\n   \n        merged = Concatenate()([q1_rep, q2_rep])\n\n        dense = BatchNormalization()(merged)\n        dense = Dense(dense_dim, activation='elu')(dense)\n        dense = BatchNormalization()(dense)\n        dense = Dropout(dense_dropout)  (dense)\n        dense = Dense(dense_dim, activation='elu')(dense)\n        dense = BatchNormalization()(dense)\n        dense = Dropout(dense_dropout)(dense)\n        out_ = Dense(1, activation='sigmoid')(dense)\n\n        model = Model(inputs=[q1, q2], outputs=out_)\n        model.compile(loss='binary_crossentropy',\n                  optimizer=AdamW(lr=0.0003,weight_decay=0.02,),\n                  metrics=[\"accuracy\",auc])\n        return model\n  ```\n  \n\n#### \u7ebf\u4e0a\u63d0\u4ea4\n* finetuning_fasttext_esim(**0.6336**)*0.6+\\\n  finetuning_w2v_esim(**0.626**)*0.2+\\\n  finetuning_w2v_esim(**0.6248**)*0.2=**lb 0.6366**\n<hr>\n\n* finetuning_fasttext_esim(**0.6336**)*0.5+\\\n  finetuning_w2v_esim(**0.626**)*0.2+\\\n  finetuning_w2v_esim(**0.6248**)*0.2+\\\n  \u5b6a\u751fRNN(**0.6214**)*0.1=ensemble_NN \n\n  lgb(**0.597**)*0.1+ensemble_NN*0.9= **lb 0.6371**\n\n\n  \n  \n#### \u6211\u4eec\u7684\u4f18\u52bf\n* \u5de5\u4e1a\u53ef\u90e8\u7f72\n> \u771f\u5b9e\u7684\u7ebf\u4e0a\u4e1a\u52a1\u4e5f\u662f\u5e9e\u5927\u7684\u6570\u636e\u91cf\uff0c\u5982\u4f55\u5145\u5206\u5229\u7528\u6570\u636e\u662f\u4e2a\u96be\u9898\u3002\u6211\u4eec\u7684\u65b9\u6848\u9002\u7528\u4e8e\u5927\u6570\u636e\u91cf\uff08\u6d41\u5f0f\u8bad\u7ec3\u5168\u91cf\u6570\u636e\u5185\u5b58\u5c0f+finetuing\u8fc1\u79fb\u5b66\u4e60\u6548\u679c\u4f73\uff09\n\n* \u7b80\u5355\u800c\u5b9e\u7528\n> \u6211\u4eec\u603b\u5171\u624d19\u4e2a\u7279\u5f81\uff0c\u4e0d\u9700\u8981\u63d0\u53d6\u5927\u91cf\u7684\u624b\u5de5\u7279\u5f81\uff0c\u6240\u4ee5\u53ef\u4ee5\u8bf4\u4e0d\u4f9d\u8d56\u4e8eLGB\u6a21\u578b\uff0cLGB\u6a21\u578b\u662f\u5168\u91cf\u6a21\u578b\uff0c\u8981\u4e48\u53ea\u80fd\u9009\u7528\u5c0f\u6570\u636e\u96c6\u63d0\u7279\u5f81\u8981\u4e48\u5927\u6570\u636e\u91cf\u63d0\u53d6\u4e0d\u4e86\u7279\u5f81\uff0c\u4e0d\u6613\u8fed\u4ee3\u3002\u6211\u4eec\u7684\u65b9\u6848\u6d41\u5f0f\u5904\u7406\uff0c\u6613\u4e8e\u8fed\u4ee3\u66f4\u65b0\u3002\n\n\n\n\n\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9813161029725735
+      ],
+      "excerpt": "| title | hash string\uff0cterm\u7a7a\u683c\u5206\u5272 | 3 9 120 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9912556242864674
+      ],
+      "excerpt": "\u4f7f\u7528\u6700\u65b0\u521a\u51fa\u7684lookahead \u4f18\u5316\u5668\uff08reference:Lookahead Optimizer: k steps forward, 1 step back(https://arxiv.org/abs/1907.08610)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9398974979104496
+      ],
+      "excerpt": "    #: Based on arXiv:1609.06038 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/chizhu/BDC2019",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-13T11:19:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-22T03:39:51Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "#: htime = Dense(col_len,activation='relu')(hin) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9108484359733701,
+        0.8577302739126875
+      ],
+      "excerpt": "#: The MLP that determines the outcome \nx = Dense(64,kernel_initializer=he_uniform(seed=123), activation='relu',)(x) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "pred = Dense(1,kernel_initializer=he_uniform(seed=123), activation='sigmoid')(x) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.860059181823877
+      ],
+      "excerpt": "#: model.summary() \nreturn model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.9174630923203576
+      ],
+      "excerpt": "        #:dense = BatchNormalization()(merged) \n        dense = Dense(512, activation='relu')(merged) \n        #:dense = BatchNormalization()(dense) \n        dense = Dropout(0.5)(dense) \n        dense = Dense(256, activation='relu')(dense) \n        #:dense = BatchNormalization()(dense) \n        dense = Dropout(0.5)(dense) \n        out_ = Dense(1, activation='sigmoid')(dense)model = Model(inputs=[input_q,input_a,input_f], outputs=out_) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "return model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875,
+        0.8577302739126875
+      ],
+      "excerpt": "dense = BatchNormalization()(merged) \ndense = Dense(dense_dim, activation='elu')(dense) \ndense = BatchNormalization()(dense) \ndense = Dropout(dense_dropout)  (dense) \ndense = Dense(dense_dim, activation='elu')(dense) \ndense = BatchNormalization()(dense) \ndense = Dropout(dense_dropout)(dense) \nout_ = Dense(1, activation='sigmoid')(dense) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "return model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\u9ad8\u6821\u8d5b2019  \u6587\u672c\u70b9\u51fb\u9884\u6d4b",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/chizhu/BDC2019/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Mon, 06 Dec 2021 01:19:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/chizhu/BDC2019/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "chizhu/BDC2019",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "   ```python  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "  ```python  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.895977115559925,
+        0.895977115559925
+      ],
+      "excerpt": "        lstm_layer = Bidirectional(CuDNNLSTM(64, return_sequences=True, kernel_initializer=glorot_uniform(seed = 123))) \n        gru_layer = Bidirectional(CuDNNGRU(64, return_sequences=True, kernel_initializer=glorot_uniform(seed = 123))) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144338362021298
+      ],
+      "excerpt": "seq1 = Input(shape=(maxlen_query,)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144338362021298
+      ],
+      "excerpt": "seq2 = Input(shape=(maxlen_answer,)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8848188974363315,
+        0.8852042254015031
+      ],
+      "excerpt": "    q1 = Input(name='q1', shape=(8,)) \n    q2 = Input(name='q2', shape=(20,)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "encode = Bidirectional(CuDNNLSTM(lstm_dim, return_sequences=True)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "compose = Bidirectional(CuDNNLSTM(lstm_dim, return_sequences=True)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/chizhu/BDC2019/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "## \u9ad8\u6821\u8d5b\u89e3\u51b3\u65b9\u6848",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BDC2019",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "chizhu",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/chizhu/BDC2019/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 47,
+      "date": "Mon, 06 Dec 2021 01:19:47 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,361 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9997161350882109
+      ],
+      "excerpt": "Author: Han Xiao https://hanxiao.github.io \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8998593429438314
+      ],
+      "excerpt": ": on another CPU machine \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jageshmaharjan/BERT_Service",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-17T08:42:25Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-06T14:39:22Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8092980582316222
+      ],
+      "excerpt": "Using BERT model as a sentence encoding service, i.e. mapping a variable-length sentence to a fixed-length vector. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9467572627257577,
+        0.954268167626174,
+        0.982712285930682,
+        0.9185262066927927,
+        0.9826442629563729,
+        0.871534623383304
+      ],
+      "excerpt": "BERT code of this repo is forked from the original BERT repo with necessary modification, especially in extract_features.py. \nBERT: Developed by Google, BERT is a method of pre-training language representations. It leverages an enormous amount of plain text data publicly available on the web and is trained in an unsupervised manner. Pre-training a BERT model is a fairly expensive yet one-time procedure for each language. Fortunately, Google released several pre-trained models where you can download from here. \nSentence Encoding/Embedding: sentence encoding is a upstream task required in many NLP applications, e.g. sentiment analysis, text classification. The goal is to represent a variable length sentence into a fixed length vector, each element of which should \"encode\" some semantics of the original sentence. \nFinally, this repo: This repo uses BERT as the sentence encoder and hosts it as a service via ZeroMQ, allowing you to map sentences into fixed-length representations in just two lines of code. \n:telescope: State-of-the-art: based on pretrained 12/24-layer models released by Google AI, which is considered as a milestone in the NLP community. \n:zap: Fast: 2000 sentence/s on a single Tesla M40 24GB with max_seq_len=40. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9584330428829824
+      ],
+      "excerpt": ":smiley: Easy-to-use: require only two lines of code to get sentence encoding once the server is set up. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9641263399789959
+      ],
+      "excerpt": "A: I take the second-to-last hidden layer of all of the tokens in the sentence and do average pooling. See the function I added to the modeling.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9283113087398394
+      ],
+      "excerpt": "A: Because a pre-trained model is not fine-tuned on any downstream tasks yet. In this case, the hidden state of [CLS] is not a good sentence representation. If later you fine-tune the model, you may use get_pooled_output() to get the fixed length representation as well. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8938445356551965
+      ],
+      "excerpt": "A: The last layer is too closed to the target functions (i.e. masked language model and next sentence prediction) during pre-training, therefore may be biased to those targets. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8152127434585726
+      ],
+      "excerpt": "A: The maximum number of concurrent requests is determined by num_worker in app.py. If you a sending more than num_worker requests concurrently, the new requests will be temporally stored in a queue until a free worker becomes available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8683752788295032,
+        0.8990070293343064,
+        0.9628863970473218
+      ],
+      "excerpt": "A: No. One request means a list of sentences sent from a client. Think the size of a request as the batch size. A request may contain 256, 512 or 1024 sentences. The optimal size of a request is often determined empirically. One large request can certainly improve the GPU utilization, yet it also increases the overhead of transmission. You may run python client_example.py for a simple benchmark. \nQ: How about the speed? Is it fast enough for production? \nA: It highly depends on the max_seq_len and the size of a request. On a single Tesla M40 24GB with max_seq_len=40, you should get about 2000 samples per second using a 12-layer BERT. In general, I'd suggest smaller max_seq_len (25) and larger request size (512/1024). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9456212734579992
+      ],
+      "excerpt": "Q: What is backend based on? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9310466671995125
+      ],
+      "excerpt": "A: No. Think of BertClient as a general feature extractor, whose output can be fed to any ML models, e.g. scikit-learn, pytorch, tensorflow. The only file that client need is client.py. Copy this file to your project and import it, then you are ready to go. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8451620774510373
+      ],
+      "excerpt": "A config file (bert_config.json) which specifies the hyperparameters of the model. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Download a model from [here](https://github.com/google-research/bert#pre-trained-models), then uncompress the zip file into some folder, say `/tmp/english_L-12_H-768_A-12/`\n\nYou can use all models listed, including `BERT-Base, Multilingual` and `BERT-Base, Chinese`.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jageshmaharjan/BERT_Service/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 21:07:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jageshmaharjan/BERT_Service/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jageshmaharjan/BERT_Service",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jageshmaharjan/BERT_Service/master/docker/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jageshmaharjan/BERT_Service/master/BERT_sentence_similarity.ipynb",
+      "https://raw.githubusercontent.com/jageshmaharjan/BERT_Service/master/Word2Vec.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jageshmaharjan/BERT_Service/master/docker/entrypoint.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8998268450275316
+      ],
+      "excerpt": "One can also start the service on one (GPU) machine and call it from another (CPU) machine as follows \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8304569735220099
+      ],
+      "excerpt": "Q: Where do you get the fixed representation? Did you do pooling or something? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.807425241490774
+      ],
+      "excerpt": "A: Yes. Make sure you have the following three items in model_dir: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199960849837926
+      ],
+      "excerpt": "Q: Can I run it in python 2? \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8386230147941713
+      ],
+      "excerpt": "<img src=\".github/demo.gif\" width=\"600\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8043373533369355
+      ],
+      "excerpt": "A config file (bert_config.json) which specifies the hyperparameters of the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8536842656864143
+      ],
+      "excerpt": "python benchmark.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jageshmaharjan/BERT_Service/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Dockerfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Han Xiao\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# THIS IS A REPLICA COPY FROM bert-as-service by Han Xiao, that uses the pre-trained model from BERT  google-research",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BERT_Service",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jageshmaharjan",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jageshmaharjan/BERT_Service/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python >= 3.5 (Python 2 is NOT supported!)\n- Tensorflow >= 1.10\n\nThese two requirements MUST be satisfied. For other dependent packages, please refere to `requirments.txt`  and `requirments.client.txt`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\ndocker build -t bert-as-service -f ./docker/Dockerfile .\nNUM_WORKER=1\nPATH_MODEL=<path of your model>\ndocker run --runtime nvidia -dit -p 5555:5555 -v $PATH_MODEL:/model -t bert-as-service $NUM_WORKER\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 10 Dec 2021 21:07:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\npython app.py -num_worker=4 -model_dir /tmp/english_L-12_H-768_A-12/\n```\nThis will start a service with four workers, meaning that it can handel up to four **concurrent** requests. (These workers are behind a simple load balancer.)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "> NOTE: please make sure your project includes [`client.py`](service/client.py), as we need to import `BertClient` class from this file. This is the **only file** that you will need as a client. You don't even need Tensorflow on client.\n\nNow you can use pretrained BERT to encode sentences in your Python code simply as follows:\n```python\nfrom service.client import BertClient\nec = BertClient()\nec.encode(['First do it', 'then do it right', 'then do it better'])\n```\nThis will return a python object with type `List[List[float]]`, each element of the outer `List` is the fixed representation of a sentence.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

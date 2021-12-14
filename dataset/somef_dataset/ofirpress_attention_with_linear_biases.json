@@ -1,0 +1,329 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@misc{press2021train,\n      title={Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation}, \n      author={Ofir Press and Noah A. Smith and Mike Lewis},\n      year={2021},\n      eprint={2108.12409},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{press2021train,\n      title={Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation}, \n      author={Ofir Press and Noah A. Smith and Mike Lewis},\n      year={2021},\n      eprint={2108.12409},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ofirpress/attention_with_linear_biases",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to Facebook AI Research Sequence-to-Sequence Toolkit (fairseq)\nWe want to make contributing to this project as easy and transparent as\npossible.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and create your branch from master.\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues to track public bugs. Please ensure your description is\nclear and has sufficient instructions to be able to reproduce the issue.\nLicense\nBy contributing to Facebook AI Research Sequence-to-Sequence Toolkit (fairseq),\nyou agree that your contributions will be licensed under the LICENSE file in\nthe root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-24T18:44:53Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-30T04:15:54Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8684218614238661
+      ],
+      "excerpt": "This repository contains the ALiBi code and models for our paper Train Short, Test Long. This file explains how to run our experiments on the WikiText-103 dataset. Read the paper here.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.997337595724106,
+        0.9848894728167358,
+        0.9422369618220159
+      ],
+      "excerpt": "Attention with Linear Biases (ALiBi) is very simple! Instead of adding position embeddings at the bottom of the transformer stack (which we don't) we add a linear bias to each attention score, as depicted in the figure above. The 'm' hyperparam is head-specific and is not learned- it is set at the beginning of training. We have a function that automatically generates these m values given the number of heads in the model.  \nALiBi allows the model to be trained on, for example, 1024 tokens, and then do inference on 2048 (or much more) tokens without any finetuning. It's also able to improve performance, even when not extrapolating, in lower resource language modeling settings.  \nThe implementation is very simple. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9119769674664454
+      ],
+      "excerpt": "To train a language model with attention with linear baises (ALiBi), on input sequences with 512 tokens, run: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8951871412938732,
+        0.8123156699306792
+      ],
+      "excerpt": "To train the model with inputs of length 3072, the --update-freq parameter must be changed to 3 and the --max-tokens parameter must be reduced to 3072 (and --tokens-per-sample must also be set to 3072).  \nIf you run out of memory while training: set --max-tokens to be 0.5 times what it was perviously and set --update-freq to be 2 times what it was previously. This results in a batched computation that is mathematically equivalent to the original command but requires less memory. If that doesn't work, set --max-tokens to be 0.25 times what it was previously and set the --update-freq to be 4 times what it was previously, and so on... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for the ALiBi method for transformer language models ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ofirpress/attention_with_linear_biases/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Tue, 07 Dec 2021 10:55:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ofirpress/attention_with_linear_biases/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ofirpress/attention_with_linear_biases",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/ofirpress/attention_with_linear_biases/tree/master/docs",
+      "https://github.com/ofirpress/attention_with_linear_biases/tree/master/examples/simultaneous_translation/docs",
+      "https://github.com/ofirpress/attention_with_linear_biases/tree/master/examples/speech_to_text/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/scripts/compound_split_bleu.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/scripts/sacrebleu.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/scripts/test_fsdp.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/language_model/prepare-wikitext-103.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/finetune_multilingual_model.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/multilingual_fairseq_gen.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/train_multilingual_model.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_af_xh.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_wmt20.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_wat19_my.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_ML50_v1.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/preprocess_ML50_v1.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_flores_data.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_lotus.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_iitb.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/download_iwslt_and_extract.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/multilingual/data_scripts/utils/strip_sgm.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/speech_recognition/datasets/prepare-librispeech.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/m2m_100/install_dependecies.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/m2m_100/tok.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/m2m_100/tokenizers/seg_ja.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/m2m_100/tokenizers/seg_ko.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/m2m_100/tokenizers/tokenizer_ar.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/criss/download_and_preprocess_tatoeba.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/criss/download_and_preprocess_flores_test.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/criss/sentence_retrieval/sentence_retrieval_tatoeba.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/criss/unsupervised_mt/eval.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/criss/mining/mine_example.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/byte_level_bpe/get_data.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/joint_alignment_translation/prepare-wmt18en2de_no_norm_no_escape_no_agressive.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/roberta/preprocess_GLUE_tasks.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/roberta/preprocess_RACE.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/roberta/commonsense_qa/download_cqa_data.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/backtranslation/sacrebleu.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/backtranslation/tokenized_bleu.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/backtranslation/prepare-wmt18en2de.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/backtranslation/prepare-de-monolingual.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/translation/prepare-wmt14en2fr.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/translation/prepare-iwslt14.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/translation/prepare-iwslt17-multilingual.sh",
+      "https://raw.githubusercontent.com/ofirpress/attention_with_linear_biases/master/examples/translation/prepare-wmt14en2de.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To download and preprocess the data, run:\n\n```bash\ncd examples/language_model/\nbash prepare-wikitext-103.sh\ncd ../..\n\n\nTEXT=examples/language_model/wikitext-103\nfairseq-preprocess \\\n    --only-source \\\n    --trainpref $TEXT/wiki.train.tokens \\\n    --validpref $TEXT/wiki.valid.tokens \\\n    --testpref $TEXT/wiki.test.tokens \\\n    --destdir data-bin/wikitext-103 \\\n    --workers 20\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository is a fork of the [Fairseq](https://github.com/pytorch/fairseq) repository and so has the same requirements. \n\nOnce you've installed the dependencies, you can install this repository by running:\n\n```bash\npip install --editable .\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8919958482546004
+      ],
+      "excerpt": "Rename the file you downloaded to checkpoint_best.pt if you'd like to follow the directions below. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8066021593103074
+      ],
+      "excerpt": "  <img src=\".github/ALiBi.jpeg\" width=\"50%\" height=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8869001905521317
+      ],
+      "excerpt": "python train.py --task language_modeling data-bin/wikitext-103 --save-dir wt103/ --arch transformer_lm_wiki103 --max-update 286000 --lr 1.0 --t-mult 2 --lr-period-updates 270000 --lr-scheduler cosine --lr-shrink 0.75 --warmup-updates 16000 --warmup-init-lr 1e-07 --stop-min-lr 1e-09 --optimizer nag --min-lr 0.0001 --clip-norm 0.1 --criterion adaptive_loss --max-tokens 9216 --update-freq 1 --tokens-per-sample 512 --seed 1 --sample-break-mode none --skip-invalid-size-inputs-valid-test --ddp-backend=legacy_ddp --fp16 --required-batch-size-multiple 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8061655020216612
+      ],
+      "excerpt": "| Input Length      | Model | Log | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8815175500827525
+      ],
+      "excerpt": "l=1024; fairseq-eval-lm data-bin/wikitext-103/     --path wt103/checkpoint_best.pt  --sample-break-mode none --gen-subset valid   --max-sentences 1 --model-overrides \"{'max_tokens':$l, 'tokens_per_sample':$l, 'max_target_positions':$l}\"  --tokens-per-sample $l --max-tokens $l  --max-target-positions $l  --context-window 0 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ofirpress/attention_with_linear_biases/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Cython",
+      "Lua",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) Facebook, Inc. and its affiliates.\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Train Short, Test Long: Attention with Linear Biases (ALiBi) Enables Input Length Extrapolation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "attention_with_linear_biases",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ofirpress",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ofirpress/attention_with_linear_biases/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository is a fork of the [Fairseq](https://github.com/pytorch/fairseq) repository and so has the same requirements. \n\nOnce you've installed the dependencies, you can install this repository by running:\n\n```bash\npip install --editable .\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 138,
+      "date": "Tue, 07 Dec 2021 10:55:12 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

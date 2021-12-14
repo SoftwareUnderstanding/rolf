@@ -1,0 +1,687 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1406.2661\n[2] https://arxiv.org/abs/1701.07875\n[3] https://arxiv.org/abs/1704.00028\n[4] https://arxiv.org/abs/1611.07004\n\nThe module `loss` exports the following options:\n\n* `--loss`: the type of loss (`gan`, `wgan`, `wgan-gp` or `pix2pix`",
+      "https://arxiv.org/abs/1701.07875\n[3] https://arxiv.org/abs/1704.00028\n[4] https://arxiv.org/abs/1611.07004\n\nThe module `loss` exports the following options:\n\n* `--loss`: the type of loss (`gan`, `wgan`, `wgan-gp` or `pix2pix`",
+      "https://arxiv.org/abs/1704.00028\n[4] https://arxiv.org/abs/1611.07004\n\nThe module `loss` exports the following options:\n\n* `--loss`: the type of loss (`gan`, `wgan`, `wgan-gp` or `pix2pix`",
+      "https://arxiv.org/abs/1611.07004\n\nThe module `loss` exports the following options:\n\n* `--loss`: the type of loss (`gan`, `wgan`, `wgan-gp` or `pix2pix`"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8043073075947367
+      ],
+      "excerpt": "    if evaluation.has_improved(losses): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9977994744046882
+      ],
+      "excerpt": "[1] https://arxiv.org/abs/1406.2661 \n[2] https://arxiv.org/abs/1701.07875 \n[3] https://arxiv.org/abs/1704.00028 \n[4] https://arxiv.org/abs/1611.07004 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andreaferretti/ganzo",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-22T07:04:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-28T07:55:49Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.868467681459758
+      ],
+      "excerpt": "For this, you just need to pass a minimal set of arguments to Ganzo, namely \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8539198611023686
+      ],
+      "excerpt": "samples to generate with the option --num-samples. The script to perform \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9332821833668965,
+        0.8673598943548338
+      ],
+      "excerpt": "Ganzo is structured into modules that handles different concerns: data loading, \ngenerators, discriminators, loss functions and so on. Each of these modules \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8069895892866087
+      ],
+      "excerpt": "data.Data), that has two static methods: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8170911646845083
+      ],
+      "excerpt": "  the options. This object is a argparse.Namespace object that is obtained by parsing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8129249790038257
+      ],
+      "excerpt": "  the options object in order to be instantiated, but in some cases, other \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9380343765647952,
+        0.9580931296965443,
+        0.8341404881192025,
+        0.9664515539966478
+      ],
+      "excerpt": "  object, and adds a set of arguments that are relevant to the specific module. \n  This is typically done by adding an argument group. Of course, options are \n  not constrained to be used by the module that introduces them: for instance, \n  data.Data adds the argument batch-size, that is used by many other modules. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8527702525182594,
+        0.9447314966451559
+      ],
+      "excerpt": "should be easy: the source of ganzo.py is less than 100 lines, most of which \ndeal with handling the case of restoring a training session. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8840955818633064,
+        0.9128543396039727,
+        0.8125795688343458
+      ],
+      "excerpt": "for configuration. \nThis module handles the loading of the image datasets. \nDatasets can come in various formats: single image datasets (with or without a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9491706162317664
+      ],
+      "excerpt": "GANs. Datasets of pairs can be used for tasks of image to image translation, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9013984415806842,
+        0.8126157461660282,
+        0.924598149645178
+      ],
+      "excerpt": "some datasets are stored in a custom way - for instance MNIST or LSUN. \nThe module data defines the following classes: \nSingleImageData: Loads datasets of single images, possibly matched with a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9024128671298502
+      ],
+      "excerpt": "  the work of data loading across a number of workers. Each batch has shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9024098679033982,
+        0.940801548131556,
+        0.8690003839313152,
+        0.9649204936898406
+      ],
+      "excerpt": "- B is the batch size \n- C is the number of channels (1 for B/W images, 3 for colors) \n- W is the image width \n- H is the image height \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9036584243658364
+      ],
+      "excerpt": "data-format: the format of the dataset, such as single-image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8524246028941497
+      ],
+      "excerpt": "generator: the type of generator (fc or conv) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9186385544118185,
+        0.8900523683781216
+      ],
+      "excerpt": "generator and the discriminator. The reason why they are coupled is that \nthe loss function for the generator needs access to the discriminator anyway. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8792396120052529
+      ],
+      "excerpt": "WGANGPLoss like WGAN, but uses gradient penalty instead of weight clipping [3] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503230278757719,
+        0.948242496699517
+      ],
+      "excerpt": "--noisy-labels-frequency: how often to invert labels for the discriminator \n--l1-weight: weight of the L\u00b9 distance contribution to the GAN loss \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9638987349954944,
+        0.9206377785484134
+      ],
+      "excerpt": "latent space is some fixed Euclidean space. The noise generators implement \nsampling in latent space, so generating an image consists of sampling a random \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363509171467752
+      ],
+      "excerpt": "GaussianNoise: A generator of Gaussian noise \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9639936569203905
+      ],
+      "excerpt": "state-size: the dimension of the latent space \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8991778044682497
+      ],
+      "excerpt": "This module defines criteria that can be used to evaluate the quality of the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8140680134936117,
+        0.8907654270437084,
+        0.8947478924094688,
+        0.9075611486009728
+      ],
+      "excerpt": "StandardGame: the usual GAN game that opposes a generator, taking random \n  noise as input, and a discriminator to learn classify real and fake samples \nTranslateGame: a game that uses the generator to perform an image translation \n  task. This is different from StandardGame, since the generator receives \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8893592731124483,
+        0.8569679460854384
+      ],
+      "excerpt": "  fake samples, but both are overlaid to the original input, in order to \n  evaluate the quality of the translation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.852950477379171
+      ],
+      "excerpt": "let Ganzo be aware of your component by registering it \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8022979967836669
+      ],
+      "excerpt": "optionally, add your custom options to the argument parser. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8231896914494086
+      ],
+      "excerpt": "registry.py. This exports the Registry singleton and the register \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8224210414380674
+      ],
+      "excerpt": "component (this is your choice, just make sure not to collide with existing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8040792268639927
+      ],
+      "excerpt": "This can also be done more explicitly by adding your class to the registry: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9526283028674989
+      ],
+      "excerpt": "Of course, at this point Ganzo is not aware that your module exists, or that \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707994085662207
+      ],
+      "excerpt": "It is advised to namespace your options into their own argument group, in order \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9009614607129621,
+        0.9053339735436212
+      ],
+      "excerpt": "    group = parser.add_argument_group('custom') \n    group.add_argument('foos', type=int, default=3, help='the number of foos') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9053339735436212
+      ],
+      "excerpt": "        group.add_argument('bars', type=int, default=5, help='the number of bars') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9208899019598974
+      ],
+      "excerpt": "All components in Ganzo are designed to be used together by configuration, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9593709385360691,
+        0.8472361654521702,
+        0.9316170747821952,
+        0.9968029537584643
+      ],
+      "excerpt": "training and inference scripts, and only need access to some of Ganzo's \ngenerators, discriminators, loss function and so on, this is easily doable. \nAll classes need in the constructor an options parameter , which is an instance \nof argparse.Namespace. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A GAN framework",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://lmdb.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/unicredit/ganzo/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Mon, 06 Dec 2021 03:39:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andreaferretti/ganzo/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andreaferretti/ganzo",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/6-pix2pix-shoes.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/2-dcgan-mnist.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/3-dcgan-bedrooms.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/8-dcgan-emnist.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/5-wgan-wc-bedrooms.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/1-gan-mnist.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/4-wgan-gp-bedrooms.sh",
+      "https://raw.githubusercontent.com/unicredit/ganzo/master/experiments/7-dcgan-fashion-mnist.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The only hard dependencies for Ganzo are PyTorch and TorchVision. For instance,\nin Conda you can create a dedicated environment with:\n\n```\nconda create -n ganzo python=3.7 pytorch torchvision -c pytorch\n```\n\nIf available, Ganzo supports [TensorBoardX](https://github.com/lanpa/tensorboardX).\nThis is detected at runtime, so Ganzo can run with or without it. TensorBoardX\ncan be installed with Pip:\n\n```\npip install tensorboardX\n```\n\nIf you want to use [LMDB](https://lmdb.readthedocs.io/) datasets such as\n[LSUN](https://github.com/fyu/lsun), you will also need that dependency:\n\n```\nconda install python-lmdb\n```\n\nTo download the LSUN image dataset, use the instructions in the linked\nrepository.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8446936665647686
+      ],
+      "excerpt": "TensorBoardSnaphot: a class that saves images via TensorBoard (requires \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.867512405940692
+      ],
+      "excerpt": "Ganzo can be extended by defining your custom modules. To do this, you do not \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8604771427547067
+      ],
+      "excerpt": "you need to follow four steps: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8491019056264002
+      ],
+      "excerpt": "  loss function...). You will need to make sure that it can be initialized \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8256943514713683
+      ],
+      "excerpt": "more simply with the register decorator. In both cases you will need to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.804923016774237
+      ],
+      "excerpt": "This can also be done more explicitly by adding your class to the registry: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8437445338199165
+      ],
+      "excerpt": "registering your component. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401076565601749,
+        0.8100766537956651
+      ],
+      "excerpt": "be done with a flag on the command line: the reason is that you are able to \nadd custom options to the argument parser, so your modules must be found \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8555464092153431,
+        0.9497064570800926,
+        0.8871405515619789
+      ],
+      "excerpt": "should contain a comma-separated list of python modules that you want to \nimport before Ganzo starts. These modules should be on the Python path, so \nthat they can be imported by name. For instance, if you have defined your loss \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8070882081293291
+      ],
+      "excerpt": "samples to generate with the option --num-samples. The script to perform \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9424725645471775,
+        0.8420188139032042
+      ],
+      "excerpt": "python src/deh.py --model-dir $MODELS --experiment $EXPERIMENT --num-samples 10 \nThe other options will be read from the file options.json that is saved next \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9388682957557277
+      ],
+      "excerpt": "python src/deh.py --model-dir $MODELS --experiment $EXPERIMENT --num-samples 10 --no-sample-from-fixed-noise \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8152034492371668
+      ],
+      "excerpt": "  command line options or JSON configuration files. Most classes only require \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.844850382134205
+      ],
+      "excerpt": "data = Data.from_options(options) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8047051114319157
+      ],
+      "excerpt": "You can write your own training script by adapting this basic structure. It \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8300652170985018
+      ],
+      "excerpt": "data-dir: the (input) directory where the images are stored \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8317406872283547,
+        0.8351042537277343
+      ],
+      "excerpt": "log: either none, console, file or tensorboard \nlog-file: when using --log file this determines the file where logs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.838069196222575,
+        0.8055682879635813,
+        0.8464675965814377
+      ],
+      "excerpt": "save-images-as: either folder or tensorboard \noutput-dir: directory where to store the generated images \nsnapshot-size: how many images to generate for each sample (must be <= batch-size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.825073299767304
+      ],
+      "excerpt": "max-batches-per-epoch: maximum number of minibatches per epoch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from registry import register \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from registry import Registry \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8382815287320964
+      ],
+      "excerpt": "before reading the command line options. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9386916033067542
+      ],
+      "excerpt": "GANZO_LOAD_MODULES=custom python src/ganzo.py #: more options here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from registry import with_option_parser \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from argparse import Namespace \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andreaferretti/ganzo/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Ganzo",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ganzo",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andreaferretti",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andreaferretti/ganzo/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Ganzo can be used either from the command line or as a library. Each\ncomponent in Ganzo can be imported and used separately, but everything is\nwritten in a way that allows for full customization on the command line or\nthrough a JSON file.\n\nTo see all available options, run `python src/ganzo.py --help`. Most options\nare relative to a component of Ganzo (data loading, generator models, discriminator\nmodels, loss functions, logging and so on) and are explained in detail together\nwith the relative component.\n\nSome options are global in nature:\n\n* `experiment` this is the name of the experiment. Models, outputs and so on\n  are saved using this name. You can choose a custom experiment name, or let\n  Ganzo use a hash generated based on the options passed.\n* `device` this is the device name (for instance `cpu` or `cuda`). If left\n  unspecified, Ganzo will autodetect the presence of a GPU and use it if\n  available.\n* `epochs` number of epochs for training.\n* `model-dir` path to the directory where models are saved. Models are further\n  namespaced according to the experiment name.\n* `restore` if this flag is set, and an experiment with this name has already\n  been run, Ganzo will reload existing models and keep running from there.\n* `delete` if this flag is set, and an experiment with this name has already\n  been run, Ganzo will delete everything there and start from scratch. Note that\n  by default Ganzo will ask on the command line what to do, unless at least one\n  flag among `delete` and `restore` is active (`delete` takes precedence over\n  `restore`).\n* `seed` this is the seed for PyTorch random number generator. This is used\n  in order to reproduce results.\n* `from-json`: load configuration from this JSON file (see below)\n* `start-epoch`: the epoch to start with. By default it is 1, but it can make\n  sense to override this if you are restoring from a previous session of training,\n  so that statistics and snapshots will be assigned the correct epoch.\n* `parallel`: if this flag is active, the computation will be distributed across\n  all available GPUs. You can limit the visible GPUs by the environment variable\n  CUDA_VISIBLE_DEVICES\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If options become too many to handle comfortably, you can run Ganzo with a\nJSON configuration file. There are two way to do this.\n\nIf you have already run an experiment, and you try to run it again, Ganzo\nsuggests you to keep going from where it was left (this can even be forced\nby using the `--restore` flag).\n\nOtherwise, if it is the first time that you run an experiment, you can create\na JSON file containing some of the command line options, and ask Ganzo to load\nthe configuration from this file using the `--from-json` flag. Command line\nand JSON options can also be mixed freely, with JSON options taking precedence.\n\nAssuming you have an option file called `options.json`, you can load it with\n\n```\npython src/ganzo.py --from-json options.json\n```\n\nIf you need a reference file, you can run any experiment, look at the generated\noptions file, and tweak that.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 64,
+      "date": "Mon, 06 Dec 2021 03:39:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "gan",
+      "pytorch",
+      "wasserstein-gan",
+      "dcgan"
+    ],
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Verification of training code was made possible with Cloud TPUs via Google's TPU Research Cloud (TRC) (https://www.tensorflow.org/tfrc)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1911.04252\n* EfficientNet AdvProp (B0-B8",
+      "https://arxiv.org/abs/1911.09665\n* EfficientNet (B0-B7",
+      "https://arxiv.org/abs/1905.11946\n* EfficientNet-EdgeTPU (S, M, L",
+      "https://arxiv.org/abs/1907.09595\n* MobileNet-V3 - https://arxiv.org/abs/1905.02244\n* MobileNet-V2 - https://arxiv.org/abs/1801.04381\n* MNASNet B1, A1 (Squeeze-Excite",
+      "https://arxiv.org/abs/1905.02244\n* MobileNet-V2 - https://arxiv.org/abs/1801.04381\n* MNASNet B1, A1 (Squeeze-Excite",
+      "https://arxiv.org/abs/1801.04381\n* MNASNet B1, A1 (Squeeze-Excite",
+      "https://arxiv.org/abs/1807.11626\n* Single-Path NAS - https://arxiv.org/abs/1904.02877\n* FBNet-C - https://arxiv.org/abs/1812.03443\n\nModels by their config name w/ valid pretrained weights that should be working here:\n```\npt_mnasnet_100\npt_semnasnet_100\npt_mobilenetv2_100\npt_mobilenetv2_110d\npt_mobilenetv2_120d\npt_mobilenetv2_140\npt_fbnetc_100\npt_spnasnet_100\npt_efficientnet_b0\npt_efficientnet_b1\npt_efficientnet_b2\npt_efficientnet_b3\ntf_efficientnet_b0\ntf_efficientnet_b1\ntf_efficientnet_b2\ntf_efficientnet_b3\ntf_efficientnet_b4\ntf_efficientnet_b5\ntf_efficientnet_b6\ntf_efficientnet_b7\ntf_efficientnet_b8\ntf_efficientnet_b0_ap\ntf_efficientnet_b1_ap\ntf_efficientnet_b2_ap\ntf_efficientnet_b3_ap\ntf_efficientnet_b4_ap\ntf_efficientnet_b5_ap\ntf_efficientnet_b6_ap\ntf_efficientnet_b7_ap\ntf_efficientnet_b8_ap\ntf_efficientnet_b0_ns\ntf_efficientnet_b1_ns\ntf_efficientnet_b2_ns\ntf_efficientnet_b3_ns\ntf_efficientnet_b4_ns\ntf_efficientnet_b5_ns\ntf_efficientnet_b6_ns\ntf_efficientnet_b7_ns\ntf_efficientnet_l2_ns_475\ntf_efficientnet_l2_ns\npt_efficientnet_es\npt_efficientnet_em\ntf_efficientnet_es\ntf_efficientnet_em\ntf_efficientnet_el\npt_efficientnet_lite0\ntf_efficientnet_lite0\ntf_efficientnet_lite1\ntf_efficientnet_lite2\ntf_efficientnet_lite3\ntf_efficientnet_lite4\npt_mixnet_s\npt_mixnet_m\npt_mixnet_l\npt_mixnet_xl\ntf_mixnet_s\ntf_mixnet_m\ntf_mixnet_l\npt_mobilenetv3_large_100\ntf_mobilenetv3_large_075\ntf_mobilenetv3_large_100\ntf_mobilenetv3_large_minimal_100\ntf_mobilenetv3_small_075\ntf_mobilenetv3_small_100\ntf_mobilenetv3_small_minimal_100\n```\n\n## Environment\n\nWorking with JAX I've found the best approach for having a working GPU compatible environment that performs well is to use Docker containers based on the latest NVIDIA NGC releases. I've found it challenging or flaky getting local conda/pip venvs or Tensorflow docker containers working well with good GPU performance, proper NCCL distributed support, etc. I use CPU JAX install in conda env for dev/debugging.\n\n### Dockerfiles\n\nThere are several container definitions in `docker/`. They use NGC containers as their parent image so you'll need to be setup to pull NGC containers: https://www.nvidia.com/en-us/gpu-cloud/containers/ . I'm currently using recent NGC containers w/ CUDA 11.1 support, the host system will need a very recent NVIDIA driver to support this but doesn't need a matching CUDA 11.1 / cuDNN 8 install.\n\nCurrent dockerfiles:\n* `pt_git.Dockerfile` - PyTorch 20.12 NGC as parent, CUDA 11.1, cuDNN 8. git (source install",
+      "https://arxiv.org/abs/1904.02877\n* FBNet-C - https://arxiv.org/abs/1812.03443\n\nModels by their config name w/ valid pretrained weights that should be working here:\n```\npt_mnasnet_100\npt_semnasnet_100\npt_mobilenetv2_100\npt_mobilenetv2_110d\npt_mobilenetv2_120d\npt_mobilenetv2_140\npt_fbnetc_100\npt_spnasnet_100\npt_efficientnet_b0\npt_efficientnet_b1\npt_efficientnet_b2\npt_efficientnet_b3\ntf_efficientnet_b0\ntf_efficientnet_b1\ntf_efficientnet_b2\ntf_efficientnet_b3\ntf_efficientnet_b4\ntf_efficientnet_b5\ntf_efficientnet_b6\ntf_efficientnet_b7\ntf_efficientnet_b8\ntf_efficientnet_b0_ap\ntf_efficientnet_b1_ap\ntf_efficientnet_b2_ap\ntf_efficientnet_b3_ap\ntf_efficientnet_b4_ap\ntf_efficientnet_b5_ap\ntf_efficientnet_b6_ap\ntf_efficientnet_b7_ap\ntf_efficientnet_b8_ap\ntf_efficientnet_b0_ns\ntf_efficientnet_b1_ns\ntf_efficientnet_b2_ns\ntf_efficientnet_b3_ns\ntf_efficientnet_b4_ns\ntf_efficientnet_b5_ns\ntf_efficientnet_b6_ns\ntf_efficientnet_b7_ns\ntf_efficientnet_l2_ns_475\ntf_efficientnet_l2_ns\npt_efficientnet_es\npt_efficientnet_em\ntf_efficientnet_es\ntf_efficientnet_em\ntf_efficientnet_el\npt_efficientnet_lite0\ntf_efficientnet_lite0\ntf_efficientnet_lite1\ntf_efficientnet_lite2\ntf_efficientnet_lite3\ntf_efficientnet_lite4\npt_mixnet_s\npt_mixnet_m\npt_mixnet_l\npt_mixnet_xl\ntf_mixnet_s\ntf_mixnet_m\ntf_mixnet_l\npt_mobilenetv3_large_100\ntf_mobilenetv3_large_075\ntf_mobilenetv3_large_100\ntf_mobilenetv3_large_minimal_100\ntf_mobilenetv3_small_075\ntf_mobilenetv3_small_100\ntf_mobilenetv3_small_minimal_100\n```\n\n## Environment\n\nWorking with JAX I've found the best approach for having a working GPU compatible environment that performs well is to use Docker containers based on the latest NVIDIA NGC releases. I've found it challenging or flaky getting local conda/pip venvs or Tensorflow docker containers working well with good GPU performance, proper NCCL distributed support, etc. I use CPU JAX install in conda env for dev/debugging.\n\n### Dockerfiles\n\nThere are several container definitions in `docker/`. They use NGC containers as their parent image so you'll need to be setup to pull NGC containers: https://www.nvidia.com/en-us/gpu-cloud/containers/ . I'm currently using recent NGC containers w/ CUDA 11.1 support, the host system will need a very recent NVIDIA driver to support this but doesn't need a matching CUDA 11.1 / cuDNN 8 install.\n\nCurrent dockerfiles:\n* `pt_git.Dockerfile` - PyTorch 20.12 NGC as parent, CUDA 11.1, cuDNN 8. git (source install",
+      "https://arxiv.org/abs/1812.03443\n\nModels by their config name w/ valid pretrained weights that should be working here:\n```\npt_mnasnet_100\npt_semnasnet_100\npt_mobilenetv2_100\npt_mobilenetv2_110d\npt_mobilenetv2_120d\npt_mobilenetv2_140\npt_fbnetc_100\npt_spnasnet_100\npt_efficientnet_b0\npt_efficientnet_b1\npt_efficientnet_b2\npt_efficientnet_b3\ntf_efficientnet_b0\ntf_efficientnet_b1\ntf_efficientnet_b2\ntf_efficientnet_b3\ntf_efficientnet_b4\ntf_efficientnet_b5\ntf_efficientnet_b6\ntf_efficientnet_b7\ntf_efficientnet_b8\ntf_efficientnet_b0_ap\ntf_efficientnet_b1_ap\ntf_efficientnet_b2_ap\ntf_efficientnet_b3_ap\ntf_efficientnet_b4_ap\ntf_efficientnet_b5_ap\ntf_efficientnet_b6_ap\ntf_efficientnet_b7_ap\ntf_efficientnet_b8_ap\ntf_efficientnet_b0_ns\ntf_efficientnet_b1_ns\ntf_efficientnet_b2_ns\ntf_efficientnet_b3_ns\ntf_efficientnet_b4_ns\ntf_efficientnet_b5_ns\ntf_efficientnet_b6_ns\ntf_efficientnet_b7_ns\ntf_efficientnet_l2_ns_475\ntf_efficientnet_l2_ns\npt_efficientnet_es\npt_efficientnet_em\ntf_efficientnet_es\ntf_efficientnet_em\ntf_efficientnet_el\npt_efficientnet_lite0\ntf_efficientnet_lite0\ntf_efficientnet_lite1\ntf_efficientnet_lite2\ntf_efficientnet_lite3\ntf_efficientnet_lite4\npt_mixnet_s\npt_mixnet_m\npt_mixnet_l\npt_mixnet_xl\ntf_mixnet_s\ntf_mixnet_m\ntf_mixnet_l\npt_mobilenetv3_large_100\ntf_mobilenetv3_large_075\ntf_mobilenetv3_large_100\ntf_mobilenetv3_large_minimal_100\ntf_mobilenetv3_small_075\ntf_mobilenetv3_small_100\ntf_mobilenetv3_small_minimal_100\n```\n\n## Environment\n\nWorking with JAX I've found the best approach for having a working GPU compatible environment that performs well is to use Docker containers based on the latest NVIDIA NGC releases. I've found it challenging or flaky getting local conda/pip venvs or Tensorflow docker containers working well with good GPU performance, proper NCCL distributed support, etc. I use CPU JAX install in conda env for dev/debugging.\n\n### Dockerfiles\n\nThere are several container definitions in `docker/`. They use NGC containers as their parent image so you'll need to be setup to pull NGC containers: https://www.nvidia.com/en-us/gpu-cloud/containers/ . I'm currently using recent NGC containers w/ CUDA 11.1 support, the host system will need a very recent NVIDIA driver to support this but doesn't need a matching CUDA 11.1 / cuDNN 8 install.\n\nCurrent dockerfiles:\n* `pt_git.Dockerfile` - PyTorch 20.12 NGC as parent, CUDA 11.1, cuDNN 8. git (source install"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9665437545861224,
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9875631528765129,
+        0.9845600173250374,
+        0.9944484218006108
+      ],
+      "excerpt": "* EfficientNet NoisyStudent (B0-B7, L2) - https://arxiv.org/abs/1911.04252 \n* EfficientNet AdvProp (B0-B8) - https://arxiv.org/abs/1911.09665 \n* EfficientNet (B0-B7) - https://arxiv.org/abs/1905.11946 \n* EfficientNet-EdgeTPU (S, M, L) - https://ai.googleblog.com/2019/08/efficientnet-edgetpu-creating.html \n* MixNet - https://arxiv.org/abs/1907.09595 \n* MobileNet-V3 - https://arxiv.org/abs/1905.02244 \n* MobileNet-V2 - https://arxiv.org/abs/1801.04381 \n* MNASNet B1, A1 (Squeeze-Excite), and Small - https://arxiv.org/abs/1807.11626 \n* Single-Path NAS - https://arxiv.org/abs/1904.02877 \n* FBNet-C - https://arxiv.org/abs/1812.03443 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rwightman/efficientnet-jax",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-12T19:06:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-20T05:44:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9751124223753379,
+        0.929546862860139
+      ],
+      "excerpt": "This is very much a giant steaming work in progress. Jax, jaxlib, and the NN libraries I'm using are shifting week to week. \nThis code base currently supports: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9079592747678954,
+        0.9058653405295047,
+        0.9046633687690708,
+        0.8621980642483972
+      ],
+      "excerpt": " * Objax (https://github.com/google/objax) -- for model and model validation with pretrained weights \nThis is essentially an adaptation of my PyTorch EfficienNet generator code (https://github.com/rwightman/gen-efficientnet-pytorch and also found in https://github.com/rwightman/pytorch-image-models) to JAX. \nI started this to \n* learn JAX by working with familiar code / models as a starting point, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9855754910219913
+      ],
+      "excerpt": "* compare the training / inference runtime traits of non-trivial models across combinations of PyTorch, JAX, GPU and TPU in order to drive cost optimizations for scaling up of future projects \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8557368972560458,
+        0.9645563670545392
+      ],
+      "excerpt": "* Training works on single node, multi-GPU and TPU v3-8 for Flax Linen variants w/ Tensorflow Datasets based pipeline \n* The Objax and Flax Linen (nn.compact) variants of models are working (for inference)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9718732579281844
+      ],
+      "excerpt": "* Tensorflow and PyTorch data pipeline based validation scripts work with models and weights. For PT pipeline with PT models and TF pipeline with TF models the results are pretty much exact. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8206789654971632
+      ],
+      "excerpt": "- [x] Fix model weight inits (working for Flax Linen variants) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9734715180708399,
+        0.8769951101512209,
+        0.8772905799974278,
+        0.8753613414158699,
+        0.918582105329148
+      ],
+      "excerpt": "- [ ] Add more instructions / help in the README on how to get an optimal environment with JAX up and running (with GPU support) \n- [x] Add basic training code. The main point of this is to scale up training. \n- [ ] Add more advance data augmentation pipeline  \n- [ ] Training on lots of GPUs \n- [ ] Training on lots of TPUs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8975479934443803,
+        0.8980012037988074
+      ],
+      "excerpt": "* Objax layers are reimplemented to make my initial work easier, scratch some itches, make more consistent with PyTorch (because why not?) \n* Flax Linen layers are by default fairly consistent with Tensorflow (left as is) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9292986718853145,
+        0.9880156154961511,
+        0.8005326473922747
+      ],
+      "excerpt": "* Models with Tensorflow 'SAME' padding and TF origin weights are prefixed with tf_. Models with PyTorch trained weights and symmetric PyTorch style padding ('LIKE' here) are prefixed with pt_ \n* I use pt and tf to refer to PyTorch and Tensorflow for both the models and environments. These two do not need to be used together. pt models with 'LIKE' padding will work fine running in a Tensorflow based environment and vice versa. I did this to show the full flexibility here, that one can use JAX models with PyTorch data pipelines and datasets or with Tensorflow based data pipelines and TFDS. \nSupported models and their paper's \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8067332186519872
+      ],
+      "excerpt": "Working with JAX I've found the best approach for having a working GPU compatible environment that performs well is to use Docker containers based on the latest NVIDIA NGC releases. I've found it challenging or flaky getting local conda/pip venvs or Tensorflow docker containers working well with good GPU performance, proper NCCL distributed support, etc. I use CPU JAX install in conda env for dev/debugging. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "EfficientNet, MobileNetV3, MobileNetV2, MixNet, etc in JAX w/ Flax Linen and Objax",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rwightman/efficientnet-jax/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Sun, 05 Dec 2021 19:23:28 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rwightman/efficientnet-jax/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rwightman/efficientnet-jax",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9132965570828232
+      ],
+      "excerpt": "- [ ] Add more instructions / help in the README on how to get an optimal environment with JAX up and running (with GPU support) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8055154696589092
+      ],
+      "excerpt": "* Models with Tensorflow 'SAME' padding and TF origin weights are prefixed with tf_. Models with PyTorch trained weights and symmetric PyTorch style padding ('LIKE' here) are prefixed with pt_ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9146234140181765
+      ],
+      "excerpt": "Models by their config name w/ valid pretrained weights that should be working here: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9240720032500856,
+        0.8566383888574941
+      ],
+      "excerpt": "Working with JAX I've found the best approach for having a working GPU compatible environment that performs well is to use Docker containers based on the latest NVIDIA NGC releases. I've found it challenging or flaky getting local conda/pip venvs or Tensorflow docker containers working well with good GPU performance, proper NCCL distributed support, etc. I use CPU JAX install in conda env for dev/debugging. \nThere are several container definitions in docker/. They use NGC containers as their parent image so you'll need to be setup to pull NGC containers: https://www.nvidia.com/en-us/gpu-cloud/containers/ . I'm currently using recent NGC containers w/ CUDA 11.1 support, the host system will need a very recent NVIDIA driver to support this but doesn't need a matching CUDA 11.1 / cuDNN 8 install. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9892374515446708,
+        0.9835258608185518,
+        0.9622825426800785,
+        0.9419801588408229,
+        0.8750757273842271
+      ],
+      "excerpt": "* pt_git.Dockerfile - PyTorch 20.12 NGC as parent, CUDA 11.1, cuDNN 8. git (source install) of jaxlib, jax, objax, and flax. \n* pt_pip.Dockerfile - PyTorch 20.12 NGC as parent, CUDA 11.1, cuDNN 8. pip (latest ver) install of jaxlib, jax, objax, and flax. \n* tf_git.Dockerfile - Tensorflow 2 21.02 NGC as parent, CUDA 11.2, cuDNN 8. git (source install) of jaxlib, jax, objax, and flax. \n* tf_pip.Dockerfile - Tensorflow 2 21.02 NGC as parent, CUDA 11.2, cuDNN 8. pip (latest ver) install of jaxlib, jax, objax, and flax. \nThe 'git' containers take some time to build jaxlib, they pull the masters of all respective repos so are up to the bleeding edge but more likely to have possible regression or incompatibilities that go with that. The pip install containers are quite a bit quicker to get up and running, based on the latest pip versions of all repos. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8632364740084102
+      ],
+      "excerpt": "- [x] Add basic training code. The main point of this is to scale up training. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rwightman/efficientnet-jax/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright 2020 Ross Wightman\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EfficientNet JAX - Flax Linen and Objax",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "efficientnet-jax",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rwightman",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rwightman/efficientnet-jax/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "rwightman",
+        "body": "",
+        "dateCreated": "2020-10-20T23:53:32Z",
+        "datePublished": "2020-10-27T21:31:54Z",
+        "html_url": "https://github.com/rwightman/efficientnet-jax/releases/tag/weights",
+        "name": "pretrained weights ported from timm (PyTorch) and original tensorflow weights",
+        "tag_name": "weights",
+        "tarball_url": "https://api.github.com/repos/rwightman/efficientnet-jax/tarball/weights",
+        "url": "https://api.github.com/repos/rwightman/efficientnet-jax/releases/33134161",
+        "zipball_url": "https://api.github.com/repos/rwightman/efficientnet-jax/zipball/weights"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 82,
+      "date": "Sun, 05 Dec 2021 19:23:28 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "jax",
+      "objax",
+      "flax",
+      "efficientnet",
+      "mobilenetv3",
+      "mobilenetv2",
+      "mixnet",
+      "tpu",
+      "flax-linen"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Make sure you have a recent version of docker and the NVIDIA Container Toolkit setup (https://github.com/NVIDIA/nvidia-docker) \n2. Build the container `docker build -f docker/tf_pip.Dockerfile -t jax_tf_pip .`\n3. Run the container, ideally map jeffnet and datasets (ImageNet) into the container\n    * For tf containers, `docker run --gpus all -it -v /path/to/tfds/root:/data/ -v /path/to/efficientnet-jax/:/workspace/jeffnet --rm --ipc=host jax_tf_pip`\n    * For pt containers, `docker run --gpus all -it -v /path/to/imagenet/root:/data/ -v /path/to/efficientnet-jax/:/workspace/jeffnet --rm --ipc=host jax_pt_pip`\n4. Model validation w/ pretrained weights (once inside running container):\n    * For tf, in `worskpace/jeffnet`, `python tf_linen_validate.py /data/ --model tf_efficientnet_b0_ns`\n    * For pt, in `worskpace/jeffnet`, `python pt_objax_validate.py /data/validation --model pt_efficientnet_b0`\n5. Training (within container)\n    * In `worskpace/jeffnet`, `tf_linen_train.py --config train_configs/tf_efficientnet_b0-gpu_24gb_x2.py --config.data_dir /data`\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

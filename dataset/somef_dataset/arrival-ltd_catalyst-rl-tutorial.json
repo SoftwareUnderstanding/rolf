@@ -1,0 +1,264 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arrival-ltd/catalyst-rl-tutorial",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-23T08:59:16Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-15T06:14:58Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This class wraps around the general RL environment class to launch the CoppeliaSim with our custom scene. Additionally, in the beginning of every episode, it initialises the properties of the mating part: 2D position in the workspace (`setup_goal()` method), as well as its colour.\n\nThe environment wrapper contains following methods:\n\n* `get_observation()`, capture a grayscale image as an observation.\n\n*  `distance_to_goal()`, compute the distance between the target and current position. The distance is used in reward design.\n   \n*  `success_check()`, check whether the goal state is reached. If yes, significantly boost agent's reward.\n   \n* `collision_check()`, check whether an agent collided with any object.\n  \n\nEpisode termination occurs when the robot gets too far from the target, collides with any object in the environment or exceeds the maximum number of time steps. Those conditions are specified at the end of `step()` method and are checked at each step taken in the environment by the agent. Once the episode terminates, the whole cycle is repeated for the next episode.  \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "One of the most exciting advancements, that has pushed the frontier of the Artificial Intelligence (AI) in recent years, is Deep Reinforcement Learning (DRL). DRL belongs to the family of machine learning algorithms. It assumes that intelligent machines can learn from their actions similar to the way humans learn from experience. Over the recent years we could witness some impressive [real-world applications of DRL](https://neptune.ai/blog/reinforcement-learning-applications). The algorithms allowed for major progress especially in the field of robotics. If you are interested in learning more about DRL, we encourage you to get familiar with the exceptional [**Introduction to RL**](https://spinningup.openai.com/en/latest) by OpenAI. We believe this is the best place to start your adventure with DRL.\n\nThe **goal of this tutorial is to show how you can apply DRL to solve your own robotic challenge**. For the sake of this tutorial we have chosen one of the classic assembly tasks: peg-in-hole insertion. By the time you finish the tutorial, you will understand how to create a complete, end-to-end pipeline for training the robot in the simulation using DRL.\n\nThe accompanying code together with all the details of the implementation can be found in our [GitHub repository](https://github.com/arrival-ltd/catalyst-rl-tutorial).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9959745587577212,
+        0.9615241550174302,
+        0.9419360215068886
+      ],
+      "excerpt": "So far we have created an environment and specified how the agent can act (action space) and what the agent observes (observation space). But the intelligence of the robot is determined by the neural network. This \"brain\" of the robot is being trained using Deep Reinforcement Learning. Depending on the modality of the input (defined in self.observation_space property of the environment wrapper) , the architecture of agent's brain changes. It could be a multi-layer perceptron (MLP) or a convolutional neural network (CNN). \nCatalyst provides an easy way to configure an agent using a YAML file. Additionally, it provides implementations of state-of-the-art RL algorithms like PPO, DDPG, TD3, SAC etc. One could pick the type of the algorithm by changing algorithm: variable in configs/config.yml. The hyper-parameters related to training can also be configured here. \nIn this tutorial, an off-policy, model-free RL algorithm TD3 is used.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9532033519224097,
+        0.8913821493132902,
+        0.8992240844358826
+      ],
+      "excerpt": "<em>Figure 2: Architecture of the actor and critic in our TD3 algorithm.</em>  \nAs depicted in Figure 2, the actor and critic(s) (TD3 concurrently learns two value networks) are modelled as agent classes in Catalyst. We customize them and configure the config file by setting agent: UR5Actor and agent: UR5StateActionCritic. The details of the neural network architecture for both actor and critic(s) can be configured by further editing the YAML file. \nThe CNN network image_net, used to process camera images, can be created as shown below. The layers of network are defined by  channels, bias,  dropout, normalization (booleans)  and activation functions (strings). These parameters are used by the function get_convolution_net in src/network.py.      \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8247674019625428
+      ],
+      "excerpt": "A MLP can be created using the block shown below. In our example, main_net, action_net are created \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8930901044020226
+      ],
+      "excerpt": "features: [64, 64] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174673207199876,
+        0.9648776342427776
+      ],
+      "excerpt": "Once the actor and critic network architectures are defined, we are ready to start the training. \n<em> Figure 3: Samplers explore the environment and collect the data. Trainer uses the collected data to train a policy. Both the trainer and samplers are also configurable in configs/config.yml. The sampler starts with a random policy and after certain transitions, governed by save_period variable, the sampler updates its policy with the latest trainer weights. As the training progresses, the sampler keeps on gathering data collected by better policies while the trainer improves the policy until convergence. All the collected data is stored in a database. Source: Sample Efficient Ensemble Learning with Catalyst.RL. </em>  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029600773265819
+      ],
+      "excerpt": "Once you clone our repository, install CoppeliaSim and PyRep, you are ready to start training. Even though Catalyst is very much focused on reproducibility, due to asynchronous manner of training we can not guarantee the convergence of the training pipeline. If you don't see a progress of the robot after ~1h of training, you can try changing random seed, noise and action step values. In any case, we encourage you to play with the parameters and alter the code to your liking.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9633721069749596
+      ],
+      "excerpt": "This tutorial is based on the research done at ARRIVAL by the outstanding robotics team:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Using Catalyst.RL to train a robot to perform peg-in-hole insertion in simulation.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arrival-ltd/catalyst-rl-tutorial/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Mon, 06 Dec 2021 23:43:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/arrival-ltd/catalyst-rl-tutorial/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "arrival-ltd/catalyst-rl-tutorial",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/arrival-ltd/catalyst-rl-tutorial/master/scripts/prepare_configs.sh",
+      "https://raw.githubusercontent.com/arrival-ltd/catalyst-rl-tutorial/master/scripts/run-training.sh",
+      "https://raw.githubusercontent.com/arrival-ltd/catalyst-rl-tutorial/master/scripts/run-inference.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Download the **robot simulation platform**, CoppeliaSim, from [the official website](https://www.coppeliarobotics.com/downloads). This tutorial is compatible with the version 4.1.0. \n\n2. Setup **toolkit for robot learning research**, PyRep, from their [github repository](https://github.com/stepjam/PyRep). PyRep library is built on top of CoppeliaSim to facilitate prototyping in python. \n\n3. Create **an environment for the RL agent**: It could be either a simulation or a real environment. We limit ourselves to simulation for faster prototyping and training. The agent interacts with the environment to collect experience. This allows it to learn a policy which maximizes the expected (discounted) sum of future rewards and hence solves the designed task. Most RL practitioners are familiar with the [OpenAI Gym environments](https://gym.openai.com/envs/#classic_control), a toolkit with toy environments used for developing and benchmarking reinforcement learning algorithms. However, our use case, robotic assembly task, is very specific. The goal is to train a robot to perform peg-in-hole insertion. This is why we created our simulation environment in [CoppeliaSim](https://www.coppeliarobotics.com). The simulator comes with various robot manipulators and grippers. For our tutorial, we picked UR5 robot with RG2 gripper (Figure 1).\n   ![](./images/sim_env.png) \n\n   <em>Figure 1: UR5 manipulator with a peg attached to its gripper. The mating part is placed on the ground in the scene. CoppeliaSim caters to a variety of different robotic tasks. Feel free to come up with your own challenge and design your own simulation! [RLBench](https://github.com/stepjam/RLBench/tree/master/rlbench/task_ttms) (the robot learning benchmark and learning environment) also provides more off-the-shelf, advanced simulation environments. </em> \n\n4. Create **a gym environment wrapped around the simulation scene**:  \n\n```python\nimport os\nimport cv2\nimport logging\nimport numpy as np\n\nfrom gym import Space\nfrom gym.spaces.box import Box\nfrom gym.spaces.dict import Dict\nfrom pyrep import PyRep, objects\n\nfrom catalyst_rl.rl.core import EnvironmentSpec\nfrom catalyst_rl.rl.utils import extend_space\n\n\nclass CoppeliaSimEnvWrapper(EnvironmentSpec):\n    def __init__(self, visualize=True,\n                 mode=\"train\",\n                 **params):\n        super().__init__(visualize=visualize, mode=mode)\n\n        #: Scene selection\n        scene_file_path = os.path.join(os.getcwd(), 'simulation/UR5.ttt')\n\n        #: Simulator launch\n        self.env = PyRep()\n        self.env.launch(scene_file_path, headless=False)\n        self.env.start()\n        self.env.step()\n\n        #: Task related initialisations in Simulator\n        self.vision_sensor = objects.vision_sensor.VisionSensor(\"Vision_sensor\")\n        self.gripper = objects.dummy.Dummy(\"UR5_target\")\n        self.gripper_zero_pose = self.gripper.get_pose()\n        self.goal = objects.dummy.Dummy(\"goal_target\")\n        self.goal_STL = objects.shape.Shape(\"goal\")\n        self.goal_STL_zero_pose = self.goal_STL.get_pose()\n        self.grasped_STL = objects.shape.Shape(\"Peg\")\n        self.stacking_area = objects.shape.Shape(\"Plane\")\n        self.vision_sensor = objects.vision_sensor.VisionSensor(\"Vision_sensor\")\n\n        self.step_counter = 0\n        self.max_step_count = 100\n        self.target_pose = None\n        self.initial_distance = None\n        self.image_width, self.image_height = 320, 240\n        self.vision_sensor.set_resolution((self.image_width, self.image_height))\n        self._history_len = 1\n\n        self._observation_space = Dict(\n                {\"cam_image\": Box(0, 255,\n                                  [self.image_height, self.image_width, 1],\n                                  dtype=np.uint8)})\n\n        self._action_space = Box(-1, 1, (3,))\n        self._state_space = extend_space(self._observation_space, self._history_len)\n\n    @property\n    def history_len(self):\n        return self._history_len\n\n    @property\n    def observation_space(self) -> Space:\n        return self._observation_space\n\n    @property\n    def state_space(self) -> Space:\n        return self._state_space\n\n    @property\n    def action_space(self) -> Space:\n        return self._action_space\n\n    def step(self, action):\n        done = False\n        info = {}\n        prev_distance_to_goal = self.distance_to_goal()\n\n        #: Make a step in simulation\n        self.apply_controls(action)\n        self.env.step()\n        self.step_counter += 1\n\n        #: Reward calculations\n        success_reward = self.success_check()\n        distance_reward = (prev_distance_to_goal - self.distance_to_goal()) / self.initial_distance\n\n        reward = distance_reward + success_reward\n\n        #: Check reset conditions\n        if self.step_counter > self.max_step_count:\n            done = True\n            logging.info('--------Reset: Timeout--------')\n        elif self.distance_to_goal() > 0.8:\n            done = True\n            logging.info('--------Reset: Too far from target--------')\n        elif self.collision_check():\n            done = True\n            logging.info('--------Reset: Collision--------')\n\n        return self.get_observation(), reward, done, info\n\n    def reset(self):\n        logging.info(\"Episode reset...\")\n        self.step_counter = 0\n        self.env.stop()\n        self.env.start()\n        self.env.step()\n        self.setup_scene()\n        observation = self.get_observation()\n        return observation\n#: -------------- all methods above are required for any Gym environment, everything below is env-specific --------------\n\n    def distance_to_goal(self):\n        goal_pos = self.goal.get_position()\n        tip_pos = self.gripper.get_position()\n        return np.linalg.norm(np.array(tip_pos) - np.array(goal_pos))\n\n    def setup_goal(self):\n        goal_position = self.goal_STL_zero_pose[:3]\n        #: 2D goal randomization\n        self.target_pose = [goal_position[0] + (2 * np.random.rand() - 1.) * 0.1,\n                            goal_position[1] + (2 * np.random.rand() - 1.) * 0.1,\n                            goal_position[2]]\n        self.target_pose = np.append(self.target_pose,\n                                     self.goal_STL_zero_pose[3:]).tolist()\n        self.goal_STL.set_pose(self.target_pose)\n\n        #: Randomizing the RGB of the goal and the plane\n        rgb_values_goal = list(np.random.rand(3,))\n        rgb_values_plane = list(np.random.rand(3,))\n        self.goal_STL.set_color(rgb_values_goal)\n        self.stacking_area.set_color(rgb_values_plane)\n\n        self.initial_distance = self.distance_to_goal()\n\n    def setup_scene(self):\n        self.setup_goal()\n        self.gripper.set_pose(self.gripper_zero_pose)\n\n    def get_observation(self):\n        cam_image = self.vision_sensor.capture_rgb()\n        gray_image = np.uint8(cv2.cvtColor(cam_image, cv2.COLOR_BGR2GRAY) * 255)\n        obs_image = np.expand_dims(gray_image, axis=2)\n        return {\"cam_image\": obs_image}\n\n    def collision_check(self):\n        return self.grasped_STL.check_collision(\n            self.stacking_area) or self.grasped_STL.check_collision(self.goal_STL)\n\n    def success_check(self):\n        success_reward = 0.\n        if self.distance_to_goal() < 0.01:\n            success_reward = 0.01\n            logging.info('--------Success state--------')\n        return success_reward\n\n    def apply_controls(self, action):\n        gripper_position = self.gripper.get_position()\n        #: predicted action is in range (-1, 1) so we are normalizing it to physical units\n        new_position = [gripper_position[i] + (action[i] / 200.) for i in range(3)]\n        self.gripper.set_position(new_position)\n```\nFor our reinforcement learning project we use [Catalyst RL](https://github.com/Scitator/catalyst-rl-framework), a distributed framework for reproducible RL research. This is just one of the elements of the marvellous [Catalyst](https://github.com/catalyst-team/catalyst) project. Catalyst is a [PyTorch ecosystem](https://pytorch.org/ecosystem/) framework for Deep Learning research and development. It focuses on reproducibility, rapid experimentation and codebase reuse. This means that the user can seamlessly run training loop with metrics, model checkpointing, advanced logging and distributed training support without the boilerplate code. We strongly encourage you to get familiar with the [Intro to Catalyst](https://medium.com/pytorch/catalyst-101-accelerated-pytorch-bd766a556d92) and incorporating the framework into your daily work!\n\nWe reuse its general Catalyst RL environment (`EnvironmentSpec`) class to create our custom environment. By inheriting from the `EnvironmentSpec`, you can quickly design your own environment, be it an [Atari game](https://gym.openai.com/envs/#atari), [classic control task](https://gym.openai.com/envs/#classic_control) or [robotic simulation](https://gym.openai.com/envs/#robotics). Finally, we specify states/observations, actions and rewards using OpenAI's gym [spaces](https://gym.openai.com/docs/#spaces) type. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "   use_bias: True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "   use_normalization: True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8617165954532027
+      ],
+      "excerpt": "  <img src=\"./images/logo.png\" alt=\"Sublime's custom image\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/arrival-ltd/catalyst-rl-tutorial/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 ARRIVAL\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Robotic Assembly using Deep Reinforcement Learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "catalyst-rl-tutorial",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "arrival-ltd",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arrival-ltd/catalyst-rl-tutorial/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 77,
+      "date": "Mon, 06 Dec 2021 23:43:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "sim2real",
+      "robotics",
+      "deep-reinforcement-learning"
+    ],
+    "technique": "GitHub API"
+  }
+}

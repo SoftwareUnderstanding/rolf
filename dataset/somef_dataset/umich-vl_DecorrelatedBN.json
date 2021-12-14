@@ -1,0 +1,313 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1804.08450",
+      "https://arxiv.org/abs/1603.05027",
+      "https://arxiv.org/abs/1804.08450](https://arxiv.org/abs/1804.08450)\n\n## Requirements and Dependency\n* Install MAGMA (you can find the instructions in \u00a0['Install MAGMA.md'](./Install_MAGMA.md) ). \nNote: MAGMA is required for SVD on GPU. Without MAGMA, you can run the code on CPU only, while all the CNN experiments in the paper are run on GPU.\n* Install [Torch](http://torch.ch) with CUDA (for GPU). Note that `cutorch` should be compiled with MAGMA support if you have installed MAGMA and set the environments correctly.\n* Install [cudnn v5](http://torch.ch).\n* Install the dependency `optnet` by:\n```Bash\nluarocks install optnet\n ```\n\n## Experiments\n\n#### 1.  Reproduce the results for PCA whitening:\n    \n*\tRun:\n```Bash\nbash execute_MLP_0debug_MNIST.sh\n ```\nThis script will download MNIST automatically and you should put the `mnist.t7/` under `./dataset/`. The experiment results will be saved at `./set_result/MLP/`.\n\t\n#### 2. Reproduce the results for MLP architecture:\n\n##### (1) FIM experiments on YaleB dataset \n* Prepare the data: download the YaleB dataset [here](https://www.dropbox.com/s/taw9mlsq29eqv82/YaleB_Torch.zip?dl=0), and put the data files under `/dataset/` so that the paths look like `./dataset/YaleB/YaleB_train.dat` and `./dataset/YaleB/YaleB_test.dat`.\n* Run:\n```Bash\nbash execute_MLP_1FIM_YaleB_best.sh\n ```\nThe experiment results will be saved at directory:  'set_result/MLP/'. \n\nYou can experiment with different hyperparameters by running these scripts --  `execute_MLP_1FIM_YaleB_HyperP.sh` and `execute_MLP_1FIM_YaleB_HyperP_nnn.sh`.\n\n##### (2) Experiments on PIE dataset \n\n* Prepare the data: download the PIE dataset [here](https://www.dropbox.com/sh/5pkrtv02wemqxzp/AADlVOs3vDMOEsOpRFa20Uqha?dl=0), and put the data file under `./dataset/` such that the paths look like `./dataset/PIE/PIE_train.dat` and `./dataset/PIE/PIE_test.dat`.\n* To experiment with different group sizes, run:\n```Bash\nbash execute_MLP_2PIE_DBNGroup.sh\n ```\n\n* To obtain different baseline performances, execute:\n\n```Bash\n bash execute_MLP_2PIE.sh\n bash execute_MLP_2PIE_nnn.sh\n ```\n \nNote that the experiments until this point can be run on CPU, so MAGMA is not needed in above experiments.\n\n --------------------\n \n#### 3. Reproduce the results for VGG-A architecture on CIFAR-10: \n *\tPrepare the data: follow the instructions for CIFAR-10 in [this project](https://github.com/szagoruyko/cifar.torch) . It will generate a preprocessed dataset and save a 1400MB file. Put this file `cifar_provider.t7` under `./dataset/`.\n* Run: \n```Bash\nbash execute_Conv_1vggA_2test_adam.sh\nbash execute_Conv_1vggA_2test_base.sh\nbash execute_Conv_1vggA_2test_ELU.sh\nbash execute_Conv_1vggA_2test_var.sh\n ```\nNote that if your machine has fewer than 4 GPUs, the environment variable `CUDA_VISIBLE_DEVICES` should be changed accordingly.\n\n#### 4. Analyze the properties of DBN on CIFAR-10 datset: \n*\tPrepare the data: same as in VGG-A experiments.\n* Run: \n```Bash\nbash exp_Conv_4Splain_1deep.lua\nbash exp_Conv_4Splain_2large.lua\n ```\n\n#### 5. Reproduce the ResNet experiments on CIFAR-10 datset: \n *\tPrepare the data: download [CIFAR-10](https://yadi.sk/d/eFmOduZyxaBrT) and [CIFAR-100](https://yadi.sk/d/ZbiXAegjxaBcM), and put the data files under `./dataset/`.\n * Run: \n```Bash\nbash execute_Conv_2residual_old.sh\nbash execute_Conv_3residual_wide_Cifar100_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh\nbash execute_Conv_3residual_wide_Cifar100_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh\nbash execute_Conv_3residual_wide_Cifar10_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh\nbash execute_Conv_3residual_wide_Cifar10_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh\n ```\n\n\n#### 6. Reproduce the ImageNet experiments. \n\n *  Clone Facebook's ResNet repo [here](https://github.com/facebook/fb.resnet.torch).\n *  Download ImageNet and put it in: `/tmp/dataset/ImageNet/` (you can also customize the path in `opts.lua`)\n *  Install the DBN module to Torch as a Lua package: go to the directory `./models/imagenet/cuSpatialDBN/` and run  `luarocks make cudbn-1.0-0.rockspec`.\n  * Copy the model definitions in `./models/imagenet/` (`resnet_BN.lua`, `resnet_DBN_scale_L1.lua` and `init.lua`) to `./models` directory in the cloned repo `fb.resnet.torch`, for reproducing the results reported in the paper. You also can compare the pre-activation version of residual networks introduced in the [paper](https://arxiv.org/abs/1603.05027) (using the model files \n  `preresnet_BN.lua` and `preresnet_DBN_scale_L1.lua`).  \n * Use the default configuration and our models to run experiments.\n\n\n## Contact\nEmail: huanglei@nlsde.buaa.edu.cn. Any discussions and suggestions are welcome!\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/princeton-vl/DecorrelatedBN",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Email: huanglei@nlsde.buaa.edu.cn. Any discussions and suggestions are welcome!\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-03-11T02:49:12Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-15T08:43:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9611253776082391,
+        0.908925214220865
+      ],
+      "excerpt": "Copy the model definitions in ./models/imagenet/ (resnet_BN.lua, resnet_DBN_scale_L1.lua and init.lua) to ./models directory in the cloned repo fb.resnet.torch, for reproducing the results reported in the paper. You also can compare the pre-activation version of residual networks introduced in the paper (using the model files  \n  preresnet_BN.lua and preresnet_DBN_scale_L1.lua).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for Decorrelated Batch Normalization",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/umich-vl/DecorrelatedBN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Sat, 11 Dec 2021 19:21:16 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/princeton-vl/DecorrelatedBN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "princeton-vl/DecorrelatedBN",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_2test_adam.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_2PIE_nnn.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_0debug_MNIST.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_4Splain_1deep.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_3residual_wide_Cifar100_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_2residual_old.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_2PIE.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_3residual_wide_Cifar10_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_2test_ELU.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_1FIM_YaleB_HyperP_nnn.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_2PIE_DBNGroup.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_2test_base.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_1validate_sgd.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_1validate_adam.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_1FIM_YaleB_best.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_3residual_wide_Cifar10_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_4Splain_2large.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_3residual_wide_Cifar100_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_MLP_1FIM_YaleB_HyperP.sh",
+      "https://raw.githubusercontent.com/umich-vl/DecorrelatedBN/master/execute_Conv_1vggA_2test_var.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9465718491881494
+      ],
+      "excerpt": "bash execute_MLP_0debug_MNIST.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494
+      ],
+      "excerpt": "bash execute_MLP_1FIM_YaleB_best.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639988909793899
+      ],
+      "excerpt": "You can experiment with different hyperparameters by running these scripts --  execute_MLP_1FIM_YaleB_HyperP.sh and execute_MLP_1FIM_YaleB_HyperP_nnn.sh. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494
+      ],
+      "excerpt": "bash execute_MLP_2PIE_DBNGroup.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494,
+        0.9465718491881494,
+        0.8864679137079741
+      ],
+      "excerpt": " bash execute_MLP_2PIE.sh \n bash execute_MLP_2PIE_nnn.sh \nNote that the experiments until this point can be run on CPU, so MAGMA is not needed in above experiments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9374915572057587
+      ],
+      "excerpt": "bash execute_Conv_1vggA_2test_adam.sh \nbash execute_Conv_1vggA_2test_base.sh \nbash execute_Conv_1vggA_2test_ELU.sh \nbash execute_Conv_1vggA_2test_var.sh \nNote that if your machine has fewer than 4 GPUs, the environment variable CUDA_VISIBLE_DEVICES should be changed accordingly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9465718491881494,
+        0.9465718491881494,
+        0.8148452158671701
+      ],
+      "excerpt": "bash execute_Conv_2residual_old.sh \nbash execute_Conv_3residual_wide_Cifar100_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh \nbash execute_Conv_3residual_wide_Cifar100_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh \nbash execute_Conv_3residual_wide_Cifar10_wr_BN_d28_h48_g16_b128_dr0.3_s1_C2.sh \nbash execute_Conv_3residual_wide_Cifar10_wr_DBN_scale_L1_d28_h48_g16_b128_dr0.3_s1_C3.sh \nClone Facebook's ResNet repo here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9156234446680053
+      ],
+      "excerpt": "Install the DBN module to Torch as a Lua package: go to the directory ./models/imagenet/cuSpatialDBN/ and run  luarocks make cudbn-1.0-0.rockspec. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8337689062543461,
+        0.8008331685760428
+      ],
+      "excerpt": "Prepare the data: follow the instructions for CIFAR-10 in this project . It will generate a preprocessed dataset and save a 1400MB file. Put this file cifar_provider.t7 under ./dataset/. \nRun:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "Run:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8434267973797538,
+        0.8008331685760428
+      ],
+      "excerpt": "Prepare the data: download CIFAR-10 and CIFAR-100, and put the data files under ./dataset/. \nRun:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8049885020901746
+      ],
+      "excerpt": "Download ImageNet and put it in: /tmp/dataset/ImageNet/ (you can also customize the path in opts.lua) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/princeton-vl/DecorrelatedBN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Lua",
+      "CMake",
+      "C",
+      "C++",
+      "Shell",
+      "Makefile",
+      "Cuda"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 2-Clause \"Simplified\" License",
+      "url": "https://api.github.com/licenses/bsd-2-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'BSD 2-Clause License\\n\\nCopyright (c) 2018, Lei Huang\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Decorrelated Batch Normalization",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DecorrelatedBN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "princeton-vl",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/princeton-vl/DecorrelatedBN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Install MAGMA (you can find the instructions in \u00a0['Install MAGMA.md'](./Install_MAGMA.md) ). \nNote: MAGMA is required for SVD on GPU. Without MAGMA, you can run the code on CPU only, while all the CNN experiments in the paper are run on GPU.\n* Install [Torch](http://torch.ch) with CUDA (for GPU). Note that `cutorch` should be compiled with MAGMA support if you have installed MAGMA and set the environments correctly.\n* Install [cudnn v5](http://torch.ch).\n* Install the dependency `optnet` by:\n```Bash\nluarocks install optnet\n ```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 72,
+      "date": "Sat, 11 Dec 2021 19:21:16 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

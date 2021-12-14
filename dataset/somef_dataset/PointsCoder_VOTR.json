@@ -1,0 +1,207 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this project useful in your research, please consider cite:\n\n```\n@article{mao2021voxel,\n  title={Voxel Transformer for 3D Object Detection},\n  author={Mao, Jiageng and Xue, Yujing and Niu, Minzhe and others},\n  journal={ICCV},\n  year={2021}\n}\n```",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{mao2021voxel,\n  title={Voxel Transformer for 3D Object Detection},\n  author={Mao, Jiageng and Xue, Yujing and Niu, Minzhe and others},\n  journal={ICCV},\n  year={2021}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/PointsCoder/VOTR",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-06T13:01:11Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T10:42:54Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We provide code and training configurations of VoTr-SSD/TSD on the KITTI and Waymo Open dataset. Checkpoints will not be released.  \n\n**Important Notes**: VoTr generally requires quite a long time (more than 60 epochs on Waymo) to converge, and a large GPU memory (32Gb) is needed for reproduction.\nPlease strictly follow the instructions and train with sufficient number of epochs.\nIf you don't have a 32G GPU, you can decrease the attention SIZE parameters in yaml files, but this may possibly harm the performance. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9796035433910184,
+        0.9556075776674607,
+        0.8720263814839524,
+        0.9462954656299911
+      ],
+      "excerpt": "This is a reproduced repo of Voxel Transformer for 3D object detection.  \nThe code is mainly based on OpenPCDet. \nAll the models are trained with Tesla V100 GPUs (32G).  \nThe KITTI config of votr_ssd is for training with a single GPU. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8340272030087629
+      ],
+      "excerpt": "The performance of VoTr is quite unstable on KITTI. If you cannnot reproduce the results, remember to run it multiple times. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Voxel Transformer for 3D object detection",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/PointsCoder/VOTR/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Tue, 07 Dec 2021 10:56:18 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/PointsCoder/VOTR/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PointsCoder/VOTR",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "a. Clone this repository.\n```shell\ngit clone https://github.com/PointsCoder/VOTR.git\n```\n\nb. Install the dependent libraries as follows:\n\n* Install the dependent python libraries: \n```\npip install -r requirements.txt \n```\n\n* Install the SparseConv library, we use the implementation from [`[spconv]`](https://github.com/traveller59/spconv). \n    * If you use PyTorch 1.1, then make sure you install the `spconv v1.0` with ([commit 8da6f96](https://github.com/traveller59/spconv/tree/8da6f967fb9a054d8870c3515b1b44eca2103634)) instead of the latest one.\n    * If you use PyTorch 1.3+, then you need to install the `spconv v1.2`. As mentioned by the author of [`spconv`](https://github.com/traveller59/spconv), you need to use their docker if you use PyTorch 1.4+. \n\nc. Compile CUDA operators by running the following command:\n```shell\npython setup.py develop\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8638663379280486
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 sh scripts/dist_train.sh 8 --cfg_file cfgs/waymo_models/votr_tsd.yaml \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9148916245334293
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python train.py --cfg_file cfgs/kitti_models/votr_ssd.yaml \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/PointsCoder/VOTR/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Voxel Transformer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VOTR",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PointsCoder",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/PointsCoder/VOTR/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The codes are tested in the following environment:\n* Ubuntu 18.04\n* Python 3.6\n* PyTorch 1.5\n* CUDA 10.1\n* OpenPCDet v0.3.0\n* spconv v1.2.1\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 87,
+      "date": "Tue, 07 Dec 2021 10:56:18 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2106.04419",
+      "https://arxiv.org/abs/2106.04419"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this code useful in your research, please consider citing:\n\n```bash\n@inproceedings{rozenberg:hal-03244860,\n  TITLE = {{Asymmetrical Bi-RNNs (U-RNNs), 2nd place solution at the Trajnet++ Challenge for pedestrian trajectory forecasting}},\n  AUTHOR = {Rozenberg, Rapha{\\\"e}l and Gesnouin, Joseph and Moutarde, Fabien},\n  URL = {https://hal-mines-paristech.archives-ouvertes.fr/hal-03244860},\n  BOOKTITLE = {{Workshop on Long-term Human Motion Prediction, 2021 IEEE International Conference on Robotics and Automation (ICRA)}},\n  ADDRESS = {Xi'an, China},\n  YEAR = {2021},\n  MONTH = May,\n  HAL_ID = {hal-03244860},\n  HAL_VERSION = {v1},\n}\n\n@ARTICLE{2021arXiv210604419R,\n       author = {{Rozenberg}, Rapha{\\\"e}l and {Gesnouin}, Joseph and {Moutarde}, Fabien},\n        title = \"{Asymmetrical Bi-RNN for pedestrian trajectory encoding}\",\n      journal = {arXiv e-prints},\n     keywords = {Computer Science - Computer Vision and Pattern Recognition, Computer Science - Artificial Intelligence},\n         year = 2021,\n        month = jun,\n          eid = {arXiv:2106.04419},\n        pages = {arXiv:2106.04419},\narchivePrefix = {arXiv},\n       eprint = {2106.04419},\n primaryClass = {cs.CV},\n       adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv210604419R},\n      adsnote = {Provided by the SAO/NASA Astrophysics Data System}\n}\n\n  ```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@ARTICLE{2021arXiv210604419R,\n       author = {{Rozenberg}, Rapha{\\\"e}l and {Gesnouin}, Joseph and {Moutarde}, Fabien},\n        title = \"{Asymmetrical Bi-RNN for pedestrian trajectory encoding}\",\n      journal = {arXiv e-prints},\n     keywords = {Computer Science - Computer Vision and Pattern Recognition, Computer Science - Artificial Intelligence},\n         year = 2021,\n        month = jun,\n          eid = {arXiv:2106.04419},\n        pages = {arXiv:2106.04419},\narchivePrefix = {arXiv},\n       eprint = {2106.04419},\n primaryClass = {cs.CV},\n       adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv210604419R},\n      adsnote = {Provided by the SAO/NASA Astrophysics Data System}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{rozenberg:hal-03244860,\n  TITLE = {{Asymmetrical Bi-RNNs (U-RNNs), 2nd place solution at the Trajnet++ Challenge for pedestrian trajectory forecasting}},\n  AUTHOR = {Rozenberg, Rapha{\\\"e}l and Gesnouin, Joseph and Moutarde, Fabien},\n  URL = {https://hal-mines-paristech.archives-ouvertes.fr/hal-03244860},\n  BOOKTITLE = {{Workshop on Long-term Human Motion Prediction, 2021 IEEE International Conference on Robotics and Automation (ICRA)}},\n  ADDRESS = {Xi'an, China},\n  YEAR = {2021},\n  MONTH = May,\n  HAL_ID = {hal-03244860},\n  HAL_VERSION = {v1},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9998665280277831,
+        0.9999997584247219
+      ],
+      "excerpt": "2nd place solution of the Trajnet++ Challenge during the Long-term Human Motion Prediction Workshop, IEEE International Conference on Robotics and Automation (ICRA 2021) \n3rd place solution of the Trajnet++ Challenge during the Multi-Agent Interaction and Relational Reasoning Workshop, IEEE International Conference on Computer Vision (ICCV 2021) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-27T11:20:28Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-17T12:04:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9771779285490444
+      ],
+      "excerpt": "PyTorch implementation of Asymmetrical Bi-RNNs to encode pedestrian trajectories on the Trajnet++ dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.978711619439591,
+        0.9331992349411345,
+        0.8456301921131821,
+        0.9895684205886187,
+        0.9830388913235781
+      ],
+      "excerpt": "Contrary to many previous studies which proposed new interactions modules but did not deepen the importance of a robust sequence encoder, our work solely \nrely on proposing a new sequence encoder that could be easily applicable on all models that use the encoder-decoder pipeline for pedestrian trajectory forecasting while taking advantage of the research on interactions. \nWe propose an Asymmetrical Bi-RNNs architecture to replace regular LSTMs or Bi-LSTMs as a motion-encoding baseline for pedestrian trajectories forecasting: \n-- An aspect of Bi-RNNs that could be undesirable is the architecture's symmetry in both time directions. Bi-RNNs are often used in natural language processing, where the order of the words is almost exclusively determined by grammatical rules and not by temporal sequentiality. However, in trajectory prediction, the data has a preferred direction in time: the forward direction.  \n-- Another potential drawback of Bi-RNNs is that their output is simply the concatenation of two naive readings of the input in both directions. In consequence, Bi-RNNs never actually read an input by knowing what happens in the future. Conversely the idea behind our approach, is to first do a backward pass, and then use during the forward pass information about the future. By using an asymmetrical Bi-RNN to encode pedestrian trajectories, we accumulate information while knowing which part of the information will be useful in the future as it should be relevant to do so if the forward direction is the preferred direction of the data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.956163199472498,
+        0.9929955669534857
+      ],
+      "excerpt": "All the architectures listed in the paper are available: Bi-RNNs, RNNs, U-RNNs (Asymmetrical ours), Reversed U-RNNs. \nWe also present a version of the Social NCE contrastive loss that is NOT the official implementation of the paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for the paper: Asymmetrical Bi-RNNs to encode pedestrian trajectories on trajnet++ dataset",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 10 Dec 2021 01:08:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "TrajNet++ is a large scale interaction-centric trajectory forecasting benchmark comprising explicit agent-agent scenarios. Our code is built on top of the numerous baselines that are [available with Trajnet++](https://github.com/vita-epfl/trajnetplusplusbaselines).\n\nIf you want to replicate our results, follow the [guidelines from the Trajnet++ benchmark hosts](https://thedebugger811.github.io/posts/2020/03/intro_trajnetpp/) to ensure you are good to go on the Trajnet++ dataset, thereafter fork our repository with respect to its architecture (/rnns/) and follow the guidelines for training our models.\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Joseph Gesnouin\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Asymmetrical Bi-RNNs to encode pedestrian trajectories",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JosephGesnouin",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JosephGesnouin/Asymmetrical-Bi-RNNs-to-encode-pedestrian-trajectories/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Fri, 10 Dec 2021 01:08:48 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

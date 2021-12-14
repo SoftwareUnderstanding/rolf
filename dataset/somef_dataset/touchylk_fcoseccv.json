@@ -1,0 +1,386 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We would like to thank [@yqyao](https://github.com/yqyao) for the tricks of center sampling and GIoU.  We also thank [@bearcatt](https://github.com/bearcatt) for his suggestion of positioning the center-ness branch with box regression (refer to [#89](https://github.com/tianzhi0549/FCOS/issues/89#issuecomment-516877042)).    \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355",
+      "https://arxiv.org/abs/1904.01355",
+      "https://arxiv.org/abs/1904.01355 \n\nThe full paper is available at: [https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355). \n\n## Highlights\n- **Totally anchor-free:**  FCOS completely avoids the complicated computation related to anchor boxes and all hyper-parameters of anchor boxes.   \n- **Better performance:** The very simple one-stage detector achieves much better performance (38.7 vs. 36.8 in AP with ResNet-50) than Faster R-CNN. Check out more models and experimental results [here](#models).\n- **Faster training and testing:** With the same hardwares and backbone ResNet-50-FPN, FCOS also requires less training hours (6.5h vs. 8.8h) than Faster R-CNN. FCOS also takes 12ms less inference time per image than Faster R-CNN (44ms vs. 56ms).\n- **State-of-the-art performance:** Our best model based on ResNeXt-64x4d-101 and deformable convolutions achieves **49.0%** in AP on COCO test-dev (with multi-scale testing).\n\n## Updates\n   - Script for exporting [ONNX models](https://github.com/tianzhi0549/FCOS/tree/master/onnx). (21/11/2019)\n   - New NMS (see [#165](https://github.com/tianzhi0549/FCOS/pull/165)) speeds up ResNe(x)t based models by up to 30% and MobileNet based models by 40%, with exactly the same performance. Check out [here](#models). (12/10/2019)\n   - New models with much improved performance are released. The best model achieves **49%** in AP on COCO test-dev with multi-scale testing. (11/09/2019)\n   - FCOS with VoVNet backbones is available at [VoVNet-FCOS](https://github.com/vov-net/VoVNet-FCOS). (08/08/2019)\n   - A trick of using a small central region of the BBox for training improves AP by nearly 1 point [as shown here](https://github.com/yqyao/FCOS_PLUS). (23/07/2019)\n   - FCOS with HRNet backbones is available at [HRNet-FCOS](https://github.com/HRNet/HRNet-FCOS). (03/07/2019)\n   - FCOS with AutoML searched FPN (R50, R101, ResNeXt101 and MobileNetV2 backbones) is available at [NAS-FCOS](https://github.com/Lausannen/NAS-FCOS). (30/06/2019)\n   - FCOS has been implemented in [mmdetection](https://github.com/open-mmlab/mmdetection). Many thanks to [@yhcao6](https://github.com/yhcao6) and [@hellock](https://github.com/hellock). (17/05/2019)\n\n## Required hardware\nWe use 8 Nvidia V100 GPUs. \\\nBut 4 1080Ti GPUs can also train a fully-fledged ResNet-50-FPN based FCOS since FCOS is memory-efficient.  \n\n## Installation\n#### Testing-only installation \nFor users who only want to use FCOS as an object detector in their projects, they can install it by pip. To do so, run:\n```\npip install torch  # install pytorch if you do not have it\npip install git+https://github.com/tianzhi0549/FCOS.git\n# run this command line for a demo \nfcos https://github.com/tianzhi0549/FCOS/raw/master/demo/images/COCO_val2014_000000000885.jpg\n```\nPlease check out [here](fcos/bin/fcos) for the interface usage.\n\n#### For a complete installation \nThis FCOS implementation is based on [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark). Therefore the installation is the same as original maskrcnn-benchmark.\n\nPlease check [INSTALL.md](INSTALL.md) for installation instructions.\nYou may also want to see the original [README.md](MASKRCNN_README.md) of maskrcnn-benchmark.\n\n## A quick demo\nOnce the installation is done, you can follow the below steps to run a quick demo.\n    \n    # assume that you are under the root directory of this project,\n    # and you have activated your virtual environment if needed.\n    wget https://cloudstor.aarnet.edu.au/plus/s/ZSAqNJB96hA71Yf/download -O FCOS_imprv_R_50_FPN_1x.pth\n    python demo/fcos_demo.py\n\n\n## Inference\nThe inference command line on coco minival split:\n\n    python tools/test_net.py \\\n        --config-file configs/fcos/fcos_imprv_R_50_FPN_1x.yaml \\\n        MODEL.WEIGHT FCOS_imprv_R_50_FPN_1x.pth \\\n        TEST.IMS_PER_BATCH 4    \n\nPlease note that:\n1) If your model's name is different, please replace `FCOS_imprv_R_50_FPN_1x.pth` with your own.\n2) If you enounter out-of-memory error, please try to reduce `TEST.IMS_PER_BATCH` to 1.\n3) If you want to evaluate a different model, please change `--config-file` to its config file (in [configs/fcos](configs/fcos)) and `MODEL.WEIGHT` to its weights file.\n4) Multi-GPU inference is available, please refer to [#78](https://github.com/tianzhi0549/FCOS/issues/78#issuecomment-526990989).\n5) We improved the postprocess efficiency by using multi-label nms (see [#165](https://github.com/tianzhi0549/FCOS/pull/165)), which saves 18ms on average. The inference metric in the following tables has been updated accordingly.\n\n## Models\nFor your convenience, we provide the following trained models (more models are coming soon).\n\n**ResNe(x)ts:**\n\n*All ResNe(x)t based models are trained with 16 images in a mini-batch and frozen batch normalization (i.e., consistent with models in [maskrcnn_benchmark](https://github.com/facebookresearch/maskrcnn-benchmark)).*\n\nModel | Multi-scale training | Testing time / im | AP (minival) | Link\n--- |:---:|:---:|:---:|:---:\nFCOS_imprv_R_50_FPN_1x | No | 44ms | 38.7 | [download](https://cloudstor.aarnet.edu.au/plus/s/ZSAqNJB96hA71Yf/download)\nFCOS_imprv_dcnv2_R_50_FPN_1x | No | 54ms | 42.3 | [download](https://cloudstor.aarnet.edu.au/plus/s/plKgHuykjiilzWr/download)\nFCOS_imprv_R_101_FPN_2x | Yes | 57ms | 43.0 | [download](https://cloudstor.aarnet.edu.au/plus/s/hTeMuRa4pwtCemq/download)\nFCOS_imprv_dcnv2_R_101_FPN_2x | Yes | 73ms | 45.6 | [download](https://cloudstor.aarnet.edu.au/plus/s/xq2Ll7s0hpaQycO/download)\nFCOS_imprv_X_101_32x8d_FPN_2x | Yes | 110ms | 44.0 | [download](https://cloudstor.aarnet.edu.au/plus/s/WZ0i7RZW5BRpJu6/download)\nFCOS_imprv_dcnv2_X_101_32x8d_FPN_2x | Yes | 143ms | 46.4 | [download](https://cloudstor.aarnet.edu.au/plus/s/08UK0OP67TogLCU/download)\nFCOS_imprv_X_101_64x4d_FPN_2x | Yes | 112ms | 44.7 | [download](https://cloudstor.aarnet.edu.au/plus/s/rKOJtwvJwcKVOz8/download)\nFCOS_imprv_dcnv2_X_101_64x4d_FPN_2x | Yes | 144ms | 46.6 | [download](https://cloudstor.aarnet.edu.au/plus/s/jdtVmG7MlugEXB7/download)\n\n*Note that `imprv` denotes `improvements` in our paper Table 3. These almost cost-free changes improve the performance by ~1.5% in total. Thus, we highly recommend to use them. The following are the original models presented in our initial paper.*\n\nModel | Multi-scale training | Testing time / im | AP (minival) | AP (test-dev) | Link\n--- |:---:|:---:|:---:|:---:|:---:\nFCOS_R_50_FPN_1x | No | 45ms | 37.1 | 37.4 | [download](https://cloudstor.aarnet.edu.au/plus/s/dDeDPBLEAt19Xrl/download)\nFCOS_R_101_FPN_2x | Yes | 59ms | 41.4 | 41.5 | [download](https://cloudstor.aarnet.edu.au/plus/s/vjL3L0AW7vnhRTo/download)\nFCOS_X_101_32x8d_FPN_2x | Yes | 110ms | 42.5 | 42.7 | [download](https://cloudstor.aarnet.edu.au/plus/s/U5myBfGF7MviZ97/download)\nFCOS_X_101_64x4d_FPN_2x | Yes | 113ms | 43.0 | 43.2 | [download](https://cloudstor.aarnet.edu.au/plus/s/wpwoCi4S8iajFi9/download)\n\n**MobileNets:**\n\n*We update batch normalization for MobileNet based models. If you want to use SyncBN, please install pytorch 1.1 or later.*\n\nModel | Training batch size | Multi-scale training | Testing time / im | AP (minival) | Link\n--- |:---:|:---:|:---:|:---:|:---:\nFCOS_syncbn_bs32_c128_MNV2_FPN_1x | 32 | No | 26ms | 30.9 | [download](https://cloudstor.aarnet.edu.au/plus/s/3GKwaxZhDSOlCZ0/download)\nFCOS_syncbn_bs32_MNV2_FPN_1x | 32 | No | 33ms | 33.1 | [download](https://cloudstor.aarnet.edu.au/plus/s/OpJtCJLj104i2Yc/download)\nFCOS_bn_bs16_MNV2_FPN_1x | 16 | No | 44ms | 31.0 | [download](https://cloudstor.aarnet.edu.au/plus/s/B6BrLAiAEAYQkcy/download)\n\n[1] *1x and 2x mean the model is trained for 90K and 180K iterations, respectively.* \\\n[2] *All results are obtained with a single model and without any test time data augmentation such as multi-scale, flipping and etc..* \\\n[3] *`c128` denotes the model has 128 (instead of 256) channels in towers (i.e., `MODEL.RESNETS.BACKBONE_OUT_CHANNELS` in [config](https://github.com/tianzhi0549/FCOS/blob/master/configs/fcos/fcos_syncbn_bs32_c128_MNV2_FPN_1x.yaml#L10)).* \\\n[4] *`dcnv2` denotes deformable convolutional networks v2. Note that for ResNet based models, we apply deformable convolutions from stage c3 to c5 in backbones. For ResNeXt based models, only stage c4 and c5 use deformable convolutions. All models use deformable convolutions in the last layer of detector towers.* \\\n[5] *The model `FCOS_imprv_dcnv2_X_101_64x4d_FPN_2x` with multi-scale testing achieves 49.0% in AP on COCO test-dev. Please use `TEST.BBOX_AUG.ENABLED True` to enable multi-scale testing.*\n\n## Training\n\nThe following command line will train FCOS_imprv_R_50_FPN_1x on 8 GPUs with Synchronous Stochastic Gradient Descent (SGD):\n\n    python -m torch.distributed.launch \\\n        --nproc_per_node=8 \\\n        --master_port=$((RANDOM + 10000)) \\\n        tools/train_net.py \\\n        --config-file configs/fcos/fcos_imprv_R_50_FPN_1x.yaml \\\n        DATALOADER.NUM_WORKERS 2 \\\n        OUTPUT_DIR training_dir/fcos_imprv_R_50_FPN_1x\n        \nNote that:\n1) If you want to use fewer GPUs, please change `--nproc_per_node` to the number of GPUs. No other settings need to be changed. The total batch size does not depends on `nproc_per_node`. If you want to change the total batch size, please change `SOLVER.IMS_PER_BATCH` in [configs/fcos/fcos_R_50_FPN_1x.yaml](configs/fcos/fcos_R_50_FPN_1x.yaml).\n2) The models will be saved into `OUTPUT_DIR`.\n3) If you want to train FCOS with other backbones, please change `--config-file`.\n4) If you want to train FCOS on your own dataset, please follow this instruction [#54](https://github.com/tianzhi0549/FCOS/issues/54#issuecomment-497558687).\n5) Now, training with 8 GPUs and 4 GPUs can have the same performance. Previous performance gap was because we did not synchronize `num_pos` between GPUs when computing loss. \n\n## ONNX\nPlease refer to the directory [onnx](onnx) for an example of exporting the model to ONNX.\nA converted model can be downloaded [here](https://cloudstor.aarnet.edu.au/plus/s/38fQAdi2HBkn274/download).\nWe recommend you to use PyTorch >= 1.4.0 (or nightly) and torchvision >= 0.5.0 (or nightly) for ONNX models.\n\n## Contributing to the project\nAny pull requests or issues are welcome.\n\n## Citations\nPlease consider citing our paper in your publications if the project helps your research. BibTeX reference is as follows.\n```\n@inproceedings{tian2019fcos,\n  title   =  {{FCOS"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please consider citing our paper in your publications if the project helps your research. BibTeX reference is as follows.\n```\n@inproceedings{tian2019fcos,\n  title   =  {{FCOS}: Fully Convolutional One-Stage Object Detection},\n  author  =  {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},\n  booktitle =  {Proc. Int. Conf. Computer Vision (ICCV)},\n  year    =  {2019}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{tian2019fcos,\n  title   =  {{FCOS}: Fully Convolutional One-Stage Object Detection},\n  author  =  {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},\n  booktitle =  {Proc. Int. Conf. Computer Vision (ICCV)},\n  year    =  {2019}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.999887409463429,
+        0.9996044701773054,
+        0.9992393194923946
+      ],
+      "excerpt": "Zhi Tian, Chunhua Shen, Hao Chen, and Tong He; \nIn: Proc. Int. Conf. Computer Vision (ICCV), 2019. \narXiv preprint arXiv:1904.01355 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/touchylk/fcoseccv/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/touchylk/fcoseccv",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to Mask-RCNN Benchmark\nWe want to make contributing to this project as easy and transparent as\npossible.\nOur Development Process\nMinor changes and improvements will be released on an ongoing basis. Larger changes (e.g., changesets implementing a new paper) will be released on a more periodic basis.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and create your branch from master.\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues to track public bugs. Please ensure your description is\nclear and has sufficient instructions to be able to reproduce the issue.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nCoding Style\n\n4 spaces for indentation rather than tabs\n80 character line length\nPEP8 formatting following Black\n\nLicense\nBy contributing to Mask-RCNN Benchmark, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-29T09:52:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-29T12:47:50Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9816033234106806
+      ],
+      "excerpt": "This project hosts the code for implementing the FCOS algorithm for object detection, as presented in our paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9128335827099135,
+        0.9770547152774467,
+        0.9651536200666211,
+        0.9736436278043812
+      ],
+      "excerpt": "Totally anchor-free:  FCOS completely avoids the complicated computation related to anchor boxes and all hyper-parameters of anchor boxes.    \nBetter performance: The very simple one-stage detector achieves much better performance (38.7 vs. 36.8 in AP with ResNet-50) than Faster R-CNN. Check out more models and experimental results here. \nFaster training and testing: With the same hardwares and backbone ResNet-50-FPN, FCOS also requires less training hours (6.5h vs. 8.8h) than Faster R-CNN. FCOS also takes 12ms less inference time per image than Faster R-CNN (44ms vs. 56ms). \nState-of-the-art performance: Our best model based on ResNeXt-64x4d-101 and deformable convolutions achieves 49.0% in AP on COCO test-dev (with multi-scale testing). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.924350440535908,
+        0.8254705598372591,
+        0.8615037069117419,
+        0.941081098213662,
+        0.8615037069117419,
+        0.8789389560199472
+      ],
+      "excerpt": "New NMS (see #165) speeds up ResNe(x)t based models by up to 30% and MobileNet based models by 40%, with exactly the same performance. Check out here. (12/10/2019) \nNew models with much improved performance are released. The best model achieves 49% in AP on COCO test-dev with multi-scale testing. (11/09/2019) \nFCOS with VoVNet backbones is available at VoVNet-FCOS. (08/08/2019) \nA trick of using a small central region of the BBox for training improves AP by nearly 1 point as shown here. (23/07/2019) \nFCOS with HRNet backbones is available at HRNet-FCOS. (03/07/2019) \nFCOS with AutoML searched FPN (R50, R101, ResNeXt101 and MobileNetV2 backbones) is available at NAS-FCOS. (30/06/2019) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303182212292588
+      ],
+      "excerpt": "But 4 1080Ti GPUs can also train a fully-fledged ResNet-50-FPN based FCOS since FCOS is memory-efficient. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9180570311931597,
+        0.8612812871265699
+      ],
+      "excerpt": "5) We improved the postprocess efficiency by using multi-label nms (see #165), which saves 18ms on average. The inference metric in the following tables has been updated accordingly. \nFor your convenience, we provide the following trained models (more models are coming soon). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801200475740159
+      ],
+      "excerpt": "All ResNe(x)t based models are trained with 16 images in a mini-batch and frozen batch normalization (i.e., consistent with models in maskrcnn_benchmark). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9419725285381833
+      ],
+      "excerpt": "Note that imprv denotes improvements in our paper Table 3. These almost cost-free changes improve the performance by ~1.5% in total. Thus, we highly recommend to use them. The following are the original models presented in our initial paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8308355721681991,
+        0.9655093622057656,
+        0.898668381073099,
+        0.9648354411280834
+      ],
+      "excerpt": "[1] 1x and 2x mean the model is trained for 90K and 180K iterations, respectively. \\ \n[2] All results are obtained with a single model and without any test time data augmentation such as multi-scale, flipping and etc.. \\ \n[3] c128 denotes the model has 128 (instead of 256) channels in towers (i.e., MODEL.RESNETS.BACKBONE_OUT_CHANNELS in config). \\ \n[4] dcnv2 denotes deformable convolutional networks v2. Note that for ResNet based models, we apply deformable convolutions from stage c3 to c5 in backbones. For ResNeXt based models, only stage c4 and c5 use deformable convolutions. All models use deformable convolutions in the last layer of detector towers. \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9197946659823747
+      ],
+      "excerpt": "Please refer to the directory onnx for an example of exporting the model to ONNX. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/touchylk/fcoseccv/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 10 Dec 2021 10:27:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/touchylk/fcoseccv/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "touchylk/fcoseccv",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/touchylk/fcoseccv/master/docker/Dockerfile",
+      "https://raw.githubusercontent.com/touchylk/fcoseccv/master/docker/docker-jupyter/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/touchylk/fcoseccv/master/demo/Mask_R-CNN_demo.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/touchylk/fcoseccv/master/test.sh",
+      "https://raw.githubusercontent.com/touchylk/fcoseccv/master/train.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This FCOS implementation is based on [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark). Therefore the installation is the same as original maskrcnn-benchmark.\n\nPlease check [INSTALL.md](INSTALL.md) for installation instructions.\nYou may also want to see the original [README.md](MASKRCNN_README.md) of maskrcnn-benchmark.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For users who only want to use FCOS as an object detector in their projects, they can install it by pip. To do so, run:\n```\npip install torch  #: install pytorch if you do not have it\npip install git+https://github.com/tianzhi0549/FCOS.git\n#: run this command line for a demo \nfcos https://github.com/tianzhi0549/FCOS/raw/master/demo/images/COCO_val2014_000000000885.jpg\n```\nPlease check out [here](fcos/bin/fcos) for the interface usage.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8353358824596112
+      ],
+      "excerpt": "For your convenience, we provide the following trained models (more models are coming soon). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030942951198009
+      ],
+      "excerpt": "We update batch normalization for MobileNet based models. If you want to use SyncBN, please install pytorch 1.1 or later. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8838377520179606
+      ],
+      "excerpt": "Note that: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9333574343066754
+      ],
+      "excerpt": "python demo/fcos_demo.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8368441649934927,
+        0.8318549392002752,
+        0.8633989807152664
+      ],
+      "excerpt": "    --config-file configs/fcos/fcos_imprv_R_50_FPN_1x.yaml \\ \n    MODEL.WEIGHT FCOS_imprv_R_50_FPN_1x.pth \\ \n    TEST.IMS_PER_BATCH 4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8208484028254655
+      ],
+      "excerpt": "FCOS_imprv_dcnv2_R_101_FPN_2x | Yes | 73ms | 45.6 | download \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8093462416429912
+      ],
+      "excerpt": "Model | Training batch size | Multi-scale training | Testing time / im | AP (minival) | Link \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8368441649934927
+      ],
+      "excerpt": "    --config-file configs/fcos/fcos_imprv_R_50_FPN_1x.yaml \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/touchylk/fcoseccv/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Dockerfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/touchylk/fcoseccv/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'FCOS for non-commercial purposes\\n\\nCopyright (c) 2019 the authors\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FCOS: Fully Convolutional One-Stage Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fcoseccv",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "touchylk",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/touchylk/fcoseccv/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 10:27:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Once the installation is done, you can follow the below steps to run a quick demo.\n    \n    ",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Specific code sourses can be found in module source code \n* Genereal code schematic provided by https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html\n* Data provided by the RSNA and Kaggle.com https://www.kaggle.com/c/rsna-pneumonia-detection-challenge/data\n* Architecture Comparison sources \n```\nhttps://towardsdatascience.com/neural-network-architectures-156e5bad51ba\nhttps://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035\nhttps://arxiv.org/pdf/1801.00631.pdf\nhttps://arxiv.org/abs/1512.03385\nhttp://yann.lecun.com/exdb/lenet/\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1512.03385\nhttp://yann.lecun.com/exdb/lenet/\n```\n\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/astoycos/Basic_Deep_Learning",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-10-16T18:09:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-23T18:17:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9171303020267111
+      ],
+      "excerpt": "This program was created to try and classify DICOM chest X-Rays as either Pneumonia positive or negative based on lung opacitites,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8197777022338678
+      ],
+      "excerpt": "The first module exists to preprocess the data and create the training, validation, and testing sets.  The RSNA images are saved in DICOM \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8132902441425921,
+        0.8243521111381876
+      ],
+      "excerpt": "reads through these directories and begins by creating two dictionaries, on for the testing and validation sets. The dictionaries store a key with the image filename and  \nthen encodes either a 0(pneumonia negative) or 1(pneumonia_Positive) for the value.  Then it loops throught these dictionaries and converts all the (1024x1024).dcm files to (256x256).png files in order to  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9216931904822223,
+        0.9040048997738045,
+        0.8875833486964335
+      ],
+      "excerpt": "image identification software. Specifically the network includes three convolution and Max Pooling layers are follwed by three dense layers all of which are activated by the Relu function.  \nThe network concludes with a sigmoid activation to narrow the output down to a single one hot vector signaling either pnemonia positive or negative \nIt also saves the history of the model to the current working directory for use by the next module \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9614346999000519,
+        0.9395059124606018,
+        0.9631313208774035,
+        0.9978919452159268
+      ],
+      "excerpt": "For this mini project I was heavily constrained by HardWare, specifically all models were trained on a 2018 macbook pro intell i7 CPU.  In the future further experimentation and compution should be done via the cloud or more robust hardware. The maximum accuracy I was wable to achieve was 77% after running for 5 epochs. which turned out to be the maximum feasibly possible on my personal computer when using such a large data set. \nThe Figure above shows how the model quickly rises to its maxium accuracy of 77% \nBased on the figure above it seems that diagnosing pneumonia from chest x-rays effetively will require a much larger nerual network architecture along with more imputs, such as bounding boxes, in order to truly be successful. Specifically when we attempt to predict on test images we most often get an output of [0] which leads me to believe that the problem is too complex for such a simple Neural Network. However as demonstration for simple nerual network architecture and data pre-prossing this demonstration was very effective. \nLeNet was released in 1988 by Yann LeCun and is a pioneering network that paved the way for many of the modern deep learning architectutres used today. It was revolutionary due to the fact that never before had there been a network which used convolutions to extract various image features.  Also, it was built during an era where hardware was a major constrant so being able to tune the various convolutional layers made it efficient enough to run in the pre GPU era.  Specifically the platform was built using three major blocks. First the image is convoluted by various sized filters to extract features, as you go deeper in the network the feature maps change from simply reporesening lines and edges, to being able to recognize macro objects.  Pooling layers follow each convolution and serve to extract the most significant data within a feature map while also decreasing the size of the layer.  Lastly a non-linear activation function is applied, such as a tanh or sigmoid equation. Lastly is a set of dense fully connected layers to serve as a final classifier. Due to the simplistic and tunable nature of this architecture I decided to model the basic pneumonia network following many of the same guidelines. Resnet was released in December of 2015, and is an advance widely used architecture, beating out its predicessor, VGGNet, with and error of only 3.6% in the ImageNet test set. At it's base functional level, ResNet also takes many intuitions from Lenet, sucha as the general order of convolution, pooling and dense layers. However, ResNet is a much deeper network and can be implemented locally with either 50 layers(Resnet50) or 101 layers(Resnet101), while the authors of Resnet have even utilized an implementation with over 1000 layers.  ResNet's ability to utilize such deep network arcitecture without facing a \"vanashishing gradient\" issue is what allows it to acheive such great results.  Specifically the solution begin with the simple idea of \"identity shortcut connection\" which is when the output of two convolutional layers along with the bypasesed input in passed to the next consectutive layers. This keeps the backpropagation gradient from steadily going to zero as the algorithm progress though the numerous layers. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/astoycos/Mini_Project2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 23:28:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/astoycos/Basic_Deep_Learning/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "astoycos/Basic_Deep_Learning",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9665721108027053
+      ],
+      "excerpt": "Once all the required packages have been installed you are ready to run the program  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9339245873751996
+      ],
+      "excerpt": "2. execute the modules in the following order, Make sure to use Python 3 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8956958072938267
+      ],
+      "excerpt": "medical format and the labels are saves in a .csv file. The data is stored in four directories, stage_1_test_images.zip stage_1_train_images.zip, stage_1_train_labels.csv.zip. The first program  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    train/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "            0001.jpg \n            0002.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "            0001.jpg \n            0002.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "            0001.jpg \n            0002.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "            0001.jpg \n            0002.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8163775288682625
+      ],
+      "excerpt": "The last module first takes the history dictionary returned by the Keras fit_model() function and creates a subplot of the Train/validation accuracy and loss functions for each epoch. Also reloads the model and evaluates some random test images.  Then it plots the test images in quesition, where the plot title is the predicted class. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8082022887640018,
+        0.8082022887640018,
+        0.865150097162176
+      ],
+      "excerpt": "$ Unzip stage_1_test_images.zip \n$ Unzip stage_1_train_images.zip \n$ Unzip stage_1_train_labels.csv.zip \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.9336801098518991,
+        0.9336801098518991
+      ],
+      "excerpt": "$ Python3 pneumonia_posneg.py \n$ Python3 pneumonia_posneg_model.py \n$ Python3 pneumonia_posneg_eval.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/astoycos/Basic_Deep_Learning/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Mini_Project2: A Basic Neural Network Design for Pneumonia Diagnosis",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Basic_Deep_Learning",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "astoycos",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/astoycos/Basic_Deep_Learning/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Required Packages \n\n```\nPython v3.6\nTensorflow v1.5.0\nkeras \nshuntil \ncsv\npydicom \nnumpy \npandas\nskimage\nitertools\nmatplotlib\npickle\nimage\nrandom\nPIL\n\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 10 Dec 2021 23:28:11 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

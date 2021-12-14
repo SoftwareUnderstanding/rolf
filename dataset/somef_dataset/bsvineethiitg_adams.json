@@ -1,0 +1,202 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1412.6980",
+      "https://arxiv.org/abs/1905.13200 [cs.LG] (2019)``.\n\n### Algorithm \n\nWe introduce variants of the Adam optimizer that either bias the updates along regions that conform across mini-batches or randomly \"explore\" in the parameter space along the variance-gradient. The update rules are summarized below: \n\n![Summary of update rules](updates.png)  \n\nAdamUCB and AdamCB are biased estimates of the full-gradient. We recommend using AdamS which is an unbiased estimate, and outperforms other variants based on our experiments with CIFAR-10. Please refer to the [paper](http://arxiv.org/abs/1905.13200) for more details.\n\n### Code\n\nPyTorch implementation of the optimizers is available under [``PyTorch-Optimizers/``](PyTorch-Optimizers/)\n\n### Usage\n\nEach of our optimizer requires access to the current loss value. This is acheived by passing in a ``closure`` function  to the ``optimizer.step()`` method. The function ``closure()`` should be defined to return the current loss tensor after the forward pass.\n\nRefer to lines ``351-357`` in [``Experiments/main.py``](Experiments/main.py) for an example of the usage.\n\n### Experiments\n\nWe evaluate the optimizers on multiple models such as Logistic Regression (LR), MLPs, and CNNs on the CIFAR-10/MNIST datasets. The architecture of the networks is chosen to closely resemble the experiments published in the original Adam paper [(Kingma and Ba, 2015)](https://arxiv.org/abs/1412.6980). Code for our experiments is available under [``Experiments/``](Experiments/), and is based on the original CIFAR-10 classifier code [here](https://github.com/bearpaw/pytorch-classification).\n\n#### Reproducing the results\n\n* Run the shell script for each type of model (LR/MLP/CNN) under [``Experiments/``](Experiments/)\n* Compute the Mean and the Standard Deviation of the training/validation metrics for each configuration across the three runs. \n\nResults of our training runs with the mean and the standard deviation values for each configuration is provided under [``Experiments/results_mean_std/``](Experiments/results_mean_std).\n\n### Results\n\n#### CNN trained on CIFAR-10 with batch size = 128 and no dropout\n\n![CNN with Batch Size 128](Experiments/results_mean_std/images/cifar-10.jpg)\n\n#### CNN trained on CIFAR-10 with batch size = 16 and no dropout\n\n![CNN with Batch Size 16](Experiments/results_mean_std/images/cifar-10-bsz16.jpg)\n\n\n#### Comparison of Dropout with AdamS for CNN trained on CIFAR-10 with batch size = 128 \n\n![Comparing dropout](Experiments/results_mean_std/images/dropout.jpg)\n\n\nPlease refer to the [paper](http://arxiv.org/abs/1905.13200) for more details.\n\n\n### Contribute\nFeel free to create a pull request if you find any bugs or you want to contribute (e.g., more datasets, more network structures, or tensorflow/keras ports). "
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9941533744942845,
+        0.9987870579227938
+      ],
+      "excerpt": "Paper: http://arxiv.org/abs/1905.13200 \nCite as: V.S. Bhaskara, and S. Desai.arXiv preprintarXiv:1905.13200 [cs.LG] (2019). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bsvineethiitg/adams",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-25T22:15:58Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-16T20:39:02Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9507491141434815
+      ],
+      "excerpt": "We introduce variants of the Adam optimizer that either bias the updates along regions that conform across mini-batches or randomly \"explore\" in the parameter space along the variance-gradient. The update rules are summarized below:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9985584801460423,
+        0.9749002704421958,
+        0.989993089849433,
+        0.8382715924925372,
+        0.9239351879987706,
+        0.9671279580227937,
+        0.9685490122702322
+      ],
+      "excerpt": "AdamUCB and AdamCB are biased estimates of the full-gradient. We recommend using AdamS which is an unbiased estimate, and outperforms other variants based on our experiments with CIFAR-10. Please refer to the paper for more details. \nPyTorch implementation of the optimizers is available under PyTorch-Optimizers/ \nWe evaluate the optimizers on multiple models such as Logistic Regression (LR), MLPs, and CNNs on the CIFAR-10/MNIST datasets. The architecture of the networks is chosen to closely resemble the experiments published in the original Adam paper (Kingma and Ba, 2015). Code for our experiments is available under Experiments/, and is based on the original CIFAR-10 classifier code here. \nRun the shell script for each type of model (LR/MLP/CNN) under Experiments/ \nCompute the Mean and the Standard Deviation of the training/validation metrics for each configuration across the three runs.  \nResults of our training runs with the mean and the standard deviation values for each configuration is provided under Experiments/results_mean_std/. \nPlease refer to the paper for more details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Exploiting Uncertainty of Loss Landscape for Stochastic Optimization",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bsvineethiitg/adams/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 05 Dec 2021 15:50:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bsvineethiitg/adams/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bsvineethiitg/adams",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/bsvineethiitg/adams/master/Experiments/experiment-cifar10-cnn.sh",
+      "https://raw.githubusercontent.com/bsvineethiitg/adams/master/Experiments/experiment-mnist-mlp.sh",
+      "https://raw.githubusercontent.com/bsvineethiitg/adams/master/Experiments/experiment-mnist-lr.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bsvineethiitg/adams/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'# Copyright (c) 2012 Giorgos Verigakis &#118;&#101;&#114;&#105;&#103;&#97;&#107;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\\n#\\n# Permission to use, copy, modify, and distribute this software for any\\n# purpose with or without fee is hereby granted, provided that the above\\n# copyright notice and this permission notice appear in all copies.\\n#\\n# THE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\\n# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\\n# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\\n# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\\n# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\\n# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\\n# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Exploiting Uncertainty of Loss Landscape for Stochastic Optimization",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "adams",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bsvineethiitg",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bsvineethiitg/adams/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Sun, 05 Dec 2021 15:50:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Each of our optimizer requires access to the current loss value. This is acheived by passing in a ``closure`` function  to the ``optimizer.step()`` method. The function ``closure()`` should be defined to return the current loss tensor after the forward pass.\n\nRefer to lines ``351-357`` in [``Experiments/main.py``](Experiments/main.py) for an example of the usage.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

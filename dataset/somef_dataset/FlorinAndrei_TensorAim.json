@@ -1,0 +1,270 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1804.02767](https://arxiv.org/abs/1804.02767",
+      "https://arxiv.org/abs/1804.02767"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The system is based on the YOLOv3 model by [Joseph Redmon](https://pjreddie.com/).\n\nYOLO encapsulation and output parsing code was borrowed from [Huynh Ngoc Anh a.k.a. experiencor](https://github.com/experiencor).\n\nHardware for the laser mount was designed and built by Victor Andrei.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9920391031109816
+      ],
+      "excerpt": "object recognition and classification \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9260094702735957
+      ],
+      "excerpt": "Here's the arXiv paper describing YOLOv3: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FlorinAndrei/TensorAim",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-18T02:10:23Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-07-23T11:35:23Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9756929712943642,
+        0.8308859996943717
+      ],
+      "excerpt": "point out the coordinates in space of the recognized objects \nWith that, action can be taken in the real world. E.g., pick one object category and literally point it out - paint a dot on them with a laser, for example. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9069932860520473,
+        0.9164302979006179,
+        0.978539342411981,
+        0.9635575927074796
+      ],
+      "excerpt": "Python throughout the project. Keras and TensorFlow. \nThe sentry.py file (the central part of the project) instantiates a deep neural network, feeds the network live images from a camera, parses the output, and estimates the locations of the detected objects (if any). \nThe model can provide 2D coordinates (X/Y) for the objects; sentry.py uses that to draw bounding boxes around the objects. Currently only the X coordinate (horizontal plane) is passed beyond the software realm into the hardware; 2D control (X/Y) would be doable, but that's for a future version. \nThe software can control a servo mechanism in real time, via standard PWM protocols, to point a laser at the objects that are detected and localized. Currently the X coordinate from object detection is used to swivel the laser left-right. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9544091929186554,
+        0.9882692530750563
+      ],
+      "excerpt": "This project is based on the YOLOv3 network. It's a deep convolutional network that performs multiple-object detection and classification, along with estimating coordinates, by looking at the whole image at once. The objectness score for each bounding box is done via logistic regression using dimension clusters as anchor boxes. \nTo detect multiple objects and estimate bounding boxes for them, YOLO is faster than other approaches, such as R-CNN. Unlike R-CNN, it uses a single network to look at the whole field. It's extremely fast, while remaining accurate enough. Real time object tracking at video frame rates is doable with YOLO on consumer hardware. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9416486602474247,
+        0.9783685319961266,
+        0.9454616686551393
+      ],
+      "excerpt": "The network is quite accurate both on static data, such as the COCO database, and on live video in the real world. \nRunning YOLO on the CPU is doable but very slow. The GPU-accelerated version of TensorFlow 1.x is much faster. On a portable, scaled down Turing-class GPU (GTX 1660 Ti) with 6 GB RAM we get up to 20 fps from the neural network alone - which is then reduced to half by the code after output parsing, display, etc (surely there's a lot of optimizations yet to be done - e.g. replace loops with vector operations). \nWe use OpenCV to get a video stream from the camera and inject it into the neural network, and also to get the annotated image with bounding boxes provided by the network and display it in real time on the computer. It's fast, easy, and standard. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9860241542002108,
+        0.8090478318814802
+      ],
+      "excerpt": "To draw bounding boxes and label them, Matplotlib is the go-to library for many. It sure is powerful, and it's very popular, but in this case it's like cracking walnuts with the 100 ton fully automated hydraulic press, when a simple hammer would suffice. Interfacing Matplotlib with Numpy (two-way interface) is obscure, counter-intuitive, and poorly documented. \nPillow is a better fit here. Much simpler API, the Numpy interface could not be more intuitive, and it's probably a bit faster too, I guess. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9225019786724418,
+        0.9238968311176695,
+        0.9827007467326752,
+        0.9621984929918228,
+        0.8617199119309635,
+        0.9353203680504079,
+        0.9487358999450357
+      ],
+      "excerpt": "The Pololu Maestro device uses a serial protocol to talk to the computer. The maestro.py file is the standard implementation by Pololu of their protocol; it's a fairly thin layer sitting on top of the standard serial Python module. \nDepending on your OS, you need to pick the serial port (COM3, /dev/ttyS0) that the Maestro is using, and inject commands into it via the maestro.py library. \nWe rely on simple technology used for amateur R/C (radiocontrolled) model vehicles (cars, planes, helicopters, drones). The AI software runs on a regular computer, and controls a servo which points a laser in the direction of the detected object. \nThe laser sits on top of a Hextronik HXT900 servo. It's a cheap, small servo typically used for R/C planes. \nThe interface between servo and computer is provided by the Pololu Mini Maestro 12-Channel USB servo controller. The controller has 12 outputs and can drive up to 12 independent servos. Each output speaks the PWM protocol typically used by R/C gear. The controller input is USB/serial and is plugged into the computer. \nPower for the servo is provided, as is standard with R/C, by a LiPo battery via an ESC BEC. \nHere's an image of the hardware: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312923793990826
+      ],
+      "excerpt": "TensorFlow on Raspberry Pi is broken. Not going to fly a drone for now - let's run it on a laptop. Waiting for TF 2.0, hopefully it gets better. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Machine Learning sentry: classify objects, pick one category, point it out in the real world (with a laser pointer). TensorFlow / Keras.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FlorinAndrei/TensorAim/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 05 Dec 2021 19:20:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/FlorinAndrei/TensorAim/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FlorinAndrei/TensorAim",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/FlorinAndrei/TensorAim/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/FlorinAndrei/TensorAim/master/old/convert_images.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8385596091223217
+      ],
+      "excerpt": "Running YOLO on the CPU is doable but very slow. The GPU-accelerated version of TensorFlow 1.x is much faster. On a portable, scaled down Turing-class GPU (GTX 1660 Ti) with 6 GB RAM we get up to 20 fps from the neural network alone - which is then reduced to half by the code after output parsing, display, etc (surely there's a lot of optimizations yet to be done - e.g. replace loops with vector operations). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8387225720068111
+      ],
+      "excerpt": "Depending on your OS, you need to pick the serial port (COM3, /dev/ttyS0) that the Maestro is using, and inject commands into it via the maestro.py library. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8506387671844011
+      ],
+      "excerpt": "train.py parses the YOLOv3 weights and compiles them into a format compatible with TensorFlow / Keras, which is then used by sentry.py. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/FlorinAndrei/TensorAim/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TensorAim",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TensorAim",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FlorinAndrei",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/FlorinAndrei/TensorAim/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Sun, 05 Dec 2021 19:20:48 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

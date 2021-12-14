@@ -1,0 +1,249 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1707.06347",
+      "https://arxiv.org/abs/1706.02275",
+      "https://arxiv.org/abs/1909.07528"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Stippler/cow-simulator",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-26T13:38:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-23T11:09:01Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project consists of a simulation that simulates a partially observable, multi-agent, dynamic, continuous in space, discrete in time and partly unknown (missing knowledge about laws of physics) environment.\n\nThere are two actors that can interact consciously with the environment: a cow and wolf. \nAdditionally, there is another entity called grass. \nEach entity has a certain energy level.\nThe cow gets energy by touching grass, the wolf by touching cows.\nEach entity loses energy by touching its counterpart or moving around.\nThe goal of each actor is to obtain as much energy as possible.\nIf the energy level of the cow or the grass drops below zero the environment is reset.\nAn actor perceives its environment, by sending out rays with a limited reach. \nThe rays return the color of the actor they intersect with, black if they intersected with the game border or white if they did not intersect with anything.\nThe next figure shows a visualisation of the rays, the cow (brown), the wolf (blue), the grass (red) and a visualisation of the rays.\n\n![figure1](screenshot.png)\n\nThe little black circles represent their head.\nTo implement the actors' AI deep Q learning as described in the lecture was used, however it does not achieve wanted results as of yet.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8837249743905132,
+        0.9905776893292357,
+        0.9250726229620985,
+        0.9951439451902068
+      ],
+      "excerpt": "This project includes a Reinforcement Learning strategy in a dynamic, multi-agent environment. <!-- TODO: define it more precisly--> \nThe type of this project is Bring your own data for reinforcement learning projects, because it provides a new environment for reinforcement learning strategies.  \nAdditionally it includes basic neural networks for every actor and learning algorithms for them. \nThere is no real dataset. The project implements the environment and a deep q learning algorithm for the actors and gives an visualisation of the state of the world. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8805138256645823
+      ],
+      "excerpt": "| building an application to present the results             | 5h                   |  4h       | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Cow Simulation for Applied Deep Learning",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The entry point is the main.py file.\nStart by installing the dependencies listed in .circleci/dependencies.txt and running the main.py file.\n\n![figure](documentation/overview.png)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Stippler/cow-simulator/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The performance measure of each actor is the reward (the energy gain) of the agent.\nThe first environment and simple dqn agents did not behave reasonable. So their reward oscillated.\n\n![figure](result/dqn-result-without-border-fixed.png)\n\nIn oder to get better results a negative reward was added if an agent hits the border.\nAdditionally the agents actions were changed to move the agent relative to its direction instead of relative to the screen.\n\n![figure](result/dqn-reward-simple.png)\n\nAs the border collision count is interesting as well, it was also captured and plotted.\nThe goal was to have an average collision count of 5.\nAs seen in the following plot both agents learnt to avoid borders in certain epochs.\nThe exploration rate goes down with each epoch, so agents rely more on their neuronal network in latter epochs.\n\n![figure](result/dqn-border-collision-result-simple.png)\n\nLast but not least a more complicated neural network was trained for approximating the q function.\nThe border collision was not penalized anymore.\n\n![figure](result/dq-reward.png)\n\nMy personal goal was to have an constant reward of 0.3 (an agent can only obtain 1.0 rewards per game).\nHowever this was too difficult for the deep q network I trained.\nThis can also be due to not enough training.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 11 Dec 2021 15:51:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Stippler/cow-simulator/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Stippler/cow-simulator",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[Control a cart](https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html)\n\n[Youtube Playlist I got my inspiration from](https://www.youtube.com/watch?v=xukp4MMTTFI&list=PL58qjcU5nk8u4Ajat6ppWVBmS_BCN_T7-&index=1 \"Youtube Playlist Inspiration\")\n\n[Multi-agent actor-critic for mixed cooperative-competitive environments](https://arxiv.org/abs/1706.02275)\n\n[Emergent Tool Use From Multi-Agent Autocurricula](https://arxiv.org/abs/1909.07528)\n\n[When Worlds Collide: Simulating Circle-Circle Collisions](https://gamedevelopment.tutsplus.com/tutorials/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769)\n\n[Quick Tip: Use Quadtrees to Detect Likely Collisions in 2D Space](https://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9102753828651221
+      ],
+      "excerpt": "in your terminal. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8202765114385282,
+        0.8836393206601191
+      ],
+      "excerpt": "| building environment                                       | 10h                  |  14h      | \n| setting up cuda, cudnn... on manjaro                       | 20m                  |  21h      | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9364541555520881,
+        0.9364541555520881,
+        0.9364541555520881
+      ],
+      "excerpt": "python3 deepcow/run.py train_cow \npython3 deepcow/run.py train_wolf \npython3 deepcow/run.py train_both \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Stippler/cow-simulator/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "TeX"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Cow Simulator",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cow-simulator",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Stippler",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Stippler/cow-simulator/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "Stippler",
+        "body": "",
+        "dateCreated": "2020-01-22T21:03:17Z",
+        "datePublished": "2020-01-23T11:30:04Z",
+        "html_url": "https://github.com/Stippler/cow-simulator/releases/tag/v1",
+        "name": "",
+        "tag_name": "v1",
+        "tarball_url": "https://api.github.com/repos/Stippler/cow-simulator/tarball/v1",
+        "url": "https://api.github.com/repos/Stippler/cow-simulator/releases/23067885",
+        "zipball_url": "https://api.github.com/repos/Stippler/cow-simulator/zipball/v1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 11 Dec 2021 15:51:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to run the application install the dependencies and type:\n\npython3 deepcow/run.py play ",
+      "technique": "Header extraction"
+    }
+  ]
+}

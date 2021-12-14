@@ -11,6 +11,6 @@ os.system("mkdir data")
 for repo in df_repos:
     name ='_'.join(repo.split('/')[-2:])
     os.system("somef describe -r {} -o {}.json -p -t 0.8".format(repo, name))
-    
     os.system("mv {}.json data/".format(name))
-    break
+    os.system("mkdir data")
+    
