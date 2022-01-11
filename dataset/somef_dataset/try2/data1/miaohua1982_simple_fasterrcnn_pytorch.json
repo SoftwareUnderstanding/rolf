@@ -1,0 +1,213 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.01497",
+      "https://arxiv.org/abs/1703.06870",
+      "https://arxiv.org/abs/1506.01497",
+      "https://arxiv.org/abs/1703.06870"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miaohua1982/simple_fasterrcnn_pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-06T07:58:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-30T02:49:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9919703860219768,
+        0.87950384075668,
+        0.9232235264050289
+      ],
+      "excerpt": "This is a simplest implementation of fasterrcnn by pytorch when I learn the paper Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks.  \nNow I also add maskrcnn Mask R-CNN. \nI give the key operation iou/nms/roi_pool/align_roi_pool in details by python and c++ , not just calling the torchvision library, so you are able to see the implementation of details. By the way, you can \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968029537584643
+      ],
+      "excerpt": "Table of Contents \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9919703860219768,
+        0.87950384075668,
+        0.9645502932656841
+      ],
+      "excerpt": "This is a simplest implementation of fasterrcnn by pytorch when I learn the paper Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks.  \nNow I also add maskrcnn Mask R-CNN. \nThere are lots of implementation in github.But many of them is too complicated, or just calling the torchvision's module. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://pybind11.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miaohua1982/simple_fasterrcnn_pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 03:01:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/miaohua1982/simple_fasterrcnn_pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "miaohua1982/simple_fasterrcnn_pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install nms & roi_pool you should have [pybind11](https://github.com/pybind/pybind11/tree/stable) installed.\n\nThen what you need to do is going into the **util** folder and run the following code:\n\n```sh\npip install ./nms_mh\n```\nand  \n```sh\npip install ./roi_pool_mh\n```\nand  \n```sh\npip install ./align_roi_pool_mh\n``` \n\nthen you can use the library in other project not only in current one. You can find how to use it in file **test.py** which is under tests folder.\n>Note:  \n nms&roi_pool&align_roi_pool is implemented in c++, so on different os platform(windows, mac os, linux) it has different compilation method. The pybind11 also has different installation instructions, so just follow the steps [here](https://pybind11.readthedocs.io/en/stable/installing.html)  \n\nThe following example is for using nms. And the nms_mh package also contains the iou & giou & ciou & diou functions.\n```sh\nimport numpy as np\nimport nms_mh as m\n\nrois = np.random.rand(12000,4).astype(np.float32)\nscores = np.random.rand(12000).astype(np.float32)\n\nkeep_list = m.nms(rois, scores, 0.7)\n```\nor you can use different iou calculation algorithm by the parameter **iou_algo** of function **nms**, the default value for iou_algo is \"iou\", and it can be iou/giou/ciou/doiu.\n\nAnd the roi_pool:\n\n```sh\nfrom torchvision.ops import RoIPool\nimport torch as t\nimport roi_pool_mh as mh\n\nfeat_x = t.rand(1, 2, 8, 8, requires_grad=True)\nrois = t.tensor([[4,4,7,5], [1,3,3,7]], dtype=t.float32)\n\nscale=1.0/2\nroi_size=7\nroi_pooling_lib = RoIPool((roi_size,roi_size),  scale)\nroi_indices = t.zeros(rois.shape[0])\nindices_and_rois = t.cat([roi_indices[:, None], rois], dim=1)\nfeat1 = roi_pooling_lib(feat_x, indices_and_rois)\n\nroi_pooling = ROI_Pooling_C(roi_size, scale)\nfeat2 = roi_pooling.apply(feat_x, rois)\n\nprint(t.all(feat1==feat2))\nassert(t.all(feat1==feat2))\n\n#: test backward\nf1 = feat1.sum()\nf1.backward()\ngrad1 = feat_x.grad.clone()\n\n_ = feat_x.grad.zero_()\nf2 = feat2.sum()\nf2.backward()\ngrad2 = feat_x.grad.clone()\n\nprint(t.all(grad1==grad2))\nassert(t.all(grad1==grad2))\n```\nHere ROI_Pooling_C is a wrapper class calling the roi_pool_mh's roi pool forward&backward function.You can have a look at the file test.py under the roi_pool_mh folder for details.  \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9521567113193657
+      ],
+      "excerpt": "What's more, the c++ version nms & roi_pool are written independently, and you can install them as a python package. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8258373113614341
+      ],
+      "excerpt": "1.The parameters for training&testing is in file config.py which is under config folder, you can change any of them for testing. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/miaohua1982/simple_fasterrcnn_pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C++"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "simple_fasterrcnn&maskrcnn_pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "simple_fasterrcnn_pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "miaohua1982",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miaohua1982/simple_fasterrcnn_pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " ipdb>=0.13.5  \n matplotlib>=3.1.1  \n numpy>=1.17.5  \n Pillow>=8.0.1  \n scikit-image>=0.18.1  \n torch>=1.5.1  \n torchvision>=0.6.1  \n tqdm>=4.51.0  \n visdom>=0.1.8.9  \n pybind11>=2.6.2  \n\n The whole project has been test on python3.6\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 03:01:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All you need to do is just run(just for fasterrcnn training):\n```sh\npython train_faster_rcnn.py\n```\nor for mask rcnn\n```sh\npython train_mask_rcnn.py\n```\n\n>",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9763431877756387
+      ],
+      "excerpt": "More details at https://arxiv.org/pdf/1505.04597.pdf. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mtancak/PyTorch-UNet-Brain-Cancer-Segmentation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-12T20:20:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T12:15:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This is a basic example of a PyTorch implementation of UNet from scratch. I've used it to segment the BraTS 2020 dataset, which contains CT scans of brains with tumors. As such, each entry has a list of 2D X-Ray slices that can be put together to form a volume. I have used VTK to render the mask vs. the prediction in 3D and thus show the usefulness of this approach. The model stops learning after only a few epochs, so for actual use, as a first cheap improvement, I'd recommend lowering the learning rate or increasing the amount of parameters in the network. The model achieves 0.75 F1 score and 98% accuracy (not very useful for semantic segmentation).\n\nYou can download the dataset I used from https://www.kaggle.com/awsaf49/brats20-dataset-training-validation. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8841643832219763
+      ],
+      "excerpt": "I have used a 3D UNet for this example. UNets were originally developed for use in medical computer vision, so it\u2019s naturally a decent fit. I have kept to the original paper\u2019s UNet architecture, thus the model has 64, 128, 256, 512 and 1024 features in each depth level. In my code, I made it trivial to update these numbers.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Creating a U-Net In PyTorch to segment the BraTS 2020 dataset",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mtancak1/PyTorch-UNet-Brain-Cancer-Segmentation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 03:06:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mtancak/PyTorch-UNet-Brain-Cancer-Segmentation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mtancak/PyTorch-UNet-Brain-Cancer-Segmentation",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To prepare the dataset, I\u2019ve filtered out all of the entries of 100% healthy samples. As I attempted semantic segmentation, the background class is already going to be overrepresented compared to the other classes, so this pre-processing of the data should help slightly even out the classes without losing valuable data. \n\nOriginally, I have cropped out 64x64x64 cubes around the tumor areas only. Although this worked well for modelling the tumor areas, the model ended up being really bad at identifying healthy areas of the brain and also labelling the \u201cvoid\u201d in the CT machine around the person, which meant that the rendered output was very poor. By removing this restriction, but still filtering out 100% healthy CTs, I achieved a fairly accurate model without a complicated training process. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mtancak/PyTorch-UNet-Brain-Cancer-Segmentation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch UNet Brain Cancer Segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch-UNet-Brain-Cancer-Segmentation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mtancak",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mtancak/PyTorch-UNet-Brain-Cancer-Segmentation/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "*I recommend using Spyder or PyCharm in scientific mode, as after each epoch train.py prints out graphs of F1 and accuracy*\n1. Download the Data\n2. Modify hyperparameters.txt to fit your needs (at minimum, adjust the directories)\n3. Run prepare_dataset.py\n4. Run train.py\n5. Optionally render output by running rendering.py\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Thu, 23 Dec 2021 03:06:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "ai",
+      "unet",
+      "brats",
+      "pytorch",
+      "cnn",
+      "medical-imaging",
+      "image-segmentation",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](Images/Example.png)\n![](Images/Example_2.png)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](Images/Bad_Preparation_1.png)\n![](Images/Bad_Preparation_2.png)\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

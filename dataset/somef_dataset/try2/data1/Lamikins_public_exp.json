@@ -1,0 +1,277 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9818894004866677
+      ],
+      "excerpt": "Author: Darius Lam \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "<img src=\"https://tex.s2cms.ru/svg/p(%5Ctextbf%7Bz%7D%2C%5Ctextbf%7Bx%7D)%20%3D%20p(%5Ctextbf%7Bz%7D)p(%5Ctextbf%7Bx%7D%7C%5Ctextbf%7Bz%7D)%20%3D%20p(z_1)%20%5Cprod_t%20p(z_t%7Cz_%7Bt-1%7D)%20%5Cprod_t%20p(%5Ctextbf%7Bx%7D_t%20%7Cz_t)\" alt=\"p(\\textbf{z},\\textbf{x}) = p(\\textbf{z})p(\\textbf{x}|\\textbf{z}) = p(z_1) \\prod_t p(z_t|z_{t-1}) \\prod_t p(\\textbf{x}_t |z_t)\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9972508553966268
+      ],
+      "excerpt": "source: https://arxiv.org/pdf/1807.03247.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9872118697333594
+      ],
+      "excerpt": "apold, hat crickspeech anrual stands makeam. He shows, trunches firere? Kiscies, father, he steps \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Lamikins/public_exp",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-02T13:52:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-14T04:47:22Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8897936816004298,
+        0.9794320336861803,
+        0.9473006206248381
+      ],
+      "excerpt": "I'm releasing several jupyter notebooks containing code I've written over the past several years. Below you will find descriptions of all of them (plus extras). Note that these were created for my own educational purposes.  Mathematical derivations are from sources including ML: APP by Murphy, Deep Learning by Goodfellow et al., and specified papers. \nIn (Gaussian) discriminant analysis, we fit a generative classifier of class-conditional gaussians: <img src=\"https://tex.s2cms.ru/svg/p(x%7Cy%3Dc%2C%5Ctheta)%20%3D%20%5Cmathcal%7BN%7D(x%7C%5Cmu_c%2C%5CSigma_c)\" alt=\"p(x|y=c,\\theta) = \\mathcal{N}(x|\\mu_c,\\Sigma_c)\" />.  The distributions are fit using maximum likelihood, which has a simple solution for gaussians. Normally, we have one distribution per class and the covariance matrices are separate across classes.  However, in the case where the matrices are shared, such that for all classes, <img src=\"https://tex.s2cms.ru/svg/%5CSigma_c%20%3D%20%5CSigma\" alt=\"\\Sigma_c = \\Sigma\" />, we get Linear Discriminant Analysis (LDA).  Additionally, I implement a regularized version of LDA, such that the shared covariance matrix is diagonal. \nAn HMM is a Markov process with hidden states.  Our HMM consists of an observation model <img src=\"https://tex.s2cms.ru/svg/p(x_t%7Cz_t)\" alt=\"p(x_t|z_t)\" /> (the probability of an observation given a hidden state) and a transition model <img src=\"https://tex.s2cms.ru/svg/p(z_%7Bt%2B1%7D%2Cz_t)\" alt=\"p(z_{t+1},z_t)\" /> (the probability of the next hidden state given the current hidden state). Our hidden states are <img src=\"https://tex.s2cms.ru/svg/%5Ctextbf%7Bz%7D\" alt=\"\\textbf{z}\" /> and observations <img src=\"https://tex.s2cms.ru/svg/%5Ctextbf%7Bx%7D\" alt=\"\\textbf{x}\" />.  Then we have the corresponding joint distribution: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9405093009714197,
+        0.8959540957188031,
+        0.9953036805315024,
+        0.94174541861469
+      ],
+      "excerpt": "From this distribution we can perform difference inferences.  Filtering is the task of computing our belief state in an online fashion, while smoothing is computing our belief state offline, given all evidence. We can also use the Viterbi algorithm to find the most likely \"path\" of states.  I implement both the forwards, forwards-backwards, and Viterbi algorithm. \nThe HMM has a large number of applications in sequence modeling.  It preceded the RNN, with many concepts overlapping. \nI recreated several of the experiments from Uber's CoordConv (Location Convolution) paper to examine the usefulness of this form of feature engineering.  The main contribution of the paper is to add additional channels at an uppermost CNN layer.  The additional channels simply broadcast x-axis, y-axis, and (optionally) radial coordinates, scaled to [-1,1].  The authors claim that by adding coordinate information to a CNN, it will drastically improve the ability of said CNN to learn tasks requiring spatial information.  In particular, they propose several tasks at which regular CNNs fail miserably but their \"CoordConv\" CNNs solve very quickly.  These are the Supervised Coordinate Classification, Supervised Rendering, and Unsupervised Density Learning task.  I experiment with the first two tasks in this notebook (the unsupervised learning experiment is in a different notebook).  True to their paper, I find that CoordConv performs much better at the tasks than regular CNNs.   \nWhat's interesting about their idea to me is not so much its immediate content but rather their willingness to experiment with adding additional non-domain-specific data to existing models.  It makes me wonder what experimental impact other added features would have.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9852787783779771,
+        0.9378624807062316,
+        0.9883416205144062
+      ],
+      "excerpt": "I implemented the mixture density network originally proposed by Bishop. The network deals with a shortcoming of neural networks trained by Euclidean loss, namely that they learn to find the conditional average of the data (assuming gaussian distribution).  However, this is often suboptimal, for example in the case where our function is one-to-many and we need to output over a multimodal distribution.  The MDN resolves this issue. \nMDPs are the backbone for almost all reinforcement learning problems today. \nThis is an implementation of MLE and MAP estimation on a small 2D dataset.  The MLE and MAP estimation methods are fundamental to machine learning. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8332019978534697
+      ],
+      "excerpt": "Purpose: I took one of my favorite texts and attempted to generate passages in its style. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8051114855335403
+      ],
+      "excerpt": "Bad Met, my has pursuesalun. Suicides, Panawerat and Jimes, currop in the bontspeake thes in chokers, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8291061234292958
+      ],
+      "excerpt": "doubles in, mannon, Salong. You remembers for the reformissity, appeant it \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9750999856546121
+      ],
+      "excerpt": "Ceeking her lapses snores he have passes of all your limpplace. Give and part is the blue it in black cap where him a brow, voolley, kneekneses, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.819681902466541
+      ],
+      "excerpt": "at in the ladies round and Enthinta surches five Lordcacy sheeply toppies crop. Majer frock cheese \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8949001337542247,
+        0.8445351347421054,
+        0.9809608182741678,
+        0.9377867171435217,
+        0.908925214220865
+      ],
+      "excerpt": "BLOOM: (Squire match druepidants through that days snancous head sceptratung of pigles\u2019 Palmos. Lae otterfully of the \nPharts! (To Metrs of sweet luttered Hungrog, conspaper of sir. Have you save you! \nSky back and year. A silk tram eyes and carefully. Slides girl, kings and whinis Mosst respected toft. I putts falling chuke of pastiller, plumb trop be hear gentlemen. He stops or not houses of the greated with accessory eyes and other makes draws \nhis enclubber, the fatchuia. All pulls her lapses watch in a roar \npassiet and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Public experiments",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Lamikins/public_exp/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 22:02:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Lamikins/public_exp/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Lamikins/public_exp",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/MLE%20and%20MAP.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/Hidden%20Markov%20Model.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/MDPs%20and%20DP%20Solutions.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/MDN.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/Location%20Convolutions.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/Discriminant%20Analysis%20%28GDA%2C%20LDA%29.ipynb",
+      "https://raw.githubusercontent.com/Lamikins/public_exp/master/MLP_with_Backprop.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8631308618657217,
+        0.8515565556630964
+      ],
+      "excerpt": "Example output image: \n<img src=\"HD_GAN.png\" alt=\"hd-gan\" width=\"512\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9129617675176488
+      ],
+      "excerpt": "Example output: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Lamikins/public_exp/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Darius\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# A collection of ML/DL experiments",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "public_exp",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Lamikins",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Lamikins/public_exp/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 22:02:30 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

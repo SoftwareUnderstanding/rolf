@@ -1,0 +1,219 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "I would like to thank the original authors for their work. Also, I thank AJ Piergiovanni for sharing his Multigrid implementation.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this work useful, please consider citing the original authors:\n```\n@inproceedings{feichtenhofer2020x3d,\n  title={X3D: Expanding Architectures for Efficient Video Recognition},\n  author={Feichtenhofer, Christoph},\n  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},\n  pages={203--213},\n  year={2020}\n}\n\n@inproceedings{wu2020multigrid,\n  title={A Multigrid Method for Efficiently Training Video Models},\n  author={Wu, Chao-Yuan and Girshick, Ross and He, Kaiming and Feichtenhofer, Christoph and Krahenbuhl, Philipp},\n  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},\n  pages={153--162},\n  year={2020}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{wu2020multigrid,\n  title={A Multigrid Method for Efficiently Training Video Models},\n  author={Wu, Chao-Yuan and Girshick, Ross and He, Kaiming and Feichtenhofer, Christoph and Krahenbuhl, Philipp},\n  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},\n  pages={153--162},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{feichtenhofer2020x3d,\n  title={X3D: Expanding Architectures for Efficient Video Recognition},\n  author={Feichtenhofer, Christoph},\n  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},\n  pages={203--213},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkahatapitiya/X3D-Multigrid",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-17T00:20:34Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T07:29:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<img src=\"./fig/fig.png\" width=\"1000\">\n\nX3D is an efficient video architecture, searched/optimized for learning video representations. Here, the author expands a tiny base network along axes: space and time (of the input), width and depth (of the network), optimizing for the performace at a given complexity (params/FLOPs). It further relies on depthwise-separable 3D convolutions [[1]](https://arxiv.org/pdf/1704.04861.pdf), inverted-bottlenecks in residual blocks [[2]](https://openaccess.thecvf.com/content_cvpr_2018/papers/Sandler_MobileNetV2_Inverted_Residuals_CVPR_2018_paper.pdf), squeeze-and-excitation blocks [[3]](https://openaccess.thecvf.com/content_cvpr_2018/papers/Hu_Squeeze-and-Excitation_Networks_CVPR_2018_paper.pdf), swish (soft) activations [[4]](https://arxiv.org/pdf/1710.05941;%20http://arxiv.org/abs/1710.05941.pdf) and sparse clip sampling (at inference) to improve its efficiency.\n\nMultigrid training is a mechanism to train video architectures efficiently. Instead of using a fixed batch size for training, this method proposes to use varying batch sizes in a defined schedule, yet keeping the computational budget approximately unchaged by keeping `batch x time x height x width` a constant. Hence, this follows a coarse-to-fine training process by having lower spatio-temporal resolutions at higher batch sizes and vice-versa. In contrast to conventioanl training with a fixed batch size, Multigrid training benefit from 'seeing' more inputs during a training schedule at approximately the same computaional budget.\n\nOur implementaion achieves 62.62% Top-1 accuracy (3-view) on Kinetics-400 when trained for ~200k iterations from scratch (a 4x shorter schedule compared to the original, when adjusted with the linear scaling rule [[5]](https://arxiv.org/pdf/1706.02677.pdf%5B3%5D%20ImageNet)), which takes only ~2.8 days on 4 Titan RTX GPUs. This is much faster than previous Kinetics-400 training schedules on a single machine. Longer schedules can achieve SOTA results. We port and include the weights trained by FAIR for a longer schedule on 128 GPUs, which achieves 71.48% Top-1 accuracy (3-view) on Kinetics-400. This can be used for fine-tuning on other datasets. For instance, we can train on Charades classification (35.01% mAP) and localization (17.71% mAP) within a few hours on 2 Titan RTX GPUs. All models and training logs are included in the repository. \n\nNote: the Kinetics-400 dataset that we trained on contains ~220k (~240k) training and ~17k (~20k) validation clips compared to (original dataset) due to availability. \n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch implementation of X3D models with Multigrid training.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkahatapitiya/X3D-Multigrid/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Thu, 23 Dec 2021 15:11:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kkahatapitiya/X3D-Multigrid/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kkahatapitiya/X3D-Multigrid",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8607631487345254
+      ],
+      "excerpt": "3D depthwise-separable convolutions are slow in current PyTorch releases as identified by FAIR. Make sure to build from source with this fix. Only a few files are changed, this can be manually edited easily in the version of the source you use. In our setting, this fix reduced the training time from ~4 days to ~2.8 days. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kkahatapitiya/X3D-Multigrid/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Kumara Kahatapitiya\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch Implementation of X3D with Multigrid Training",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "X3D-Multigrid",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kkahatapitiya",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkahatapitiya/X3D-Multigrid/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3.7.6\n- PyTorch 1.7.0 (built from source, with [this fix](https://github.com/pytorch/pytorch/pull/40801)). This issue is fixed in PyTorch >= 1.9 releases.\n- torchvision 0.8.0 (built from source)\n- accimage 0.1.1\n- pkbar 0.5\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 57,
+      "date": "Thu, 23 Dec 2021 15:11:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "x3d",
+      "multigrid",
+      "efficient-video-architectures",
+      "efficient-training"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Edit the Dataset directories to fit yours, adjust the learning rate and the schedule, and,\n\n- Use `python train_x3d_kinetics_multigrid.py -gpu 0,1,2,3` for training on Kinetics-400.\n- Use `python train_x3d_charades.py -gpu 0,1` for training on Charades classification.\n- Use `python train_x3d_charades_loc.py -gpu 0,1` for training on Charades localization.\n\nCharades dataset can be found [here](http://vuchallenge.org/charades.html). Kinetics-400 data is only partially available on YouTube now. Use annotations [here](https://github.com/Showmax/kinetics-downloader). I would recommend [this](https://github.com/Showmax/kinetics-downloader) repo for downloading Kinetics data. If you want access to our Kinetics-400 data (~220k training and ~17k validation), please drop me an email.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1409.1556\n8. https://www.quora.com/What-is-the-VGG-neural-network\n9. https://gist.github.com/baraldilorenzo/07d7802847aaad0a35d3\n10. https://github.com/aaronphilip/Image-Segmentation-On-Faces"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Ulman, Vladim\u00edr & Ma\u0161ka, Martin (2017). An Objective Comparison of Cell Tracking Algorithms. Nature Methods. 14. 10.1038/nmeth.4473\n2. O. Ronneberger, P. Fischer, T. Brox, U-net: Convolutional networks for biomedical image segmentation, 2015.\n3. A fully convolutional network for weed mapping of unmanned aerial vehicle (UAV) imagery, Huasheng Huang, Jizhong Deng, Yubin Lan , Aqing Yang, Xiaoling Deng, Lei Zhang\n4. [Learning how to train U-Net model by Sukriti Paul](https://medium.com/coinmonks/learn-how-to-train-u-net-on-your-dataset-8e3f89fbd623)\n5. [U-Net by Zhixuhao](https://github.com/zhixuhao/unet)\n6. [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](https://papers.nips.cc/paper/5955-convolutional-lstm-network-a-machine-learning-approach-for-precipitation-nowcasting.pdf)\n7. https://arxiv.org/abs/1409.1556\n8. https://www.quora.com/What-is-the-VGG-neural-network\n9. https://gist.github.com/baraldilorenzo/07d7802847aaad0a35d3\n10. https://github.com/aaronphilip/Image-Segmentation-On-Faces\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "10. Leaky Relu \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuvrajarora/CSCI5922_Project",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-13T16:49:19Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-08T05:54:33Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.96230263825755,
+        0.9882454656373815,
+        0.9506295384299593,
+        0.9730545118704935,
+        0.9590164866030568,
+        0.9957382983857141,
+        0.9064624246572819
+      ],
+      "excerpt": "Neural Networks and Deep Learning Course Project - CSCI 5922 \nThe goal of our project was to build Neural Network Models to segment moving cells in a real 2D time-lapse microscopy videos of cells along with computer generated 2D video sequences simulating whole cells moving in realistic environments. The evaluation method used for the models is segmentation accuracy. \nFrom the vast dataset available in the Cell Tracking Challenge, we chose the Fluo-N2DH-SIM+ dataset. This dataset consists of simulated nuclei of HL60 cells stained with Hoescht. The video is recorded over 29 minutes to study the cell dynamics of various cells. The benchmark for the segmentation evaluation methodology is 80.7 % for this dataset. \nU-Net is built on Fully Convolutional Network. It is modified and extended in a way such that it works with very few training images and yields more precise segmentation. The network aims to classify each pixel. This network takes a raw input image and outputs a segmentation mask. A class label is assigned to each pixel. This architecture consists of two main parts: Contraction Path and Expansion Path. We end up creating multiple feature maps and the network is able to learn complex patterns with these feature maps. The Contraction path helps to localize high resolution features and the Expansion Path increases the resolution of the output by upsampling and combining features from the contraction path. \nThis network incorporates Convolution LSTM (C-LSTM) Block into the U-Net architecture. This network allows considering past cell appearances at multiple scales by holding their compact representations in the C-LSTM memory units. Applying the CLSTM on multiple scales is essential for cell microscopy sequences since the frame to frame differences might be at different scales, depending on cells' dynamics. The network is fully convolutional and, therefore, can be used with any image size during both training and testing. \nVGG Net shows a improvement on the classification accuracy and generalization capability on our model. Along with that using skip and Relu  allows us to improve the performance of the models and segment cells properly to view and  refine the spatial precision of the output. \nVGGnet developed by visual geometry group with skip connections consists of 16 conv layers and 1 skip connection. VGG-16 consists of three additional 1x1 conv layers which helps us in out problem to clearly see the segmentation and masking. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9392332896949888,
+        0.9804126180259255,
+        0.9745598309961442
+      ],
+      "excerpt": "Along with that a skip connection from the first layer to the layer where the convolution has finished and before usage of skip connection improves the accuracy and helps to see the information more clearly. \nWe make use of the skip as for our problem we are doing downsampling and then upsampling later but the input to the upsample is a lower resolution picture. \nThe spatial precision is lost during the downsampling and hence to compensate the resolution loss a skip architecture combines the coarse layer with the shallow layer to refine the spatial precision of the output. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9396181711380777,
+        0.9396181711380777,
+        0.9396181711380777,
+        0.9396181711380777,
+        0.9396181711380777,
+        0.9319708861235405,
+        0.9917159896299618
+      ],
+      "excerpt": "1. 2 Conv2d with 64 filters \n2. 2 Conv2d with 128 filters \n3. 3 Conv2d with 256 filters \n4. 3 Conv2d with 512 filters \n5. 2 Conv2d with 4096 filters \n6. 4 MaxPool with stride as (2,2) \n7. Densing to 1x1 with sigmoid \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8180869761324617
+      ],
+      "excerpt": "The other things that we tried were: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891674889228715
+      ],
+      "excerpt": "Mostly used for sequences. In this we go two ways from 0 to N and from N to 0 and combine the outputs via summation. Exciting work, but ran into problems and all problems of these were on sequences. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Neural Networks and Deep Learning Course Project",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuvrajarora/CSCI5922_Project/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 03:42:19 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuvrajarora/CSCI5922_Project/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuvrajarora/CSCI5922_Project",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/yuvrajarora/CSCI5922_Project/master/Unet-Model/Unet-Model.ipynb",
+      "https://raw.githubusercontent.com/yuvrajarora/CSCI5922_Project/master/ConvLstm2D/Conv2DLSTM.ipynb",
+      "https://raw.githubusercontent.com/yuvrajarora/CSCI5922_Project/master/ConvLstm2D/Conv2DLSTM_new.ipynb",
+      "https://raw.githubusercontent.com/yuvrajarora/CSCI5922_Project/master/VGGnet/VGGNet.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuvrajarora/CSCI5922_Project/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CSCI5922_Project",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CSCI5922_Project",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuvrajarora",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuvrajarora/CSCI5922_Project/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 03:42:19 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

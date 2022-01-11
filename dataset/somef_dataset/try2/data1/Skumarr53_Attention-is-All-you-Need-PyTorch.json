@@ -1,0 +1,348 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1706.03762"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [Attention Is All You Need - Paper (arxiv)](https://arxiv.org/abs/1706.03762)\n\n2. [**harvardnlp** - The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)\n2. [Fastai - Introduction to Transformer](https://www.youtube.com/watch?v=KzfyftiH7R8&list=PLtmWHNX-gukKocXQOkQjuVxglSDYWsSh9&index=18)\n\n3. [Transformer (Attention is all you need) - Minsuk Heo \ud5c8\ubbfc\uc11d](https://www.youtube.com/watch?v=z1xs9jdZnuY&t=182s)\n\n</br>\n\n------\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8853314653160089
+      ],
+      "excerpt": "After computing,  attention scores would look like this \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8373058090969138
+      ],
+      "excerpt": "src_vocab_size - source language vocabulary size \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "<center><i><b> n_baches vs loss</b></i></center><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "5 | 0.813250 | 1.529009 | 0.734520 | 0.553977 | 01:37 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Skumarr53/Attention-is-All-you-Need-PyTorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-27T16:08:29Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-18T14:05:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.926440991295706,
+        0.8806344734553792
+      ],
+      "excerpt": "Fr2En_MachineTranslation_final.ipynb - Notebook with all the preprocessing, data prepartion, and model building training steps. \ntransformer/model.py - Pytorch implementation of BERT model architecture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9901726166887507,
+        0.873828621763487,
+        0.951484700126316,
+        0.9231779822047136,
+        0.9844188355430127,
+        0.9844398068407069,
+        0.9535342721635429,
+        0.9908015414333674,
+        0.900824231979763,
+        0.9222648897030922,
+        0.9907962296861199,
+        0.9973637277556017
+      ],
+      "excerpt": "A basic Seq2seq model consists of an encoder and decoder. The model takes input sentence with T tokens into the encoder and encodes information one word at a time and outputs a hidden state at every step that stores the sentence context till that point and passed on for encoding the next word. So the final hidden state (E[T]) at the end of the sentence stores the context of the entire sentence. \nThis final hidden state becomes the input for a decoder that produces translated sentence word by word. At each step, the decoder outputs a word and a hidden state(D[t]) which will be used for generating the next word. \nBut traditional RNN suffers from the problem of vanishing gradients, making it ineffective for learning the context for long sequences. \nRNN model with Attention differs in the following things: \nInstead of the last hidden state, all the states (E[0], E[1]\u2026, E[T]) at every step along with the final context vector (E[T]) are passed into the decoder. The idea here is each hidden state is majorly associated with a certain word in the input sentence. using all the hidden state gives a better translation. \nAt every time step in the Decoding phase, scores are computed for every hidden state (E[t]) that stores how relevant is a particular hidden state in predicting a word at the current step(t). In this way,  more importance is given to the hidden state that is relevant in predicting the current word. \nex: when predicting the 5th word more importance must be given to the 4th, 5th, or 6th input hidden states (depends on the language structure to be translated). \nThis method is a significant improvement over traditional RNN. But RNNs lack a parallelization capability (RNN have wait till completion of t-1 steps to process at 't'th step) which makes it computationally efficient especially when dealing with a huge corpus of text. \nThe architecture looks complicated, but do not worry because it's not. It is just different from the previous ones. It can be parallelized, unlike Attention And/or RNN as it doesn't wait till all previous words are processed or encoded in the context vector. \nThe Transformer architecture does not process data sequentially. So, This layer is used to incorporate relative position information of words in the sentence. \nIn the transformer, there is no such concept as a hidden state. The transformer uses something called Self-attention that captures the association of a certain word with other words in the input sentence. \nTo explain in simple words, In the figure above the word 'it' associated with the word 'The' and 'animal' more than other words because the model has learned that 'it' is referred to 'animal' in this context. It is easy for us to tell this because we know 'street' won't get tired (as it doesn't move). But for the transformer, someone has to tell to put more focus on the word 'animal'. Self-attention does that. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9268835791878568,
+        0.9722471439374093,
+        0.9009726121451813
+      ],
+      "excerpt": "This is achieved by three vectors Query, Key, and Value which are obtained by multiplying input word embedding with the unknown weight matrices Wq, Wk, Wv (to be estimated) \nWq, Wk, Wv is parameter matrices to be learned to get q, k, and v upon multiplying with input embeddings \nT - dimension of the key \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9858874586977343
+      ],
+      "excerpt": "Here the Score column is the result of the dot product of query and key. So, another way of interpreting this is a query word looking for similar words (not strictly though as query and key are not the same). Therefore words with high scores have a high association. Softmax pushes scores value between 0 and 1 (think as weights). So, the final column is the result of the weighted average of value vectors. We can see how attention screens out nonrelevant inputs for encoding each word. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8697098037194526
+      ],
+      "excerpt": "Till now we have seen single head attention. we can also use multiple sets of q, k, v for each word for computing individual Attention scores providing greater flexibility in understanding context, and Finally resulting matrices are concatenated as shown below. This is called Multi-head attention. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9444601036573472,
+        0.9772058799091276
+      ],
+      "excerpt": "The encoder component needs to look at each word in the input sentence to understand the context but while decoding, let say predicting 'i'th, it should be only be allowed to look at previous i-1 words. To prevent this, Inputs to the decoder are passed through the Masked Multi-head Attention that prevents future words to be part of the attention. \nThe decoder has to relay on Encoder input for the understanding context of the complete sentence. It is achieved by allowing the decoder to query the encoded embeddings (key and value) that stores both positional and contextual information. Since the query changes at every step, so does Attention telling which words to focus on input words to predict the current word. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9841449265024266,
+        0.9681641022220306
+      ],
+      "excerpt": "Positional Encoding: As the Transformer architecture does not have components to represent the sequential nature of the data. This layer is used to inject relative positions of the word in the sequence. \nSelf-attention: word embedding is broke down into query, key, and value of the same dimension. During the training phase, these matrices learn how much other words value it. query queries other words and get feedback as key which then dot produced with value to get the score. This is performed against all other words  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8788097518525534,
+        0.887950049738232,
+        0.9716753672530031,
+        0.9744473616401775,
+        0.8873193234190057
+      ],
+      "excerpt": "Masked Self-Attention: Encoder component needs to look at each word in the input sentence to understand the context but while decoding, let say predicting 'i'th,  it should be only be allowed to look at previous i-1 words, otherwise, it would be cheating. It is done by masking. \nEncoder-Decoder Attention: Decoder has to relay on Encoder input for the understanding context of the complete sentence. It is achieved by allowing decoder query the encoded embeddings (key and value) that stores both positional and contextual information. Decoder predicts based on this embedding. \nEncoder-Decoder Stack: One thing to notice in the Transformer network is the dimensions of the encoded embeddings (output of encoder) remains the same. In other words, it can be said that Encoded embedding is an improvised representation of original data. It can still be improved by stacking similar layer in sequence. \nThe Machine translation task has been implemented using BERT transformer architecture, which stands for Bidirectional Encoder Representations from Transformers. BERT is designed to pre-train deep bidirectional representations from the unlabeled text by jointly conditioning on both left and right context in all layers. Hence, It is suitable for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. \nDataset consists of around 30000 pairs of french queries and their translation in English.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8950001701384368
+      ],
+      "excerpt": "\u00c0 votre avis, pourquoi est-il important que les gouvernements g\u00e8rent les terres et les rivi\u00e8res? | What type of activities threaten the animals or plants in a national park? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8497144110161112
+      ],
+      "excerpt": "d_k - dimension of key vector  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8335384480526982
+      ],
+      "excerpt": "n_heads - No of units in the Multihead attention \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8271718622612282,
+        0.9913577906227963
+      ],
+      "excerpt": "5e-4 is the value chosen for learning rate \nThe model is trained using fit_one_cycle method which is the implementation of popular one cycle policy technique.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Repo has PyTorch implementation \"Attention is All you Need - Transformers\" paper for Machine Translation from French queries to English.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Skumarr53/Attention-is-All-you-Need-PyTorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Sat, 25 Dec 2021 03:27:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Skumarr53/Attention-is-All-you-Need-PyTorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Skumarr53/Attention-is-All-you-Need-PyTorch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Skumarr53/Attention-is-All-you-Need-PyTorch/master/Fr2En_MachineTranslation_final.ipynb",
+      "https://raw.githubusercontent.com/Skumarr53/Attention-is-All-you-Need-PyTorch/master/Fr2En_MachineTranslation_experiment.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "Training (Fastai) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968,
+        0.8828665034782968
+      ],
+      "excerpt": "3 | 1.384582 | 1.713956 | 0.702641 | 0.511958 | 01:31 \n4 | 1.127888 | 1.588813 | 0.723198 | 0.536749 | 01:33 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80434838082658,
+        0.8828665034782968,
+        0.8828665034782968,
+        0.80434838082658,
+        0.8229668073129937,
+        0.894315460894216,
+        0.8876922083224287,
+        0.8527801769417388
+      ],
+      "excerpt": "6 | 0.497641 | 1.541128 | 0.743082 | 0.570197 | 01:32 \n7 | 0.262595 | 1.580004 | 0.747232 | 0.581183 | 01:31 \n8 | 0.140268 | 1.620333 | 0.750187 | 0.587652 | 01:31 \n9 | 0.086930 | 1.639049 | 0.750771 | 0.589219 | 01:32 \n<img target=\"_blank\" src=\"Snapshots/PyTorch.png\" width=250> \n<img target=\"_blank\" src=\"Snapshots/fastai.jpg\" width=130> \n<img target=\"_blank\" src=\"Snapshots/Bert.jpg\" width=120> \n<img target=\"_blank\" src=\"Snapshots/streamlit.png\" width=150> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Skumarr53/Attention-is-All-you-Need-PyTorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Machine Translation French to English:",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Attention-is-All-you-Need-PyTorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Skumarr53",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Skumarr53/Attention-is-All-you-Need-PyTorch/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 42,
+      "date": "Sat, 25 Dec 2021 03:27:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pytorch",
+      "fastai",
+      "transformer",
+      "machine-translation",
+      "encoder-decoder",
+      "bert-model",
+      "streamlit"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](Snapshots/Fr2En_translate.gif)\n<p align=\"center\"><i>Demo of working App developed using Streamlit</i></p>\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1806.06259"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{Peters:2018,\n  author={Peters, Matthew E. and  Neumann, Mark and Iyyer, Mohit and Gardner, Matt and Clark, Christopher and Lee, Kenton and Zettlemoyer, Luke},\n  title={Deep contextualized word representations},\n  booktitle={Proc. of NAACL},\n  year={2018}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weixsong/bilm-tf",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-10T07:40:47Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-11T11:09:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9741856196459355,
+        0.9438048120136387,
+        0.9528848989008001
+      ],
+      "excerpt": "This is just a fork of ELMo Tensorflow Implementation, the original repo is too old \n, so I update some tensorflow api to make it runnable with tf1.15, and reformat the code. \nTensorflow implementation of the pretrained biLM used to compute ELMo \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8771435094529825,
+        0.9157722759822122
+      ],
+      "excerpt": "This repository supports both training biLMs and using pre-trained models for prediction. \nWe also have a pytorch implementation available in AllenNLP. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.866003704354961,
+        0.9198589195997369,
+        0.9542128688055068,
+        0.8075220633754446,
+        0.9932926532033451
+      ],
+      "excerpt": "There are three ways to integrate ELMo representations into a downstream task, depending on your use case. \nCompute representations on the fly from raw text using character input.  This is the most general method and will handle any input text.  It is also the most computationally expensive. \nPrecompute and cache the context independent token representations, then compute context dependent representations using the biLSTMs for input data.  This method is less computationally expensive then #1, but is only applicable with a fixed, prescribed vocabulary. \nPrecompute the representations for your entire dataset and save to a file. \nWe have used all of these methods in the past for various use cases.  #1 is necessary for evaluating at test time on unseen data (e.g. public SQuAD leaderboard). #2 is a good compromise for large datasets where the size of the file in #3 is unfeasible (SNLI, SQuAD).  #3 is a good choice for smaller datasets or in cases where you'd like to use ELMo in other frameworks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8272063798640431
+      ],
+      "excerpt": "First, create a Batcher (or TokenBatcher for #2) to translate tokenized strings to numpy arrays of character (or token) ids. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9868987715086837
+      ],
+      "excerpt": "Each tokenized sentence is a list of str, with a batch of sentences \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8049920102228906
+      ],
+      "excerpt": "The Batcher packs these into a shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9491673341151053
+      ],
+      "excerpt": "ids, padding on the right with 0 ids for sentences less then the maximum \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9639044980219759
+      ],
+      "excerpt": "begin and end of sentence ids added by the Batcher. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.875292673507421
+      ],
+      "excerpt": "After running inference with the batch, the return biLM embeddings are \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8938111906337579
+      ],
+      "excerpt": "The Batcher takes a vocabulary file as input for efficency.  This is a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9208585683606776,
+        0.9582566678878015
+      ],
+      "excerpt": "Each token in the vocabulary is cached as the appropriate 50 character id \nsequence once.  Since the model is completely character based, tokens not in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8886594033824691
+      ],
+      "excerpt": "decrease in run time.  It is recommended to always include the special \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9628314403251664
+      ],
+      "excerpt": "To speed up model inference with a fixed, specified vocabulary, it is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9422934776930944,
+        0.9011157004433531,
+        0.8674942843974324
+      ],
+      "excerpt": "support falling back to character inputs for out-of-vocabulary words, \nso this should only be used when the biLM is used to compute embeddings \nfor input with a fixed, defined vocabulary. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.829011870852258
+      ],
+      "excerpt": "First create a vocabulary file with all of the unique tokens in your \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8141809972811371
+      ],
+      "excerpt": "Run dump_token_embeddings with the full model to write the token \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9810706751001248
+      ],
+      "excerpt": "2 to the BidirectonalLanguageModel constructor. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9051634445161393
+      ],
+      "excerpt": "Test (compute the perplexity of) the biLM on heldout data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8958574903989839
+      ],
+      "excerpt": "See the instructions above for using the output from Step #4 in downstream models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "    --save_dir /output_path/to/checkpoint \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "    --save_dir /output_path/to/checkpoint \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "    --save_dir /output_path/to/checkpoint \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8813536151551585
+      ],
+      "excerpt": "The tensorflow checkpoint is available by downloading these files: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8206995798282697,
+        0.9173136134768065
+      ],
+      "excerpt": "Then prepare the dataset as described in the section \"Training a biLM on a new corpus\", with the exception that we will use the existing vocabulary file instead of creating a new one.  Finally, use the script bin/restart.py to restart training with the existing checkpoint on the new dataset. \nFor small datasets (e.g. < 10 million tokens) we only recommend tuning for a small number of epochs and monitoring the perplexity on a heldout set, otherwise the model will overfit the small dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9502555290507146,
+        0.803740764917802
+      ],
+      "excerpt": "At the model input, all text used the full character based representation, \nincluding tokens outside the vocab. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9315406057404781
+      ],
+      "excerpt": "The model was trained with a fixed size window of 20 tokens. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.865859286634328,
+        0.8272293673089143,
+        0.9080146464507939
+      ],
+      "excerpt": "Partial sentences and the LSTM states were carried over from batch to batch so that the language model could use information across batches for context, but backpropogation was broken at each batch boundary. \nThe number of gradient updates during training is determined by: \nthe number of tokens in the training data (n_train_tokens) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8154104550603786
+      ],
+      "excerpt": "the number of epochs (n_epochs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9979209023617471,
+        0.8845829758318847
+      ],
+      "excerpt": "The UnicodeCharsVocabulary that converts token strings to lists of character \nids always uses a fixed number of character embeddings of n_characters=261, so always \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8302053597840343,
+        0.897654705623874,
+        0.8939783573685313
+      ],
+      "excerpt": "However, for prediction, we ensure each sentence is fully contained in a single batch, \nand as a result pad sentences of different lengths with a special padding id. \nThis occurs in the Batcher see here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This is just a fork of https://github.com/allenai/bilm-tf, make it compatible with tf1.15",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weixsong/bilm-tf/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The below warning can be safely ignored:\n```\n2018-08-24 13:04:08,779 : WARNING : Error encountered when serializing lstm_output_embeddings.\nType is unsupported, or the types of the items don't match field type in CollectionDef.\n'list' object has no attribute 'name'\n```\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 08:40:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/weixsong/bilm-tf/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weixsong/bilm-tf",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/weixsong/bilm-tf/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/weixsong/bilm-tf/master/run_tests_before_shell.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To train and evaluate a biLM, you need to provide:\n\n* a vocabulary file\n* a set of training files\n* a set of heldout files\n\nThe vocabulary file is a a text file with one token per line.  It must also include the special tokens `<S>`, `</S>` and `<UNK>` (case sensitive) in the file.\n\n<i>IMPORTANT</i>: the vocabulary file should be sorted in descending order by token count in your training data.  The first three lines should be the special tokens (`<S>`, `</S>` and `<UNK>`), then the most common token in the training data, ending with the least common token.\n\n<i>NOTE</i>: the vocabulary file used in training may differ from the one use for prediction.\n\nThe training data should be randomly split into many training files,\neach containing one slice of the data.  Each file contains pre-tokenized and\nwhite space separated text, one sentence per line.\nDon't include the `<S>` or `</S>` tokens in your training data.\n\nAll tokenization/normalization is done before training a model, so both\nthe vocabulary file and training files should include normalized tokens.\nAs the default settings use a fully character based token representation, in general we do not recommend any normalization other then tokenization.\n\nFinally, reserve a small amount of the training data as heldout data for evaluating the trained biLM.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To run the image, you must use nvidia-docker, because this repository\nrequires GPUs.\n```\nsudo nvidia-docker run -t allennlp/bilm-tf:training-gpu\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install python version 3.5 or later, tensorflow version 1.2 and h5py:\n\n```\npip install tensorflow-gpu==1.2 h5py\npython setup.py install\n```\n\nEnsure the tests pass in your environment by running:\n```\npython -m unittest discover tests/\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9102983411316715
+      ],
+      "excerpt": "You may also find it easier to use the version provided in Tensorflow Hub if you just like to make predictions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9344461620174119
+      ],
+      "excerpt": "See the instructions above for using the output from Step #4 in downstream models. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8238820987710572
+      ],
+      "excerpt": "Each model is specified with two separate files, a JSON formatted \"options\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8448180795117878
+      ],
+      "excerpt": "Then, load the pretrained ELMo model (class BidirectionalLanguageModel). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8583810947150543
+      ],
+      "excerpt": "a numpy array with shape (n_sentences, 3, max_sentence_length, 1024), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9107890269974542
+      ],
+      "excerpt": "text file, with one token per line, separated by newlines (\\n). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885558803720427
+      ],
+      "excerpt": "See usage_character.py for a detailed usage example. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8271959063257739
+      ],
+      "excerpt": "Run dump_token_embeddings with the full model to write the token \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885558803720427,
+        0.8795940627374299,
+        0.906057740030695
+      ],
+      "excerpt": "See usage_token.py for a detailed usage example. \nTo take this option, create a text file with your tokenized dataset.  Each line is one tokenized sentence (whitespace separated).  Then use dump_bilm_embeddings. \nThe output file is hdf5 format.  Each sentence in the input data is stored as a dataset with key str(sentence_id) where sentence_id is the line number in the dataset file (indexed from 0). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8141624351591542
+      ],
+      "excerpt": "See usage_cached.py for a detailed example. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8330194574965684
+      ],
+      "excerpt": "Train the biLM. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8062093860831775
+      ],
+      "excerpt": "Write out the weights from the trained biLM to a hdf5 file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8335859929130798
+      ],
+      "excerpt": "The hyperparameters used to train the ELMo model can be found in bin/train_elmo.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.907178545292082,
+        0.886000611540511
+      ],
+      "excerpt": "To train a new model with the same hyperparameters, first download the training data from the 1 Billion Word Benchmark. \nThen download the vocabulary file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968045850405657
+      ],
+      "excerpt": "python bin/train_elmo.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8457246576617803
+      ],
+      "excerpt": "Use bin/run_test.py to evaluate a trained model, e.g. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968045850405657
+      ],
+      "excerpt": "python bin/run_test.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8533933533039592
+      ],
+      "excerpt": "First, create an options.json file for the newly trained model.  To do so, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8117007451991057,
+        0.8968045850405657
+      ],
+      "excerpt": "Then Run: \npython bin/dump_weights.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8798569155664966
+      ],
+      "excerpt": "First download the checkpoint files above. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8498919431925832
+      ],
+      "excerpt": "The script bin/train_elmo.py has hyperparameters for training the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8406670390644805
+      ],
+      "excerpt": "Be sure to set these values for your particular dataset in bin/train_elmo.py. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/weixsong/bilm-tf/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright {yyyy} {name of copyright owner}\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weso",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bilm-tf",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weixsong",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weixsong/bilm-tf/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "As a result of the training method (see above), the LSTMs are stateful, and carry their state forward from batch to batch.\nConsequently, this introduces a small amount of non-determinism, expecially\nfor the first two batches.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 08:40:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "As a result of the training method (see above), the LSTMs are stateful, and carry their state forward from batch to batch.\nConsequently, this introduces a small amount of non-determinism, expecially\nfor the first two batches.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Simple methods like average and max pooling of the word level ELMo representations across sentences works well, often outperforming supervised methods on benchmark datasets.\nSee \"Evaluation of sentence embeddings in downstream and linguistic probing tasks\", Perone et al, 2018 [arxiv link](https://arxiv.org/abs/1806.06259).\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

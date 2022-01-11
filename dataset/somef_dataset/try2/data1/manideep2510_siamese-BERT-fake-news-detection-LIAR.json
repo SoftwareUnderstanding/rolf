@@ -1,0 +1,324 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1706.03762",
+      "https://arxiv.org/abs/1810.04805"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [Keras: The Python Deep Learning library](https://keras.io)\n2. [Keras Tutorial on Glove embedding](https://keras.io/examples/pretrained_word_embeddings/)\n3. [A library of state-of-the-art pretrained models for Natural Language Processing](https://github.com/huggingface/pytorch-transformers)\n4. [Pytorch Deep Learning framework](https://github.com/pytorch/pytorch)\n5. [Pytorch BERT usage example](https://github.com/sugi-chan/custom_bert_pipeline)\n6. [Attention Is All You Need](https://arxiv.org/abs/1706.03762)\n7. [Blog on attention networks in Keras](https://androidkt.com/text-classification-using-attention-mechanism-in-keras/)\n8. [BERT: Pre-training of Deep Bidirectional Transformers for Language\nUnderstanding](https://arxiv.org/abs/1810.04805)\n9. [Example on Siamese networks in pytorch](https://innovationincubator.com/siamese-neural-network-with-pytorch-code-example/)\n10. [LIAR-PLUS dataset](https://github.com/Tariq60/LIAR-PLUS)\n(https://aclweb.org/anthology/W18-5513) \n11. [GloVe: Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manideep2510/siamese-BERT-fake-news-detection-LIAR",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-12T16:17:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T07:39:44Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8817253234400652
+      ],
+      "excerpt": "Fake_News_classification.pdf - Explanation about the architectures and techniques used \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9783957738363693,
+        0.9035566550114803,
+        0.9685191566869805
+      ],
+      "excerpt": "As presented in the dataset paper, where they have employed \u201cenhanced claim/statement representation that captures additional information shown to be useful such as hedging\u201d but I haven't done anything like they mentioned in the paper because I wanted to check whether the state of the art language modeling algorithm can do good on a very complex classification task like the fake news classification. From my experiments I found that BERT can be finetuned to work on classification to some extent. \nI have experimented with different training strategies with BERT as the base architecture which I have fine tuned for text classification (In this case fake news classification). \nI chose BERT as the base architecture because state of the art performance in Language Translation and Language Modeling tasks. I thought I would be a good idea to leverage its pretrained weights as finetine it to the task of text classification. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9518624646042007
+      ],
+      "excerpt": "Below are the three training strategies and Architectures used to get the desired results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8624089458437569,
+        0.8715022281463889
+      ],
+      "excerpt": "Here only the news statements are used for training the network. No metadata or the justification data has been used. \nThrough this, I was able to achieve around 60% accuracy on the binary classification task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9380676397430523,
+        0.9247893696810147,
+        0.8797742850644867
+      ],
+      "excerpt": "Built a siamese network with two branches with each branch containing BERT as the base models. \nInput of the first branch will be the tokens corresponding to the news statements on which we need to predict the labels. Input of the second branch will be the tokens corresponding to the justification of the particular news statement passed to the first branch. \nThe output of each BERT layer branch will be a 1D tensor of shape (768). As we have two branches we will get two 1D tensors of shape (768). Now these two outputs are concatenated and passed through a Linear layer(fully connected layer), from this we get two logits and a \u2018softmax\u2019 activation is applied to get the output probabilities. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9367410369907033,
+        0.9591398455289876,
+        0.9902726957533479
+      ],
+      "excerpt": "This approach is used particularly to leverage the additional information we have, In this case the \u2018justifications\u2019. \nThis method gave a binary classification accuracy of 65.4%. \nIn case of 6 classification, this method achieved an accuracy of 23.6% which is improved a lot in the next method. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9445051589650043,
+        0.9514736847077927
+      ],
+      "excerpt": "Here the architecture is similar to the one in the previous case, but here I have added one bore branch with BERT as the base network to the siamese network in the previous case making this a Triple Branch Siamese network. The input to this additional branch will be the remaining meta data available like speaker, source, affiliation, etc. apart from the justification. \nThe second change/addition here is taking into account the authenticity of the publisher.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8575162799459585
+      ],
+      "excerpt": "So the Credit score is calculated as, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8152461899580364,
+        0.9645590975121195,
+        0.953975647889839,
+        0.9979396551541473
+      ],
+      "excerpt": "The credit score tells us about how false or fake the news published by that author or the source is on average. \nThis credit score is multiplied to the tensor resulting from the concatenation of the output tensors from all three branches of the siamese network. And then multiplied 1D tensor is passed through a fully connected layers to get two logits a outputs. \nThe reason why I used this credit score is to sort of increase the relative difference between the output activations between the fake and the real cases (As the credit score will be high incase of a publisher who publishes fake news compared to the someone who does less.) \nFor binary classification, the model wasn\u2019t able to learn at all on the training data as the loss is also constant throughput the training. This can be due to the reason that there are many moving parts here like the credit_score integration, meta data integration, etc. and due to this, tweaking the network and learning parameters became difficult. Also because of limited computing resources available with me and the huge training times the network is taking, I was not able to properly tweak different parameters and couldn\u2019t experiment with different strategies of combining the meta data with the news statements and justification. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9438993008316204,
+        0.8329351808492254,
+        0.9317923329212094,
+        0.994174842103912,
+        0.9791659905857021
+      ],
+      "excerpt": "Quite different from the binary classification, there was an improvement in accuracy in the case of 6 class classification to 32.8%. \nTwo further modifications have been made to this method giving better results. They are discussed below. \nModification1: Added the credit scores to the output of the concatenation layer instead of multiplication. And decreasing the learning rate by 5 times. \nModification2: Instead of giving inputs of same sequence sizes (128) to all three branches, I changed the input sequence size depending on the type of data and the average number of words in them. For the branch which takes news statements as input, the sequence size is 64 as there are only 5-10 input sequences with more than 64 words in them. For the branch which takes justifications as input, the sequence size is 256 as many of the justifications have 128 to 264 words and there are only around 10 input sequences with more than 264 words in them. And same with metadata input for which the input sequence size is fixed to 32 as there are zero inputs with more than 32 words in them. This also allowed me to use the GPU memory more efficiently. \nThese modifications resolved the problem of network not learning in case of binary classification and improved the six-way classification accuracy by a large margin. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Triple Branch BERT Siamese Network for fake news classification on LIAR-PLUS dataset in PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manideep2510/siamese-BERT-fake-news-detection-LIAR/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 31,
+      "date": "Thu, 30 Dec 2021 00:04:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/manideep2510/siamese-BERT-fake-news-detection-LIAR/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "manideep2510/siamese-BERT-fake-news-detection-LIAR",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9740595479284062
+      ],
+      "excerpt": "requirements.txt - File to install all the dependencies \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/with_acc.png\" width=\"700\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/bert.png\" width=\"640\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/1_siamese.png\" width=\"640\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/2_siamese.png\" width=\"600\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/3_siamese.png\" width=\"640\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/credit_score.png\" width=\"1200\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"doc_images/no_acc.png\" width=\"700\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/manideep2510/siamese-BERT-fake-news-detection-LIAR/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Triple Branch BERT Siamese Network for fake news classification on LIAR-PLUS dataset",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "siamese-BERT-fake-news-detection-LIAR",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "manideep2510",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manideep2510/siamese-BERT-fake-news-detection-LIAR/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 82,
+      "date": "Thu, 30 Dec 2021 00:04:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "fake-news",
+      "fake-news-challenge",
+      "bert-siamese",
+      "bert-model",
+      "pytorch",
+      "language-understanding",
+      "liar-plus",
+      "liar",
+      "bert-models",
+      "artificial-intelligence",
+      "artificial-neural-networks",
+      "machine-learning",
+      "huggingface"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install Python3.5 (Should also work for python>3.5)\n\nThen install the requirements by running\n\n``` bash\n$ pip3 install -r requirements.txt\n```\n\nNow to run the training code for binary classification, execute\n\n``` bash\n$ python3 bert_siamese.py -num_labels 2\n```\n\nNow to run the training code for 6 class classification, execute\n\n``` bash\n$ python3 bert_siamese.py -num_labels 6\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Bergstrom, C. T., & West, J. D. (2020). Calling Bullshit: The Art of Skepticism in a Data-Driven World (Illustrated Edition). Random House.\n- Tufte, E. R. (2001). The visual display of quantitative information (Vol. 2). Graphics press Cheshire, CT.\n- Bochkovskiy, A., Wang, C.-Y., & Liao, H.-Y. M. (2020). YOLOv4: Optimal Speed and Accuracy of Object Detection. ArXiv:2004.10934 [Cs, Eess]. http://arxiv.org/abs/2004.10934\n- Poco, J., & Heer, J. (2017). Reverse-engineering visualizations: Recovering visual encodings from chart images. Computer Graphics Forum, 36, 353\u2013363.\n- Epshtein, B., Ofek, E., & Wexler, Y. (2010). Detecting text in natural scenes with stroke width transform. 2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition, 2963\u20132970. https://doi.org/10.1109/CVPR.2010.5540041\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sciosci/graph_check",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-07T21:49:03Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T04:11:56Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9989931215722905,
+        0.9645230859936571
+      ],
+      "excerpt": "Academic graphs are essential for communicating scientific ideas and results. Also, to turthfully reflct data and results, visualization reserchers have proposed several principles to guide creation process. In this work, we created a deep learning-based method, focusing on bar charts, to measure violations of the proportional ink principle and the specific rules are: a bar chart\u2019s y-axis should start from zero, have one scale, and not be partially hidden (Bergstrom & West, 2020; Tufte, 2001). Based on the 5-folds cross validation, the AUC of the method is 0.917 with 0.02 standard deviation, which means the model is capable of distinguishing graphs with or without graphical integrity issues and low standard deviation relfects stable performance. The precision is 0.77 with 0.0209 standard error. \nCompound Figure Classification: We used CNN (Resnet-101v2, pre-trained on ImageNet) with fine-tune to classify figures into compound and non-compound figures. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184927446222001,
+        0.8320095210920276,
+        0.9786515604149406,
+        0.9395616535501764,
+        0.8191726554348286
+      ],
+      "excerpt": "Image Classification: We focus on bar charts in this study, so we collected diagnostc figures from IMageCLEF2016 competition (Garc\u00eda Seco de Herrera et al., 2016) and fine-tuned a CNN (Resnet-101v2, pre-trained on ImageNet) to classify figures into categroies. (Ex: bar charts, line charts, scatter chats, ......) \nText Localization: We fine-tuend a CNN (YOLO v4,  pre-trained on MS COCO dataset) to detect or localize texts on academic figures, prepocessed with Stroke Width Transformation (Bochkovskiy et al., 2020; Epshtein et al., 2010). \nText Recognition: Using fine-tuned Tesseract model of English texts to recognize the content of texts from text localization. \nText Role Classification: Using open-source model to predict the role of texts on academic figures, basecd on the geometric information of texts (Poco & Heer, 2017). \nFeature Engineering: Before the feature engineering, we had a preprocessing process to correct some misclassifications. Then, extracing 7 features (see below chart) from figures to train the detector. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389308963665317
+      ],
+      "excerpt": "| The value of the lowest y-axis label on the y-axis (detected or inference from y-axis) | he lowest y-axis label should be zero | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8262933685293885
+      ],
+      "excerpt": "| If we need to inference the lowest text on the y-axis | If the lowest label on the y-axis is far from the x-axis, then we might ignore the actual lowest label on the y-axis | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336195266075301,
+        0.9989584153399625,
+        0.9756447777203004
+      ],
+      "excerpt": "| The probability of being texts | We prefer texts with a higher probability of being texts | \n| The OCR confidences  of texts on the y-axis | We prefer predictions of the content of texts with a higher confidence | \n| The probability of being bar charts | Our classifier only classifies bar charts. Thus we prefer figures with a high probability of being bar charts | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sciosci/graph_check/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 07:34:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sciosci/graph_check/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sciosci/graph_check",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/sciosci/graph_check/main/Graphical_Integrity_Detector.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sciosci/graph_check/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "PureBasic"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Graphical integrity issues in open access publications: detection and patterns of proportional ink violations",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "graph_check",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sciosci",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sciosci/graph_check/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. YoloV4 (Bochkovskiy et al., 2020)\n```bash\ngit clone https://github.com/AlexeyAB/darknet.git\n```\n   - Follow the instruction in https://github.com/AlexeyAB/darknet.git to install YoloV4\n2. Stroke Width Transform (Epshtein et al., 2010)\n```bash\ngit clone https://github.com/sunsided/stroke-width-transform.git\n```\n   - Use convert_swt.py to do the transformation.\n3. Reverse-Engineering Visualizations(REV) (Poco & Heer, 2017)\n```bash\ngit clone https://github.com/uwdata/rev.git\n```\n   - Move REV.py inside the rev.git folder before doing REV. Follow the instruction in the notebook to implement.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 07:34:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p float=\"left\">\n  <img src=\"https://github.com/sciosci/graph_check/blob/main/images/Example1.png\" width=\"400\" />\n  <img src=\"https://github.com/sciosci/graph_check/blob/main/images/Example2.png\" width=\"400\" /> \n</p>\n<p float=\"left\">\n  <img src=\"https://github.com/sciosci/graph_check/blob/main/images/Example3.png\" width=\"400\" />\n  <img src=\"https://github.com/sciosci/graph_check/blob/main/images/Example4.png\" width=\"400\" /> \n</p>\nThe y-axis of upper two graphs does not start from zero and there are truncations in lower two graphs. Therefore, these graphs would be annotated graphical integrity issues.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

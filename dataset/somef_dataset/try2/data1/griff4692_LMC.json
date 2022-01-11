@@ -1,0 +1,320 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1802.05365",
+      "https://arxiv.org/abs/1711.11027.\n\nThe training procedure is identical to the original paper.  Yet, the encoder architecture is different: we found better performance by encoding context sequences with a bi-LSTM and summarizing with a simple pooled attention mechanism.  Please see paper and code for more details.\n\nIn similar fashion to the LMC, to train the BSG embeddings, please run the following script in `./modules/bsg/`:\n1. `bsg_main.py`\n\n**NB:**\n\nIn the LMC paper, we introduce a modification of the BSG, referred to as the MBSGE (Metadata Bayesian Skip-Gram Ensemble).  In this specific instance, center word ids are randomly replaced with metadata ids.  This variant is controlled by the boolean flag `-multi_bsg` with parameters `--multi_weights` to control the categorical distribution parameters governing the relative frequency with which words, sections, and note categories are chosen as the pseudo-center word.\n\n**ELMo Baseline**\n\nWe also provide a setup to enable training AllenNLP's ELMo model on MIMIC-III. from the seminal ([paper](https://arxiv.org/abs/1802.05365)).\n\nWe use the [Transformer based implementation of ELMo](https://github.com/allenai/allennlp/blob/master/docs/tutorials/how_to/training_transformer_elmo.md) given its promising performance.  There is a version mismatch between allennlp's import of Huggingface and the version of Huggingface our code.  As such, we are currently working on a solution and will provide complete documentation for how to run it when available.  For now, all ELMo related code has been commented out.\n\n## Evaluating on Clinical Acronym Expansion\n\nTo evaluate pre-trained LMC, BSG, and ELMo models on the task of clinical acronym expansion, please refer to the README in the `acronyms` module.\n\nThe code is compatible with two acronym expansion datasets:\n\n1. [CASI dataset](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3932450/) - this labeled dataset from the University of Minnesota is a common benchmark for clinical acronym expansion and has been pre-processed to work with all models (included in the `shared_data/casi` for convenience).\n2. MIMIC-III RS dataset - this is a new dataset that uses the same sense inventory as CASI.  It creates a synthetic dataset using reverse substitution (RS). MIMIC requires a license so please follow instructions in `preprocess/context_extraction` to generate the dataset.\n\nEach dataset is runnable with the same script by toggling the flag `--dataset {mimic, casi"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9744779447690421
+      ],
+      "excerpt": "- Bra\u017einskas, A., Havrylov, S., & Titov, I. (2017). Embedding words as distributions with a Bayesian skip-gram model. arXiv preprint arXiv:1711.11027. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/griff4692/LMC",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please raise a Github issue if you encounter any issues running the code.  Please feel free to issue a pull requests for bug fixes or feature requests as well.\n\nIf you want to discuss the paper and modeling approach more, please contact me at griffin.adams@columbia.edu.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-20T19:57:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-10T15:14:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9877760168446842,
+        0.9380498971393627,
+        0.8931253513875673
+      ],
+      "excerpt": "This is the main repository for the Latent Meaning Cells (LMC) Model. The LMC is a Latent Variable Model for Jointly Modeling Words and Document Metadata. \nThis is the official PyTorch codebase for the paper \"Zero-Shot Clinical Acronym Expansion via Latent Meaning Cells\" presented at the NeurIPS 2020 Machine Learning for Healthcare (ML4H) Workshop. \nA word is the atomic unit of discrete data and represents an item from a fixed vocabulary. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9764740367844177,
+        0.9771300109340756,
+        0.8860132718436099
+      ],
+      "excerpt": "The psuedo-generative process of the LMC model is shown in plate notation and story form below: \nPlease refer to the paper for more information on the distributions and model parameters. \nrepresents the number of unique metadata in the corpus.  This could be the number of unique section headers or even simply the number of documents in the corpus, depending on the modeling choice. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9818507903838477
+      ],
+      "excerpt": "represents the number of unique tokens in the k<sup>th</sup> metadata. For our purposes, metadata are pseudo-documents which contain a sequence of words.  For instance, if the metadata is a section header Discharge Medications, that metadata is comprised of the concatenation of the body of every section entitled Discharge Medications across the corpus.  Yet, when computing context windows, we do not combine text from different physical documents. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9719669905922437,
+        0.8772590967783039,
+        0.9772942179837695,
+        0.8795524832901945
+      ],
+      "excerpt": "denotes the window size. That is, the number of words drawn from the left and right side of the center word. \ndenotes the j<sup>th</sup> context word given the latent meaning of i<sup>th</sup> center word in k<sup>th</sup> metadata. \nThis formulation allows for the latent meaning of a word to depend on the metadata (section header, paragraph id, etc.) in which it is found, and vice versa.  For instance,  the latent meaning of a sports article is not the same for all sports articles. Sports can refer to the NBA, the Olympics, or chess.  Therefore, the concept of a sports article is refined by knowing the words used inside the article.  Conversely, if you see the word net, its latent meaning will shift more to basketball than to fishing if you know that it is used within a sports article.  The LMC models both phenomena.  This notion is encapsulated in the below figure. \nThe repository containts the following modules: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9738303736462085
+      ],
+      "excerpt": "- Also contains custom scripts for each model in modules to adapt each neural language model to the acronym expansion task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9547555034903625
+      ],
+      "excerpt": "The output of these scripts is a series of data files: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8970927419741521,
+        0.8948480956511706,
+        0.92978912082929
+      ],
+      "excerpt": "- We recommend running each of the above scripts with the optional -debug boolean flag which does all preprocessing on the mini version of the dataset as created from generate_mini_dataset.py.  \n- The last two files are essential for training the language model. \nIn this section, we describe how to train the jointly contextualized token and document metadata embeddings, as described in the LMC paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8807522221146133
+      ],
+      "excerpt": "Please note that, at this point, the -bert flag is an experimental feature. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9929573853460689
+      ],
+      "excerpt": "As a primary baseline and source of great inspiration for the LMC, we provide our own PyTorch implementation of the BSG model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9940890024459481
+      ],
+      "excerpt": "The training procedure is identical to the original paper.  Yet, the encoder architecture is different: we found better performance by encoding context sequences with a bi-LSTM and summarizing with a simple pooled attention mechanism.  Please see paper and code for more details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9951495316114547
+      ],
+      "excerpt": "In the LMC paper, we introduce a modification of the BSG, referred to as the MBSGE (Metadata Bayesian Skip-Gram Ensemble).  In this specific instance, center word ids are randomly replaced with metadata ids.  This variant is controlled by the boolean flag -multi_bsg with parameters --multi_weights to control the categorical distribution parameters governing the relative frequency with which words, sections, and note categories are chosen as the pseudo-center word. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8781531546264343,
+        0.9863951909295816,
+        0.9707729761242655,
+        0.9762350518256878,
+        0.9784793728850801
+      ],
+      "excerpt": "We also provide a setup to enable training AllenNLP's ELMo model on MIMIC-III. from the seminal (paper). \nWe use the Transformer based implementation of ELMo given its promising performance.  There is a version mismatch between allennlp's import of Huggingface and the version of Huggingface our code.  As such, we are currently working on a solution and will provide complete documentation for how to run it when available.  For now, all ELMo related code has been commented out. \nTo evaluate pre-trained LMC, BSG, and ELMo models on the task of clinical acronym expansion, please refer to the README in the acronyms module. \nThe code is compatible with two acronym expansion datasets: \nCASI dataset - this labeled dataset from the University of Minnesota is a common benchmark for clinical acronym expansion and has been pre-processed to work with all models (included in the shared_data/casi for convenience). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Jointly Learning Word and Metadata Embeddings: Latent Meaning Cells Applied to Clinical Acronym Expansion",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. If you haven't already, please [request access](https://mimic.physionet.org/gettingstarted/access/) to MIMIC-III notes.\n2. Follow instructions to download `NOTEEVENTS.csv` and place under `preprocess/data/mimic/`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/griff4692/LMC/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 24 Dec 2021 18:11:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/griff4692/LMC/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "griff4692/LMC",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Clone this repository and place it in `~`.\n2. Run `pip install -r requirements.txt`\n- Note: packages are pinned to exact versions but may work with older versions.  Compatibility is untested for versions not explicitly listed in `requirements.txt`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9112600082684696
+      ],
+      "excerpt": "The repository containts the following modules: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8769149276032847
+      ],
+      "excerpt": "4. utils - Utility function store. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8304260203896219,
+        0.8726577626393622,
+        0.8155271631561654
+      ],
+      "excerpt": "2. compute_sections.py - Use custom regex to precompute the names of all section headers in MIMIC-III. \n3. mimic_tokenize.py - Tokenize the data and save \n4. subsample_tokens.py - Subsample frequent tokens to speed-up training and increase effective window size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "1. bsg_main.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/griff4692/LMC/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Latent Meaning Cells",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LMC",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "griff4692",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/griff4692/LMC/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Fri, 24 Dec 2021 18:11:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "natural-language-processing",
+      "deep-generative-model",
+      "word-embeddings",
+      "deep-learning",
+      "neural-network",
+      "machine-learning",
+      "bioinformatics"
+    ],
+    "technique": "GitHub API"
+  }
+}

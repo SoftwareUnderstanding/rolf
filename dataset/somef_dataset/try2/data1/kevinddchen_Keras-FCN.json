@@ -1,0 +1,285 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1605.06211\">Shelhamer et al. (2016"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8198091799310736
+      ],
+      "excerpt": "This is a Keras implementation of the fully convolutional network outlined in <a href=\"https://arxiv.org/abs/1605.06211\">Shelhamer et al. (2016)</a>, which performs semantic image segmentation on the Pascal VOC dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9015748377153242
+      ],
+      "excerpt": "| True label | FCN32 prediction | FCN16 prediction | FCN8 prediction | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kevinddchen/Keras-FCN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-29T23:13:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-18T01:05:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The goal of **semantic segmentation** is to identify objects, like cars and dogs, in an image by labelling the corresponding groups of pixels according to their classes.\nFor an introduction, see <a href=\"https://nanonets.com/blog/semantic-image-segmentation-2020/\">this article</a>.\nAs an example, below is an image and its labelled pixels.\n\n| <img src=\"assets/rider.jpg\" alt=\"biker\" width=400> | <img src=\"assets/rider_label.png\" alt=\"true label\" width=400> |\n|:---:|:---:|\n| Image | True label |\n\nA **fully convolutional network (FCN)** is an artificial neural network that performs semantic segmentation. \nThe bottom layers of a FCN are those of a convolutional neural network (CNN), usually taken from a pre-trained network like VGGNet or GoogLeNet.\nThe purpose of these layers is to perform classification on subregions of the image.\nThe top layers of a FCN are **transposed convolution/deconvolution** layers, which upsample the results of the classification to the resolution of the original image.\nThis gives us a label for each pixel.\nWhen upsampling, we can also utilize the intermediate layers of the CNN to improve the accuracy of the segmentation.\nFor an introduction, see <a href=\"https://nanonets.com/blog/how-to-do-semantic-segmentation-using-deep-learning/\">this article</a>.\n\nThe <a href=\"http://host.robots.ox.ac.uk/pascal/VOC/\">Pascal VOC project</a> is a dataset containing images whose pixels have been labeled according to 20 classes (excluding the background), which include aeroplanes, cars, and people.\nWe will be performing semantic segmentation according to this dataset.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8220732923447214,
+        0.987914397381499,
+        0.8524206031658541
+      ],
+      "excerpt": "This is a Keras implementation of the fully convolutional network outlined in <a href=\"https://arxiv.org/abs/1605.06211\">Shelhamer et al. (2016)</a>, which performs semantic image segmentation on the Pascal VOC dataset. \nMy hope is that this document will be readable to people outside of deep learning, such as myself, who are looking to learn about fully convolutional networks. \nIn preparation, I found the following repos invaluable for reference: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9396972057548901
+      ],
+      "excerpt": "We have divided our data as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8817144511866253,
+        0.9193120674712293
+      ],
+      "excerpt": "The filenames of the training images are found in data/train_mat.txt and data/train_png.txt. \nThe filenames of the validation images are found in data/val_mat.txt. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9095281252421936,
+        0.8717745492921368,
+        0.8667203409217556,
+        0.8821303448089659,
+        0.9960759383950331
+      ],
+      "excerpt": "After untarring, place the contents of benchmark_RELEASE/dataset/img into data/images_mat/ and benchmark_RELEASE/dataset/cls into data/labels_mat/. \ndata.ipynb puts the data into .tfrecords files, since it cannot all be loaded into RAM. \nWe followed the steps in the original paper. \nOur model details can be found in models.py. \nThe base CNN is VGG16. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9638754112108469,
+        0.9041006468120304
+      ],
+      "excerpt": "Second, the final layer of VGG16 that predicts 1000 classes is replaced by a layer that predicts the 21 Pascal VOC classes (including the background). \nThird, these predictions are fed into a deconvolution layer that upsampls 32x to the original resolution via bilinear interpolation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9830822398950164,
+        0.9851903980007882,
+        0.8247712454843393,
+        0.983804850688749,
+        0.9789563349326252
+      ],
+      "excerpt": "As previously mentioned, we utilize the intermediate layers of the CNN to improve the accuracy of the segmentation. \nFor the FCN16 network, instead of upsampling 32x we first upsample 2x to get an output whose resolution matches that of the block4_pool layer of VGG16. \nWe predicte 21 classes from block4_pool and add these two outputs together. \nThis is upsampled 16x to get to the original resolution. \nA similar procedure is also done for the FCN8 network, where we additionally include predictions from the block3_pool layer of VGG16. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9569718991505374,
+        0.9374048932278146
+      ],
+      "excerpt": "We trained each FCN32, FCN16, and FCN8 model from scratch for 25 epochs using the Adam optimizer at a fixed training rate of 1e-4, with L<sup>2</sup> regularization with strength 1e-6. \nBelow are the predicted labels for an example image above, which is in the validation set. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9657914383316175,
+        0.860059181823877
+      ],
+      "excerpt": "The performance of these models on the validation set are summarized below. \n| Model | FCN32 | FCN16 | FCN8 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9505490053524509
+      ],
+      "excerpt": "At the time of writing, the Pascal VOC website was down so I could not evaluate on the test set. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9510583177942992,
+        0.9935416014468341,
+        0.9533752666856719,
+        0.9339332922069972
+      ],
+      "excerpt": "I am quite happy with the performance of the models given the relatively simple implementation and short training period. \nOur performance is slightly worse than that of Shelhamer. \nTo get better performance, there are a couple of things that we still need to do: \nData set augmentation, such as cropping. This seems to be very important, but relatively easy to include. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Keras implementation of fully convolutional network for semantic image segmentation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kevinddchen/Keras-FCN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 21 Dec 2021 20:27:31 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kevinddchen/Keras-FCN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kevinddchen/Keras-FCN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kevinddchen/Keras-FCN/main/train.ipynb",
+      "https://raw.githubusercontent.com/kevinddchen/Keras-FCN/main/data.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8235340971579189,
+        0.8656103795546138,
+        0.8805670202532782
+      ],
+      "excerpt": "Training set: the SBD training set (8,498 images) + last 1,657 images (out of 2,857 total) of the SBD validation set + the 676 non-overlapping images of the Pascal VOC trainval set. \nValidation set: first 1,200 images (out of 2,857 total) of the SBD validation set \nIn total, we have 10,831 training images and 1,200 validation images. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9043796323093733
+      ],
+      "excerpt": "| <img src=\"assets/rider_label.png\" alt=\"true label\" width=300> | <img src=\"assets/fcn32.png\" alt=\"fcn32 pred\" width=300> | <img src=\"assets/fcn16.png\" alt=\"fcn16 pred\" width=300> | <img src=\"assets/fcn8.png\" alt=\"fcn8 pred\" width=300> | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.881512412648881
+      ],
+      "excerpt": "<img src=\"assets/loss.png\" alt=\"loss\" width=400> <img src=\"assets/meaniou.png\" alt=\"meaniou\" width=400> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kevinddchen/Keras-FCN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Keras-FCN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Keras-FCN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kevinddchen",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kevinddchen/Keras-FCN/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Tue, 21 Dec 2021 20:27:31 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

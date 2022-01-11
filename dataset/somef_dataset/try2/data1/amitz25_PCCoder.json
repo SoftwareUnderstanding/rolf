@@ -1,0 +1,240 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1809.04682\n\n## Requirements\n- Python 3.6 \n- Pytorch >= 0.4.0 \n- pathos \n- tqdm\n\n## Generating a dataset\nscripts/gen_programs.py allows the generation of a dataset either from scratch, or by continuing from an existing database. For example, to generate a dataset similar to experiment 1 from the paper:\n```\npython3.6 -m scripts.gen_programs --num_train=100000 --num_test=500 --train_output_path=train_dataset --test_output_path=test_dataset --max_train_len=12 --test_lengths=\"5\" --num_workers=8\n```\n\n1. You can (and should",
+      "https://arxiv.org/abs/1703.07469"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8275418226255707
+      ],
+      "excerpt": "1. For attention, we use the \"concat\" variant whereas RobustFill used \"general\" in their paper (https://arxiv.org/pdf/1508.04025.pdf). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amitz25/PCCoder",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-12T16:21:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-19T19:42:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9710306742311993
+      ],
+      "excerpt": "The official implementation of the paper \"Automatic Program Synthesis of Long Programs with a Learned Garbage Collector\": \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9458200090834877,
+        0.8629333220397566
+      ],
+      "excerpt": "You can (and should) have virtually all programs with lengths <= 3 in the dataset to ensure that longer programs are meaningful. Generation for smaller lengths is slower since the number of possible programs is small. Therefore, it is recommended to generate a dataset for length 3 once, and then use it as a cache with --cache. \ntest_lengths accepts a list of test lengths separated by a space. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8304301824928693
+      ],
+      "excerpt": "scripts/solve_problems expects a list of I/O sample sets and a network and solves them in multiple processes concurrently. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9242819005164035,
+        0.8432083862994993,
+        0.8130219472459295,
+        0.9734484166794103
+      ],
+      "excerpt": "max_program_len dictates the maximum depth of the search. \nThe result file has a json dictionary line for each program predicted. The dictionary contains the predicted program and some details about the search, like the amount of time the search took and the final beam size. \nUse --search_method to change the method from the default CAB search to DFS. \nparams.py contains all of the global \"constants\". This includes the program's memory size (which is calculated as params.num_inputs + params.max_program_len which are both changeable), number of exampes, DSL int range and max array size, and more. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.807345563848323
+      ],
+      "excerpt": "Specifically, this is the general format: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9611421456632168
+      ],
+      "excerpt": "The full implementation of RobustFill's attention-B variant (https://arxiv.org/abs/1703.07469) for this DSL is inside baseline/robustfill. Since our problem (and DSL) is significantly different from RobustFill's original paper, some alterations were made: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9720220624299384,
+        0.947276890369269
+      ],
+      "excerpt": "2. For evaluation, we use an altered version of beam-search that detects the prediction of invalid statements prematurely and significantly improves results. Furthermore, we use CAB instead of a vanilla beam-search with constant-size.  \n3. In order to give the I/O samples as input to the LSTMs (I and O), we encode them similarly to how it is done for PCCoder. Concretely, for each variable, we pass as input '[', then '0' or '1' (type of var - list of int), then the values of the list number-by-number, and then ']'. The decoder LSTM (P) outputs a program token-by-token, where each token can be either a parameter (number), lambda, or function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of the paper \"Automatic Program Synthesis of Long Programs with a Learned Garbage Collector\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amitz25/PCCoder/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Mon, 20 Dec 2021 22:49:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/amitz25/PCCoder/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "amitz25/PCCoder",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8827966065620273,
+        0.8128812763947961
+      ],
+      "excerpt": "scripts/train.py expects just the input dataset and the output path of the model. A model is saved for each epoch. \npython3.6 -m scripts.train dataset model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8152689215404402
+      ],
+      "excerpt": "In order to run RobustFill, use robustfill/train.py and robustfill/solve_problems.py similarly to how they're used for PCCoder. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/amitz25/PCCoder/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 amitz25\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PCCoder",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PCCoder",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "amitz25",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amitz25/PCCoder/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3.6 \n- Pytorch >= 0.4.0 \n- pathos \n- tqdm\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 39,
+      "date": "Mon, 20 Dec 2021 22:49:03 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

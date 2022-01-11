@@ -1,0 +1,414 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1807.00734"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A. Jolicoeur-Martineau. The relativistic discriminator: a key element missing from standard GAN. CoRR, abs/1807.00734, 2018. URL http://arxiv.org/abs/1807.00734.\n\nI. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In NIPS, 2014.\n\nZ. Wu, S. Song, A. Khosla, F. Yu, L. Zhang, X. Tang, J. Xiao. 3d shapenets: A deep representation for volumetric shapes. IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2015, Boston, MA, USA, June 7-12, 2015. (2015) 1912\u20131920\n\nN. Sedaghat, M. Zolfaghari, E. Amiri, and T. Brox. Orientation-boosted voxel nets for 3D object recognition, British Machine Vision Conference, BMVC 2017. URL http://lmb.informatik.uni-freiburg.de/Publications/2017/SZB17a.\n\nN. Sedaghat, and T. Brox. Unsupervised Generation of a Viewpoint Annotated Car Dataset from Videos. IEEE Conference on Computer Vision, ICCV 2015. URL http://lmb.informatik.uni-freiburg.de/Publications/2015/SB15.\n\nJ. Wu, C. Zhang, T. Xue, B. Freeman, and J. Tenenbaum. Learning a probabilistic latent space of object shapes via 3d generative-adversarial modeling. Advances in Neural Information Processing Systems, pages 82\u201390, 2016.\n\nE. Smith and D. Meger. Improved Adversarial Systems for 3D Object Generation and Reconstruction. CoRR, abs/1707.09557, 2017. URL http://arxiv.org/abs/1707.09557.\n\nD.P. Kingma and J. Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014. URL http://arxiv.org/abs/1412.6980.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9771419473408856,
+        0.9186665153711271
+      ],
+      "excerpt": "SGAN (non-saturating) loss functions [Goodfellow et al., 2014]: \nRSGAN loss functions [Jolicoeur-Martineau, 2018]: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9186665153711271
+      ],
+      "excerpt": "RaSGAN loss functions [Jolicoeur-Martineau, 2018]: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8834059256124378,
+        0.9263624733526716
+      ],
+      "excerpt": "Single object category of chairs (train part of the splitted data) from ModelNet10 [Wu et al., 2015]. \nSingle object category of airplane (train part of the splitted data) from manually aligned ModelNet40 [Sedaghat et al., 2017][Sedaghat and Brox, 2015]. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9045148075574208
+      ],
+      "excerpt": "Click the above image link to play the video. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8720357882879315
+      ],
+      "excerpt": "python 64-3D-RaSGan.py -n chair-1 -d ModelNet10/chair/train -e 2500 -b 24 -sample 10 -save 10 -graph 10 -graph3d 10 -glr 0.0025 -dlr 0.00003 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.89166667092169
+      ],
+      "excerpt": "| -sample | How often generated obejcts are sampled and saved. | 10 | No (default = 10) | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9089824976700623
+      ],
+      "excerpt": "| -graph3d | How often the 3D graphs are saved. | 10 | No (default = 10) | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jpjuvo/64-3D-RaSGAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-07-23T07:59:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-14T22:01:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8309443821646715,
+        0.9949537064830942,
+        0.995507569693217,
+        0.9317851432148614
+      ],
+      "excerpt": "Jolicoeur-Martineau [2018] showed that by introducing relativistic discriminator to standard generative adversarial network (SGAN), training is more stable and produces higher quality samples in image generation than with non-relativistic SGAN. \nIn the SGAN, discriminator and generator play a two-player game where the discriminator is trying to minimize the probability that the generated data is classified as real and the generator is trying to generate data that is falsely classified as real. \nIn relativistic SGAN (RSGAN), the discriminator is trying to minimize the probability that the generated data is classified as real more than the real data is classified as real and the generator is doing the opposite. \nBy altering the loss functions to the relativistic approach, GAN training is more stable and it should produce better quality samples without additional computational cost. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9852799159096313
+      ],
+      "excerpt": "And to make the relativistic discriminator act more globally, we compute the average of the components instead of comparing to single random samples. This is called relativistic average SGAN (RaSGAN). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.972729993217039
+      ],
+      "excerpt": "The motivation to this work is to test if relativistic approach in GANs give significant improvements in stability and sample quality when generating 3D objects. The relativistic approach is used in 3D object generation method known as 3DGAN [Wu et al., 2016] to see whether it brings stability as complex joint data distributions over 3D objects are hard to train [E. Smith and D. Meger, 2017]. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9349638772297586,
+        0.9501057709134314,
+        0.9600812763390857,
+        0.9721131392675405,
+        0.9622014662909639,
+        0.9032689006131057
+      ],
+      "excerpt": "The generator maps a 200-dimensional probabilistic and normally distributed latent vector z to 64x64x64 tensor that represents a 3D object in voxel space. \nThe discriminator is the mirror of the generator except it outputs a confidence value of the input being a fake. \nADAM [Kingma and Ba, 2014] for both generator and discriminator with learning rates of 0.002 and 0.00005. Beta is 0.5. \nGenerating 3D objects is harder than discriminating if they are real or generated so the discriminator learns much faster. Decreasing the learning rate of the discriminator helps but I found it also necessary to restric discriminator's learning if it went too far ahead of the generator. \nHere, discriminator is trained at every step when the loss of the generator is less than 200% of the discriminator's loss. As the minibatch size is relatively small (24), the losses are smoothed before deciding whether to train discriminator. Smoothing compensates for the higher loss variance error caused by a small minibatch. \nThe models were trained with RaSGAN using early stopping. Early stopping was not used for overfitting but for increasing generator's and decreasing discriminator's learning rate after the network had reached a state where the discriminator was trained only every 150 or more cycles. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9413865819618663,
+        0.9315263666663228
+      ],
+      "excerpt": "Compared to a non saturating standard GAN (SGAN), training RSGAN and RaSGAN was more stable. Relativistic GANs were able to train with broader range of initial learning rates for both generator and for discriminator. \nHowever, I cannot fairly compare SGAN to it's relativistic counterparts because I did not thoroughly search for good values of SGAN's learning rates. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9056479186935179
+      ],
+      "excerpt": "You may also experiment with other GAN architectures that are included in the repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.818750272515143
+      ],
+      "excerpt": "| --validation_data -v | The location of the voxel grid validation models. If this is specified, discriminator's validation loss is also drawn to the graph. This can be helpful for monitoring divergence of train/test losses to prevent overfitting. | ModelNet10/chair/test | No | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8399089206311032
+      ],
+      "excerpt": "Note! You may run into random CUDA errors or other memory related errors of TensorFlow if your batch size is too large for your gpu memory. If the training doesn't launch, try to decrease your bath size to 4 and increase it from there until you get to your gpu's limit. 24 is working with GTX 1080 with 8 GB of memory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9237112272205704
+      ],
+      "excerpt": "The .obj format is recognized by most 3D software. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9178588974249616,
+        0.9609005680469173
+      ],
+      "excerpt": "I used his code as a base template for my project. I changed the network architecture, loss functions, training logic and added scripts for downloading the dataset, generating voxel files and for generating 3D graphs. \nThe 64-3D-RaSGAN idea comes from combining the relativistic approach in The relativistic discriminator: a key element missing from standard GAN with the 3DGAN in Learning a Probabilistic Latent Space of Object \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "RaSGAN 3D object generation",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This python script will ask and download for you [Princeton's 10-Class orientation-aligned CAD models](http://modelnet.cs.princeton.edu/) or [Manually aligned 40-Class CAD models](https://github.com/lmb-freiburg/orion).\n\nModelNet10 object classes: *bathtub, bed, chair, desk, dresser, monitor, night stand, sofa, table, toilet.*\nModelNet40 object classes: *airplane, bathtub, bed, beanch, bookshelf, bottle, bowl, car, chair, cone, cup, curtain, desk, door, dresser, flower pot, glass box, guitar, keyboard, lamp, laptop, mantel, monitor, night stand, person, piano, plant, radio, range hood, sink, sofa, stairs, stool, table, tent, toilet, tv stand, wardrobe, vase, xbox.*\n\n```\npython download_data.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jpjuvo/64-3D-RaSGAN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Tue, 28 Dec 2021 17:20:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jpjuvo/64-3D-RaSGAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jpjuvo/64-3D-RaSGAN",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9906248903846466,
+        0.9261462417971023
+      ],
+      "excerpt": "cd [place_to_clone_this_project] \ngit clone https://github.com/jpjuvo/64-3D-RaSGAN.git \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8807444021989447
+      ],
+      "excerpt": "Specify the class that you want to train eg. chair. Note that converting a single class may take a few hours. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.86101617844214
+      ],
+      "excerpt": "cd render \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8174540907975313,
+        0.8174540907975313
+      ],
+      "excerpt": "Training chair \nTraining airplane \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9008665164438993
+      ],
+      "excerpt": "python convert_data.py -m ModelNet10/chair -b binvox.exe \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661998019067082
+      ],
+      "excerpt": "python 64-3D-RaSGan.py -n chair-1 -d ModelNet10/chair/train -e 2500 -b 24 -sample 10 -save 10 -graph 10 -graph3d 10 -glr 0.0025 -dlr 0.00003 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8492497523281222,
+        0.8835860123941608
+      ],
+      "excerpt": "| --name -n | The name of the training run. This will be used to create folders and save models | chair-1 | Yes | \n| --data -d | The location of the voxel grid training models | ModelNet10/chair/train | Yes | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8020236958052722
+      ],
+      "excerpt": "| --batchsize -b | The batch size | 24 | No (default = 24) | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python convert_to_graph.py -n chair-1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8745778937720412,
+        0.8036307256627555
+      ],
+      "excerpt": "| --name -n | Training run name for saving images from all  model files in that run | chair-1 | No if used with -f | \n| --file -f | File path. Convert single .npy model file to a 3D scatter plot graph | savepoint/chair-1/1000.npy | No if used with -n | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550613043363203
+      ],
+      "excerpt": "python convert_to_obj.py -f savepoint/chair-1/1000.npy \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8588654008800123,
+        0.8182277977138929
+      ],
+      "excerpt": "| --name -n | Training run name for converting all model files in that run | chair-1 | No if used with -f | \n| --file -f | File path. Convert single .npy model file to .obj format | savepoint/chair-1/1000.npy | No if used with -n | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8726223624094974
+      ],
+      "excerpt": "python render_class_view.py -m ../models/1000.obj -o test.png -b \"C:/Program Files/Blender Foundation/Blender/blender.exe\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8687426004559068
+      ],
+      "excerpt": "| --output_img -o | Output image filename | demo_img.png | No (default = demo_img.png) | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jpjuvo/64-3D-RaSGAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "MATLAB"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Jump to",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "64-3D-RaSGAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jpjuvo",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jpjuvo/64-3D-RaSGAN/blob/master/Readme.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3.6\n- [TensorFlow](https://www.tensorflow.org/install/) (GPU version) version 1.7!\n- [Patrick Min's Binvox software](http://www.patrickmin.com/binvox/) for converting training data to raw voxel data.\n- [Blender](https://www.blender.org) for rendering generated models to images (optional).\n- Python modules: wget, tqdm, matplotlib, numpy, tensorlayer==1.9\n\nIf you have pip installed, get these modules with:\n```\npip3 install wget tqdm matplotlib numpy tensorlayer==1.9\n```\n\n**Note!** *GPU version of the Tensorflow is the only reasonable option for this tutorial. 3D-GANs of this size would take too long to train on any CPU.*\n\n**Note-2!** This repository works with Tensorflow version 1.7 and Tensorlayer version 1.9. You may run into errors if you use newer versions. Thank you Sven for testing and reporting this!\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 36,
+      "date": "Tue, 28 Dec 2021 17:20:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "With these steps you can clone this repository and train your own model that produces 3D models.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

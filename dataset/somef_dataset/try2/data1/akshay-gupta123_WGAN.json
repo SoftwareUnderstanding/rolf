@@ -1,0 +1,335 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1701.07875\n* **Author** : Martin Arjovsky,Soumith Chintala and L\u00b4eon Bottou\n* **Tags** : Neural Network,Genreative Adversirial Network\n* **Published** : 6 Dec, 2017\n\n# Summary:\n\n## Introduction:\n\n<strong>Generative adversarial network</strong> contains the two components: generator and discriminator. The training process is just like zero-sum game, and it can be simply shown in Figure below. \n<img src=\"/asset/gan.png\"/>\n\nFor generator, it should generate the image which is just like the real one. On the contrary, the discriminator should distinguish the image is fake or not. During the training, the generator should make itself have more capability to generate image which is more and more like the actual one, and the discriminator should make itself realize the difference with more and more accuracy.\n\nThe problem this paper is concerned with is that of unsupervised learning.Authors direct their attention towards<em>various ways to measure how close the model distribution and the real distribution are</em>, or equvalently on the various ways to define a distance or divergence  \u03c1(P<sub>\u03b8</sub>, P<sub>r</sub>",
+      "https://arxiv.org/abs/1701.07875\">Paper</a>"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8714162992508173,
+        0.9813161029725735,
+        0.9977994744046882,
+        0.9890131201201999
+      ],
+      "excerpt": "Akshay Gupta \nTitle : Wassertian GAN \nLink : https://arxiv.org/abs/1701.07875 \nAuthor : Martin Arjovsky,Soumith Chintala and L\u00b4eon Bottou \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9836179740804603
+      ],
+      "excerpt": "Published : 6 Dec, 2017 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.997505222195542
+      ],
+      "excerpt": "*( For proof refer to <a href=\"https://arxiv.org/abs/1701.07875\">Paper</a>) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/WGAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-30T10:55:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-12T10:43:23Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<strong>Generative adversarial network</strong> contains the two components: generator and discriminator. The training process is just like zero-sum game, and it can be simply shown in Figure below. \n<img src=\"/asset/gan.png\"/>\n\nFor generator, it should generate the image which is just like the real one. On the contrary, the discriminator should distinguish the image is fake or not. During the training, the generator should make itself have more capability to generate image which is more and more like the actual one, and the discriminator should make itself realize the difference with more and more accuracy.\n\nThe problem this paper is concerned with is that of unsupervised learning.Authors direct their attention towards<em>various ways to measure how close the model distribution and the real distribution are</em>, or equvalently on the various ways to define a distance or divergence  \u03c1(P<sub>\u03b8</sub>, P<sub>r</sub>) where the real data distribution P<sub>r</sub> admits a density and P<sub>\u03b8</sub> is the distribution of the parametrized density. The most fundamental difference between such distances is their impact on the convergence of sequences of probability distributions. In order to optimize the parameter \u03b8, it is of course desirable to define our model distribution P<sub>\u03b8</sub> in a manner that makes the mapping \u03b8\u2192P<sub>\u03b8</sub> is continuous.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9890039079735615
+      ],
+      "excerpt": "Let X be a compact metric set (such as the space of images [0, 1]<sup>d</sup>) and let \u03a3 denote the set of all the Borel subsets of X . Let Prob(X) denote the space of probability measures defined on X . We can now define elementary distances and divergences between two distributions P<sub>r</sub>, P<sub>g</sub> \u2208 Prob(X ): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9165305402659429,
+        0.9138650415432985
+      ],
+      "excerpt": "For the distance measure of probability distribution, there are a lot of metric can be the choice which are shown in Figure above. The most left one is total variation distance (TV-divergence); the second one is KL-divergence which has been well known in VAE; the third one is JS-divergence. \n<br>The following figure illustrates how apparently simple sequences of probability distributions converge under the<strong>EM distance </strong>but do not converge under the other distances and divergences defined above. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9123980801963989,
+        0.9618303824124376
+      ],
+      "excerpt": "Example above gives us a case where we can learn a probability distribution over a low dimensional manifold by doing gradient descent on the EM distance. This cannot be done with the other distances and divergences because the resulting loss function is not even continuous.<br> \nThe Figure below illustrates this example. The green region is the data distribution of P<sub>0</sub>, and the orange region is the data distribution of P<sub>\u03b8</sub>. In the general case, the two distribution are separated. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9511870818189299
+      ],
+      "excerpt": "Neither KL-divergence nor JS-divergence can give the right direction to learn the capability, Martin et al. changed another metric \u2014 <strong>EM distance</strong> (or called Wasserstein-1 distance) . The physical idea of EM distance is:<em> how much work you should spend to transport the distribution to another one</em>. As the result, the value is positive and the shape is symmetric. There are two properties that the EM-distance has:<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9166755037602973
+      ],
+      "excerpt": "2. The gradient of the function is almost everywhere</strong> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8993620454933768
+      ],
+      "excerpt": "However, During finding the infimum, it\u2019s hard to exhaust the whole possible sample in the joint distribution. By Kantorovich-Rubinstein duality method, we can approximate the problem into the dual format, and just find the supremum. The relation between the two form is shown in Figure above. The only constraint is that the function should be the <em>Lipschitz-1 continuous function</em>. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9411678754358007
+      ],
+      "excerpt": "In the usual GAN, we want to maximize the score of classification. If the image is fake, the discriminator should give it as 0 score; if the image is real one, the 1 score should be gotten. In WGAN, it changes the task of discriminator as regression problem, and Martin renamed it as <strong>critics</strong>. The critics should measure the EM-distance that how many work should spend, and find the maximum case \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9826251550484374
+      ],
+      "excerpt": "The training process of WGAN is shown above which is very similar like usual GAN. There are only 4 difference: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9309470592240836
+      ],
+      "excerpt": "<br>3. We should do weight clipping to satisfy the constraint of Lipschitz continuity \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9157631244911972
+      ],
+      "excerpt": "After the experiment by Martin, the WGAN can avoid the problem of <em>gradient vanishment</em>. As you can see in the Figure , the gradient of usual GAN drops to zero and becomes saturate phenomenon. However, <em>EM-distance provides meaningful loss and the model can still learn gradually</em>. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9135089325682413
+      ],
+      "excerpt": "* Udates of discriminator per update of generator(n_update_dis): 5 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/WGAN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 19:24:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akshay-gupta123/WGAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akshay-gupta123/WGAN",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"/asset/dis.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.927171392433827
+      ],
+      "excerpt": "<img src=\"/asset/example.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8409348007555099
+      ],
+      "excerpt": "<img src=\"/asset/illustration.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8273349638564602
+      ],
+      "excerpt": "<img src=\"/asset/dual form.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8674304248352449
+      ],
+      "excerpt": "<img src=\"/asset/object-wgan.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8239984166194723
+      ],
+      "excerpt": "<img src=\"/asset/algorithm-wgan.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853204239981019
+      ],
+      "excerpt": "<img src=\"/asset/loss-dis.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"/asset/image_gen.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"/asset/gloss.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"/asset/dloss.png\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akshay-gupta123/WGAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TENSORFLOW IMPLEMENTATION OF WGAN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WGAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akshay-gupta123",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/WGAN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 19:24:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nusage: train.py [-h] [--dataset {mnist,cifar-10}]\n                [--learning_rate LEARNING_RATE] [--n_clip N_CLIP]\n                [--n_epoch N_EPOCH] [--n_update_dis N_UPDATE_DIS]\n                [--noise_dim NOISE_DIM] [--batch_size BATCH_SIZE]\n                [--samples_dir SAMPLES_DIR] [--save_dir SAVE_DIR]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --dataset {mnist,cifar-10}\n                        choice of dataset\n  --learning_rate LEARNING_RATE\n                        initial learning rate\n  --n_clip N_CLIP       Cliping weight\n  --n_epoch N_EPOCH     max #: of epoch\n  --n_update_dis N_UPDATE_DIS\n                        #: of updates of discriminator per update of generator\n  --noise_dim NOISE_DIM\n                        dimension of random noise\n  --batch_size BATCH_SIZE\n                        #: of batch size\n  --samples_dir SAMPLES_DIR\n                        directory for sample output\n  --save_dir SAVE_DIR   directory for checkpoint models\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n$ python3 train.py\n```\n>**_NOTE_** On Notebook use :\n```python\n!git clone link-to-repo\n%run train.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

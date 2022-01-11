@@ -1,0 +1,461 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- We thank the authors of [InferSent](https://github.com/facebookresearch/InferSent), [sentence-transformer](https://github.com/UKPLab/sentence-transformers), and [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) for their repositories and pre-trained models which we use in our training and experiments. We acknowledge [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) as we use their dataset and parts of our code were modified from theirs. \n\n- - -\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- If you find this code helpful, please cite our paper:\n```javascript\n@inproceedings{abdelnabi2020adversarial,\n    title = {Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding},\n    author = {Abdelnabi, Sahar and Fritz, Mario},\n    booktitle = {42nd IEEE Symposium on Security and Privacy},\n    year = {2021}\n}\n```\n- - -\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{abdelnabi2020adversarial,\n    title = {Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding},\n    author = {Abdelnabi, Sahar and Fritz, Mario},\n    booktitle = {42nd IEEE Symposium on Security and Privacy},\n    year = {2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9187562978819511
+      ],
+      "excerpt": "Videos: Short video, Full video \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/S-Abdelnabi/awt",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-08T20:09:50Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-18T07:48:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9356532216107009
+      ],
+      "excerpt": "Code for the paper: Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.997240431804109,
+        0.9938785024612494
+      ],
+      "excerpt": "Recent advances in natural language generation have introduced powerful language models with high-quality output text. However, this raises concerns about the potential misuse of such models for malicious purposes. In this paper, we study natural language watermarking as a defense to help better mark and trace the provenance of text. We introduce the Adversarial Watermarking Transformer (AWT) with a jointly trained encoder-decoder and adversarial training that, given an input text and a binary message, generates an output text that is unobtrusively encoded with the given message. We further study different training and inference strategies to achieve minimal changes to the semantics and correctness of the input text. AWT is the first end-to-end model to hide data in text by automatically learning -without ground truth- word substitutions \nalong with their locations in order to encode the message. We empirically show that our model is effective in largely preserving text utility and decoding the watermark while hiding its presence against adversaries. Additionally, we demonstrate that our method is robust against a range of attacks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9106050150634234,
+        0.9189151925126166
+      ],
+      "excerpt": "AWD-LSTM language model \nTrained with the fine-tuning step and reaches a comparable perplexity to what was reproted in the AWD-LSTM paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9016043589737681
+      ],
+      "excerpt": "DAE trained to denoise non-watermarked text (the noise applied is word replacement and word removing)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8788560736292694
+      ],
+      "excerpt": "A transformer-based classifier trained on the full AWT output (20 samples), tasked to classify between watermarked and non-watermarked text  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8354789014027051
+      ],
+      "excerpt": "Phase 1 of training AWT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8354789014027051
+      ],
+      "excerpt": "Phase 2 of training AWT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.970785628259687,
+        0.9640778511407377,
+        0.908015975419225
+      ],
+      "excerpt": "sentences_agg_number is the number of segments to accumulate to calculate the p-value \nthreshold on the increase of the LM loss \nthresholds used in the paper: 0.45, 0.5, 0.53, 0.59, 0.7 (encodes from 75% to 95% of the sentences) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057876325811911
+      ],
+      "excerpt": "sub_prob: prob. of substituting words during training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8806231122193264
+      ],
+      "excerpt": "Evaluate the DAE on its own on clean data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9072140003911612
+      ],
+      "excerpt": "To implement this attack you need to train a second AWT model with different seed (see our checkpoints) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9173936049118186,
+        0.8887470458801571,
+        0.9072140003911612,
+        0.8712013965603435
+      ],
+      "excerpt": "This generates using awt_model_gen_1, re-watermarks with awt_model_gen_2, decode with awt_model_gen_1 again \nsamples_num_adv is the number of samples sampled by awt_model_gen_2, we use 1 sample in the paper \nTo implement this attack you need to train a second AWT model with a different seed (see our checkpoints) \nYou then need to train a denoisining autoencoder on input and output pairs of the second de-watermarking model (the data is in under: 'data_dae_pairs') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8425244793705207
+      ],
+      "excerpt": "First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9241404184849493
+      ],
+      "excerpt": "To evaluate the classifier (on the generated data used before), use:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8146769550366333
+      ],
+      "excerpt": "The code to reproduce the visualization experiments (histogram counts, words change map count, top changed words) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for our S&P'21 paper: Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/S-Abdelnabi/awt/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Sun, 26 Dec 2021 02:18:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/S-Abdelnabi/awt/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "S-Abdelnabi/awt",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/S-Abdelnabi/awt/main/code/visualization/word_changes_map.ipynb",
+      "https://raw.githubusercontent.com/S-Abdelnabi/awt/main/code/visualization/word_freq.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8426697353077596,
+        0.8837680365796365,
+        0.9322609392449874
+      ],
+      "excerpt": "Main requirements: \nPython 3.7.6 \nPyTorch 1.2.0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9525536110812413
+      ],
+      "excerpt": "conda env create --name awt --file=environment.yml \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.935996307329387
+      ],
+      "excerpt": "You will need the WikiText-2 (WT2) dataset. Follow the instructions in: AWD-LSTM to download it \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9102893943770496
+      ],
+      "excerpt": "You will need to install wordcloud for the words maps \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9066381909684091
+      ],
+      "excerpt": "python main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epochs 200 --save WT2_mt_noft --optimizer adam --fixed_length 1 --bptt 80 --use_lm_loss 0 --use_semantic_loss 0  --discr_interval 1 --msg_weight 5 --gen_weight 1.5 --reconst_weight 1.5 --scheduler 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9066381909684091
+      ],
+      "excerpt": "python main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epochs 200 --save WT2_mt_full --optimizer adam --fixed_length 0 --bptt 80  --discr_interval 3 --msg_weight 6 --gen_weight 1 --reconst_weight 2 --scheduler 1 --shared_encoder 1 --use_semantic_loss 1 --sem_weight 6 --resume WT2_mt_noft --use_lm_loss 1 --lm_weight 1.3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_sampling_lm.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9185426937324342
+      ],
+      "excerpt": "python evaluate_selective_lm_threshold.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences agg. number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --lm_threshold [threshold] --samples_num 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num 1 --bert_threshold [dist_threshold] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --avg_cycle [number_of_sentences_to_avg] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9067760206071418
+      ],
+      "excerpt": "python main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model1 --batch_size 64 --epochs 2000 --dropoute 0.05 --sub_prob 0.1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_denoise_autoenc.py --data data/wikitext-2 --bptt 80 --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200 --sub_prob [sub_noise_prob.] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8650104954716357
+      ],
+      "excerpt": "First sample from AWT, then input to the DAE, then decode the msg  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_denoise_autoenc_attack_greedy.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path  [awt_model_disc] --samples_num [num_samples] --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_remove_attacks.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --remove_prob [prob_of_removing_words] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --use_elmo 0 --seed 200 --samples_num [num_samples] --modify_prob [prob_of_replacing_words] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9067760206071418
+      ],
+      "excerpt": "python main_train_dae_wm_pairs.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model2 --batch_size 64 --epochs 500 --dropoute 0.05 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_dewatermarking_attack.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment  [sentences_agg_number] --gen_path [awt_model_gen_1]  --disc_path  [awt_model_disc_1] --samples_num 1 --autoenc_attack_path [dae_paired_model_path] --use_lm_loss 1 --seed 200 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8115602283229597
+      ],
+      "excerpt": "First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9148920366522815
+      ],
+      "excerpt": "python main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 300 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9162851065645711
+      ],
+      "excerpt": "python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier_name] --seed 200 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/S-Abdelnabi/awt/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Adversarial Watermarking Transformer (AWT) #",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "awt",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "S-Abdelnabi",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/S-Abdelnabi/awt/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Model checkpt of InferSent:\n\t- get the model infersent2.pkl from: [InferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly\n  \n\t- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly\n  \n- Model checkpt of AWD LSTM LM:\n\t- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm))\n  \n- Model checkpt of SBERT:\n\t- Follow instructions from: [sentence-transformer](https://github.com/UKPLab/sentence-transformers)\n- - -\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Sun, 26 Dec 2021 02:18:48 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

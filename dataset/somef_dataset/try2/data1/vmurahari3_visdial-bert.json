@@ -1,0 +1,333 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Builds on Jiasen Lu's ViLBERT [implementation](https://github.com/jiasenlu/vilbert_beta).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1912.02379",
+      "https://arxiv.org/abs/1908.02265\n[visdial-data]: https://visualdialog.org/data",
+      "https://arxiv.org/abs/1912.02379"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{visdial_bert\n  title={Large-scale Pretraining for Visual Dialog: A Simple State-of-the-Art Baseline},\n  author={Vishvak Murahari and Dhruv Batra and Devi Parikh and Abhishek Das},\n  journal={arXiv preprint arXiv:1912.02379},\n  year={2019},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9999617513419655
+      ],
+      "excerpt": "If you find this work useful in your research, please cite: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmurahari3/visdial-bert",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-12-04T20:14:11Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-20T07:30:15Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9373959082390325,
+        0.8726862116669724
+      ],
+      "excerpt": "PyTorch implementation for the paper: \nLarge-scale Pretraining for Visual Dialog: A Simple State-of-the-Art Baseline \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9985602671889908,
+        0.9924679367407887
+      ],
+      "excerpt": "Prior work in visual dialog has focused on training deep neural models on the VisDial dataset in isolation, which has led to great progress, but is limiting and wasteful. In this work, following recent trends in representation learning for language, we introduce an approach to leverage pretraining on related large-scale vision-language datasets before transferring to visual dialog. Specifically, we adapt the recently proposed [ViLBERT][vilbert] model for multi-turn visually-grounded conversation sequences. Our model is pretrained on the Conceptual Captions and Visual Question Answering datasets, and finetuned on VisDial with a VisDial-specific input representation and the masked language modeling and next sentence prediction objectives (as in BERT). Our best single model achieves state-of-the-art on Visual Dialog, outperforming prior published work (including model ensembles) by more than 1% absolute on NDCG and MRR. \nThis repository contains code for reproducing results with and without finetuning on dense annotations. All results are on [v1.0 of the Visual Dialog dataset][visdial-data]. We provide pretrained model weights and associated configs to run inference or train these models from scratch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.93347230720658
+      ],
+      "excerpt": "After running the above scripts, all the pre-processed data is downloaded to data/visdial and the major pre-trained model checkpoints used in the paper are downloaded to checkpoints-release \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8751978907179478
+      ],
+      "excerpt": "To train the base model (no finetuning on dense annotations): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.995496889870234
+      ],
+      "excerpt": "To finetune the base model with dense annotations: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9854785256964786
+      ],
+      "excerpt": "To finetune the base model with dense annotations and the next sentence prediction (NSP) loss: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.982604134238341
+      ],
+      "excerpt": "NOTE: Dense annotation finetuning is currently only supported for 8-GPU training. This is primarily due to memory issues. To calculate the cross entropy loss over the 100 options at a dialog round, we need to have all the 100 dialog sequences in memory. However, we can only fit 80 sequences on 8 GPUs with ~12 GB RAM and we only select 80 options. Performance gets worse with fewer GPUs as we need to further cut down on the number of answer options. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8344323788541256
+      ],
+      "excerpt": "The metrics for the pretrained checkpoints should match with the numbers mentioned in the paper. However, we mention them below too. These results are on v1.0 test-std. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8732915750241484
+      ],
+      "excerpt": "| basemodel + dense + nsp  |   4.28    | 63.92 | 50.78 | 79.53 | 89.60 | 68.08 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation for \"Large-scale Pretraining for Visual Dialog\"  https://arxiv.org/abs/1912.02379",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Download preprocessed dataset and extracted features:\n\n```\nsh scripts/download_preprocessed.sh\n```\n\nTo get these files from scratch:\n```\npython preprocessing/pre_process_visdial.py \n```\n\nHowever, we recommend downloading these files directly.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmurahari3/visdial-bert/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 12,
+      "date": "Sat, 25 Dec 2021 19:19:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vmurahari3/visdial-bert/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vmurahari3/visdial-bert",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/vmurahari3/visdial-bert/master/scripts/download_preprocessed.sh",
+      "https://raw.githubusercontent.com/vmurahari3/visdial-bert/master/scripts/download_checkpoints.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Our code is implemented in PyTorch (v1.0). To setup, do the following:\n\n1. Install [Python 3.6](https://www.python.org/downloads/release/python-365/)\n2. Get the source:\n```\ngit clone https://github.com/vmurahari3/visdial-bert.git visdial-bert\n```\n3. Install requirements into the `visdial-bert` virtual environment, using [Anaconda](https://anaconda.org/anaconda/python):\n```\nconda env create -f env.yml\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8110985282788978
+      ],
+      "excerpt": "Setup and Dependencies \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9108067312815358
+      ],
+      "excerpt": "sh scripts/download_checkpoints.sh \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8634339304689512
+      ],
+      "excerpt": "Download preprocessed data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8757641159249813
+      ],
+      "excerpt": "python train.py -batch_size 80  -batch_multiply 1 -lr 2e-5 -image_lr 2e-5 -mask_prob 0.1 -sequences_per_image 2 -start_path checkpoints-release/vqa_pretrained_weights \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8294988078240161
+      ],
+      "excerpt": "python dense_annotation_finetuning.py -batch_size 80 -batch_multiply 10  -lr 1e-4 -image_lr 1e-4 -nsp_loss_coeff 0 -mask_prob 0.1 -sequences_per_image 2 -start_path checkpoints-release/basemodel \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8294988078240161
+      ],
+      "excerpt": "python dense_annotation_finetuning.py -batch_size 80 -batch_multiply 10  -lr 1e-4 -image_lr 1e-4 -nsp_loss_coeff 1 -mask_prob 0.1 -sequences_per_image 2 -start_path checkpoints-release/basemodel \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vmurahari3/visdial-bert/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "url": "https://api.github.com/licenses/bsd-3-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'BSD 3-Clause License\\n\\nCopyright (c) 2019, Vishvak Murahari \\nAll rights reserved. \\n\\nRedistribution and use in source and binary forms, with or without \\nmodification, are permitted provided that the following conditions are met: \\n\\n * Redistributions of source code must retain the above copyright notice, \\n   this list of conditions and the following disclaimer. \\n * Redistributions in binary form must reproduce the above copyright \\n   notice, this list of conditions and the following disclaimer in the \\n   documentation and/or other materials provided with the distribution. \\n * Neither the name of  nor the names of its contributors may be used to \\n   endorse or promote products derived from this software without specific \\n   prior written permission. \\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" \\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE \\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE \\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE \\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR \\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF \\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS \\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN \\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) \\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE \\nPOSSIBILITY OF SUCH DAMAGE. \\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# VisDial-BERT ##",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "visdial-bert",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vmurahari3",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmurahari3/visdial-bert/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Our code is implemented in PyTorch (v1.0). To setup, do the following:\n\n1. Install [Python 3.6](https://www.python.org/downloads/release/python-365/)\n2. Get the source:\n```\ngit clone https://github.com/vmurahari3/visdial-bert.git visdial-bert\n```\n3. Install requirements into the `visdial-bert` virtual environment, using [Anaconda](https://anaconda.org/anaconda/python):\n```\nconda env create -f env.yml\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 73,
+      "date": "Sat, 25 Dec 2021 19:19:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Make both the scripts in `scripts/` executable\n\n```\nchmod +x scripts/download_preprocessed.sh\nchmod +x scripts/download_checkpoints.sh\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gbcolborne/lang_id",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-07T21:20:36Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-28T15:38:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8088377151384015,
+        0.8899677352610017
+      ],
+      "excerpt": "Cuneiform language identification using BERT. \nThis code was developed for the shared task on cuneiform language \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9943822188145373,
+        0.9575446326212258
+      ],
+      "excerpt": "Campaign, and is \nlargely based on code available in the Big and Extending Repository \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Cuneiform language identification using BERT",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gbcolborne/lang_id/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 23:19:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gbcolborne/lang_id/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gbcolborne/lang_id",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Get training and development data. It is assumed to be in a\ntab-separated text file containing 2 columns, with text in the first\ncolumn and label in the second. The following instructions assume the\nlabeled training and dev sets (`train.txt` and `dev.txt`) are in a\nsubdirectory called `data_raw`.\n\n2. Deduplicate training data.\n\n```bash\npython map_texts_to_best_labels.py data_raw/train.txt data_raw/train_text_to_best_label.txt\npython dedup_labeled_training_file.py data_raw/train.txt data_raw/train_text_to_best_label.txt data_raw/train_dedup.txt\n```\n\n3. Gather all labeled data. \n\n```bash\nmkdir data_labeled\ncp data_raw/train_dedup.txt data_labeled/train.txt\ncp data_raw/dev.txt data_labeled/dev.txt\n```\n\n4. Copy dev set as test set. IMPORTANT: this is for illustrative\npurposes only, given that we don't have the gold labels of the CLI\ntest set yet.\n\n```bash\ncp data_labeled/dev.txt data_labeled/test.txt\n```\n\n5. Strip labels from training set for pretraining. Use `--split`\noption to group examples by class, for the sentence pair\nclassification task.\n\n```bash\nmkdir data_unlabeled\npython remove_labels.py --split data_labeled/train.txt data_unlabeled/train.txt\n```\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8138470993705482
+      ],
+      "excerpt": "Review settings in configuration file bert_config.json. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319801355033284
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python pretrain_BERT_on_2_tasks.py --bert_model_or_config_file bert_config.json --train_file data_unlabeled/train.txt --output_dir model_pretrained --max_seq_length 128 --do_train --train_batch_size 48 --learning_rate 1e-4 --warmup_proportion 0.02 --num_train_epochs 278 --num_gpus 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8005182785606366
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python run_BERT_classifier.py --data_dir data_labeled --bert_model_or_config_file model_pretrained --output_dir model_finetuned --do_train --do_eval --train_batch_size 32 --eval_batch_size 48 --learning_rate 1e-5 --num_train_epochs 8 --num_gpus 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python run_BERT_classifier.py --data_dir data_unlabeled --bert_model_or_config_file model_finetuned --output_dir model_predictions --do_predict --eval_batch_size 48 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gbcolborne/lang_id/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lang_id",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lang_id",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gbcolborne",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gbcolborne/lang_id/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python 3 (tested using version 3.7.1)\n* PyTorch (tested using version 1.0.0)\n* [pytorch-pretrained-bert](https://github.com/huggingface/pytorch-pretrained-BERT/tree/master/examples) (tested using version 0.5.1)\n* Anything missing? Please let me know.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 23:19:22 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

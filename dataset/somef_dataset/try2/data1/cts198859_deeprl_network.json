@@ -1,0 +1,251 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1702.08887, 2017.](https://arxiv.org/pdf/1702.08887.pdf)\n* ConsensusUpdate: [Zhang, Kaiqing, et al. \"Fully decentralized multi-agent reinforcement learning with networked agents.\" arXiv preprint https://arxiv.org/abs/1802.08757, 2018.](https://arxiv.org/pdf/1802.08757.pdf)\n\n\nAvailable MA2C algorithms:\n* DIAL: [Foerster, Jakob, et al. \"Learning to communicate with deep multi-agent reinforcement learning.\" Advances in Neural Information Processing Systems. 2016.](http://papers.nips.cc/paper/6042-learning-to-communicate-with-deep-multi-agent-reinforcement-learning.pdf)\n* CommNet: [Sukhbaatar, Sainbayar, et al. \"Learning multiagent communication with backpropagation.\" Advances in Neural Information Processing Systems, 2016.](https://arxiv.org/pdf/1605.07736.pdf)\n* NeurComm: Inspired from [Gilmer, Justin, et al. \"Neural message passing for quantum chemistry.\" arXiv preprint https://arxiv.org/abs/1704.01212, 2017.](https://arxiv.org/pdf/1704.01212.pdf)\n\nAvailable NMARL scenarios:\n* ATSC Grid: Adaptive traffic signal control in a synthetic traffic grid.\n* ATSC Monaco: Adaptive traffic signal control in a real-world traffic network from Monaco city.\n* CACC Catch-up: Cooperative adaptive cruise control for catching up the leadinig vehicle.\n* CACC Slow-down: Cooperative adaptive cruise control for following the leading vehicle to slow down.\n\n## Requirements\n* Python3 == 3.5\n* [Tensorflow](http://www.tensorflow.org/install) == 1.12.0 \n* [SUMO](http://sumo.dlr.de/wiki/Installing) >= 1.1.0\n\n## Usages\nFirst define all hyperparameters (including algorithm and DNN structure) in a config file under `[config_dir]` ([examples](./config)), and create the base directory of each experiement `[base_dir]`. For ATSC Grid, please call [`build_file.py`](./envs/large_grid_data) to generate SUMO network files before training.\n\n1. To train a new agent, run\n~~~\npython3 main.py --base-dir [base_dir] train --config-dir [config_dir]\n~~~\nTraining config/data and the trained model will be output to `[base_dir]/data` and `[base_dir]/model`, respectively.\n\n2. To access tensorboard during training, run\n~~~\ntensorboard --logdir=[base_dir]/log\n~~~\n\n3. To evaluate a trained agent, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seeds]\n~~~\nEvaluation data will be output to `[base_dir]/eva_data`. Make sure evaluation seeds are different from those used in training.    \n\n4. To visualize the agent behavior in ATSC scenarios, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seed] --demo\n~~~\nIt is recommended to use only one evaluation seed for the demo run. This will launch the SUMO GUI, and [`view.xml`](./envs/large_grid_data) can be applied to visualize queue length and intersectin delay in edge color and thickness. \n\n## Reproducibility\nThe paper results are based on an out-of-date SUMO version 0.32.0. We have re-run the ATSC experiments with SUMO 1.2.0 using the master code, and provided the following training plots as reference. The paper conclusions remain the same.\n|   Grid                   \t\t |      Monaco                   \n:-------------------------------:|:------------------------------:\n![](./figs/grid_train.png) \t\t | ![](./figs/net_train.png) \n\nThe pytorch impelmention is also avaliable at branch [pytorch](https://github.com/cts198859/deeprl_network/tree/pytorch).\n\n## Citation\nFor more implementation details and underlying reasonings, please check our paper [Multi-agent Reinforcement Learning for Networked System Control](https://openreview.net/forum?id=Syx7A3NFvH).\n~~~\n@inproceedings{\nchu2020multiagent,\ntitle={Multi-agent Reinforcement Learning for Networked System Control",
+      "https://arxiv.org/abs/1802.08757, 2018.](https://arxiv.org/pdf/1802.08757.pdf)\n\n\nAvailable MA2C algorithms:\n* DIAL: [Foerster, Jakob, et al. \"Learning to communicate with deep multi-agent reinforcement learning.\" Advances in Neural Information Processing Systems. 2016.](http://papers.nips.cc/paper/6042-learning-to-communicate-with-deep-multi-agent-reinforcement-learning.pdf)\n* CommNet: [Sukhbaatar, Sainbayar, et al. \"Learning multiagent communication with backpropagation.\" Advances in Neural Information Processing Systems, 2016.](https://arxiv.org/pdf/1605.07736.pdf)\n* NeurComm: Inspired from [Gilmer, Justin, et al. \"Neural message passing for quantum chemistry.\" arXiv preprint https://arxiv.org/abs/1704.01212, 2017.](https://arxiv.org/pdf/1704.01212.pdf)\n\nAvailable NMARL scenarios:\n* ATSC Grid: Adaptive traffic signal control in a synthetic traffic grid.\n* ATSC Monaco: Adaptive traffic signal control in a real-world traffic network from Monaco city.\n* CACC Catch-up: Cooperative adaptive cruise control for catching up the leadinig vehicle.\n* CACC Slow-down: Cooperative adaptive cruise control for following the leading vehicle to slow down.\n\n## Requirements\n* Python3 == 3.5\n* [Tensorflow](http://www.tensorflow.org/install) == 1.12.0 \n* [SUMO](http://sumo.dlr.de/wiki/Installing) >= 1.1.0\n\n## Usages\nFirst define all hyperparameters (including algorithm and DNN structure) in a config file under `[config_dir]` ([examples](./config)), and create the base directory of each experiement `[base_dir]`. For ATSC Grid, please call [`build_file.py`](./envs/large_grid_data) to generate SUMO network files before training.\n\n1. To train a new agent, run\n~~~\npython3 main.py --base-dir [base_dir] train --config-dir [config_dir]\n~~~\nTraining config/data and the trained model will be output to `[base_dir]/data` and `[base_dir]/model`, respectively.\n\n2. To access tensorboard during training, run\n~~~\ntensorboard --logdir=[base_dir]/log\n~~~\n\n3. To evaluate a trained agent, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seeds]\n~~~\nEvaluation data will be output to `[base_dir]/eva_data`. Make sure evaluation seeds are different from those used in training.    \n\n4. To visualize the agent behavior in ATSC scenarios, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seed] --demo\n~~~\nIt is recommended to use only one evaluation seed for the demo run. This will launch the SUMO GUI, and [`view.xml`](./envs/large_grid_data) can be applied to visualize queue length and intersectin delay in edge color and thickness. \n\n## Reproducibility\nThe paper results are based on an out-of-date SUMO version 0.32.0. We have re-run the ATSC experiments with SUMO 1.2.0 using the master code, and provided the following training plots as reference. The paper conclusions remain the same.\n|   Grid                   \t\t |      Monaco                   \n:-------------------------------:|:------------------------------:\n![](./figs/grid_train.png) \t\t | ![](./figs/net_train.png) \n\nThe pytorch impelmention is also avaliable at branch [pytorch](https://github.com/cts198859/deeprl_network/tree/pytorch).\n\n## Citation\nFor more implementation details and underlying reasonings, please check our paper [Multi-agent Reinforcement Learning for Networked System Control](https://openreview.net/forum?id=Syx7A3NFvH).\n~~~\n@inproceedings{\nchu2020multiagent,\ntitle={Multi-agent Reinforcement Learning for Networked System Control",
+      "https://arxiv.org/abs/1704.01212, 2017.](https://arxiv.org/pdf/1704.01212.pdf)\n\nAvailable NMARL scenarios:\n* ATSC Grid: Adaptive traffic signal control in a synthetic traffic grid.\n* ATSC Monaco: Adaptive traffic signal control in a real-world traffic network from Monaco city.\n* CACC Catch-up: Cooperative adaptive cruise control for catching up the leadinig vehicle.\n* CACC Slow-down: Cooperative adaptive cruise control for following the leading vehicle to slow down.\n\n## Requirements\n* Python3 == 3.5\n* [Tensorflow](http://www.tensorflow.org/install) == 1.12.0 \n* [SUMO](http://sumo.dlr.de/wiki/Installing) >= 1.1.0\n\n## Usages\nFirst define all hyperparameters (including algorithm and DNN structure) in a config file under `[config_dir]` ([examples](./config)), and create the base directory of each experiement `[base_dir]`. For ATSC Grid, please call [`build_file.py`](./envs/large_grid_data) to generate SUMO network files before training.\n\n1. To train a new agent, run\n~~~\npython3 main.py --base-dir [base_dir] train --config-dir [config_dir]\n~~~\nTraining config/data and the trained model will be output to `[base_dir]/data` and `[base_dir]/model`, respectively.\n\n2. To access tensorboard during training, run\n~~~\ntensorboard --logdir=[base_dir]/log\n~~~\n\n3. To evaluate a trained agent, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seeds]\n~~~\nEvaluation data will be output to `[base_dir]/eva_data`. Make sure evaluation seeds are different from those used in training.    \n\n4. To visualize the agent behavior in ATSC scenarios, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seed] --demo\n~~~\nIt is recommended to use only one evaluation seed for the demo run. This will launch the SUMO GUI, and [`view.xml`](./envs/large_grid_data) can be applied to visualize queue length and intersectin delay in edge color and thickness. \n\n## Reproducibility\nThe paper results are based on an out-of-date SUMO version 0.32.0. We have re-run the ATSC experiments with SUMO 1.2.0 using the master code, and provided the following training plots as reference. The paper conclusions remain the same.\n|   Grid                   \t\t |      Monaco                   \n:-------------------------------:|:------------------------------:\n![](./figs/grid_train.png) \t\t | ![](./figs/net_train.png) \n\nThe pytorch impelmention is also avaliable at branch [pytorch](https://github.com/cts198859/deeprl_network/tree/pytorch).\n\n## Citation\nFor more implementation details and underlying reasonings, please check our paper [Multi-agent Reinforcement Learning for Networked System Control](https://openreview.net/forum?id=Syx7A3NFvH).\n~~~\n@inproceedings{\nchu2020multiagent,\ntitle={Multi-agent Reinforcement Learning for Networked System Control"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For more implementation details and underlying reasonings, please check our paper [Multi-agent Reinforcement Learning for Networked System Control](https://openreview.net/forum?id=Syx7A3NFvH).\n~~~\n@inproceedings{\nchu2020multiagent,\ntitle={Multi-agent Reinforcement Learning for Networked System Control},\nauthor={Tianshu Chu and Sandeep Chinchali and Sachin Katti},\nbooktitle={International Conference on Learning Representations},\nyear={2020},\nurl={https://openreview.net/forum?id=Syx7A3NFvH}\n}\n~~~\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{\nchu2020multiagent,\ntitle={Multi-agent Reinforcement Learning for Networked System Control},\nauthor={Tianshu Chu and Sandeep Chinchali and Sachin Katti},\nbooktitle={International Conference on Learning Representations},\nyear={2020},\nurl={https://openreview.net/forum?id=Syx7A3NFvH}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9995360344992816,
+        0.9999978934769747,
+        0.9999991917117652
+      ],
+      "excerpt": "* PolicyInferring: Lowe, Ryan, et al. \"Multi-agent actor-critic for mixed cooperative-competitive environments.\" Advances in Neural Information Processing Systems, 2017. \n* FingerPrint: Foerster, Jakob, et al. \"Stabilising experience replay for deep multi-agent reinforcement learning.\" arXiv preprint arXiv:1702.08887, 2017. \n* ConsensusUpdate: Zhang, Kaiqing, et al. \"Fully decentralized multi-agent reinforcement learning with networked agents.\" arXiv preprint arXiv:1802.08757, 2018. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9878587451617619,
+        0.9852413459380145,
+        0.9999885874073116
+      ],
+      "excerpt": "* DIAL: Foerster, Jakob, et al. \"Learning to communicate with deep multi-agent reinforcement learning.\" Advances in Neural Information Processing Systems. 2016. \n* CommNet: Sukhbaatar, Sainbayar, et al. \"Learning multiagent communication with backpropagation.\" Advances in Neural Information Processing Systems, 2016. \n* NeurComm: Inspired from Gilmer, Justin, et al. \"Neural message passing for quantum chemistry.\" arXiv preprint arXiv:1704.01212, 2017. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cts198859/deeprl_network",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-08-09T01:01:16Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T12:35:52Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9942002774847374
+      ],
+      "excerpt": "This repo implements the state-of-the-art MARL algorithms for networked system control, with observability and communication of each agent limited to its neighborhood. For fair comparison, all algorithms are applied to A2C agents, classified into two groups: IA2C contains non-communicative policies which utilize neighborhood information only, whereas MA2C contains communicative policies with certain communication protocols. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8285087187189928
+      ],
+      "excerpt": "* DIAL: Foerster, Jakob, et al. \"Learning to communicate with deep multi-agent reinforcement learning.\" Advances in Neural Information Processing Systems. 2016. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9232044022165707
+      ],
+      "excerpt": "The paper results are based on an out-of-date SUMO version 0.32.0. We have re-run the ATSC experiments with SUMO 1.2.0 using the master code, and provided the following training plots as reference. The paper conclusions remain the same. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "multi-agent deep reinforcement learning for networked system control.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cts198859/deeprl_network/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 68,
+      "date": "Wed, 29 Dec 2021 13:22:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cts198859/deeprl_network/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cts198859/deeprl_network",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/cts198859/deeprl_network/master/result_plot.ipynb",
+      "https://raw.githubusercontent.com/cts198859/deeprl_network/master/.ipynb_checkpoints/result_plot-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/cts198859/deeprl_network/master/setup_sumo.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.806894807625977
+      ],
+      "excerpt": "* ATSC Grid: Adaptive traffic signal control in a synthetic traffic grid. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8981524067900627
+      ],
+      "excerpt": "|   Grid                         |      Monaco                  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cts198859/deeprl_network/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Networked Multi-agent RL (NMARL)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "deeprl_network",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cts198859",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cts198859/deeprl_network/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python3 == 3.5\n* [Tensorflow](http://www.tensorflow.org/install) == 1.12.0 \n* [SUMO](http://sumo.dlr.de/wiki/Installing) >= 1.1.0\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 224,
+      "date": "Wed, 29 Dec 2021 13:22:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First define all hyperparameters (including algorithm and DNN structure) in a config file under `[config_dir]` ([examples](./config)), and create the base directory of each experiement `[base_dir]`. For ATSC Grid, please call [`build_file.py`](./envs/large_grid_data) to generate SUMO network files before training.\n\n1. To train a new agent, run\n~~~\npython3 main.py --base-dir [base_dir] train --config-dir [config_dir]\n~~~\nTraining config/data and the trained model will be output to `[base_dir]/data` and `[base_dir]/model`, respectively.\n\n2. To access tensorboard during training, run\n~~~\ntensorboard --logdir=[base_dir]/log\n~~~\n\n3. To evaluate a trained agent, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seeds]\n~~~\nEvaluation data will be output to `[base_dir]/eva_data`. Make sure evaluation seeds are different from those used in training.    \n\n4. To visualize the agent behavior in ATSC scenarios, run\n~~~\npython3 main.py --base-dir [base_dir] evaluate --evaluation-seeds [seed] --demo\n~~~\nIt is recommended to use only one evaluation seed for the demo run. This will launch the SUMO GUI, and [`view.xml`](./envs/large_grid_data) can be applied to visualize queue length and intersectin delay in edge color and thickness. \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

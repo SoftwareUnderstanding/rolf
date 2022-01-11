@@ -1,0 +1,396 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nWe thank NSF Career Award #1943349, MIT-IBM Watson AI Lab, Google, Adobe, and Sony for supporting this research.  Research supported with Cloud TPUs from Google's TensorFlow Research Cloud (TFRC). We thank William S. Peebles and Yijun Li for helpful comments.\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nIf you find this code helpful, please cite our paper:\r\n```\r\n@inproceedings{zhao2020diffaugment,\r\n  title={Differentiable Augmentation for Data-Efficient GAN Training},\r\n  author={Zhao, Shengyu and Liu, Zhijian and Lin, Ji and Zhu, Jun-Yan and Han, Song},\r\n  booktitle={Conference on Neural Information Processing Systems (NeurIPS)},\r\n  year={2020}\r\n}\r\n```\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{zhao2020diffaugment,\n  title={Differentiable Augmentation for Data-Efficient GAN Training},\n  author={Zhao, Shengyu and Liu, Zhijian and Lin, Ji and Zhu, Jun-Yan and Han, Song},\n  booktitle={Conference on Neural Information Processing Systems (NeurIPS)},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9999087997143978,
+        0.9776512631329025
+      ],
+      "excerpt": "Shengyu Zhao, Zhijian Liu, Ji Lin, Jun-Yan Zhu, and Song Han<br> \nMIT, Tsinghua University, Adobe Research, CMU<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559,
+        0.8955886365383559
+      ],
+      "excerpt": "real_scores = Discriminator(DiffAugment(reals, policy=policy)) \nfake_scores = Discriminator(DiffAugment(fakes, policy=policy)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "fake_scores = Discriminator(DiffAugment(fakes, policy=policy)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mit-han-lab/data-efficient-gans",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-15T16:07:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-27T05:52:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.963890885271258,
+        0.8822373907070095,
+        0.966761681495743,
+        0.9497265199174866,
+        0.8208619214441452,
+        0.9458818631402945,
+        0.9697241026851044,
+        0.9731321479763226
+      ],
+      "excerpt": "Generated using only 100 images of Obama, grumpy cats, pandas, the Bridge of Sighs, the Medici Fountain, the Temple of Heaven, without pre-training. \n[NEW!] PyTorch training with DiffAugment-stylegan2-pytorch is now available! \n[NEW!] Our Colab tutorial is released!  \n[NEW!] FFHQ training is supported! See the DiffAugment-stylegan2 README. \n[NEW!] Time to generate 100-shot interpolation videos with generate_gif.py! \n[NEW!] Our DiffAugment-biggan-imagenet repo (for TPU training) is released! \n[NEW!] Our DiffAugment-biggan-cifar PyTorch repo is released! \nThis repository contains our implementation of Differentiable Augmentation (DiffAugment) in both PyTorch and TensorFlow. It can be used to significantly improve the data efficiency for GAN training. We have provided DiffAugment-stylegan2 (TensorFlow) and DiffAugment-stylegan2-pytorch, DiffAugment-biggan-cifar (PyTorch) for GPU training, and DiffAugment-biggan-imagenet (TensorFlow) for TPU training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.836401436486815
+      ],
+      "excerpt": "Low-shot generation without pre-training. With DiffAugment, our model can generate high-fidelity images using only 100 Obama portraits, grumpy cats, or pandas from our collected 100-shot datasets, 160 cats or 389 dogs from the AnimalFace dataset at 256\u00d7256 resolution. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8674992636412588
+      ],
+      "excerpt": "Unconditional generation results on CIFAR-10. StyleGAN2\u2019s performance drastically degrades given less training data. With DiffAugment, we are able to roughly match its FID and outperform its Inception Score (IS) using only 20% training data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9471063305903217
+      ],
+      "excerpt": "Overview of DiffAugment for updating D (left) and G (right). DiffAugment applies the augmentation T to both the real sample x and the generated output G(z). When we update G, gradients need to be back-propagated through T (iii), which requires T to be differentiable w.r.t. the input. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594472296596961
+      ],
+      "excerpt": "To run StyleGAN2 + DiffAugment for unconditional generation on the 100-shot datasets, CIFAR, FFHQ, or LSUN, please refer to the DiffAugment-stylegan2 README or DiffAugment-stylegan2-pytorch for the PyTorch version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9472906522296974
+      ],
+      "excerpt": "To help you use DiffAugment in your own codebase, we provide portable DiffAugment operations of both TensorFlow and PyTorch versions in DiffAugment_tf.py and DiffAugment_pytorch.py. Generally, DiffAugment can be easily adopted in any model by substituting every D(x) with D(T(x)), where x can be real images or fake images, D is the discriminator, and T is the DiffAugment operation. For example, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9191418228246323,
+        0.8785410080152383
+      ],
+      "excerpt": ": For large datasets, try using a subset of transformations in ['color', 'translation', 'cutout']. \n: Welcome to discover more DiffAugment transformations! \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890391071376806
+      ],
+      "excerpt": ": Calculating D's loss based on real_scores and fake_scores... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8086382895828291
+      ],
+      "excerpt": ": Calculating G's loss based on fake_scores... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[NeurIPS 2020] Differentiable Augmentation for Data-Efficient GAN Training",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mit-han-lab/data-efficient-gans/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 145,
+      "date": "Thu, 30 Dec 2021 04:47:27 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mit-han-lab/data-efficient-gans/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mit-han-lab/data-efficient-gans",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-stylegan2-pytorch/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-stylegan2-pytorch/docker_run.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar100-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar100.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar100-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar10-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar10-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar10-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar100-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar100.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar100-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar10.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar10.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar100-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar10-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar10-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar10-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar100.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar10-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/biggan-cifar100.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar10.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar100-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-biggan-cifar10.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar10-0.2.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/DiffAugment-cr-biggan-cifar100-0.1.sh",
+      "https://raw.githubusercontent.com/mit-han-lab/data-efficient-gans/master/DiffAugment-biggan-cifar/scripts/cr-biggan-cifar100-0.1.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd DiffAugment-stylegan2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9952653930297553
+      ],
+      "excerpt": "cd DiffAugment-stylegan2-pytorch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860199125211739
+      ],
+      "excerpt": "To run StyleGAN2 + DiffAugment for unconditional generation on the 100-shot datasets, CIFAR, FFHQ, or LSUN, please refer to the DiffAugment-stylegan2 README or DiffAugment-stylegan2-pytorch for the PyTorch version. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8584204970970639
+      ],
+      "excerpt": "<img src=\"imgs/interp.gif\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8887108663380188
+      ],
+      "excerpt": "<img src=\"imgs/low-shot-comparison.jpg\" width=\"1000px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9257683492787132
+      ],
+      "excerpt": "<img src=\"imgs/cifar10-results.jpg\" width=\"1000px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8621241534198456
+      ],
+      "excerpt": "<img src=\"imgs/method.jpg\" width=\"1000px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9317404072202677
+      ],
+      "excerpt": "python run_low_shot.py --dataset=100-shot-obama --num-gpus=4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.875473765935996
+      ],
+      "excerpt": "python train.py --outdir=training-runs --data=https://data-efficient-gans.mit.edu/datasets/100-shot-obama.zip --gpus=1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.8801854956928516
+      ],
+      "excerpt": "from DiffAugment_pytorch import DiffAugment \n: from DiffAugment_tf import DiffAugment \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mit-han-lab/data-efficient-gans/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "Shell",
+      "C++",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 2-Clause \"Simplified\" License",
+      "url": "https://api.github.com/licenses/bsd-2-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright (c) 2020, Shengyu Zhao, Zhijian Liu, Ji Lin, Jun-Yan Zhu, and Song Han\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n\\n\\n--------------------------- LICENSE FOR BigGAN-PyTorch --------------------------------\\nMIT License\\n\\nCopyright (c) 2019 Andy Brock\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Data-Efficient GANs with DiffAugment",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "data-efficient-gans",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mit-han-lab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mit-han-lab/data-efficient-gans/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 962,
+      "date": "Thu, 30 Dec 2021 04:47:27 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "gans",
+      "pytorch",
+      "tensorflow",
+      "data-efficient",
+      "generative-adversarial-network",
+      "image-generation",
+      "neurips-2020"
+    ],
+    "technique": "GitHub API"
+  }
+}

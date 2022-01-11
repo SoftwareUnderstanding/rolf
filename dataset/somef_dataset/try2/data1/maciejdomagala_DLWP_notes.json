@@ -1,0 +1,418 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1512.03385"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maciejdomagala/DLWP_notes",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-05T20:48:45Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-11T16:00:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8258303532915466
+      ],
+      "excerpt": "Notes made for chosen chapters when reading a book.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8694663480149835
+      ],
+      "excerpt": "113 - idea of a gradient descent, rate of change of the function (ROC) formula \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9010977597439777,
+        0.9510118481653231
+      ],
+      "excerpt": "119 - input normalization, problem of having parameters of different scale \nhaving different learning rates for different parameters is not a good option, becomes redundant as the model scales up. always normalize the inputs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8785946682626111,
+        0.970956241823601
+      ],
+      "excerpt": "usage of torch.no_grad(): it stops tracing the grad changes. used when updating the parameters, since grad would track that in-place change being made. \nanother way of doing that: creating a copy of a tensor using the tensor.detach() functionality (also removes the grad tracking). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.972095108784243
+      ],
+      "excerpt": "optimizers have two primary methods: zero_grad and step. when constructing optimizer, we are passing the parameters inside. the zero_grad will zero the grad for these parameters. step method is updating the value of the parameters (we don't have to change the values of parameters after backward pass in place anymore) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042000067757013
+      ],
+      "excerpt": "ADAM is a lot less sensitive to the scale of the parameters than SGD. it has the adaptive learning rate property. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9334752991142393,
+        0.9693233393948762,
+        0.9952458873254455,
+        0.9016873854504204,
+        0.8642161119046923,
+        0.9599143182927992
+      ],
+      "excerpt": "if the training loss and validation loss are diverge with the training going forward, it means we are overfitting. the model is fitting too well to the training data and therefore it's not generalizing well \nways to prevent overfitting: \n1. using more data (more samples for model to learn \u2192 statistically better generalizing) \n2. using regularization methods - penalizing big differences between the prediction and ground truths. this makes sure that the model will be as regular in-between the training data. \n3. using data augmentation - providing more training samples by manipulation of already existing data (adding noise, translations etc.) \n4. making the model simpler - having less parameters \u2192 a bit worse fit to the data \u2192 less error during prediction on new data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8810915355450554,
+        0.8055096890118832
+      ],
+      "excerpt": "usual way of performing the neural network fitting in two steps: \n1. make it bigger until it fits the data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8336794153571372
+      ],
+      "excerpt": "torch.randperm() is shuffling the tensor indices \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9716136982621952,
+        0.9638877225607974,
+        0.8010993836713414,
+        0.9375599751642861
+      ],
+      "excerpt": "1. it presents non-linearity to the model. normally, neuron construction only allows linear changes (mul and add in the neuron). we can later apply activation function of any type (tanh, relu etc.) to change the output. \n2. it allows us to get a certain type of output from the network when included on the last layer (for instance classes with softmax) \n147 - types of activation functions \nReLU - widely used, one of the state-of-the-art performances in networks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8158164171701655
+      ],
+      "excerpt": "2. differantiable (for gradient calculation). point discontinuities are fine (so ReLU works) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8469799120162678
+      ],
+      "excerpt": "1. processing only one sample at the time doesn't saturate CPU/GPU performance. these are normally parallelized which means we can perform whole batches at once to use all of the computing power \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8217340678113328
+      ],
+      "excerpt": "to use the nn.Module we need to provide the data where first dimension is the batch quantity. for single tensors as inputs we can use torch.unsqueeze() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9422442799348754
+      ],
+      "excerpt": "160 - inspecting the parameters of the network \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8447992342646516,
+        0.9030182590507119,
+        0.8743346172859702
+      ],
+      "excerpt": "torchvision.transforms provides a translation of PIL and numpy to tensors. it can be used directly when loading a dataset when using transform=transforms.ToTensor() \nmatplotlib expects HxWxC shape (color channels at the end) when plotting. pytorch uses CxHxW so there is a need to permute it. \n170 - normalizing the data, using transform.Compose \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9243438641725881
+      ],
+      "excerpt": "dealing with the categorical input requires using different functions. softmax gives us output as a probability at the end of the network \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8880547808426862,
+        0.9773764570151374,
+        0.9402501224307793,
+        0.968233670559255
+      ],
+      "excerpt": "1. for a single sample in the batch, look at the probability value p that model assigned to the correct class. \n2. calculate the -log(p), which is high when probability is low and vice versa \n3. add that to the overall loss for a batch \nin pytorch, the NLLLoss is not implemented as in theory, it doesn't apply the log value to the probability. therefore, we need to already input the logarithmic value inside of the loss function. for that, we should switch softmax to logsoftmax in the model, so the output tensor from the model is already with log. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9727087761499346,
+        0.9833368706887989,
+        0.9598541041885037,
+        0.909204471568689
+      ],
+      "excerpt": "using LogSoftmax with NLLLoss results in the same result as using nn.CrossEntropyLoss at one go for the loss value (without using any softmax function at the end of the network). difference  is, the results of the network won't be presentable as probabilities (or log_probabilities), since softmax gives us that. \n186 - checking the accuracy of the model \n189 - limitations of nn.Linear \nfully connected network is not translation invariant. recognizing a pattern in one place on the image doesn't contribute to recognizing the pattern in a different place. that is why linear layers are redundant - they need too many parameters to take every possibility into account. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8835925526572038,
+        0.843643147545251
+      ],
+      "excerpt": "1. local operations on the neighboourhoods, \n2. translation invariance (we slide the kernel over the whole image) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8171923284161798
+      ],
+      "excerpt": "padding is used to leave the image dimensions unchanged after the convolution layer. important in big architectures. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9709725083557829
+      ],
+      "excerpt": "idea of downsampling: even though convolutions are reducing the number of parameters and equip us with locality and translation invariance, the kernels have limited (and usually small) size. therefore we are unable to get the \"big picture\" properties of an image. to address that, we could use bigger kernels or use downsampling between convolutions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8983460252270085
+      ],
+      "excerpt": "3. strided convolution when we are looking with the convolutional filter at the pixels that are further from each other. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8897437796347423,
+        0.9326587995472015
+      ],
+      "excerpt": "use numel() to get the number of parameters in each of the network layer \nwhen working with nn.Sequential we can get from multichannel, 2d layer output (for instance after conv2d layer) to the Linear layer (at the end, when we want to calculate the probabilities) using the nn.Flatten functionality. without it, we must build the forward network pass by hand. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9377971066347465,
+        0.860059181823877
+      ],
+      "excerpt": "main difference between using nn.Module and nn.functional utilities is that with the former, we trace the parameters, the latter is purely functional input \u2192 output mapping, nothing is remember. useful e.g for activation functions, pooling etc. \n214 - saving a model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9901242186152523,
+        0.9905429778981476,
+        0.9697040629808941
+      ],
+      "excerpt": "L2 regularization is called weight decay, it sums the squares of the weights in the model \nL1 is called lasso regression, it is a sum of absolute values in the model \nL1 is good for sparsity, when there are many inputs and you believe that only a few of them are meaningful. L2 is good at dealing with correlated inputs. If two inputs are perfectly correlated L2 put half of the weight (beta) on each input, while L1 would pick one randomly (so less stable). One can use a combination of L1, L2 to get a balance of both, also known as Elastic Net. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9496065908529114
+      ],
+      "excerpt": "reckon that when using nn.BatchNorm2d in the network we should set bias=False in the nn.Conv2d since the bias is already included in the batch normalization part.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9063051152185019,
+        0.9747734837185166
+      ],
+      "excerpt": "deep networks prior to 2015 had ~20 layers, the training on more of them was highly uneffective due to the vanishing gradient problem. Multiplying a lot of small numbers during backpropagation led to the parameters on the early layer to be very difficult to train properly. problem was addressed in 2015 by introducing the ResNets (https://arxiv.org/abs/1512.03385) and reaching even 100 layers in the networks. \n227 - creating deep ResNet sequentially with the usage of ResBlocks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9719040201965407
+      ],
+      "excerpt": "260 - caching data on the disk \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Notes and code based on the Deep Learning with PyTorch book.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maciejdomagala/DLWP_notes/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 18:41:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/maciejdomagala/DLWP_notes/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "maciejdomagala/DLWP_notes",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/maciejdomagala/DLWP_notes/master/chap5.ipynb",
+      "https://raw.githubusercontent.com/maciejdomagala/DLWP_notes/master/chap6.ipynb",
+      "https://raw.githubusercontent.com/maciejdomagala/DLWP_notes/master/chap7.ipynb",
+      "https://raw.githubusercontent.com/maciejdomagala/DLWP_notes/master/chap8.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8017102069703639
+      ],
+      "excerpt": "Source: https://pytorch.org/assets/deep-learning/Deep-Learning-with-PyTorch.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8861599471137942
+      ],
+      "excerpt": "131 - train/test/valid dataset separation, overfitting \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8435705523010719
+      ],
+      "excerpt": "215 - GPU training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8365111574279513
+      ],
+      "excerpt": "223 - model.train() and model.eval() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8644160398756944
+      ],
+      "excerpt": "259 - collections.namedtuple usage \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8403466907453594
+      ],
+      "excerpt": "275 - training/validation datasets \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/maciejdomagala/DLWP_notes/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deep Learning with PyTorch Notes",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DLWP_notes",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "maciejdomagala",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maciejdomagala/DLWP_notes/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 18:41:22 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

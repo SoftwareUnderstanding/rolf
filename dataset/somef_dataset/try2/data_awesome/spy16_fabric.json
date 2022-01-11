@@ -1,0 +1,170 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/spy16/fabric",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-07T19:52:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-28T04:23:32Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8392940572104687
+      ],
+      "excerpt": "Fabric is a triple-store written in Go. Fabric provides simple functions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Fabric is a simple triplestore written in Golang",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/spy16/fabric/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Mon, 20 Dec 2021 11:35:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/spy16/fabric/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "spy16/fabric",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/spy16/fabric/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Go",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Shivaprasad Bhat\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Fabric",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fabric",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "spy16",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/spy16/fabric/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 177,
+      "date": "Mon, 20 Dec 2021 11:35:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "golang",
+      "golang-library",
+      "triplestore",
+      "graph"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Get fabric by using `go get -u github.com/spy16/fabric` (Fabric as a library has no external dependencies)\n\n```go\nmem := &fabric.InMemoryStore{}\n\nfab := fabric.New(mem)\n\nfab.Insert(context.Background(), fabric.Triple{\n    Source: \"Bob\",\n    Predicate: \"Knows\",\n    Target: \"John\",\n})\n\nfab.Query(context.Background(), fabric.Query{\n    Source: fabric.Clause{\n        Type: \"equal\",\n        Value: \"Bob\",\n    },\n})\n```\n\nTo use a SQL database for storing the triples, use the following snippet:\n\n```go\ndb, err := sql.Open(\"sqlite3\", \"fabric.db\")\nif err != nil {\n    panic(err)\n}\n\nstore := &fabric.SQLStore{\n    DB: db,\n}\nstore.Setup(context.Background()) // to create required tables\n\nfab := fabric.New(store)\n```\n\n> Fabric `SQLStore` uses Go's standard `database/sql` package. So any SQL database supported\n> through this interface (includes most major SQL databases) should work.\n\nAdditional store support can be added by implementing the `Store` interface.\n\n```go\ntype Store interface {\n\tInsert(ctx context.Context, tri Triple) error\n\tQuery(ctx context.Context, q Query) ([]Triple, error)\n\tDelete(ctx context.Context, q Query) (int, error)\n}\n```\n\nOptional `Counter` and `ReWeighter` can be implemented by the store implementations\nto support extended query options.\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

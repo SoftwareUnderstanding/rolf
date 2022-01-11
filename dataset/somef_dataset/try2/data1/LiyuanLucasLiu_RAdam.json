@@ -1,0 +1,305 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1908.03265",
+      "https://arxiv.org/abs/1908.03265"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite the following paper if you found our model useful. Thanks!\n\n>Liyuan Liu , Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng Gao, and Jiawei Han (2020). On the Variance of the Adaptive Learning Rate and Beyond. the Eighth International Conference on Learning Representations.\n\n```\n@inproceedings{liu2019radam,\n author = {Liu, Liyuan and Jiang, Haoming and He, Pengcheng and Chen, Weizhu and Liu, Xiaodong and Gao, Jianfeng and Han, Jiawei},\n booktitle = {Proceedings of the Eighth International Conference on Learning Representations (ICLR 2020)},\n month = {April},\n title = {On the Variance of the Adaptive Learning Rate and Beyond},\n year = {2020}\n}\n\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We provide a simple introduction in [Motivation](#motivation), and more details can be found in our [paper](https://arxiv.org/abs/1908.03265). There are some unofficial introductions available (with better writings), and they are listed here for reference only (contents/claims in our paper are more accurate):\n\n[Medium Post](https://medium.com/@lessw/new-state-of-the-art-ai-optimizer-rectified-adam-radam-5d854730807b)\n> [related Twitter Post](https://twitter.com/jeremyphoward/status/1162118545095852032?ref_src=twsrc%5Etfw)\n\n[CSDN Post (in Chinese)](https://blog.csdn.net/u014248127/article/details/99696029)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{liu2019radam,\n author = {Liu, Liyuan and Jiang, Haoming and He, Pengcheng and Chen, Weizhu and Liu, Xiaodong and Gao, Jianfeng and Han, Jiawei},\n booktitle = {Proceedings of the Eighth International Conference on Learning Representations (ICLR 2020)},\n month = {April},\n title = {On the Variance of the Adaptive Learning Rate and Beyond},\n year = {2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9535738584086332
+      ],
+      "excerpt": "<p>[0] Goyal et al, Accurate, Large Minibatch SGD: Training Imagenet in 1 Hour, 2017</p> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LiyuanLucasLiu/RAdam",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-01T00:54:02Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T12:01:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We provide a simple introduction in [Motivation](#motivation), and more details can be found in our [paper](https://arxiv.org/abs/1908.03265). There are some unofficial introductions available (with better writings), and they are listed here for reference only (contents/claims in our paper are more accurate):\n\n[Medium Post](https://medium.com/@lessw/new-state-of-the-art-ai-optimizer-rectified-adam-radam-5d854730807b)\n> [related Twitter Post](https://twitter.com/jeremyphoward/status/1162118545095852032?ref_src=twsrc%5Etfw)\n\n[CSDN Post (in Chinese)](https://blog.csdn.net/u014248127/article/details/99696029)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<h5 align=\"center\"><i>If warmup is the answer, what is the question?</i></h5>\n\nThe learning rate warmup for Adam is a must-have trick for stable training in certain situations (or eps tuning). But the underlying mechanism is largely unknown. In our study, we suggest one fundamental cause is __the large variance of the adaptive learning rates__, and provide both theoretical and empirical support evidence.\n\nIn addition to explaining __why we should use warmup__, we also propose __RAdam__, a theoretically sound variant of Adam. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "Related Posts and Repos \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9015514264399226
+      ],
+      "excerpt": "As shown in Figure 1, we assume that gradients follow a normal distribution (mean: \\mu, variance: 1). The variance of the adaptive learning rate is simulated and plotted in Figure 1 (blue curve). We observe that the adaptive learning rate has a large variance in the early stage of training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8423453526380951
+      ],
+      "excerpt": "When using a Transformer for NMT, a warmup stage is usually required to avoid convergence problems (e.g., Adam-vanilla converges around 500 PPL in Figure 2, while Adam-warmup successfully converges under 10 PPL). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9558616735389588,
+        0.9929965883093514,
+        0.9609078147470088,
+        0.9953299974323194,
+        0.9866775654271902
+      ],
+      "excerpt": "Therefore, we conjecture that the large variance in the early stage causes the convergence problem, and further propose Rectified Adam by analytically reducing the large variance. More details can be found in our paper. \nYes, the robustness of RAdam is not infinity. In our experiments, it works for a broader range of learning rates, but not all learning rates. \nChoice of the Original Transformer. We choose the original Transformer as our main study object because, without warmup, it suffers from the most serious convergence problems in our experiments. With such serious problems, our controlled experiments can better verify our hypothesis (i.e., we demonstrate that Adam-2k / Adam-eps can avoid spurious local optima by minimal changes). \nSensitivity. We observe that the Transformer is sensitive to the architecture configuration, despite its efficiency and effectiveness. For example, by changing the position of the layer norm, the model may / may not require the warmup to get a good performance. Intuitively, since the gradient of the attention layer could be more sparse and the adaptive learning rates for smaller gradients have a larger variance, they are more sensitive. Nevertheless, we believe this problem deserves more in-depth analysis and is beyond the scope of our study. \nAlthough the adaptive learning rate has a larger variance in the early stage, the exact magnitude is subject to the model design. Thus, the convergent problem could be more serious for some models/tasks than others. In our experiments, we observe that RAdam achieves consistent improvements over the vanilla Adam. It verifies the variance issue widely exists (since we can get better performance by fixing it). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928498081848249,
+        0.9840941427564205,
+        0.9940918841624485
+      ],
+      "excerpt": "Another related concern is that, when the mean of the gradient is significantly larger than its variance, the magnitude of the \"problematic\" variance may not be very large (i.e., in Figure 1, when \\mu equals to 10, the adaptive learning rate variance is relatively small and may not cause problems). We think it provides a possible explaination on why warmup have a bigger impact on some models than others. Still, we suggest that, in real-world applications, neural networks usually have some parts of parameters meet our assumption well (i.e., their gradient variance is larger than their gradient mean), and needs the rectification to stabilize the training. \nTo the best of our knowledge, the warmup heuristic is originally designed for large minibatch SGD [0], based on the intuition that the network changes rapidly in the early stage. However, we find that it does not explain why Adam requires warmup. Notice that, Adam-2k uses the same large learning rate but with a better estimation of the adaptive learning rate can also avoid the convergence problems. \nThe reason why sometimes warmup also helps SGD still lacks of theoretical support. FYI, when optimizing a simple 2-layer CNN with gradient descent, the thoery of [1] could be used to show the benifits of warmup. Specifically, the lr must be $O(cos \\phi)$, where $\\phi$ is the angle between the current weight and the ground true weight and $cos \\phi$ could be very small due to  high dimensional space and random initialization. And thus lr must be very small at the beginning to guarentee the convergence. $cos \\phi$ however can be improved in the later stage, and thus the learning rate is allowed to be larger. Their theory somehow can justify why warmup is needed by gradient descend and neural networks. But it is still far-fetched for the real scenario. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9279507764911411
+      ],
+      "excerpt": "RAdam is very easy to implement, we provide PyTorch implementations here, while third party ones can be found at: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8075392983312921,
+        0.9754850937926131,
+        0.9204385314680196,
+        0.8249448201146338,
+        0.9170151226951634,
+        0.9316186703486173
+      ],
+      "excerpt": "Julia implementation in Flux.jl \nWe are happy to see that our algorithms are found to be useful by some users : -) \n<blockquote data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">&quot;...I tested it on ImageNette and quickly got new high accuracy scores for the 5 and 20 epoch 128px leaderboard scores, so I know it works... <a href=https://forums.fast.ai/t/meet-radam-imo-the-new-state-of-the-art-ai-optimizer/52656>https://forums.fast.ai/t/meet-radam-imo-the-new-state-of-the-art-ai-optimizer/52656</a></p>&mdash; Less Wright August 15, 2019</blockquote> \n<blockquote data-conversation=\"none\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">Thought &quot;sounds interesting, I&#39;ll give it a try&quot; - top 5 are vanilla Adam, bottom 4 (I only have access to 4 GPUs) are RAdam... so far looking pretty promising! <a href=\"https://t.co/irvJSeoVfx\">pic.twitter.com/irvJSeoVfx</a></p>&mdash; Hamish Dickson (@_mishy) August 16, 2019</blockquote> \n<blockquote data-conversation=\"none\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">RAdam works great for me! It\u2019s good to several % accuracy for free, but the biggest thing I like is the training stability. RAdam is way more stable! <a href=\"https://medium.com/@mgrankin/radam-works-great-for-me-344d37183943\">https://medium.com/@mgrankin/radam-works-great-for-me-344d37183943</a></p>&mdash; Grankin Mikhail August 17, 2019</blockquote> \n<blockquote data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">&quot;... Also, I achieved higher accuracy results using the newly proposed RAdam optimization function.... <a href=https://towardsdatascience.com/optimism-is-on-the-menu-a-recession-is-not-d87cce265b10> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "On the Variance of the Adaptive Learning Rate and Beyond",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LiyuanLucasLiu/RAdam/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 343,
+      "date": "Sat, 25 Dec 2021 13:34:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LiyuanLucasLiu/RAdam/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LiyuanLucasLiu/RAdam",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/LiyuanLucasLiu/RAdam/master/nmt/eval.sh",
+      "https://raw.githubusercontent.com/LiyuanLucasLiu/RAdam/master/cifar_imagenet/fourstep.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Directly replace the vanilla Adam with RAdam without changing any settings. \n2. Further tune hyper-parameters (including the learning rate) for a better performance.\n\nNote that in our paper, our major contribution is __to identify why we need the warmup for Adam__. Although some researchers successfully improve their model performance (__[user comments](#user-comments)__), considering the difficulty of training NNs, directly plugging in RAdam __may not__ result in an immediate performance boost. Based on our experience, replacing __the vanilla Adam__ with RAdam usually results in a better performance; however, if __warmup has already been employed and tuned__ in the baseline method, it is necessary to also tune hyper-parameters for RAdam. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8480640334807876
+      ],
+      "excerpt": "<p align=\"center\"><img width=\"100%\" src=\"img/variance.png\"/></p> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LiyuanLucasLiu/RAdam/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Wei Yang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Table of Contents",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RAdam",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LiyuanLucasLiu",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LiyuanLucasLiu/RAdam/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2444,
+      "date": "Sat, 25 Dec 2021 13:34:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "optimizer",
+      "adam",
+      "adam-optimizer",
+      "warmup"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Directly replace the vanilla Adam with RAdam without changing any settings. \n2. Further tune hyper-parameters (including the learning rate) for a better performance.\n\nNote that in our paper, our major contribution is __to identify why we need the warmup for Adam__. Although some researchers successfully improve their model performance (__[user comments](#user-comments)__), considering the difficulty of training NNs, directly plugging in RAdam __may not__ result in an immediate performance boost. Based on our experience, replacing __the vanilla Adam__ with RAdam usually results in a better performance; however, if __warmup has already been employed and tuned__ in the baseline method, it is necessary to also tune hyper-parameters for RAdam. \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

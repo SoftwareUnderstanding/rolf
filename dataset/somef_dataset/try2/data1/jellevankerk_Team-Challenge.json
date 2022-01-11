@@ -1,0 +1,248 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9674428380587339
+      ],
+      "excerpt": "Written by: Colin Nieuwlaat, Jelle van Kerkvoorde, Mandy de Graaf, Megan Schuurmans & Inge van der Schagt \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jellevankerk/Team-Challenge",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-28T19:40:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-05T16:30:06Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    This program performs segmentation of the left vertricle, myocardium, right ventricle\n    and backgound of Cardiovascular Magnetic Resonance Images, with use of a convolutional neural network based on the well-known U-Net     architecture, as described by [https://arxiv.org/pdf/1505.04597.pdf](Ronneberger et al.) For each patient, both a 3D end systolic       image and a 3D end diastolic image with its corresponding ground truth segmentation of the left ventricle, myocardium and right         ventricle is available. \n    \n    The available code first divides the patients data into a training set and a test set. The training data is then loaded from the        stored location and subsequently preprocessed. Preprocessing steps include resampling the image to the same voxel spacing, removal of outliers, normalization, cropping and one-hot encoding of the labels. Before training, the trainingset is subdivided again for training and validation of the model.\n    \n    For training, a network based on the U-Net architecture is used and implemented with keras. For training, many different variables       can be tweaked, which are described in some detail below. After training, the network is evaluated using the test dataset. This data is loaded and preprocessed in the same way as the training dataset and propagated through the network to obtain pixel-wise predictions for each class. These predictions are probabilities and are thresholded to obtain a binary segmentation. \n    \n    The binary segmentations are then evaluated by computing the (multiclass) softdice coefficient and the Hausdorff distance between the obtained segmentations and the ground truth segmentations. The softdice coefficients and Hausdorff distances are computed for each image for each individual class and the multiclass softdice for all the classes together. These results are all automatically saved in a text file. Furthermore, the obtained segmentations as an overlay with the original images, the training log and corresponding plots and the model summary are also saved automatically.\n   \n    Lastly, from the segmentations of the left ventricular cavity during the end systole and end diastole, the ejection fraction is calculated. This value is, alongside the ejection fraction computed from the ground truth segmentations, stored in the same text file with results.\n   \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.868525482850378
+      ],
+      "excerpt": "Team challenge group 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8998931740590892
+      ],
+      "excerpt": "- TC_data.py:  Contains functions that initializes the data, preprocessing and  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9068769679746079
+      ],
+      "excerpt": "- TC_test.py:  Contains functions that show results of testing.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9800070645788749
+      ],
+      "excerpt": "- Data: a map with all the patient data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9369032111209682
+      ],
+      "excerpt": "                    is trained. When set to False, a network is loaded from the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9539760512044635,
+        0.9634409246316815,
+        0.9202178766200932
+      ],
+      "excerpt": "trainingsetsize:    Number between 0 and 1 which defines the fraction of the data \n                    that is used for training. The rest of the data will be used for testing. \nvalidationsetsize:  Number between 0 and 1 which defines the fraction of the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9362997440470746
+      ],
+      "excerpt": "dropoutpct:         Float between 0 and 1 which defines the amount of dropout \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8232666978326342,
+        0.9155791185356961
+      ],
+      "excerpt": "lr:                 Float (&gt;=0) which defines the initial learning rate for the stochastic gradient descent (SGD) optimization                               algorithm. \nmomentum:           Float (&gt;=0) which defines the amount of momentum used for the SGD algorithm. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This is the repository of group 1 for medical imaging analysis project of the master medical imaging ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jellevankerk/Team-Challenge/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 00:56:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jellevankerk/Team-Challenge/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jellevankerk/Team-Challenge",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    - glob2 0.6\n    - numpy 1.15.4\n    - matplotlib 3.0.1\n    - keras 2.2.4\n    - SimpleITK 1.2.0\n    - scipy 1.1.0\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8957389279217085
+      ],
+      "excerpt": "- TC_main.py:  Current python file, run this file to run the program. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8064571314278995,
+        0.8301966333937738,
+        0.8054711411565417
+      ],
+      "excerpt": "- TC_test.py:  Contains functions that show results of testing.  \n- TC_visualization.py: visualises the intermediated and final results. \n- TC_helper_functions.py: contains functions to make the main more clean \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.814441882929865
+      ],
+      "excerpt": "nesterov:           Whether to apply Nesterov momentum. Can be set to True or False. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jellevankerk/Team-Challenge/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Team-Challenge",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Team-Challenge",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jellevankerk",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jellevankerk/Team-Challenge/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    Place all the files of zip file in the same folder together with the Data folder. \n    Make sure all modules from above are installed.\n    Run TC_main.py in a python compatible IDE.\n    If you want to train your network, set trainnetwork to True in main()\n    If you want to evaluate your network, set evaluationnetwork to True in main() and change networkpath to the network you want to evaluate\n    (you can find these at global settings).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 00:56:20 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

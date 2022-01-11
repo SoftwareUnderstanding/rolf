@@ -1,0 +1,321 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2010.10392\n\nThis is the repository of the paper \"[CharacterBERT: Reconciling ELMo and BERT for Word-LevelOpen-Vocabulary Representations From Characters][paper]\" that is soon to appear at COLING 2020.\n\n> 2021-02-25: Code for pre-training BERT and CharacterBERT is now available [here](https://github.com/helboukkouri/character-bert-pretraining",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1802.05365"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite our paper if you use CharacterBERT in your work:\n\n```\n@inproceedings{el-boukkouri-etal-2020-characterbert,\n    title = \"{C}haracter{BERT}: Reconciling {ELM}o and {BERT} for Word-Level Open-Vocabulary Representations From Characters\",\n    author = \"El Boukkouri, Hicham  and\n      Ferret, Olivier  and\n      Lavergne, Thomas  and\n      Noji, Hiroshi  and\n      Zweigenbaum, Pierre  and\n      Tsujii, Jun{'}ichi\",\n    booktitle = \"Proceedings of the 28th International Conference on Computational Linguistics\",\n    month = dec,\n    year = \"2020\",\n    address = \"Barcelona, Spain (Online)\",\n    publisher = \"International Committee on Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.coling-main.609\",\n    doi = \"10.18653/v1/2020.coling-main.609\",\n    pages = \"6903--6915\",\n    abstract = \"Due to the compelling improvements brought by BERT, many recent representation models adopted the Transformer architecture as their main building block, consequently inheriting the wordpiece tokenization system despite it not being intrinsically linked to the notion of Transformers. While this system is thought to achieve a good balance between the flexibility of characters and the efficiency of full words, using predefined wordpiece vocabularies from the general domain is not always suitable, especially when building models for specialized domains (e.g., the medical domain). Moreover, adopting a wordpiece tokenization shifts the focus from the word level to the subword level, making the models conceptually more complex and arguably less convenient in practice. For these reasons, we propose CharacterBERT, a new variant of BERT that drops the wordpiece system altogether and uses a Character-CNN module instead to represent entire words by consulting their characters. We show that this new model improves the performance of BERT on a variety of medical domain tasks while at the same time producing robust, word-level, and open-vocabulary representations.\",\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{el-boukkouri-etal-2020-characterbert,\n    title = \"{C}haracter{BERT}: Reconciling {ELM}o and {BERT} for Word-Level Open-Vocabulary Representations From Characters\",\n    author = \"El Boukkouri, Hicham  and\n      Ferret, Olivier  and\n      Lavergne, Thomas  and\n      Noji, Hiroshi  and\n      Zweigenbaum, Pierre  and\n      Tsujii, Jun{'}ichi\",\n    booktitle = \"Proceedings of the 28th International Conference on Computational Linguistics\",\n    month = dec,\n    year = \"2020\",\n    address = \"Barcelona, Spain (Online)\",\n    publisher = \"International Committee on Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.coling-main.609\",\n    doi = \"10.18653/v1/2020.coling-main.609\",\n    pages = \"6903--6915\",\n    abstract = \"Due to the compelling improvements brought by BERT, many recent representation models adopted the Transformer architecture as their main building block, consequently inheriting the wordpiece tokenization system despite it not being intrinsically linked to the notion of Transformers. While this system is thought to achieve a good balance between the flexibility of characters and the efficiency of full words, using predefined wordpiece vocabularies from the general domain is not always suitable, especially when building models for specialized domains (e.g., the medical domain). Moreover, adopting a wordpiece tokenization shifts the focus from the word level to the subword level, making the models conceptually more complex and arguably less convenient in practice. For these reasons, we propose CharacterBERT, a new variant of BERT that drops the wordpiece system altogether and uses a Character-CNN module instead to represent entire words by consulting their characters. We show that this new model improves the performance of BERT on a variety of medical domain tasks while at the same time producing robust, word-level, and open-vocabulary representations.\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9418631341622122
+      ],
+      "excerpt": "How do I reproduce the paper's results? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "<div style=\"text-align:center\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/helboukkouri/character-bert",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-20T16:04:08Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-23T15:59:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9986595933048132
+      ],
+      "excerpt": "This is the repository of the paper \"CharacterBERT: Reconciling ELMo and BERT for Word-LevelOpen-Vocabulary Representations From Characters\" that is soon to appear at COLING 2020. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9963748655468393
+      ],
+      "excerpt": "CharacterBERT is a variant of BERT that produces word-level contextual representations by attending to the characters of each input token. To achieve that, instead of relying on a matrix of pre-defined wordpieces, it uses a CharacterCNN module similar to ELMo to produce representations for arbitrary tokens. Besides this difference, CharacterBERT's architecture is identical BERT's. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9883146237526332
+      ],
+      "excerpt": "The figure above shows the way context-independent representations are built in BERT and CharacterBERT. Here, we suppose that \"Apple\" is an unknown token and see that BERT splits it into two wordpieces \"Ap\" and \"##ple\" before embedding each unit. On the other hand, CharacterBERT receives the token \"Apple\" as is then attends to its characters to produce a single token embedding. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9919856067742627,
+        0.9748014357593692,
+        0.99575740124638
+      ],
+      "excerpt": "In more and more cases, the original BERT is adapted to new domains (e.g. medical domain) by re-training it on specialized corpora. In these cases, the original (general domain) wordpiece vocabulary is kept despite the model being actually used on a different domain, which seemed suboptimal (see Section 2 of the paper). A naive solution would be to train a new BERT from scratch with a specialized wordpiece vocabulary, but training a single BERT is costly let alone training one for each and every domain of interest. \nBERT uses a wordpiece system as a good compromise between the specificity of tokens and generality of characters. However, working with subwords is not very convenient in practice (Should we average the representations to get the original token embedding for word similarity tasks ? Should we only use the first wordpiece of each token in sequence labelling tasks ? ...) \nInspired by ELMo, we use a CharacterCNN module and manage to get a variant of BERT that produces word-level contextual representations and can be re-adapted on any domain without needing to worry about the suitability of any wordpieces. Moreover, attending to the characters of input tokens also allows us to achieve superior robustness to noise (see Section 5.5 of the paper). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8112146660077283
+      ],
+      "excerpt": "| Keyword                | Model description                                                                                                                                                                                                                                                         | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8247010068927373
+      ],
+      "excerpt": "<sup>1, 2</sup> <small>We pre-train BERT models as well so that we can fairly compare each CharacterBERT model to it's BERT counterpart. Our BERT models use the same architecture and vocabulary as bert-base-uncased.</small><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8162159681305379
+      ],
+      "excerpt": "CharacterBERT's architecture is almost identical to BERT, so you can easilly adapt any code that uses the Transformers library. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Main repository for \"CharacterBERT: Reconciling ELMo and BERT for Word-Level Open-Vocabulary Representations From Characters\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/helboukkouri/character-bert/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 35,
+      "date": "Wed, 22 Dec 2021 11:03:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/helboukkouri/character-bert/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "helboukkouri/character-bert",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/helboukkouri/character-bert/main/run_experiments.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We recommend using a virtual environment that is specific to using CharacterBERT.\n\nIf you do not already have `conda` installed, you can install Miniconda from [this link](https://docs.conda.io/en/latest/miniconda.html#linux-installers) (~450Mb). Then, check that conda is up to date:\n\n```bash\nconda update -n base -c defaults conda\n```\n\nAnd create a fresh conda environment (~220Mb):\n\n```bash\nconda create python=3.8 --name=character-bert\n```\n\nIf not already activated, activate the new conda environment using:\n\n```bash\nconda activate character-bert\n```\n\nThen install the following packages (~3Gb):\n\n```bash\nconda install pytorch cudatoolkit=10.2 -c pytorch\npip install transformers==3.3.1 scikit-learn==0.23.2\n```\n\n> Note 1: If you will not be running experiments on a GPU, install pyTorch via this command instead `conda install pytorch cpuonly -c pytorch`\n\n> Note 2: If you just want to be able to load pre-trained CharacterBERT weigths, you do not have to install `scikit-learn` which is only used for computing Precision, Recall, F1 metrics during evaluation.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8498334502192549
+      ],
+      "excerpt": "You can use the download.py script to download any of the models below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9551280344871405
+      ],
+      "excerpt": "For example, to download the medical version of CharacterBERT you can run: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8909838899523493
+      ],
+      "excerpt": "Or you can download all models by running: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8967198598353515
+      ],
+      "excerpt": "    <img src=\"./img/archi-compare.png\" width=\"45%\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403475490777098
+      ],
+      "excerpt": "python download.py --model='medical_character_bert' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9258363020883161
+      ],
+      "excerpt": "python download.py --model='all' \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/helboukkouri/character-bert/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CharacterBERT",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "character-bert",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "helboukkouri",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/helboukkouri/character-bert/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to use GPUs you will need to make sure the PyTorch version that is in your conda environment matches your machine's configuration. To do that, you may want to run a few tests.\n\nLet's assume you want to use the GPU n\u00b00 on your machine. Then set:\n\n```bash\nexport CUDA_VISIBLE_DEVICES=0\n```\n\nAnd run these commands to check whether pytorch can detect your GPU:\n\n```python\nimport torch\nprint(torch.cuda.is_available())  #: Should return `True`\n```\n\nIf the last command returns `False`, then there is probably a mismatch between the installed PyTorch version and your machine's configuration. To fix that, run `nvidia-smi` in your terminal and check your driver version:\n\n<center><img src=\"img/nvidiasmi.png\" alt=\"drawing\" width=\"550\"/></center>\n\nThen compare this version with the numbers given in the [NVIDIA CUDA Toolkit Release Notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html):\n\n<center><img src=\"img/cudaversions.png\" alt=\"drawing\" width=\"800\"/></center>\n\nIn this example the shown version is `390.116` which corresponds to `CUDA 9.0`. This means that the appropriate command for installing PyTorch is:\n\n```bash\nconda install pytorch cudatoolkit=9.0 -c pytorch\n```\n\nNow, everything should work fine!\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 130,
+      "date": "Wed, 22 Dec 2021 11:03:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\n\"\"\"Basic example: getting word embeddings from CharacterBERT\"\"\"\nfrom transformers import BertTokenizer\nfrom modeling.character_bert import CharacterBertModel\nfrom utils.character_cnn import CharacterIndexer\n\n#: Example text\nx = \"Hello World!\"\n\n#: Tokenize the text\ntokenizer = BertTokenizer.from_pretrained(\n    './pretrained-models/bert-base-uncased/')\nx = tokenizer.basic_tokenizer.tokenize(x)\n\n#: Add [CLS] and [SEP]\nx = ['[CLS]', *x, '[SEP]']\n\n#: Convert token sequence into character indices\nindexer = CharacterIndexer()\nbatch = [x]  #: This is a batch with a single token sequence x\nbatch_ids = indexer.as_padded_tensor(batch)\n\n#: Load some pre-trained CharacterBERT\nmodel = CharacterBertModel.from_pretrained(\n    './pretrained-models/medical_character_bert/')\n\n#: Feed batch to CharacterBERT & get the embeddings\nembeddings_for_batch, _ = model(batch_ids)\nembeddings_for_x = embeddings_for_batch[0]\nprint('These are the embeddings produces by CharacterBERT (last transformer layer)')\nfor token, embedding in zip(x, embeddings_for_x):\n    print(token, embedding)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\n\"\"\" Basic example: using CharacterBERT for binary classification \"\"\"\nfrom transformers import BertForSequenceClassification, BertConfig\nfrom modeling.character_bert import CharacterBertModel\n\n#:#:#:#: LOADING BERT FOR CLASSIFICATION #:#:#:#:\n\nconfig = BertConfig.from_pretrained('bert-base-uncased', num_labels=2)  #: binary classification\nmodel = BertForSequenceClassification(config=config)\n\nmodel.bert.embeddings.word_embeddings  #: wordpiece embeddings\n>>> Embedding(30522, 768, padding_idx=0)\n\n#:#:#:#: REPLACING BERT WITH CHARACTER_BERT #:#:#:#:\n\ncharacter_bert_model = CharacterBertModel.from_pretrained(\n    './pretrained-models/medical_character_bert/')\nmodel.bert = character_bert_model\n\nmodel.bert.embeddings.word_embeddings  #: wordpieces are replaced with a CharacterCNN\n>>> CharacterCNN(\n        (char_conv_0): Conv1d(16, 32, kernel_size=(1,), stride=(1,))\n        (char_conv_1): Conv1d(16, 32, kernel_size=(2,), stride=(1,))\n        (char_conv_2): Conv1d(16, 64, kernel_size=(3,), stride=(1,))\n        (char_conv_3): Conv1d(16, 128, kernel_size=(4,), stride=(1,))\n        (char_conv_4): Conv1d(16, 256, kernel_size=(5,), stride=(1,))\n        (char_conv_5): Conv1d(16, 512, kernel_size=(6,), stride=(1,))\n        (char_conv_6): Conv1d(16, 1024, kernel_size=(7,), stride=(1,))\n        (_highways): Highway(\n        (_layers): ModuleList(\n            (0): Linear(in_features=2048, out_features=4096, bias=True)\n            (1): Linear(in_features=2048, out_features=4096, bias=True)\n        )\n        )\n        (_projection): Linear(in_features=2048, out_features=768, bias=True)\n    )\n\n#:#:#:#: PREPARING RAW TEXT #:#:#:#:\n\nfrom transformers import BertTokenizer\nfrom utils.character_cnn import CharacterIndexer\n\ntext = \"CharacterBERT attends to each token's characters\"\nbert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')\ntokenized_text = bert_tokenizer.basic_tokenizer.tokenize(text) #: this is NOT wordpiece tokenization\n\ntokenized_text\n>>> ['characterbert', 'attends', 'to', 'each', 'token', \"'\", 's', 'characters']\n\nindexer = CharacterIndexer()  #: This converts each token into a list of character indices\ninput_tensor = indexer.as_padded_tensor([tokenized_text])  #: we build a batch of only one sequence\ninput_tensor.shape\n>>> torch.Size([1, 8, 50])  #: (batch_size, sequence_length, character_embedding_dim)\n\n#:#:#:#: USING CHARACTER_BERT FOR INFERENCE #:#:#:#:\n\noutput = model(input_tensor)[0]\n>>> tensor([[-0.3378, -0.2772]], grad_fn=<AddmmBackward>)  #: class logits\n```\n\nFor more complete (but still illustrative) examples you can refer to the `run_experiments.sh` script which runs a few Classification/SequenceLabelling experiments using BERT/CharacterBERT.\n\n```bash\nbash run_experiments.sh\n```\n\nYou can adapt the `run_experiments.sh` script to try out any available model. You should also be able to add real classification and sequence labelling tasks by adapting the `data.py` script.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

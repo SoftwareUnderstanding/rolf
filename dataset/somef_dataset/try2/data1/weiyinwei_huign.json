@@ -1,0 +1,184 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1510.01784",
+      "https://arxiv.org/abs/1706.02216",
+      "https://arxiv.org/abs/1905.08108"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weiyinwei/HUIGN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-05T15:52:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T02:00:30Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9952624636053402,
+        0.8073552589619173
+      ],
+      "excerpt": "This is our Pytorch implementation for the paper: Hierarchical User Intent Graph Network for Multimedia Recommendation \nWe provide three processed datasets: Movielnes, Tiktok, and Kwai. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.876991914675162,
+        0.9135648599669615
+      ],
+      "excerpt": "<!-- - We select some users and micro-videos in [Kwai](https://drive.google.com/open?id=1Xk-ofNoDnwcZg_zYE5tak9s1iW195kY2) and [Tiktok](https://drive.google.com/open?id=1mlKTWugOr8TxRb3vq_-03kbr0olSJN_7) datasets accoding to the timestamp.  \n- We extract the visual, acoustic, and textual features of all trailers in [Movielens](https://drive.google.com/open?id=1I1cHf9TXY88SbVCDhRiJV1drWX5Tc1-8) dataset.--> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Hierarchical User Intent Graph Network for Multimedia Recommendation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weiyinwei/huign/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 05:46:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/weiyinwei/HUIGN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weiyinwei/HUIGN",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/weiyinwei/HUIGN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Hierarchical User Intent Graph Network for Multimedia Recommendation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "HUIGN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weiyinwei",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/weiyinwei/HUIGN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code has been tested running under Python 3.5.2. The required packages are as follows:\n- Pytorch == 1.1.0\n- torch-cluster == 1.4.2\n- torch-geometric == 1.2.1\n- torch-scatter == 1.2.0\n- torch-sparse == 0.4.0\n- numpy == 1.16.0\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The instruction of commands has been clearly stated in the codes.\n- Movielens dataset  \n`python main.py --data_path 'Movielens' --l_r 0.0001 --weight_decay 0.0001 --batch_size 1024 --dim_x 64 --num_workers 30 --topK 10 --cluster_list 32 8 4` \n- Tiktok dataset  \n`python train.py --data_path 'Tiktok' --l_r 0.0005 --weight_decay 0.1 --batch_size 1024 --dim_latent 64 --num_workers 30 --topK 10 --cluster_list 32 8 4`\n- Kwai dataset  \n```python train.py --data_path 'Kwai' --l_r 0.0005 --weight_decay 0.1 --batch_size 1024 --dim_latent 64 --num_workers 30 --topK 10 --cluster_list 32 8 4```\n\n\n\nSome important arguments:  \n\n`has_ind`: It indicates the optional independence loss function.\n\n`has_cro`: It indicates the optional cross_entropy loss function.\n\n`has_v`, `has_a`, and `has_t`: They are used to indicate which modalities are included in this work.\n\n`--num_links`: It indicates the number of co-occurrence. \n\n`--cluster_list`: It describes the structure of hierarchical user intents.\n\n<!--- `model_name`: \n  It specifies the type of model. Here we provide three options: \n  1. `MMGCN` (by default) proposed in MMGCN: Multi-modal Graph Convolution Network for Personalized Recommendation of Micro-video, ACM MM2019. Usage: `--model_name='MMGCN'`\n  2. `VBPR` proposed in [VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1510.01784), AAAI2016. Usage: `--model_name 'VBPR'`  \n  3. `ACF` proposed in [Attentive Collaborative Filtering: Multimedia Recommendation with Item- and Component-Level Attention\n](https://dl.acm.org/citation.cfm?id=3080797), SIGIR2017. Usage: `--model_name 'ACF'`  \n  4. `GraphSAGE` proposed in [Inductive Representation Learning on Large Graphs](https://arxiv.org/abs/1706.02216), NIPS2017. Usage: `--model_name 'GraphSAGE'`\n  5. `NGCF` proposed in [Neural Graph Collaborative Filtering](https://arxiv.org/abs/1905.08108), SIGIR2019. Usage: `--model_name 'NGCF'` \n-->\n\n<!-- - `aggr_mode` \n  It specifics the type of aggregation layer. Here we provide three options:  \n  1. `mean` (by default) implements the mean aggregation in aggregation layer. Usage `--aggr_mode 'mean'`\n  2. `max` implements the max aggregation in aggregation layer. Usage `--aggr_mode 'max'`\n  3. `add` implements the sum aggregation in aggregation layer. Usage `--aggr_mode 'add'`\n  -->\n  <!-- \n- `concat`:\n  It indicates the type of combination layer. Here we provide two options:\n  1. `concat`(by default) implements the concatenation combination in combination layer. Usage `--concat 'True'`\n  2. `ele` implements the element-wise combination in combination layer. Usage `--concat 'False'`-->\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 05:46:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The instruction of commands has been clearly stated in the codes.\n- Movielens dataset  \n`python main.py --data_path 'Movielens' --l_r 0.0001 --weight_decay 0.0001 --batch_size 1024 --dim_x 64 --num_workers 30 --topK 10 --cluster_list 32 8 4` \n- Tiktok dataset  \n`python train.py --data_path 'Tiktok' --l_r 0.0005 --weight_decay 0.1 --batch_size 1024 --dim_latent 64 --num_workers 30 --topK 10 --cluster_list 32 8 4`\n- Kwai dataset  \n```python train.py --data_path 'Kwai' --l_r 0.0005 --weight_decay 0.1 --batch_size 1024 --dim_latent 64 --num_workers 30 --topK 10 --cluster_list 32 8 4```\n\n\n\nSome important arguments:  \n\n`has_ind`: It indicates the optional independence loss function.\n\n`has_cro`: It indicates the optional cross_entropy loss function.\n\n`has_v`, `has_a`, and `has_t`: They are used to indicate which modalities are included in this work.\n\n`--num_links`: It indicates the number of co-occurrence. \n\n`--cluster_list`: It describes the structure of hierarchical user intents.\n\n<!--- `model_name`: \n  It specifies the type of model. Here we provide three options: \n  1. `MMGCN` (by default) proposed in MMGCN: Multi-modal Graph Convolution Network for Personalized Recommendation of Micro-video, ACM MM2019. Usage: `--model_name='MMGCN'`\n  2. `VBPR` proposed in [VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1510.01784), AAAI2016. Usage: `--model_name 'VBPR'`  \n  3. `ACF` proposed in [Attentive Collaborative Filtering: Multimedia Recommendation with Item- and Component-Level Attention\n](https://dl.acm.org/citation.cfm?id=3080797), SIGIR2017. Usage: `--model_name 'ACF'`  \n  4. `GraphSAGE` proposed in [Inductive Representation Learning on Large Graphs](https://arxiv.org/abs/1706.02216), NIPS2017. Usage: `--model_name 'GraphSAGE'`\n  5. `NGCF` proposed in [Neural Graph Collaborative Filtering](https://arxiv.org/abs/1905.08108), SIGIR2019. Usage: `--model_name 'NGCF'` \n-->\n\n<!-- - `aggr_mode` \n  It specifics the type of aggregation layer. Here we provide three options:  \n  1. `mean` (by default) implements the mean aggregation in aggregation layer. Usage `--aggr_mode 'mean'`\n  2. `max` implements the max aggregation in aggregation layer. Usage `--aggr_mode 'max'`\n  3. `add` implements the sum aggregation in aggregation layer. Usage `--aggr_mode 'add'`\n  -->\n  <!-- \n- `concat`:\n  It indicates the type of combination layer. Here we provide two options:\n  1. `concat`(by default) implements the concatenation combination in combination layer. Usage `--concat 'True'`\n  2. `ele` implements the element-wise combination in combination layer. Usage `--concat 'False'`-->\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

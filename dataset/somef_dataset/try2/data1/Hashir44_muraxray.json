@@ -1,0 +1,218 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1608.06993",
+      "https://arxiv.org/abs/1712.06957",
+      "https://arxiv.org/abs/1712.06957v3](https://arxiv.org/abs/1712.06957) by Pranav Rajpurkar et al. MURA is a large dataset of musculoskeletal radiographs, where each study is manually labeled by radiologists as either normal or abnormal. [know more](https://stanfordmlgroup.github.io/projects/mura/)\n\n## Important Points:\n* The implemented model is a 169 layer DenseNet with single node output layer initialized with weights from a model pretrained on ImageNet dataset.\n* Before feeding the images to the network, each image is normalized to have same mean and standard deviation as of the images in the ImageNet training set, scaled to 224 x 224 and augmentented with random lateral inversions and rotations.\n* The model uses modified Binary Cross Entropy Loss function as mentioned in the paper.\n* The Learning Rate decays by a factor of 10 every time the validation loss plateaus after an epoch.\n* The optimization algorithm is Adam with default parameters \u03b21 = 0.9 and \u03b22 = 0.999.\n\nAccording to MURA dataset paper:\n\n> The model takes as input one or more views for a study of an upper extremity. On each view, our 169-layer convolutional neural network predicts the probability of abnormality. We compute the overall probability of abnormality for the study by taking the arithmetic mean of the abnormality probabilities output by the network for each image.\n\nThe model implemented in [model.py](model.py) takes as input 'all' the views for a study of an upper extremity. On each view the model predicts the probability of abnormality. The Model computes the overall probability of abnormality for the study by taking the arithmetic mean of the abnormality probabilites output by the network for each image.\n\n## Instructions\n\nInstall dependencies:\n* PyTorch\n* TorchVision\n* Numpy\n* Pandas\n\nTrain the model with `python main.py`\n\n## Citation\n    @ARTICLE{2017arXiv171206957R,\n       author = {{Rajpurkar"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    @ARTICLE{2017arXiv171206957R,\n       author = {{Rajpurkar}, P. and {Irvin}, J. and {Bagul}, A. and {Ding}, D. and \n      {Duan}, T. and {Mehta}, H. and {Yang}, B. and {Zhu}, K. and \n      {Laird}, D. and {Ball}, R.~L. and {Langlotz}, C. and {Shpanskaya}, K. and \n      {Lungren}, M.~P. and {Ng}, A.},\n        title = \"{MURA Dataset: Towards Radiologist-Level Abnormality Detection in Musculoskeletal Radiographs}\",\n      journal = {ArXiv e-prints},\n    archivePrefix = \"arXiv\",\n       eprint = {1712.06957},\n     primaryClass = \"physics.med-ph\",\n     keywords = {Physics - Medical Physics, Computer Science - Artificial Intelligence},\n         year = 2017,\n        month = dec,\n       adsurl = {http://adsabs.harvard.edu/abs/2017arXiv171206957R},\n      adsnote = {Provided by the SAO/NASA Astrophysics Data System}\n    }\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@ARTICLE{2017arXiv171206957R,\n   author = {{Rajpurkar}, P. and {Irvin}, J. and {Bagul}, A. and {Ding}, D. and \n  {Duan}, T. and {Mehta}, H. and {Yang}, B. and {Zhu}, K. and \n  {Laird}, D. and {Ball}, R.~L. and {Langlotz}, C. and {Shpanskaya}, K. and \n  {Lungren}, M.~P. and {Ng}, A.},\n    title = \"{MURA Dataset: Towards Radiologist-Level Abnormality Detection in Musculoskeletal Radiographs}\",\n  journal = {ArXiv e-prints},\narchivePrefix = \"arXiv\",\n   eprint = {1712.06957},\n primaryClass = \"physics.med-ph\",\n keywords = {Physics - Medical Physics, Computer Science - Artificial Intelligence},\n     year = 2017,\n    month = dec,\n   adsurl = {http://adsabs.harvard.edu/abs/2017arXiv171206957R},\n  adsnote = {Provided by the SAO/NASA Astrophysics Data System}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Hashir44/muraxray",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-07-15T15:46:56Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-07-15T18:15:40Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.948950133798207,
+        0.9093535530999526,
+        0.9529424324839444,
+        0.8905025585300924,
+        0.8466634634255836,
+        0.9752934110668215
+      ],
+      "excerpt": "A PyTorch implementation of 169 layer DenseNet model on MURA dataset, inspired from the paper arXiv:1712.06957v3 by Pranav Rajpurkar et al. MURA is a large dataset of musculoskeletal radiographs, where each study is manually labeled by radiologists as either normal or abnormal. know more \nThe implemented model is a 169 layer DenseNet with single node output layer initialized with weights from a model pretrained on ImageNet dataset. \nBefore feeding the images to the network, each image is normalized to have same mean and standard deviation as of the images in the ImageNet training set, scaled to 224 x 224 and augmentented with random lateral inversions and rotations. \nThe model uses modified Binary Cross Entropy Loss function as mentioned in the paper. \nThe Learning Rate decays by a factor of 10 every time the validation loss plateaus after an epoch. \nThe optimization algorithm is Adam with default parameters \u03b21 = 0.9 and \u03b22 = 0.999. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9857419055275541,
+        0.9882423286165777
+      ],
+      "excerpt": "The model takes as input one or more views for a study of an upper extremity. On each view, our 169-layer convolutional neural network predicts the probability of abnormality. We compute the overall probability of abnormality for the study by taking the arithmetic mean of the abnormality probabilities output by the network for each image. \nThe model implemented in model.py takes as input 'all' the views for a study of an upper extremity. On each view the model predicts the probability of abnormality. The Model computes the overall probability of abnormality for the study by taking the arithmetic mean of the abnormality probabilites output by the network for each image. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Hashir44/muraxray/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 10:00:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Hashir44/muraxray/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Hashir44/muraxray",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Hashir44/muraxray/master/EDA/eda.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9954583257582014,
+        0.9322609392449874
+      ],
+      "excerpt": "Install dependencies: \n* PyTorch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8233588558014837,
+        0.833782873776028
+      ],
+      "excerpt": "* Numpy \n* Pandas \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8165663990638019
+      ],
+      "excerpt": "The implemented model is a 169 layer DenseNet with single node output layer initialized with weights from a model pretrained on ImageNet dataset. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Hashir44/muraxray/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Rishabh Agrahari\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DenseNet on MURA Dataset using PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "muraxray",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Hashir44",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Hashir44/muraxray/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 10:00:54 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

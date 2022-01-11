@@ -1,0 +1,275 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1802.05365.\n\nI've written a blog post with a high-level overview here: https://jordanhart.co.uk/2018/09/09/elmo-embeddings-layer-in-keras/.\n\n## Requirements\n\n* Keras 2.2.0\n* NumPy 1.13.3\n* Tensorflow 1.7.0\n* Tensorflow Hub 0.1.1\n\n## Usage\n\nTo import the module:\n\n```\nfrom elmo import ELMoEmbedding\n```\n\nIncluding the embedding in your architecture is as simple as replacing an existing embedding with this layer:\n```\nELMoEmbedding(idx2word=idx2word, output_mode=\"default\", trainable=True"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9862500885429625
+      ],
+      "excerpt": "You can find the original paper on ELMo embeddings here: https://arxiv.org/abs/1802.05365. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHart96/keras_elmo_embedding_layer",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-12T11:09:18Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-14T07:50:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9783311934439156,
+        0.8741126878133479
+      ],
+      "excerpt": "This is a Keras layer for ELMo embeddings. It is designed to be completely interchangeable with the built-in Keras embedding layer. \nUnfortunately the layer only works on the Tensorflow backend since it depends on a Tensorflow Hub module (https://www.tensorflow.org/hub/modules/google/elmo/2). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8621771064353799,
+        0.8079773135357944
+      ],
+      "excerpt": "idx2word - a dictionary where the keys are token ids and the values are the corresponding words. \noutput_mode - a string, one of \"default\", \"word_emb\", \"lstm_outputs1\", \"lstm_outputs2\", and \"elmo\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8092196251904722
+      ],
+      "excerpt": "A 2D tensor with shape (batch_size, max_sequence_length). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8732915750241484
+      ],
+      "excerpt": "hidden = Dense(50, activation='relu')(dropout) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model.fit(x_train, y_train, batch_size=2, epochs=5, validation_data=(x_test, y_test)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8732915750241484
+      ],
+      "excerpt": "hidden = Dense(50, activation='relu')(dropout) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model.fit(x_train, y_train, batch_size=2, epochs=5, validation_data=(x_test, y_test)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This is a drop-in Keras layer for ELMo embeddings.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHart96/keras_elmo_embedding_layer/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Thu, 23 Dec 2021 03:10:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JHart96/keras_elmo_embedding_layer/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JHart96/keras_elmo_embedding_layer",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8562687297631429
+      ],
+      "excerpt": "\"default\" output mode - a 2D tensor with shape (batch_size, 1024). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.925671696398174,
+        0.9535879515266492,
+        0.9040368155137037,
+        0.8385128887712422,
+        0.8801854956928516,
+        0.8801854956928516
+      ],
+      "excerpt": "import tensorflow as tf \nimport utils \nfrom keras.models import Model \nfrom keras.layers import * \nfrom keras.optimizers import Adam \nfrom elmo import ELMoEmbedding \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8924976426181745,
+        0.8924976426181745,
+        0.8773489141095551
+      ],
+      "excerpt": "(x_train, y_train), (x_test, y_test) = utils.load_data(max_sequence_length=MAX_SEQUENCE_LENGTH) \nidx2word = utils.get_idx2word() \nsentence_input = Input(shape=(x_train.shape[1],), dtype=tf.int64) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.925671696398174,
+        0.9535879515266492,
+        0.9040368155137037,
+        0.8385128887712422,
+        0.8801854956928516,
+        0.8801854956928516
+      ],
+      "excerpt": "import tensorflow as tf \nimport utils \nfrom keras.models import Model \nfrom keras.layers import * \nfrom keras.optimizers import Adam \nfrom elmo import ELMoEmbedding \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8924976426181745,
+        0.8924976426181745,
+        0.8773489141095551
+      ],
+      "excerpt": "(x_train, y_train), (x_test, y_test) = utils.load_data(max_sequence_length=MAX_SEQUENCE_LENGTH) \nidx2word = utils.get_idx2word() \nsentence_input = Input(shape=(x_train.shape[1],), dtype=tf.int64) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JHart96/keras_elmo_embedding_layer/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Keras ELMo Embedding Layer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "keras_elmo_embedding_layer",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JHart96",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHart96/keras_elmo_embedding_layer/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Keras 2.2.0\n* NumPy 1.13.3\n* Tensorflow 1.7.0\n* Tensorflow Hub 0.1.1\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 47,
+      "date": "Thu, 23 Dec 2021 03:10:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To import the module:\n\n```\nfrom elmo import ELMoEmbedding\n```\n\nIncluding the embedding in your architecture is as simple as replacing an existing embedding with this layer:\n```\nELMoEmbedding(idx2word=idx2word, output_mode=\"default\", trainable=True)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The following are modified examples taken from the examples directory in the Keras repository (https://github.com/keras-team/keras). The `utils` class contains some of the preprocessing code for this dataset. This repository contains all of the code needed to run these examples.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

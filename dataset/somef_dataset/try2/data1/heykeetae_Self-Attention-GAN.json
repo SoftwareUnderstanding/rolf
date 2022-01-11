@@ -1,0 +1,253 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1805.08318",
+      "https://arxiv.org/abs/1805.08318",
+      "https://arxiv.org/abs/1802.05957",
+      "https://arxiv.org/abs/1805.08318 (2018)](https://arxiv.org/abs/1805.08318).**\n\n## Meta overview\nThis repository provides a PyTorch implementation of [SAGAN](https://arxiv.org/abs/1805.08318). Both wgan-gp and wgan-hinge loss are ready, but note that wgan-gp is somehow not compatible with the spectral normalization. Remove all the spectral normalization at the model for the adoption of wgan-gp.\n\nSelf-attentions are applied to later two layers of both discriminator and generator.\n\n<p align=\"center\"><img width=\"100%\" src=\"image/main_model.PNG\" /></p>\n\n## Current update status\n* [ ] Supervised setting\n* [ ] Tensorboard loggings\n* [x] **[20180608] updated the self-attention module. Thanks to my colleague [Cheonbok Park](https://github.com/cheonbok94)! see 'sagan_models.py' for the update. Should be efficient, and run on large sized images**\n* [x] Attention visualization (LSUN Church-outdoor)\n* [x] Unsupervised setting (use no label yet) \n* [x] Applied: [Spectral Normalization](https://arxiv.org/abs/1802.05957), code from [here](https://github.com/christiancosgrove/pytorch-spectral-normalization-gan)\n* [x] Implemented: self-attention module, two-timescale update rule (TTUR), wgan-hinge loss, wgan-gp loss\n\n&nbsp;\n&nbsp;\n\n## Results\n\n### Attention result on LSUN (epoch #8)\n<p align=\"center\"><img width=\"100%\" src=\"image/sagan_attn.png\" /></p>\nPer-pixel attention result of SAGAN on LSUN church-outdoor dataset. It shows that unsupervised training of self-attention module still works, although it is not interpretable with the attention map itself. Better results with regard to the generated images will be added. These are the visualization of self-attention in generator layer3 and layer4, which are in the size of 16 x 16 and 32 x 32 respectively, each for 64 images. To visualize the per-pixel attentions, only a number of pixels are chosen, as shown on the leftmost and the rightmost numbers indicate. \n\n### CelebA dataset (epoch on the left, still under training)\n<p align=\"center\"><img width=\"80%\" src=\"image/sagan_celeb.png\" /></p>\n\n### LSUN church-outdoor dataset (epoch on the left, still under training)\n<p align=\"center\"><img width=\"70%\" src=\"image/sagan_lsun.png\" /></p>\n\n## Prerequisites\n* [Python 3.5+](https://www.continuum.io/downloads)\n* [PyTorch 0.3.0](http://pytorch.org/)\n\n&nbsp;\n\n## Usage\n\n#### 1. Clone the repository\n```bash\n$ git clone https://github.com/heykeetae/Self-Attention-GAN.git\n$ cd Self-Attention-GAN\n```\n\n#### 2. Install datasets (CelebA or LSUN)\n```bash\n$ bash download.sh CelebA\nor\n$ bash download.sh LSUN\n```\n\n\n#### 3. Train \n##### (i) Train\n```bash\n$ python python main.py --batch_size 64 --imsize 64 --dataset celeb --adv_loss hinge --version sagan_celeb\nor\n$ python python main.py --batch_size 64 --imsize 64 --dataset lsun --adv_loss hinge --version sagan_lsun\n```\n#### 4. Enjoy the results\n```bash\n$ cd samples/sagan_celeb\nor\n$ cd samples/sagan_lsun\n\n```\nSamples generated every 100 iterations are located. The rate of sampling could be controlled via --sample_step (ex, --sample_step 100). "
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9999998531289515
+      ],
+      "excerpt": "Han Zhang, Ian Goodfellow, Dimitris Metaxas and Augustus Odena, \"Self-Attention Generative Adversarial Networks.\" arXiv preprint arXiv:1805.08318 (2018). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/heykeetae/Self-Attention-GAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-05-28T06:37:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T06:43:29Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9961963160457894,
+        0.8410893780530032
+      ],
+      "excerpt": "This repository provides a PyTorch implementation of SAGAN. Both wgan-gp and wgan-hinge loss are ready, but note that wgan-gp is somehow not compatible with the spectral normalization. Remove all the spectral normalization at the model for the adoption of wgan-gp. \nSelf-attentions are applied to later two layers of both discriminator and generator. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9895372280706561
+      ],
+      "excerpt": "Per-pixel attention result of SAGAN on LSUN church-outdoor dataset. It shows that unsupervised training of self-attention module still works, although it is not interpretable with the attention map itself. Better results with regard to the generated images will be added. These are the visualization of self-attention in generator layer3 and layer4, which are in the size of 16 x 16 and 32 x 32 respectively, each for 64 images. To visualize the per-pixel attentions, only a number of pixels are chosen, as shown on the leftmost and the rightmost numbers indicate. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Pytorch implementation of Self-Attention Generative Adversarial Networks (SAGAN)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/heykeetae/Self-Attention-GAN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 432,
+      "date": "Mon, 27 Dec 2021 10:01:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/heykeetae/Self-Attention-GAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "heykeetae/Self-Attention-GAN",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/heykeetae/Self-Attention-GAN/master/download.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n$ bash download.sh CelebA\nor\n$ bash download.sh LSUN\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9829922351927534,
+        0.9355532161343175
+      ],
+      "excerpt": "$ git clone https://github.com/heykeetae/Self-Attention-GAN.git \n$ cd Self-Attention-GAN \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9003729605384843
+      ],
+      "excerpt": "$ cd samples/sagan_celeb \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9003729605384843
+      ],
+      "excerpt": "$ cd samples/sagan_lsun \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8532985168798555
+      ],
+      "excerpt": "<p align=\"center\"><img width=\"100%\" src=\"image/main_model.PNG\" /></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8532985168798555
+      ],
+      "excerpt": "<p align=\"center\"><img width=\"100%\" src=\"image/sagan_attn.png\" /></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8423250384747827
+      ],
+      "excerpt": "<p align=\"center\"><img width=\"80%\" src=\"image/sagan_celeb.png\" /></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8907305294368035
+      ],
+      "excerpt": "$ python python main.py --batch_size 64 --imsize 64 --dataset celeb --adv_loss hinge --version sagan_celeb \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8907305294368035
+      ],
+      "excerpt": "$ python python main.py --batch_size 64 --imsize 64 --dataset lsun --adv_loss hinge --version sagan_lsun \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/heykeetae/Self-Attention-GAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Self-Attention GAN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Self-Attention-GAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "heykeetae",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/heykeetae/Self-Attention-GAN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [Python 3.5+](https://www.continuum.io/downloads)\n* [PyTorch 0.3.0](http://pytorch.org/)\n\n&nbsp;\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2119,
+      "date": "Mon, 27 Dec 2021 10:01:58 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

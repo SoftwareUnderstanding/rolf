@@ -1,0 +1,219 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If CGNet is useful for your research, please consider citing:\n```\n  @article{wu2020cgnet,\n  title={Cgnet: A light-weight context guided network for semantic segmentation},\n  author={Wu, Tianyi and Tang, Sheng and Zhang, Rui and Cao, Juan and Zhang, Yongdong},\n  journal={IEEE Transactions on Image Processing},\n  volume={30},\n  pages={1169--1179},\n  year={2020},\n  publisher={IEEE}\n}\n```\n  ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{wu2020cgnet,\n  title={Cgnet: A light-weight context guided network for semantic segmentation},\n  author={Wu, Tianyi and Tang, Sheng and Zhang, Rui and Cao, Juan and Zhang, Yongdong},\n  journal={IEEE Transactions on Image Processing},\n  volume={30},\n  pages={1169--1179},\n  year={2020},\n  publisher={IEEE}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wutianyiRosun/CGNet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-19T11:29:55Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T14:37:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The demand of applying semantic segmentation model on mobile devices has been increasing rapidly. Current\nstate-of-the-art networks have enormous amount of parameters, hence unsuitable for mobile devices, while other small\nmemory footprint models follow the spirit of classification network and ignore the inherent characteristic of semantic\nsegmentation. To tackle this problem, we propose a novel Context Guided Network (CGNet), which is a light-weight\nand efficient network for semantic segmentation. We first propose the Context Guided (CG) block, which learns the\njoint feature of both local feature and surrounding context, and further improves the joint feature with the global context.\nBased on the CG block, we develop CGNet which captures contextual information in all stages of the network and\nis specially tailored for increasing segmentation accuracy. CGNet is also elaborately designed to reduce the number\nof parameters and save memory footprint. Under an equivalent number of parameters, the proposed CGNet significantly outperforms existing segmentation networks. Extensive experiments on Cityscapes and CamVid datasets verify the effectiveness of the proposed approach. Specifically, without any post-processing and multi-scale testing, the proposed CGNet achieves 64.8% mean IoU on Cityscapes with less than 0.5 M parameters.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "CGNet: A Light-weight Context Guided Network for Semantic Segmentation [IEEE Transactions on Image Processing 2020]",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wutianyiRosun/CGNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 48,
+      "date": "Tue, 28 Dec 2021 02:13:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wutianyiRosun/CGNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wutianyiRosun/CGNet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Install PyTorch\n  - Env: PyTorch\\_0.4; cuda\\_9.2; cudnn\\_7.5; python\\_3.6\n2. Clone the repository\n   ```shell\n   git clone https://github.com/wutianyiRosun/CGNet.git \n   cd CGNet\n   ```\n3. Dataset\n\n  - Download the [Cityscapes](https://www.cityscapes-dataset.com/) dataset and convert the dataset to [19 categories](https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py). It should have this basic structure.\n  ```\n  \u251c\u2500\u2500 cityscapes_test_list.txt\n  \u251c\u2500\u2500 cityscapes_train_list.txt\n  \u251c\u2500\u2500 cityscapes_trainval_list.txt\n  \u251c\u2500\u2500 cityscapes_val_list.txt\n  \u251c\u2500\u2500 cityscapes_val.txt\n  \u251c\u2500\u2500 gtCoarse\n  \u2502   \u251c\u2500\u2500 train\n  \u2502   \u251c\u2500\u2500 train_extra\n  \u2502   \u2514\u2500\u2500 val\n  \u251c\u2500\u2500 gtFine\n  \u2502   \u251c\u2500\u2500 test\n  \u2502   \u251c\u2500\u2500 train\n  \u2502   \u2514\u2500\u2500 val\n  \u251c\u2500\u2500 leftImg8bit\n  \u2502   \u251c\u2500\u2500 test\n  \u2502   \u251c\u2500\u2500 train\n  \u2502   \u2514\u2500\u2500 val\n  \u251c\u2500\u2500 license.txt\n```\n  - Download the [Camvid](https://github.com/alexgkendall/SegNet-Tutorial/tree/master/CamVid) dataset. It should have this basic structure.\n  ```\n  \u251c\u2500\u2500 camvid_test_list.txt\n  \u251c\u2500\u2500 camvid_train_list.txt\n  \u251c\u2500\u2500 camvid_trainval_list.txt\n  \u251c\u2500\u2500 camvid_val_list.txt\n  \u251c\u2500\u2500 test\n  \u251c\u2500\u2500 testannot\n  \u251c\u2500\u2500 train\n  \u251c\u2500\u2500 trainannot\n  \u251c\u2500\u2500 val\n  \u2514\u2500\u2500 valannot\n\n  ```\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8418357920572419,
+        0.8624255405436684,
+        0.8350609189288264,
+        0.8624255405436684
+      ],
+      "excerpt": "training on train set \n  python cityscapes_train.py --gpus 0,1 --dataset cityscapes --train_type ontrain --train_data_list ./dataset/list/Cityscapes/cityscapes_train_list.txt --max_epochs 300 \ntraining on train+val set \n  python cityscapes_train.py --gpus 0,1 --dataset cityscapes --train_type ontrainval --train_data_list ./dataset/list/Cityscapes/cityscapes_trainval_list.txt --max_epochs 350 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9084599442186675,
+        0.9242225781175932,
+        0.8265991291887348,
+        0.9084599442186675,
+        0.9242225781175932
+      ],
+      "excerpt": "python cityscapes_eval.py --gpus 0 --val_data_list ./dataset/list/Cityscapes/cityscapes_val_list.txt --resume ./checkpoint/cityscapes/CGNet_M3N21bs16gpu2_ontrain/model_cityscapes_train_on_trainset.pth \nmodel file download: model_cityscapes_train_on_trainset.pth \nTesting (on test set) \n  python cityscapes_test.py --gpus 0 --test_data_list ./dataset/list/Cityscapes/cityscapes_test_list.txt --resume ./checkpoint/cityscapes/CGNet_M3N21bs16gpu2_ontrainval/model_cityscapes_train_on_trainvalset.pth \nmodel file download: model_cityscapes_train_on_trainvalset.pth \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8350609189288264,
+        0.9246227682586091,
+        0.8265991291887348,
+        0.9246227682586091,
+        0.9242225781175932
+      ],
+      "excerpt": "training on train+val set \n   python camvid_train.py \ntesting (on test set) \n  python camvid_test.py \nmodel file download: model_camvid_train_on_trainvalset.pth \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wutianyiRosun/CGNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Tianyi Wu\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "[CGNet: A Light-weight Context Guided Network for Semantic Segmentation](https://arxiv.org/pdf/1811.08201.pdf)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CGNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wutianyiRosun",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wutianyiRosun/CGNet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 206,
+      "date": "Tue, 28 Dec 2021 02:13:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "semantic-segmentation",
+      "cityscapes",
+      "camvid",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  }
+}

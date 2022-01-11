@@ -1,0 +1,173 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1712.00726\n\nsh build_and_install.sh\n## Dataset preparation\nPlease download the official [KITTI 3D object detection](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8724552891764201,
+        0.9894855953936156
+      ],
+      "excerpt": "a muilti-stage- 3d detector based on PointRCNN (https://github.com/sshaoshuai/PointRCNN)  \nand Cascade-rcnn https://arxiv.org/abs/1712.00726 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tsbiosky/Cascade-point-rcnn",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-19T19:15:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-18T15:01:24Z",
+    "technique": "GitHub API"
+  },
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tsbiosky/Cascade-point-rcnn/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 13:36:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tsbiosky/Cascade-point-rcnn/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tsbiosky/Cascade-point-rcnn",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/tsbiosky/Cascade-point-rcnn/master/build_and_install.sh",
+      "https://raw.githubusercontent.com/tsbiosky/Cascade-point-rcnn/master/tools/script_train.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please download the official [KITTI 3D object detection](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) dataset and organize the downloaded files as follows: \n```\nPointRCNN\n\u251c\u2500\u2500 data\n\u2502   \u251c\u2500\u2500 KITTI\n\u2502   \u2502   \u251c\u2500\u2500 ImageSets\n\u2502   \u2502   \u251c\u2500\u2500 object\n\u2502   \u2502   \u2502   \u251c\u2500\u2500training\n\u2502   \u2502   \u2502      \u251c\u2500\u2500calib & velodyne & label_2 & image_2 & (optional: planes)\n\u2502   \u2502   \u2502   \u251c\u2500\u2500testing\n\u2502   \u2502   \u2502      \u251c\u2500\u2500calib & velodyne & image_2\n\u251c\u2500\u2500 lib\n\u251c\u2500\u2500 pointnet2_lib\n\u251c\u2500\u2500 tools\n```\n Generate the augmented offline scenes by running the following command:\n```\npython generate_aug_scene.py --class_name Car --split train --aug_times 4\n```\n(a) Train RCNN network with fixed RPN network to use online GT augmentation: Use `--rpn_ckpt` to specify the path of a well-trained RPN model and run the command as follows:\n```\npython train_rcnn.py --cfg_file cfgs/default.yaml --batch_size 4 --train_mode rcnn --epochs 70  --ckpt_save_interval 2 --rpn_ckpt ./PointRCNN.pth --ouput_dir ./cascade_output\n```\nTo evaluate a single checkpoint, run the following command with `--ckpt` to specify the checkpoint to be evaluated:\n```\npython eval_rcnn.py --cfg_file cfgs/default.yaml --ckpt ./cascade_output/ckpt/checkpoint_epoch_?.pth --batch_size 4 --eval_mode rcnn \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tsbiosky/Cascade-point-rcnn/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 \\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Cascade-point-rcnn",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Cascade-point-rcnn",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tsbiosky",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tsbiosky/Cascade-point-rcnn/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Thu, 23 Dec 2021 13:36:23 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

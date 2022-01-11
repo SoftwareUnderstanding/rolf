@@ -1,0 +1,1005 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The package was greatly inspired by `Lee Feigenbaum's similar package for Javascript <http://thefigtrees.net/lee/blog/2006/04/sparql_calendar_demo_a_sparql.html>`_.\n\nDevelopers involved:\n\n* Ivan Herman <http://www.ivan-herman.net>\n* Sergio Fern\u00e1ndez <http://www.wikier.org>\n* Carlos Tejo Alonso <http://www.dayures.net>\n* Alexey Zakhlestin <https://indeyets.ru/>\n\nOrganizations involved:\n\n* `World Wide Web Consortium <http://www.w3.org>`_\n* `Salzburg Research <http://www.salzburgresearch.at>`_\n* `Foundation CTIC <http://www.fundacionctic.org/>`_\n\n\n.. |Build Status| image:: https://secure.travis-ci.org/RDFLib/sparqlwrapper.svg?branch=master\n   :target: https://travis-ci.org/RDFLib/sparqlwrapper\n.. |PyPi version| image:: https://badge.fury.io/py/SPARQLWrapper.svg\n   :target: https://pypi.python.org/pypi/SPARQLWrapper\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        0.8577783455419916
+      ],
+      "excerpt": ":Parameter key: results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8209707758818588
+      ],
+      "excerpt": ":Website: 4store &lt;https://github.com/4store/4store&gt; \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/RDFLib/sparqlwrapper",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2013-10-12T16:45:13Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T00:20:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "From `SPARQL 1.1 Specification <https://www.w3.org/TR/sparql11-protocol/#query-success>`_:\n\nThe response body of a successful query operation with a 2XX response is either:\n\n- `SELECT` and `ASK`: a SPARQL Results Document in XML, JSON, or CSV/TSV format.\n- `DESCRIBE` and `CONSTRUCT`: an **RDF graph serialized**, for example, in the RDF/XML syntax, or an equivalent RDF graph serialization.\n\n\nThe fact is that the **parameter key** for the choice of the **output format** is not defined.\nVirtuoso uses `format`, joseki/fuseki uses `output`, rasqual seems to use `results`, etc...\nAlso, in some cases HTTP Content Negotiation can/must be used.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8933213017551269
+      ],
+      "excerpt": "The simplest usage of this module looks as follows (using the default, ie, XML return format &lt;http://www.w3.org/TR/rdf-sparql-XMLres/&gt;_, and special URI for the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9493021960024574
+      ],
+      "excerpt": "    # ret is a stream with the results in XML, see http://www.w3.org/TR/rdf-sparql-XMLres/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9605357791017516
+      ],
+      "excerpt": "  The response body of a successful query operation with a 2XX response is either: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9322277537169312,
+        0.8464061011128002,
+        0.9816997012611116
+      ],
+      "excerpt": "DESCRIBE and CONSTRUCT: an RDF graph serialized, for example, in the RDF/XML syntax, or an equivalent RDF graph serialization. \nThe package, though it does not contain a full SPARQL parser, makes an attempt to determine the query type \nwhen the query is set. This should work in most of the cases (but there is a possibility to set this manually, in case something \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372807729293444
+      ],
+      "excerpt": "For RDF/XML and JSON-LD, the RDFLib &lt;https://rdflib.readthedocs.io&gt;_ package is used to convert the result into a Graph instance. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8344136665381527
+      ],
+      "excerpt": "There are two ways to generate this conversion: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9638965923323445
+      ],
+      "excerpt": "A further help is to offer an extra, partial interpretation of the results, again to cover \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8668417796402065
+      ],
+      "excerpt": "is used instead of :class:SPARQLWrapper.Wrapper.SPARQLWrapper, this result format is generated. Note that this relies on a JSON format only, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.913603501566064
+      ],
+      "excerpt": "Here is a simple code that makes use of this feature:: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.807101554602939
+      ],
+      "excerpt": "     print ret.variables  # this is an array consisting of \"subj\" and \"prop\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9758097589904466
+      ],
+      "excerpt": "To make this type of code even easier to realize, the [] and in operators are also implemented \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8971951798131226
+      ],
+      "excerpt": "in the return value). This features becomes particularly useful when the OPTIONAL feature of SPARQL is used. For example:: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9708475688566626,
+        0.9135232794169474
+      ],
+      "excerpt": "        # bindings is an array of dictionaries with the full bindings \n        for b in bindings : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8705152726981785,
+        0.9079910606145407,
+        0.9601972328632964
+      ],
+      "excerpt": "            # do something nice with subj, o, and opt \n     # another way of accessing to values for a single variable: \n     # take all the bindings of the \"subj\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9195393372854519,
+        0.8366356537962398,
+        0.8479301467784758,
+        0.8836409461934431
+      ],
+      "excerpt": "For a SELECT query type, the default return mimetype (if Accept: */* is sent) is application/sparql-results+xml \nFor a ASK query type, the default return mimetype (if Accept: */* is sent) is text/html \nFor a CONSTRUCT query type, the default return mimetype (if Accept: */* is sent) is text/turtle \nFor a DESCRIBE query type, the default return mimetype (if Accept: */* is sent) is text/turtle \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8792939771851085
+      ],
+      "excerpt": "Valid alias for DESCRIBE and CONSTRUCT: \"json\" (alias for json-ld ONLY in Fuseki 2), \"xml\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671819540943825,
+        0.8569938800313452,
+        0.9284197054574803
+      ],
+      "excerpt": "Default return mimetypes: For a SELECT and ASK query types, the default return mimetype (if Accept: / is sent) is application/sparql-results+json \nDefault return mimetypes: For a DESCRIBE and CONTRUCT query types, the default return mimetype (if Accept: / is sent) is text/turtle \nIn case of a bad formed query, Fuseki 1 returns 200 instead of 400. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8752655083237583
+      ],
+      "excerpt": ":Parameter: If an unexpected parameter is used, the server ignores it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174104489809455
+      ],
+      "excerpt": "Other values: application/x-binary-rdf-results-table \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9215499307448939
+      ],
+      "excerpt": "For variable bindings, the values of FORMAT vary upon what Rasqal supports but include simple \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9544618358826785,
+        0.9421182096408545
+      ],
+      "excerpt": "tsv for SPARQL TSV, rdfxml and turtle for RDF syntax formats, and json for a JSON version of the results. \nFor RDF graph results, the values of FORMAT are ntriples (N-Triples, default), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8857634236839504
+      ],
+      "excerpt": "rss-1.0 (RSS 1.0, also an RDF/XML syntax). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100293686599674,
+        0.9937574768095547,
+        0.9463722620619117
+      ],
+      "excerpt": "SPARQL mode in Query Console. For details, see Querying Triples with SPARQL \nXQuery using the semantics functions, and Search API, or a combination of XQuery and SPARQL. For details, see Querying Triples with XQuery or JavaScript. \nHTTP via a SPARQL endpoint. For details, see Using Semantics with the REST Client API. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9606133442871914
+      ],
+      "excerpt": ":Parameter: The server always looks at the Accept header of a request, and tries to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9753180628970435,
+        0.9130349608519662
+      ],
+      "excerpt": "  a 406 response is returned. When no Accept, or an Accept of / is specified, \n  the server prefers text/plain, in order to make it easy to explore the interface from a web browser. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207067819648662
+      ],
+      "excerpt": ":Parameter value: alias. If an unexpected alias is used, the server is not working properly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9085733837696827
+      ],
+      "excerpt": ":Valid alias for DESCRIBE and CONSTRUCT: \"xml\", \"text\" (for turtle) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207067819648662
+      ],
+      "excerpt": ":Parameter value: alias. If an unexpected alias is used, the server is not working properly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174104489809455
+      ],
+      "excerpt": "Other values: application/x-binary-rdf-results-table \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8270272647397797,
+        0.8527821560237687
+      ],
+      "excerpt": ":Valid alias for SELECT and ASK: \"xml\", \"json\" \n:Valid alias for DESCRIBE and CONSTRUCT: \"xml\", \"json\" (but it returns unexpected \"application/sparql-results+json\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8752655083237583
+      ],
+      "excerpt": ":Parameter key: If an unexpected parameter is used, the server ignores it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174104489809455
+      ],
+      "excerpt": "Other values: application/x-binary-rdf-results-table \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.842267606654053
+      ],
+      "excerpt": "Community support is available through the developer's discussion group rdflib-dev &lt;http://groups.google.com/d/forum/rdflib-dev&gt;. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A wrapper for a remote SPARQL endpoint",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The `SPARQLWrapper documentation is available online <https://sparqlwrapper.readthedocs.io>`_.\n\nOther interesting documents are the latest `SPARQL 1.1 Specification (W3C Recommendation 21 March 2013) <https://www.w3.org/TR/sparql11-overview/>`_\nand the initial `SPARQL Specification (W3C Recommendation 15 January 2008) <http://www.w3.org/TR/rdf-sparql-query/>`_.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/RDFLib/sparqlwrapper/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 103,
+      "date": "Mon, 20 Dec 2021 17:51:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/RDFLib/sparqlwrapper/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RDFLib/sparqlwrapper",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/RDFLib/sparqlwrapper/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can install SPARQLWrapper from PyPi::\n\n   $ pip install sparqlwrapper\n\nYou can install SPARQLWrapper from GitHub::\n\n   $ pip install git+https://github.com/rdflib/sparqlwrapper#egg=sparqlwrapper\n\nYou can install SPARQLWrapper from Debian::\n\n   $ sudo apt-get install python-sparqlwrapper\n   \n.. note::\n\n   Be aware that there could be a gap between the latest version of SPARQLWrapper\n   and the version available as Debian package.\n\nAlso, the source code of the package can be downloaded \nin ``.zip`` and ``.tar.gz`` formats from `GitHub SPARQLWrapper releases <https://github.com/RDFLib/sparqlwrapper/releases>`_.\nDocumentation is included in the distribution.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9945864321649523
+      ],
+      "excerpt": "|Build Status| |PyPi version| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8681772025154941
+      ],
+      "excerpt": "for JSON, the json &lt;https://docs.python.org/library/json.html&gt; package to generate a Python dictionary. Until version 1.3.1, the simplejson &lt;https://pypi.python.org/pypi/simplejson&gt; package was used. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8279514003940622
+      ],
+      "excerpt": "You can use following methods to query triples &lt;https://docs.marklogic.com/guide/semantics/semantic-searches#chapter&gt;_: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9750996156222702,
+        0.9307741073569005,
+        0.977494402329709
+      ],
+      "excerpt": "SPARQLWrapper: the Python package. You should copy the directory \n   somewhere into your PYTHONPATH. Alternatively, you can also run \n   the distutils scripts: python setup.py install \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9523989229309532
+      ],
+      "excerpt": "   some packages have to be installed before. So please install the packages  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9955652127899879
+      ],
+      "excerpt": "   pip install -r requirements.development.txt \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from SPARQLWrapper import SPARQLWrapper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8198786280722468
+      ],
+      "excerpt": "SELECT and ASK: a SPARQL Results Document in XML, JSON, or CSV/TSV format. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from SPARQLWrapper import SPARQLWrapper2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9266818383012748,
+        0.9266818383012748
+      ],
+      "excerpt": "         print \"%s: %s (of type %s)\" % (\"s\",binding[u\"subj\"].value,binding[u\"subj\"].type) \n         print \"%s: %s (of type %s)\" % (\"p\",binding[u\"prop\"].value,binding[u\"prop\"].type) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from SPARQLWrapper import SPARQLWrapper2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8191108445493579
+      ],
+      "excerpt": "     print ret.variables  # this is an array consisting of \"subj\", \"o\", \"opt\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8731562459058029,
+        0.8731562459058029
+      ],
+      "excerpt": "            subj = b[u\"subj\"].value \n            o    = b[u\"o\"].value \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.862657950745011
+      ],
+      "excerpt": "     subjbind = ret.getValues(u\"subj\") # an array of Value instances \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8047385249167379
+      ],
+      "excerpt": ":Parameter value: MUST be one of these values: rdf+xml, json, csv, application/sparql-results+xml or application/sparql-results+json. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8924620861967797
+      ],
+      "excerpt": "  \"text/plain\" (N-Triples), \"text/csv\" (CSV), \"text/tab-separated-values\" (TSV) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8120804866704271
+      ],
+      "excerpt": "text/rdf+n3 (returns text/n3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8120804866704271
+      ],
+      "excerpt": "text/rdf+n3 (returns text/n3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8163191817753352
+      ],
+      "excerpt": "for a simple text format (default), xml for the SPARQL Query Results XML format, csv for SPARQL CSV, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8263785387076211
+      ],
+      "excerpt": "ASK queries return a boolean (true or false). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8020013205725677
+      ],
+      "excerpt": "OTHERS: text/integer, application/json, text/plain, text/x-nquads, application/trix, text/table, application/x-direct-upis \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8682709676561868,
+        0.8185024724792488
+      ],
+      "excerpt": "text/csv (alias csv) \ntext/tab-separated-values (alias tsv). Returns \"text/plain\" in GET. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8682709676561868,
+        0.8185024724792488
+      ],
+      "excerpt": "text/csv (alias csv) \ntext/tab-separated-values (alias tsv). Returns \"text/plain\" in GET. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "text/turtle (alias \"text\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "text/turtle (alias \"text\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8120804866704271
+      ],
+      "excerpt": "text/turtle (returns text/n3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8120804866704271
+      ],
+      "excerpt": "text/turtle (returns text/n3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8052925709964562,
+        0.8304039983256449
+      ],
+      "excerpt": "application/sparql-results+json, application/json (.srj file) \ntext/csv (DEFAULT if Accept: / is sent) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8277021550892166
+      ],
+      "excerpt": "NOT supported: text/csv, text/tab-separated-values \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9046905340678327
+      ],
+      "excerpt": "text/turtle (.ttl file) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8845632847248134,
+        0.8293753304203659
+      ],
+      "excerpt": "text/n3, text/rdf+n3 (.n3 file) \napplication/ld+json (.jsonld file) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9046905340678327
+      ],
+      "excerpt": "text/turtle (.ttl file) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8845632847248134,
+        0.8293753304203659
+      ],
+      "excerpt": "text/n3, text/rdf+n3 (.n3 file) \napplication/ld+json (.jsonld file) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9211072435177371
+      ],
+      "excerpt": "test: some unit and integrations tests. In order to run the tests  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/RDFLib/sparqlwrapper/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": ".. image:: docs/source/SPARQLWrapper-250.png",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sparqlwrapper",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RDFLib",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/RDFLib/sparqlwrapper/blob/master/README.rst",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "Tagging version 1.8.5 release of SPARQLWrapper.",
+        "dateCreated": "2019-12-22T11:40:20Z",
+        "datePublished": "2019-12-22T11:44:05Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.5",
+        "name": "1.8.5",
+        "tag_name": "1.8.5",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.5",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/22413670",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "Tagging version 1.8.4 release of SPARQLWrapper.",
+        "dateCreated": "2019-04-18T10:03:07Z",
+        "datePublished": "2019-04-18T10:04:42Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.4",
+        "name": "1.8.4",
+        "tag_name": "1.8.4",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.4",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/16845525",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "Tagging version 1.8.3 release of SPARQLWrapper.\r\nProblably it is not working for Python3",
+        "dateCreated": "2019-04-17T19:36:38Z",
+        "datePublished": "2019-04-17T19:44:07Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.3",
+        "name": "1.8.3",
+        "tag_name": "1.8.3",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.3",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/16833264",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "",
+        "dateCreated": "2018-05-16T20:32:47Z",
+        "datePublished": "2018-05-16T20:35:49Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.2",
+        "name": "1.8.2",
+        "tag_name": "1.8.2",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.2",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/11035777",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "",
+        "dateCreated": "2018-02-25T10:58:02Z",
+        "datePublished": "2018-02-25T11:03:32Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.1",
+        "name": "1.8.1",
+        "tag_name": "1.8.1",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.1",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/9823561",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "dayures",
+        "body": "",
+        "dateCreated": "2016-12-07T09:23:46Z",
+        "datePublished": "2018-02-25T10:46:13Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.8.0",
+        "name": "1.8.0",
+        "tag_name": "1.8.0",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.8.0",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/9823507",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.8.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-12-18T09:22:56Z",
+        "datePublished": "2015-12-18T09:25:16Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.6",
+        "name": "1.7.6",
+        "tag_name": "1.7.6",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.6",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2310183",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-11-19T13:14:26Z",
+        "datePublished": "2015-11-19T13:17:19Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.5",
+        "name": "1.7.5",
+        "tag_name": "1.7.5",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.5",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2152880",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-11-05T13:56:22Z",
+        "datePublished": "2015-11-19T13:17:08Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.4",
+        "name": "1.7.4",
+        "tag_name": "1.7.4",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.4",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2152878",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-11-05T11:07:52Z",
+        "datePublished": "2015-11-05T11:14:39Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.3",
+        "name": "1.7.3",
+        "tag_name": "1.7.3",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.3",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2076446",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-11-03T13:15:01Z",
+        "datePublished": "2015-11-03T13:17:46Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.2",
+        "name": "1.7.2",
+        "tag_name": "1.7.2",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.2",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2063081",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-10-30T08:00:50Z",
+        "datePublished": "2015-10-30T08:04:13Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.1",
+        "name": "",
+        "tag_name": "1.7.1",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.1",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2045063",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "",
+        "dateCreated": "2015-10-29T13:00:58Z",
+        "datePublished": "2015-10-29T13:24:48Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.7.0",
+        "name": "",
+        "tag_name": "1.7.0",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.7.0",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/2039492",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.7.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "- Fixed unicode problems on setup (issue #42)\n",
+        "dateCreated": "2014-08-26T12:54:16Z",
+        "datePublished": "2014-08-26T12:59:39Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.6.4",
+        "name": "1.6.4",
+        "tag_name": "1.6.4",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.6.4",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/515360",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.6.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "- Fixed unicode problems with urllib in Python 3 (issue #35)\n- Restored SPARQLWrapper2 class (issue #36)\n- Enhanced warning for missing rdflib-jsonld (issue #38)\n- Fixed build system (issue #39)\n",
+        "dateCreated": "2014-08-26T06:50:06Z",
+        "datePublished": "2014-08-26T09:40:16Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.6.3",
+        "name": "1.6.3",
+        "tag_name": "1.6.3",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.6.3",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/514956",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.6.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "- Returning raw response in case of unknown content type returned\n- Fixed some issues with the last version of the SPARQL 1.1 Update Protocol\n- `setQuery()` doesn't imply `resetQuery()` anymore\n- Deprecated `addCustomParameter()`, `addParameter()` and `clearParameter()` come to provide all required functionality\n- `SPARQLWrapper`, `QueryResult`, `Value`, `Bindings` (and classes inherited from them) are new-style classes now\n- POST queries are accompanied by full set of parameters now\n- Added rudimentary support for JSON-LD\n- Added proper unit tests without dependencies of external endpoints\n- Fixed Python 3 compatibility issues in `SmartWrapper` module\n",
+        "dateCreated": "2014-05-12T07:34:28Z",
+        "datePublished": "2014-07-24T15:41:05Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.6.0",
+        "name": "1.6.0",
+        "tag_name": "1.6.0",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.6.0",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/448880",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.6.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "- Added missing query types (issue #17)\n- Added a new method to the API to select the request method to be fully SPARQL 1.1 Protocol compliant (issue #28)  \n- Improved the test suite coverage, including support to run the tests under Python 3.x (issues #20, #24 and #31)\n",
+        "dateCreated": "2014-07-21T14:45:28Z",
+        "datePublished": "2014-07-24T15:39:33Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.6.1",
+        "name": "1.6.1",
+        "tag_name": "1.6.1",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.6.1",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/448872",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.6.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wikier",
+        "body": "- Fixed query type detection with comments (issue #32)\n",
+        "dateCreated": "2014-07-24T15:24:26Z",
+        "datePublished": "2014-07-24T15:38:44Z",
+        "html_url": "https://github.com/RDFLib/sparqlwrapper/releases/tag/1.6.2",
+        "name": "1.6.2",
+        "tag_name": "1.6.2",
+        "tarball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/tarball/1.6.2",
+        "url": "https://api.github.com/repos/RDFLib/sparqlwrapper/releases/448869",
+        "zipball_url": "https://api.github.com/repos/RDFLib/sparqlwrapper/zipball/1.6.2"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The `RDFLib <https://rdflib.readthedocs.io>`_ package is used for RDF parsing.\n\nThis package is imported in a lazy fashion, ie, only when needed. Ie, if the user never intends to use the\nRDF format, the RDFLib package is not imported and the user does not have to install it.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 407,
+      "date": "Mon, 20 Dec 2021 17:51:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "sparql-endpoints",
+      "python",
+      "pypi",
+      "wrapper",
+      "sparql",
+      "sparql-query",
+      "rdf"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper, JSON\n\n   sparql = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n   sparql.setQuery(\"\"\"\n       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n       SELECT ?label\n       WHERE { <http://dbpedia.org/resource/Asturias> rdfs:label ?label }\n   \"\"\")\n   sparql.setReturnFormat(JSON)\n   results = sparql.query().convert()\n\n   for result in results[\"results\"][\"bindings\"]:\n       print(result[\"label\"][\"value\"])\n   \n   print('---------------------------')\n   \n   for result in results[\"results\"][\"bindings\"]:\n       print('%s: %s' % (result[\"label\"][\"xml:lang\"], result[\"label\"][\"value\"]))\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper, XML\n\n   sparql = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n   sparql.setQuery(\"\"\"\n       ASK WHERE { \n           <http://dbpedia.org/resource/Asturias> rdfs:label \"Asturias\"@es\n       }    \n   \"\"\")\n   sparql.setReturnFormat(XML)\n   results = sparql.query().convert()\n   print(results.toxml())\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper, RDFXML\n   from rdflib import Graph\n\n   sparql = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n\n   sparql.setQuery(\"\"\"\n       PREFIX dbo: <http://dbpedia.org/ontology/>\n       PREFIX schema: <http://schema.org/>\n       \n       CONSTRUCT {\n         ?lang a schema:Language ;\n         schema:alternateName ?iso6391Code . \n       }\n       WHERE {\n         ?lang a dbo:Language ;\n         dbo:iso6391Code ?iso6391Code .\n         FILTER (STRLEN(?iso6391Code)=2) # to filter out non-valid values\n       }\n   \"\"\")\n\n   sparql.setReturnFormat(RDFXML)\n   results = sparql.query().convert()\n   print(results.serialize(format='xml'))\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper, N3\n   from rdflib import Graph\n\n   sparql = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n\n   sparql.setQuery(\"\"\"\n       DESCRIBE <http://dbpedia.org/resource/Asturias>\n   \"\"\")\n\n   sparql.setReturnFormat(N3)\n   results = sparql.query().convert()\n   g = Graph()\n   g.parse(data=results, format=\"n3\")\n   print(g.serialize(format='n3'))\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper, POST, DIGEST\n\n   sparql = SPARQLWrapper(\"https://example.org/sparql-auth\")\n\n   sparql.setHTTPAuth(DIGEST)\n   sparql.setCredentials(\"login\", \"password\")\n   sparql.setMethod(POST)\n\n   sparql.setQuery(\"\"\"\n   WITH <http://example.graph>\n   DELETE\n   { <http://dbpedia.org/resource/Asturias> rdfs:label \"Asturies\"@ast }\n   \"\"\")\n\n   results = sparql.query()\n   print results.response.read()\n   \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "There is also a ``SPARQLWrapper2`` class that works with JSON SELECT\nresults only and wraps the results to make processing of average queries\na bit simpler.\n\n.. code:: python\n\n   from SPARQLWrapper import SPARQLWrapper2\n\n   sparql = SPARQLWrapper2(\"http://dbpedia.org/sparql\")\n   sparql.setQuery(\"\"\"\n       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n       SELECT ?label\n       WHERE { <http://dbpedia.org/resource/Asturias> rdfs:label ?label }\n   \"\"\")\n\n   for result in sparql.query().bindings:\n       print('%s: %s' % (result[\"label\"].lang, result[\"label\"].value))\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "By default, all SPARQL services are invoked using HTTP **GET** verb. However, \n**POST** might be useful if the size of the query\nextends a reasonable size; this can be set in the query instance.\n\nNote that some combination may not work yet with all SPARQL processors\n(e.g., there are implementations where **POST + JSON return** does not work). \nHopefully, this problem will eventually disappear.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Chassy, Philippe, and Fernand Gobet. \u201cMeasuring Chess Experts' Single-Use Sequence Knowledge: an Archival Study of Departure from 'Theoretical' Openings.\u201d PloS One, Public Library of Science, 16 Nov. 2011 www.ncbi.nlm.nih.gov/pmc/articles/PMC3217924/. \n\n\u201cDeep Blue.\u201d IBM100 - Deep Blue, IBM www.ibm.com/ibm/history/ibm100/us/en/icons/deepblue/. \n\nSilver, David, et al. \u201cMastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm.\u201d ArXiv.org, Cornell University, 5 Dec. 2017 arxiv.org/abs/1712.01815v1.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8940583111730483,
+        0.8047696154562745
+      ],
+      "excerpt": "Team Members: Samia Khan, Minseo Kwak, Ethan Jones, and Kyle Keirstead \nSource: https://www.kaggle.com/datasnaek/chess \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/samiamkhan/4641Project",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-09T22:20:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-30T13:35:34Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Chess has been studied as a subject of artificial intelligence for many decades, which is why it has been described as, \u201cthe most widely-studied domain in the history of artificial intelligence\u201d (Silver et al. 1). Ranging back all the way to the 1950s, various aspects of the game have been studied; one of the most notable instances of this is IBM's Deep Blue computer. In 1997, Deep Blue beat chess champion Garry Kasparov (\"Deep Blue\"), proving AI's ability to compete against (and beat) the best human chess players.\n\nGiven that IBM was able to achieve this over 20 years ago and technology has only continued to evolve, our team chose to focus on creating something that has the ability to derive conclusions from prior player performance and the opening moves used in a chess match. Chess always begins with the same initial board layout; as a result, different combinations of opening moves occur frequently in play and have the potential to be used to predict the outcome of the match at a very early stage. Point systems in chess are often used as the game progresses as a measure of which player holds an advantage; however, our work studies the earliest moves in the game (before players generally begin trading pieces).\n\nOur goal is to predict the likelihood that the result of a chess game can be predicted using only the knowledge of the first x moves and the ratings of the two players involved in the match. Initially, we believed that this may be beneficial for helping players to choose certain openings; though our work may be useful in this respect, the choice of moves should be viewed as a causality of the player's experience. As a result, an inexperienced player making the moves in a bid to play better may yield moderate performance gains, but ultimately the opening moves lead to victory not because they are superior, but because the player making them is superior and recognizes the advantages of using certain openings.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.886730085223036
+      ],
+      "excerpt": "Team Members: Samia Khan, Minseo Kwak, Ethan Jones, and Kyle Keirstead \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9572232767965593,
+        0.9918761120674495,
+        0.9983451145040204,
+        0.987974426625686,
+        0.9757490475777797,
+        0.9743197320339669
+      ],
+      "excerpt": "Our team utilized a data-source that provided information on over 20,000 games played on the website Lichess.org. The set included data on both sets of players, the game's duration, the end result, all moves (in Standard Chess Notation), the names of the openings used by both players, and other miscellaneous information. \nFor our project, the team only used a subset of the available features. These include the rating of each player, the first 10 moves for each player, and the result of the game. Though the data provided information on the name of the specific openings used by each player, these openings are associated with a specific number of moves at the beginning of the match. We elected to manually evaluate the openings by using the raw move data for an increasing number of moves to prevent the possibility of overlooking the importance of different numbers of moves. \nOur team utilized Supervised Machine Learning for our project. When drafting our initial proposal, we discussed a variety of different techniques and how well they would align with our goal. We realized that the hierarchy of potential chess moves from a single starting state resembled a tree with branches that extend to represent different combinations of moves. As a result, we chose to utilize decision trees. \nIn creating decision trees, each combination of moves represents a node. Using a Python dictionary, these move combinations serve as a key, and the games that correspond to each opening sequence of moves are stored as a list of values. To limit overfitting, we split our game data as follows: 80% training data and 20% testing data. For each key in the training data, we used the players' ratings and the result of the game (white wins, black wins, or stalemate) to train the decision tree. After completing the training, we ran the decision tree on the testing data and compared the predicted result of the game to the actual outcome. \nThis procedure was performed 10 times; initially, only the first move for each player was being considered, and in each iteration another move was added, and a new list of keys was formed until the keys represented the first 10 moves of the game. As more moves were added, the tree began to branch out, and an increasing number of potential sequences of moves appeared as keys. As a result, one-off instances began to occur; with only one piece of data corresponding to a certain key, it was impossible to split into training and testing data, and in these situations the key was not included in our findings.  \nTo visualize our results, we generated plots. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/samiamkhan/4641Project/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 13:37:44 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/samiamkhan/4641Project/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "samiamkhan/4641Project",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/samiamkhan/4641Project/master/MLproject.ipynb",
+      "https://raw.githubusercontent.com/samiamkhan/4641Project/master/.ipynb_checkpoints/MLproject-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8952450539027421
+      ],
+      "excerpt": "Source: https://www.kaggle.com/datasnaek/chess \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/samiamkhan/4641Project/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Predicting Chess Match Results Based on Opening Moves",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "4641Project",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "samiamkhan",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/samiamkhan/4641Project/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 23 Dec 2021 13:37:44 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

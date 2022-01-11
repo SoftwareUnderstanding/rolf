@@ -1,0 +1,167 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1908.07442"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MagnusPetersen/Mechanism-of-action-prediction",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-27T15:58:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-15T10:59:57Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9651569598044333,
+        0.9584184995815305,
+        0.9598555384158509,
+        0.9896713161472334,
+        0.9924377585904561,
+        0.9896274928471247,
+        0.9550552841255322,
+        0.9570312339541166,
+        0.9904571849196551
+      ],
+      "excerpt": "The goal is to use 100 cell viability features and 772 gene expression features to find the corresponding 206 target mechanisms. The features are the results from the L1000 and Prism assay respectively. The problem is therefore a simple classification problem where the complexity comes from the number of categories and their imbalance. \nBaseline: My baseline model was a fully connected neural network with only the necessary data rescaling. As expected, the results were not that great with a logit loss of 0.027. \nTabNet: As the next model to improve upon the base line TabNet and XgBoost were picked, since they both deal well with tabular data. XgBoost performed barely better than the baseline and therefore TabNet was chosen for the continued refinement of the solution.  \nTabNet [1] is an attention-based network, that sequentially reasons over features to reach a decision. The power of attention-based methods has been not only powerful but in this vase also leads to further interpretability. Just using TabNet a result of 0.025 was achieved.  \nTabNet with feature engineering: Using Kernel PCA on the data 100 principal components were calculated to bolster the data, this improved accuracy by an insignificant amount. Furthermore, I trained an Autoencoder with 40 laments to encode the data and add the encoded version to the data feed into the TabNet. This improved the performance to 0.024.  \nThe performance on the hidden Kaggle test set is noticeably worse than on the validation set. This appears to be due to the large amount of labels and the rarity of a few of those. An 80/20 train-validation split is suboptimal in this situation, as it might stop the model from seeing some of the rarer labels more frequently. A K-fold split might be better in this case.  \nUsing K-Fold split the performance stayed the same on the different validation sets but improved on the hidden set to 0.024 \nInitially the final prediction of the 10 models was calculated by taking the mean of the predictions. This can be improved by taking the weighted mean. The weights were the optimized via backpropagation. For each model there is one weight for all 206 labels leading to 2060 weights. This however did not improve the results leading to the conclusion, that each TabNet trained on each fold has an about even ability on all labels. \nThe best approach appears to be blending many different models, each with strengths and weaknesses for the final prediction. In addition to the TabNet and a FCNN, SVMs, XgBoost, and even CNNs can be used as components of a meta-model. Manifold learning techniques like UMAP and T-SNE could also be used in addition to PCA for data augmentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "My Kaggle challenge notebooks for the \"Mechanism of Action\" contest. All my iterations and insights. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MagnusPetersen/Mechanism-of-action-prediction/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 15:52:02 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MagnusPetersen/Mechanism-of-action-prediction/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MagnusPetersen/Mechanism-of-action-prediction",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/MagnusPetersen/Mechanism-of-action-prediction/main/BaselineFCN.ipynb",
+      "https://raw.githubusercontent.com/MagnusPetersen/Mechanism-of-action-prediction/main/TabNet.ipynb",
+      "https://raw.githubusercontent.com/MagnusPetersen/Mechanism-of-action-prediction/main/TabNet%2BAdditionalFeaturesKfolds.ipynb",
+      "https://raw.githubusercontent.com/MagnusPetersen/Mechanism-of-action-prediction/main/TabNet%2BAdditionalFeatures.ipynb",
+      "https://raw.githubusercontent.com/MagnusPetersen/Mechanism-of-action-prediction/main/TabNet%2BAdditionalFeaturesKfolds-BP.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MagnusPetersen/Mechanism-of-action-prediction/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Mechanism-of-action-prediction",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Mechanism-of-action-prediction",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MagnusPetersen",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MagnusPetersen/Mechanism-of-action-prediction/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 15:52:02 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1607.06450"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MycChiu/fast-LayerNorm-TF",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2016-11-29T07:49:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-19T09:23:34Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.929929422287982
+      ],
+      "excerpt": "![comparing built-in and custom] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9900252364541032
+      ],
+      "excerpt": "This repo is in the process of merging into Tensorflow trunk, there is some redundancy and inefficiency in the code that needs to be improved, so please come check out the pull request if you are knowledgeable in CUDA or C++ and have the time to help out. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993399964846981,
+        0.8929407331768979,
+        0.933638427394461,
+        0.8957750387144677
+      ],
+      "excerpt": "Layer normalization (Jimmy Lei Ba et al.) is a technique used to prevent \"covariate-shift\" which in terms reduces the number of batches needed to reach convergence, and in some cases improves the performance of a model.However, the current implementation of layer_norm in TensorFlow will increase the clock-time required per batch dramatically. This is a result of computing mean and variance seperately through multiple steps, with the current architecture of NVIDIA's GPU, reading and writing to global memory (on the GPU device) is quite costly. This is unavoidable for batch normalization, since we would have to keep the running mean and variance for the test time inference. However, layer normalization does not have this constraint, we can lump all the computations together with single read and write to the global memory, which is why this custom kernel is so much faster (about 5-10x faster, depends on the input size) than the current implementation. \nHere are some benchmarks for 5 layers of fully-connected layers using different normalization methods. Generated with layer_norm_bench_mark.py \nBatch size fixed to 128 with different nb_units. \nNumber of units fixed to 128 with different batch size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8135028068214899,
+        0.8797828569311977,
+        0.9353325533307428,
+        0.837013402621875,
+        0.9215612437317386,
+        0.9652876416208953
+      ],
+      "excerpt": "There are three diffrenet kernels in this code, they are layer_norm_custom,layer_norm_bias_add_custom, and layer_norm_fused_custom. Take a look at layer_norm_fused_layer.py to see how they can be used. \nThis implementation uses warp shuffle instructions to reduce shared memory access, which (I think) only exists after Kepler (Geforce 600 series), so you will need to modify the code to use on Fermi or older cards.  \nThe performance may differ with different hardware, I only optimized the code for the card I am using (GTX1070). You can use layer_norm_bench_mark.py to check if it really is faster with your hardware, and layer_norm_fused_test.py to test for validity of the outputs. \nThis implementation is not exactly the same as tf.contrib.layers.layer_norm. This custom kernel normalize along the last dimension, while the built-in implementation normalize along all dimensions except the first. This will probably not affect standard usage for rnn and fully-connected layers, but it will be diffrenet for 1D or 2D convolutions. \nThe current implementation of this kernel has a limit on the size of your last dimension. More specifically,it can't be more than 5120, which should be more than enough for most use cases, but if you need to increase this limit, please submit an issue, and I will write additional instruction on how to increase this limit. \nI am really new to CUDA and C++, so the code is far from optimized. Any suggestion on how to improve the kernel is deeply appreciated. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Efficient layer normalization GPU kernel for Tensorflow",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MycChiu/fast-LayerNorm-TF/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 23,
+      "date": "Sun, 26 Dec 2021 21:18:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MycChiu/fast-LayerNorm-TF/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MycChiu/fast-LayerNorm-TF",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9315938573085636
+      ],
+      "excerpt": "If you failed to build the .so file, make sure you didn't set your Tensorflow in development mode. I ran into this problem just now, and once I switch back to the pip package install directory, I was able to build again. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9343882421612928
+      ],
+      "excerpt": "The makefile assumes your cuda library is installed in /usr/local/cuda, if you installed it somewhere else, you can change the part -L /usr/local/cuda/lib64/ in the last line of the makefile to -L [your cuda install path]/lib64/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85587746501686
+      ],
+      "excerpt": "This may not be required (may even raise error) if you are using newer version of TensorFlow. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.925671696398174
+      ],
+      "excerpt": "import tensorflow as tf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MycChiu/fast-LayerNorm-TF/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2016 MycChiu\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Fast TensorFlow Layer Normalization GPU kernel",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fast-LayerNorm-TF",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MycChiu",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MycChiu/fast-LayerNorm-TF/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 110,
+      "date": "Sun, 26 Dec 2021 21:18:34 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

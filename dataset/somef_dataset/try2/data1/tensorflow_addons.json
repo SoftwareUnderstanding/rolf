@@ -1,0 +1,1148 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8964737401288927
+      ],
+      "excerpt": "| tensorflow-addons-0.10.0 | 2.2  | GCC 7.3.1 | 7.6 | 10.1 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "bazel-bin/build_pip_pkg artifacts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "bazel-bin/build_pip_pkg artifacts \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/tensorflow/addons/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tensorflow/addons",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing\nInterested in contributing to TensorFlow Addons? We appreciate all kinds\nof help and are working to make this guide as comprehensive as possible.\nPlease let us know if\nyou think of something we could do to help lower the barrier to\ncontributing.\nPull Requests\nWe gladly welcome pull requests.\nHave you ever done a pull request with GitHub? \nIf not we recommend you to read \nthis guide \nto get your started.\nBefore making any changes, we recommend opening an issue (if it\ndoesn't already exist) and discussing your proposed changes. This will\nlet us give you advice on the proposed changes. If the changes are\nminor, then feel free to make them without discussion.\nAll submissions, including submissions by project members, require\nreview.\nRequirements for New Contributions to the Repository\nAll new components/features to Addons need to first be submitted as a feature \nrequest issue. This will allow the team to check with our counterparts in the TF\necosystem and ensure it is not roadmapped internally for Keras or TF core. These \nfeature requests will be labeled with ecosystem-review while we determine if it \nshould be included in Addons.\nThe tensorflow/addons repository contains additional functionality\nfitting the following criteria:\n\nThe functionality is not otherwise available in TensorFlow\nAddons have to be compatible with TensorFlow 2.x.\nThe addon conforms to the code and documentation standards\nThe addon is impactful to the community (e.g. an implementation used\n in widely cited paper)\nLastly, the functionality conforms to the contribution guidelines of\n its subpackage.\n\nSuggested guidelines for new feature requests:\n\nThe feature contains an official reference implementation.\nShould be able to reproduce the same results in a published paper.\nThe academic paper exceeds 50 citations.\n\nNote: New contributions often require team-members to read a research\npaper and understand how it fits into the TensorFlow community. This\nprocess can take longer than typical commit reviews so please bare with\nus\nTools needed for developement\nLinux\n\nDocker (code formatting / testing)\nNvidia-docker (for GPU testing, optional)\nBazel installed locally (to build custom ops locally, optional)\nNVCC/Cuda installed locally (to build custom ops with gpu locally, optional)\n\nMacOS\n\nDocker (code formatting / testing)\nBazel installed locally (to build custom ops locally, optional)\n\nWindows\nFor Windows, you have two options:\nWSL 2\nWSL 2 is a very light virtual machine running with hyper-V. When running in \nWSL 2, you're in a full linux environment, with a real linux kernel. \nWSL 2 networking is shared with Windows and your Windows files can be found under \n/mnt/c. When working with WSL 2, you can just follow the linux guides and tutorials\nand everything will work as in linux, including \nDocker (that means you install docker with apt-get), git, ssh...\nSee the WSL 2 install guide.\nPowershell in Windows\nThis is if you want to stay in Windows world. In this case, you need:\n\nGit with git bash install on the PATH (meaning that you can run the sh command from Powershell).\nDocker desktop with Linux containers (code format, testing on linux, etc...)\nA local Python installation\nBazel (if you want to compile custom ops on Windows, optional)\nVisual Studio build tools 2019\ninstall with chocolatey or\n install manually\n (if you want to compile custom ops on windows, optional).\n\nIf you develop on Windows and you encounter issues, we'd be happy to have your feedback!\n This link might help you.\nDevelopment Tips\nTry these useful commands below, they only use Docker and \ndon't require anything else (not even python installed):\n\nFormat code automatically: bash tools/pre-commit.sh\nRun sanity check: bash tools/run_sanity_check.sh\nRun CPU unit tests: bash tools/run_cpu_tests.sh\nRun GPU unit tests: bash tools/run_gpu_tests.sh\n\nIf you're running Powershell on Windows, use sh instead of bash when typing the commands.\nCoding style\nWe provide a pre-commit hook to format your code automatically before each\ncommit, so that you don't have to read our style guide. Install it on Linux/MacOS with\nbash\ncd .git/hooks &amp;&amp; ln -s -f ../../tools/pre-commit.sh pre-commit\nand you're good to go.\nOn Windows, in powershell, do:\nbash\ncd .git/hooks\ncmd /c mklink pre-commit ..\\..\\tools\\pre-commit.sh\nNote that this pre-commit needs Docker to run. \nIf you have docker 19.03+, it uses\nDocker buildkit \nto make the build step much faster.\nSee our Style Guide for more details.\nCode Testing\nCI Testing\nNightly CI tests are ran and results can be found on the central README. To\nsubscribe for alerts please join the addons-testing mailing list.\nTesting locally, without Docker\nWhen running outside Docker, you can use your IDE to debug, and use your local tools to work.\nIf you're just modifying Python code (as opposed to C++/CUDA code), \nthen you don't need to use Bazel to run your tests. \nAnd you don't need to compile anything.\nOptional but recommended, creating a virtual environment\nIf you want to work in \na virtualenv:\nbash\npip install virtualenv\nvenv my_dev_environement\nsource my_dev_environement/bin/activate  # Linux/macos/WSL2\n.\\my_dev_environement\\Scripts\\activate   # PowerShell\nIf you want to work in \na conda environment:\nbash\nconda create --name my_dev_environement\nconda activate my_dev_environement\nInstall TensorFlow Addons in editable mode\nJust run from the root:\n```bash\npip install tensorflow==2.7\nyou can use \"pip install tensorflow-cpu==2.7.0\" too if you're not testing on gpu.\npip install -e ./\n```\nIt's going to install Addons in editable mode without compiling anything.\nYou can modify source files and changes will be seen at the next Python \ninterpreter startup. This command needs to be executed only once. \nNow, anywhere on your system, if you do import tensorflow_addons, it's \ngoing to import the code in this git repository.\nUninstall TensorFlow Addons\nTo undo this operation, for example, you want to later on \ninstall TensorFlow Addons from PyPI, the release version, do:\nbash\npip uninstall tensorflow-addons\nRun the tests with pytest\nIf TensorFlow Addons is installed in editable mode, you can then just run your tests by \nrunning Pytest. For example:\n```bash\npip install -r tools/install_deps/pytest.txt\npython -m pytest tensorflow_addons/rnn/tests/cell_test.py\nor even\npython -m pytest tensorflow_addons/rnn/\nor even\npython -m pytest tensorflow_addons/\nor even if pytest is in the PATH\npytest tensorflow_addons/\n```\nPytest has many cool options to help you make great tests:\n```bash\nUse multiprocessing to run the tests, 3 workers\npytest -n 3 tensorflow_addons/\npytest -n auto tensorflow_addons/\nRun the whole test suite without compiling any custom ops (.so files).\npytest -v --skip-custom-ops tensorflow_addons/\nOpen the debugger to inspect variables and execute code when\nan exception is raised.\npytest --pdb tensorflow_addons/ \nor if you prefer the Ipython debugger\npytest --pdb --pdbcls=IPython.terminal.debugger:TerminalPdb --capture no tensorflow_addons/\nby defaults print() aren't displayed with pytest\nif you like to debug with prints (you might get\nthe output scrambled)\npytest -s tensorflow_addons/\nget the list of functions you ran\npytest -v tensorflow_addons/\nto rerun all previous tests, running the ones that failed first\npytest --ff tensorflow_addons/\nYou know which function to execute, but you're too\nlazy to type the file path\npytest -k \"test_get_all_shared_objects\" ./tensorflow_addons/\nget the 10 slowest functions\npytest --duration=10 tensorflow_addons/\n```\nTesting with Pycharm\nPycharm has a debugger build in the IDE for visual inspection of variables\nand step by step executions of Python instructions. It can run your test \nfunctions from the little green arrows next to it. And you can add \n breakpoints by just clicking next to a line in the code (a red dot will appear). \nBut in order for the debugger to run correctly, you need to specify \n that you use pytest as your main test runner, not unittest (the default one). \nFor that, go in File -> Settings -> search box -> Default test runner -> Select \"Pytest\".\nCompiling custom ops\nIf you need a custom C++/Cuda op for your test, compile your ops with\nbash\npython configure.py\npip install tensorflow==2.7 -e ./ -r tools/install_deps/pytest.txt\nbash tools/install_so_files.sh  # Linux/macos/WSL2\nsh tools/install_so_files.sh    # PowerShell\nNote that you need bazel, a C++ compiler and a NVCC compiler (if you want to test\nCuda ops). For that reason, we recommend you run inside the custom-op docker containers. \nThis will avoid you the hassle of installing Bazel, GCC/clang...\nSee below.\nRun Manually\nRunning tests interactively in Docker gives you good flexibility and doesn't require \nto install any additional tools.\nCPU Docker: \nbash\ndocker run --rm -it -v ${PWD}:/addons -w /addons tfaddons/dev_container:latest-cpu\nGPU Docker: \nbash\ndocker run --gpus all --rm -it -v ${PWD}:/addons -w /addons gcr.io/tensorflow-testing/nosla-cuda11.2-cudnn8.1-ubuntu18.04-manylinux2010-multipython\nConfigure:\nbash\npython3 -m pip install tensorflow==2.7\npython3 ./configure.py  # Links project with TensorFlow dependency\nInstall in editable mode\nbash\npython3 -m pip install -e .\npython3 -m pip install -r tools/install_deps/pytest.txt\nCompile the custom ops\nbash\nexport TF_NEED_CUDA=1 # If GPU is to be used\nbash tools/install_so_files.sh\nRun selected tests:\nbash\npython3 -m pytest path/to/file/or/directory/to/test\nRun the gpu only tests with pytest -m needs_gpu ./tensorflow_addons.\nRun the cpu only tests with pytest -m 'not needs_gpu' ./tensorflow_addons.\nTesting with Bazel\nTesting with Bazel is still supported but not recommended unless you have prior experience \nwith Bazel, and would like to use it for specific capabilities (Remote execution, etc).\nThis is because pytest offers many more options to run your test suite and has\nbetter error reports, timings reports, open-source plugins and documentation online \nfor Python testing. \nInternally, Google can use Bazel to test many commits \nquickly, as Bazel has great support for caching and distributed testing.\nTo test with Bazel:\nbash\npython3 -m pip install tensorflow==2.7\npython3 configure.py\npython3 -m pip install -r tools/install_deps/pytest.txt\nbazel test -c opt -k \\\n--test_timeout 300,450,1200,3600 \\\n--test_output=all \\\n--run_under=$(readlink -f tools/testing/parallel_gpu_execute.sh) \\\n//tensorflow_addons/...\nTesting docstrings\nWe use DocTest to test code snippets\nin Python docstrings. The snippet must be executable Python code.\nTo enable testing, prepend the line with &gt;&gt;&gt; (three left-angle brackets).\nAvailable namespace include np for numpy, tf for TensorFlow, and tfa for TensorFlow Addons.\nSee docs_ref for more details.\nTo test docstrings locally, run either\nbash\nbash tools/run_cpu_tests.sh\non all files, or\nbash\npytest -v -n auto --durations=25 --doctest-modules /path/to/pyfile\non specific files.\nAbout type hints\nIdeally, we would like all the functions and classes constructors exposed in \nthe public API to be have type hints (adding the return type for class \nconstructors is not necessary).\nWe do so to improve the user experience. Some users might use IDEs or static\ntype checking, and having types greatly improve productivity with those tools.\nIf you are not familiar with type hints, you can read \nthe PEP 484.\nWe also have a runtime type check that we do \nusing typeguard.\nFor an example, see the normalizations.py file.\nPlease add it if you type a class constructor (Note that the decorator doesn't \nplay nice with autograph at the moment, this is why we don't add it to functions. For more\ncontext, see this pull request).\nYou can import some common types \nfrom tensorflow_addons/utils/types.py.\nWe recommend adding types if you add a new class/function to Addons' public API, \nbut we don't enforce it.\nSince adding type hints can be hard, especially for people who are not\nfamiliar with it, we made a big todo-list of functions/class constructors that \nneed typing. If you want to add a feature to the public API and \ndon't want to bother adding type hints, please add your feature to the todo-list \nin tools/testing/source_code_test.py.\nHelp is welcome to make this TODO list smaller!\nWriting tests\nIf you add a new feature, you should add tests to ensure that new code changes \ndoesn't introduce bugs.\nIf you fix a bug, you should add a tests which fails before your patch and passes \nafter your patch.\nWe use Pytest to write tests. We encourage you\nto read the documentation, but you'll find a quick summary here:\n\nIf you're testing code written in xxx.py, your tests should be in xxx_test.py.\nIn xxx_test.py, all functions starting with test_ are collected and run by Pytest.\nTests are run with the TF 2.x behavior, meaning eager mode my default, unless you use a tf.function.\nEnsure something is working by using assert. For example: assert my_variable in my_list.\nWhen comparing numpy arrays, use \nthe testing module of numpy.\nNote that since TensorFlow ops often run with float32 of float16, you might need to \nincrease the default atol and rtol. You can take a look at the default values used \nin the TensorFlow repository.\nPrefer using your code's public API when writing tests. It ensures future refactoring is possible\nwithout changing the tests.\nWhen testing multiple configurations, prefer using\n parametrize rather than for \n loops for a clearer error report.\nRunning all the tests in a single file should take no more than 5 seconds. You very \nrarely need to do heavy computation to test things. Your tests should be small and \nfocused on a specific feature/parameter.\nDon't be afraid to write too many tests. This is fine as long as they're fast.\n\nCode example\n\nIt is required to contribute a code example in the docstring when adding new features.\nIt is strongly suggested to expand or contribute a new tutorial for more complex features that are hard to be expressed in the docstring only.\n\nFixtures and assert functions:\nWe provide fixtures to help your write \nyour tests as well as helper functions. Those can be found in \ntest_utils.py.\nmaybe_run_functions_eagerly\nWill run your test function twice, once normally and once with \ntf.config.run_functions_eagerly(True). To use it:\npython\n@pytest.mark.usefixtures(\"maybe_run_functions_eagerly\")\ndef test_something():\n    assert ...== ...\nWhen to use it?\nYou should use it only if you are using tf.function and running some control flow\non Tensors, if or for for example. Or with TensorArray. In short, when the \n conversion to graph is not trivial. No need to use it on all\nyour tests. Having fast tests is important.\nSelecting the devices to run the test\nBy default, each test is wrapped behind the scenes with a \npython\nwith tf.device(\"CPU:0\"):\n    ...\nThis is automatic. But it's also possible to ask the test runner to run \nthe test twice, on CPU and on GPU, or only on GPU. Here is how to do it.\n```python\nimport pytest\nimport tensorflow as tf\nfrom tensorflow_addons.utils import test_utils\n@pytest.mark.with_device([\"cpu\", \"gpu\"])\ndef test_something():\n    # the code here will run twice, once on gpu, once on cpu.\n    ...\n@pytest.mark.with_device([\"cpu\", \"gpu\"])\ndef test_something2(device):\n    # the code here will run twice, once on gpu, once on cpu.\n    # device will be \"cpu:0\" or \"gpu:0\" or \"gpu:1\" or \"gpu:2\" ... \n    if \"cpu\" in device:\n        print(\"do something.\")\n    if \"gpu\" in device:\n        print(\"do something else.\")\n@pytest.mark.with_device([\"cpu\", \"gpu\", tf.distribute.MirroredStrategy])\ndef test_something3(device):\n    # the code here will run three times, once on gpu, once on cpu and once with \n    # a mirror distributed strategy.\n    # device will be \"cpu:0\" or \"gpu:0\" or the strategy.\n    # with the MirroredStrategy, it's equivalent to:\n    # strategy = tf.distribute.MirroredStrategy(...)\n    # with strategy.scope():\n    #     test_function(strategy)\n    if \"cpu\" in device:\n        print(\"do something.\")\n    if \"gpu\" in device:\n        print(\"do something else.\")\n    if isinstance(device, tf.distribute.Strategy):\n        device.run(...)\n@pytest.mark.with_device([\"gpu\"])\ndef test_something_else():\n    # This test will be only run on gpu.\n    # The test runner will call with tf.device(\"GPU:0\") behind the scenes.\n    ...\n@pytest.mark.with_device([\"cpu\"])\ndef test_something_more():\n    # Don't do that, this is the default behavior. \n    ...\n@pytest.mark.with_device([\"no_device\"])\n@pytest.mark.needs_gpu\ndef test_something_more2():\n    # When running the function, there will be no with tf.device wrapper.\n    # You are free to do whatever you wish with the devices in there.\n    # Make sure to use only the cpu, or only gpus available to the current process with\n    # test_utils.gpu_for_testing() , otherwise, it might not play nice with \n    # pytest's multiprocessing.\n    # If you use a gpu, mark the test with @pytest.mark.needs_gpu , otherwise the \n    # test will fail if no gpu is available on the system.\n    # for example\n    ...\n    strategy = tf.distribute.MirroredStrategy(test_utils.gpus_for_testing())\n    with strategy.scope():\n        print(\"I'm doing whatever I want.\") \n    ...\n```\nNote that if a gpu is not detected on the system, the test will be \nskipped and not marked as failed. Only the first gpu of the system is used,\neven when running pytest in multiprocessing mode. (-n argument). \nBeware of the out of cuda memory errors if the number of pytest workers is too high.\nWhen to use it?\nWhen you test custom CUDA code or float16 ops.\nWe can expect other existing TensorFlow ops to behave the same on CPU and GPU.\ndata_format\nWill run your test function twice, once with data_format being channels_first and \nonce with data_format being channels_last. To use it:\npython\ndef test_something(data_format):\n    assert my_function_to_test(..., data_format=data_format) == ...\nWhen to use it?\nWhen your function has a data_format argument. You'll want to make sure your \nfunction behaves correctly with both data format.\nassert_allclose_according_to_type\nIs the same as tf.test.TestCase.assertAllCloseAccordingToType\nbut doesn't require any subclassing to be done. Can be used as a plain function. To use it:\n```python\nfrom tensorflow_addons.utils import test_utils\ndef test_something():\n    expected = ...\n    computed = my_function_i_just_wrote(...).numpy()\n    test_utils.assert_allclose_according_to_type(computed, expected)\n```\nWhen to use it?\nWhen you want to test your function with multiple dtypes. Different dtypes requires \ndifferent tolerances when comparing values.\nCode Reviews\nAll submissions, including submissions by project members, require review. We\nuse Github pull requests for this purpose.\nContributor License Agreement\nContributions to this project must be accompanied by a Contributor License\nAgreement. You (or your employer) retain the copyright to your contribution;\nthis simply gives us permission to use and redistribute your contributions as\npart of the project. Head over to https://cla.developers.google.com/ to see\nyour current agreements on file or to sign a new one.\nYou generally only need to submit a CLA once, so if you've already submitted one\n(even if it was for a different project), you probably don't need to do it\nagain.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-26T23:57:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T17:18:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9886998116109779
+      ],
+      "excerpt": "TensorFlow Addons is a repository of contributions that conform to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8984727369048333
+      ],
+      "excerpt": "not available in core TensorFlow. TensorFlow natively supports \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9301475393160804,
+        0.9296551695196466
+      ],
+      "excerpt": "(because their broad applicability is not yet clear, or it is mostly \n used by a smaller subset of the community). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8911165733306012
+      ],
+      "excerpt": "The maintainers of TensorFlow Addons can be found in the CODEOWNERS file of the repo. This file  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.92192846760537,
+        0.9391767134256334
+      ],
+      "excerpt": "like to maintain something, please feel free to submit a PR. We encourage multiple  \nowners for all submodules. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9566740544747985
+      ],
+      "excerpt": "To ensure you have a version of TensorFlow that is compatible with TensorFlow Addons,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8250993236649302
+      ],
+      "excerpt": "TensorFlow Addons is actively working towards forward compatibility with TensorFlow 2.x.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8274877833347258
+      ],
+      "excerpt": "we can only guarantee compatibility with the TensorFlow versions which it was tested against.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9315999650649357,
+        0.827546587909121,
+        0.9759272154076989
+      ],
+      "excerpt": "TensorFlow C++ APIs are not stable and thus we can only guarantee compatibility with the  \nversion TensorFlow Addons was built against. It is possible custom ops will work with multiple  \nversions of TensorFlow, but there is also a chance for segmentation faults or other problematic crashes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9149632766993444
+      ],
+      "excerpt": "match what we had built against. A simplification of this is that TensorFlow Addons  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8126964305385428
+      ],
+      "excerpt": "RFC #133 aims to fix this. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9275384265628043,
+        0.9067801618712723,
+        0.8416909860155338
+      ],
+      "excerpt": "There are also nightly builds of TensorFlow Addons under the pip package \ntfa-nightly, which is built against the latest stable version of TensorFlow. Nightly builds \ninclude newer features, but may be less stable than the versioned releases. Contrary to  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9530613891702213,
+        0.828248075609643
+      ],
+      "excerpt": "of the master branch. 0.9.0.dev20200306094440 means that the commit time was  \n2020/03/06 at 09:44:40 Coordinated Universal Time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8038008394784535
+      ],
+      "excerpt": ": This script links project with TensorFlow dependency \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8038008394784535
+      ],
+      "excerpt": ": This script links project with TensorFlow dependency \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9722890819172856,
+        0.9605087487805204,
+        0.8763773801828509
+      ],
+      "excerpt": "User experience and project maintainability are core concepts in \nTensorFlow Addons. In order to achieve these we require that our additions \nconform to established API patterns seen in core TensorFlow. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9837959156800498
+      ],
+      "excerpt": "The order of priority on Linux is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.838385826495678,
+        0.952516549167755
+      ],
+      "excerpt": "that they can be maintained by community users who have expertise, and a vested  \ninterest in that component. We heavily encourage users to submit sign up to maintain a  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8490037945672047,
+        0.9584076663677538,
+        0.8250041420019725,
+        0.8845458374513986,
+        0.946068195768896,
+        0.9961471197124631
+      ],
+      "excerpt": "the repo. \nFor more information see the RFC  \non this topic. \nGiven the nature of this repository, submodules may become less  \nand less useful to the community as time goes on. In order to keep the  \nrepository sustainable, we'll be performing bi-annual reviews of our code to  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9413442127075307
+      ],
+      "excerpt": "Amount of issues or bugs attributed to the code \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9772092959035644,
+        0.8594101561414637
+      ],
+      "excerpt": "Discouraged: a better alternative is available; the API is kept for  \nhistoric reasons; or the API requires maintenance and is the waiting period  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8762645421579213
+      ],
+      "excerpt": "The status change between these three groups is:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9310381399249574
+      ],
+      "excerpt": "releases before an API is deleted. The release notes could give user enough  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9780379591735926,
+        0.9419507239373367,
+        0.9808716169696562
+      ],
+      "excerpt": "TensorFlow Addons is a community-led open source project (only a few maintainers work for Google!).  \nAs such, the project depends on public contributions, bug fixes, and documentation.  \nThis project adheres to TensorFlow's code of conduct. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8556698363894553,
+        0.9197737379307094,
+        0.9803675050536549
+      ],
+      "excerpt": "1. Add a new tutorial. Located in docs/tutorials/, \n  these are a great way to familiarize yourself and others with TensorFlow Addons. See \n  the guidelines for more information on how to add \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.876722613642055,
+        0.8150409800090289
+      ],
+      "excerpt": "  Do a change and hundreds of developers will see it and benefit from it. Maintainers are often focused  \n  on making APIs, fixing bugs and other code related changes. The documentation will never  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8017945499440294,
+        0.8640744582834265
+      ],
+      "excerpt": "  papers. Since TensorFlow Addons maintainers are not specialized in everything, \n  you can imagine how hard it is to review. It takes very long to read the paper, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9399017895310178
+      ],
+      "excerpt": "  the list of pull requests.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8949185816616788,
+        0.9665536274984221
+      ],
+      "excerpt": "  check the math is ok. If you see that everything is good, say it! It will help  \n  the maintainers to sleep better at night knowing that he/she wasn't the only \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8790119198767242
+      ],
+      "excerpt": "5. You have an opinion and want to share it? The docs are not very helpful for  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8038458807272255,
+        0.9736195875933785
+      ],
+      "excerpt": "  say it! We want feedback. Maintainers are too much the head into the code  \n  to understand what it's like for someone new to open source to come to this project.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9584302507257721
+      ],
+      "excerpt": "Please see contribution guidelines to get started (and remember, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Useful extra functionality for TensorFlow 2.x maintained by SIG-addons",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tensorflow/addons/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 527,
+      "date": "Sat, 25 Dec 2021 15:26:26 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tensorflow/addons/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tensorflow/addons",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.devcontainer/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/tensorflow/addons/tree/master/docs",
+      "https://github.com/tensorflow/addons/tree/master/tools/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/optimizers_conditionalgradient.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/networks_seq2seq_nmt.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/tqdm_progress_bar.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/time_stopping.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/layers_normalizations.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/optimizers_lazyadam.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/_template.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/layers_weightnormalization.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/optimizers_cyclicallearningrate.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/image_ops.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/average_optimizers_callback.ipynb",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/docs/tutorials/losses_triplet.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.github/workflows/make_wheel_Linux_x86.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.github/workflows/make_wheel_macOS_x86.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.github/workflows/make_wheel_macOS_arm64.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.github/workflows/github_build_dev_container.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/.github/workflows/make_wheel_Windows_x86.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/run_sanity_check.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/run_build.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/update_release_version.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/run_gpu_tests.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/run_cpu_tests.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/pre-commit.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/run_google_cloud_tests.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/install_so_files.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/build_dev_container.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/releases/tf_auditwheel_patch.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/testing/build_and_run_tests.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/testing/parallel_gpu_execute.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/install_deps/install_bazelisk.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/install_deps/clang-format.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/tools/install_deps/buildifier.sh",
+      "https://raw.githubusercontent.com/tensorflow/addons/master/build_deps/build_pip_pkg.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can also install from source. This requires the [Bazel](\nhttps://bazel.build/) build system (version >= 1.0.0).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9096104964140866
+      ],
+      "excerpt": "| Build      | Status | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9598468209257575,
+        0.9001568781292729
+      ],
+      "excerpt": "| Ubuntu/macOS/Windows   |  | \n| Ubuntu GPU custom ops   |  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9960444823942436,
+        0.9468127189097293,
+        0.9967777177014457
+      ],
+      "excerpt": "TensorFlow Addons is available on PyPI for Linux, macOS, and Windows. To install the latest version,  \nrun the following: \npip install tensorflow-addons \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9648845878294077,
+        0.9722623568496047,
+        0.8011794397551392
+      ],
+      "excerpt": "you can specify the tensorflow extra requirement during install: \npip install tensorflow-addons[tensorflow] \nSimilar extras exist for the tensorflow-gpu and tensorflow-cpu packages. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8310312274189869
+      ],
+      "excerpt": "Warnings will be emitted when importing tensorflow_addons if your TensorFlow version does not match  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8138869022277042
+      ],
+      "excerpt": "required that users have a compatible installation of TensorFlow even if the versions  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8921434062904525
+      ],
+      "excerpt": "| TensorFlow Addons | TensorFlow | Compiler  | cuDNN | CUDA |  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8797395027582258
+      ],
+      "excerpt": "| tensorflow-addons-0.13.0 | 2.5  | GCC 7.3.1 | 8.1 | 11.2 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9910210531727922
+      ],
+      "excerpt": "pip install tfa-nightly \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9876851288033279,
+        0.9906248903846466
+      ],
+      "excerpt": "git clone https://github.com/tensorflow/addons.git \ncd addons \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9096104964140866
+      ],
+      "excerpt": "bazel build build_pip_pkg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9904273073932569
+      ],
+      "excerpt": "pip install artifacts/tensorflow_addons-*.whl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9876851288033279,
+        0.9906248903846466
+      ],
+      "excerpt": "git clone https://github.com/tensorflow/addons.git \ncd addons \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8367174346544335
+      ],
+      "excerpt": ": Set these if the below defaults are different on your system \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9096104964140866
+      ],
+      "excerpt": "bazel build build_pip_pkg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9904273073932569
+      ],
+      "excerpt": "pip install artifacts/tensorflow_addons-*.whl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8988721598182814
+      ],
+      "excerpt": "GPU custom ops currently only work on Linux distributions. For this reason Windows and macOS  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8270022807793074
+      ],
+      "excerpt": "1) Pure TensorFlow + Python implementation (works on CPU and GPU) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8270022807793074
+      ],
+      "excerpt": "3) Pure TensorFlow + Python implementation (works on CPU and GPU) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9555910165439284
+      ],
+      "excerpt": "you can set the environment variable TF_ADDONS_PY_OPS=1 from the command line or \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.861450093105422
+      ],
+      "excerpt": "For example, if you are on Linux and you have compatibility problems with the compiled ops, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8060157724499407
+      ],
+      "excerpt": "the repo. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.925671696398174,
+        0.9012248701992861
+      ],
+      "excerpt": "import tensorflow as tf \nimport tensorflow_addons as tfa \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.840995685370445
+      ],
+      "excerpt": "| tensorflow-addons-0.15.0 | 2.5, 2.6, 2.7 |3.7, 3.8, 3.9 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8086108647863313
+      ],
+      "excerpt": "| tensorflow-addons-0.10.0 | 2.2 |3.5, 3.6, 3.7, 3.8 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088915541442451,
+        0.8086108647863313,
+        0.8086108647863313,
+        0.8086108647863313,
+        0.8086108647863313
+      ],
+      "excerpt": "| tensorflow-addons-0.10.0 | 2.2  | GCC 7.3.1 | 7.6 | 10.1 | \n| tensorflow-addons-0.9.1 | 2.1  | GCC 7.3.1 | 7.6 | 10.1 | \n| tensorflow-addons-0.8.3 | 2.1  | GCC 7.3.1 | 7.6 | 10.1 | \n| tensorflow-addons-0.7.1 | 2.1  | GCC 7.3.1 | 7.6 | 10.1 | \n| tensorflow-addons-0.6.0 | 2.0  | GCC 7.3.1 | 7.4 | 10.0 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 ./configure.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 ./configure.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8023304427934365
+      ],
+      "excerpt": "From the command line: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012248701992861
+      ],
+      "excerpt": "import tensorflow_addons as tfa \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8015068578216044
+      ],
+      "excerpt": "submodule by submitting your username to the CODEOWNERS file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8838148168639296
+      ],
+      "excerpt": "  examples. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tensorflow/addons/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C++",
+      "Smarty",
+      "Starlark",
+      "Shell",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright 2018 The TensorFlow Authors.  All rights reserved.\\n\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "## Continuous Build Status",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "addons",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tensorflow",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tensorflow/addons/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.7\r\n* CUDA kernels are compiled with CUDA11.2 and cuDNN 8.1.0\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Use multipython image for dev container (#2598)\r\n* Add support for publishing macOS M1 ARM64 wheels for tfa-nightly (#2559) \r\n\r\n### Tutorials\r\n* Update optimizers_cyclicallearningrate.ipynb (#2538)\r\n\r\n### tfa.activations\r\n* Correct documentation for Snake activation to match literature and return statement (#2572) @fliptrail\r\n\r\n### tfa.iamge \r\n* Fix euclidean distance transform float16 kernel (#2568) \r\n\r\n### tfa.layers\r\n* Fix using NoisyNet with .fit() or .train_on_batch() (#2486) \r\n* Fix spectral norm mixed precision (#2576) \r\n\r\n### tfa.optimizers\r\n* Add AdaBelief optimizer (#2548)\r\n* Make Rectified Adam faster (#2570)\r\n\r\n### tfa.text\r\n* Add the CRF model wrapper (#2555)\r\n* Add a codeowner for CRF (#2556)\r\n\r\n## Thanks to our Contributors\r\n@MarkDaoust, @bhack, @eli-osherovich, @fliptrail, @fsx950223, @howl-anderson, @juntang-zhuang, @jvishnuvardhan, @lgeiger, @markub3327, @seanpmorgan, @szutenberg and @vtjeng\r\n\r\n",
+        "dateCreated": "2021-11-10T16:59:37Z",
+        "datePublished": "2021-11-10T21:09:55Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.15.0",
+        "name": "TensorFlow Addons v0.15.0",
+        "tag_name": "v0.15.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.15.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/48116819",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.15.0"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.6\r\n* CUDA kernels are compiled with CUDA11.2 and cuDNN 8.1.0\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Remove compatibility code for TensorFlow < 2.4 (#2545) \r\n* Modify configure.py to recognize 'aarch64' for 64-Bit Raspberry Pi OS (#2540) \r\n* Apple silicon support (#2504) \r\n* Build fix Raspberry Pi 4 Linux ARM64 (#2487) \r\n\r\n### tfa.layers\r\n* Add EmbeddingBag gpu op and layer (#2352) (#2517)(#2505)\r\n* Fix StochasticDepth layer error in training mixed_float16  (#2450) \r\n\r\n### tfa.optimizers\r\n* Adding a tutorial on CyclicalLearningRate (#2463) \r\n\r\n## Thanks to our Contributors\r\n@HeatfanJohn, @Rocketknight1, @RyanGoslingsBugle, @fsx950223, @kaoh, @leondgarse, @lgeiger, @maxhgerlach, @sayakpaul, @seanpmorgan, @singhsidhukuldeep and @tetsuyasu\r\n",
+        "dateCreated": "2021-08-19T12:46:24Z",
+        "datePublished": "2021-08-19T12:57:05Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.14.0",
+        "name": "TensorFlow Addons v0.14.0",
+        "tag_name": "v0.14.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.14.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/43001444",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.14.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.4.1\r\n* CUDA kernels are compiled with CUDA 11\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Remove AVX2 Compilation by default (Aligns with https://github.com/tensorflow/tensorflow/releases/tag/v2.4.1)\r\n\r\n## tfa.image\r\n* Fix image/fix sparse image warp unknown batch size (https://github.com/tensorflow/addons/pull/2311)\r\n\t\r\n\t",
+        "dateCreated": "2021-01-30T13:28:54Z",
+        "datePublished": "2021-01-30T13:40:21Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.12.1",
+        "name": "TensorFlow Addons v0.12.1",
+        "tag_name": "v0.12.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.12.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/37121276",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.12.1"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.5\r\n* CUDA kernels are compiled with CUDA11.2 and cuDNN 8.1.0\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Add python3.9 support (#2204)\r\n* Fixed build on ppc (#2438) \r\n\r\n### tfa.activations\r\n* Cleanup legacy codes for activations (#2394) \r\n\r\n### tfa.image\r\n* Add python fallback for adjust_hsv_in_yiq (#2392) \r\n* Remove ImageProjectiveTransform kernel (#2395) \r\n* Fix EDT float16 and float64 kernels (#2412) \r\n* Optimize EDT (#2402) \r\n* Update cutout_ops.py (#2416) \r\n\r\n### tfa.metrics\r\n* Initial commit of streaming Kendall's Tau algorithm. (#2423) \r\n* Fix F1Score docs (#2462) \r\n* Matthew Fix (#2406) \r\n* Fix RSquare serialization (#2390) \r\n* Make RSquare.reset_states to be able to run in tf.function (#2445) \r\n\r\n### tfa.optimizers\r\n* Adding COntinuos COin Betting (COCOB) Backprop optimizer (#2063) \r\n* Fix NovoGrad optimizer to work with float64 layers (#2467)\r\n* Update cyclical_learning_rate.py (#2286)\r\n* RectifiedAdam: Store 'total_steps' hyperparameter as float (#2369) \r\n\r\n### tfa.text\r\n* fix wrong type hinting of `crf_log_likelihood` (#2471) \r\n\r\n## Thanks to our Contributors\r\n\r\n@0x0badc0de, @bhack, @DragonPG2000, @Harsh188, @WindQAQ, @ashutosh1919, @fsx950223, @jeongukjae, @jonpsy, @juliangilbey, @lucasdavid, @lum4chi, @m-a-r-o-u, @nickswalker, @nleastaugh, @npanpaliya, @olesalscheider, @rehanguha, @seanpmorgan, @shubhanshu02, @sorensenjs, @whatwilliam and @xiedeping",
+        "dateCreated": "2021-05-15T16:35:21Z",
+        "datePublished": "2021-05-15T16:45:30Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.13.0",
+        "name": "TensorFlow Addons v0.13.0",
+        "tag_name": "v0.13.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.13.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/35673402",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.13.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Changelog \r\nImprove API documentation \r\n* Beautifier image doc (#2101) \r\n* Beautifier callbacks doc (#2105)\r\n* Beautifier losses doc (#2062) \r\n* Fix broken link in NovoGrad docstring (#2096)\r\n* Beautifier layers doc (#2072) ",
+        "dateCreated": "2020-08-27T02:48:48Z",
+        "datePublished": "2020-08-27T02:52:02Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.11.2",
+        "name": "TensorFlow Addons v0.11.2",
+        "tag_name": "v0.11.2",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.11.2",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/30192797",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.11.2"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.4\r\n* CUDA kernels are compiled with CUDA 11\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Add AVX2 support (#2299) \r\n* Drop TF2.2 compatibility (#2224)\r\n* Drop python3.5 support (#2204)\r\n* Expose tfa.types doc (#2162)\r\n* Rename \"Arguments:\" to \"Args:\" (#2267)\r\n* Add support for ARM architecture build from source (#2182)\r\n\r\n### tfa.activations\r\n* Add tf.nn.gelu alias for TF >= 2.4 (#2265)\r\n* Remove custom op activations (#2247)\r\n\r\n### tfa.image\r\n* Speedup gaussian kernel generation (#2149)\r\n* Support fill_mode for transform (#2153) \r\n* Use ImageProjectiveTransformV3 for TF >= 2.4.0 (#2293) \r\n* Support unknown rank image (#2300)\r\n* Fix sparse_image_warp partially unknown shape (#2308)\r\n* Make cutout compatible with keras layer (#2302) \r\n* Remove unsupported data_format (#2296)\r\n* Refactor sharpness (#2287)\r\n* Rodert fix image random cutout 2276 (#2285) \r\n* Remove tf.function decorator in tfa.image.equalize (#2264)\r\n* Support empty batches in ResamplerOp (#2219) \r\n* Make cutout op compatible with non eager mode (#2190)\r\n\r\n### tfa.layers\r\n* Add stochastic depth layer (#2154)\r\n* Add MaxUnpooling2D layer (#2272)\r\n* Add noisy dense layers. (#2099) \r\n* Add discriminative Layer Training (#969)\r\n\r\n* Make MultiHeadAttention agnostic to dtype (float32 vs. float16) (#2253)\r\n* Change CRF layer dtype (#2270)\r\n* Change GroupNormalization default groups to 32. (#2241)\r\n\r\n### tfa.optimizers\r\n* Standardized Testing Module (#2233)\r\n* Fix LazyAdam resource variable ops performance issue (#2274)\r\n* Add experimental_aggregate_gradients support (#2137) \r\n\r\n### tfa.rnn\r\n* Bug fix for conflict variable name in layernorm cells. (#2284)\r\n\r\n\r\n### tfa.seq2seq\r\n* Graduate _BaseAttentionMechanism to a public base class (#2209)\r\n* Add a doctest example for BasicDecoder (#2214) \r\n* Add a doctest example for AttentionWrapper (#2215) \r\n* Improve sampler documentation, use doctest (#2213)\r\n* Beam search decoding procedure added to seq2seq_nmt tutorial (#2140)\r\n\r\n## Thanks to our Contributors\r\n\r\n@DanBmh, @DavidWAbrahams, @Harsh188, @JulianRodert, @LeonShams, @MHStadler, @MarkDaoust, @SamuelMarks, @WindQAQ, @aaronmondal, @abhishek-niranjan, @albertz, @bhack, @crccw, @edend10, @fsx950223, @gabrieldemarmiesse, @guillaumekln, @hmph, @hp77-creator, @hwaxxer, @hyang0129, @kaixih, @lamberta, @marksandler2, @matwilso, @napsternxg, @nataliyah123, @perfinion, @qlzh727, @rmlarsen, @rushabh-v, @rybakov, @seanpmorgan, @stephengmatthews, @tgaddair and @thaink\r\n",
+        "dateCreated": "2020-12-22T05:06:32Z",
+        "datePublished": "2020-12-23T19:21:28Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.12.0",
+        "name": "TensorFlow Addons v0.12.0",
+        "tag_name": "v0.12.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.12.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/29433218",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.12.0"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## Release Notes\r\n\r\n* Update TF compatibility warning to include all of 2.3.x as acceptable.\r\n",
+        "dateCreated": "2020-08-07T02:25:52Z",
+        "datePublished": "2020-08-07T02:28:03Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.11.1",
+        "name": "TensorFlow Addons v0.11.1",
+        "tag_name": "v0.11.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.11.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/29390938",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.11.1"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.3\r\n* CUDA kernels are compiled with CUDA 10.1\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Support building against CUDA 11 and CUDNN 8 (#1950)\r\n\r\n### tfa.activations\r\n* Add Snake layer and activation (#1967)\r\n* Deprecate gelu (#2048)\r\n\r\n### tfa.image\r\n* Set shape for dense image warp (#1993\r\n* Drop data_format argument (#1980)\r\n* Enable half and double for resampler GPU ops (#1852) \r\n\r\n### tfa.layers\r\n* Add Spectral Normalization layer (#1244) \r\n* Add CRF layer  (#1999)\r\n* Add Snake layer and activation (#1967)\r\n* Add Spatial Pyramid Pooling layer (#1745)\r\n* Add Echo State Network (ESN) layer (#1862) \r\n* Incorporate low-rank techniques into DCN. (#1795)\r\n\r\n### tfa.metrics\r\n* Add geometric mean (#2031)\r\n* Fix R_Square shape issue in model.evaluate (#2034)\r\n\r\n### tfa.losses\r\n* Change the default distance metric for `tfa.losses.triplet_semihard_loss` and `tfa.losses.triplet_hard_loss` from squared euclidean norm to euclidean norm. Users must change `distance_metric` to \"squared-L2\" in order to achieve the old behavior.\r\n\r\n### tfa.optimizers\r\n* Add ProximalAdagrad optimizer (#1976)\r\n* Add support for scheduled weight decays in RectifiedAdam. (#1974) \r\n* Fixed lr/wd schedules for DecoupledWeightDecayExtension running on GPU (#2053) (#2029) \r\n* Fixed sparse novograd (#1970) \r\n* MovingAverage: add dynamic decay and swap weights (#1726) \r\n* Remove RAdam optional float total steps (#1871) \r\n\r\n### tfa.rnn\r\n* Move the tf.keras.layers.PeepholeLSTMCell to TFA (#1944) \r\n* Added echo state network (ESN) recurrent cell (#1811) \r\n\r\n### tfa.seq2seq\r\n* Improve support of global dtype policy in seq2seq layers (#1981) \r\n* Add a Python alternative to seq2seq.gather_tree (#1925) \r\n* Allow resetting embedding_fn when calling BeamSearchDecoder (#1917) \r\n* Fixup returned cell state structure in BasicDecoder (#1905) \r\n* Fixup returned cell state structure in BeamSearchDecoder (#1904) \r\n* Fix AttentionWrapper type annotation for multiple attention mechanisms (#1872) \r\n* Ensure cell state structure is unchanged on first AttentionWrapper call (#1861)\r\n* Remove `sequential_update` from AverageWrapper (#1807)\r\n\r\n## Thanks to our Contributors\r\n\r\n@AakashKumarNain, @AntPeixe, @JakeTheWise, @MHStadler, @PRUBHTEJ, @Smankusors, @Squadrick, @Susmit-A, @WindQAQ, @autoih, @bhack, @brunodoamaral, @cgarciae, @charlielito, @csachs, @failure-to-thrive, @feyn-aman, @fsx950223, @gabrieldemarmiesse, @gugarosa, @guillaumekln, @jaeyoo, @jaspersjsun, @jlsneto, @ksachdeva, @lc0, @leandro-gracia-gil, @marload, @nluehr, @pedrolarben, @qlzh727, @seanpmorgan, @tanzhenyu, @tf-marissaw and @xvr-hlt\r\n",
+        "dateCreated": "2020-08-06T01:08:02Z",
+        "datePublished": "2020-08-06T01:20:57Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.11.0",
+        "name": "TensorFlow Addons v0.11.0",
+        "tag_name": "v0.11.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.11.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/26539741",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.11.0"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.2\r\n* CUDA kernels are compiled with CUDA 10.1\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Enable ppc64le build (#1672) \r\n\r\n### tfa.activations\r\n* Added the DepreciationWarning for the custom op version of activations functions (#1791) \r\n\r\n### tfa.image\r\n* Fix condition tracing in scale_channel (#1830) \r\n* Expose sharpness and equalize image op (#1827) \r\n* Clarify flow definition for dense_image_warp (#1817)\r\n* Added gaussian_blur_op (#1450)\r\n\r\n### tfa.layers\r\n* Added Adaptive MaxPooling layers (#1727)\r\n* Added AdaptiveAveragePooling2D layer (#1383) \r\n\r\n### tfa.metrics\r\n* Add sample_weight support to FScore metrics (#1816) \r\n\r\n### tfa.losses\r\n* Added angular distance option to triplet loss (#1730) \r\n* Enable npairs loss on windows (#1742) \r\n* Added float16 and bfloat16 support for TripletSemiHardLoss, TripletHardLoss and LiftedStructLoss (#1683) \r\n* Add Soft Weighted Kappa Loss (#762)\r\n\r\n### tfa.optimizers\r\n* Fixed serializability bug in yogi (#1728) \r\n\r\n## Thanks to our Contributors\r\n@Dagamies, @HauserA, @MarkDaoust, @Squadrick, @Susmit-A, @WindQAQ, @ageron, @amascia, @ashutosh1919, @autoih, @ben-arnao, @bhack, @fsx950223, @gabrieldemarmiesse, @ghosalsattam, @guillaumekln, @henry-eigen, @jharmsen, @olesalscheider, @seanpmorgan, @shun-lin, @terrytangyuan and @wenmin-wu\r\n",
+        "dateCreated": "2020-05-15T00:24:23Z",
+        "datePublished": "2020-05-15T00:34:25Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.10.0",
+        "name": "TensorFlow Addons v0.10.0",
+        "tag_name": "v0.10.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.10.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/25446617",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.10.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Include CUDA kernels missing from 0.9.0\r\n* Fix serialization for cyclical learning rate (https://github.com/tensorflow/addons/pull/1623)",
+        "dateCreated": "2020-04-10T14:52:14Z",
+        "datePublished": "2020-04-10T18:23:01Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.9.1",
+        "name": "TensorFlow Addons v0.9.1",
+        "tag_name": "v0.9.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.9.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/25401362",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.9.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Built against TensorFlow 2.1\r\n* CUDA kernels are compiled with CUDA 10.1\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Add strict TF2.1 version match warning (#1281, #1492, #1482)\r\n* Move to pytest as default test runner\r\n\r\n### tfa.activations\r\n* Support for python composite ops instead of custom-ops where possible\r\n    * export TF_ADDONS_PY_OPS=1\r\n    * tfa.options.TF_ADDONS_PY_OPS=True\r\n\r\n### tfa.image\r\n* Add blend image op (#1275)\r\n* Add cutout image op (#1338)\r\n* Add sharpness op (#1452)\r\n\r\n\r\n### tfa.layers\r\n* Add MultiHeadAttention layer (#1062)\r\n* Add NetVLAD layer (#1237)\r\n* Add Filter response normalization layer (#765)\r\n* Add Thresholded linear unit layer (#857)\r\n\r\n### tfa.metrics\r\n* Add Multivariate r2 metric (#1310)\r\n\r\n### tfa.optimizers\r\n* Fix serialization bug for rectified ADAM (#1375)\r\n* Fix typing check for LAMB optimizer (#1532)\r\n\r\n# Thanks to our Contributors\r\nAakash Kumar Nain, Cristian Garcia, Dheeraj R Reddy, Gabriel de Marmiesse, George Sterpu, Guillaume Klein, Harald Husum, Jared T Nielsen, Jeremy Oldfather, Jhuo IH, Joel Shor, Lucas Frey, Mark Sandler, Michael Reneer, NoobMaster, Qianli Scott Zhu, Rushabh Vasani, Sean Morgan, Sergii Khomenko, Xiaoquan Kong, failure-to-thrive, manzilz, pkan2, us\r\n",
+        "dateCreated": "2020-04-09T13:12:10Z",
+        "datePublished": "2020-04-09T13:33:33Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.9.0",
+        "name": "TensorFlow Addons v0.9.0",
+        "tag_name": "v0.9.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.9.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/25180715",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.9.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Botched release due to GitHub action disk space limitation.\r\n* This was never published to pypi",
+        "dateCreated": "2020-04-03T16:00:28Z",
+        "datePublished": "2020-04-03T16:01:56Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.8.5",
+        "name": "TensorFlow Addons v0.8.5",
+        "tag_name": "v0.8.5",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.8.5",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/25178460",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.8.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Botched release due to GitHub action disk space limitation.\r\n* This was never published to pypi",
+        "dateCreated": "2020-04-03T13:18:05Z",
+        "datePublished": "2020-04-03T14:42:21Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.8.4",
+        "name": "TensorFlow Addons v0.8.4",
+        "tag_name": "v0.8.4",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.8.4",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/25175150",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.8.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Updated compatibility for macos to >= 10.13 (https://github.com/tensorflow/addons/pull/1119)\r\n* Fixed typing error in cyclical learning rates (https://github.com/tensorflow/addons/pull/1160)\r\n",
+        "dateCreated": "2020-02-28T16:12:27Z",
+        "datePublished": "2020-03-04T15:48:54Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.8.3",
+        "name": "TensorFlow Addons v0.8.3",
+        "tag_name": "v0.8.3",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.8.3",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/24216064",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.8.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Cherrypick cohen kappa fix (#1047)\r\n* Cherrypick typing for normalization layers (#1069)",
+        "dateCreated": "2020-02-12T06:34:28Z",
+        "datePublished": "2020-02-12T11:37:01Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.8.2",
+        "name": "TensorFlow Addons v0.8.2",
+        "tag_name": "v0.8.2",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.8.2",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/23601355",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.8.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* CUDA kernels are compiled with CUDA 10.1\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n\r\n# Changelog\r\n* Dropped Python2 support\r\n* PyPi package has no longer has an installation dependency on TF.\r\n    * Enables TFA for `tensorflow / tensorflow-gpu / tensorflow-cpu` (#974)\r\n* Much of the repository is typed and has run-time type checking using `typeguard`\r\n    * Adds a new pip dependency\r\n* Lazy loading of custom ops to prevent ABI crashes when unnecessary (#869)\r\n\r\n### tfa.activations\r\n* Renamed GeLU to GELU (#843)\r\n\r\n### tfa.callbacks\r\n* Add AverageModelCheckpoint\r\n* Bugfix for TimeStopping callback (#1010)\r\n\r\n### tfa.layers\r\n* Add PolynomialCrossing (#1018)\r\n* Add Thresholded Linear Unit (#857)\r\n\r\n### tfa.losses\r\n* Add TripletHardLoss with soft margin (#959)\r\n\r\n### tfa.optimizers\r\n* Add Novograd Optimizer (#836)\r\n\r\n### tfa.rnn\r\n* Add LayernormSimpleRNN (#841)\r\n\r\n### Tutorials\r\n* Updated NMT Seq2seq tutorial (#1003)\r\n* Fixed KerasTQDM tutorial (#936)\r\n\r\n# Thanks to our Contributors\r\nAakash Kumar Nain, Calvin, Dheeraj R Reddy, Gabriel de Marmiesse, Guillaume Klein, HauserA, Jhuo IH, Luke Miner, Mark Daoust, NoobMaster, Romain Brault, Samuel Marks, Tzu-Wei Sung",
+        "dateCreated": "2020-02-07T15:45:38Z",
+        "datePublished": "2020-02-07T11:22:52Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.8.1",
+        "name": "TensorFlow Addons v0.8.1",
+        "tag_name": "v0.8.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.8.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/23476688",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.8.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Correct import structure to enable Yogi optimizer (https://github.com/tensorflow/addons/pull/922)",
+        "dateCreated": "2020-01-23T21:56:44Z",
+        "datePublished": "2020-01-26T23:47:20Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.7.1",
+        "name": "TensorFlow Addons v0.7.1",
+        "tag_name": "v0.7.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.7.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/23137534",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.7.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n\r\n* **Built against: TensorFlow 2.1.0** \r\n* Available for Linux/MacOS/Windows\r\n* Last release to support python2\r\n* CUDA kernels are compiled with CUDA 10.1\r\n* API docs [found on the website](https://www.tensorflow.org/addons/api_docs/python/tfa)\r\n* Keras subclasses now use the [public registration decorator](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/utils/generic_utils.py#L134) as package `Addons`\r\n    - The prefix of registration name is `Addons>`. For example, users should change the serialization from `tf.keras.activations.get('gelu')` to `tf.keras.activations.get('Addons>gelu')`\r\n\r\n# Changelog\r\n\r\n### tfa.activations\r\n* Add mish activation (#569)\r\n* Add rrelu activation (#573)\r\n* Add softshrink activation (#570) \r\n\r\n### tfa.callbacks\r\n* Add Keras TQDM callback (#610)\r\n* Add TimeStopping callback (#757)\r\n\r\n### tfa.image\r\n* Add resampler kernel (#662)\r\n* Various bugfixes\r\n\r\n### tfa.layers\r\n* Support for WeightNorm in RNNs (#769)\r\n* Fix WeightNorm support for layers without bias (#696)\r\n* Support for WeightNorm serialization in keras hd5 format (#691)\r\n* Fix bug in GroupNormalization axis (#611)\r\n\r\n### tfa.losses\r\n* Fix keras model compile for lifted_struct_loss (#700)\r\n* Speed up CPU CorrelationCost layer (#689)\r\n\r\n### tfa.metrics\r\n* Fix bug to enable CohenKappa with distributed strategy scope (#721)\r\n\r\n### tfa.optimizers\r\n* Add Yogi Optimizer (#745)\r\n* Add LAMB Optimizer (#491)\r\n* Add Cyclical learning rate schedulers (#644)\r\n* Add Stochastic Weight Averaging Optimizer (#620)\r\n* Allow MovingAverage to support dynamic number of updates (#758)\r\n\r\n### Tutorials\r\n* Add Keras TQDM progress bar tutorial\r\n* Add TimeStopping callback tutorial \r\n\r\n\r\n**Various bug fixes and improvements**\r\n\r\n# Thanks to our Contributors\r\nAakash Kumar Nain, Amirhossein Kazemnejad, Brian Lee, Brian Patton, Calvin, Daniel, David Honz\u00e1tko, Dero Gharibian, Dheeraj R Reddy, Guillaume Klein, Ishant Mrinal Haloi, John Arevalo, Mark Daoust, Matt Elsey, Philip May, Rahul Nair, Raphael Meudec, Saishruthi, Sean Morgan, Sergii Khomenko, Shreyash Patodia, Shun Lin, Tzu-Wei Sung, Vladimir Vlasov, Yan Facai (\u989c\u53d1\u624d), junjiek, manzilz, omalleyt12, pkan2, prcvih, tzachar, who who who",
+        "dateCreated": "2020-01-10T13:57:25Z",
+        "datePublished": "2020-01-10T16:16:23Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.7.0",
+        "name": "TensorFlow Addons v0.7.0",
+        "tag_name": "v0.7.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.7.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/22730979",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.7.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* **Built against: tensorflow-gpu==2.0.0 (Linux); tensorflow==2.0.0 (Mac)** \r\n* API docs [found here in repository](https://github.com/tensorflow/addons/blob/r0.6/docs/api_docs/python/index.md)\r\n* Ops are now namespaced `Addons>OpName` per [RFC #126](https://github.com/tensorflow/community/pull/126)\r\n\r\n# Changelog\r\n\r\n### tfa.activations\r\n* Add tanhshrink (#493)\r\n* Add hardshrink (#500)\r\n* Add lisht (#529)\r\n\r\n### tfa.losses\r\n* Add npairs_multilabel loss (#466)\r\n\r\n### tfa.optimizers\r\n* Add RAdam (#506)\r\n* Add LookAhead wrapper (#506)\r\n* Add conditional_gradient optimizer (#469)\r\n\r\n### tfa.seq2seq\r\n* Minor bugfixes and improvements\r\n* Make SequenceLoss Keras compatible (#503)\r\n* Allow manual memory reset in AttentionMechanism (#547)\r\n\r\n### tfa.text\r\n* Add ParseTime Op (#530)\r\n\r\n### Tutorials\r\n* Examples moved to `docs/tutorials`\r\n\r\n# Thanks to our Contributors\r\nAakash Kumar Nain, Amirhossein Kazemnejad, Chen Yang, Dheeraj R Reddy, George Sterpu, Guillaume Klein, Helin Wang, Mark Daoust, Philip May, PyExtreme, Qianli Scott Zhu, Saishruthi, Sean Morgan, Tomer Kaftan, Tzu-Wei Sung, Yan Facai (\u989c\u53d1\u624d)\r\n\r\n",
+        "dateCreated": "2019-10-03T13:36:14Z",
+        "datePublished": "2019-10-04T22:07:29Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.6.0",
+        "name": "TensorFlow Addons v0.6.0",
+        "tag_name": "v0.6.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.6.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/20486549",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.6.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "facaiy",
+        "body": "# Release Notes\r\n* **Built against: tensorflow-gpu==2.0.0 (Linux); tensorflow==2.0.0 (Mac)**\r\n* Bugfix: #532 Import crashed on a non-GPU Linux system. (#539 #548)",
+        "dateCreated": "2019-09-30T23:02:22Z",
+        "datePublished": "2019-10-01T01:35:19Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.5.2",
+        "name": " TensorFlow Addons v0.5.2",
+        "tag_name": "v0.5.2",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.5.2",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/20370142",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.5.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "facaiy",
+        "body": "# Release Notes\r\n* **Built against: tensorflow-gpu==2.0.0-rc1 (Linux); tensorflow==2.0.0-rc1 (Mac)**\r\n* Automatically install the correct tensorflow version during the installation.\r\n* Update document for `CorrelationCost` class, and hide `correlation_cost` function.\r\n\r\n### Known problem\r\n* #532 Import crashed on a non-GPU Linux system. Workaround: please uninstall tensorflow-gpu, and then install tensorflow-cpu manually instead.",
+        "dateCreated": "2019-09-20T13:50:41Z",
+        "datePublished": "2019-09-20T15:42:16Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.5.1",
+        "name": "TensorFlow Addons v0.5.1",
+        "tag_name": "v0.5.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.5.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/20142403",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.5.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "facaiy",
+        "body": "# Release Notes\r\n* **Built against: tensorflow-gpu==2.0.0-rc0 (Linux); tensorflow==2.0.0-rc0 (Mac)** \r\n* GPU Kernels now part of PyPi package (Linux)\r\n* API docs [found here in repository](https://github.com/tensorflow/addons/blob/r0.5/docs/api_docs/python/index.md)\r\n\r\n# Changelog\r\n\r\n### tfa.activations\r\n* Add GeLu (#424, #427)\r\n\r\n### tfa.image\r\n*  Add sparse image warp (#252)\r\n* Support batch input for median_filter2d (#288)\r\n* Speed up median_filter2d (#304)\r\n* Add Translate ops (#320)\r\n* Fix unknown ranks bug, image is compatible with tf.data now (#330)\r\n* Add Connected components (#409)\r\n\r\n### tfa.layers\r\n* Add correlation cost layer (#207)\r\n* WeightNormalization is compatible with tf.functions now (#458)\r\n\r\n### tfa.losses\r\n* Fix compile triplet loss within keras model (#298)\r\n* Add npairs_loss (#309)\r\n\r\n### tfa.metrics\r\n* Add R-square metric (#283)\r\n* Add F1 metric - micro/macro/weighted (#284)\r\n* F1-Beta Score (#315)\r\n* Multilabel Confusion Matrix (#324)\r\n\r\n### tfa.seq2seq\r\n* Improve API for resetting AttentionMechanism memory (#354)\r\n* Minor bugfixs and improvement\r\n\r\n### tfa.text\r\n* Add conditional random fields (#314)\r\n\r\n\r\n### Examples\r\n* Normalizations (#144)\r\n* TripletLoss (#360)\r\n* Image Ops (#398, #444)\r\n\r\n\r\n# Thanks to our Contributors\r\n\r\nAakash Kumar Nain, Dheeraj R Reddy, Fei Hu, Guillaume Klein, Karmel Allison, Keshan, Kyle Beauchamp, Matt Elsey, Moritz Kr\u00f6ger, parth-p, Patrick Wieschollek, Qianli Scott Zhu, Saishruthi, Sayooj, Sean Morgan, seanccho, Sebastian J. Mielke, Sergii Khomenko, Tzu-Wei Sung, Yan Facai (\u989c\u53d1\u624d)\r\n\r\n",
+        "dateCreated": "2019-08-30T03:26:55Z",
+        "datePublished": "2019-08-30T04:24:45Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.5.0",
+        "name": "TensorFlow Addons v0.5.0 ",
+        "tag_name": "v0.5.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.5.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/19641771",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.5.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "\r\n# Release Notes\r\n* **Built against: tensorflow==2.0.0-beta1**\r\n* API docs [found in the repository](https://github.com/tensorflow/addons/blob/r0.4/docs/api_docs/python/index.md)\r\n\r\n# Changelog\r\n* Assorted bugfixes throughout\r\n* Cleanup to use public tensorflow APIs throughout\r\n\r\n### tfa.image\r\n* Add mean filter 2d (#185)\r\n* Speed up mean_filter2d with depthwise_conv2d (#235)\r\n\r\n### tfa.metrics\r\n* Add Cohen's Kappa (#267)\r\n\r\n### tfa.optimizers\r\n* Bugfix correctly subclass Adam in LazyAdam optimizer (#261)\r\n* Set epsilon as a constant in LazyAdam optimizer (#248)\r\n\r\n### tfa.rnn\r\n*  Pass kwargs to wrapped cell in AttentionWrapper (#272)\r\n\r\n# Thanks to our Contributors\r\n* Aakash Kumar Nain\r\n* Dheeraj R Reddy\r\n* Guillaume Klein\r\n* Kyle Beauchamp\r\n* Mainak Dutta\r\n* Qianli Scott Zhu\r\n* Sean Morgan\r\n* Shashvat Chand Shahi\r\n* Tzu-Wei Sung\r\n* Yan Facai (\u989c\u53d1\u624d)\r\n",
+        "dateCreated": "2019-06-16T16:01:50Z",
+        "datePublished": "2019-06-16T16:43:29Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.4.0",
+        "name": "TensorFlow Addons v0.4.0",
+        "tag_name": "v0.4.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.4.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/18023275",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Built against: tensorflow==2.0.0.a0\r\n* MacOS & Linux whl files are now available on pypi\r\n* New subpackage tfa.RNN\r\n* API docs have been generated and will soon be available on the website\r\n* Addons is now up to 9 subpackage and submodule maintainers!\r\n\r\n# Changelog\r\n* Assorted bugfixes throughout\r\n\r\n### tfa.image\r\n* Add median filter 2d\r\n* Add dense image warp \r\n* Add euclidean distance transform\r\n* Add rotate transform\r\n### tfa.layers\r\n* Remove LayerNormalization as it's now part of TF Core\r\n### tfa.losses\r\n* Add contrastive loss\r\n### tfa.optimizers\r\n* Add decoupled weight decay optimizers (SGDW, AdamW)\r\n* Add moving average optimizer\r\n### tfa.rnn\r\n* Add NASCell\r\n* Add LayerNormLSTMCell\r\n### tfa.seq2seq\r\n* API and other fixes\r\n### Examples\r\n* Add example for lazy adam optimizer\r\n* Add example for weight normalization layer\r\n\r\n# Thanks to our Contributors\r\n* Armando Fandango\r\n* Aur\u00e9lien Geron\r\n* Dheeraj R Reddy\r\n* Gokkul Nath\r\n* Kyle Beauchum\r\n* Mainak Dutta\r\n* Moritz Kr\u00f6ger\r\n* PhilJd\r\n* Qianli Scott Zhu\r\n* Sean Morgan\r\n* Shreyas Sharma\r\n* Tzu-Wei Sung\r\n* Yan Facai (\u989c\u53d1\u624d)\r\n",
+        "dateCreated": "2019-04-30T18:39:34Z",
+        "datePublished": "2019-04-30T22:29:08Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.3.1",
+        "name": "TensorFlow Addons v0.3.1",
+        "tag_name": "v0.3.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.3.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/17079453",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.3.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Rebuild package with gcc4.8 as per issues [seen here](https://github.com/tensorflow/tensorflow/issues/27067)\r\n* Remove python3.7 package until [tool chain is finalized](https://github.com/tensorflow/addons/issues/119)",
+        "dateCreated": "2019-04-02T16:34:48Z",
+        "datePublished": "2019-04-02T16:37:25Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.2.1",
+        "name": "TensorFlow Addons 0.2.1",
+        "tag_name": "v0.2.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.2.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/16507360",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.2.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\n* Build against: tensorflow==2.0.0-alpha0\r\n* Restructure into subpackages for future maintainership\r\n* Add python3.7 package\r\n\r\n# Change Log\r\n\r\n#### Seq2seq\r\n* Add new subpackage `seq2seq` to TensorFlow Addons \r\n\r\n#### Layers\r\n* Add `LayerNormalization` \r\n* Add `GroupNormalization`\r\n* Add `InstanceNormalization` \r\n\r\n#### Losses\r\n* Add `focal_loss`\r\n\r\n#### Optimizers\r\n* Rename `LazyAdamOptimizer` to `LazyAdam` in order to match TF2 standards\r\n\r\n#### Image\r\n* Add `adjust_hsv_in_yiq` (ported from tf.contrib)\r\n* Add `random_hsv_in_yiq` (ported from tf.contrib)\r\n\r\n# Thank You to All Our Contributors\r\n* Aakash Kumar Nain\r\n* Amit Patankar\r\n* Dheeraj R Reddy \r\n* Jakub Arnold\r\n* Jeremiah Harmsen\r\n* Kapil Sachdeva\r\n* Karmel Allison\r\n* Moritz Kr\u00f6ger\r\n* Paige Bailey\r\n* Qianli Scott Zhu\r\n* Tzu-Wei Sung\r\n* Yan Facai (\u989c\u53d1\u624d)\r\n",
+        "dateCreated": "2019-03-29T19:10:31Z",
+        "datePublished": "2019-03-29T19:24:59Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.2.0",
+        "name": "TensorFlow Addons 0.2.0",
+        "tag_name": "v0.2.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.2.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/16445206",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.2.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes:\r\n* Reverted image op names to use `V2` suffix in order to preserve compatibility with previous saved models.\r\n* Workaround fix for test utils until https://github.com/tensorflow/tensorflow/pull/26723 is fixed",
+        "dateCreated": "2019-03-17T16:41:02Z",
+        "datePublished": "2019-03-17T17:41:22Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.1.1",
+        "name": "TensorFlow Addons 0.1.1",
+        "tag_name": "v0.1.1",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.1.1",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/16165110",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "seanpmorgan",
+        "body": "# Release Notes\r\nThis is the first release of TensorFlow Addons! \r\n\r\n# Change Log\r\n\r\n#### Activations\r\n* Add `Sparsemax` (ported from tf.contrib)\r\n\r\n#### Image\r\n* Add `transform` (ported from tf.contrib)\r\n\r\n#### Layers\r\n* Add `Maxout` (ported from tf.contrib)\r\n* Add `PoincareNormalize` (ported from tf.contrib)\r\n* Add `WeightNormalization` \r\n\r\n#### Losses\r\n* Add `LiftedStructLoss` (ported from tf.contrib)\r\n* Add `SparsemaxLoss` (ported from tf.contrib)\r\n* Add `TripletSemiHardLoss` (ported from tf.contrib)\r\n\r\n#### Optimizers\r\n* Add `LazyAdamOptimizer` (ported from tf.contrib)\r\n\r\n#### Text\r\n* Add `skip_gram_sample` (ported from tf.contrib)\r\n\r\n\r\n# Thank You to All Our Contributors\r\n### Those included in the release\r\n* Yan Facai (\u989c\u53d1\u624d)\r\n* Tabish Shaikh\r\n* Andreas Madsen\r\n* Lukas Geiger\r\n\r\n### Those waiting for PRs to be merged\r\n* Moritz Kr\u00f6ger\r\n* Aakash Kumar Nain\r\n* Qianli Scott Zhu\r\n* Tzu-Wei Sung\r\n\r\n#### We also want to extend a thank you to the Google team members who have helped with CI setup and reviews!\r\n",
+        "dateCreated": "2019-03-06T03:01:47Z",
+        "datePublished": "2019-03-06T03:42:07Z",
+        "html_url": "https://github.com/tensorflow/addons/releases/tag/v0.1.0",
+        "name": "TensorFlow Addons 0.1.0",
+        "tag_name": "v0.1.0",
+        "tarball_url": "https://api.github.com/repos/tensorflow/addons/tarball/v0.1.0",
+        "url": "https://api.github.com/repos/tensorflow/addons/releases/15935271",
+        "zipball_url": "https://api.github.com/repos/tensorflow/addons/zipball/v0.1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1426,
+      "date": "Sat, 25 Dec 2021 15:26:26 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support_channel": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://gitter.im/tensorflow/sig-addons",
+    "technique": "Regular expression"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "deep-learning",
+      "tensorflow",
+      "neural-network",
+      "tensorflow-addons",
+      "python"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "See [`docs/tutorials/`](docs/tutorials/)\nfor end-to-end examples of various addons.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

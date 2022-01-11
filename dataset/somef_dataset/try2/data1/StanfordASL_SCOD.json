@@ -1,0 +1,258 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2102.12567",
+      "https://arxiv.org/abs/1910.09573",
+      "https://arxiv.org/abs/1612.01474",
+      "https://arxiv.org/abs/2102.12567](https://arxiv.org/abs/2102.12567) (2021).\n\n## Overview\n\nThis repository provides a framework for wrapping a pre-trained neural network with uncertainty estimates. It is designed to work with any pytorch model. We implement several such wrappers in a general framework. Given a pretrained DNN `model : torch.nn.Module`, the distribution that the network parameterizes `dist_fam : nn_ood.distributions.DistFam`, and a PyTorch dataset containing the training data `dataset : torch.utils.data.Dataset`, we can construct a uncertainty-equipped version of the network as follows:\n\n```\nunc_model = UncWrapper(model, dist_fam, **kwargs)\nunc_model.process_dataset(dataset)\n```\n\nwhere wrapper specific hyperparameters are passed in as keyword arguments.\n\nThen, we can use `unc_model` as we would use `model,` except the wrapped model now will produce an uncertainty score along with the normal model output:\n\n```\noutput, unc = unc_model(input)\n```\n\nWe implement several such uncertainty wrappers, available in `nn_ood.posteriors`:\n\n- `SCOD`: Sketching Curvature for OoD Detection\n- `LocalEnsemble`: Implements the algorithm described in [(Madras et al., 2019)](https://arxiv.org/abs/1910.09573)\n- `KFAC`: Implements the algorithm described in [(Ritter et al., 2019)](https://arxiv.org/abs/1612.01474)\n- `Naive`: Uses the model's output directly to compute an uncertainty score (e.g., entropy of output distribution)\n\nWe also compare to DeepEnsembles, which operate on a collection of models of identical architecture. Implementing Deep Ensembles in this framework is a similar process -- after having trained K models, we can intialized the wrapper with a list containing these models\n```\nmodels = [model1, model2, ..., modelK]\nunc_model = Ensemble(models, dist_fam, **kwargs)\n```\n\n## How to use\n\n### Downloading / installing dependencies\n\nClone this repo (including the submodules):\n\n```\ngit clone --recurse-submodules git@github.com:StanfordASL/SCOD.git\n```\n\nInstall the framework (this will autoinstall the required submodules)\n\n```\npip install -e .\n```\n\nDownload datasets (dataloaders expect data to be in ~/datasets). This script downloads the data for Wine and TinyImagenet. The other datasets used in these experiments are all downloaded automatically through pytorch.\n```\n./download_datasets.sh -t ~/datasets/\n```\nMake sure to update `nn_ood/__init__.py` to match the location of your dataset directory. \n\n### Running experiments\nEach domain / experiment has a folder in `experiments` which contains a `config.py` file. This file defines all experiment specific details -- hyperparameters, which dataset to use, model architecture, functions to plot data, etc. The config file also defines which combinations of uncwrappers and hyperparameters to test.\n\nThe notebook `experiments/run_experiments.ipynb` has scripts which run experiments as defined by this config file. At the start of the script, replace `EXP_FOLDER` to point to the desired experiment folder so that the correct config.py file is used.\n\nThe notebook `experiments/visualize.ipynb` has code that generates plots from the results that are saved by the `run_experiments.ipynb` notebook. The notebook generates experiment-specific plots as defined in the appropriate `EXP_FOLDER/config.py`.\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.998821291084553
+      ],
+      "excerpt": "Sharma, Apoorva, Navid Azizan, and Marco Pavone. \"Sketching Curvature for Efficient Out-of-Distribution Detection for Deep Neural Networks.\" arXiv preprint arXiv:2102.12567 (2021). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.968367588970379,
+        0.968367588970379
+      ],
+      "excerpt": "LocalEnsemble: Implements the algorithm described in (Madras et al., 2019) \nKFAC: Implements the algorithm described in (Ritter et al., 2019) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/StanfordASL/SCOD",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-14T01:48:14Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-14T21:57:50Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9973553631579368
+      ],
+      "excerpt": "This repository contains a PyTorch implementation of the technique described in our paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9808732546028579,
+        0.860059181823877
+      ],
+      "excerpt": "This repository provides a framework for wrapping a pre-trained neural network with uncertainty estimates. It is designed to work with any pytorch model. We implement several such wrappers in a general framework. Given a pretrained DNN model : torch.nn.Module, the distribution that the network parameterizes dist_fam : nn_ood.distributions.DistFam, and a PyTorch dataset containing the training data dataset : torch.utils.data.Dataset, we can construct a uncertainty-equipped version of the network as follows: \nunc_model = UncWrapper(model, dist_fam, **kwargs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9894154314743744
+      ],
+      "excerpt": "We also compare to DeepEnsembles, which operate on a collection of models of identical architecture. Implementing Deep Ensembles in this framework is a similar process -- after having trained K models, we can intialized the wrapper with a list containing these models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code accompanying \"Sketching Curvature for Efficient Out-of-Distribution Detection for Deep Neural Networks\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Clone this repo (including the submodules):\n\n```\ngit clone --recurse-submodules git@github.com:StanfordASL/SCOD.git\n```\n\nInstall the framework (this will autoinstall the required submodules)\n\n```\npip install -e .\n```\n\nDownload datasets (dataloaders expect data to be in ~/datasets). This script downloads the data for Wine and TinyImagenet. The other datasets used in these experiments are all downloaded automatically through pytorch.\n```\n./download_datasets.sh -t ~/datasets/\n```\nMake sure to update `nn_ood/__init__.py` to match the location of your dataset directory. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/StanfordASL/SCOD/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Fri, 24 Dec 2021 20:48:19 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/StanfordASL/SCOD/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "StanfordASL/SCOD",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/StanfordASL/SCOD/main/experiments/run_experiments.ipynb",
+      "https://raw.githubusercontent.com/StanfordASL/SCOD/main/experiments/visualize.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/StanfordASL/SCOD/main/download_datasets.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Clone this repo (including the submodules):\n\n```\ngit clone --recurse-submodules git@github.com:StanfordASL/SCOD.git\n```\n\nInstall the framework (this will autoinstall the required submodules)\n\n```\npip install -e .\n```\n\nDownload datasets (dataloaders expect data to be in ~/datasets). This script downloads the data for Wine and TinyImagenet. The other datasets used in these experiments are all downloaded automatically through pytorch.\n```\n./download_datasets.sh -t ~/datasets/\n```\nMake sure to update `nn_ood/__init__.py` to match the location of your dataset directory. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8471632383263955
+      ],
+      "excerpt": "output, unc = unc_model(input) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/StanfordASL/SCOD/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Apoorva Sharma\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SCOD: Sketching Curvature for Out-of-Distribution Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SCOD",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "StanfordASL",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/StanfordASL/SCOD/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Clone this repo (including the submodules):\n\n```\ngit clone --recurse-submodules git@github.com:StanfordASL/SCOD.git\n```\n\nInstall the framework (this will autoinstall the required submodules)\n\n```\npip install -e .\n```\n\nDownload datasets (dataloaders expect data to be in ~/datasets). This script downloads the data for Wine and TinyImagenet. The other datasets used in these experiments are all downloaded automatically through pytorch.\n```\n./download_datasets.sh -t ~/datasets/\n```\nMake sure to update `nn_ood/__init__.py` to match the location of your dataset directory. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Each domain / experiment has a folder in `experiments` which contains a `config.py` file. This file defines all experiment specific details -- hyperparameters, which dataset to use, model architecture, functions to plot data, etc. The config file also defines which combinations of uncwrappers and hyperparameters to test.\n\nThe notebook `experiments/run_experiments.ipynb` has scripts which run experiments as defined by this config file. At the start of the script, replace `EXP_FOLDER` to point to the desired experiment folder so that the correct config.py file is used.\n\nThe notebook `experiments/visualize.ipynb` has code that generates plots from the results that are saved by the `run_experiments.ipynb` notebook. The notebook generates experiment-specific plots as defined in the appropriate `EXP_FOLDER/config.py`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Fri, 24 Dec 2021 20:48:19 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

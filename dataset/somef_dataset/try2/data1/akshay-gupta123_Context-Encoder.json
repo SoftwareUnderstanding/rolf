@@ -1,0 +1,217 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1604.07379v1.pdf\n* **Author** : Deepak Pathak, Phillip Krahenbulh, Jeff Donahue, Trevor Darell, Alexie A. Efros\n* **Tags** : Neural Network,Genreative Adversirial Network,Inpainting\n* **Published** : 25 April, 2016\n\n# Summary:\n\n## Introduction:\n\nImage inpainting is the art of reconstructing damaged/missing parts of an image and can be extended to videos easily. Producing images where the missing parts have been filled with bothvisually and semantically plausible appeal  is the main objective of an artificial image inpainter.<br> \nBefore Deep learning , computer vision is used for that purpose. It\u2019s worth noting that these techniques are good at inpainting backgrounds in an image but fail to generalize.<br>\nIn modern approach, we train a neural network to predict missing parts of an image such that the predictions are both visually and semantically consistent.\n\n## Architecture:\n\nThe whole architecture comprises of two parts Generator and Discriminator like a GAN model, where Generator tries to generate the missing part which looks real and sementically consistent whereas Disriminator tries to distinguish between a real image and fake image.<br>\nGenerator itself consist of two parts an Encoder and a Decoder. Encoder capturing the context of\nan image into a compact latent feature representation and a decoder which uses that representation to produce the missing image content. \n\n**Encoder:** \n\nEncoder acrhitecture is derived from AlexNet architecture . Paper was designed for image size 227x227 but I used 32x32 image of Cifar10 . Moreover, If architecture is limited only to Convolutional layer , their is no way for imformation to directly propagate from one corner of feature to another.This is so because convolutional layers connect all the feature maps together, but never directly connect all locations within a specific feature map. In the present architectures, this information propagation is handled by fullyconnected or inner product layers, where all the activations are directly connected to each otherThis is so because convolutional layers connect all the feature maps together, but never directly connect all locations within a specific feature map. In the present architectures, this information propagation is handled by fullyconnected or inner product layers, where all the activations\nare directly connected to each other. \n\n**Decoder:** \n\nNow comes Decoder, that generate the missing part using Encoder. The <strong>Encoder features</strong>\nare connected to <strong>Decoder features</strong> using a chanell wise fully connected layer.\nDecoder consist of up-convolution layers with learned filters each with a ReLu activation function.\n\n![Architecture](./assets/archi.png"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8714162992508173,
+        0.9758652426555272,
+        0.9977994744046882,
+        0.9818894004866677
+      ],
+      "excerpt": "Akshay Gupta \nTitle : Context Encoders: Feature Learning by Inpainting \nLink : https://arxiv.org/abs/1604.07379v1.pdf \nAuthor : Deepak Pathak, Phillip Krahenbulh, Jeff Donahue, Trevor Darell, Alexie A. Efros \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9809396775432889
+      ],
+      "excerpt": "Published : 25 April, 2016 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/Context-Encoder",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-24T07:26:47Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-27T08:22:07Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Image inpainting is the art of reconstructing damaged/missing parts of an image and can be extended to videos easily. Producing images where the missing parts have been filled with bothvisually and semantically plausible appeal  is the main objective of an artificial image inpainter.<br> \nBefore Deep learning , computer vision is used for that purpose. It\u2019s worth noting that these techniques are good at inpainting backgrounds in an image but fail to generalize.<br>\nIn modern approach, we train a neural network to predict missing parts of an image such that the predictions are both visually and semantically consistent.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9524091570904978,
+        0.8708931530376383,
+        0.8963024481763342
+      ],
+      "excerpt": "The whole architecture comprises of two parts Generator and Discriminator like a GAN model, where Generator tries to generate the missing part which looks real and sementically consistent whereas Disriminator tries to distinguish between a real image and fake image.<br> \nGenerator itself consist of two parts an Encoder and a Decoder. Encoder capturing the context of \nan image into a compact latent feature representation and a decoder which uses that representation to produce the missing image content.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9776438453369027
+      ],
+      "excerpt": "Encoder acrhitecture is derived from AlexNet architecture . Paper was designed for image size 227x227 but I used 32x32 image of Cifar10 . Moreover, If architecture is limited only to Convolutional layer , their is no way for imformation to directly propagate from one corner of feature to another.This is so because convolutional layers connect all the feature maps together, but never directly connect all locations within a specific feature map. In the present architectures, this information propagation is handled by fullyconnected or inner product layers, where all the activations are directly connected to each otherThis is so because convolutional layers connect all the feature maps together, but never directly connect all locations within a specific feature map. In the present architectures, this information propagation is handled by fullyconnected or inner product layers, where all the activations \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216525007564448
+      ],
+      "excerpt": "Decoder consist of up-convolution layers with learned filters each with a ReLu activation function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9657290006996624,
+        0.9146761713940602,
+        0.8360701928625072
+      ],
+      "excerpt": "-Reconstruction loss or Mean Square loss calculates the L2 distance between the original masked portion and portion generated by the model.It is used to penalize the model if generated image not seems to be close the original one.<br> \n- Adversarial loss is actually binary_crossentropy loss which takes generated masked portion and determine how much it look likes the original one.It used to give sharpness to generated images where MSE is lacking.<br> \nLambda_adv and Lamba_rec are hyperparameters to decide weightage to each loss. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/Context-Encoder/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 15:33:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akshay-gupta123/Context-Encoder/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akshay-gupta123/Context-Encoder",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8400803773079889
+      ],
+      "excerpt": "Default values used in Training Model \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akshay-gupta123/Context-Encoder/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TENSORFLOW IMPLEMENTATION OF Context Encoders",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Context-Encoder",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akshay-gupta123",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akshay-gupta123/Context-Encoder/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 15:33:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nusage: train.py [-h] [--learning_rate_g LEARNING_RATE_G]\n                [--learning_rate_d LEARNING_RATE_D] [--n_epoch N_EPOCH]\n                [--batch_size BATCH_SIZE] [--num_img NUM_IMG]\n                [--lambda_adv LAMBDA_ADV] [--mask_height MASK_HEIGHT]\n                [--mask_width MASK_WIDTH] [--samples_dir SAMPLES_DIR]\n                [--save_dir SAVE_DIR]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --learning_rate_g LEARNING_RATE_G\n                        learning rate for generator\n  --learning_rate_d LEARNING_RATE_D\n                        learning rate for discriminator\n  --n_epoch N_EPOCH     max #: of epoch\n  --batch_size BATCH_SIZE\n                        #: of batch size\n  --num_img NUM_IMG     #: Number of images to be generated\n  --lambda_adv LAMBDA_ADV\n                        Weightage for Adversarial loss\n  --mask_height MASK_HEIGHT\n                        Masked portion height\n  --mask_width MASK_WIDTH\n                        Masked portion width\n  --samples_dir SAMPLES_DIR\n                        directory for sample output\n  --save_dir SAVE_DIR   directory for checkpoint models\n\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n$ python3 train.py\n```\n>**_NOTE_** On Notebook use :\n```python\n!git clone link-to-repo\n%run train.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

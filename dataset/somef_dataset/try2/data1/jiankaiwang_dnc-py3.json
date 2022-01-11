@@ -1,0 +1,269 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "| lists sets             | 2.10%   | 5.5\u00b15.9%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559,
+        0.8550101043698384
+      ],
+      "excerpt": "| indefinite knowledge   | 1.70%   | 9.6\u00b111.4%    | \n| basic coreference      | 0.10%   | 3.3\u00b15.7%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8374695145293185
+      ],
+      "excerpt": "| time reasoning         | 11.80%  | 11.0\u00b17.5%    | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278824608274014,
+        0.8356013927728488
+      ],
+      "excerpt": "| positional reasoning   | 39.02%  | 32.4\u00b18.0%    | \n| size reasoning         | 8.68%   | 4.2\u00b11.8%     | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiankaiwang/dnc-py3",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-04T04:10:27Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-04T08:38:56Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9800075351828406,
+        0.893285298728064,
+        0.9645947544677407,
+        0.9675709603202545
+      ],
+      "excerpt": "Differentiable Neural Computer (DNC) is a kind of enhanced neural cell-like LSTM and GRU. It is published in 2016 by Google DeepMind. The main article please refer to https://www.nature.com/articles/nature20101. DNC mainly purposed a new idea to keep memory out of the neural cell but in the external memory. We can train a feedForward or a recurrent neural network to learn how to operate the memory. That is, we are no longer to require RNN cells to keep memorizing and calculating at the same time.  \nSuch an idea was not the first time to the public, its predecessor NTM was already published in 2014 (https://arxiv.org/pdf/1410.5401.pdf). Compare to NTM, DNC solved three main problems. First NTM cannot guarantee the write head would update the values directly on the correct position, or say it might encounter \bthe interference while writing. Second external memory can not be reused once it had been written. Third NTM writes data in a consecutive way, and it might change to another location while coming to the boundary. This causes a problem while reading consecutive data, the data would be not continuous. DNC provides new mechanisms, including memory matrix, memory usage vector, linking matrix, and precedence vector, etc. to solve the above issues. DNC's architecture is like the below. \nIn this repository, we are going to demo how to implement such DNC architecture and how to use it in real cases. \nScripts are implemented on python3 and tensorflow r1.11 or r1.12. The core scripts are referred to the following repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.89095806567103,
+        0.9614178471851282,
+        0.9935645712462811,
+        0.9677533722228876
+      ],
+      "excerpt": "The implementation of main DNC architecture is under the folder dnc-py3 as the package for python. Several tasks are implemented both in training and testing. The scripts are under the folder tasks. There are two commonplace tasks, copy and bAbI. \nThis experiment is designed to demonstrate the various functionalities of the external memory access mechanisms such as in-order retrieval and allocation/deallocation. \nA similar approach to that of the paper was followed by training a 2-layer feedforward model with only 10 memory locations on a copy task in which a series of 4 random binary sequences each of which is of size 6 (24 piece of information) was presented as input. Details about the training can be found here. \nThe model was able to learn to copy the input successfully, and it indeed learned to use the mentioned memory mechanisms. The following figure (which resembles Extended Data Figure 1 in the paper) illustrates that. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.960068931079141,
+        0.9525520902914381,
+        0.9876817729168899
+      ],
+      "excerpt": "In the Memory Locations part of the figure, it's apparent that the model is able to read the memory locations in the same order they were written into. \nIn the Free Gate and the Allocation Gate portions of the figure, it's shown that the free gates are fully activated after a memory location is read and becomes obsolete, while being less activated in the writing phase. The opposite is true for the allocation gate. The Memory Locations Usage also demonstrates how memory locations are used, freed, and re-used again time after time. \nThe figure differs a little from the one in the paper when it comes to the activation degrees of the gates. This could be due to the small size of the model and the relatively small training time. However, this doesn't affect the operation of the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9709443223477039,
+        0.9744398560278495,
+        0.9925621027045051,
+        0.8094942466220009,
+        0.9861520177190202
+      ],
+      "excerpt": "if the learned model is independent of the training memory size and can be scaled-up with memories of larger sizes. \nTo approach that, a 2-layer feedforward model with 15 memory locations was trained on a copy problem in which a single sequence of random binary vectors of lengths between 1 and 10 was presented as input. Details of the training process can be found here. \nThe model was then tested on pairs of increasing sequence lengths and increasing memory sizes with re-training on any of these pairs of parameters, and the fraction of correctly copied sequences out of a batch of 100 was recorded. The model was indeed able to generalize and use the available memory locations effectively without retraining. This is depicted in the following figure which resembles Extended Data Figure 2 from the paper. \nSimilar figures can be re-generated in the visualization notebook \nThis experiment was designed to reproduce the paper's results on the bAbI 20QA task. By training a model with the same parameters as DNC1 described in the paper (Extended Data Table 2) on the en-10k dataset, the model resulted in error percentages that mostly fell within the 1 standard deviation of the means reported in the paper (Extended Data Table 1). The results, and their comparison to the paper's mean results, are shown in the following table. Details about training and reproduction can be found here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "a tutorial for Differentiable Neural Computer (DNC) in python3",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiankaiwang/dnc-py3/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 22:00:40 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jiankaiwang/dnc-py3/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jiankaiwang/dnc-py3",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/jiankaiwang/dnc-py3/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jiankaiwang/dnc-py3/master/tasks/babi/Colab_DNC_py_babi_train.ipynb",
+      "https://raw.githubusercontent.com/jiankaiwang/dnc-py3/master/tasks/copy/Colab_DNC_py3_Copy_train_series.ipynb",
+      "https://raw.githubusercontent.com/jiankaiwang/dnc-py3/master/tasks/copy/visualization.ipynb",
+      "https://raw.githubusercontent.com/jiankaiwang/dnc-py3/master/tasks/copy/Colab_DNC_py3_Copy_Visualization.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8246598784483701
+      ],
+      "excerpt": "Scripts are implemented on python3 and tensorflow r1.11 or r1.12. The core scripts are referred to the following repository. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8528922785668234
+      ],
+      "excerpt": "| basic coreference      | 0.10%   | 3.3\u00b15.7%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8818958692923505,
+        0.8107587636078171
+      ],
+      "excerpt": "| basic deduction        | 45.44%  | 27.2\u00b120.1%   | \n| basic induction        | 56.43%  | 53.6\u00b11.9%    | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8733990456256718
+      ],
+      "excerpt": "| Mean Err.          | 15.78%  | 16.7\u00b17.6%    | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jiankaiwang/dnc-py3/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DNC-py3",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dnc-py3",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jiankaiwang",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiankaiwang/dnc-py3/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 22:00:40 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "dnc",
+      "dnc-tensorflow",
+      "tutorial",
+      "babi-tasks"
+    ],
+    "technique": "GitHub API"
+  }
+}

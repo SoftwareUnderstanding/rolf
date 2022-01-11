@@ -1,0 +1,765 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Some basic material on sequence to sequence NMT models came from these sources. The first link is to Jason Brownlee's masterful blog series. The second is to Francois Chollet's Keras blog.\n  * https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/\n  * https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html\n* Specifically regarding attention decoders and a special hand written Keras layer designed just for that purpose. The author of the layer is Zafarali Ahmed. The code was designed for an earlier version of Keras and Tensorflow. Zafarali's software is provided with the ['GNU Affero General Public License v3.0'](https://github.com/datalogue/keras-attention/blob/master/LICENSE) \n  * https://medium.com/datalogue/attention-in-keras-1892773a4f22\n  * https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/\n* Pytorch code was originally written by Sean Robertson for the Pytorch demo and example site. He uses the [MIT license.](https://github.com/spro/practical-pytorch/blob/master/LICENSE)\n  * http://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html#sphx-glr-intermediate-seq2seq-translation-tutorial-py\n* Additional Pytorch code was written by Austin Jacobson. A link to his NMT project is included here. He uses the [MIT license.](https://github.com/A-Jacobson/minimal-nmt/blob/master/LICENSE.md)\n  * https://github.com/A-Jacobson/minimal-nmt\n* Some code was originally written by Yerevann Research Lab. This theano code implements the DMN Network Model. They use the [MIT License.](https://github.com/YerevaNN/Dynamic-memory-networks-in-Theano/blob/master/LICENSE)\n  * https://github.com/YerevaNN/Dynamic-memory-networks-in-Theano\n* The original paper on Dynamic Memory Networks, by Kumar et al., can be found here:\n  * http://arxiv.org/abs/1506.07285\n* This paper discusses using a sequence to sequence model ('seq2seq') to make a chatbot:\n  * http://arxiv.org/abs/1506.05869v3\n* For GPT2 see the following links:\n  * https://github.com/graykode/gpt-2-Pytorch\n  * https://github.com/huggingface/pytorch-pretrained-BERT\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The goal of this part of the project is to provide for comprehensive speech-to-text and text-to-speech for the use of the chatbot when it is installed on a Raspberry Pi. For this purpose we use the excellent google api. The google api 'Cloud Speech API' costs money to operate. If you want to use it you must sign up for Google Cloud services and enable the Speech API for the project. This document will attempt to direct a developer how to setup the account, but may not go into intimate detail. Use this document as a guide, but not necessarily the last word. After everything is set up the project will require internet access to perform speech recognition.\n\nAs of this writing the Keras model does not work on the Raspberry Pi because Tensorflow is so difficult to compile for Pi. Tensorflow is the Keras backend that we use in this project.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The Google Cloud api is complicated and not all of the things you need to do are covered in this document. I will be as detailed as possible if I can. The basic idea is to install the software on a regular computer to establish your account and permissions. You will need to create a special json authentication file and tell google where to find it on your computer. Then install as much software as possible on the Raspberry Pi along with another special authentication json file. This second file will refer to the same account and will allow google to charge you normally as it would for a regular x86 or x86_64 computer. The speech recognition code in this project should run on the regular computer before you proceed to testing it on the Raspberry Pi.\n\nInstall all the recommended python packages on both computers and make sure they install without error. This includes `gtts`, `google-api-python-client`, and `google-cloud-speech`. Install the Google Cloud SDK on the regular computer. The following link shows where to download the SDK. \n* https://cloud.google.com/sdk/docs/\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1603.01417 . They say in the paper that the input module on the basic DMN sometimes experiences overfitting. I followed the example as best as I could and my validation is much better on task 1. At this time I started using the 'en-10k' babi data set. The training portion of this data set is 10,000 questions long.\n\n8/6/18 - I am trying to reproduce the 20 tests from the babi test set. At the same time I'm adding a recurrent GRU decoder to the output of the whole model to see if I can get multi-word output to work. This would help with the resolution of babi task number 19, which employs two word output. The project is still a work in progress.\n\n8/15/18 - I have not been able to finish babi test 19. I have tried adding an output gru to the answer module of the program. My results with that gru are poor.\nThe program recognizes that the answer must be a pair of cardinal directions, like north, south, east, and west. The program does not, however, identify the correct pair.\n\n9/24/18 - I am still working on multiple word output. WHAT I TRIED: I have placed a dropout function in the code for the recurrent output section of the `babi_recurrent.py` program.\nThe output of my first test run is promising. I think to start with I will run it with task #1 and then I will try it out on task #19. In other people's code I have noticed that they typically do not\nuse 50% dropout, but something closer to 30%. I can run task #1 and #19 with lower dropout if I want to later. WHAT WORKED:\nThe task #1 experiment worked with the recurrent output code. The #19 tests still don't work!\n\n10/6/18 - I've completed some code that runs on hadoop and helps clean input from the reddit download. I have been\nkeeping it in a separate repository. I will include a link to the github repository here: https://github.com/radiodee1/awesome-hadoop-reddit .\n\n2/19/19 - I stopped working on the babi code and focused on the sequence to sequence code. \nThe code originally ran with batches of 50 sentence pairs at a time. \nThis code ran but I could not tell if it was training properly. \nI changed the decoder so that while the encoder ran with batches the decoder ran one sentence pair at a time. \nWith this code training is very slow and at first I could not tell if it was learning at all. \nI found out though, that this model does learn the rudimentary chatbot task if it is trained long enough. \nI am currently training for several days at a time. \nIt turned out that teacher-forcing was very important for this training process. \nI will keep working on this sequence to sequence model and if I have time I will return to the babi code and try to finish task # 19.\n\n3/8/19 - The raspberry pi uses a debian based operating system, so to ensure that the chatbot software is run at boot-up, the `/etc/rc.local` file needs to be edited.\nSince the file uses bash styled commands, the change to the file can be made with a single line. `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json && cd /path/to/project/ && ./do_launch_game.sh`\nThat is the line that must be added to `rc.local`. Also at this time I am experimenting with an open ended vocabulary for `seq_2_seq.py`.\n\n3/17/19 - Code was added to the `./do_launch_game.sh` script so that it will launch the `seq_2_seq.py` model if there exists in the root project folder a file named 'launch'. \nThis file does not exist in the github repository, so if you use the repository you must add it yourself.\nThis is so that the `/etc/rc.local` file can be set up once and the automatic startup of the seq_2_seq model can be disabled on the raspberry pi at the project directory. \n\n4/9/2019 - The `model` directory has turned into a sandbox of sorts for exploring different neural network implementations. \nI am currently most interested in bert. \nWhen I am done with this exploration \nI'll spend some time cleaning up the `model` directory.\n\n4/25/2019 - I found some pytorch code on a github site for 'gpt2' that seems to work for me. It doesn't do everything I want but it's a good start.\nThis is the site: https://github.com/huggingface/pytorch-pretrained-BERT . The version of gpt2 that I'm using is the smaller released version.\nI believe the larger version is not available. In any case the model does respond with sentence type output when it is given the same.\nPreviously I was trying to get a downloaded version of BERT to respond in sentences. That does not seem to work. \nI guess next I'm hoping to fine tune the gpt2 code so that it works better if I can.\n\n5/10/2019 - The code I was using on 4/25 did not work, but I found another repository at https://github.com/graykode/gpt-2-Pytorch that works. \nIn fact it works well enough that I've decided to use it in a full blown version of my chatbot. The code, is in Pytorch and also uses the 'huggingface' code from 4/25. \nI've made his github repository a submodule of this project because I use the code like a library. \nThis is still all without fine tuning anything. The people at OpenAI who created gpt2 call this sort of implementation 'zero-shot'. \nThis means that the model is used right off of the shelf with no fine tuning. This is very interesting. \nI use this 'zero-shot' approach and it works well. At the same time I am finalizing the sequence-to-sequence model, so that I will have two examples for show. \nOne will be the best sequence-to-sequence model I have and the other will be the zero-shot gpt2 model. In order to try this code,\nafter cloning this github repository, run the script named `do_make_submodule_init.sh` .\nThis will pull the submodule and put the gpt2 data in the right directory.\n\n5/29/2019 - I have tried to re-organize the project folders somewhat.\n\n7/5/2019 - I have added a 'transformer' model which I train from the 'persona' sentence\ncorpus. It is located in the 'transformer' folder. The model is trained from scratch so\nthere is no *transfer-learning* going on. The model works on a laptop. Now I should try\nto see if I can port the code over to the Raspberry Pi. I do believe, at this writing, that the memory\nfootprint of the model is small enough for the Raspberry Pi but there are some libraries\nthat the model requires that need to be ported to the Pi and at this writing I don't know\nif that is possible.\n\n8/16/2019 - For the transformer model, I wrote a script that will run the model on a Raspberry Pi. \nIt uses a version of the package 'tensorflow_model_server'. \nThe version I use for the 'armhf' platform is from the following web site: https://github.com/emacski/tensorflow-serving-arm . \nThe transformer model is set up to launch automatically when the pi is plugged in. \nIt takes about two minutes to boot up. \nAfter that it answers some basic questions that a chatbot might be expected to answer. \nIt is not as versatile as the GPT2 based model. \nThe GPT2 model will not fit on a Raspberry Pi, but the tensorflow transformer model will.\n\n9/9/2019 - I have this goal of running the gpt2 chatbot model on some kind of small board computer. \nI had been considering buying an O-droid. \nConveniently the raspberry pi 4 was released with a 4 GB memory option. \nI ordered one and installed the pytorch part of the model on it. \nTo do this I had to compile pytorch for armv7 specifically for python 3.7. I did this. \nThe only thing not tested at this time is speech-to-text and text-to-speech. \nInterestingly the speech libraries work already on the raspberry pi 3B. \nCompiling pytorch was not trivial and took several tries. \nAlso interestingly each reply from the chatbot takes ten to fifteen seconds. \nI have yet to determine if this makes the deployed model unusable.\n\n1/5/2020 - I have a version of the gpt-2 model that refers to an aiml file before giving an answer.\nThis is an experimental python script that is not currently used in any of my Raspberry Pi setups.\nThe idea is that using a single aiml file you could give the gpt-2 chatbot more specific instructions about how to answer particular questions.\nThe model answers random questions with the sort of answer you would expect from a model trained on Reddit data,\nbut answers the questions found in the aiml file with the specific answers in the aiml.\n\n1/6/2020 - I have disgarded my hand-coded version of the sequence to sequence chatbot as it did not produce the desired output.\n I have found and employed a chatbot tutorial that could be found for a while on the Pytorch tutorial site.\n The code was authored by Matthew Inkawhich.\n The code works.\n I contacted Mr. Inkawhich and asked him for instructions on how to cite his work in a paper using latex.\n He was nice enough to help with that.\n\n2/4/2020 - I am removing all babi-type code from the repository.\n\n2/28/2020 - I just spent some time on the gpt2 model and getting it to\naccept commands and even do some question and answer type stuff.\nIt will search the internet for wiki articles and then answer questions about them.\nThis was fun but not crucial to the overall goals of the project.\nIt will even launch system apps for you if you ask it to.\nI use some aiml to do this.\nThe aiml is the week link in all of this.\n\n3/9/2020 - Code was written so that Raspberry Pi installations could use indicator lights to show if output is being accepted or if the bot is processing input.\nThe code was tested with indicator LEDs on the Raspberry Pi.\n\n6/15/2020 - The old readme file was moved to a safe location and this new readme file was created.\n\n# Organization\nThe folders and files in the project are organized in the following manor. \nThe root directory of the project is called `awesome-chatbot`. \nIn that folder are sub folders named `data`,  `model`, `raw`, `seq_2_seq`, `transformer`, and `saved`.\nThere are several script files in the main folder along side the folders mentioned above. \nThese scripts all have names that start with the word `do_` . \nThis is so that when the files are listed by the computer the scripts will all appear together. \nBelow is a folder by folder breakdown of the project.\n\n* `data` This folder holds the training data that the model uses during the `fit` and `predict` operations. The contents of this folder are generally processed to some degree by the project scripts. This pre-processing is described below. This folder also holds the `vocab` files that the program uses for training and inference. The modified word embeddings are also located here.\n* `model` This folder holds the python code for the project. \nThough some of the setup scripts are also written in python, this folder holds the special python code that maintains the chatbot model. There are also some setup scripts in this folder.\n* `bot` This folder is the home of programs that are meant to help the chatbot run. This includes speech-to-text code and speech-recognition code. Ultimately this directory will be the home of a loop of code that monitors audio input from a microphone and decides what to do with it.\n* `raw` This folder holds the raw downloads that are manipulated by the setup scripts. These include the GloVe vectors and the Reddit Comments download.\n* `saved` This folder holds the saved values from the training process.\n* `classifier` This folder is for BERT and an attempt to create a model that did the chatbot task that at its core was a classifier. The experiment was not successful.\nFurther BERT experiments can be found here.\n* `seq_2_seq` This is for a rnn based sequence to sequence model.\n* `transformer` This is for the 'transformer' based chat bot model.  \n* `torch_t2t` This experimental directory is for a transformer model written in pytorch. A working model for the chatbot task has not been developed using this code.\n* `docker` This folder has scripts for generating docker containers for the project. This was a programming experiment and code from this directory is not used in any of the final installed models.\n* `virtualenv` This folder has scripts for working with virtual environments. Some of the scipts are more like templates than working programs.\n* `vis` This folder has some code that helps visualize data from the transrormer model and the gpt2 model.\n* `experiments` This folder is for experiments.\n\nDescription of some of the individual setup scripts is included below.\n# Suggested Reading - Acknowledgements\n* Some basic material on sequence to sequence NMT models came from these sources. The first link is to Jason Brownlee's masterful blog series. The second is to Francois Chollet's Keras blog.\n  * https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/\n  * https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html\n* Specifically regarding attention decoders and a special hand written Keras layer designed just for that purpose. The author of the layer is Zafarali Ahmed. The code was designed for an earlier version of Keras and Tensorflow. Zafarali's software is provided with the ['GNU Affero General Public License v3.0'](https://github.com/datalogue/keras-attention/blob/master/LICENSE"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9105368110547479
+      ],
+      "excerpt": "* https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/radiodee1/awesome-chatbot",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-02-17T21:37:40Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T16:10:46Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9965906806459935
+      ],
+      "excerpt": "The goal of this project is to make a Keras, Tensorflow, or Pytorch implementation of a chatbot. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8465724698736306,
+        0.9891914060047696
+      ],
+      "excerpt": "Later we want to use our code to implement a chatbot. This requires finding a suitable data set.  \nThe inspiration for this project is the tensorflow NMT project found at the following link: here  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9648776679072054,
+        0.9976444519551594
+      ],
+      "excerpt": "A link for that is here \n6/23/18 - The project is in its early stages. No model in this project implements an AI chatbot. That is the goal, but it has not been reached as of yet. Presently the focus is on the babi data set. This implies that we are using pytorch, not keras at this time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914702988776611,
+        0.9682933311295356,
+        0.9019463740906786
+      ],
+      "excerpt": "7/19/18 - I found this paper. It refers to DMN+, a more advanced Dynamic Memory Network, which can work with the babi data set. This is the link: https://arxiv.org/abs/1603.01417 . They say in the paper that the input module on the basic DMN sometimes experiences overfitting. I followed the example as best as I could and my validation is much better on task 1. At this time I started using the 'en-10k' babi data set. The training portion of this data set is 10,000 questions long. \n8/6/18 - I am trying to reproduce the 20 tests from the babi test set. At the same time I'm adding a recurrent GRU decoder to the output of the whole model to see if I can get multi-word output to work. This would help with the resolution of babi task number 19, which employs two word output. The project is still a work in progress. \n8/15/18 - I have not been able to finish babi test 19. I have tried adding an output gru to the answer module of the program. My results with that gru are poor. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823857027924046,
+        0.8510256450511322,
+        0.9700719415327731
+      ],
+      "excerpt": "keeping it in a separate repository. I will include a link to the github repository here: https://github.com/radiodee1/awesome-hadoop-reddit . \n2/19/19 - I stopped working on the babi code and focused on the sequence to sequence code.  \nThe code originally ran with batches of 50 sentence pairs at a time.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8243525985820337,
+        0.84403825251257,
+        0.8025116239957796,
+        0.8162456861009092,
+        0.805994555325021,
+        0.8635706719484617,
+        0.9068424853816668
+      ],
+      "excerpt": "I changed the decoder so that while the encoder ran with batches the decoder ran one sentence pair at a time.  \nWith this code training is very slow and at first I could not tell if it was learning at all.  \nI found out though, that this model does learn the rudimentary chatbot task if it is trained long enough.  \nI am currently training for several days at a time.  \nIt turned out that teacher-forcing was very important for this training process.  \nI will keep working on this sequence to sequence model and if I have time I will return to the babi code and try to finish task \n3/8/19 - The raspberry pi uses a debian based operating system, so to ensure that the chatbot software is run at boot-up, the /etc/rc.local file needs to be edited. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9467839404557006
+      ],
+      "excerpt": "That is the line that must be added to rc.local. Also at this time I am experimenting with an open ended vocabulary for seq_2_seq.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9318687341572951,
+        0.880135663814287
+      ],
+      "excerpt": "This is so that the /etc/rc.local file can be set up once and the automatic startup of the seq_2_seq model can be disabled on the raspberry pi at the project directory.  \n4/9/2019 - The model directory has turned into a sandbox of sorts for exploring different neural network implementations.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8564863799315211
+      ],
+      "excerpt": "When I am done with this exploration  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9259814231793659,
+        0.9130962462451842,
+        0.9563920280253977,
+        0.9616383652608494
+      ],
+      "excerpt": "4/25/2019 - I found some pytorch code on a github site for 'gpt2' that seems to work for me. It doesn't do everything I want but it's a good start. \nThis is the site: https://github.com/huggingface/pytorch-pretrained-BERT . The version of gpt2 that I'm using is the smaller released version. \nI believe the larger version is not available. In any case the model does respond with sentence type output when it is given the same. \nPreviously I was trying to get a downloaded version of BERT to respond in sentences. That does not seem to work.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8572963392080774,
+        0.9825207651096834,
+        0.9560719112523877,
+        0.9570594684586867,
+        0.98875080541664,
+        0.8444866225755979,
+        0.8593208108519125
+      ],
+      "excerpt": "5/10/2019 - The code I was using on 4/25 did not work, but I found another repository at https://github.com/graykode/gpt-2-Pytorch that works.  \nIn fact it works well enough that I've decided to use it in a full blown version of my chatbot. The code, is in Pytorch and also uses the 'huggingface' code from 4/25.  \nI've made his github repository a submodule of this project because I use the code like a library.  \nThis is still all without fine tuning anything. The people at OpenAI who created gpt2 call this sort of implementation 'zero-shot'.  \nThis means that the model is used right off of the shelf with no fine tuning. This is very interesting.  \nI use this 'zero-shot' approach and it works well. At the same time I am finalizing the sequence-to-sequence model, so that I will have two examples for show.  \nOne will be the best sequence-to-sequence model I have and the other will be the zero-shot gpt2 model. In order to try this code, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8822666762824677
+      ],
+      "excerpt": "5/29/2019 - I have tried to re-organize the project folders somewhat. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9130644246355976,
+        0.9182865371665704,
+        0.9001296604667347,
+        0.9915283531984098,
+        0.9031937621562774
+      ],
+      "excerpt": "corpus. It is located in the 'transformer' folder. The model is trained from scratch so \nthere is no transfer-learning going on. The model works on a laptop. Now I should try \nto see if I can port the code over to the Raspberry Pi. I do believe, at this writing, that the memory \nfootprint of the model is small enough for the Raspberry Pi but there are some libraries \nthat the model requires that need to be ported to the Pi and at this writing I don't know \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8934370474818094
+      ],
+      "excerpt": "It uses a version of the package 'tensorflow_model_server'.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9725717956556195,
+        0.8639980487841707
+      ],
+      "excerpt": "The transformer model is set up to launch automatically when the pi is plugged in.  \nIt takes about two minutes to boot up.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.980601031110123,
+        0.8533071350873193,
+        0.9325054022250583
+      ],
+      "excerpt": "It is not as versatile as the GPT2 based model.  \nThe GPT2 model will not fit on a Raspberry Pi, but the tensorflow transformer model will. \n9/9/2019 - I have this goal of running the gpt2 chatbot model on some kind of small board computer.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8432031472001805,
+        0.8283907515447246,
+        0.977770538928486,
+        0.8674851624529092
+      ],
+      "excerpt": "I ordered one and installed the pytorch part of the model on it.  \nTo do this I had to compile pytorch for armv7 specifically for python 3.7. I did this.  \nThe only thing not tested at this time is speech-to-text and text-to-speech.  \nInterestingly the speech libraries work already on the raspberry pi 3B.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9376334471235538,
+        0.9758379169897045,
+        0.9547204024822908,
+        0.9297258823555523,
+        0.9204153779245255
+      ],
+      "excerpt": "1/5/2020 - I have a version of the gpt-2 model that refers to an aiml file before giving an answer. \nThis is an experimental python script that is not currently used in any of my Raspberry Pi setups. \nThe idea is that using a single aiml file you could give the gpt-2 chatbot more specific instructions about how to answer particular questions. \nThe model answers random questions with the sort of answer you would expect from a model trained on Reddit data, \nbut answers the questions found in the aiml file with the specific answers in the aiml. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9295762780962261
+      ],
+      "excerpt": " I have found and employed a chatbot tutorial that could be found for a while on the Pytorch tutorial site. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9817248579829814,
+        0.9038210632321835,
+        0.9026736138842667,
+        0.983226340491997
+      ],
+      "excerpt": " I contacted Mr. Inkawhich and asked him for instructions on how to cite his work in a paper using latex. \n He was nice enough to help with that. \n2/4/2020 - I am removing all babi-type code from the repository. \n2/28/2020 - I just spent some time on the gpt2 model and getting it to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9925229714437376
+      ],
+      "excerpt": "This was fun but not crucial to the overall goals of the project. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9975432219873358
+      ],
+      "excerpt": "The aiml is the week link in all of this. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8501701000327142
+      ],
+      "excerpt": "The code was tested with indicator LEDs on the Raspberry Pi. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9477490674696882,
+        0.966124368854534,
+        0.9031052654652243
+      ],
+      "excerpt": "The folders and files in the project are organized in the following manor.  \nThe root directory of the project is called awesome-chatbot.  \nIn that folder are sub folders named data,  model, raw, seq_2_seq, transformer, and saved. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8994467064863174,
+        0.9001908496993938,
+        0.9856192926206929,
+        0.9159769333392144,
+        0.8277412826488558,
+        0.9466510597009224
+      ],
+      "excerpt": "This is so that when the files are listed by the computer the scripts will all appear together.  \nBelow is a folder by folder breakdown of the project. \ndata This folder holds the training data that the model uses during the fit and predict operations. The contents of this folder are generally processed to some degree by the project scripts. This pre-processing is described below. This folder also holds the vocab files that the program uses for training and inference. The modified word embeddings are also located here. \nmodel This folder holds the python code for the project.  \nThough some of the setup scripts are also written in python, this folder holds the special python code that maintains the chatbot model. There are also some setup scripts in this folder. \nbot This folder is the home of programs that are meant to help the chatbot run. This includes speech-to-text code and speech-recognition code. Ultimately this directory will be the home of a loop of code that monitors audio input from a microphone and decides what to do with it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9460926871711663
+      ],
+      "excerpt": "classifier This folder is for BERT and an attempt to create a model that did the chatbot task that at its core was a classifier. The experiment was not successful. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9527560615510455,
+        0.9876560631264711,
+        0.8923842717218885,
+        0.8949509531797932,
+        0.892550959659861,
+        0.9276815553363086
+      ],
+      "excerpt": "seq_2_seq This is for a rnn based sequence to sequence model. \ntransformer This is for the 'transformer' based chat bot model.   \ntorch_t2t This experimental directory is for a transformer model written in pytorch. A working model for the chatbot task has not been developed using this code. \ndocker This folder has scripts for generating docker containers for the project. This was a programming experiment and code from this directory is not used in any of the final installed models. \nvirtualenv This folder has scripts for working with virtual environments. Some of the scipts are more like templates than working programs. \nvis This folder has some code that helps visualize data from the transrormer model and the gpt2 model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9541168328509392,
+        0.9932236917217873
+      ],
+      "excerpt": "Description of some of the individual setup scripts is included below. \nAn important part of the process of porting this project to the Raspberry Pi is compiling Pytorch for the Pi. At the time of this writing the compiling of Pytorch is possible following the urls below. You do not need to compile Pytorch before you test the speech recognition, but it is required for later steps. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8952936142200802,
+        0.8282467876529059
+      ],
+      "excerpt": "You may need to set up a billing account with Google for yourself. Here are some resources for using the Google Cloud Platform. \n* https://cloud.google.com/sdk/docs/quickstart-linux See this url for details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9083547478231253
+      ],
+      "excerpt": "Setup a google cloud platform account and project. For a project name I used awesome-sr.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9259847863362826
+      ],
+      "excerpt": "Use the Google Cloud Platform Console to create a second project json file for the Raspberry Pi. Go to the Downloads folder and identify the Raspberry Pi json file. Transfer the file to the Pi with a command like scp. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9533520721549568
+      ],
+      "excerpt": "On the raspberry pi there is a file called /etc/rc.local that is launched with every reboot. Use this file to launch the chatbot/smart-speaker on startup. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9567588029116127
+      ],
+      "excerpt": "With virtualenv: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9567588029116127
+      ],
+      "excerpt": "With virtualenv: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9607817464241762
+      ],
+      "excerpt": "Run these commands on the raspberry pi. This is necessary for the Transformer model that uses Tensorflow. The GPT2 model uses Pytorch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9933503448633109
+      ],
+      "excerpt": "work in the Docker version of the project. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9495394087481738,
+        0.9775484112810997
+      ],
+      "excerpt": "With an update to a version of Ubuntu, Python 3.7 was replaced with a later version and scripts for this project stopped working. \nTo use this project with Docker, follow the commands below. This should work on any linux amd64 operating system with Docker. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8767003501850131
+      ],
+      "excerpt": "* git pull this project to the directory of your choice. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246472806775221
+      ],
+      "excerpt": "* You can change or add to the contents of the project directory as you wish before and after launching Docker. The contents of the folder are mounted in the Docker context. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "work in progress - python Keras, Tensorflow, or Pytorch implementation of a chatbot or possibly smart-speaker",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/radiodee1/awesome-chatbot/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 9,
+      "date": "Sun, 26 Dec 2021 05:55:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/radiodee1/awesome-chatbot/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "radiodee1/awesome-chatbot",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/vis/tf_t2t_vis.ipynb",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/vis/head_view_gpt2.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_apt_amd64.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_tf_model_server_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_submodule_init_1558M.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_submodule_init.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_gpt2_signal.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_docker_arm32v7.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_rename_train_valid_test.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_submodule_init_774M.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_bert_L_6_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_reddit_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_submodule_init_117M.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_bert_L_12_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_apt_aarch64.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_calc_t2t.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_movie_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_apt_armv7.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_game.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_unpack_text.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_gpt2.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_calc_raw.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_gpt2_wiki.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_calc_gpt2.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_persona_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_transformer_link.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_transformer_arm.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_tf_armv7_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_tf_aarch64_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_transformer.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_calc_gru.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_game_s2s.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_launch_gpt2_apps.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_deepspeech_download.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/do_make_sr_test.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/model/do_launch_tensorboard.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/model/do_make_find_credentials.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/model/do_split_run.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/transformer/do_launch_tensorboard.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/transformer/do_launch_chat_movie_30.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/do_build_amd64.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/do_find_credentials.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/do_build_armv7.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/do_launch_armv7.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/do_launch_amd64.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/scripts/build_tensorflow.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/scripts/do_dind_launch.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/scripts/check-config.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/scripts/wrapdocker.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/docker/scripts/get-docker.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/virtualenv/do_make_virtualenv_use_37.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/virtualenv/do_make_virtualenv_use_36.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/virtualenv/do_make_virtualenv_setup37.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/virtualenv/do_make_virtualenv_setup36.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/classifier/do_make_hundred_bert_train.sh",
+      "https://raw.githubusercontent.com/radiodee1/awesome-chatbot/master/classifier/do_make_hundred_bert_interactive.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Flash the OS to the sd card.\nUse a wire USB-A male to micro USB male to connect to the host machine for the first time.\nUse the command below to setup the Nano for the first time headless.\n\n`sudo screen /dev/ttyACM0 115200`\n\nThe Nano runs python 3.6 in the aarch64 environment. \nLaunch these scripts in order to setup an environment for the gpt2 small model.\nYou will probably need to install sentencepiece from source before installing `transformers`.\n\n```\n$ sudo apt-get install cmake build-essential pkg-config libgoogle-perftools-dev\n$ git clone https://github.com/google/sentencepiece.git\n$ cd sentencepiece\n$ mkdir build\n$ cd build\n$ cmake ..\n$ make -j $(nproc)\n$ sudo make install\n$ sudo ldconfig -v\n```\n\ncontinue\n```\n#:#: install sentencepiece first from source here! #:#:\n$ ./do_make_tf_apt_aarch64.sh\n$ sudo python3 -m pip install -r requirements.aarch64.txt\n$ ./do_make_submodule_init.sh\n```\n\nInstall Pytorch 1.5 for python3.6 from the following forum site.\n\nSite: https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048\n\n```\ncurl https://nvidia.box.com/shared/static/3ibazbiwtkl181n95n9em3wtrca7tdzp.whl -o  torch-1.5.0-cp36-cp36m-linux_aarch64.whl \n```\nThen you can test the model at the command line.\nThis does not ensure text-to-speech or speech-to-text is working.\n\nSome useful pulseaudio commands:\n\n```\nalsamixer #:#: <-- use F6 to find your USB audio\npacmd list-sources\npacmd list-sinks\npacmd set-default-source 0 #:#: <-- 0 is the microphone's index number from the list.\npacmd set-default-sink 0 #:#: <-- this will be some number other than 0\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* This guide assumes you are using a linux computer. It also assumes that if you downloaded the json file from the internet and it was stored in your `Downloads` folder, that you have moved it to the root of your home directory. \n* For convenience I made a folder in my home directory called `bin`. This will be the folder for the json file on my  regular computer.\n* On the Raspberry Pi I navigated to the `/opt` directory and made a folder called `bot`. I placed the json file at `/opt/bot/`.\n* For simplicity I will refer to the json file on my regular computer as `awesome-sr-XXXXXX.json`. In this scheme `awesome-sr` is the name of my project and `XXXXXX` is the hexadecimal number that google appends to the json file name. Because this name is long and the hex digits are hard to type I will copy and paste them when possible as I set up the Bash shell variable.\n* Edit the `.bashrc` file with your favorite editor.\n* Add the following to the  last line of the `.bashrc` file: `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/json/awesome-sr-XXXXXX.json` A link follows that might be helpful: https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable\n* Save the changes.\n* You must exit and re-enter the bash shell in a new terminal for the changes to take effect. After that you should be able to run the `game_sr.py` file. You will be charged for the service.\n* On the Raspberry Pi use the same general technique as above. Edit the `.basshrc` file to contain the line `export GOOGLE_APPLICATION_CREDENTIALS=/opt/bot/awesome-sr-XXXXXX.json` where `XXXXXX` is the hexadecimal label on the json file on the Rapberry Pi. This number will be different from the one on your regular computer.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Here is a list of scripts and their description and possibly their location. It is recommended that you install all the packages in the `requirements.txt` file. You can do this with the command `pip3 install -r requirements.txt`\n* `do_make_movie_download.sh` Download movie subtitles corpus.\n* `do_make_persona_download.sh` Download the persona corpus.\n* `do_make_db_tab_from_cornell_movie.py` Make db file or tab file from movie subtitles corpus. If you make a tab file, separate parts of the file with `do_split.py`. This script is found in the `seq_2_seq` folder.\n* `do_make_tab_file_from_persona.py` Make a tab file from the persona corpus.\n* `do_make_train_test_from_db.py` This file is not located in the root folder of the repository. It is in the subfolder called `seq_2_seq`. Execute this file with one argument, the location of the `input.db` file. The script takes several hours and creates many files in the `data` folder that the individual `seq_2_seq` file will later use for training. These data files are also used to create the vocabulary files that are essential for the model. The `transformer` model, based on the tensorflow t2t repository, can also use these files.\n* `do_make_vocab.py` This file is located in the directory  that the `do_make_train_test_from_db.py` is found in. It takes no arguments. It proceeds to find the most popular words in the training files and makes them into a list of vocabulary words of the size specified by the `settings.py` file. It also adds a token for unknown words and for the start and end of each sentence. If word embeddings are enabled, it will prepare the word embeddings from the GloVe download. The GloVe download does not include contractions, so if it is used no contractions will appear in the `vocab.big.txt` file. The embeddings can be disabled by specifying 'None' for `embed_size` in the `model/settings.py` file. Embeddings can be enabled with some versions of the keras model. The pytorch model is to be used without pre-set embeddings. This script could take hours to run. It puts its vocabulary list in the `data` folder, along with a modified GloVe word embeddings file.\n* `do_make_rename_train_valid_test.sh` This script sets up some links for the corpus files.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8074397854662508
+      ],
+      "excerpt": "Since the file uses bash styled commands, the change to the file can be made with a single line. export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json &amp;&amp; cd /path/to/project/ &amp;&amp; ./do_launch_game.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9535726014069922
+      ],
+      "excerpt": "This is the site: https://github.com/huggingface/pytorch-pretrained-BERT . The version of gpt2 that I'm using is the smaller released version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9785508012582336
+      ],
+      "excerpt": "The version I use for the 'armhf' platform is from the following web site: https://github.com/emacski/tensorflow-serving-arm .  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8780156891225083
+      ],
+      "excerpt": "To do this I had to compile pytorch for armv7 specifically for python 3.7. I did this.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8122607623608313
+      ],
+      "excerpt": "These scripts all have names that start with the word do_ .  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8225770999164425
+      ],
+      "excerpt": "virtualenv This folder has scripts for working with virtual environments. Some of the scipts are more like templates than working programs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8636253863183455
+      ],
+      "excerpt": "* https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8298924944749909
+      ],
+      "excerpt": "Download and install the Google-Cloud-Sdk. This package has the gcloud command.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9463710404121645
+      ],
+      "excerpt": "You must also restart your terminal. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8258889590591852
+      ],
+      "excerpt": "This runs the shutdown script on the Pi. You must install the physical button on pins #05 and #20. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9157445373963107,
+        0.8492451440485044
+      ],
+      "excerpt": "If you intend to use a virtual environment, you must activate it in this line. \nexport VIRTUALENVWRAPPER_PYTHON=$(which python3.7) &amp;&amp; source $(which virtualenvwrapper.sh) &amp;&amp; workon chatbot37 &amp;&amp; sudo python /home/pi/workspace/awesome-chatbot/shutdown.py &amp; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8470587336899782,
+        0.8591215546866241
+      ],
+      "excerpt": "With virtualenv: \nsu pi  -c 'export VIRTUALENVWRAPPER_PYTHON=$(which python3.7) &amp;&amp; source $(which virtualenvwrapper.sh) &amp;&amp; workon chatbot37 &amp;&amp; cd /home/pi/workspace/awesome-chatbot/ &amp;&amp; GOOGLE_APPLICATION_CREDENTIALS=/home/pi/bin/awesome-sr-xxxxxx.json ./do_launch_game_s2s.sh' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8470587336899782
+      ],
+      "excerpt": "With virtualenv: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9623668047804587,
+        0.9386161258456761
+      ],
+      "excerpt": "$ sudo apt-get update \n$ sudo apt-get upgrade \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9201961855226503
+      ],
+      "excerpt": "* cd into the project directory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8291209000618124
+      ],
+      "excerpt": "* Exit bash with the exit command. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8342036495006211
+      ],
+      "excerpt": "* Run ./do_launch_amd64.sh any time to start the image after build. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8147804506026263
+      ],
+      "excerpt": "There are several script files in the main folder along side the folders mentioned above.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8187756456177225
+      ],
+      "excerpt": "Use the Google Cloud Platform Console to create a second project json file for the Raspberry Pi. Go to the Downloads folder and identify the Raspberry Pi json file. Transfer the file to the Pi with a command like scp. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144038021958251
+      ],
+      "excerpt": "Place this line first before all others. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144038021958251
+      ],
+      "excerpt": "Place this line first before all others. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079676447879063
+      ],
+      "excerpt": "One is the api_key.txt file. One is the cse_id.txt file. Wiki search will only \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/radiodee1/awesome-chatbot/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "`awesome-chatbot`",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "awesome-chatbot",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "radiodee1",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/radiodee1/awesome-chatbot/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Sun, 26 Dec 2021 05:55:05 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Jun-Yan Zhu https://github.com/junyanz/CycleGAN\n* Erik Linder-Nor\u00e9n https://github.com/eriklindernoren/Keras-GAN\n* HagopB https://github.com/HagopB/cyclegan\n* Ulyanov et al Instance Normalization: The Missing Ingredient for Fast Stylization https://arxiv.org/pdf/1607.08022.pdf\n* Ahmed Hamada Mohamed Kamel El-Hinidy https://github.com/Ahmkel/Keras-Project-Template\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hollygrimm/cyclegan-keras-art-attrs",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-08-17T00:46:02Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-08T01:43:48Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "CycleGAN with Art Composition Attributes",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Weights can be downloaded with these commands:\n```\nwget --load-cookies /tmp/cookies.txt \"https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1A1FvTA-n7EZrtLx7TD9q3KgF5khpAjVW' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\\1\\n/p')&id=1A1FvTA-n7EZrtLx7TD9q3KgF5khpAjVW\" -O art_composition_cnn_weights.hdf5 && rm -rf /tmp/cookies.txt\n\nsha256sum d922aa82e6e67177915895e34f02e03e89a902d7a15914edcee0c3056f285d24\n```\n\nOr train your own weights using this repository: https://github.com/hollygrimm/art-composition-cnn\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nbash download_dataset.sh apple2orange\n```\n\nMinimum image size for training or predicting is 16x16 pixels (size of Patch-GAN patch). When training your own dataset, the number of images in the trainA folder, should be equal to or less than the number of images in trainB folder.\n\nWith a batch size of 1, here are the maximum image sizes that train on various GPU sizes:\n\n| GPU        | Img Size    | Trains?  |\n|:------------- |:-------------|:-----|\n|2 GiB|320x320|No, OOM|\n|2 GiB|256x256|Yes|\n|12 GiB|1024x1024|No, OOM|\n|12 GiB|768x768|Yes|\n|16 GiB|1280x1280|No, OOM|\n|16 GiB|1024x1024|Yes|\n\nWhen running prediction, here are the maximum predict image sizes for various GPU sizes:\n\n| GPU        | Predict Img Size    | Predicts? |\n|:------------- |:-------------|:-----|\n|2 GiB|1408x1408|No, OOM|\n|2 GiB|1344x1344|Yes|\n|12 GiB|4096x4096|No, OOM|\n|12 GiB|4032x4032|Yes|\n|16 GiB|4832x4832|No, OOM|\n|16 GiB|4816x4816|Yes (a or b, not both)\n|16 GiB|4800x4800|Yes (both)\n\n\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hollygrimm/cyclegan-keras-art-attrs/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 22 Dec 2021 01:54:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hollygrimm/cyclegan-keras-art-attrs/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hollygrimm/cyclegan-keras-art-attrs",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/hollygrimm/cyclegan-keras-art-attrs/master/download_dataset.sh",
+      "https://raw.githubusercontent.com/hollygrimm/cyclegan-keras-art-attrs/master/aws-setup.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nsource activate tensorflow_p36\ngit clone https://www.github.com/keras-team/keras-contrib.git\ncd keras-contrib\npython setup.py install\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Select Deep Learning AMI (Ubuntu) Version 14.0\n* Instance Type `GPU Compute` such as p2.xlarge\n* 125GB sda1\n\nConnect to instance, copy contents of [aws-setup.sh](aws-setup.sh) to file in /home/ubuntu and run:\n```\nvi aws-setup.sh\nchmod +x aws-setup.sh\n./aws-setup.sh\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9452048014747011
+      ],
+      "excerpt": "python main.py -c params/harmony/analogous.json | python main.py -c params/harmony/complementary.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95877351454287
+      ],
+      "excerpt": "python main.py -c params/variety_color/1.json | python main.py -c params/variety_color/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95877351454287
+      ],
+      "excerpt": "python main.py -c params/variety_texture/1.json | python main.py -c params/variety_texture/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95877351454287
+      ],
+      "excerpt": "python main.py -c params/variety_shape/1.json | python main.py -c params/variety_shape/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95877351454287
+      ],
+      "excerpt": "python main.py -c params/variety_size/1.json | python main.py -c params/variety_size/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9402835335363128
+      ],
+      "excerpt": "python main.py -c params/contrast/1.json | python main.py -c params/contrast/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95877351454287
+      ],
+      "excerpt": "python main.py -c params/repetition/1.json | python main.py -c params/repetition/10.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9542734125125946
+      ],
+      "excerpt": "python main.py -c params/pri_color/blue-cyan.json | python main.py -c params/pri_color/yellow.json \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hollygrimm/cyclegan-keras-art-attrs/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright 2018 Holly Grimm.\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CycleGAN on Art Composition Attributes",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cyclegan-keras-art-attrs",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hollygrimm",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hollygrimm/cyclegan-keras-art-attrs/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Error message 'ValueError: axes don't match array' during load_weights unless older version of Keras and keras-contrib installed. See https://stackoverflow.com/questions/51944836/keras-load-model-valueerror-axes-dont-match-array\n\n* Keras\n* keras-contrib\n* pillow\n* imageio\n* pandas\n* matplotlib\n* sklearn\n* Weights from https://github.com/hollygrimm/art-composition-cnn\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nsource activate tensorflow_p36\ncd cyclegan-keras-art-attrs/\npython main.py -c input_params.json\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "after training, update weights_path in input_params_predict.json\n\n```\nsource activate tensorflow_p36\ncd cyclegan-keras-art-attrs/\npython predict.py -c input_params_predict.json\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\ncd tests\npython cyclegan_keras_art_attrs_tests.py\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Wed, 22 Dec 2021 01:54:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "cyclegan",
+      "cyclegan-keras",
+      "deep-learning",
+      "neural-network",
+      "keras"
+    ],
+    "technique": "GitHub API"
+  }
+}

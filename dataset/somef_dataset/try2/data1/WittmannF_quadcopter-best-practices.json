@@ -1,0 +1,417 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9262817537700196
+      ],
+      "excerpt": "ax.scatter(results['x'], results['y'], results['z']) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9648876536464102,
+        0.9243188970772274,
+        0.9243188970772274,
+        0.9243188970772274
+      ],
+      "excerpt": "    pose = task.sim.pose[:3] \n    self.X.append(pose[0]) \n    self.Y.append(pose[1]) \n    self.Z.append(pose[2]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693,
+        0.8751772600833906
+      ],
+      "excerpt": "    if i_episode: \n        plt.title(\"Episode {}\".format(i_episode)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993651318321566
+      ],
+      "excerpt": "        self.ax.scatter(pose[0], pose[1], pose[2], c='r', marker='*', linewidths=5) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993651318321566
+      ],
+      "excerpt": "        self.ax.scatter(pose[0], pose[1], pose[2], c='k', marker='s', linewidths=5) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8043073075947367
+      ],
+      "excerpt": "if done: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9774894434709585
+      ],
+      "excerpt": "reward_function = lambda pose, target_pos: 1.-.3*(abs(pose - target_pos)).sum() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "target_pos = [0, 10] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8729352401565182
+      ],
+      "excerpt": "reward_function = lambda pose, target_pos: np.clip(2.-.25*(eucl_distance(pose, target_pos)), -1, 1) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/WittmannF/quadcopter-best-practices",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-02T21:14:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-28T05:03:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.810203149913012
+      ],
+      "excerpt": "Use those two lines of code in order to reload the python packages that are being used: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8475621105330261,
+        0.8929637714575285,
+        0.960089859189186,
+        0.9583952361673634,
+        0.9316039810944235,
+        0.8229743967509223,
+        0.96058439281556
+      ],
+      "excerpt": "Ideally the reward function should be normalized between -1 and 1 (except for colisions) in order to the NN better learn the gradients. The hyperbolic tangent function np.tanh can be used for this purpose. \nCheck the learning rate parameter in Adam(lr=...). Lower learning rates might lead to better learning results. \nIn order to debug the agent, after training it is highly advisable to visualize it. Check the Visualization section.  \nAlso try to visualize the reward function as a heatmap in order to better debug it. Check the visualization section as well.  \nKeep in mind that the z = 0 is considered the floor.  \nDon\u2019t initialize the agent on z=0 since it can be too unstable to fly and easily crash. \nWhen flying, it is important to avoid crashes by penalizing colisions to the floor. The penalization has to be very high in order to compensate the accumulated positive reward. You don\u2019t need to keep it between -1 and 1. Here\u2019s an example on how this can be done: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8063298619208632,
+        0.884155391232499,
+        0.903727145707538,
+        0.8277506097007398,
+        0.9089995115653638,
+        0.9877943671900683,
+        0.9141869738324037
+      ],
+      "excerpt": "- It was reported that increasing the hyperparameter tau might help in the convergence. \n- You can choose one of 4 tasks: takeoff, hover in place, land softly, or reach a target pose. Usually the easiest task to get started is the takeoff.  \n    - For the takeoff task, set the reward to a distance slightly higher than the start position(like z=20), and give a generous reward once its position is higher than the target \n    - For the hovering task keep in mind that 1/rpm can make a huge difference between the agent going up or down. Try lowering the minimum and maximum speed range.  \n    - For the landing taks, try to include the speed in the reward function. Ideally you should reward very low speed when the agent is close to the origin.  \n    - For reaching a target pose, it is important to make the agent aknowledge when it reached the destination and finalize the episode when this happens. Please check the first answer of this reference for more details (mirror).  \n- It might be too unstable for the agent to learn to control the exact position of x, y and z with only 1000 iterations. You can try focus on the z axis first (by adjusting the reward function on this) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8932850728194933
+      ],
+      "excerpt": "In order to make it work, you have to create an instance of the class before the while loop and inside the while loop, you have to call the method plot. Here\u2019s an example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8529031581874141
+      ],
+      "excerpt": "It is also best practices to visualize the reward function in terms of its inputs. Here's one example based on the default reward function provided in the source code: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076,
+        0.9560187895509076
+      ],
+      "excerpt": "    for xx in x: \n        for yy in y: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.933251503408783
+      ],
+      "excerpt": "This way it is easier to play with alternative possibilities. For example, instead of a linear distance we can use an Euclidean distance: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[Unofficial] Udacity's How to Train a Quadcopter Best Practices",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/WittmannF/quadcopter-best-practices/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 28 Dec 2021 17:20:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/WittmannF/quadcopter-best-practices/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WittmannF/quadcopter-best-practices",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9204365296776966
+      ],
+      "excerpt": "%matplotlib notebook \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9204365296776966
+      ],
+      "excerpt": "%matplotlib notebook \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8017391419767956
+      ],
+      "excerpt": "In order to better debug how your agent is performing after training, you should visualize it. The plot can be as simple as a x, y, z versus time. Here\u2019s an example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9068127677393759
+      ],
+      "excerpt": "import matplotlib.pyplot as plt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8604538609984971,
+        0.8604538609984971,
+        0.8604538609984971
+      ],
+      "excerpt": "plt.plot(results['time'], results['x'], label='x') \nplt.plot(results['time'], results['y'], label='y') \nplt.plot(results['time'], results['z'], label='z') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from mpl_toolkits.mplot3d import Axes3D \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8125220434818017,
+        0.8215348752096903
+      ],
+      "excerpt": "ax = fig.add_subplot(111, projection='3d') \nax.scatter(results['x'], results['y'], results['z']) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9068127677393759,
+        0.8149645089418173
+      ],
+      "excerpt": "from mpl_toolkits.mplot3d import Axes3D \nimport matplotlib.pyplot as plt \n: Make sure to change from notebook to inline after your tests \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8396948529258378
+      ],
+      "excerpt": "import time \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8039290325194929
+      ],
+      "excerpt": "def plot(self, task, i_episode=None): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.820111944518547
+      ],
+      "excerpt": "    self.ax.clear() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.809726610547402
+      ],
+      "excerpt": "while True: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134
+      ],
+      "excerpt": "import numpy as np \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012248701992861
+      ],
+      "excerpt": "import seaborn as sns \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941439145028235
+      ],
+      "excerpt": "    R = pd.DataFrame(np.zeros([len(x), len(y)]), index=y, columns=x) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9110338600251059,
+        0.9015827166966363,
+        0.9338333410011042
+      ],
+      "excerpt": "x_range = np.round(np.arange(-10.0,10,0.1), 2) \nz_range = np.round(np.arange(20,0,-0.1), 2) \ntarget_pos = np.array([0, 10]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9000107903124189,
+        0.8238529575405381,
+        0.8238529575405381
+      ],
+      "excerpt": "ax = sns.heatmap(R) \nax.set_xlabel(\"Position X-axis\") \nax.set_ylabel(\"Position Z-axis\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9161669502700203,
+        0.9161669502700203
+      ],
+      "excerpt": "x_range = np.round(np.arange(0.0,10,0.1), 2) \nz_range = np.round(np.arange(10,0,-0.1), 2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8997243352845468
+      ],
+      "excerpt": "eucl_distance = lambda a, b: np.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/WittmannF/quadcopter-best-practices/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# (Unofficial) Udacity's How to Train a Quadcopter Best Practices",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "quadcopter-best-practices",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WittmannF",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/WittmannF/quadcopter-best-practices/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Tue, 28 Dec 2021 17:20:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Since the DDPG algorithm is already provided, your main goal is to define the reward function to make the agent learn your choice of task. The DDPG is in the sections 3 to 8, below the workspace:\n\n![Screen Shot 2019-03-23 at 19.23.37.png](https://udacity-reviews-uploads.s3.us-west-2.amazonaws.com/_attachments/38140/1553394389/Screen_Shot_2019-03-23_at_19.23.37.png)\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

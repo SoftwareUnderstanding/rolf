@@ -1,0 +1,331 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2103.00020"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "      turtle: 12.29% \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": ": Perform logistic regression \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/CLIP",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-16T11:24:42Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-29T03:20:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8989238877282901,
+        0.988525847184422
+      ],
+      "excerpt": "[Blog] [Paper] [Model Card] [Colab] \nCLIP (Contrastive Language-Image Pre-Training) is a neural network trained on a variety of (image, text) pairs. It can be instructed in natural language to predict the most relevant text snippet, given an image, without directly optimizing for the task, similarly to the zero-shot capabilities of GPT-2 and 3. We found CLIP matches the performance of the original ResNet50 on ImageNet \u201czero-shot\u201d without using any of the original 1.28M labeled examples, overcoming several major challenges in computer vision. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8615333324739484,
+        0.9055905570882284,
+        0.8805884804551557,
+        0.9456423927311008,
+        0.9926619164183645,
+        0.9349918607037148
+      ],
+      "excerpt": "The device to run the model can be optionally specified, and the default is to use the first CUDA device if there is any, otherwise the CPU. When jit is False, a non-JIT version of the model will be loaded. \nReturns a LongTensor containing tokenized sequences of given text input(s). This can be used as the input to the model \nThe model returned by clip.load() supports the following methods: \nGiven a batch of images, returns the image features encoded by the vision portion of the CLIP model. \nGiven a batch of text tokens, returns the text features encoded by the language portion of the CLIP model. \nGiven a batch of images and a batch of text tokens, returns two Tensors, containing the logit scores corresponding to each image and text input. The values are cosine similarities between the corresponding image and text features, times 100. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8819907518538044,
+        0.9481686009874342,
+        0.8930901044020226
+      ],
+      "excerpt": "image_input = preprocess(image).unsqueeze(0).to(device) \ntext_inputs = torch.cat([clip.tokenize(f\"a photo of a {c}\") for c in cifar100.classes]).to(device) \n: Calculate features \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.860059181823877
+      ],
+      "excerpt": "    image_features = model.encode_image(image_input) \n    text_features = model.encode_text(text_inputs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9393523617364072,
+        0.9569688987580386
+      ],
+      "excerpt": "Note that this example uses the encode_image() and encode_text() methods that return the encoded features of given inputs. \nThe example below uses scikit-learn to perform logistic regression on image features. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8904471431042623,
+        0.8930901044020226
+      ],
+      "excerpt": "        features = model.encode_image(images.to(device)) \n        all_features.append(features) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9232624187536992
+      ],
+      "excerpt": ": Calculate the image features \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Contrastive Language-Image Pretraining",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/CLIP/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 737,
+      "date": "Wed, 29 Dec 2021 03:58:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/openai/CLIP/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "openai/CLIP",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/openai/CLIP/main/notebooks/Prompt_Engineering_for_ImageNet.ipynb",
+      "https://raw.githubusercontent.com/openai/CLIP/main/notebooks/Interacting_with_CLIP.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8401558704798054,
+        0.9133368656218674
+      ],
+      "excerpt": "import os \nimport clip \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8757982359298006
+      ],
+      "excerpt": "from torchvision.datasets import CIFAR100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309391638231081,
+        0.8956930752400422
+      ],
+      "excerpt": ": Download the dataset \ncifar100 = CIFAR100(root=os.path.expanduser(\"~/.cache\"), download=True, train=False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "image_features /= image_features.norm(dim=-1, keepdim=True) \ntext_features /= text_features.norm(dim=-1, keepdim=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9318586238188387,
+        0.882931430232575,
+        0.8083324414662458,
+        0.912917026795244
+      ],
+      "excerpt": ": Print the result \nprint(\"\\nTop predictions:\\n\") \nfor value, index in zip(values, indices): \n    print(f\"{cifar100.classes[index]:>16s}: {100 * value.item():.2f}%\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401558704798054,
+        0.9133368656218674
+      ],
+      "excerpt": "import os \nimport clip \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8801854956928516,
+        0.8878193409743138,
+        0.8757982359298006
+      ],
+      "excerpt": "import numpy as np \nfrom sklearn.linear_model import LogisticRegression \nfrom torch.utils.data import DataLoader \nfrom torchvision.datasets import CIFAR100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8863552773035349,
+        0.9015052263449577
+      ],
+      "excerpt": "train = CIFAR100(root, download=True, train=True, transform=preprocess) \ntest = CIFAR100(root, download=True, train=False, transform=preprocess) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137,
+        0.8633989807152664
+      ],
+      "excerpt": "train_features, train_labels = get_features(train) \ntest_features, test_labels = get_features(test) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8072062611019861,
+        0.8908676726348917
+      ],
+      "excerpt": "predictions = classifier.predict(test_features) \naccuracy = np.mean((test_labels == predictions).astype(np.float)) * 100. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/openai/CLIP/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 OpenAI\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CLIP",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CLIP",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "openai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/CLIP/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5725,
+      "date": "Wed, 29 Dec 2021 03:58:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:\n\n```bash\n$ conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0\n$ pip install ftfy regex tqdm\n$ pip install git+https://github.com/openai/CLIP.git\n```\n\nReplace `cudatoolkit=11.0` above with the appropriate CUDA version on your machine or `cpuonly` when installing on a machine without a GPU.\n\n```python\nimport torch\nimport clip\nfrom PIL import Image\n\ndevice = \"cuda\" if torch.cuda.is_available() else \"cpu\"\nmodel, preprocess = clip.load(\"ViT-B/32\", device=device)\n\nimage = preprocess(Image.open(\"CLIP.png\")).unsqueeze(0).to(device)\ntext = clip.tokenize([\"a diagram\", \"a dog\", \"a cat\"]).to(device)\n\nwith torch.no_grad():\n    image_features = model.encode_image(image)\n    text_features = model.encode_text(text)\n    \n    logits_per_image, logits_per_text = model(image, text)\n    probs = logits_per_image.softmax(dim=-1).cpu().numpy()\n\nprint(\"Label probs:\", probs)  #: prints: [[0.9927937  0.00421068 0.00299572]]\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

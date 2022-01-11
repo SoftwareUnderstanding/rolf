@@ -1,0 +1,298 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The basis for this repository was [pytorch-cifar](https://github.com/kuangliu/pytorch-cifar).\nWe make use of [torchlars](https://github.com/kakaobrain/torchlars).\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2002.05709"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{chen2020simple,\n  title={A simple framework for contrastive learning of visual representations},\n  author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},\n  journal={arXiv preprint arXiv:2002.05709},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9392901210467604
+      ],
+      "excerpt": "CIFAR-100 and STL-10. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ae-foster/pytorch-simclr",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-20T14:55:53Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T06:33:46Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This is an *unofficial* [PyTorch](https://github.com/pytorch/pytorch) implementation of the recent\n paper ['A Simple Framework for Contrastive Learning of Visual \nRepresentations'](https://arxiv.org/pdf/2002.05709.pdf). The arXiv version of this paper can be cited as\n```\n@article{chen2020simple,\n  title={A simple framework for contrastive learning of visual representations},\n  author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},\n  journal={arXiv preprint arXiv:2002.05709},\n  year={2020}\n}\n```\nThe focus of this repository is to accurately reproduce the results in the paper using PyTorch. We use the original\npaper and the official [tensorflow repo](https://github.com/google-research/simclr) as our sources.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8526619928010598,
+        0.8957633136972384
+      ],
+      "excerpt": "For comparison with the original paper, we use the CIFAR-10 and  \nILSVRC2012 datasets. This PyTorch version also supports  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9414725480456562
+      ],
+      "excerpt": " - Random crop and resize. We use RandomResizedCrop in PyTorch with cubic interpolation for the resizing. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9644849353076256,
+        0.9845191727859837
+      ],
+      "excerpt": " - Stem adapted to the dataset, for details see models/resnet.py. We adapt the stem for CIFAR in the same way as \n   the original paper: replacing the first 7\u00d77 Conv of stride 2 with 3\u00d73 Conv of stride 1, and also removing the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8030181620237914
+      ],
+      "excerpt": "The projection head consists of the following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8567486735227966,
+        0.8836402583397226,
+        0.9193823827454077,
+        0.8374951617565737
+      ],
+      "excerpt": " - Following the tensorflow code, we also include batch norm in the projection head \nWe use the NT-Xent loss of the original paper. Specifically, we calculate the CosineSimilarity (using PyTorch's \nimplementation) between each of the 2N projected representations z. We rescale these similarities by temperature. \nWe set the diagonal similarities to -inf and treat the one remaining positive example as the correct category in a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8732810195430886,
+        0.9138051650481629
+      ],
+      "excerpt": "We use the LARS optimizer with trust_coef=1e-3 to match the tensorflow code. We set the weight decay to 1e-6. \nThe 10 epoch linear ramp and cosine annealing of the original paper are implemented and can be activated using \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9429420429211438,
+        0.981601879250858,
+        0.9021047307165703,
+        0.9717484739769412
+      ],
+      "excerpt": "On CIFAR-10, we fitted the downstream classifier using L-BFGS with no augmentation on the training set. This is the \napproach used in the original paper for transfer learning (and is substantially faster for small datasets). \nFor ImageNet, we use SGD with the same random resized crop and random flip as for the original training, but no \ncolour distortion or other augmentations. This is as in the original paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259,
+        0.8979411005071259,
+        0.8979411005071259
+      ],
+      "excerpt": "    \"cifar10\": \"/data/cifar10/\", \n    \"cifar100\": \"/data/cifar100/\", \n    \"stl10\": \"/data/stl10/\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8343873087549893,
+        0.995464765962047
+      ],
+      "excerpt": "We not use Gaussian blur for any datasets, including ILSVRC2012. \nWe are not aware of any other discrepancies with the original work, but any correction is more than welcome and  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A PyTorch reproduction of 'A Simple Framework for Contrastive Learning of Visual Representations' by Ting Chen, et al.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ae-foster/pytorch-simclr/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Wed, 29 Dec 2021 00:05:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ae-foster/pytorch-simclr/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ae-foster/pytorch-simclr",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8709631831019518
+      ],
+      "excerpt": "ILSVRC2012 datasets. This PyTorch version also supports  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8862760935570431
+      ],
+      "excerpt": "following changes: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ae-foster/pytorch-simclr/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Adam Foster\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Reproducing SimCLR in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pytorch-simclr",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ae-foster",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ae-foster/pytorch-simclr/blob/simclr-master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "See `requirements.txt`. Note we require the [torchlars](https://github.com/kakaobrain/torchlars) package.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Use the following command to train an encoder from scratch on CIFAR-10\n```\n$ python3 simclr.py --num-epochs 1000 --cosine-anneal --filename output.pth --base-lr 1.5\n```\nTo evaluate the trained encoder using L-BFGS across a range of regularization parameters\n```\n$ python3 lbfgs_linear_clf.py --load-from output.pth\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Use the following command to train an encoder from scratch on ILSVRC2012\n```\n$ python3 simclr.py --num-epochs 1000 --cosine-anneal --filename output.pth --test-freq 0 --num-workers 32 --dataset imagenet \n```\nTo evaluate the trained encoder, use\n```\n$ python3 gradient_linear_clf.py --load-from output.pth --nesterov --num-workers 32\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 25,
+      "date": "Wed, 29 Dec 2021 00:05:45 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] Tisse Augmentation - https://www.ncbi.nlm.nih.gov/pubmed/28094850\n\n[2] Conditional Generative Adversarial and Convolutional Networks for X-ray Breast Mass Segmentation and Shape Classification - https://arxiv.org/pdf/1805.10207.pdf\n\n[3] CBIS-DDSM Dataset https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM\n\n[4] U-Net https://arxiv.org/pdf/1505.04597.pdf\n\n[5] SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation - https://arxiv.org/pdf/1511.00561.pdf\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Violet981/Breast_mass_Segmentation",
+    "technique": "GitHub API"
+  },
+  "contributor": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Ankit Chadha (ankitrc@stanford.edu) and Rewa Sood (rrsood@stanford.edu)\nThis work is an extension of the work we had done for CS229.\n\n![GAN for breast mammography](https://github.com/ankit-ai/GAN_breast_mammography_segmentation/blob/master/images/Screen%20Shot%202019-01-06%20at%209.47.40%20PM.png)\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-02T15:01:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T10:29:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```You can run the model and the harness around it using:\npython main.py\n\nRun evaluate over your test set\npython main.py --mode=evaluate\n\nConfiguration: config.py \n\nconfig.TRAIN.batch_size = 8 #:Training batch size\n\nconfig.TRAIN.lr_init = 1e-4 #:Initial Learning Rate\n\nconfig.TRAIN.beta1 = 0.9 #:Beta1 parameter for batch normalization\n\nconfig.TRAIN.n_epoch_init = 35 #:Number of epochs to run the generator before adversarial training\n\nconfig.TRAIN.n_epoch = 56 #:Number of Epochs of Adversarial training\nconfig.TRAIN.lr_decay = 0.1 #:Learning rate decay through adversarial training\nconfig.TRAIN.decay_every = int(config.TRAIN.n_epoch / 2) \n\nconfig.TRAIN.hr_img_path = '../train_data_out_2'\nconfig.TRAIN.lr_img_path = '../train_data_in'\n\nconfig.VALID.hr_img_path = '../test_data_out_2/'\nconfig.VALID.lr_img_path = '../test_data_in/'\n```\n\nTRAIN.hr_img_path is the groundtruth path and TRAIN.lr_img_path is the input image path. In our case these are 128x128 slices of input image and binary masks.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9985553207526381,
+        0.8776017048966647
+      ],
+      "excerpt": "This repository contains code for SegNet-cGAN and UNET-cGAN for Breast Mammography Segmentation and also a discussion of the results we were able to achieve with our implementation. \nThis repo is originated from GAN_breast_mammography_segmentation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.879574407484415
+      ],
+      "excerpt": "Some samples of the training/testing images are also uploaed in train_data_in/train_data_out/test_data_in/test_data_out \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9762412409375094,
+        0.9942802033034279
+      ],
+      "excerpt": "The DDSM is a database of 2,620 scanned film mammography studies. \nSince our problem is becomes challenging with very limited number of samples, we resorted to data augmentation without changing underlying pathology information of the image.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8874366401279615
+      ],
+      "excerpt": "The above poster shows results for training the UNet without adversarial training. We extended the UNet and SegNet with adversarial training to generate more precise masks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Originated from https://github.com/ankit-ai/GAN_breast_mammography_segmentation. Changed the training dataset from CBIS-DDSM to INbreast. Little modification on the original one.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Violet981/Breast_mass_Segmentation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Mon, 27 Dec 2021 02:02:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Violet981/Breast_mass_Segmentation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Violet981/Breast_mass_Segmentation",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8172105256505188,
+        0.812542286654075,
+        0.9366689909217384
+      ],
+      "excerpt": "Some codes in the original main.py file were anotated however they were essential to make it. Little changes in the main.py file. \n102 pairs of mammography and mask images were obtained from INbreast dataset. Since it is not enough, I used Keras ImageDataGenerator to get 20052 images to train. Something needed to be noticed: the code in the main.py requires the number of training images minus 4 to be the multiple of batch number(which is 8 in the default setting). For example, (20052 - 4) % 8 = 0. You can find it in line 232. \nUsing python main.py --mode=evaluate to have a test. The output of test results are stored in /sample/evaluate.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8556026545429551
+      ],
+      "excerpt": "| Model        | Dice           | model filename  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.9336801098518991
+      ],
+      "excerpt": "| SegNet-cGAN      | 89% | model_vae.py | \n| Unet-cGAN      | 86.3%      |   unet_tf.py | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Violet981/Breast_mass_Segmentation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Pixel wise Breast Mammography Image Segmentation using Generative Adversarial Networks",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Breast_mass_Segmentation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Violet981",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Violet981/Breast_mass_Segmentation/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Mon, 27 Dec 2021 02:02:41 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

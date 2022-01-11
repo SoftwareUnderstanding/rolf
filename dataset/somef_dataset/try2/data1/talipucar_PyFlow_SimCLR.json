@@ -1,0 +1,480 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use this work in your own studies, and work, you can cite it by using the following:\n```\n@Misc{talip_ucar_2021_simclr,\n  author =   {Talip Ucar},\n  title =    {{Pytorch implementation of SimCLR}},\n  howpublished = {\\url{https://github.com/talipucar/PyFlow_SimCLR}},\n  month        = Jan,\n  year = {since 2021}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@Misc{talip_ucar_2021_simclr,\n  author =   {Talip Ucar},\n  title =    {{Pytorch implementation of SimCLR}},\n  howpublished = {\\url{https://github.com/talipucar/PyFlow_SimCLR}},\n  month        = Jan,\n  year = {since 2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8234277363611612
+      ],
+      "excerpt": "Pytorch implementation of SimCLR (https://arxiv.org/pdf/2002.05709.pdf) with custom Encoder.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "Experiment tracking \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9023511844090581
+      ],
+      "excerpt": "Citing this repo \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "  - [32,  64, 5, 2, 1, 1]          \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "|   Baseline    |     0.64      |     0.32     |     0.44      |     0.40     | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/talipucar/PyFlow_SimCLR",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-08T11:19:58Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-13T10:01:18Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1) Data \nWhen you run training script, it automatically downloads and saves the data if it is not downloaded already.\n\n\n2) Installation of required packages:\n```\npip install pipenv          #: To install pipenv if you don't have it already\npipenv shell                #: To activate virtual env\npipenv install --skip-lock  #: To install required packages. \n```\n\n3) Training and evaluation of the models:\n```\n  I) python 0_train.py                              #: Train autoencoder using default dataset STL10\n II) python 1_eval.py -d \"CIFAR10\" -img 32          #: Evaluations using CIFAR10 dataset\n```\nIf you want to train on another dataset, you can simply define it:\n```\npython 0_train.py -d \"dataset_name\" -img image_size\n```\n\nIf you want to use Python 3.7, please follow the steps described in [Important Note](#important-note).\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "Tricks and Warnings \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9031257779014298,
+        0.942828599211031
+      ],
+      "excerpt": "It supports 3 models: \nA custom CNN-based encoder model is provided, and its architecture is defined in  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8086624387020831
+      ],
+      "excerpt": "Architecture is agnostic to input image size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8297900642084867
+      ],
+      "excerpt": "is not able to detect GPU even if it is available. In general, just make sure that your torch modules are compatible with the particular cuda driver installed on your machine. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8425622167889765
+      ],
+      "excerpt": "This is also where you define whether you want to track experiments using MLFlow, random seed to use, whether to use distributed training (not implemented, just a placeholder for now), and paths for data and results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8040818323508391
+      ],
+      "excerpt": "To fine-tune on STL10. You can choose to define the dataset when fine-tuning: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8675085760876436
+      ],
+      "excerpt": "Logistic regression model is trained, using representations extracted from Encoder using training set of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9398330716438345,
+        0.894229248407486,
+        0.9511861381162557
+      ],
+      "excerpt": "PCA is used to reduce the dimensionality so that the feature \ndimension is same as that of representations from Encoder (to be a fair comparison).  \nLogistic regression model is trained, using data obtained using PCA, the results are reported on both training and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "             |-model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9424422823743132,
+        0.8841591366785108,
+        0.8843587728409552,
+        0.9104075301251529
+      ],
+      "excerpt": "The model with custom encoder (i.e. no resnet backbone) is trained on STL10 dataset with default hyper-parameters (no optimization).  \nFollowing results compare performances using extraxted features via PCA and via trained Model in linear classification task on  \nSTL10, and CIFAR10 (transfer learning) datasets. \nPerformance of SimCLR with small, custom encoder with default hyper-parameters, trained on STL10: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9347598356314282
+      ],
+      "excerpt": "Performance of SimCLR with custom encoder (trained on STL10) on classification task on STL10 and CIFAR10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9210661529945733,
+        0.9342268845270882
+      ],
+      "excerpt": "Performance of SimCLR with ResNet50 with default hyper-parameters, trained on STL10: \n- Training time:  779 minutes on a single GPU with batch size of 256 for 100 epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9480665144430743
+      ],
+      "excerpt": "Performance of SimCLR with ResNet50 (trained on STL10) on classification task on STL10 and CIFAR10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8711964728176304
+      ],
+      "excerpt": "Note: For baseline PCA performance, the dimension of projection was 128 (same as the projection head in the SimCLR models to keep the comparison fair). If we increased PCA dimension to 512, we would get: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911434680857629
+      ],
+      "excerpt": "MLFlow is used to track experiments. It is turned off by default, but can be turned on by changing option in  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9599186737626655
+      ],
+      "excerpt": "SimCLR is not stable when trained with small batch size. However, the model converges much faster with smaller batch sizes. So, you can try to keep batch size small enough to converge faster, but big enough to keep the training stable. You can also try to dynamically change batch size during the training for fast convergence at the beginning of training, and stability for the rest of the training. Batch size of 512 might be a good trade-off when training STL10. For other datasets, you need to experiment with hyper-parameters to see what works the best. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Pytorch implementation of the paper, \"A Simple Framework for Contrastive Learning of Visual Representations\", or SimCLR, https://arxiv.org/pdf/2002.05709.pdf ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/talipucar/PyFlow_SimCLR/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 17:37:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/talipucar/PyFlow_SimCLR/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "talipucar/PyFlow_SimCLR",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/talipucar/PyFlow_SimCLR/main/feeling_lazy.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8805413350901162
+      ],
+      "excerpt": "You can define which one to use by defining model_mode in (\"./config/runtime.yaml\"). For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9855597806818528,
+        0.9990129395466854,
+        0.9730584876655555,
+        0.9982473972247818,
+        0.9172551290642518,
+        0.9968545083699065,
+        0.8883327999111242,
+        0.9995643732523932,
+        0.9976915524294866,
+        0.8915271965647691
+      ],
+      "excerpt": "It is tested with Python 3.7, or 3.8. You can set up the environment by following three steps: \n1. Install pipenv using pip \n2. Activate virtual environment \n3. Install required packages  \nRun following commands in order to set up the environment: \npip install pipenv             #: To install pipenv if you don't have it already \npipenv shell                   #: To activate virtual env \npipenv install --skip-lock     #: To install required packages. \nIf the last step causes issues, you can install packages defined in Pipfile by using pip i.e. \"pip install package_name\" one by one. \nIf you want to use Python 3.7, follow these steps: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9541179098150737,
+        0.964525506099541,
+        0.983740791831395
+      ],
+      "excerpt": "- Install the packages as described above in 3 steps. \n- Pip install torch and torchvision using following command line: \npip install torch==1.5.0+cu101 torchvision==0.6.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8754503159674982
+      ],
+      "excerpt": "is not able to detect GPU even if it is available. In general, just make sure that your torch modules are compatible with the particular cuda driver installed on your machine. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309006183242424
+      ],
+      "excerpt": "You can train the model using any supported dataset. For now, STL10 is recommended to use. The more datasets will be  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.943505796473746
+      ],
+      "excerpt": "To pre-train the model using STL10 dataset, you can use following command: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885391741967808
+      ],
+      "excerpt": "If you already have a pre-trained model, you can fine-tune it by using following command: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8471237833806575,
+        0.8778487586960795
+      ],
+      "excerpt": "yaml file of the model (\"./config/contrastive_encoder.yaml\").  \nExample:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python 0_train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8703418010718866
+      ],
+      "excerpt": "python 0_train.py -d \"dataset_name\" -img image_size \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9483418594369847
+      ],
+      "excerpt": "python 0_train.py -t True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9215303632136923
+      ],
+      "excerpt": "python 0_train.py -d \"dataset_name\" -img image_size  -t True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8038093310071157
+      ],
+      "excerpt": "Raw images of specified dataset is reshaped to a 2D array.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "    |-training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8599157455504824
+      ],
+      "excerpt": "Note that model_mode corresponds to the model defined as a yaml file. For example, contrastive_encoder.yaml is saved under /config, and pointed to in runtime.yaml file so that the script uses this particular architecture & hyper-parameters, and saves the results under a folder with the same name. You can write your own custom config files, and point to them in runtime.yaml \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9213716497003656
+      ],
+      "excerpt": "                |     Train     |    Test      |     Train     |    Test      | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9213716497003656
+      ],
+      "excerpt": "                |     Train     |    Test      |     Train     |    Test      | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9213716497003656
+      ],
+      "excerpt": "                |     Train     |    Test      |     Train     |    Test      | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/talipucar/PyFlow_SimCLR/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyFlow_SimCLR:",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyFlow_SimCLR",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "talipucar",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/talipucar/PyFlow_SimCLR/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Once you have a trained model, you can evaluate the model performance on any dataset. Correct image size should be provided\nwith corresponding dataset to get correct results since the model architecture is agnostic to image size and will not flag\nerror if correct image size is not specified.\n\nTwo examples: \n1. Evaluating on STL10\n```\npython 1_eval.py -d \"STL10\" -img 96\n```\n2. Evaluating on CIFAR10\n```\npython 1_eval.py -d \"CIFAR10\" -img 32\n```\n\nFor further details on what arguments you can use (or to add your own arguments), you can check out \"/utils/arguments.py\"\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Wed, 29 Dec 2021 17:37:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "simclr",
+      "self-supervised-learning",
+      "self-supervised",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  }
+}

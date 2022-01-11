@@ -1,0 +1,777 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1908.07442.) https://arxiv.org/pdf/1908.07442.pdf.\n\n[![CircleCI](https://circleci.com/gh/dreamquark-ai/tabnet.svg?style=svg)](https://circleci.com/gh/dreamquark-ai/tabnet)\n\n[![PyPI version](https://badge.fury.io/py/pytorch-tabnet.svg)](https://badge.fury.io/py/pytorch-tabnet)\n\n![PyPI - Downloads](https://img.shields.io/pypi/dm/pytorch-tabnet)\n\nAny questions ? Want to contribute ? To talk with us ? You can join us on [Slack](https://join.slack.com/t/mltooling/shared_invite/zt-fxaj0qk7-SWy2_~EWyhj4x9SD6gbRvg)\n\n# Installation\n\n## Easy installation\nYou can install using pip by running:\n`pip install pytorch-tabnet`\n\n## Source code\nIf you wan to use it locally within a docker container:\n\n- `git clone git@github.com:dreamquark-ai/tabnet.git`\n\n- `cd tabnet` to get inside the repository\n\n-----------------\n#### CPU only\n- `make start` to build and get inside the container\n\n#### GPU\n- `make start-gpu` to build and get inside the GPU container\n\n-----------------\n- `poetry install` to install all the dependencies, including jupyter\n\n- `make notebook` inside the same terminal. You can then follow the link to a jupyter notebook with tabnet installed.\n\n# Contributing\n\nWhen contributing to the TabNet repository, please make sure to first discuss the change you wish to make via a new or already existing issue.\n\nOur commits follow the rules presented [here](https://www.conventionalcommits.org/en/v1.0.0/).\n\n# What problems does pytorch-tabnet handle?\n\n- TabNetClassifier : binary classification and multi-class classification problems\n- TabNetRegressor : simple and multi-task regression problems\n- TabNetMultiTaskClassifier:  multi-task multi-classification problems\n\n# How to use it?\n\nTabNet is now scikit-compatible, training a TabNetClassifier or TabNetRegressor is really easy.\n\n```python\nfrom pytorch_tabnet.tab_model import TabNetClassifier, TabNetRegressor\n\nclf = TabNetClassifier()  #TabNetRegressor()\nclf.fit(\n  X_train, Y_train,\n  eval_set=[(X_valid, y_valid)]\n)\npreds = clf.predict(X_test)\n```\n\nor for TabNetMultiTaskClassifier :\n\n```python\nfrom pytorch_tabnet.multitask import TabNetMultiTaskClassifier\nclf = TabNetMultiTaskClassifier()\nclf.fit(\n  X_train, Y_train,\n  eval_set=[(X_valid, y_valid)]\n)\npreds = clf.predict(X_test)\n```\n\nThe targets on `y_train/y_valid` should contain a unique type (e.g. they must all be strings or integers).\n\n### Default eval_metric\n\nA few classic evaluation metrics are implemented (see further below for custom ones):\n- binary classification metrics : 'auc', 'accuracy', 'balanced_accuracy', 'logloss'\n- multiclass classification : 'accuracy', 'balanced_accuracy', 'logloss'\n- regression: 'mse', 'mae', 'rmse', 'rmsle'\n\n\nImportant Note : 'rmsle' will automatically clip negative predictions to 0, because the model can predict negative values.\nIn order to match the given scores, you need to use `np.clip(clf.predict(X_predict), a_min=0, a_max=None)` when doing predictions.\n\n\n### Custom evaluation metrics\n\nYou can create a metric for your specific need. Here is an example for gini score (note that you need to specifiy whether this metric should be maximized or not):\n\n```python\nfrom pytorch_tabnet.metrics import Metric\nfrom sklearn.metrics import roc_auc_score\n\nclass Gini(Metric):\n    def __init__(self):\n        self._name = \"gini\"\n        self._maximize = True\n\n    def __call__(self, y_true, y_score):\n        auc = roc_auc_score(y_true, y_score[:, 1])\n        return max(2*auc - 1, 0.)\n\nclf = TabNetClassifier()\nclf.fit(\n  X_train, Y_train,\n  eval_set=[(X_valid, y_valid)],\n  eval_metric=[Gini]\n)\n\n```\n\nA specific customization example notebook is available here : https://github.com/dreamquark-ai/tabnet/blob/develop/customizing_example.ipynb\n\n# Semi-supervised pre-training\n\nAdded later to TabNet's original paper, semi-supervised pre-training is now available via the class `TabNetPretrainer`:\n\n```python\n# TabNetPretrainer\nunsupervised_model = TabNetPretrainer(\n    optimizer_fn=torch.optim.Adam,\n    optimizer_params=dict(lr=2e-2),\n    mask_type='entmax' # \"sparsemax\"\n)\n\nunsupervised_model.fit(\n    X_train=X_train,\n    eval_set=[X_valid],\n    pretraining_ratio=0.8,\n)\n\nclf = TabNetClassifier(\n    optimizer_fn=torch.optim.Adam,\n    optimizer_params=dict(lr=2e-2),\n    scheduler_params={\"step_size\":10, # how to use learning rate scheduler\n                      \"gamma\":0.9"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9999754168025624
+      ],
+      "excerpt": "This is a pyTorch implementation of Tabnet (Arik, S. O., & Pfister, T. (2019). TabNet: Attentive Interpretable Tabular Learning. arXiv preprint arXiv:1908.07442.) https://arxiv.org/pdf/1908.07442.pdf. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "- regression: 'mse', 'mae', 'rmse', 'rmsle' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8582768340640389
+      ],
+      "excerpt": "    scheduler_params={\"step_size\":10, #: how to use learning rate scheduler \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "explanatory video \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066,
+        0.8109194328925066,
+        0.9321597499656605,
+        0.9321597499656605
+      ],
+      "excerpt": "multi-class classification examples \nregression examples \nmulti-task regression examples \nmulti-task multi-class classification examples \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dreamquark-ai/tabnet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-17T11:17:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T02:10:15Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9082285303578068,
+        0.9184152012085699
+      ],
+      "excerpt": "The loss function has been normalized to be independent of pretraining_ratio, batch_size and the number of features in the problem. \nA self supervised loss greater than 1 means that your model is reconstructing worse than predicting the mean for each feature, a loss bellow 1 means that the model is doing better than predicting the mean. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8914549783897429
+      ],
+      "excerpt": "/!\\ : current implementation is trying to reconstruct the original inputs, but Batch Normalization applies a random transformation that can't be deduced by a single line, making the reconstruction harder. Lowering the batch_size might make the pretraining easier. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8826474229798598
+      ],
+      "excerpt": ": define new model with basic parameters and load state dict weights \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9862757991275783
+      ],
+      "excerpt": "Width of the decision prediction layer. Bigger values gives more capacity to the model with the risk of overfitting. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8450577728779918,
+        0.8684084689593259
+      ],
+      "excerpt": "Width of the attention embedding for each mask. \nAccording to the paper n_d=n_a is usually a good choice. (default=8) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9644256105613453
+      ],
+      "excerpt": "This is the coefficient for feature reusage in the masks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.917647192139653,
+        0.9305747991692244,
+        0.917647192139653,
+        0.9223976516876259
+      ],
+      "excerpt": "cat_idxs : list of int (default=[] - Mandatory for embeddings)  \nList of categorical features indices. \ncat_dims : list of int (default=[] - Mandatory for embeddings) \nList of categorical features number of modalities (number of unique values for a categorical feature) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9263201391115159
+      ],
+      "excerpt": "List of embeddings size for each categorical features. (default =1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "Random seed for reproducibility \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.972474713196975
+      ],
+      "excerpt": "This is the extra sparsity loss coefficient as proposed in the original paper. The bigger this coefficient is, the sparser your model will be in terms of feature selection. Depending on the difficulty of your problem, reducing this value could help. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9806413444457311
+      ],
+      "excerpt": "Parameters compatible with optimizer_fn used initialize the optimizer. Since we have Adam as our default optimizer, we use this to define the initial learning rate used for training. As mentionned in the original paper, a large initial learning rate of 0.02  with decay is a good option. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9398880043188038
+      ],
+      "excerpt": "Dictionnary of parameters to apply to the scheduler_fn. Ex : {\"gamma\": 0.95, \"step_size\": 10} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8435128507446462
+      ],
+      "excerpt": "Name of the model used for saving in disk, you can customize this to easily retrieve and reuse your trained models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9592652450113436
+      ],
+      "excerpt": "Verbosity for notebooks plots, set to 1 to see every epoch, 0 to get None. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9508815812027632
+      ],
+      "excerpt": "    Either \"sparsemax\" or \"entmax\" : this is the masking function to use for selecting features. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9173315375342378
+      ],
+      "excerpt": "Number of shared GLU block in decoder, this is only useful for TabNetPretrainer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9173315375342378
+      ],
+      "excerpt": "Number of independent GLU block in decoder, this is only useful for TabNetPretrainer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8999531193718416,
+        0.8135379858203683,
+        0.8142612971689475,
+        0.8999531193718416
+      ],
+      "excerpt": "eval_set: list of tuple   \nList of eval tuple set (X, y). \nThe last one is used for early stopping   \neval_name: list of str \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8999531193718416
+      ],
+      "excerpt": "eval_metric : list of str \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979264863298839
+      ],
+      "excerpt": "              The last metric is used for early stopping. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8769304940127091
+      ],
+      "excerpt": "Maximum number of epochs for trainng. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9257387431606404
+      ],
+      "excerpt": "/!\\ Only for TabNetClassifier \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8016215687304192
+      ],
+      "excerpt": "Loss function for training (default to mse for regression and cross entropy for classification) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9243102371781998
+      ],
+      "excerpt": "Size of the mini batches used for \"Ghost Batch Normalization\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8999531193718416
+      ],
+      "excerpt": "        List of custom callbacks \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9817011549282115,
+        0.9356546348403026
+      ],
+      "excerpt": "/!\\ TabNetPretrainer Only : Percentage of input features to mask during pretraining. \nShould be between 0 and 1. The bigger the harder the reconstruction task is. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9642359819200677
+      ],
+      "excerpt": "    In order to match scikit-learn API, this is set to False. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch implementation of TabNet paper : https://arxiv.org/pdf/1908.07442.pdf",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dreamquark-ai/tabnet/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- TabNetClassifier : binary classification and multi-class classification problems\n- TabNetRegressor : simple and multi-task regression problems\n- TabNetMultiTaskClassifier:  multi-task multi-classification problems\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 298,
+      "date": "Thu, 23 Dec 2021 16:39:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dreamquark-ai/tabnet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dreamquark-ai/tabnet",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/dreamquark-ai/tabnet/tree/develop/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/customizing_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/census_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/multi_task_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/pretraining_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/regression_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/forest_example.ipynb",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/multi_regression_example.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/docs-scripts/rst_generator.sh",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/release-script/do-release.sh",
+      "https://raw.githubusercontent.com/dreamquark-ai/tabnet/develop/release-script/prepare-release.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can install using pip by running:\n`pip install pytorch-tabnet`\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9647904471855105,
+        0.9322817366705576,
+        0.9044733329838361,
+        0.9838162920416433,
+        0.9946835645526492,
+        0.9875196255350711
+      ],
+      "excerpt": "git clone git@github.com:dreamquark-ai/tabnet.git \ncd tabnet to get inside the repository \nmake start to build and get inside the container \nmake start-gpu to build and get inside the GPU container \npoetry install to install all the dependencies, including jupyter \nmake notebook inside the same terminal. You can then follow the link to a jupyter notebook with tabnet installed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8627414714775214
+      ],
+      "excerpt": "You can create a metric for your specific need. Here is an example for gini score (note that you need to specifiy whether this metric should be maximized or not): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8185591422135922
+      ],
+      "excerpt": "A complete example can be found within the notebook pretraining_example.ipynb. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8660381765609066
+      ],
+      "excerpt": "    'cpu' for cpu training, 'gpu' for gpu training, 'auto' to automatically detect gpu. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8291153175985861
+      ],
+      "excerpt": "Important Note : 'rmsle' will automatically clip negative predictions to 0, because the model can predict negative values. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8051979476225217
+      ],
+      "excerpt": "epsilon : float  (default 1e-15) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8067436345866953
+      ],
+      "excerpt": "Momentum for batch normalization, typically ranges from 0.01 to 0.4 (default=0.02) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184584439529182
+      ],
+      "excerpt": "device_name : str (default='auto') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9241022411340848
+      ],
+      "excerpt": "X_train : np.array \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9241022411340848,
+        0.8174540907975313
+      ],
+      "excerpt": "y_train : np.array \nTraining targets \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8279564858369444
+      ],
+      "excerpt": "patience : int (default = 15) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8044718412864555
+      ],
+      "excerpt": "virtual_batch_size : int (default=128) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dreamquark-ai/tabnet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Makefile",
+      "Shell",
+      "Batchfile",
+      "CSS",
+      "Dockerfile",
+      "HTML",
+      "Smarty"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 DreamQuark\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "README",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tabnet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dreamquark-ai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dreamquark-ai/tabnet/blob/develop/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* add preds_mapper to pretraining ([76f2c85](https://github.com/dreamquark-ai/tabnet/commit/76f2c85))\n\n\n\n",
+        "dateCreated": "2021-02-02T07:52:15Z",
+        "datePublished": "2021-02-02T08:05:08Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v3.1.1",
+        "name": "v3.1.1",
+        "tag_name": "v3.1.1",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v3.1.1",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/37219900",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v3.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* n_a not being used ([7ae20c9](https://github.com/dreamquark-ai/tabnet/commit/7ae20c9))\n\n\n### Features\n\n* save and load preds_mapper ([cab643b](https://github.com/dreamquark-ai/tabnet/commit/cab643b))\n\n\n\n",
+        "dateCreated": "2021-01-12T18:16:51Z",
+        "datePublished": "2021-01-12T18:17:59Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v3.1.0",
+        "name": "v3.1.0",
+        "tag_name": "v3.1.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v3.1.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/36294881",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v3.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* checknan allow string as targets ([855befc](https://github.com/dreamquark-ai/tabnet/commit/855befc))\n* deactivate pin memory when device is cpu ([bd0b96f](https://github.com/dreamquark-ai/tabnet/commit/bd0b96f))\n* fixed docstring issues ([d216fbf](https://github.com/dreamquark-ai/tabnet/commit/d216fbf))\n* load from cpu when saved on gpu ([451bd86](https://github.com/dreamquark-ai/tabnet/commit/451bd86))\n\n\n### Features\n\n* add new default metrics ([0fe5b72](https://github.com/dreamquark-ai/tabnet/commit/0fe5b72))\n* enable self supervised pretraining ([d4af838](https://github.com/dreamquark-ai/tabnet/commit/d4af838))\n* mask-dependent loss ([64052b0](https://github.com/dreamquark-ai/tabnet/commit/64052b0))\n\n\n\n",
+        "dateCreated": "2020-12-15T11:55:05Z",
+        "datePublished": "2020-12-15T12:44:21Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v3.0.0",
+        "name": "v3.0.0",
+        "tag_name": "v3.0.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v3.0.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/35288977",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v3.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* add check for evalset dim ([ba09980](https://github.com/dreamquark-ai/tabnet/commit/ba09980))\n* pin memory available for training only ([28346c2](https://github.com/dreamquark-ai/tabnet/commit/28346c2))\n* specify device ([46a301f](https://github.com/dreamquark-ai/tabnet/commit/46a301f))\n* torch.load map_location in Py36 fallback ([63cb8c4](https://github.com/dreamquark-ai/tabnet/commit/63cb8c4))\n\n\n\n",
+        "dateCreated": "2020-10-15T20:53:00Z",
+        "datePublished": "2020-10-15T21:00:49Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v2.0.1",
+        "name": "v2.0.1",
+        "tag_name": "v2.0.1",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v2.0.1",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/32643087",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v2.0.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* 1000 lines only when env=CI ([c557349](https://github.com/dreamquark-ai/tabnet/commit/c557349))\n* add map_location to torch load ([c2b560e](https://github.com/dreamquark-ai/tabnet/commit/c2b560e))\n* load_model fallback to BytesIO for Py3.6 ([55c09e5](https://github.com/dreamquark-ai/tabnet/commit/55c09e5))\n\n\n### Features\n\n* add check nan and inf ([d871406](https://github.com/dreamquark-ai/tabnet/commit/d871406))\n* add easy schedulers ([0ae114f](https://github.com/dreamquark-ai/tabnet/commit/0ae114f))\n* adding callbacks and metrics ([1e0daec](https://github.com/dreamquark-ai/tabnet/commit/1e0daec))\n* refacto models with metrics and callbacks ([cc57d62](https://github.com/dreamquark-ai/tabnet/commit/cc57d62))\n* speedups ([5a01359](https://github.com/dreamquark-ai/tabnet/commit/5a01359))\n* TabNetMultiTaskClassifier ([5764a43](https://github.com/dreamquark-ai/tabnet/commit/5764a43))\n* update readme and notebooks ([9cb38d2](https://github.com/dreamquark-ai/tabnet/commit/9cb38d2))\n\n\n\n",
+        "dateCreated": "2020-10-13T12:07:45Z",
+        "datePublished": "2020-10-13T12:10:14Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v2.0.0",
+        "name": "v2.0.0",
+        "tag_name": "v2.0.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v2.0.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/32501583",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v2.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* verbosity with schedulers ([d6fbf90](https://github.com/dreamquark-ai/tabnet/commit/d6fbf90))\n\n\n### Features\n\n* add entmax as parameter ([96c8a74](https://github.com/dreamquark-ai/tabnet/commit/96c8a74))\n* allow other optimizer parameters ([16d92d5](https://github.com/dreamquark-ai/tabnet/commit/16d92d5))\n* allow weights sample for regression ([d40b02f](https://github.com/dreamquark-ai/tabnet/commit/d40b02f))\n* save and load tabnet models ([9d2d8ae](https://github.com/dreamquark-ai/tabnet/commit/9d2d8ae))\n* save params and easy loading ([6e22393](https://github.com/dreamquark-ai/tabnet/commit/6e22393))\n\n\n\n",
+        "dateCreated": "2020-07-01T16:07:37Z",
+        "datePublished": "2020-07-01T16:27:43Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.2.0",
+        "name": "v1.2.0",
+        "tag_name": "v1.2.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.2.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/28123286",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.2.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* allow zero layer ([e3b5a04](https://github.com/dreamquark-ai/tabnet/commit/e3b5a04))\n* sort by cat_idx into embedding generator ([9ab3ad5](https://github.com/dreamquark-ai/tabnet/commit/9ab3ad5))\n* update forest_example notebook ([8092324](https://github.com/dreamquark-ai/tabnet/commit/8092324))\n\n\n### Features\n\n* add multi output regression ([ffd7c28](https://github.com/dreamquark-ai/tabnet/commit/ffd7c28))\n* add num_workers and drop_last to fit parameters ([313d074](https://github.com/dreamquark-ai/tabnet/commit/313d074))\n* remove mask computations from forward ([44d1a47](https://github.com/dreamquark-ai/tabnet/commit/44d1a47))\n* speed boost and code simplification for GBN ([1642909](https://github.com/dreamquark-ai/tabnet/commit/1642909))\n\n\n\n",
+        "dateCreated": "2020-06-02T15:40:18Z",
+        "datePublished": "2020-06-02T15:46:05Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.1.0",
+        "name": "v1.1.0",
+        "tag_name": "v1.1.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.1.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/27142796",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n\n",
+        "dateCreated": "2020-04-20T07:56:30Z",
+        "datePublished": "2020-04-20T08:13:01Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.6",
+        "name": "v1.0.6",
+        "tag_name": "v1.0.6",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.6",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/25669619",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Hartorn",
+        "body": "\n\n### Bug Fixes\n\n* remove dead code for plots ([f96795f](https://github.com/dreamquark-ai/tabnet/commit/f96795f))\n\n\n### Features\n\n* switch to sparse matrix trick ([98910bc](https://github.com/dreamquark-ai/tabnet/commit/98910bc))\n\n\n\n",
+        "dateCreated": "2020-03-13T15:17:16Z",
+        "datePublished": "2020-03-13T15:18:46Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.5",
+        "name": "v1.0.5",
+        "tag_name": "v1.0.5",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.5",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/24506578",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* allow smaller different nshared and nindependent ([4b365a7](https://github.com/dreamquark-ai/tabnet/commit/4b365a7))\n* sparsemax on train and predict epoch ([6f7c0e0](https://github.com/dreamquark-ai/tabnet/commit/6f7c0e0))\n\n\n\n",
+        "dateCreated": "2020-02-28T16:29:13Z",
+        "datePublished": "2020-02-28T16:36:15Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.4",
+        "name": "v1.0.4",
+        "tag_name": "v1.0.4",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.4",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/24081233",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "eduardocarvp",
+        "body": "\n\n### Bug Fixes\n\n* map class predictions for XGB results ([3747e2f](https://github.com/dreamquark-ai/tabnet/commit/3747e2f))\n\n\n### Features\n\n* fix shared layers with independent batchnorm ([5f0e43f](https://github.com/dreamquark-ai/tabnet/commit/5f0e43f))\n\n\n\n",
+        "dateCreated": "2020-02-07T16:52:39Z",
+        "datePublished": "2020-02-07T16:54:40Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.3",
+        "name": "v1.0.3",
+        "tag_name": "v1.0.3",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.3",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/23487337",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Hartorn",
+        "body": "\r\n\r\n### Bug Fixes\r\n\r\n* multiclass prediction mapper ([2317c5c](https://github.com/dreamquark-ai/tabnet/commit/2317c5c))\r\n* remove deepcopy from shared blocks ([123932a](https://github.com/dreamquark-ai/tabnet/commit/123932a))\r\n\r\n\r\n\r\n",
+        "dateCreated": "2020-02-03T16:00:19Z",
+        "datePublished": "2020-02-03T16:22:38Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.2",
+        "name": "v1.0.2",
+        "tag_name": "v1.0.2",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.2",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/23345090",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Hartorn",
+        "body": "\n\n### Bug Fixes\n\n* **regression:** fix scheduler ([01e46b7](https://github.com/dreamquark-ai/tabnet/commit/01e46b7))\n* fixing Dockerfile for poetry 1.0 ([6c5cdec](https://github.com/dreamquark-ai/tabnet/commit/6c5cdec))\n* importance indexing fixed ([a8382c3](https://github.com/dreamquark-ai/tabnet/commit/a8382c3))\n* local explain all batches ([91461fb](https://github.com/dreamquark-ai/tabnet/commit/91461fb))\n* regression gpu integration an typos ([269b4c5](https://github.com/dreamquark-ai/tabnet/commit/269b4c5))\n* resolve timer issue and warnings ([ecd2cd9](https://github.com/dreamquark-ai/tabnet/commit/ecd2cd9))\n\n\n### Features\n\n* improve verbosity ([8a2cd87](https://github.com/dreamquark-ai/tabnet/commit/8a2cd87))\n\n\n\n",
+        "dateCreated": "2020-01-20T15:24:03Z",
+        "datePublished": "2020-01-20T15:28:19Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.1",
+        "name": "v1.0.1",
+        "tag_name": "v1.0.1",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.1",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/22979124",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Optimox",
+        "body": "\n\n### Bug Fixes\n\n* **deps:** update dependency numpy to v1.17.3 ([eff6555](https://github.com/dreamquark-ai/tabnet/commit/eff6555))\n* **deps:** update dependency numpy to v1.17.4 ([a80cf29](https://github.com/dreamquark-ai/tabnet/commit/a80cf29))\n* **deps:** update dependency torch to v1.3.1 ([18ec79b](https://github.com/dreamquark-ai/tabnet/commit/18ec79b))\n* **deps:** update dependency tqdm to v4.37.0 ([f8f04e7](https://github.com/dreamquark-ai/tabnet/commit/f8f04e7))\n* **deps:** update dependency tqdm to v4.38.0 ([0bf45d2](https://github.com/dreamquark-ai/tabnet/commit/0bf45d2))\n* functional balanced version ([fab7f16](https://github.com/dreamquark-ai/tabnet/commit/fab7f16))\n* remove torch warnings (index should be bool) ([f5817cf](https://github.com/dreamquark-ai/tabnet/commit/f5817cf))\n\n\n### Features\n\n* add gpu dockerfile and adapt makefile ([8d14406](https://github.com/dreamquark-ai/tabnet/commit/8d14406))\n* update notebooks for new model format ([43e2693](https://github.com/dreamquark-ai/tabnet/commit/43e2693))\n\n\n\n",
+        "dateCreated": "2019-12-03T11:34:19Z",
+        "datePublished": "2019-12-03T11:40:24Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v1.0.0",
+        "name": "v1.0.0",
+        "tag_name": "v1.0.0",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v1.0.0",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/21925575",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v1.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Hartorn",
+        "body": "\n\n### Bug Fixes\n\n* add softmax to predict_proba ([bea966f](https://github.com/dreamquark-ai/tabnet/commit/bea966f))\n* correct code linting ([ae3098c](https://github.com/dreamquark-ai/tabnet/commit/ae3098c))\n* float type when output_dim=1 ([7bb7dfd](https://github.com/dreamquark-ai/tabnet/commit/7bb7dfd))\n\n\n### Features\n\n* add editorconfig file ([5e84b66](https://github.com/dreamquark-ai/tabnet/commit/5e84b66))\n* add flake8 ([b1be1f9](https://github.com/dreamquark-ai/tabnet/commit/b1be1f9))\n* run flake8 in CI ([e72d416](https://github.com/dreamquark-ai/tabnet/commit/e72d416))\n* start PyTorch TabNet Paper Implementation ([e7dc059](https://github.com/dreamquark-ai/tabnet/commit/e7dc059))\n\n\n\n",
+        "dateCreated": "2019-11-06T08:44:38Z",
+        "datePublished": "2019-11-06T08:48:16Z",
+        "html_url": "https://github.com/dreamquark-ai/tabnet/releases/tag/v0.1.2",
+        "name": "v0.1.2",
+        "tag_name": "v0.1.2",
+        "tarball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/tarball/v0.1.2",
+        "url": "https://api.github.com/repos/dreamquark-ai/tabnet/releases/21247431",
+        "zipball_url": "https://api.github.com/repos/dreamquark-ai/tabnet/zipball/v0.1.2"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1472,
+      "date": "Thu, 23 Dec 2021 16:39:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pytorch",
+      "deep-neural-networks",
+      "machine-learning-library",
+      "tabular-data",
+      "research-paper",
+      "pytorch-tabnet",
+      "tabnet"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "TabNet is now scikit-compatible, training a TabNetClassifier or TabNetRegressor is really easy.\n\n```python\nfrom pytorch_tabnet.tab_model import TabNetClassifier, TabNetRegressor\n\nclf = TabNetClassifier()  #:TabNetRegressor()\nclf.fit(\n  X_train, Y_train,\n  eval_set=[(X_valid, y_valid)]\n)\npreds = clf.predict(X_test)\n```\n\nor for TabNetMultiTaskClassifier :\n\n```python\nfrom pytorch_tabnet.multitask import TabNetMultiTaskClassifier\nclf = TabNetMultiTaskClassifier()\nclf.fit(\n  X_train, Y_train,\n  eval_set=[(X_valid, y_valid)]\n)\npreds = clf.predict(X_test)\n```\n\nThe targets on `y_train/y_valid` should contain a unique type (e.g. they must all be strings or integers).\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "---\n\n* Stratified Batch Normalization\n\n  Idea of batch normalization in general :\n\n  * [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/pdf/1502.03167.pdf)\n\n  Loosely connected paper (explains the idea of stratified batch normalization) :\n\n  * [(PDF) Cross-Subject EEG-Based Emotion Recognition through Neural Networks with Stratified Normalization](https://www.researchgate.net/publication/344377115_Cross-Subject_EEG-Based_Emotion_Recognition_through_Neural_Networks_with_Stratified_Normalization)\n\n* LDAM loss\n\n  Learning Imbalanced Datasets with Label-Distribution-Aware Margin Loss :\n\n  * https://arxiv.org/pdf/1906.07413.pdf\n\n  * https://github.com/kaidic/LDAM-DRW/blob/master/losses.py (Pytorch implementation of the authors) \n\n* Data Generator\n\n  Inspired by this implementation :\n\n  * https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly\n\n---\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.991315232649623
+      ],
+      "excerpt": "Introduced by this paper: https://arxiv.org/pdf/1906.07413.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/karurb92/ldam_str_bn",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-06T16:13:11Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-29T17:58:32Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8604317279406939
+      ],
+      "excerpt": "When it comes to dealing with heavily imbalanced dataset, we focused on two approaches: Label-distribution-aware loss function(LDAM) and stratified batch normalization. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8527906708899432
+      ],
+      "excerpt": "It encourages minority classes to have larger margins. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9168781411056024
+      ],
+      "excerpt": "First layer of the net is being normalized separately for different stratification classes. For example, if sex and age_mapped are dimensions used for stratification, there will be 6 stratification classes (cartesian of (male,female,unknown) and (<=50, >50)). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9698639165493932,
+        0.9004550386560844
+      ],
+      "excerpt": "The underlying idea of stratification is the assumption that for different stratification classes, distributions of labels differ significantly. Therefore, they should be made even before being fed to the network. \nWe artificially made medical imaging dataset to be highly imbalanced (with different imbalance ratios). strat_data_generator and utils_sc.draw_data() implement this functionality. Then, we implemented stratified batch normalization (models.strat_bn_simplified) within a ResNet model (models.resnet) with use of Label-Distribution-Aware loss function (losses). In the end, we perform unit tests with unittest python module for the loss function, stratified batch normalization and data generator to check if they function correctly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9785519403557871,
+        0.9799669466167497
+      ],
+      "excerpt": "Deciding on what dimensions do we stratify - choice of features and dealing with data transformation. \nBuilding our own data generator and feeding metadata to the net in a customized way. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8536523190521844,
+        0.8862126824478109
+      ],
+      "excerpt": "Understanding the concept and original Tensorflow BN implementation \nDealing with parameters in new shapes for both training and non-training modes (i.e. updating/using moving_mean, moving_variance,  beta, gamma)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8959323261163791,
+        0.8909903277315766,
+        0.9711109206695283
+      ],
+      "excerpt": "Understanding the concept of LDAM in general \nDealing with different data structures & methods \nData Preprocessing - implemented our own data generator strat_data_generator and utils_sc \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.887340297909683
+      ],
+      "excerpt": "Implemented stratified batch normalization with ResNet model (models.strat_bn_simplified, models.resnet) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TF implementation of ResNet architecture on heavily imbalanced SIIM-ISIC melanoma dataset with use of LDAM loss and stratified batch normalization to guard against imbalance problem",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/karurb92/ldam_str_bn/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 14:26:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/karurb92/ldam_str_bn/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "karurb92/ldam_str_bn",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "---\n\nThe setup below works on a UNIX like system. Windows should work in a similar fashion. Just give it a quick google.\n```bash\npython3 -m venv <directory name>\nsource <directory name>/bin/activate\npip install -r requirements.txt\n```\nThe dataset should be stored in a folder called `local_work` and all images should reside is a child folder called `all_imgs`. These names can also be adjusted in the config file. You can read more about the dataset in the corresponding section below.\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9155043963153351
+      ],
+      "excerpt": "Unit tests with unittest: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_epoch_acc.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_epoch_loss.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_beta.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_gamma.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_moving_mean.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\strat_bn_without_ldam_moving_var.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\ldam_epoch_acc.jpg\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "<img src=\".\\readme_images\\ldam_epoch_loss.jpg\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/karurb92/ldam_str_bn/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ldam_str_bn",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ldam_str_bn",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "karurb92",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/karurb92/ldam_str_bn/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 14:26:13 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

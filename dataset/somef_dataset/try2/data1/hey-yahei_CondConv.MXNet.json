@@ -1,0 +1,192 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1904.04971v2",
+      "https://arxiv.org/abs/1904.04971v2](https://arxiv.org/abs/1904.04971v2) with the implement of MXNet-Gluon.     \n\n## Do CondConv with grouped convolution         \nI use groupwise convolution to implement CondConv easily --    \n1. Combine kernels then do convolution        \n    1. Reshape `x` from `(bs, c, h, w)` to `(1, bs*c, h, w)`     \n    2. Combine `weight` from `(k, oc, c, kh, kw)` to `(bs, oc, c, kh, kw)` and then reshape to `(bs*oc, c, kh, kw)`\n    3. Combine `bias` from `(k, oc)` to `(bs, oc)` and then reshape to `(bs*oc, )`\n    4. Do convolution with `num_filter=bs*oc` and `num_group=bs` and get outputs with shape `(1, bs*oc, oh, ow)`\n    5. Reshape outputs to `(bs, oc, oh, ow)` which are the final results for CondConv\n2. Do convolution then combine outputs     \n    1. Tile `x` on the second axis for `k` times, and get a new `x` with shape `(bs, k*c, h, w)`\n    2. Reshape `weight` from `(k, oc, c, kh, kw)` to `(k*oc, c, kh, kw)`\n    3. Reshape `bias` from `(k, oc)` to `(k*oc, )`\n    4. Do convolution with `num_filter=k*oc` and `num_group=k` and get outputs with shape `(bs, k*oc, oh, ow)`\n    5. Reshape outputs to `(bs, k, oc, oh, ow)` and combine to `(bs, oc, oh, ow)` which are the final results for CondConv\n\nFor small `k`(<8), training with latter method is faster.   \nFor large `k`(>=8), training with the former method is suggested.\n\n## Experiment on cifar_resnet20_v1      \n\n| num_experts | Parameters | FLOPS | Top-1 Acc |\n|:---:|:---:|:---:|:---:|\n|(baseline)|274,042|41,013,878|91.51%|\n|4|1,078,402(+293%)|42,087,854(+2.6%)|91.77%|\n|8|2,150,026(+684%)|43,161,830(+5.2%)|91.81%|\n|16|4,293,274(+1467%)|45,309,782(+10.5%)|91.89%|\n|32|8,579,770(+3031%)|49,605,686(+20.9%)|92.26%|\n|(resnet56)|860,026(+314%)|126,292,598(+308%)|92.85%|\n\n-----------         \nMore details refer to [CondConv\uff1a\u6309\u9700\u5b9a\u5236\u7684\u5377\u79ef\u6743\u91cd | Hey~YaHei!](https://www.yuque.com/yahei/hey-yahei/condconv"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hey-yahei/CondConv.MXNet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-01T06:54:38Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-15T04:55:58Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9001431550905091
+      ],
+      "excerpt": "Reproduce work in arXiv:1904.04971v2 with the implement of MXNet-Gluon. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8892290895412613
+      ],
+      "excerpt": "    5. Reshape outputs to (bs, oc, oh, ow) which are the final results for CondConv \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9327289145967061
+      ],
+      "excerpt": "    1. Tile x on the second axis for k times, and get a new x with shape (bs, k*c, h, w) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8600676688299937,
+        0.882860542613331,
+        0.9657489016612637,
+        0.9861284348961428
+      ],
+      "excerpt": "    4. Do convolution with num_filter=k*oc and num_group=k and get outputs with shape (bs, k*oc, oh, ow) \n    5. Reshape outputs to (bs, k, oc, oh, ow) and combine to (bs, oc, oh, ow) which are the final results for CondConv \nFor small k(<8), training with latter method is faster.  \nFor large k(>=8), training with the former method is suggested. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Reproduce work in arXiv:1904.04971v2 with the implement of MXNet-Gluon.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hey-yahei/CondConv.MXNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 03:12:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hey-yahei/CondConv.MXNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hey-yahei/CondConv.MXNet",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/hey-yahei/CondConv.MXNet/master/examples/cifar/cifar_resnet20_condconv.ipynb",
+      "https://raw.githubusercontent.com/hey-yahei/CondConv.MXNet/master/examples/cifar/cifar_resnet20_baseline.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hey-yahei/CondConv.MXNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 hey-yahei\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CondConv",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CondConv.MXNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hey-yahei",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hey-yahei/CondConv.MXNet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Thu, 23 Dec 2021 03:12:29 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

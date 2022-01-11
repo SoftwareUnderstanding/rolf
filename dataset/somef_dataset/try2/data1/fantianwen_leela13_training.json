@@ -1,0 +1,634 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.82000071191569
+      ],
+      "excerpt": "Head to the Github releases page at https://github.com/gcp/leela-zero/releases, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fantianwen/leela13_training",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "How to become a contributor and submit your own code\nContributor License Agreements\nWe'd love to accept your patches! Before we can take them, we\nhave to jump a couple of legal hurdles.\nPlease fill out either the individual or corporate Contributor License Agreement\n(CLA).\n\nIf you are an individual writing original source code and you're sure you\n    own the intellectual property, then you'll need to sign an\n    individual CLA.\nIf you work for a company that wants to allow you to contribute your work,\n    then you'll need to sign a\n    corporate CLA.\n\nFollow either of the two links above to access the appropriate CLA and\ninstructions for how to sign and return it. Once we receive it, we'll be able to\naccept your pull requests.\nContributing A Patch\n\nSubmit an issue describing your proposed change to the\n   issue tracker.\nPlease don't mix more than one logical change per submittal,\n   because it makes the history hard to follow. If you want to make a\n   change that doesn't have a corresponding issue in the issue\n   tracker, please create one.\nAlso, coordinate with team members that are listed on the issue in\n   question. This ensures that work isn't being duplicated and\n   communicating your plan early also generally leads to better\n   patches.\nIf your proposed change is accepted, and you haven't already done so, sign a\n   Contributor License Agreement (see details above).\nFork the desired repo, develop and test your code changes.\nEnsure that your code adheres to the existing style in the sample to which\n   you are contributing.\nEnsure that your code has an appropriate set of unit tests which all pass.\nSubmit a pull request.\n\nIf you are a Googler, it is preferable to first create an internal change and\nhave it reviewed and submitted, and then create an upstreaming pull\nrequest here. \nThe Google Test and Google Mock Communities\nThe Google Test community exists primarily through the\ndiscussion group\nand the GitHub repository.\nLikewise, the Google Mock community exists primarily through their own\ndiscussion group.\nYou are definitely encouraged to contribute to the\ndiscussion and you can also help us to keep the effectiveness of the\ngroup high by following and promoting the guidelines listed here.\nPlease Be Friendly\nShowing courtesy and respect to others is a vital part of the Google\nculture, and we strongly encourage everyone participating in Google\nTest development to join us in accepting nothing less. Of course,\nbeing courteous is not the same as failing to constructively disagree\nwith each other, but it does mean that we should be respectful of each\nother when enumerating the 42 technical reasons that a particular\nproposal may not be the best choice. There's never a reason to be\nantagonistic or dismissive toward anyone who is sincerely trying to\ncontribute to a discussion.\nSure, C++ testing is serious business and all that, but it's also\na lot of fun. Let's keep it that way. Let's strive to be one of the\nfriendliest communities in all of open source.\nAs always, discuss Google Test in the official GoogleTest discussion group.\nYou don't have to actually submit code in order to sign up. Your participation\nitself is a valuable contribution.\nStyle\nTo keep the source consistent, readable, diffable and easy to merge,\nwe use a fairly rigid coding style, as defined by the google-styleguide project.  All patches will be expected\nto conform to the style outlined here.\nRequirements for Contributors\nIf you plan to contribute a patch, you need to build Google Test,\nGoogle Mock, and their own tests from a git checkout, which has\nfurther requirements:\n\nPython v2.3 or newer (for running some of\n    the tests and re-generating certain source files from templates)\nCMake v2.6.4 or newer\nGNU Build System\n    including automake (>= 1.9), autoconf (>= 2.59), and\n    libtool / libtoolize.\n\nDeveloping Google Test\nThis section discusses how to make your own changes to Google Test.\nTesting Google Test Itself\nTo make sure your changes work as intended and don't break existing\nfunctionality, you'll want to compile and run Google Test's own tests.\nFor that you can use CMake:\nmkdir mybuild\ncd mybuild\ncmake -Dgtest_build_tests=ON ${GTEST_DIR}\n\nMake sure you have Python installed, as some of Google Test's tests\nare written in Python.  If the cmake command complains about not being\nable to find Python (Could NOT find PythonInterp (missing:\nPYTHON_EXECUTABLE)), try telling it explicitly where your Python\nexecutable can be found:\ncmake -DPYTHON_EXECUTABLE=path/to/python -Dgtest_build_tests=ON ${GTEST_DIR}\n\nNext, you can build Google Test and all of its own tests.  On *nix,\nthis is usually done by 'make'.  To run the tests, do\nmake test\n\nAll tests should pass.\nRegenerating Source Files\nSome of Google Test's source files are generated from templates (not\nin the C++ sense) using a script.\nFor example, the\nfile include/gtest/internal/gtest-type-util.h.pump is used to generate\ngtest-type-util.h in the same directory.\nYou don't need to worry about regenerating the source files\nunless you need to modify them.  You would then modify the\ncorresponding .pump files and run the 'pump.py'\ngenerator script.  See the Pump Manual.\nDeveloping Google Mock\nThis section discusses how to make your own changes to Google Mock.\nTesting Google Mock Itself\nTo make sure your changes work as intended and don't break existing\nfunctionality, you'll want to compile and run Google Test's own tests.\nFor that you'll need Autotools.  First, make sure you have followed\nthe instructions above to configure Google Mock.\nThen, create a build output directory and enter it.  Next,\n${GMOCK_DIR}/configure  # try --help for more info\n\nOnce you have successfully configured Google Mock, the build steps are\nstandard for GNU-style OSS packages.\nmake        # Standard makefile following GNU conventions\nmake check  # Builds and runs all tests - all should pass.\n\nNote that when building your project against Google Mock, you are building\nagainst Google Test as well.  There is no need to configure Google Test\nseparately.",
+    "technique": "File Exploration"
+  },
+  "contributors": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "This file contains a list of people who've made non-trivial\ncontribution to the Google C++ Testing Framework project.  People\nwho commit code to the project are encouraged to add their names\nhere.  Please keep the list sorted by first names.\nAjay Joshi &#106;&#97;&#106;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nBal\u00e1zs D\u00e1n &#98;&#97;&#108;&#97;&#122;&#115;&#46;&#100;&#97;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nBharat Mediratta &#98;&#104;&#97;&#114;&#97;&#116;&#64;&#109;&#101;&#110;&#97;&#108;&#116;&#111;&#46;&#99;&#111;&#109;\nChandler Carruth &#99;&#104;&#97;&#110;&#100;&#108;&#101;&#114;&#99;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nChris Prince &#99;&#112;&#114;&#105;&#110;&#99;&#101;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nChris Taylor &#116;&#97;&#121;&#108;&#111;&#114;&#99;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nDan Egnor &#101;&#103;&#110;&#111;&#114;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nEric Roman &#101;&#114;&#111;&#109;&#97;&#110;&#64;&#99;&#104;&#114;&#111;&#109;&#105;&#117;&#109;&#46;&#111;&#114;&#103;\nHady Zalek &#104;&#97;&#100;&#121;&#46;&#122;&#97;&#108;&#101;&#107;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nJeffrey Yasskin &#106;&#121;&#97;&#115;&#115;&#107;&#105;&#110;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nJ\u00f3i Sigur\u00f0sson &#106;&#111;&#105;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nKeir Mierle &#109;&#105;&#101;&#114;&#108;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nKeith Ray &#107;&#101;&#105;&#116;&#104;&#46;&#114;&#97;&#121;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nKenton Varda &#107;&#101;&#110;&#116;&#111;&#110;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nManuel Klimek &#107;&#108;&#105;&#109;&#101;&#107;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nMarkus Heule &#109;&#97;&#114;&#107;&#117;&#115;&#46;&#104;&#101;&#117;&#108;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nMika Raento &#109;&#105;&#107;&#105;&#101;&#64;&#105;&#107;&#105;&#46;&#102;&#105;\nMikl\u00f3s Fazekas &#109;&#102;&#97;&#122;&#101;&#107;&#97;&#115;&#64;&#115;&#122;&#101;&#109;&#97;&#102;&#111;&#114;&#46;&#99;&#111;&#109;\nPasi Valminen &#112;&#97;&#115;&#105;&#46;&#118;&#97;&#108;&#109;&#105;&#110;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nPatrick Hanna &#112;&#104;&#97;&#110;&#110;&#97;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nPatrick Riley &#112;&#102;&#114;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nPeter Kaminski &#112;&#105;&#111;&#116;&#114;&#107;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nPreston Jackson &#112;&#114;&#101;&#115;&#116;&#111;&#110;&#46;&#97;&#46;&#106;&#97;&#99;&#107;&#115;&#111;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nRainer Klaffenboeck &#114;&#97;&#105;&#110;&#101;&#114;&#46;&#107;&#108;&#97;&#102;&#102;&#101;&#110;&#98;&#111;&#101;&#99;&#107;&#64;&#100;&#121;&#110;&#97;&#116;&#114;&#97;&#99;&#101;&#46;&#99;&#111;&#109;\nRuss Cox &#114;&#115;&#99;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nRuss Rufer &#114;&#117;&#115;&#115;&#64;&#112;&#101;&#110;&#116;&#97;&#100;&#46;&#99;&#111;&#109;\nSean Mcafee &#101;&#101;&#102;&#97;&#99;&#109;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;\nSigur\u00f0ur \u00c1sgeirsson &#115;&#105;&#103;&#103;&#105;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nTracy Bialik &#116;&#114;&#97;&#99;&#121;&#64;&#112;&#101;&#110;&#116;&#97;&#100;&#46;&#99;&#111;&#109;\nVadim Berman &#118;&#97;&#100;&#105;&#109;&#98;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nVlad Losev &#118;&#108;&#97;&#100;&#108;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;\nZhanyong Wan &#119;&#97;&#110;&#64;&#103;&#111;&#111;&#103;&#108;&#101;&#46;&#99;&#111;&#109;",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-04T12:44:38Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-04T12:45:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.979219551298523,
+        0.9173765602124146,
+        0.9531983271841112
+      ],
+      "excerpt": "This is a fairly faithful reimplementation of the system described \nin the Alpha Go Zero paper \"Mastering the Game of Go without Human Knowledge\". \nFor all intents and purposes, it is an open source AlphaGo Zero. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8965561406895736
+      ],
+      "excerpt": "be an engine that is far stronger than the top humans. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363207968336344,
+        0.8861790690159256,
+        0.8635575203630618
+      ],
+      "excerpt": "One reason for publishing this program is that we are running a public, \ndistributed effort to repeat the work. Working together, and especially \nwhen starting on a smaller scale, it will take less than 1700 years to get \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8818572653162655
+      ],
+      "excerpt": "the server automatically and do its work in the background, uploading results \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8943072643172953,
+        0.8569366557992855,
+        0.9242625561857859
+      ],
+      "excerpt": "Follow the instructions below to compile the leelaz binary, then go into \nthe autogtp subdirectory and follow the instructions there \nto build the autogtp binary. Copy the leelaz binary into the autogtp dir, and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9922776317749896
+      ],
+      "excerpt": "that are usable for helping the leela-zero project. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9571141677975775
+      ],
+      "excerpt": "And head to the Usage section of this README. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9877238155879763,
+        0.877617903499411,
+        0.8591719591674217
+      ],
+      "excerpt": "The layout of the network is as in the AlphaGo Zero paper, but any number of \nresidual blocks is allowed, and any number of outputs (filters) per layer, \nas long as the latter is the same for all layers. The program will autodetect \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9495743027549155,
+        0.9151633939648772,
+        0.8592780487879873,
+        0.9410046557775178
+      ],
+      "excerpt": "head. All convolution filters are 3x3 except for the ones at the start of the policy and value head, which are 1x1 (as in the paper). \nThere are 18 inputs to the first layer, instead of 17 as in the paper. The \noriginal AlphaGo Zero design has a slight imbalance in that it is easier \nfor the black player to see the board edge (due to how padding works in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8068953168871238
+      ],
+      "excerpt": "1) Side to move stones at time T=0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8256387107811768
+      ],
+      "excerpt": "18) All 1 if white is to move, 0 otherwise \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9189749338775963
+      ],
+      "excerpt": "description of the full 40 residual block design, in (NVIDIA)-Caffe protobuff \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9330386999014089
+      ],
+      "excerpt": "because they are followed by a batchnorm layer, which is supposed to normalize \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9094219622414114,
+        0.9488671820622203
+      ],
+      "excerpt": "operation in the batchnorm layer, corrected for the effect of the batchnorm mean/variance adjustment. At inference time, Leela Zero will fuse the channel \nbias into the batchnorm mean, thereby offsetting it and performing the center operation. This roundabout construction exists solely for backwards \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.916311975937522,
+        0.9025586935682142
+      ],
+      "excerpt": "Leela can convert a database of concatenated SGF games into a datafile suitable \nfor learning: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9684473347564445
+      ],
+      "excerpt": "The training data consists of files with the following data, all in text \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8096892841717471
+      ],
+      "excerpt": "16 lines of hexadecimal strings, each 361 bits longs, corresponding to the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9742557693696156,
+        0.9398384857726668,
+        0.9538663115488041,
+        0.9693233393948762
+      ],
+      "excerpt": "(visit counts) at the end of the search for the move in question. The last \nnumber is the probability of passing. \n1 line with either 1 or -1, corresponding to the outcome of the game for the \nplayer to move \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9235253062837733
+      ],
+      "excerpt": "well as snapshots of the learning state numbered by the batch number. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8821926934974886,
+        0.8886034359529978
+      ],
+      "excerpt": "[ ] Root filtering for handicap play. \nMore backends: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8789339176452443
+      ],
+      "excerpt": "Status page of the distributed effort: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    msvc\\x64\\Release\\leelaz.exe --weights best-network\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fantianwen/leela13_training/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 07:42:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fantianwen/leela13_training/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fantianwen/leela13_training",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/fantianwen/leela13_training/tree/master/gtest/googlemock/docs",
+      "https://github.com/fantianwen/leela13_training/tree/master/gtest/googletest/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/googletest/xcode/Scripts/runtests.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/googletest/xcode/Samples/FrameworkSample/runtests.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/build-linux-bazel.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/install-osx.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/travis.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/env-osx.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/build-linux-autotools.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/install-linux.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/log-config.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/get-nprocessors.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/gtest/ci/env-linux.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/autoTrain/minitrain.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/training/tf/trainpipe.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/blas/testing/runblastest.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/bench_multi_compilers.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/btl/data/mk_gnuplot_script.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/btl/data/smooth_all.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/btl/data/mk_new_gnuplot.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/btl/data/mk_mean_script.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/perf_monitoring/gemm/make_plot.sh",
+      "https://raw.githubusercontent.com/fantianwen/leela13_training/master/src/Eigen/bench/perf_monitoring/gemm/run.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    brew install boost cmake\n\n    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    sudo apt install libboost-dev libboost-program-options-dev libboost-filesystem-dev opencl-headers ocl-icd-libopencl1 ocl-icd-opencl-dev zlib1g-dev\n\n    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9518582487054953
+      ],
+      "excerpt": "You need a PC with a GPU, i.e. a discrete graphics card made by NVIDIA or AMD, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9578948819182579
+      ],
+      "excerpt": "Follow the instructions below to compile the leelaz binary, then go into \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879863063452118,
+        0.9906248903846466,
+        0.8270538936472002,
+        0.9879863063452118,
+        0.9906248903846466,
+        0.8270538936472002,
+        0.9879863063452118,
+        0.9906248903846466,
+        0.8270538936472002,
+        0.9906248903846466
+      ],
+      "excerpt": "git clone https://github.com/gcp/leela-zero \ncd leela-zero \ngit submodule update --init --recursive \ngit clone https://github.com/gcp/leela-zero \ncd leela-zero \ngit submodule update --init --recursive \ngit clone https://github.com/gcp/leela-zero \ncd leela-zero \ngit submodule update --init --recursive \ncd msvc \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9304772622292063
+      ],
+      "excerpt": "to the Visual Studio version you have. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8229637852726345
+      ],
+      "excerpt": "This requires a working installation of TensorFlow 1.4 or later: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9748709027320682
+      ],
+      "excerpt": "[ ] Implement GPU batching. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9532312362739296
+      ],
+      "excerpt": "[ ] CUDA specific version using cuDNN or cuBLAS. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8615764604075481
+      ],
+      "excerpt": "The weights file is a text file with each line containing a row of coefficients. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289669050403863
+      ],
+      "excerpt": "    2) output biases \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9221361021541947
+      ],
+      "excerpt": "in the tfprocess.py file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8454553703666403
+      ],
+      "excerpt": "dump_supervised sgffile.sgf train.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8866584713902795
+      ],
+      "excerpt": "starting with the name train.txt and containing training data generated from \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090460578397023
+      ],
+      "excerpt": "The training data consists of files with the following data, all in text \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8142829148706594
+      ],
+      "excerpt": "first 16 input planes from the previous section \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8612138100060728
+      ],
+      "excerpt": "1 line with 362 (19x19 + 1) floating point numbers, indicating the search probabilities \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8522043822775097,
+        0.8291400007888242
+      ],
+      "excerpt": "src/leelaz -w weights.txt \ndump_supervised bigsgf.sgf train.out \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9231761409144816
+      ],
+      "excerpt": "training/tf/parse.py train.out \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9323578162161054
+      ],
+      "excerpt": "training/tf/parse.py train.out leelaz-model-batchnumber \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fantianwen/leela13_training/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Fortran",
+      "Python",
+      "CMake",
+      "C",
+      "Cuda",
+      "Shell",
+      "Makefile",
+      "M4",
+      "JavaScript",
+      "CSS",
+      "Batchfile",
+      "QMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "GNU General Public License v3.0",
+      "url": "https://api.github.com/licenses/gpl-3.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright 2008, Google Inc.\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are\\nmet:\\n\\n    * Redistributions of source code must retain the above copyright\\nnotice, this list of conditions and the following disclaimer.\\n    * Redistributions in binary form must reproduce the above\\ncopyright notice, this list of conditions and the following disclaimer\\nin the documentation and/or other materials provided with the\\ndistribution.\\n    * Neither the name of Google Inc. nor the names of its\\ncontributors may be used to endorse or promote products derived from\\nthis software without specific prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "What",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "leela13_training",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fantianwen",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fantianwen/leela13_training/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* GCC, Clang or MSVC, any C++14 compiler\n* Boost 1.58.x or later, headers and program_options, filesystem and system libraries (libboost-dev, libboost-program-options-dev and libboost-filesystem-dev on Debian/Ubuntu)\n* zlib library (zlib1g & zlib1g-dev on Debian/Ubuntu)\n* Standard OpenCL C headers (opencl-headers on Debian/Ubuntu, or at\nhttps://github.com/KhronosGroup/OpenCL-Headers/tree/master/CL)\n* OpenCL ICD loader (ocl-icd-libopencl1 on Debian/Ubuntu, or reference implementation at https://github.com/KhronosGroup/OpenCL-ICD-Loader)\n* An OpenCL capable device, preferably a very, very fast GPU, with recent\ndrivers is strongly recommended (OpenCL 1.1 support is enough).\nIf you do not have a GPU, add the define \"USE_CPU_ONLY\", for example\nby adding -DUSE_CPU_ONLY=1 to the cmake command line.\n* Optional: BLAS Library: OpenBLAS (libopenblas-dev) or Intel MKL\n* The program has been tested on Windows, Linux and macOS.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For training a new network, you can use an existing framework (Caffe,\nTensorFlow, PyTorch, Theano), with a set of training data as described above.\nYou still need to contruct a model description (2 examples are provided for\nCaffe), parse the input file format, and outputs weights in the proper format.\n\nThere is a complete implementation for TensorFlow in the training/tf directory.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 07:42:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    sudo apt install clinfo && clinfo\n\n    ",
+      "technique": "Header extraction"
+    }
+  ],
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    mkdir build && cd build\n    cmake ..\n    cmake --build .\n    ./tests\n    curl -O https://zero.sjeng.org/best-network\n    ./leelaz --weights best-network\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    mkdir build && cd build\n    cmake ..\n    cmake --build .\n    ./tests\n    curl -O https://zero.sjeng.org/best-network\n    ./leelaz --weights best-network\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The engine supports the [GTP protocol, version 2](https://www.lysator.liu.se/~gunnar/gtp/gtp2-spec-draft2/gtp2-spec.html).\n\nLeela Zero is not meant to be used directly. You need a graphical interface\nfor it, which will interface with Leela Zero through the GTP protocol.\n\n[Lizzie](https://github.com/featurecat/lizzie/releases) is a client specifically\nfor Leela Zero which shows live search probilities, a win rate graph, and has\nan automatic game analysis mode. Has binaries for Windows, Mac, and Linux.\n\n[Sabaki](http://sabaki.yichuanshen.de/) is a very nice looking GUI with GTP 2\ncapability.\n\n[LeelaSabaki](https://github.com/SabakiHQ/LeelaSabaki) is modified to\nshow variations and winning statistics in the game tree, as well as a heatmap\non the game board.\n\nA lot of go software can interface to an engine via GTP,\nso look around.\n\nAdd the --gtp commandline option on the engine command line to enable Leela\nZero's GTP support. You will need a weights file, specify that with the -w option.\n\nAll required commands are supported, as well as the tournament subset, and\n\"loadsgf\". The full set can be seen with \"list_commands\". The time control\ncan be specified over GTP via the time\\_settings command. The kgs-time\\_settings\nextension is also supported. These have to be supplied by the GTP 2 interface,\nnot via the command line!\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "At the end of the game, you can send Leela Zero a \"dump\\_training\" command,\nfollowed by the winner of the game (either \"white\" or \"black\") and a filename,\ne.g:\n\n    dump_training white train.txt\n\nThis will save (append) the training data to disk, in the format described below,\nand compressed with gzip.\n\nTraining data is reset on a new game.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

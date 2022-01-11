@@ -1,0 +1,396 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2005.07683",
+      "https://arxiv.org/abs/1910.06188",
+      "https://arxiv.org/abs/1907.05686",
+      "https://arxiv.org/abs/2004.07320"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this resource useful, please consider citing the following paper:\n\n```\n@article{sanh2020movement,\n    title={Movement Pruning: Adaptive Sparsity by Fine-Tuning},\n    author={Victor Sanh and Thomas Wolf and Alexander M. Rush},\n    year={2020},\n    eprint={2005.07683},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{sanh2020movement,\n    title={Movement Pruning: Adaptive Sparsity by Fine-Tuning},\n    author={Victor Sanh and Thomas Wolf and Alexander M. Rush},\n    year={2020},\n    eprint={2005.07683},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.887167692142383,
+        0.887167692142383
+      ],
+      "excerpt": "| MNLI - Dev<br>acc/MM acc                                    | 84.5/84.9               | 10%<br>3%                | 78.3/79.3<br>69.4/70.6 | 78.7/79.7<br>76.0/76.2 | 80.1/80.4<br>76.5/77.4 | 81.2/81.8<br>79.5/80.1 | \n| QQP - Dev<br>acc/F1                                         | 91.4/88.4               | 10%<br>3%                | 79.8/65.0<br>72.4/57.8 | 88.1/82.8<br>87.0/81.9 | 89.7/86.2<br>86.1/81.5 | 90.2/86.8<br>89.1/85.5 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --num_train_epochs 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --num_train_epochs 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --num_train_epochs 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --num_train_epochs 10 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/block_movement_pruning",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-03T09:58:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-18T07:49:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9980879131420727
+      ],
+      "excerpt": "Magnitude pruning is a widely used strategy for reducing model size in pure supervised learning; however, it is less effective in the transfer learning regime that has become standard for state-of-the-art natural language processing applications. We propose the use of movement pruning, a simple, deterministic first-order weight pruning method that is more adaptive to pretrained model fine-tuning. Experiments show that when pruning large pretrained language models, movement pruning shows significant improvements in high-sparsity regimes. When combined with distillation, the approach achieves minimal accuracy loss with down to only 3% of the model parameters: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9597137708867625,
+        0.9671719734184939
+      ],
+      "excerpt": "This page contains information on how to fine-prune pre-trained models such as BERT to obtain extremely sparse models with movement pruning. In contrast to magnitude pruning which selects weights that are far from 0, movement pruning retains weights that are moving away from 0. \nFor more information, we invite you to check out our paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928754351281479,
+        0.9975300431859684,
+        0.9403782567943128
+      ],
+      "excerpt": "One promise of extreme pruning is to obtain extremely small models that can be easily sent (and stored) on edge devices. By setting weights to 0., we reduce the amount of information we need to store, and thus decreasing the memory size. We are able to obtain extremely sparse fine-pruned models with movement pruning: ~95% of the dense performance with ~5% of total remaining weights in the BERT encoder. \nIn this notebook, we showcase how we can leverage standard tools that exist out-of-the-box to efficiently store an extremely sparse question answering model (only 6% of total remaining weights in the encoder). We are able to reduce the memory size of the encoder from the 340MB (the orignal dense BERT) to 11MB, without any additional training of the model (every operation is performed post fine-pruning). It is sufficiently small to store it on a 91' floppy disk \ud83d\udcce! \nWhile movement pruning does not directly optimize for memory footprint (but rather the number of non-null weights), we hypothetize that further memory compression ratios can be achieved with specific quantization aware trainings (see for instance Q8BERT, And the Bit Goes Down or Quant-Noise). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8876652559463459
+      ],
+      "excerpt": "Pre-trained BERT-base-uncased fine-pruned with soft movement pruning on SQuAD v1.1. We use an additional distillation signal from BERT-base-uncased finetuned on SQuAD. The encoder counts 6% of total non-null weights and reaches 83.8 F1 score. The model can be accessed with: pruned_bert = BertForQuestionAnswering.from_pretrained(\"huggingface/prunebert-base-uncased-6-finepruned-w-distil-squad\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979421611541115,
+        0.8644427332556834,
+        0.8697616883565729
+      ],
+      "excerpt": "Pre-trained BERT-base-uncased fine-pruned with soft movement pruning on MNLI. We use an additional distillation signal from BERT-base-uncased finetuned on MNLI. The encoder counts 6% of total non-null weights and reaches 80.7 (matched) accuracy. The model can be accessed with: pruned_bert = BertForSequenceClassification.from_pretrained(\"huggingface/prunebert-base-uncased-6-finepruned-w-distil-mnli\") \nBelow, we detail how to reproduce the results reported in the paper. We use SQuAD as a running example. Commands (and scripts) can be easily adapted for other tasks. \nThe following command fine-prunes a pre-trained BERT-base on SQuAD using movement pruning towards 15% of remaining weights (85% sparsity). Note that we freeze all the embeddings modules (from their pre-trained value) and only prune the Fully Connected layers in the encoder (12 layers of Transformer Block). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8858797354869845
+      ],
+      "excerpt": "We can also explore other fine-pruning methods by changing the pruning_method parameter: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.954838391764905,
+        0.8775851129550848
+      ],
+      "excerpt": "Regularization based pruning methods (soft movement pruning and L0 regularization) rely on the penalty to induce sparsity. The multiplicative coefficient controls the sparsity level. \nTo obtain the effective sparsity level in the encoder, we simply count the number of activated (non-null) weights: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8544537019279119,
+        0.9401039415517817
+      ],
+      "excerpt": "Pruning once for all \nOnce the model has been fine-pruned, the pruned weights can be set to 0. once for all (reducing the amount of information to store). In our running experiments, we can convert a MaskedBertForQuestionAnswering (a BERT model augmented to enable on-the-fly pruning capabilities) to a standard BertForQuestionAnswering: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Block Sparse movement pruning",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/block_movement_pruning/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Thu, 23 Dec 2021 15:11:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huggingface/block_movement_pruning/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huggingface/block_movement_pruning",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/huggingface/block_movement_pruning/master/Saving_PruneBERT.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/huggingface/block_movement_pruning/master/block_movement_pruning/run.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code relies on the \ud83e\udd17 Transformers library. In addition to the dependencies listed in the [`examples`](https://github.com/huggingface/transformers/tree/master/examples) folder, you should install a few additional dependencies listed in the `requirements.txt` file: `pip install -r requirements.txt`.\n\nNote that we built our experiments on top of a stabilized version of the library (commit https://github.com/huggingface/transformers/commit/352d5472b0c1dec0f420d606d16747d851b4bda8): we do not guarantee that everything is still compatible with the latest version of the master branch.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8902627162932362,
+        0.9906248903846466
+      ],
+      "excerpt": "mkdir $SQUAD_DATA \ncd $SQUAD_DATA \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8010674869703212,
+        0.9906248903846466
+      ],
+      "excerpt": "wget -q https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json \ncd .. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8462236640329945
+      ],
+      "excerpt": "| SQuAD - Dev<br>EM/F1                                        | 80.4/88.1               | 10%<br>3%                | 70.2/80.1<br>45.5/59.6 | 72.4/81.9<br>64.3/75.8 | 75.6/84.3<br>67.5/78.0 | 76.6/84.9<br>72.7/82.3 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/masked_run_squad.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8445146240188418
+      ],
+      "excerpt": "    --train_file train-v1.1.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.811854372964597
+      ],
+      "excerpt": "    --initial_threshold 1 --final_threshold 0.15 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/masked_run_squad.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8445146240188418
+      ],
+      "excerpt": "    --train_file train-v1.1.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/masked_run_squad.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8445146240188418
+      ],
+      "excerpt": "    --train_file train-v1.1.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/masked_run_squad.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8112209821663555,
+        0.8445146240188418
+      ],
+      "excerpt": "    --data_dir examples/distillation/data/squad_data \\ \n    --train_file train-v1.1.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.811854372964597
+      ],
+      "excerpt": "    --initial_threshold 1 --final_threshold 0.15 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/counts_parameters.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9563277988753164
+      ],
+      "excerpt": "python examples/movement-pruning/bertarize.py \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huggingface/block_movement_pruning/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "block_movement_pruning",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huggingface",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/block_movement_pruning/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 40,
+      "date": "Thu, 23 Dec 2021 15:11:45 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

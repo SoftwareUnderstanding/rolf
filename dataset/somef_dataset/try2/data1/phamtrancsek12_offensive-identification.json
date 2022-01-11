@@ -1,0 +1,168 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1911.04252"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/phamtrancsek12/offensive-identification",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-31T06:14:10Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-27T07:20:07Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9922147489795159,
+        0.9216662075296882,
+        0.9851070977849715,
+        0.9550917115842077
+      ],
+      "excerpt": "This repo contains the code for our solutions of SemEval-2020 Task 12 challenge, which won the second place (2nd) in sub-task B: Automatic categorization of offense types and were ranked 55th with a macro F1-score of 90.59 in sub-task A: Offensive language identification \nDue to the limitation of computational power, we decide to not pre-train BERT model from scratch but fine-tune from the BERT-Large, Uncased (Whole Word Masking) checkpoint. \nIn BERT\u2019s vocabulary, there are 994 tokens marked as \u2018unused\u2019 which are effectively randomly initialized. We replace 150 of them with the top occurrences and offensive-related words of the Tweets dataset. \nWe use 9 milion tweet sentences to pre-train this BERT model. We follow the instruction of pre-training model from Google BERT github. However, since tweets data are single short sentences, we modify the processing and training script to remove the Next Sentence Prediction loss and only perform the Masked LM task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9836372256923877,
+        0.850545746146495,
+        0.8497871278551168,
+        0.911244783197606
+      ],
+      "excerpt": "In addition to the output vector of the [CLS] token from BERT model, in our implementation, the output vectors of all word tokens are also used for classification. Those tokens are sent through LSTM layers, then concatenated with the [CLS] token and finally passed to a fully connected neural network to perform the final classification \nTo leverage the enormous semi-supervised data given in the challenge, we use the Noisy Student training method to train the model. \nWe only select the most confidence instances from the training set and assign hard-label (NOT/OFF, TIN/UNT). These instances are used to train the \u2018Teacher\u2019 model. \nThen we split the unlabeled data set to multiple subsets. At each iteration, we use the \u2018Teacher\u2019 model to score one subset to generate the pseudo labels and use the pseudo labels to train the \u2018Stu- dent\u2019 model. Finally, we iterate the process by putting back the student as a teacher to generate pseudo labels on a new subset and train a new stu- dent again. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "2nd place in OffensEval-2, task B - English language track",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/phamtrancsek12/offensive-identification/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 00:26:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/phamtrancsek12/offensive-identification/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "phamtrancsek12/offensive-identification",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8250924965183113
+      ],
+      "excerpt": "Both Tensorflow and Pytorch checkpoint are released here. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/phamtrancsek12/offensive-identification/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PGSG at SemEval-2020 Task 12",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "offensive-identification",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "phamtrancsek12",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/phamtrancsek12/offensive-identification/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 00:26:00 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

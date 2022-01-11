@@ -1,0 +1,426 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1905.11946, EFN architectures provide the \nhighest accuracy per flop compared to SOTA at the of publication of \nthe paper. B4 was chosen because of its good balance between accuracy and \nflops. Compared to EFNB2, EFNB3 provides a significant boost in accuracy. \nSizes larger than EFNB4 provide minor increases in accuracy, but significant\nincrease in flops. EFNB4 was not chosen due to increase in parameters, which\nwould increase the time to initialize the network. \n\n#### Dataset Choice \n\nFood101 https://www.tensorflow.org/datasets/catalog/food101 was chosen \nbecause of its accessibility and quantity. Note that the training images\nhave noisy labels. \n\n#### Model Fine Tuning \n\nPriority: Train Quickly, Handle Noisy Data, Focus on Hard Examples \n\nImagenet pretrained weights were used to initialize the network. Food images\nhave many common features with imagenet images. To handle noisy data, label \nsmoothing https://arxiv.org/pdf/1701.06548.pdf was used. Focal loss was \nchosen over cross entropy in order to increase the impact of hard to classify\nexamples, even though its primary use is for class imbalance https://arxiv.org/abs/1708.02002.\n\n#### Out of Classes Images \n\nCurrently, the classifier is limited to 100 classes, which means that \nthere are many foods that are not included. For any photo that does not\ncontain one of the 100 classes, the classifier will classify the result\ninto one of the 100 classes. There is currently no null class. \n\n### Server Component \n\nPriority: Low Cost, Quick Scaling \n\nTFLite was used for quantization of the trained model. Reducing the model footprint\nimproves the time to start a new instance. To minimize cost, instances are only\nactive when requests come in, thus it is important to quickly spin up instances \non the fly. Google App Engine allows for low cost instance management that scales\nautomatically.  \n\n### App Component \n\nAndroid was chosen over iOS due to ease of development and access to android devices.  \n\n## How to Deploy \n\nIn order to deploy the server component, you will need your own Google Cloud \nproject and some understanding of the App Engine and Cloud Storage services. \nThe follow steps assume that the user has familiarity with those to services. \nIf you are new to Google App Engine, I recommend going through the python 3 \ntutorial.  \n\n1. Upload your model files (h5 or tflite format",
+      "https://arxiv.org/abs/1708.02002.\n\n#### Out of Classes Images \n\nCurrently, the classifier is limited to 100 classes, which means that \nthere are many foods that are not included. For any photo that does not\ncontain one of the 100 classes, the classifier will classify the result\ninto one of the 100 classes. There is currently no null class. \n\n### Server Component \n\nPriority: Low Cost, Quick Scaling \n\nTFLite was used for quantization of the trained model. Reducing the model footprint\nimproves the time to start a new instance. To minimize cost, instances are only\nactive when requests come in, thus it is important to quickly spin up instances \non the fly. Google App Engine allows for low cost instance management that scales\nautomatically.  \n\n### App Component \n\nAndroid was chosen over iOS due to ease of development and access to android devices.  \n\n## How to Deploy \n\nIn order to deploy the server component, you will need your own Google Cloud \nproject and some understanding of the App Engine and Cloud Storage services. \nThe follow steps assume that the user has familiarity with those to services. \nIf you are new to Google App Engine, I recommend going through the python 3 \ntutorial.  \n\n1. Upload your model files (h5 or tflite format"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9819747982998702
+      ],
+      "excerpt": "smoothing https://arxiv.org/pdf/1701.06548.pdf was used. Focal loss was  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9108221188045336
+      ],
+      "excerpt": "should yield better results than the multi-class approach and allows \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyang0129/food-class-app",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-10T19:05:58Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-17T20:37:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8045499006838761,
+        0.959825636391356,
+        0.9719842860616562,
+        0.9598971871092816,
+        0.9759356399285097
+      ],
+      "excerpt": "This android app classifies food into one of 101 categories using a cloud compute architecture. \nThe purpose is to classify different foods in real world settings.  \nThis project evaluates the suitability of the Google App Engine and various \nother technologies for inference in the cloud. \nThe App Engine alone is not suitable for cloud inference. This is because the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863666819957388
+      ],
+      "excerpt": "on the App Engine. Additionally, there are major downsides to deploying a  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8650705860271736,
+        0.9254513814721355,
+        0.8409359084453277
+      ],
+      "excerpt": "could use the mobile device for inference, it reduces the complexity significantly. \nThe only realistic use case for the App Engine is to function as a web server \nintermediary for cloud inference. In this scenario, a mobile device would  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8047326897821673,
+        0.8677694655757306
+      ],
+      "excerpt": "compute resources for whatever reason (save battery, perform other tasks) and \nthere is insufficient traffic to justify a GPU inference server. However,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9862529810420259
+      ],
+      "excerpt": "The model used for inference is EfficientNetB3 (EFNB3).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9739838583780958,
+        0.8888615444795442,
+        0.8542375026367218
+      ],
+      "excerpt": "highest accuracy per flop compared to SOTA at the of publication of  \nthe paper. B4 was chosen because of its good balance between accuracy and  \nflops. Compared to EFNB2, EFNB3 provides a significant boost in accuracy.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8556646798138638,
+        0.85501208104229
+      ],
+      "excerpt": "increase in flops. EFNB4 was not chosen due to increase in parameters, which \nwould increase the time to initialize the network. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.903671689841156
+      ],
+      "excerpt": "have many common features with imagenet images. To handle noisy data, label  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9691803563779946
+      ],
+      "excerpt": "chosen over cross entropy in order to increase the impact of hard to classify \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9656886534339229,
+        0.8425302120767628
+      ],
+      "excerpt": "Currently, the classifier is limited to 100 classes, which means that  \nthere are many foods that are not included. For any photo that does not \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9120510678227979
+      ],
+      "excerpt": "into one of the 100 classes. There is currently no null class. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8885031287242703,
+        0.938215742146114,
+        0.8948554471315099,
+        0.9245495864435743
+      ],
+      "excerpt": "TFLite was used for quantization of the trained model. Reducing the model footprint \nimproves the time to start a new instance. To minimize cost, instances are only \nactive when requests come in, thus it is important to quickly spin up instances  \non the fly. Google App Engine allows for low cost instance management that scales \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9526606164319821
+      ],
+      "excerpt": "Android was chosen over iOS due to ease of development and access to android devices. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9760917331842894,
+        0.9101662316858202
+      ],
+      "excerpt": "project and some understanding of the App Engine and Cloud Storage services.  \nThe follow steps assume that the user has familiarity with those to services.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456983929739118
+      ],
+      "excerpt": "If you wish to train and or fine tune the model, see the interactive notebook  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9121756372572294
+      ],
+      "excerpt": "in your web browser with a TPU for free. Be sure to change the model save path to './models/' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8139587476614867,
+        0.9128508811989257,
+        0.9607679700460907
+      ],
+      "excerpt": "the number of foods for classification through one of two ways.  \nIncrease the number of classes without any changes to the prediction  \npipeline. This method only requires additional data of the new classes and can \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.929360643576846
+      ],
+      "excerpt": "the number of weights in the actual model. Given that the final layer is a  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9415495758901298
+      ],
+      "excerpt": "Increase the number of classes with a new prediction pipeline. This method  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042707937764886
+      ],
+      "excerpt": "allows for the model to train on a large number of classes (say 1k), but then  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8650816945355635
+      ],
+      "excerpt": "but different values for different foods. This method would scale much better \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8468375752567149,
+        0.9915944878449287,
+        0.9722530895985836,
+        0.9135421700622939
+      ],
+      "excerpt": "servers even if the mobile device could perform inference. The necessity is brought by  \nthe need for the KNN search of the embeddings. It is unrealistic for a mobile \ndevice to store the embeddings of hundreds of thousands of food photos. \nWhen a photo is taken of a non food object, the classifier still attempts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9637337606615775
+      ],
+      "excerpt": "the variety of non food objects is even greater than the variety of food \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8623865174449563
+      ],
+      "excerpt": "reduce the overall classification accuracy of food classes.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507086923235675
+      ],
+      "excerpt": "second is a sigmoid binary cross entropy between is food and not food.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9952149790307232
+      ],
+      "excerpt": "for easy calibration of the is food threshold because the model outputs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.831170791089808,
+        0.944820789294204,
+        0.93996849530559
+      ],
+      "excerpt": "is likely to yield the best performance, but it requires bounding boxes \nor segmentation maps for the data. This approach makes it more difficult \nto scrape images from the web (eg. a simple Google search of boiled eggs \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyang0129/foodclassapp/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 16:02:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hyang0129/food-class-app/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hyang0129/food-class-app",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/hyang0129/foodclassapp/main/training/FOODTRAINER.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.852988529648701
+      ],
+      "excerpt": "The follow steps assume that the user has familiarity with those to services.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9425307709345123,
+        0.9103343589428889
+      ],
+      "excerpt": "Use gcloud app deploy command via the terminal.  \nFor the android app component, follow the standard steps for a gradle build,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9293404814969001,
+        0.9552830756543947
+      ],
+      "excerpt": "using a Jupyter environment outside of Colab, you will need to allocate the correct \nTPU or GPU resource and ensure that the packages are installed correctly. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8204456385704659
+      ],
+      "excerpt": "<img src=\"appdemo.gif\" align=\"right\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8006622368835921
+      ],
+      "excerpt": "contain one of the 100 classes, the classifier will classify the result \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9293317353748517
+      ],
+      "excerpt": "Update the main.py file to point towards your model file.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hyang0129/food-class-app/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Food Classifier",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "food-class-app",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hyang0129",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyang0129/food-class-app/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 16:02:37 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

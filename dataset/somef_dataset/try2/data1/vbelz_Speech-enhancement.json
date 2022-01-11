@@ -1,0 +1,406 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1703.08019]\n\n>Ronneberger O., Fischer P., Brox T. (2015",
+      "https://arxiv.org/abs/1505.04597]\n\n> K. J. Piczak. **ESC: Dataset for Environmental Sound Classification**. *Proceedings of the 23rd Annual ACM Conference on Multimedia*, Brisbane, Australia, 2015.\n>\n> [DOI: http://dx.doi.org/10.1145/2733373.2806390]\n\n## License\n\n[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ">Jansson, Andreas, Eric J. Humphrey, Nicola Montecchio, Rachel M. Bittner, Aparna Kumar and Tillman Weyde.**Singing Voice Separation with Deep U-Net Convolutional Networks.** *ISMIR* (2017).\n>\n>[https://ejhumphrey.com/assets/pdf/jansson2017singing.pdf]\n\n>Grais, Emad M. and Plumbley, Mark D., **Single Channel Audio Source Separation using Convolutional Denoising Autoencoders** (2017).\n>\n>[https://arxiv.org/abs/1703.08019]\n\n>Ronneberger O., Fischer P., Brox T. (2015) **U-Net: Convolutional Networks for Biomedical Image Segmentation**. In: Navab N., Hornegger J., Wells W., Frangi A. (eds) *Medical Image Computing and Computer-Assisted Intervention \u2013 MICCAI 2015*. MICCAI 2015. Lecture Notes in Computer Science, vol 9351. Springer, Cham\n>\n>[https://arxiv.org/abs/1505.04597]\n\n> K. J. Piczak. **ESC: Dataset for Environmental Sound Classification**. *Proceedings of the 23rd Annual ACM Conference on Multimedia*, Brisbane, Australia, 2015.\n>\n> [DOI: http://dx.doi.org/10.1145/2733373.2806390]\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9594554290178517
+      ],
+      "excerpt": "<img src=\"img/Unet_noisyvoice_to_noisemodel.png\" alt=\"Unet training\" title=\"Unet training\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9594554290178517
+      ],
+      "excerpt": "<img src=\"img/loss_training.png\" alt=\"loss training\" title=\"loss training\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9991874583098879
+      ],
+      "excerpt": "<img src=\"img/flow_prediction.png\" alt=\"flow prediction part 1\" title=\"flow prediction part 1\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9991874583098879
+      ],
+      "excerpt": "<img src=\"img/flow_prediction_part2.png\" alt=\"flow prediction part 2\" title=\"flow prediction part 2\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9301242705116426
+      ],
+      "excerpt": "<img src=\"img/validation_spec_examples.png\" alt=\"validation examples\" title=\"Spectrogram validation examples\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9813161029725735
+      ],
+      "excerpt": "<img src=\"img/denoise_ts_10classes.gif\" alt=\"Timeserie denoising\" title=\"Speech enhancement\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vbelz/Speech-enhancement",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-12-14T12:57:36Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T02:38:01Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**This project aims at building a speech enhancement system to attenuate environmental noise.**\n\n<img src=\"img/denoise_10classes.gif\" alt=\"Spectrogram denoising\" title=\"Speech enhancement\"/>\n\n\n\nAudios have many different ways to be represented, going from raw time series to time-frequency decompositions.\nThe choice of the representation is crucial for the performance of your system.\nAmong time-frequency decompositions, Spectrograms have been proved to be a useful representation for audio processing. They consist in 2D images representing sequences of Short Time Fourier Transform (STFT) with time and frequency as axes, and brightness representing the strength of a frequency component at each time frame. In such they appear a natural domain to apply the CNNS architectures for images directly to sound. Between magnitude and phase spectrograms, magnitude spectrograms contain most the structure of the signal. Phase spectrograms appear to show only little temporal and spectral regularities.\n\nIn this project, I will use magnitude spectrograms as a representation of sound (cf image below) in order to predict the noise model to be subtracted to a noisy voice spectrogram.\n\n<img src=\"img/sound_to_spectrogram.png\" alt=\"sound representation\" title=\"sound representation\" />\n\nThe project is decomposed in three modes: `data creation`, `training` and `prediction`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9157166150686634,
+        0.9332044786035222,
+        0.9540783037403955
+      ],
+      "excerpt": "Published in towards data science : Speech-enhancement with Deep learning \nThe model used for the training is a U-Net, a Deep Convolutional Autoencoder with symmetric skip connections. U-Net was initially developed for Bio Medical Image Segmentation. Here the U-Net has been adapted to denoise spectrograms. \nAs input to the network, the magnitude spectrograms of the noisy voices. As output the Noise to model (noisy voice magnitude spectrogram - clean voice magnitude spectrogram). Both input and output matrix are scaled with a global scaling to be mapped into a distribution between -1 and 1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9453202393567824,
+        0.9233668425131673
+      ],
+      "excerpt": "Many configurations have been tested during the training. For the preferred configuration the encoder is made of 10 convolutional layers (with LeakyReLU, maxpooling and dropout). The decoder is a symmetric expanding path with skip connections. The last activation layer is a hyperbolic tangent (tanh) to have an output distribution between -1 and 1. For training from scratch the initial random weights where set with He normal initializer. \nModel is compiled with Adam optimizer and the loss function used is the Huber loss as a compromise between the L1 and L2 loss. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8080630317850932
+      ],
+      "excerpt": "start training from pre-trained weights specified in weights_folder and name_model. I let available model_unet.h5 with weights from my training in ./weights. The number of epochs and the batch size for training are specified by epochs and batch_size. Best weights are automatically saved during training as model_best.h5. You can call fit_generator to only load part of the data to disk at training time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9550113685951207,
+        0.9360992461392296
+      ],
+      "excerpt": "./colab/Train_denoise.ipynb. If you have a large available space on your drive, you can load all your training data to your drive and load part of it at training time with the fit_generator option of tensorflow.keras. Personally I had limited space available on my Google drive so I pre-prepared in advanced batches of 5Gb to be loaded to drive for training. Weights were regularly saved and reload for next training. \nAt the end, I obtained a training loss of 0.002129 and a validation loss of 0.002406. Below a loss graph made in one of the trainings. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9756929918321874
+      ],
+      "excerpt": "For prediction, the noisy voice audios are converted into numpy time series of windows slightly above 1 second. Each time serie is converted into a magnitude spectrogram and a phase spectrogram via STFT transforms. Noisy voice spectrograms are passed into the U-Net network that will predict the noise model for each window (cf graph below). Prediction time for one window once converted to magnitude spectrogram is around 80 ms using classical CPU. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9908786472694655
+      ],
+      "excerpt": "Then the model is subtracted from the noisy voice spectrogram (here I apply a direct subtraction as it was sufficient for my task, we could imagine to train a second network to adapt the noise model, or applying a matching filter such as performed in signal processing). The \"denoised\" magnitude spectrogram is combined with the initial phase as input for the inverse Short Time Fourier Transform (ISTFT). Our denoised time serie can be then converted to audio (cf graph below). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9712300558040308,
+        0.9849990028565014
+      ],
+      "excerpt": "For each of them I display the initial noisy voice spectrogram, the denoised spectrogram predicted by the network, and the true clean voice spectrogram. We can see that the network is well able to generalize the noise modelling, and produce a slightly smoothed version of the voice spectrogram, very close to the true clean voice spectrogram. \nMore examples of spectrogram denoising on validation data are displayed in the initial gif on top of the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8755498847760246
+      ],
+      "excerpt": "Let's hear the results converted back to sounds: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8539376260371504
+      ],
+      "excerpt": "Below I show the corresponding displays converting back to time series: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869056147193564
+      ],
+      "excerpt": "Below, I show the corresponding gif of the spectrogram denoising gif (top of the repository) in the time serie domain. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9339359644376406,
+        0.93202638227554
+      ],
+      "excerpt": "As an extreme testing, I applied to some voices blended with many noises at a high level. \nThe network appeared to work surprisingly well for the denoising. The total time to denoise a 5 seconds audio was around 4 seconds (using classical CPU). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Deep learning for audio denoising",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vbelz/Speech-enhancement/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 81,
+      "date": "Sun, 26 Dec 2021 22:52:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vbelz/Speech-enhancement/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vbelz/Speech-enhancement",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/vbelz/Speech-enhancement/master/colab/Train_denoise.ipynb",
+      "https://raw.githubusercontent.com/vbelz/Speech-enhancement/master/demo_data/demo_predictions.ipynb",
+      "https://raw.githubusercontent.com/vbelz/Speech-enhancement/master/demo_data/.ipynb_checkpoints/demo_predictions-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To create the datasets for training, I gathered english speech clean voices  and environmental noises from different sources.\n\nThe clean voices were mainly gathered from [LibriSpeech](http://www.openslr.org/12/): an ASR corpus based on public domain audio books. I used as well some datas from [SiSec](https://sisec.inria.fr/sisec-2015/2015-two-channel-mixtures-of-speech-and-real-world-background-noise/).\nThe environmental noises were gathered from [ESC-50 dataset](https://github.com/karoldvl/ESC-50) or [https://www.ee.columbia.edu/~dpwe/sounds/](https://www.ee.columbia.edu/~dpwe/sounds/).  \n\n For this project, I focused on 10 classes of environmental noise: **tic clock**, **foot steps**, **bells**, **handsaw**, **alarm**, **fireworks**, **insects**, **brushing teeth**, **vaccum cleaner** and **snoring**. These classes are illustrated in the image below\n (I created this image using pictures from [https://unsplash.com](https://unsplash.com)).\n\n<img src=\"img/classes_noise.png\" alt=\"classes of environmental noise used\" title=\"classes of environmental noise\" />\n\nTo create the datasets for training/validation/testing, audios were sampled at 8kHz and I extracted windows\nslighly above 1 second. I performed some data augmentation for the environmental noises (taking the windows at different times creates different noise windows). Noises have been blended to clean voices  with a randomization of the noise level (between 20% and 80%). At the end, training data consisted of 10h of noisy voice & clean voice,\nand validation data of 1h of sound.\n\nTo prepare the data, I recommend to create data/Train and data/Test folders in a location separate from your code folder. Then create the following structure as in the image below:\n\n<img src=\"img/structure_folder.png\" alt=\"data folder structure\" title=\"data folder structure\" />\n\nYou would modify the `noise_dir`, `voice_dir`, `path_save_spectrogram`, `path_save_time_serie`, and `path_save_sound` paths name accordingly into the `args.py` file that takes the default parameters for the program.\n\nPlace your noise audio files into `noise_dir` directory and your clean voice files into `voice_dir`.\n\nSpecify how many frames you want to create as `nb_samples` in `args.py` (or pass it as argument from the terminal)\nI let nb_samples=50 by default for the demo but for production I would recommend having 40 000 or more.\n\nThen run `python main.py --mode='data_creation'`. This will randomly blend some clean voices from `voice_dir` with some noises from `noise_dir` and save the spectrograms of noisy voices, noises and clean voices to disk as well as complex phases, time series and sounds (for QC or to test other networks). It takes the inputs parameters defined in `args.py`. Parameters for STFT, frame length, hop_length can be modified in `args.py` (or pass it as arguments from the terminal), but with the default parameters each window will be converted into spectrogram matrix of size 128 x 128.\n\nDatasets to be used for training will be magnitude spectrograms of noisy voices and magnitude spectrograms of clean voices.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.850231198841133
+      ],
+      "excerpt": "If you have a GPU for deep learning computation in your local computer, you can train with: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8065537426540054
+      ],
+      "excerpt": "You can have a look at these displays/audios in the jupyter notebook demo_predictions.ipynb that I provide in the ./demo_data folder. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8093360924146745
+      ],
+      "excerpt": "<img src=\"img/Unet_noisyvoice_to_noisemodel.png\" alt=\"Unet training\" title=\"Unet training\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8431819628379035,
+        0.8208036453345592
+      ],
+      "excerpt": "python main.py --mode=\"training\". It takes as inputs parameters defined in args.py. By default it will train from scratch (you can change this by turning training_from_scratch to false). You can \nstart training from pre-trained weights specified in weights_folder and name_model. I let available model_unet.h5 with weights from my training in ./weights. The number of epochs and the batch size for training are specified by epochs and batch_size. Best weights are automatically saved during training as model_best.h5. You can call fit_generator to only load part of the data to disk at training time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8630149586411434
+      ],
+      "excerpt": "<img src=\"img/validation_spec_examples.png\" alt=\"validation examples\" title=\"Spectrogram validation examples\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228,
+        0.8711681737126942,
+        0.8857650612668752,
+        0.9453201001802395,
+        0.8216270093103228,
+        0.8711681737126942,
+        0.8857650612668752,
+        0.9453201001802395,
+        0.8216270093103228,
+        0.8711681737126942,
+        0.8857650612668752,
+        0.9453201001802395
+      ],
+      "excerpt": "Audios for Alarm example: \nInput example alarm \nPredicted output example alarm \nTrue output example alarm \nAudios for Insects example: \nInput example insects \nPredicted output example insects \nTrue output example insects \nAudios for Vaccum cleaner example: \nInput example vaccum cleaner \nPredicted output example vaccum cleaner \nTrue output example vaccum cleaner \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8364279544170419,
+        0.8688325750073709,
+        0.9215483827877731
+      ],
+      "excerpt": "Input example bells \nPredicted output example bells \nTrue output example bells \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8586467060244308
+      ],
+      "excerpt": "<img src=\"img/validation_timeserie_examples.png\" alt=\"validation examples timeserie\" title=\"Time serie validation examples\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vbelz/Speech-enhancement/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019, vincent belz\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Speech-enhancement",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Speech-enhancement",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vbelz",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vbelz/Speech-enhancement/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 319,
+      "date": "Sun, 26 Dec 2021 22:52:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-learning",
+      "unet",
+      "cnn",
+      "speech"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n- Clone this repository\n- pip install -r requirements.txt\n- python main.py OPTIONS\n\n* Modes of the program (Possible OPTIONS):\n\n--mode: default='prediction', type=str, choices=['data_creation', 'training', 'prediction']\n\n```\n\nHave a look at possible arguments for each option in `args.py`.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

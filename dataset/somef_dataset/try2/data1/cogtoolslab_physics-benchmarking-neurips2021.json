@@ -1,0 +1,385 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2012.12877",
+      "https://arxiv.org/abs/2002.09405"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9440098813070663,
+        0.9302785107180478,
+        0.9302785107180478,
+        0.9302785107180478
+      ],
+      "excerpt": "| SVG        |               | Denton and Fergus 2018 | Image-like latent | \n| OP3        |               | Veerapaneni et. al. 2020 | | \n| CSWM       |               | Kipf et. al. 2020 | | \n| RPIN       |               | Qi et. al. 2021 | | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9302785107180478
+      ],
+      "excerpt": "| pDEIT-mlp  |               | Touvron et. al. 2020| | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9302785107180478
+      ],
+      "excerpt": "| GNS        |               | Sanchez-Gonzalez et. al. 2020| | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9992579236028358
+      ],
+      "excerpt": "| DPI        |               | Li et. al. 2019| | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cogtoolslab/physics-benchmarking-neurips2021",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-22T01:37:26Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T05:50:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9798602366448098,
+        0.9559093163188208
+      ],
+      "excerpt": "This repo contains code and data to reproduce the results in our NeurIPS 2021 paper, Physion: Evaluating Physical Prediction from Vision in Humans and Machines. For a brief overview, please check out our project website: https://physion-benchmark.github.io/.  \nPlease see below for details about how to download the Physion dataset, replicate our modeling & human experiments, and statistical analyses to reproduce our results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8154349936711227,
+        0.958821908249891
+      ],
+      "excerpt": "Comparing models and humans \nPhysionTest-Core is all you need to evaluate humans and models on exactly the same test stimuli used in our paper.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9285948543837041,
+        0.886966629638855
+      ],
+      "excerpt": "- mp4s: Contains the MP4 video files presented to human participants. The agent and patient objects appear in random colors.  \n- mp4s-redyellow: Contains the MP4 video files passed into models. The agent and patient objects consistently appear in red and yellow, respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9141121526807879
+      ],
+      "excerpt": "Each stimulus is encoded in an HDF5 file containing comprehensive information regarding depth, surface normals, optical flow, and segmentation maps associated with each frame of each trial, as well as other information about the physical states of objects at each time step.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8605398707205321,
+        0.9560206037134944
+      ],
+      "excerpt": "Specifically, tdw_physics is used to generate the dataset of physical scenarios (a.k.a. stimuli), including both the training datasets used to train physical-prediction models, as well as test datasets used to measure prediction accuracy in both physical-prediction models and human participants. \nInstructions for using the ThreeDWorld simulator to regenerate datasets used in our work can be found here. Links for downloading the Physion testing, training, and readout fitting datasets can be found here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891510626811716
+      ],
+      "excerpt": "The modeling component of this repo depends on the physopt repo.  The physopt repo implements an interface through which a wide variety of physics prediction models from the literature (be they neural networks or otherwise) can be adapted to accept the inputs provided by our training and testing datasets and produce outputs for comparison with our human measurements.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9539938677164697,
+        0.9749933693325973,
+        0.9414115250765447,
+        0.9868091774863195
+      ],
+      "excerpt": "The only protocol, in which each candidate physics model architecture is trained -- using that model's native loss function as specified by the model's authors -- separately on each of the scenarios listed above (e.g. \"dominoes\", \"support\", &c).  This produces eight separately-trained models per candidate architecture (one for each scenario).  Each of these separate models are then tested in comparison to humans on the testing data for that scenario. \nA all protocol, in which each candidate physics architecture is trained on mixed data from all of the scenarios simultaneously (again, using that model's native loss function). This single model is then tested and compared to humans separately on each scenario. \nA all-but-one protocol, in which each candidate physics architecture is trained on mixed data drawn for all but one scenario -- separately for all possible choices of the held-out scenario.  This produces eight separately-trained models per candidate architecture (one for each held-out scenario).  Each of these separate models are then tested in comparison to humans on the testing data for that scenario. \nResults from each of the three protocols are separately compared to humans (as described below in the section on comparison of humans to models).  All model-human comparisons are carried using a representation-learning paradigm, in which models are trained on their native loss functions (as encoded by the original authors of the model).  Trained models are then evaluated on the specific physion red-object-contacts-yellow-zone prediction task.  This evaluation is carried by further training a \"readout\", implemented as a linear logistic regression.  Readouts are always trained in a per-scenario fashion.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9276932461366327,
+        0.9971872636826359
+      ],
+      "excerpt": "This repo contains code to conduct the human behavioral experiments reported in this paper, as well as analyze the resulting data from both human and modeling experiments.  \nThe details of the experimental design and analysis plan are documented in our study preregistration contained within this repository. The format for this preregistration is adapted from the templates provided by the Open Science Framework for our studies, and put under the same type of version control as the rest of the codebase for this project.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9708524915237091,
+        0.9570276390450998,
+        0.9320969291157738
+      ],
+      "excerpt": "    - /results/plots/ contains .pdf/.png plots, a selection of which are then polished and formatted for inclusion in the paper using Adobe Illustrator.  \n    - Important: Before pushing any csv files containing human behavioral data to a public code repository, triple check that this data is properly anonymized. This means no bare AMT Worker ID's or Prolific participant IDs. \n- stimuli: This directory contains any download/preprocessing scripts for data (a.k.a. stimuli) that are the inputs to human behavioral experiments. This repo assumes you have generated stimuli using tdw_physics. This repo uses code in this directory to upload stimuli to AWS S3 and generate metadata to control the timeline of stimulus presentation in the human behavioral experiments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9623627801072118,
+        0.9688639715095263
+      ],
+      "excerpt": "summarize_human_model_behavior.ipynb: The purpose of this notebook is to: \nApply preprocessing to human behavioral data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9623627801072118,
+        0.882542944622516,
+        0.9117647339448219,
+        0.8855476042671343
+      ],
+      "excerpt": "inference_human_model_behavior.ipynb: The purpose of this notebook is to:  \nVisualize human and model prediction accuracy (proportion correct) \nVisualize average-human and model agreement (RMSE) \nVisualize human-human and model-human agreement (Cohen's kappa) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Repo for \"Physion: Evaluating Physical Prediction from Vision in Humans and Machines\", presented at NeurIPS 2021 (Datasets & Benchmarks track)",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All videos in the Physion test set have been manually evaluated to ensure that the behavior of the simulated physics does not feature glitches or unexpected behaviors. A small number of stimuli that contain potential physics glitches have been identified; the stimulus names can be seen [here](analysis/manual_stim_evaluation_buggy_stims.txt) or downloaded at the following link:\n\n**Download URL**: [https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/manual_stim_evaluation_glitchy_test_stims.txt](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/manual_stim_evaluation_glitchy_test_stims.txt).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "`PhysionTrain-Dynamics` contains the full dataset used to train the dynamics module of models benchmarked in our paper. It consists of approximately 2K stimuli per scenario type.\n\n**Download URL** (770 MB): [https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/PhysionTrainMP4s.tar.gz](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/PhysionTrainMP4s.tar.gz)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "`PhysionTrain-Readout` contains a separate dataset used for training the object-contact prediction (OCP) module for models pretrained on the `PhysionTrain-Dynamics` dataset. It consists of 1K stimuli per scenario type.\n\nThe `agent` and `patient` objects in each of these readout stimuli consistently appear in red and yellow, respectively (as in the `mp4s-redyellow` examples from `PhysionTest-Core` above).\n\n*NB*: Code for using these readout sets to benchmark **any** pretrained model (not just models trained on the Physion training sets) will be released prior to publication.\n\n**Download URLs** for complete `PhysionTrain-Dynamics` and `PhysionTrain-Readout`:\n\n| Scenario | Dynamics Training Set         | Readout Training Set       | Test Set      |\n| -------- | -------------------- | ----------------- | ---------------- |\n| Dominoes | [Dominoes_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Dominoes_dynamics_training_HDF5s.tar.gz) | [Dominoes_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Dominoes_readout_training_HDF5s.tar.gz)         | [Dominoes_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Dominoes_testing_HDF5s.tar.gz) |\n| Support | [Support_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Support_dynamics_training_HDF5s.tar.gz) | [Support_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Support_readout_training_HDF5s.tar.gz)         | [Support_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Support_testing_HDF5s.tar.gz) |\n| Collide | [Collide_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Collide_dynamics_training_HDF5s.tar.gz) | [Collide_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Collide_readout_training_HDF5s.tar.gz)         | [Collide_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Collide_testing_HDF5s.tar.gz) |\n| Contain | [Contain_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Contain_dynamics_training_HDF5s.tar.gz) | [Contain_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Contain_readout_training_HDF5s.tar.gz)         | [Contain_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Contain_testing_HDF5s.tar.gz) |\n| Drop | [Drop_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drop_dynamics_training_HDF5s.tar.gz) | [Drop_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drop_readout_training_HDF5s.tar.gz)         | [Drop_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drop_testing_HDF5s.tar.gz) |\n| Roll | [Roll_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Roll_dynamics_training_HDF5s.tar.gz) | [Roll_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Rollreadout_HDF5s.tar.gz)         | [Roll_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Roll_testing_HDF5s.tar.gz) |\n| Link | [Link_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Link_dynamics_training_HDF5s.tar.gz) | [Link_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Link_readout_training_HDF5s.tar.gz)         | [Link_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Link_testing_HDF5s.tar.gz) |\n| Drape | [Drape_dynamics_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drape_dynamics_training_HDF5s.tar.gz) | [Drape_readout_training_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drape_readout_training_HDF5s.tar.gz)         | [Drape_testing_HDF5s](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/Drape_testing_HDF5s.tar.gz) |\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cogtoolslab/physics-benchmarking-neurips2021/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 18:41:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cogtoolslab/physics-benchmarking-neurips2021/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cogtoolslab/physics-benchmarking-neurips2021",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generate_metadata_redyellow.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/upload_stims_to_s3.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generate_metadata.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/check_stims_for_balance.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/analyze_error_basic.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/analyze_human_behavior_across_scenarios.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/paper_plots.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/analyze_human_behavior_single_scenario.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/summarize_human_model_behavior.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/inference_human_model_behavior.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/summarize_human_model_behavior_subset.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/stimulus_plots.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/analyze_human_model_behavior.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/familiariarization_exclusion.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/demographics.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/check_metadata_for_matching_urls.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/stimulus_evaluation.ipynb",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/analysis/analyze_model_model_behavior.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/generate_test_data.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/generate_train_and_readout_data.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/generate_human_stimuli.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_collide.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_drop.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_roll.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_dominoes.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_link.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_support.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_drape.sh",
+      "https://raw.githubusercontent.com/cogtoolslab/physics-benchmarking-neurips2021/master/stimuli/generation/scripts/deprecated/generate_contain.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All videos in the Physion test set have been manually evaluated to ensure that the behavior of the simulated physics does not feature glitches or unexpected behaviors. A small number of stimuli that contain potential physics glitches have been identified; the stimulus names can be seen [here](analysis/manual_stim_evaluation_buggy_stims.txt) or downloaded at the following link:\n\n**Download URL**: [https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/manual_stim_evaluation_glitchy_test_stims.txt](https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/manual_stim_evaluation_glitchy_test_stims.txt).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.865794359733022
+      ],
+      "excerpt": "Download URL: https://physics-benchmarking-neurips2021-dataset.s3.amazonaws.com/PhysionTestHDF5.tar.gz.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8481763157218073
+      ],
+      "excerpt": "    - /results/csv/ contains csv files containing tidy dataframes with \"raw\" data.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cogtoolslab/physics-benchmarking-neurips2021/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "JavaScript",
+      "HTML",
+      "Python",
+      "CSS",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Cognitive Tools Lab\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Physion: Evaluating Physical Prediction from Vision in Humans and Machines",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "physics-benchmarking-neurips2021",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cogtoolslab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cogtoolslab/physics-benchmarking-neurips2021/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 21,
+      "date": "Wed, 29 Dec 2021 18:41:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "dataset",
+      "deep-learning",
+      "benchmark",
+      "ai"
+    ],
+    "technique": "GitHub API"
+  }
+}

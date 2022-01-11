@@ -1,0 +1,236 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2005.11129",
+      "https://arxiv.org/abs/2005.11129](https://arxiv.org/abs/2005.11129)]\n- Full code is based on original github repository [jaywalnut310/glow-tts](https://github.com/jaywalnut310/glow-tts)\n\n## Requirements\n\nTested in python 3.8.5 windows10 conda environment, [requirements.txt](./requirements.txt)\n\n## Usage\n\nTo download LJ-Speech dataset, run under script.\n\nDataset will be downloaded in '~/tensorflow_datasets' in tfrecord format. If you want to change the download directory, specify `data_dir` parameter of `LJSpeech` initializer.\n\n```python\nfrom dataset.ljspeech import LJSpeech\n\n# lj = LJSpeech(data_dir=path, download=True)\nlj = LJSpeech(download=True) \n```\n\nTo train model, run [train.py](./train.py). \n\nCheckpoint will be written on `TrainConfig.ckpt`, tensorboard summary on `TrainConfig.log`.\n\n```bash\npython train.py\ntensorboard --logdir .\\log\n```\n\nIf you want to train model from raw audio, specify audio directory and turn on the flag `--from-raw`.\n\n```bash\npython .\\train.py --data-dir D:\\LJSpeech-1.1\\wavs --from-raw\n```\n\nTo start to train from previous checkpoint, `--load-epoch` is available.\n\n```bash\npython .\\train.py --load-epoch 20 --config D:\\tf\\ckpt\\glowtts.json\n```\n\nTo inference the audio, run [inference.py](./inference.py). \\\nSince this code is for POC, only alphabets and several special characters are available, reference [TextNormalizer.GRAPHEMES](./datasets/normalizer.py).\n\n```bash\npython .\\inference.py\n    --config D:\\tf\\ckpt\\glowtts.json\n    --ckpt D:\\tf\\ckpt\\glowtts\\glowtts_20.ckpt-1\n    --text \"Hello, my name is revsic\"\n```\n\nPretrained checkpoints are relased on [releases](https://github.com/revsic/tf-glow-tts/releases).\n\nTo use pretrained model, download files and unzip it. Followings are sample script.\n\n```py\nfrom config import Config\nfrom glowtts import GlowTTS\n\nwith open('glowtts.json') as f:\n    config = Config.load(json.load(f))\n\ntts = GlowTTS(config.model)\ntts.restore('./glowtts_20.ckpt-1').expect_partial()\n```\n\n## Learning Curve\n\ntrain LJSpeech 20 epochs with [tf-diffwave](https://github.com/revsic/tf-diffwave)\n\n![loss](./rsrc/loss.png)\n![sample](./rsrc/image.jpg)\n\n\n## Samples\n\nReference [https://revsic.github.io/tf-glow-tts](https://revsic.github.io/tf-glow-tts)."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9179645268243631
+      ],
+      "excerpt": "(Unofficial) Tensorflow implementation of Glow-TTS, Jaehyeon Kim et al., in NeurIPS 2020.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-glow-tts",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-23T10:30:53Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-14T02:18:58Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.986922565069962
+      ],
+      "excerpt": "Full code is based on original github repository jaywalnut310/glow-tts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Tensorflow implementation of Glow-TTS",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-glow-tts/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 21:51:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/revsic/tf-glow-tts/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "revsic/tf-glow-tts",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8174538311679427
+      ],
+      "excerpt": "train LJSpeech 20 epochs with tf-diffwave \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8642859155617836
+      ],
+      "excerpt": "train LJSpeech 20 epochs with tf-diffwave \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/revsic/tf-glow-tts/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 YoungJoong Kim\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tf-glow-tts",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tf-glow-tts",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "revsic",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-glow-tts/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "revsic",
+        "body": "Proof of concept. Tag `v1` is compatible with given checkpoint of commit hash fa8bee4b7bd1b9b20bf5e3735e83833f38488b26\r\n\r\n```python\r\nfrom config import Config\r\nfrom glowtts import GlowTTS\r\n\r\nwith open('glowtts.json') as f:\r\n    config = Config.load(json.load(f))\r\n\r\ntts = GlowTTS(config.model)\r\ntts.restore('./glowtts_20.ckpt-1').expect_partial()\r\n```",
+        "dateCreated": "2021-05-07T08:40:25Z",
+        "datePublished": "2021-05-07T08:41:56Z",
+        "html_url": "https://github.com/revsic/tf-glow-tts/releases/tag/v1",
+        "name": "Glow-TTS POC",
+        "tag_name": "v1",
+        "tarball_url": "https://api.github.com/repos/revsic/tf-glow-tts/tarball/v1",
+        "url": "https://api.github.com/repos/revsic/tf-glow-tts/releases/42589479",
+        "zipball_url": "https://api.github.com/repos/revsic/tf-glow-tts/zipball/v1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Tested in python 3.8.5 windows10 conda environment, [requirements.txt](./requirements.txt)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Tue, 21 Dec 2021 21:51:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "tensorflow",
+      "tf2",
+      "glow-tts",
+      "tts"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To download LJ-Speech dataset, run under script.\n\nDataset will be downloaded in '~/tensorflow_datasets' in tfrecord format. If you want to change the download directory, specify `data_dir` parameter of `LJSpeech` initializer.\n\n```python\nfrom dataset.ljspeech import LJSpeech\n\n#: lj = LJSpeech(data_dir=path, download=True)\nlj = LJSpeech(download=True) \n```\n\nTo train model, run [train.py](./train.py). \n\nCheckpoint will be written on `TrainConfig.ckpt`, tensorboard summary on `TrainConfig.log`.\n\n```bash\npython train.py\ntensorboard --logdir .\\log\n```\n\nIf you want to train model from raw audio, specify audio directory and turn on the flag `--from-raw`.\n\n```bash\npython .\\train.py --data-dir D:\\LJSpeech-1.1\\wavs --from-raw\n```\n\nTo start to train from previous checkpoint, `--load-epoch` is available.\n\n```bash\npython .\\train.py --load-epoch 20 --config D:\\tf\\ckpt\\glowtts.json\n```\n\nTo inference the audio, run [inference.py](./inference.py). \\\nSince this code is for POC, only alphabets and several special characters are available, reference [TextNormalizer.GRAPHEMES](./datasets/normalizer.py).\n\n```bash\npython .\\inference.py\n    --config D:\\tf\\ckpt\\glowtts.json\n    --ckpt D:\\tf\\ckpt\\glowtts\\glowtts_20.ckpt-1\n    --text \"Hello, my name is revsic\"\n```\n\nPretrained checkpoints are relased on [releases](https://github.com/revsic/tf-glow-tts/releases).\n\nTo use pretrained model, download files and unzip it. Followings are sample script.\n\n```py\nfrom config import Config\nfrom glowtts import GlowTTS\n\nwith open('glowtts.json') as f:\n    config = Config.load(json.load(f))\n\ntts = GlowTTS(config.model)\ntts.restore('./glowtts_20.ckpt-1').expect_partial()\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

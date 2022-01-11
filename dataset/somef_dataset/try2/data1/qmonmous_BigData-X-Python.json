@@ -1,0 +1,173 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.945338958678735,
+        0.8729393277090676,
+        0.9761865157193444,
+        0.9999905902006304,
+        0.9999992324938308
+      ],
+      "excerpt": "Lorsqu'on souhaite travailler avec un volume important de donn\u00e9es, des outils sp\u00e9cifiques sont n\u00e9cessaires pour scaler les processus. Des mod\u00e8les distribu\u00e9s comme celui d'Hadoop MapReduce sont donc apparus pour r\u00e9pondre \u00e0 ces probl\u00e9matiques de scale.  \nAvec MapReduce, le tra\u00eetement des donn\u00e9es est r\u00e9alis\u00e9 en deux phases distinctes, Map et Reduce. Pour se familiariser avec le concept, nous allons voir l'exemple du compteur de mots. \nOn pourrait, de prime abord, vouloir compter manuellement le nombre de fois qu\u2019un mot appara\u00eet en input, mais cela prendrait potentiellement beaucoup de temps. \nSi l\u2019on r\u00e9partit cette t\u00e2che entre une vingtaine de personnes, les choses peuvent aller beaucoup plus vite. En effet, chaque personne prend une page du roman et \u00e9crit le nombre de fois que le mot appara\u00eet sur la page. Il s\u2019agit de la partie Map de MapReduce. Si une personne s\u2019en va, une autre prend sa place. Cet exemple illustre la tol\u00e9rance aux erreurs de MapReduce.  \nLorsque toutes les pages sont trait\u00e9es, les utilisateurs r\u00e9partissent tous les mots dans 26 bo\u00eetes en fonction de la premi\u00e8re lettre de chaque mot. Chaque utilisateur prend une bo\u00eete, et classe les mots par ordre alphab\u00e9tique. Le nombre de pages avec le m\u00eame mot est un exemple de la partie Reduce de MapReduce. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qmonmous/BigData-X-Python",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-08T09:38:03Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-09T04:51:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "En distribuant le travail en diff\u00e9rentes partitions et sur diff\u00e9rents noeuds, avec ce qu'on appelle le *Resilient Distributed Dataset (RDD)*, Spark est jusqu'\u00e0 30 fois plus rapide que Hadoop MapReduce pour ex\u00e9cuter un tri par exemple.\n\nSpark fonctionne en 4 grandes \u00e9tapes :\n- on cr\u00e9e un RDD \u00e0 partir de notre jeu de donn\u00e9es,\n- on applique diff\u00e9rentes transformations pour en cr\u00e9er de nouveaux ; r\u00e9sultants de fonctions dites 'immutables' telles que `.map` ou `.filter`,\n- on d\u00e9cide quels RDDs garder en m\u00e9moire avec les fonctions `.persist` ou `.unpersist`,\n- et on peut ensuite appliquer des fonctions plus classiques \u00e0 nos RDDs comme `.count` ou `.collect` qui modifie le RDD directement, sans en cr\u00e9er un nouveau.\n\nEssayons de reproduire l'algorithme de MapReduce pour compter les mots.\n\n```python\nfrom pyspark import SparkContext\n\nsc = pyspark.SparkContext()\nfile = sc.textfile(\"data/count.txt\")\n\n            #:split words on each line\ncount = file.flatMap(lambda line: line.split(\" \"))\n            #:add 1 for each occurence of a word\n            .map(lambda word: (word, 1))\n            #:aggregate the number of occurences of each word\n            .reduceByKey(lambda a, b: a + b)\n            \ncount.persist()\ncount.saveAsTextFile(\"data/count.txt\")\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8974760215542208
+      ],
+      "excerpt": "Introduction to pySpark by building a very simple recommender system. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9376966501689656
+      ],
+      "excerpt": "The main issue with MapReduce is that at each step, the file system (called HDFS) read and write and loose a lot of performance by saving each intermediary outputs. Building a better algorithm would require a primitive to share the data efficiently. Here comes Spark with his ability to store iterations in your cache and computer memory to avoid moving data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\ud83c\uddec\ud83c\udde7 Introduction to pySpark by building a very simple recommender system.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qmonmous/BigData-X-Python/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 10:35:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/qmonmous/BigData-X-Python/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "qmonmous/BigData-X-Python",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/qmonmous/BigData-X-Python/master/Intro-pySpark.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/qmonmous/BigData-X-Python/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Big Data *X* Python",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BigData-X-Python",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "qmonmous",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qmonmous/BigData-X-Python/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 10:35:13 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

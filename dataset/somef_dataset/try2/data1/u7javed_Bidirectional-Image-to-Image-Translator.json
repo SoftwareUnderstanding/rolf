@@ -1,0 +1,248 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Scene Parsing through ADE20K Dataset. Bolei Zhou, Hang Zhao, Xavier Puig, Sanja Fidler, Adela Barriuso and Antonio Torralba. Computer Vision and Pattern Recognition (CVPR), 2017. http://people.csail.mit.edu/bzhou/publication/scene-parse-camera-ready.pdf\n\nSemantic Understanding of Scenes through ADE20K Dataset. Bolei Zhou, Hang Zhao, Xavier Puig, Tete Xiao, Sanja Fidler, Adela Barriuso and Antonio Torralba. International Journal on Computer Vision (IJCV). https://arxiv.org/pdf/1608.05442.pdf\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9869224966082298
+      ],
+      "excerpt": "Reference to CycleGAN paper: https://arxiv.org/pdf/1703.10593.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Bidirectional-Image-to-Image-Translator",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-07T21:46:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-08T02:58:17Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9404539022260905
+      ],
+      "excerpt": "Image semantic segmentation is a common use of Image-to-Image translation and we will be focusing on that approach in this repo. Specifically, we want a GAN to both learn from semantic information and generate a high-quality image and also be given an image and produce a segmented image from it. We will be using the CycleGAN to develop out Translator. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9676581250324435,
+        0.9837785211476748
+      ],
+      "excerpt": "The Cycle GAN learns the mapping G: X -> Y where X is defined as the first set of images and Y is the augmented or segmented Image form. The CycleGAN also couples the inverse mapping of G, F: Y -> X which takes the augmented or segmented image as input and generates the inital image form. In an ideal case, F(G(X)) = F(Y) = X. These two inverse mappings are represented as coupled generators with joint loss trained coined cycle-consistency loss. The forward cycle is defined by: y -> F(x) -> G(F(y)) = y while the backward cycle-consistency loss is defined as: x -> G(x) -> F(G(x)) = x; hence the name, CycleGAN.  \nThe CycleGAN utilizes Residual Blocks to learn feature mappings through convolutions and translates from one feature to the other. The CycleGAN generator can be split into 3 main components. The Encoder, Translator, and Decoder. The Encoder is where downsizing occurs and feature space expansion to be passed through the translator. The translator is a sequence of residual blocks learning the feature mapping described above. The Decoder upsamples the image dimensions and shrinks the feature space size back to the original channel size, in this case, RGB. The CycleGAN also utilizes Instance Normalization instead of Batch Normalization and Reflection Padding to reduce artifacts within generated data. Similarly, the Dicriminator can be split into 2 main components. The first part is a suquence of strided convolution blocks called Discriminator Blocks to downsize the fed image. The second part is the final output that Zero Pads the output from part 1 and the final step is a convolution. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319675775210366
+      ],
+      "excerpt": "    - Contains the model architectures described in the CycleGAN paper including the Residual Blocks, Discriminator Blocks, Generator, and Discriminator. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9699908134417149
+      ],
+      "excerpt": "Contains the dataset builder class the seperates segmented data and real data to batched pairs and samples the data based on specified size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9622957121711425
+      ],
+      "excerpt": "Contains the optimizer learning rate scheduler class calssed Lambda_LR or Lambda Learning Rate which adjusts learning rate as the training goes on. It also contains a replay buffer that augments the data to more appropriately fit with it's respective discriminator. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8765760136010888
+      ],
+      "excerpt": "--hyperparameters are a list of hyperparameters to call in order to properly execute train.py. Each hyperparamter is to be entered in this format: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9060156457824284
+      ],
+      "excerpt": "followed by a space to seperate each hyperparameter entered. Please refer to script_run.ipynb Jupyter Notebook file to see specific hyperparamters \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A bidirectional Image-to-Image translator that uses the CycleGAN as its foundation. This example is done with Semantic Segmentation as the translation target but any image-to-image correlation can be applied.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Bidirectional-Image-to-Image-Translator/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 05:00:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/u7javed/Bidirectional-Image-to-Image-Translator/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "u7javed/Bidirectional-Image-to-Image-Translator",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/u7javed/Bidirectional-Image-to-Image-Translator/master/script_run.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.9144810508102184
+      ],
+      "excerpt": "  - models.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9099440223319041
+      ],
+      "excerpt": "python train.py --hyperparameters \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8223260458697862
+      ],
+      "excerpt": "--image_directory data/images/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9275092605381995,
+        0.844143334352158
+      ],
+      "excerpt": "Here is a test run example: \npython generate_image.py --image_file test_image.jpg --file_width 256 --file_height 256 --channels 3 --dir_to_generator saved_models/real2seg_gen_50.pt --save_directory test_directory \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/u7javed/Bidirectional-Image-to-Image-Translator/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Umer Javed\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Bidirectional-Image-to-Image-Translator",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Bidirectional-Image-to-Image-Translator",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "u7javed",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Bidirectional-Image-to-Image-Translator/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 05:00:11 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

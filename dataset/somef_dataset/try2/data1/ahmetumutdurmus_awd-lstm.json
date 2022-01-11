@@ -1,0 +1,194 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1706.03762",
+      "https://arxiv.org/abs/1708.02182](https://arxiv.org/abs/1708.02182",
+      "https://arxiv.org/abs/1708.02182"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmetumutdurmus/awd-lstm",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-09-16T06:36:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-30T09:01:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9760982477624675,
+        0.9992389220777209
+      ],
+      "excerpt": "This repository contains the replication of \"Regularizing and Optimizing LSTM Language Models\" by Merity et al. (2017). \nThe AWD-LSTM model introduced in the paper still forms the basis for the state-of-the-art results in language modeling on smaller benchmark datasets such as the Penn Treebank and WikiText-2 according to the NLP-Progress repository. On bigger datasets, such as WikiText-103 and Google One Billion Word Benchmark, the state-of-the-art is generally achieved with introducing some form of attention to the model. Generally this is some variant of the Transformer model. This could likely be explained by the fact that attention models tend to have greater number of parameters and can overfit the data more easily.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8915336574197236,
+        0.9209962448398508,
+        0.9594308235373574,
+        0.8062291887921739
+      ],
+      "excerpt": "I have replicated the paper using Python 3.7 and PyTorch 1.2 with CUDA Toolkit 10.0. So the model is now PyTorch 1.2 compatible. \nThe repository contains four scripts: \nmodel.py contains the model described as in the paper. \nntasgd.py contains the NT-ASGD optimizer described as in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9388357923485698
+      ],
+      "excerpt": "finetune.py is used to replicate the finetuning process in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Replication of \"Regularizing and Optimizing LSTM Language Models\" by Merity et al. (2017).",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmetumutdurmus/awd-lstm/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 01:40:44 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ahmetumutdurmus/awd-lstm/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ahmetumutdurmus/awd-lstm",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8520155678811467
+      ],
+      "excerpt": "The experiments run on the two different word-level datasets can be replicated from the terminal as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8212531536792552
+      ],
+      "excerpt": "You can use both my implementation of LSTM by setting --lstm_type custom or the PyTorch's embedded C++ implementation using --lstm_type pytorch. PyTorch's implementation is about 2 times faster. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.918943866265477,
+        0.9018812563495762,
+        0.9175844894052966,
+        0.9004636438668986
+      ],
+      "excerpt": "python main.py --data PTB --save model.tar --layer_num 3 --embed_size 400 --hidden_size 1150 --lstm_type pytorch --w_drop 0.5 --dropout_i 0.4 --dropout_l 0.3 --dropout_o 0.4 --dropout_e 0.1 --winit 0.1 --batch_size 40 --bptt 70 --ar 2 --tar 1 --weight_decay 1.2e-6 --epochs 750 --lr 30 --max_grad_norm 0.25 --non_mono 5 --device gpu --log 100 \npython finetune.py --data PTB --load model.tar --layer_num 3 --embed_size 400 --hidden_size 1150 --lstm_type pytorch --w_drop 0.5 --dropout_i 0.4 --dropout_l 0.3 --dropout_o 0.4 --dropout_e 0.1 --winit 0.1 --batch_size 40 --bptt 70 --ar 2 --tar 1 --weight_decay 1.2e-6 --lr 30 --max_grad_norm 0.25 --non_mono 5 --device gpu --log 100 \npython main.py --data PTB --save model.tar --layer_num 3 --embed_size 400 --hidden_size 1150 --lstm_type pytorch --w_drop 0.65 --dropout_i 0.4 --dropout_l 0.3 --dropout_o 0.4 --dropout_e 0.1 --winit 0.1 --batch_size 80 --bptt 70 --ar 2 --tar 1 --weight_decay 1.2e-6 --epochs 750 --lr 30 --max_grad_norm 0.25 --non_mono 5 --device gpu --log 50 \npython finetune.py --data PTB --load model.tar --layer_num 3 --embed_size 400 --hidden_size 1150 --lstm_type pytorch --w_drop 0.65 --dropout_i 0.4 --dropout_l 0.3 --dropout_o 0.4 --dropout_e 0.1 --winit 0.1 --batch_size 80 --bptt 70 --ar 2 --tar 1 --weight_decay 1.2e-6 --lr 30 --max_grad_norm 0.25 --non_mono 5 --device gpu --log 50 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ahmetumutdurmus/awd-lstm/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Regularizing and Optimizing LSTM Language Models by Merity et al. (2017).",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "awd-lstm",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ahmetumutdurmus",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmetumutdurmus/awd-lstm/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Thu, 30 Dec 2021 01:40:44 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is writen by [Prince Wang](https://github.com/princewang1994), and thanks the faster-rcnn.pytorch's code provider [jwyang](https://github.com/jwyang)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1605.06409",
+      "https://arxiv.org/abs/1708.02863",
+      "https://arxiv.org/abs/1605.06409: [R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/abs/1605.06409)\n\n![15063403082127](http://princepicbed.oss-cn-beijing.aliyuncs.com/blog_201807132042010817.jpg)\n\nThis repo has following modification compare to [jwyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch):\n\n- **R-FCN architecture**: We refered to the origin [Caffe version] of R-FCN, the main structure of R-FCN is show in following figure.\n- **PS-RoIPooling with CUDA** :(refer to the other pytorch implement R-FCN, pytorch_RFCN). I have modified it to fit multi-image training (not only batch-size=1 is supported)\n- **Implement multi-scale training:** As the original paper says, each image is randomly reized to differenct resolutions (400, 500, 600, 700, 800) when training, and during test time, we use fix input size(600). These make 1.2 mAP gain in our experiments.\n- **Implement OHEM:** in this repo, we implement Online Hard Example Mining(OHEM) method in the paper, set `OHEM: False` in `cfgs/res101.yml` for using OHEM. Unluckly, it cause a bit performance degration in my experiments\n\n![](http://princepicbed.oss-cn-beijing.aliyuncs.com/blog_20180817160334.jpg)\n\n## CoupleNet\n\nhttps://arxiv.org/abs/1708.02863:[CoupleNet: Coupling Global Structure with Local Parts for Object Detection](https://arxiv.org/abs/1708.02863)\n\n![](http://princepicbed.oss-cn-beijing.aliyuncs.com/blog_20180816205255.png)\n\n- Making changes based on R-FCN\n- Implement local/global FCN in CoupleNet\n\n## Tutorial\n\n* [R-FCN blog](http://blog.prince2015.club/2018/07/13/R-FCN/)\n\n## Benchmarking\n\nWe benchmark our code thoroughly on three datasets: pascal voc using two different architecture: R-FCN and CoupleNet. Results shows following:\n\n1). PASCAL VOC 2007 (Train: 07_trainval - Test: 07_test, scale=400, 500, 600, 700, 800)\n\nmodel \u00a0  | #GPUs | batch size | lr \u00a0 \u00a0 \u00a0  | lr_decay | max_epoch \u00a0 \u00a0 |  time/epoch | mem/GPU | mAP\n---------|--------|-----|--------|-----|-----|-------|--------|-----\n[R-FCN](https://drive.google.com/file/d/1JMh0gguOozEEIRijQxkQnMKLTAp2_iu5/view?usp=sharing)  | 1 | 2 | 4e-3 | 8   | 20  |  0.88 hr | 3000 MB  | 73.8\nCouleNet\u00a0 | 1 | 2 | 4e-3 | 8 \u00a0 | 20 |  0.60 hr | 8900 MB  | 75.2\n\n- Pretrained model for R-FCN(VOC2007) has released~, See `Test` part following\n\n\n## Preparation\n\n\nFirst of all, clone the code\n```\n$ git clone https://github.com/princewang1994/R-FCN.pytorch.git\n```\n\nThen, create a folder:\n```\n$ cd R-FCN.pytorch && mkdir data\n$ cd data\n$ ln -s $VOC_DEVKIT_ROOT .\n```\n\n### prerequisites\n\n* Python 3.6\n* Pytorch 0.3.0, **NOT suport 0.4.0 because of some errors**\n* CUDA 8.0 or higher\n\n### Data Preparation\n\n* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.\n* **Pretrained ResNet**: download from [here](https://drive.google.com/file/d/1I4Jmh2bU6BJVnwqfg5EDe8KGGdec2UE8/view?usp=sharing) and put it to `$RFCN_ROOT/data/pretrained_model/resnet101_caffe.pth`.\n\n\n### Compilation\n\nAs pointed out by [ruotianluo/pytorch-faster-rcnn](https://github.com/ruotianluo/pytorch-faster-rcnn), choose the right `-arch` in `make.sh` file, to compile the cuda code:\n\n| GPU model  | Architecture |\n| ------------- | ------------- |\n| TitanX (Maxwell/Pascal) | sm_52 |\n| GTX 960M | sm_50 |\n| GTX 1080 (Ti) | sm_61 |\n| Grid K520 (AWS g2.2xlarge) | sm_30 |\n| Tesla K80 (AWS p2.xlarge) | sm_37 |\n\nMore details about setting the architecture can be found [here](https://developer.nvidia.com/cuda-gpus) or [here](http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)\n\nInstall all the python dependencies using pip:\n```\n$ pip install -r requirements.txt\n```\n\nCompile the cuda dependencies using following simple commands:\n\n```\n$ cd lib\n$ sh make.sh\n```\n\nIt will compile all the modules you need, including NMS, ROI_Pooing, ROI_Align and ROI_Crop. The default version is compiled with Python 2.7, please compile by yourself if you are using a different python version.\n\n## Train\n\nTo train a R-FCN model with ResNet101 on pascal_voc, simply run:\n```\n$ CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_net.py \\\n\t\t\t\t   --arch rfcn \\\n                   --dataset pascal_voc --net res101 \\\n                   --bs $BATCH_SIZE --nw $WORKER_NUMBER \\\n                   --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \\\n                   --cuda\n```\n\n- Set `--s` to identified differenct experiments. \n- For CoupleNet training, replace `--arch rfcn` with `--arch couplenet`, other arguments should be modified according to your machine. (e.g. larger learning rate for bigger batch-size)\n- Model are saved to `$RFCN_ROOT/save` \n\n## Test\n\nIf you want to evlauate the detection performance of a pre-trained model on pascal_voc test set, simply run\n```\n$ python test_net.py --dataset pascal_voc --arch rfcn \\\n\t\t\t\t   --net res101 \\\n                   --checksession $SESSION \\\n                   --checkepoch $EPOCH \\\n                   --checkpoint $CHECKPOINT \\\n                   --cuda\n```\n- Specify the specific model session(`--s` in training phase), chechepoch and checkpoint, e.g., SESSION=1, EPOCH=6, CHECKPOINT=5010.\n\n###  Pretrained Model\n\n- R-FCN VOC2007: [faster_rcnn_2_12_5010.pth](https://drive.google.com/file/d/1JMh0gguOozEEIRijQxkQnMKLTAp2_iu5/view?usp=sharing)\n\nDownload from link above and put it to `save/rfcn/res101/pascal_voc/faster_rcnn_2_12_5010.pth`. Then you can set `$SESSiON=2, $EPOCH=12, $CHECKPOINT=5010` in test command. It'll got 73.2 mAP.\n\n## Demo\n\nBelow are some detection results:\n\n<div style=\"color:#0000FF\" align=\"center\">\n<img src=\"images/img3_det_res101.jpg\" width=\"430\"/> <img src=\"images/img4_det_res101.jpg\" width=\"430\"/>\n</div>\n\n## Going to do\n\n- Keeping updating structures to reach the state-of-art\n- More benchmarking in VOC0712/COCO\n- ~~RFCN Pretrained model for VOC07~~\n- CoupleNet pretrained model for VOC07\n- Adapt to fit PyTorch 0.4.0\n\n## Acknowledgement\n\nThis project is writen by [Prince Wang](https://github.com/princewang1994), and thanks the faster-rcnn.pytorch's code provider [jwyang](https://github.com/jwyang)",
+      "https://arxiv.org/abs/1708.02863:[CoupleNet: Coupling Global Structure with Local Parts for Object Detection](https://arxiv.org/abs/1708.02863)\n\n![](http://princepicbed.oss-cn-beijing.aliyuncs.com/blog_20180816205255.png)\n\n- Making changes based on R-FCN\n- Implement local/global FCN in CoupleNet\n\n## Tutorial\n\n* [R-FCN blog](http://blog.prince2015.club/2018/07/13/R-FCN/)\n\n## Benchmarking\n\nWe benchmark our code thoroughly on three datasets: pascal voc using two different architecture: R-FCN and CoupleNet. Results shows following:\n\n1). PASCAL VOC 2007 (Train: 07_trainval - Test: 07_test, scale=400, 500, 600, 700, 800)\n\nmodel \u00a0  | #GPUs | batch size | lr \u00a0 \u00a0 \u00a0  | lr_decay | max_epoch \u00a0 \u00a0 |  time/epoch | mem/GPU | mAP\n---------|--------|-----|--------|-----|-----|-------|--------|-----\n[R-FCN](https://drive.google.com/file/d/1JMh0gguOozEEIRijQxkQnMKLTAp2_iu5/view?usp=sharing)  | 1 | 2 | 4e-3 | 8   | 20  |  0.88 hr | 3000 MB  | 73.8\nCouleNet\u00a0 | 1 | 2 | 4e-3 | 8 \u00a0 | 20 |  0.60 hr | 8900 MB  | 75.2\n\n- Pretrained model for R-FCN(VOC2007) has released~, See `Test` part following\n\n\n## Preparation\n\n\nFirst of all, clone the code\n```\n$ git clone https://github.com/princewang1994/R-FCN.pytorch.git\n```\n\nThen, create a folder:\n```\n$ cd R-FCN.pytorch && mkdir data\n$ cd data\n$ ln -s $VOC_DEVKIT_ROOT .\n```\n\n### prerequisites\n\n* Python 3.6\n* Pytorch 0.3.0, **NOT suport 0.4.0 because of some errors**\n* CUDA 8.0 or higher\n\n### Data Preparation\n\n* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.\n* **Pretrained ResNet**: download from [here](https://drive.google.com/file/d/1I4Jmh2bU6BJVnwqfg5EDe8KGGdec2UE8/view?usp=sharing) and put it to `$RFCN_ROOT/data/pretrained_model/resnet101_caffe.pth`.\n\n\n### Compilation\n\nAs pointed out by [ruotianluo/pytorch-faster-rcnn](https://github.com/ruotianluo/pytorch-faster-rcnn), choose the right `-arch` in `make.sh` file, to compile the cuda code:\n\n| GPU model  | Architecture |\n| ------------- | ------------- |\n| TitanX (Maxwell/Pascal) | sm_52 |\n| GTX 960M | sm_50 |\n| GTX 1080 (Ti) | sm_61 |\n| Grid K520 (AWS g2.2xlarge) | sm_30 |\n| Tesla K80 (AWS p2.xlarge) | sm_37 |\n\nMore details about setting the architecture can be found [here](https://developer.nvidia.com/cuda-gpus) or [here](http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)\n\nInstall all the python dependencies using pip:\n```\n$ pip install -r requirements.txt\n```\n\nCompile the cuda dependencies using following simple commands:\n\n```\n$ cd lib\n$ sh make.sh\n```\n\nIt will compile all the modules you need, including NMS, ROI_Pooing, ROI_Align and ROI_Crop. The default version is compiled with Python 2.7, please compile by yourself if you are using a different python version.\n\n## Train\n\nTo train a R-FCN model with ResNet101 on pascal_voc, simply run:\n```\n$ CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_net.py \\\n\t\t\t\t   --arch rfcn \\\n                   --dataset pascal_voc --net res101 \\\n                   --bs $BATCH_SIZE --nw $WORKER_NUMBER \\\n                   --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \\\n                   --cuda\n```\n\n- Set `--s` to identified differenct experiments. \n- For CoupleNet training, replace `--arch rfcn` with `--arch couplenet`, other arguments should be modified according to your machine. (e.g. larger learning rate for bigger batch-size)\n- Model are saved to `$RFCN_ROOT/save` \n\n## Test\n\nIf you want to evlauate the detection performance of a pre-trained model on pascal_voc test set, simply run\n```\n$ python test_net.py --dataset pascal_voc --arch rfcn \\\n\t\t\t\t   --net res101 \\\n                   --checksession $SESSION \\\n                   --checkepoch $EPOCH \\\n                   --checkpoint $CHECKPOINT \\\n                   --cuda\n```\n- Specify the specific model session(`--s` in training phase), chechepoch and checkpoint, e.g., SESSION=1, EPOCH=6, CHECKPOINT=5010.\n\n###  Pretrained Model\n\n- R-FCN VOC2007: [faster_rcnn_2_12_5010.pth](https://drive.google.com/file/d/1JMh0gguOozEEIRijQxkQnMKLTAp2_iu5/view?usp=sharing)\n\nDownload from link above and put it to `save/rfcn/res101/pascal_voc/faster_rcnn_2_12_5010.pth`. Then you can set `$SESSiON=2, $EPOCH=12, $CHECKPOINT=5010` in test command. It'll got 73.2 mAP.\n\n## Demo\n\nBelow are some detection results:\n\n<div style=\"color:#0000FF\" align=\"center\">\n<img src=\"images/img3_det_res101.jpg\" width=\"430\"/> <img src=\"images/img4_det_res101.jpg\" width=\"430\"/>\n</div>\n\n## Going to do\n\n- Keeping updating structures to reach the state-of-art\n- More benchmarking in VOC0712/COCO\n- ~~RFCN Pretrained model for VOC07~~\n- CoupleNet pretrained model for VOC07\n- Adapt to fit PyTorch 0.4.0\n\n## Acknowledgement\n\nThis project is writen by [Prince Wang](https://github.com/princewang1994), and thanks the faster-rcnn.pytorch's code provider [jwyang](https://github.com/jwyang)"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9953861635234926
+      ],
+      "excerpt": "arXiv:1605.06409: R-FCN: Object Detection via Region-based Fully Convolutional Networks \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "                   --net res101 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/princewang1994/RFCN_CoupleNet.pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-10-25T08:46:21Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-07-30T08:32:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is an pytorch implement R-FCN and CoupleNet, large part code is reference from [jwyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch). The R-FCN structure is refer to [Caffe R-FCN](https://github.com/daijifeng001/R-FCN) and [Py-R-FCN](https://github.com/YuwenXiong/py-R-FCN)\n\n- For R-FCN, mAP@0.5 reached 73.2 in VOC2007 trainval dataset\n- For CoupleNet, mAP@0.5 reached 75.2 in VOC2007 trainval dataset\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9780051816012464,
+        0.9788864664252668,
+        0.874831473873378,
+        0.8912468596732597
+      ],
+      "excerpt": "R-FCN architecture: We refered to the origin [Caffe version] of R-FCN, the main structure of R-FCN is show in following figure. \nPS-RoIPooling with CUDA :(refer to the other pytorch implement R-FCN, pytorch_RFCN). I have modified it to fit multi-image training (not only batch-size=1 is supported) \nImplement multi-scale training: As the original paper says, each image is randomly reized to differenct resolutions (400, 500, 600, 700, 800) when training, and during test time, we use fix input size(600). These make 1.2 mAP gain in our experiments. \nImplement OHEM: in this repo, we implement Online Hard Example Mining(OHEM) method in the paper, set OHEM: False in cfgs/res101.yml for using OHEM. Unluckly, it cause a bit performance degration in my experiments \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9411413858835495,
+        0.9149777677790867,
+        0.9743004672353055
+      ],
+      "excerpt": "Making changes based on R-FCN \nImplement local/global FCN in CoupleNet \nWe benchmark our code thoroughly on three datasets: pascal voc using two different architecture: R-FCN and CoupleNet. Results shows following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8328385901336572
+      ],
+      "excerpt": "R-FCN  | 1 | 2 | 4e-3 | 8   | 20  |  0.88 hr | 3000 MB  | 73.8 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8085298343652195
+      ],
+      "excerpt": "Pretrained model for R-FCN(VOC2007) has released~, See Test part following \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9024290413247953,
+        0.9222814670574238
+      ],
+      "excerpt": "For CoupleNet training, replace --arch rfcn with --arch couplenet, other arguments should be modified according to your machine. (e.g. larger learning rate for bigger batch-size) \nModel are saved to $RFCN_ROOT/save \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Pytorch Implementation of R-FCN/CoupleNet, transfer from https://github.com/princewang1994/R-FCN.pytorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/princewang1994/RFCN_CoupleNet.pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Wed, 29 Dec 2021 07:39:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/princewang1994/RFCN_CoupleNet.pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "princewang1994/RFCN_CoupleNet.pytorch",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/princewang1994/RFCN_CoupleNet.pytorch/master/lib/make.sh",
+      "https://raw.githubusercontent.com/princewang1994/RFCN_CoupleNet.pytorch/master/lib/model/roi_align/make.sh",
+      "https://raw.githubusercontent.com/princewang1994/RFCN_CoupleNet.pytorch/master/lib/model/nms/make.sh",
+      "https://raw.githubusercontent.com/princewang1994/RFCN_CoupleNet.pytorch/master/lib/model/roi_crop/make.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.\n* **Pretrained ResNet**: download from [here](https://drive.google.com/file/d/1I4Jmh2bU6BJVnwqfg5EDe8KGGdec2UE8/view?usp=sharing) and put it to `$RFCN_ROOT/data/pretrained_model/resnet101_caffe.pth`.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First of all, clone the code\n```\n$ git clone https://github.com/princewang1994/R-FCN.pytorch.git\n```\n\nThen, create a folder:\n```\n$ cd R-FCN.pytorch && mkdir data\n$ cd data\n$ ln -s $VOC_DEVKIT_ROOT .\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9232663703797687
+      ],
+      "excerpt": "This repo has following modification compare to jwyang/faster-rcnn.pytorch: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8740491651038526
+      ],
+      "excerpt": "As pointed out by ruotianluo/pytorch-faster-rcnn, choose the right -arch in make.sh file, to compile the cuda code: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9979582169967833,
+        0.9979947896609701,
+        0.974632487657705,
+        0.953691433472028,
+        0.9481254878291825,
+        0.9860632627305032
+      ],
+      "excerpt": "Install all the python dependencies using pip: \n$ pip install -r requirements.txt \nCompile the cuda dependencies using following simple commands: \n$ cd lib \n$ sh make.sh \nIt will compile all the modules you need, including NMS, ROI_Pooing, ROI_Align and ROI_Crop. The default version is compiled with Python 2.7, please compile by yourself if you are using a different python version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8411004553040458
+      ],
+      "excerpt": "                   --cuda \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8411004553040458
+      ],
+      "excerpt": "                   --cuda \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8696680719007295,
+        0.8318409470605271
+      ],
+      "excerpt": "1). PASCAL VOC 2007 (Train: 07_trainval - Test: 07_test, scale=400, 500, 600, 700, 800) \nmodel \u00a0  | #GPUs | batch size | lr \u00a0 \u00a0 \u00a0  | lr_decay | max_epoch \u00a0 \u00a0 |  time/epoch | mem/GPU | mAP \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8673400581099576
+      ],
+      "excerpt": "$ CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_net.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8725431281043621
+      ],
+      "excerpt": "$ python test_net.py --dataset pascal_voc --arch rfcn \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.832926936081024
+      ],
+      "excerpt": "- Specify the specific model session(--s in training phase), chechepoch and checkpoint, e.g., SESSION=1, EPOCH=6, CHECKPOINT=5010. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/princewang1994/RFCN_CoupleNet.pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C",
+      "Cuda",
+      "C++",
+      "Shell",
+      "MATLAB",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Jianwei Yang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "A Pytorch Implementation of R-FCN/CoupleNet",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RFCN_CoupleNet.pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "princewang1994",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/princewang1994/RFCN_CoupleNet.pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python 3.6\n* Pytorch 0.3.0, **NOT suport 0.4.0 because of some errors**\n* CUDA 8.0 or higher\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 46,
+      "date": "Wed, 29 Dec 2021 07:39:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [R-FCN blog](http://blog.prince2015.club/2018/07/13/R-FCN/)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Below are some detection results:\n\n<div style=\"color:#0000FF\" align=\"center\">\n<img src=\"images/img3_det_res101.jpg\" width=\"430\"/> <img src=\"images/img4_det_res101.jpg\" width=\"430\"/>\n</div>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Keeping updating structures to reach the state-of-art\n- More benchmarking in VOC0712/COCO\n- ~~RFCN Pretrained model for VOC07~~\n- CoupleNet pretrained model for VOC07\n- Adapt to fit PyTorch 0.4.0\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

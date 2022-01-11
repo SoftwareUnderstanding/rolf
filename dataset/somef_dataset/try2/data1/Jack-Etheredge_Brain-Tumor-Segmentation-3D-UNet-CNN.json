@@ -1,0 +1,277 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1802.10508\n\nMy presentation for this work is here: [talk](./Brain_Tumor_Segmentation_Talk.pptx",
+      "https://arxiv.org/abs/1802.10508\n[BraTS]: https://www.med.upenn.edu/sbia/brats2018/data.html"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9852763499138395
+      ],
+      "excerpt": "The UNet was based on this paper: https://arxiv.org/abs/1802.10508 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-07-02T13:57:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-18T08:33:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9558625254943182,
+        0.8448657170405924,
+        0.9842592731052167,
+        0.9828621799515616,
+        0.9633663767366567,
+        0.9783498027544266,
+        0.8113688700555318,
+        0.949420966096707
+      ],
+      "excerpt": "Brain tumor segmentation using a 3D UNet CNN \nI used Keras with a Tensorflow backend. This UNet was built for the MICCAI BraTS dataset: https://www.med.upenn.edu/sbia/brats2018/data.html \nI achieved a dice score of 0.78 and weighted dice score of 0.67. I treated both tumor types (low-grade glioma and high-grade glioma, LGG and HGG) together. Papers that separate the task for each tumor subtype can perform better with respect to these scores. \nThis U-Net was built for the [MICCAI BraTS dataset][BraTS]. This U-Net was based on the one constructed in [this paper (Isensee 2017)][Isensee 2017]. The original U-Net paper is from 2015, so the architecture is still quite new. It performs extremely well for segmentation tasks that require a lot of precision and for which there is not a lot of example data. There were a total of 285 patients in this dataset. Typically, for neural networks to be trained well on image classification tasks, there are tens of thousands of example training images. \nI cropped the images to 240x240x155 and used the four types of MRI contrasts per patient as different channels, yielding volumes with final input dimensions of 4x240x240x155. \nThe first half of the U-net is effectively a typical convolutional neural network like one would construct for an image classification task, with successive rounds of zero-padded ReLU-activated convolutions and ReLU-activated max-pooling layers. Instead of classification occurring at the \"bottom\" of the U, symmetrical upsampling and convolution layers are used to bring the pixel-wise prediction layer back to the original dimensions of the input image. \nHere is the architecture for the 2D U-Net from the original publication mentioned earlier: \nThere are 3 tumor regions that are being determined in the ground truth and the predictions. From largest to smallest, these are: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8226525502478987,
+        0.8226525502478987,
+        0.9319087527401452,
+        0.9175876520892943
+      ],
+      "excerpt": "2. Enhancing tumor core \n3. Necrotic tumor core \nThe ground truth segmentation comes as a single channel coded 0,1,2,4 for the different regions and 0 as no tumor. I converted this to a 3-channel image with each channel corresponding to a single tumor region prediction of 0 or 1 for each pixel. Correspondingly, I output predictions for for the 3 tumor regions into separate channels with a binary classification for each channel. \nHere's an example of the correlation between my predictions in a single 2D plane: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9220657547869189
+      ],
+      "excerpt": "Reload the page or click each image to see the gif loop again. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.955031571960848,
+        0.9793916640912705,
+        0.974316727875745
+      ],
+      "excerpt": "My presentation for this work is here: talk \nBlog post about this project: https://jack-etheredge.github.io/Brain-tumor-segmentation-with-3D-UNet-CNN/ \nI heavily modified code from two sources to get this project to work: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9477620895744208
+      ],
+      "excerpt": "Original code for the data generator: https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly.html \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8634241724815495
+      ],
+      "excerpt": "~~Try creating tiffs of predictions~~ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865,
+        0.8039472859631452
+      ],
+      "excerpt": "~~Cropping and saving~~ \nAligning the segmentation back to the original uncropped image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Brain tumor segmentation using a 3D UNet CNN",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 52,
+      "date": "Thu, 23 Dec 2021 07:15:27 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/BraTS_3DUNetCNN.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DCNN_Classifier.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-v1.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v5-pickle-crops.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-julia-code-pickle-crops-normalization-Copy1.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-normalization-v2-increased-depth.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-tumor-type-only-normalizing-oversampling-v3.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-flair-only-super-crop.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-add-relu.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v2.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-add-relu-switch-to-flatten.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-normalization-v4-increased-depth.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v4-checking-predictions-callbacks.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-local.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-julia-code-pickle-crops-normalization-Copy2.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-julia-code-pickle-crops.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-tumor-type-only.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-flair-only.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-tumor-type-only-v2.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-tumor-type-only-oversampling-v3.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_simple_CNN.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-julia-code-pickle-crops-normalization.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-normalization-v4-increased-depth-adding-age.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_simple_CNN_3DResNet.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-normalization-v3-increased-depth.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v2.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-making-tiffs-of-predictions-from-pickle-crops.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu-pickle-crops-survival-only-increased-depth-adding-age-v6.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v3-multigpu.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout.ipynb",
+      "https://raw.githubusercontent.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/master/old-versions/BraTS_3DUNetCNN-cropping-v3-checking-predictions-callbacks-multiout-extra-layers-3preds-sequential-v4.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8639340593811995
+      ],
+      "excerpt": "~~Pathlib to support windows pathing~~ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9119839674107418,
+        0.8413777260243803
+      ],
+      "excerpt": "~~Try running training file~~ \n~~Try running again on GPU~~ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Brain-Tumor-Segmentation-3D-UNet-CNN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Brain-Tumor-Segmentation-3D-UNet-CNN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Jack-Etheredge",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jack-Etheredge/Brain-Tumor-Segmentation-3D-UNet-CNN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 77,
+      "date": "Thu, 23 Dec 2021 07:15:27 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

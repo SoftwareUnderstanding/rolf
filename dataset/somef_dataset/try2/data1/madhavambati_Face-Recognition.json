@@ -1,0 +1,272 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "An Introduction to **one-shot learning**\n\nImplementation of Face-recognition system using [FaceNet](https://arxiv.org/pdf/1503.03832.pdf).\n\nThis is based on learning a **Euclidean em-bedding** per image using a deep convolutional network. The network  is  trained  such  that  the  squared  L2  distances  in the embedding space directly correspond to face similarity.\n\nFaceNet is a combination of Siamese Network at the end of Inception Network.\n\n**FaceNet Architecture:**\n      \n      Image(96\u00d796\u00d73) -> InceptionNetwork -> SiameseNetwork -> Output\n\nMore info about [InceptionNetwork](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf) and [SiameseNetwork](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is available in the later sections of this documentation.   \n\nwe feed frames from the webcam to the network to determine whether or not the frame conatins an individual we recognise.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1503.03832\n- https://www.youtube.com/watch?v=d2XB5-tuCWU\n- https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/\n- https://www.youtube.com/watch?v=-FfMVnwXrZ0\n- https://medium.freecodecamp.org/making-your-own-face-recognition-system-29a8e728107c"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- https://arxiv.org/pdf/1503.03832.pdf\n- https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf\n- https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf\n- https://arxiv.org/abs/1503.03832\n- https://www.youtube.com/watch?v=d2XB5-tuCWU\n- https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/\n- https://www.youtube.com/watch?v=-FfMVnwXrZ0\n- https://medium.freecodecamp.org/making-your-own-face-recognition-system-29a8e728107c\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9358223674441953
+      ],
+      "excerpt": "Research paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "Explanation Video \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/madhavambati/Face-Recognition",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-10T14:32:24Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-10T03:21:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9862264348011728
+      ],
+      "excerpt": "Firstly, we make our database of the faces which we want to recognise. This will be a directory named images. To do this, different functions are defined based on the users requirements. Input image to the network must of shape 96\u00d796\u00d73. A pre-processing pipeline is involved befor saving the image to database. While recognising faces, a frame (which contains a face) is taken from webcam and fed into our network. The network takes in the camera frame and database, compares the similarities and differences between each set of frame and database image. The output will be a string which is the name of the most likely similar image in the database. If the face is not found in the database, the output will be a zero. The essence of each file in this repo is each given below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.996983924632083,
+        0.9180462160711642
+      ],
+      "excerpt": "Normally, in deep learning, we need a large amount of data and the more we have, the better the results get. However, it will be more convenient to learn only from few data because not all of us are rich in terms of how much data we have. The idea here is that we need to learn an object class from only a few data and that\u2019s what One-shot learning algorithm is. \nSiamese network is an artificial neural network that use the same weights while working in tandem on two different input vectors to compute comparable output vectors. Often one of the output vectors are precomputed, thus forming a baseline the other output vector are compared against. This is similar to a comparing fingerprints or more technical as a distance function for Locality-sensitive hashing.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9814677289493835,
+        0.8289379184860487
+      ],
+      "excerpt": "The first subnetwork\u2019s input is an image, followed by a sequence of convolutional, pooling, fully connected layers and finally a feature vector (We are not going to use a softmax function for classification). The last vector f(x1) is the encoding of the input x1. Then, we do the same thing for the image x2, by feeding it to the second subnetwork which is totally identical to the first one to get a different encoding f(x2) of the input x2. \nTo compare the two images x1 and x2, we compute the distance d between their encoding f(x1) and f(x2). If it is less than a threshold (a hyperparameter), it means that the two pictures are the same person, if not, they are two different persons. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8391591401034876
+      ],
+      "excerpt": "In order to learn parameters to get good encodding for the images we use Triplet loss function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9776246873738283,
+        0.9859047957211765
+      ],
+      "excerpt": "So, we want the distance d(A, P) between the encoding of the anchor and the encoding of the positive example to be less than or equal to the distance d(A, N) between the encoding of the anchor and the encoding of the negative example. \nThe problem here is that the model can learn to make the same encoding for different images. For this reason, we are adding a margin alpha (hyperparameter), to prevent this from happening, and to always have a gap between A and P versus A and N. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.869136131933389,
+        0.8829281619425147
+      ],
+      "excerpt": "As mentioned in earlier sections we use an Inception Network which is then connected to a siamese network to get different image encoddings. \nInception Network is a one big mess of a neural net with a lot of hidden layers. Inception network architecture is given below.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993155981252425
+      ],
+      "excerpt": "It contains 1\u00d71 Convolution at the middle of the network. And global average pooling is used at the end of the network instead of using fully connected layers. These two techniques are from another paper \u201cNetwork In Network\u201d. Another technique, called inception module, is to have different sizes/types of convolutions for the same input and stacking all the outputs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9531075194570985
+      ],
+      "excerpt": "If you want to go deep into the study of Inception network, refer to the links below or at the end of the documentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9637140279405575
+      ],
+      "excerpt": "Explaination of the Network \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8762799637701223
+      ],
+      "excerpt": "Different versions of GoogleNet \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of Face-recognition system using Inception Network and Siamese Network ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/madhavambati/Face-Recognition/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In face recognition systems, we want to be able to recognize a person\u2019s identity by just feeding one picture of that person\u2019s face to the system i.e **one-shot learning** should be implemented. And, in case, it fails to recognize the picture, it means that this person\u2019s image is not stored in the system\u2019s database.\n\nTo solve this problem, we cannot use only a convolutional neural network for two reasons: \n1) CNN doesn\u2019t work on a small training set. \n2) It is not convenient to retrain the model every time we add a picture of a new person to the system.\n\nHowever, we can use Siamese neural network for face recognition.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Wed, 29 Dec 2021 09:18:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/madhavambati/Face-Recognition/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "madhavambati/Face-Recognition",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Use the following commands to install the model in your machine. \n\n- Clone the repository \n\n      git clone https://github.com/madhavambati/Face-Recognition.git\n      \n - Move to directory Face-Recognition\n \n       cd Face-Recognition\n       \n - Install all the dependencies\n \n       pip install requirements.txt\n       \n - To add a face from webcam to database \n       \n       python add_to_database.py\n       \n - To add a face from image to database, first extract the face from image and then add the face.\n       \n        python face_cutter.py\n        python add_to _database.py\n        \n - To run the Face-recognition system\n \n        python face_recogniser.py\n        \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8906400730397496
+      ],
+      "excerpt": "face_recogniser.py main file which recognises faces. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/madhavambati/Face-Recognition/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Face Recognition System powered by Inception Network",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Face-Recognition",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "madhavambati",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/madhavambati/Face-Recognition/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 13,
+      "date": "Wed, 29 Dec 2021 09:18:23 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

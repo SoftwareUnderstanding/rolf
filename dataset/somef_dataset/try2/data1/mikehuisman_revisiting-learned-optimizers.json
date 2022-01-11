@@ -1,0 +1,217 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9822343157293048
+      ],
+      "excerpt": "Transfer Learning (also used by Chen et al. (2019)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikehuisman/revisiting-learned-optimizers",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-13T14:17:54Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-03T13:18:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9652492505629093,
+        0.9862221966759112,
+        0.884408997249966
+      ],
+      "excerpt": "This is the Github repo associated with the paper: Stateless Neural Meta-Learning with Second-Order Gradients. \nOn a high-level, we propose a new technique TURTLE and compare its performance to that of transfer learning baselines, MAML, and the LSTM meta-learner in various challenging scenarios. In addition, we enhance the meta-learner LSTM by using raw gradients as meta-learner input and second-order information. \nAll implemented techniques in this repository can be split into two groups: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9350092968215981
+      ],
+      "excerpt": "Centroid Fine-Tuning (CFT): Model with a special output layer. This layer learns vector representations for every class. Predictions are made by assigning the class with the most similar class representation to the input embedding. In similar fashion to the fine-tuning model, it is first trained on minibatches without task structure, and all hidden layers are frozen before performing meta-validation or meta-testing.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9853736902208429,
+        0.9700316514861863,
+        0.9433647054835624,
+        0.9835532811592725,
+        0.9759679757133274,
+        0.9788941900181597,
+        0.9326968580131995,
+        0.8721521680140292,
+        0.9514988480294571,
+        0.879582697338871
+      ],
+      "excerpt": "LSTM Meta-Learner: Uses an LSTM to propose updates to the weights of a base-learner model. The code for this model comes from Mark Dong and has been adapted for our purposes. \nModel-Agnostic Meta-Learning (MAML): Learns a good set of initialization parameters for the base-learner. From this initialization, few gradient updates are enough to achieve good performance. Our MAML implementation uses 1 gradient update step and ignores second-order derivatives, as they were shown to be mostly irrelevant. \nTURTLE (our proposed technique): A combination of the LSTM meta-learner and MAML where we replace the stateful LSTM by a stateless feed-forward network, and omit the default first-order assumption made by the LSTM meta-learner. \nThe sine wave problem was originally formulated in Finn et al. (2017). For our purposes, we have slighty the setup. That is, we do perform validation, even though it is not required (no fixed training set; tasks are only seen once so there is no risk of overfitting), as it gives us valuable information about the learning process. Second, we do not maintain a running average of performance over meta-training tasks. Instead, we use a fixed meta-test set, consisting of 2K tasks on which we evaluate the models' performances.  \nThe problem is as follows. Every task is associated with a sine wave function f(x) = amplitude * sin(x + phase). The amplitude and phase are chosen uniformly at random for every task, from the intervals [0.1, 5.0] and [0, pi] respectively. Support sets contain k examples (x,y), whereas the query sets contain more than k observations to ensure proper evaluation.  \nA base-learner neural network (input x -> dense layer (40) -> ReLU -> dense layer (40) -> ReLU -> output (1)) is used to learn the sine wave functions f. Thus, given a task, the goal is to infer the sine wave function that give rise to the examples from the support set. Correct inference leads to good performance on the query set. \nFollowing Chen et al. (2019), we implemented N-way, k-shot classification for the miniImageNet and CUB data sets. Both can be easily downloaded using a single script that we have created. More about this in the section about reproducability.  \nIn short, tasks are constructed by sampling N classes, and randomly picking k examples per class to construct the support set. Query sets are created by joining 16 randomly selected examples per class. The goal is to make a convolutional base-learner network learn as quickly as possible on the small support sets. The better it learns, the better the performance will be on the query sets. \nWe have made a special effort to make it easy to reproduce our results. Please follow the instructions below to do so.  \nClone this repository to your machine using git clone &lt;url&gt;, where url is the URL of this repo.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9678525761885856
+      ],
+      "excerpt": "We have tried to make it as easy as possible to extend our code. We have created high-level abstractions for core objects. Below you find instructions to create your custom algorithm or data loader. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikehuisman/revisiting-learned-optimizers/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 07:54:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mikehuisman/revisiting-learned-optimizers/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mikehuisman/revisiting-learned-optimizers",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mikehuisman/revisiting-learned-optimizers/main/Meta-learners.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9951273643235503
+      ],
+      "excerpt": "Install all required packages listed in requirements.txt. An easy way to do this is by using pip install -r requirements.txt We recommend you to create a virtual environment before doing this, using e.g., miniconda.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8357579792412685
+      ],
+      "excerpt": "Centroid Fine-Tuning (CFT): Model with a special output layer. This layer learns vector representations for every class. Predictions are made by assigning the class with the most similar class representation to the input embedding. In similar fashion to the fine-tuning model, it is first trained on minibatches without task structure, and all hidden layers are frozen before performing meta-validation or meta-testing.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9331797122826379
+      ],
+      "excerpt": "Run main.py with the command python main.py --arg1 value1 --arg2 value2 ..., where argi are argument names and values the corresponding values. The script will try to load all parameters from the config file configs.py and overwrite these parameters with your provided arguments where necessary. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mikehuisman/revisiting-learned-optimizers/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 mikehuisman\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Stateless Neural Meta-Learning with Second-Order Gradients",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "revisiting-learned-optimizers",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mikehuisman",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikehuisman/revisiting-learned-optimizers/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 24 Dec 2021 07:54:49 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

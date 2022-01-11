@@ -1,0 +1,382 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1601.06759",
+      "https://arxiv.org/abs/1606.05328"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anordertoreclaim/PixelCNN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-01T12:13:04Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-07T03:42:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9800429726948042,
+        0.9324373108088202,
+        0.8094598271839198,
+        0.9594605075652595,
+        0.9794829128740923
+      ],
+      "excerpt": "This repository is a PyTorch implementation of PixelCNN in its gated form. \nThe main goals I've pursued while doing it is to dive deeper into PyTorch and the network's architecture itself, which I've found both interesting and challenging to grasp. The repo might help someone, too! \nA lot of ideas were taken from rampage644's, blog. Useful links also include this, this and this. \nHere I am going to sum up the main idea behind the architecture. I won't go deep into implementation details and how convolutions work, because it would be too much text and visuals. Visit the links above in order to have a more detailed look on the inner workings of the architecture. Then come here for a summary :) \nAt first this architecture was an attempt to speed up the learning process of a RNN implementation of the same idea, which is a generative model that learns an explicit joint distribution of image's pixels by modeling it using simple chain rule: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9924664781776716
+      ],
+      "excerpt": "The order is row-wise i.e. value of each pixel depends on values of all pixels above and to the left of it. Here is an explanatory image: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9389429495838632
+      ],
+      "excerpt": "In order to achieve this property authors of the papers used simple masked convolutions, which in the case of 1-channel black and white images look like this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9912646098978979
+      ],
+      "excerpt": "There are 2 types of masks: A and B. Masked convolution of type A can only see previously generated pixels, while mask of type B allows taking value of a pixel being predicted into consideration. Applying B-masked convolution after A-masked one preserves the causality, work it out! In the case of 3 data channels, types of masks are depicted on this image: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9744172025623381,
+        0.9890433314546484
+      ],
+      "excerpt": "The problem with a simple masking approach was the blind spot: when predicting some pixels, a portion of the image did not influence the prediction. This was fixed by introducing 2 separate convolutions: horizontal and vertical.  Vertical convolution performs a simple unmasked convolution and sends its outputs to a horizontal convolution, which performs a masked 1-by-N convolution. They also added conditioning on labels and gates in order to increase the predicting power of the model. \nThe main submodel of PixelCNN is a gated block, several of which are used in the network. Here is how it looks: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9880133839949524
+      ],
+      "excerpt": "Causal block is the same as gated block, except that it has neither residual nor skip connections, its input is image instead of a tensor with depth of hidden_fmaps, it uses mask of type A instead of B of a usual gated block and it doesn't incorporate label bias. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9037785598472782
+      ],
+      "excerpt": "Model's state dictionary is saved to model folder by default. Samples which are generated during training are saved to train_samples folder by default. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "                [--hidden-ksize HIDDEN_KSIZE] [--data-channels DATA_CHANNELS] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.826584191750179
+      ],
+      "excerpt": "  --epochs EPOCHS       Number of epochs to train model for \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8234347227717351
+      ],
+      "excerpt": "                        Kernel size of causal convolution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8319754153604336
+      ],
+      "excerpt": "                        of each pixel into \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9615197492293835
+      ],
+      "excerpt": "                        Number of layers of gated convolutions with mask of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.836053068095571
+      ],
+      "excerpt": "                        Learning rate of optimizer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "                 [--hidden-ksize HIDDEN_KSIZE] [--data-channels DATA_CHANNELS] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8234347227717351
+      ],
+      "excerpt": "                        Kernel size of causal convolution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8319754153604336
+      ],
+      "excerpt": "                        of each pixel into \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9615197492293835
+      ],
+      "excerpt": "                        Number of layers of gated convolutions with mask of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch implementation of gated PixelCNN",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anordertoreclaim/PixelCNN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Thu, 23 Dec 2021 23:34:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/anordertoreclaim/PixelCNN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "anordertoreclaim/PixelCNN",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8411004553040458
+      ],
+      "excerpt": "                [--cuda CUDA] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8411004553040458
+      ],
+      "excerpt": "                 [--hidden-layers HIDDEN_LAYERS] [--cuda CUDA] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8725114318592851
+      ],
+      "excerpt": "In order to train the model, use the python train.py command and set optional arguments if needed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503189345333785,
+        0.909660877161103
+      ],
+      "excerpt": "$ python train.py -h \nusage: train.py [-h] [--epochs EPOCHS] [--batch-size BATCH_SIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8012517216629799
+      ],
+      "excerpt": "                [--max-norm MAX_NORM] [--epoch-samples EPOCH_SAMPLES] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.806231503790735
+      ],
+      "excerpt": "  --batch-size BATCH_SIZE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.827527349685095
+      ],
+      "excerpt": "  --dataset DATASET     Dataset to train model on. Either mnist, fashionmnist \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8012517216629799,
+        0.85278213748064
+      ],
+      "excerpt": "  --epoch-samples EPOCH_SAMPLES \n                        Number of images to sample each epoch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8094608001024749
+      ],
+      "excerpt": "Sampling is performed similarly with python sample.py. Path to model's saved parameters must be defined. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9277211356909733,
+        0.949536528894591
+      ],
+      "excerpt": "$ python sample.py -h \nusage: sample.py [-h] [--causal-ksize CAUSAL_KSIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.88294264547222
+      ],
+      "excerpt": "                 [--model-path MODEL_PATH] [--output-fname OUTPUT_FNAME] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8241302165216211
+      ],
+      "excerpt": "  --model-path MODEL_PATH, -m MODEL_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289669050403863,
+        0.9373160493441314
+      ],
+      "excerpt": "  --output-fname OUTPUT_FNAME \n                        Name of output file (.png format) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/anordertoreclaim/PixelCNN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PixelCNN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PixelCNN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "anordertoreclaim",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anordertoreclaim/PixelCNN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 28,
+      "date": "Thu, 23 Dec 2021 23:34:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pixelcnn",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The biggest challenge is to make the network converge to a good set of parameters. I've experimented with hyperparameters and here are the results I've managed to obtain for N-way MNIST using different models.\n\nGenerally, in order for model to converge to a good set of parameters, one needs to go with a small learning rate (about 1e-4). I've also found that bigger kernel sizes in hidden layers work better.\n\nA very simple model, `python train.py --epochs 2 --color-levels 2 --hidden-fmaps 21 --lr 0.002 --max-norm 2` (all others are default values), trained for just 2 epochs, managed to produce these samples on a binary MNIST:\n\n![MNIST_1](https://github.com/anordertoreclaim/PixelCNN/blob/master/.images/mnist_samples_1.png?raw=true)\n\n`python train.py --lr 0.0002` (quite a simple model, too) produced these results:\n\n![MNIST_2](https://github.com/anordertoreclaim/PixelCNN/blob/master/.images/mnist_samples_2.png?raw=true)\n\nA more complex model, `python train.py --color-levels 10 --hidden-fmaps 120 --out-hidden-fmaps 60 --lr 0.0002`, managed to produce these on a 10-way MNIST:\n\n![MNIST_3](https://github.com/anordertoreclaim/PixelCNN/blob/master/.images/mnist_samples_3.png?raw=true)\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

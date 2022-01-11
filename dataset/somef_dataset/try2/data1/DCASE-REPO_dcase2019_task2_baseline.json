@@ -1,0 +1,546 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1704.04861.\n\n2. Hershey, S. et. al., [CNN Architectures for Large-Scale Audio Classification](https://ai.google/research/pubs/pub45611"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Howard, A. et. al., MobileNets: [Efficient Convolutional Neural Networks for Mobile Vision Applications](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html), https://arxiv.org/abs/1704.04861.\n\n2. Hershey, S. et. al., [CNN Architectures for Large-Scale Audio Classification](https://ai.google/research/pubs/pub45611), ICASSP 2017.\n\n3. Szegedy, C. et. al., [Rethinking the Inception Architecture for Computer Vision](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Szegedy_Rethinking_the_Inception_CVPR_2016_paper.pdf), CVPR 2016.\n\n4. Wang, Y. et. al., [Trainable Frontend For Robust and Far-Field Keyword Spotting](https://ai.google/research/pubs/pub45911), ICASSP 2017.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "SC(3x3, 64, 1)      | (100, 96, 64)    | 1.2K      | 11.2M \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488,
+        0.8356013927728488,
+        0.8356013927728488,
+        0.8356013927728488,
+        0.8356013927728488,
+        0.8356013927728488
+      ],
+      "excerpt": "SC(3x3, 512, 2)     | (13, 12, 512)    | 133.4K    | 20.8M \nSC(3x3, 512, 1)     | (13, 12, 512)    | 266.8K    | 41.6M \nSC(3x3, 512, 1)     | (13, 12, 512)    | 266.8K    | 41.6M \nSC(3x3, 512, 1)     | (13, 12, 512)    | 266.8K    | 41.6M \nSC(3x3, 512, 1)     | (13, 12, 512)    | 266.8K    | 41.6M \nSC(3x3, 512, 1)     | (13, 12, 512)    | 266.8K    | 41.6M \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DCASE-REPO/dcase2019_task2_baseline",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For general discussion of this task, please use the [Kaggle Discussion board](https://www.kaggle.com/c/freesound-audio-tagging-2019/discussion).\n\nFor specific issues with the code for this baseline system, please create an issue or a pull request on GitHub for the\n[DCASE 2019 Baseline repo](https://github.com/DCASE-REPO/dcase2019_task2_baseline) and make sure to @-mention `plakal`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-20T22:13:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-24T07:43:43Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We use the MobileNet v1 convolutional neural network architecture [1], which gives us a light-weight\nand efficient model with reasonable performance.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9633631916067893
+      ],
+      "excerpt": "This is the baseline system for Task 2 of the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8597349011742104
+      ],
+      "excerpt": "an efficient MobileNet v1 convolutional neural network, which takes log mel spectrogram features as input and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301131574427852
+      ],
+      "excerpt": "model.py: Tensorflow model and hyperparameter definitions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9524981115707496
+      ],
+      "excerpt": "We use frames of log mel spectrogram as input features, which has been demonstrated to work well for \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9853013584289373,
+        0.8027368108364836,
+        0.9741982649710316,
+        0.8923983283414652,
+        0.9643720839189408,
+        0.9455925555338499
+      ],
+      "excerpt": "The spectrogram is computed using the magnitude of \n  the Short-Time Fourier Transform \n  (STFT) with a window size of 25ms, a window hop size of 10ms, and a periodic Hann window. \nThe mel spectrogram is computed by mapping the spectrogram to 96 mel bins covering the range 20 Hz - 20 kHz. \n  The mel scale is intended to better represent \n  human audio perception by using more bins in the lower frequencies and fewer bins in the higher \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9960797026570357,
+        0.915155202154143,
+        0.926071195421209,
+        0.9235303363136433,
+        0.9743789144882565,
+        0.9077433143953023
+      ],
+      "excerpt": "  the offset of 0.001 is used to avoid taking a logarithm of 0. The compressive non-linearity of the \n  logarithm is used to reduce the dynamic range of the feature values. \nThe log mel spectrogram is then framed into overlapping examples with a window size of 1s and a \n  hop size of 0.5s.  The overlap allows generating more examples from the same data than with no \n  overlap, which helps to increase the effective size of the dataset, and also gives the model a \n  little more context to learn from because it now sees the same slice of audio in different \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8583544779429121
+      ],
+      "excerpt": "on-the-fly and purely in TensorFlow, without requiring any Python preprocessing or separate feature \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9132615401857602
+      ],
+      "excerpt": "hyperparameters in your grid search without having to generate features offline, and also improves \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9802123065100566,
+        0.9345743738659652
+      ],
+      "excerpt": "We use a variant of the MobileNet v1 CNN architecture [1] which consists of a stack of separable \nconvolution layers, each of which are composed of a pair of a depthwise convolution (which acts on \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9216056285084633,
+        0.9147508544537571
+      ],
+      "excerpt": "standard convolutions if using 3x3 filters) with only a small reduction in model accuracy. \nThe model layers are listed in the table below using notation C(kernel size, depth, stride) and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9129709172868858,
+        0.967904225532985,
+        0.8217154269210816,
+        0.8222635239926633,
+        0.9003955967967594,
+        0.9411724334309148
+      ],
+      "excerpt": "Our MobileNet baseline is ~8x smaller than a ResNet-50 and uses ~4x less compute. \nOur implementation follows the version released as part of the TF-Slim model \nlibrary with \nthe main difference being that we tried a stride of 1 instead of 2 in the first convolution layer, \nwhich gives us a little more time-frequency resolution in the layers before the final reduce. Note \nthat MobileNet naturally allows scaling the model size and compute by changing the number of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8186128193114993,
+        0.8268286631016091,
+        0.8907128381384478
+      ],
+      "excerpt": "list of 80 scores. \nThe following hyperparameters, defined with their default values in parse_hparams() in model.py, \nare used in the input pipeline and model definition. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8870585142474964
+      ],
+      "excerpt": "    #: Window and hop length for Short-Time Fourier Transform applied to audio \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9449038859319522
+      ],
+      "excerpt": "    #: Parameters controlling conversion of spectrogram into mel spectrogram. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8826520503912817
+      ],
+      "excerpt": "    #: Window and hop length used to frame the log mel spectrogram into \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968529660061765
+      ],
+      "excerpt": "    #: For all CNN classifiers, whether to use global mean or max pooling. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.874510386475424
+      ],
+      "excerpt": "    #: Note that this is the keep probability, not the the dropout rate. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.846479915714696
+      ],
+      "excerpt": "    #: uniform 0.5 rather than a hard 1.0). Set to zero to disable. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9361152783525017,
+        0.9749804888333636,
+        0.9326269196030602
+      ],
+      "excerpt": "    #: Standard deviation of the normal distribution with mean 0 used to \n    #: initialize the weights of the model. A standard deviation of zero \n    #: selects Xavier initialization. Biases are always initialized to 0. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8688763853049287
+      ],
+      "excerpt": "    #: Type of optimizer (sgd, adam) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8096858349554713
+      ],
+      "excerpt": "    #: Epsilon passed to the Adam optimizer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8511784519760182
+      ],
+      "excerpt": "    #: How many epochs to wait between each decay of learning rate. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9633097212506809,
+        0.9228122049600965,
+        0.9648301447277098
+      ],
+      "excerpt": "of size 0.5s, a batch size of 32, and a learning rate of 0.01. \nA few notes about some of the hyperparameters: \nLabel Smoothing: This was introduced in Inception v3 [3] and converts each ground truth label into a blend of the original label and 0.5 (representing a uniform probability distribution). The higher the lsmooth hyperparameter (in the range [0, 1]), the more the labels are blended towards 0.5. This is useful when training with noisy labels that we don't trust. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8137642419377671,
+        0.8916395105028961
+      ],
+      "excerpt": "Exponential Decay: Setting lrdecay greater than 0 will enable exponential decay of learning rate, as described in the TensorFlow documentation of tf.train.exponential_decay. You will also need to specify the --epoch_num_batches flag to define the number of batches in an epoch for the training dataset that you will be using, as well as the decay_epochs hyperparameter if you want to change the default number of epochs before the learning rate changes. \nAn aside on computing epoch sizes: We can use a simple back-of-the-envelope calculation of epoch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9128295567160316,
+        0.9237423476401821,
+        0.9898877407319786
+      ],
+      "excerpt": "examples with a hop of 0.5s seconds and if we have a batch size of 64, then the number of batches in \nan epoch would be 38956 / 0.5 / 64 = ~1217. Similarly, for a batch size of 64, the number of batches \nin an epoch of the noisy dataset is ~9148 and the number of batches in an epoch of the combined \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403383443072142,
+        0.853513308222303
+      ],
+      "excerpt": "We first train the model on the noisy dataset which lets us learn an audio representation from a lot of data. We use dropout and label smoothing to deal with noisy labels and to avoid overfitting. \nWe then warmstart training on the curated dataset using a noisily trained checkpoint. This transfer learning approach lets us use all the data without having to deal with the domain mismatch if we tried to train on both noisy and curated in the same training run. We continue to use dropout and label smoothing because even the curated labels are not 100% trustworthy and we do not want to overfit to the smaller dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9317225064858881
+      ],
+      "excerpt": "All runs used Xavier initialization as well as batch normalization and the Adam optimizer with the default settings as specified in parse_hparams() in model.py. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DCASE-REPO/dcase2019_task2_baseline/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 13,
+      "date": "Thu, 30 Dec 2021 09:13:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DCASE-REPO/dcase2019_task2_baseline/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DCASE-REPO/dcase2019_task2_baseline",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Clone [this GitHub repository](https://github.com/DCASE-REPO/dcase2019_task2_baseline).\n* Requirements: python, numpy, sklearn, tensorflow. The baseline was tested with\n  on a Debian-like Linux OS with Python v2.7.16/v3.6.5, NumPy v1.16.2, Scikit-learn v0.20.3,\n  TensorFlow v1.13.1.\n* Download the dataset [from Kaggle](https://kaggle.com/c/freesound-audio-tagging-2019/data):\n  `audio_curated.zip`, `audio_noisy.zip`, `test.zip`, `train_curated.csv`, `train_noisy.csv`.\n  Unzip the zip files to produce `train_curated`, `train_noisy`, and `test` directories.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8272066675591453
+      ],
+      "excerpt": "SC(3x3, 512, 2)     | (13, 12, 512)    | 133.4K    | 20.8M \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.833462419687597
+      ],
+      "excerpt": "    #: waveform to make the spectrogram. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8732253740282472
+      ],
+      "excerpt": "datasets is ~10272. Note that you will need to adjust these numbers because you are probably using a \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9157805387013773,
+        0.9177082133356589
+      ],
+      "excerpt": "runner.py: Main driver. Run runner.py --help to see all available flags. \ntrain.py: Training loop. Called by runner.py when passed --mode train \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8033612023380318,
+        0.8178021868777979,
+        0.8683859374410184,
+        0.8499952768140763
+      ],
+      "excerpt": "inputs.py: TensorFlow input pipeline for decoding CSV input and WAV files, and constructing \n   framed and labeled log mel spectrogtram examples. \nmodel.py: Tensorflow model and hyperparameter definitions. \nmake_class_map.py: Utility to create a class map from the training dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8903997383460776
+      ],
+      "excerpt": "The input pipeline parses CSV records, decodes WAV files, creates examples containing log mel \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.801522847029513
+      ],
+      "excerpt": "Input               | (100, 96, 1)     | -         | - \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853492186136904
+      ],
+      "excerpt": "Total           |                  | 3.3M| 432.4M \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8766312876385063
+      ],
+      "excerpt": "hparams = tf.contrib.training.HParams( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8838148168639296
+      ],
+      "excerpt": "    #: examples. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8402200424615561
+      ],
+      "excerpt": "    #: Number of examples in each batch fed to the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9166263955100747
+      ],
+      "excerpt": "pairs.  For example, --hparams example_window_seconds=0.5,batch_size=32,lr=0.01 will use examples \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8019152508784079
+      ],
+      "excerpt": "Warm Start: As mentioned in the Usage section earlier, specifying warmstart=1 requires also specifying a --warmstart_checkpoint flag as well as optionally the --warmstart_{include,exclude}_scopes flags. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9235185357103878
+      ],
+      "excerpt": "fixed sample size (16-bit signed PCM). For example, the total size of the train_curated directory  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8189571633681765
+      ],
+      "excerpt": "the total number of seconds in the training set is (3.2 * 2 ^ 30) / (2 * 44100) = ~38956. We frame \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8495669097165893
+      ],
+      "excerpt": "All runs used Xavier initialization as well as batch normalization and the Adam optimizer with the default settings as specified in parse_hparams() in model.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "Lwlrap(Run) = 0.305023 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DCASE-REPO/dcase2019_task2_baseline/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Tampere University of Technology, Google LLC, Queen Mary University of London, Inria, and KU Leuven\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Baseline system for Task 2 of DCASE 2019",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dcase2019_task2_baseline",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DCASE-REPO",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DCASE-REPO/dcase2019_task2_baseline/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 24,
+      "date": "Thu, 30 Dec 2021 09:13:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Prepare a class map, which is a CSV file that maps between class indices and class names, and is\n  used by various parts of the system:\n```shell\n$  make_class_map.py < /path/to/train_curated.csv > /path/to/class_map.csv\n```\n  Note that we have provided a canonical `class_map.csv` (in this repo) where the order of classes\n  matches the order of columns required in Kaggle submission files.\n\n* If you want to use a validation set to compare models, prepare a hold-out validation set by moving\n  some random fraction (say, 10%) of the rows from the training CSV files into a validation CSV\n  file, while keeping the same header line. This is a multi-label task so, to avoid any bias in the\n  split, make sure that the training and validation sets have roughly the same number of labels per\n  class. The rows of the original training CSV files are not necessarily in random order so make sure\n  to shuffle rows when making splits.\n\n* Train a model on the curated data with checkpoints created in `train_dir`:\n```shell\n$ main.py \\\n    --mode train \\\n    --model mobilenet-v1 \\\n    --class_map_path /path/to/class_map.csv \\\n    --train_clip_dir /path/to/train_curated \\\n    --train_csv_path /path/to/train.csv \\\n    --train_dir /path/to/train_dir\n```\n  This will produce checkpoint files in `train_dir` having the name prefix `model.ckpt-N` with\n  increasing N, where N represents the number of batches of examples seen by the model.  By default,\n  checkpoints are written every 100 batches. Edit the saver settings in `train.py` to change this.\n\n  This will also print the loss at each step on standard output, as well as add summary entries to a\n  TensorFlow event log in `train_dir` which can be viewed by running a TensorBoard server pointed at\n  that directory.\n\n  By default, this will use the default hyperparameters defined inside `model.py`. These can be\n  overridden using the `--hparams` flag to pass in comma-separated `name=value` pairs. For example,\n  `--hparams batch_size=32,lr=0.01` will use a batch size of 32 and a learning rate of 0.01.  For\n  more information about the hyperparameters, see below in the Model description section. Note that\n  if you use non-default hyperparameters during training, you must use the same hyperparameters when\n  running the evaluation and inference steps described below.\n\n* Evaluate the model checkpoints in the training directory on the (curated) validation set:\n```shell\n$ main.py \\\n    --mode eval \\\n    --model mobilenet-v1 \\\n    --class_map_path /path/to/class_map.csv \\\n    --eval_clip_dir /path/to/train_curated \\\n    --eval_csv_path /path/to/validation.csv \\\n    --train_dir /path/to/train_dir \\\n    --eval_dir /path/to/eval_dir\n```\n  This will loop through all checkpoints in `train_dir` and run evaluation on each checkpoint. A\n  running Lwlrap (per-class and overall) will be periodically printed on stdout. The final Lwlrap\n  will be printed on stdout and logged into a text file named `eval-<N>.txt` in `eval_dir` (these\n  files are checked by the evaluator so that if it is interrupted and re-started on the same data,\n  then it will skip re-evaluating any checkpoints that have already been evaluated).  Lwlrap summary\n  values will also be written in TensorFlow event logs in `eval_dir` (both the full Lwlrap as well\n  as a partial Lwlrap from 5% of the data) which can be viewed in TensorBoard. Evaluation can be\n  sped up by modifying the top-level loop in `evaluation.py` to look at every K-th checkpoint\n  instead of every single one, or by spawning multiple copies of eval where each one is looking at\n  a different subset of checkpoints.\n\n* Generate predictions in `submission.csv` from a particular trained model checkpoint for submission\n  to Kaggle:\n```shell\n$ main.py \\\n    --mode inference \\\n    --model mobilenet-v1 \\\n    --class_map_path /path/to/class_map.csv \\\n    --inference_clip_dir /path/to/test \\\n    --inference_checkpoint /path/to/train_dir/model.ckpt-<N> \\\n    --predictions_csv_path /path/to/submission.csv\n```\n\n* We also support warm-starting training of a model using weights from the checkpoint of a previous\n  training run. This allows, for example, training a model on the noisy dataset and then\n  warm-starting a curated training run using a noisily trained checkpoint.\n```shell\n$ main.py \\\n    --mode train \\\n    --model mobilenet-v1 \\\n    --class_map_path /path/to/class_map.csv \\\n    --train_clip_dir /path/to/train_curated \\\n    --train_csv_path /path/to/train.csv \\\n    --train_dir /path/to/train_dir \\\n    --hparams warmstart=1,<other hparams ...> \\\n    --warmstart_checkpoint=/path/to/model.ckpt-<N> \\\n    --warmstart_include_scopes=<excludescope>,... \\\\\n    --warmstart_exclude_scopes=<includescope>,...\n```\n  This will initialize training with weights taken from `model.ckpt-<N>`, which assumes that the\n  model being trained and the model that generated the checkpoint have compatible architectures and\n  layer names. If the `--warmstart_{exclude,include}_scopes` flags are not specified, then all\n  weights are used.  The scope flags specify comma-separated lists of TensorFlow scope names\n  matching variables that are to be included and excluded. The include scope defaults to match all\n  variables, and the exclude scope defaults to match no variables. Inclusions are applied before\n  exclusions. For example, if you had a trained model which had a stack of convolution layers\n  followed by a single fully connected layer with a scope named`fully_connected`, and you wanted to\n  use the convolution weights only, then you could specify\n  `--warmstart_exclude_scopes=fully_connected` to exclude the last layer.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

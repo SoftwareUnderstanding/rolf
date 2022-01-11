@@ -1,0 +1,212 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1907.07073",
+      "https://arxiv.org/abs/1301.3781"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "* negative = 10 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/social-machines/RadioTalk",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-07-01T05:01:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-13T19:51:04Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The RadioTalk corpus is in JSONL format, with one json document per line. Each line represents one \"snippet\" of audio, may contain multiple sentences, and is represented as a dictionary object with the following keys:\n* `content`: The transcribed speech from the snippet.\n* `callsign`: The call letters of the station the snippet aired on.\n* `city`: The city the station is based in, as in FCCC filings.\n* `state`: The state the station is based in, as in FCCC filings.\n* `show_name`: The name of the show containing this snippet.\n* `signature`: The initial 8 bytes of an MD5 hash of the `content` field, after lowercasing and removing English stopwords (specifically the NLTK stopword list), intended to help with deduplication.\n* `studio_or_telephone`: A flag for whether the underlying audio came from a telephone or studio audio equipment. (The most useful feature in distinguishing these is the [narrow frequency range](https://en.wikipedia.org/wiki/Plain_old_telephone_service#Characteristics) of telephone audio.)\n* `guessed_gender`: The imputed speaker gender.\n* `segment_start_time`: The Unix timestamp of the beginning of the underlying audio.\n* `segment_end_time`: The Unix timestamp of the end of the underlying audio.\n* `speaker_id`: A diarization ID for the person speaking in the audio snippet.\n* `audio_chunk_id`: An ID for the audio chunk this snippet came from (each chunk may be split into multiple snippets).\n\nAn example snippet from the corpus (originally on one line but pretty-printed here for readability):\n```\n{\n    \"content\": \"This would be used for housing programs and you talked a little bit about how the attorney\",\n    \"callsign\": \"KABC\",\n    \"city\": \"Los Angeles\",\n    \"state\": \"CA\",\n    \"show_name\": \"The Drive Home With Jillian Barberie & John Phillips\",\n    \"signature\": \"afd7d2ee\",\n    \"studio_or_telephone\": \"T\",\n    \"guessed_gender\": \"F\",\n    \"segment_start_time\": 1540945402.6,\n    \"segment_end_time\": 1540945408.6,\n    \"speaker_id\": \"S0\",\n    \"audio_chunk_id\": \"2018-10-31/KABC/00_20_28/16\"\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9559393422932729,
+        0.9001166618658049,
+        0.9051081248233742,
+        0.9958696974321224,
+        0.9934862357421322,
+        0.8882366750508052
+      ],
+      "excerpt": "This repository contains supplementary information for the paper \"RadioTalk: a large-scale corpus of talk radio transcripts\", forthcoming at Interspeech 2019. \nThe corpus as documented in the paper is available in the Amazon AWS S3 bucket radio-talk at s3://radio-talk/v1.0/  (Browse on AWS S3 console) \nThe entire corpus is available as one file of about 9.3 GB at s3://radio-talk/v1.0/radiotalk.json.gz, and there's also a version with one file per month under s3://radio-talk/v1.0/monthly/. Pre-trained word embeddings are also available. Any future versions will be released under other vX.Y prefixes for suitable values of X and Y. \nA word embedding model trained on the RadioTalk data, in the format produced by gensim, is also available in the bucket, at s3://radio-talk/v1.0/word2vec/. The embeddings are 300-dimensional and were trained with the skip-gram with negative sampling variant of Word2Vec (see Mikolov et al 2013). See also our evaluation of these embeddings on some standard analogy and similarity tasks. \nBesides doing the usual preprocessing -- conversion to lowercase, removing punctuation, etc -- we also concatenated common phrases into single tokens with words separated by underscores  before training the embeddings. (Specifically, the list of phrases to combined included the titles of English Wikipedia articles, a list of phrases detected from the corpus, and the names of certain political figures.) Counting these combined collocations as single terms, the model vocabulary contains 53,968 terms. \nFor reproducibility, the gensim model object was initialized with the following non-default parameters: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9971724395860115,
+        0.9342741044629601
+      ],
+      "excerpt": "As discussed in the paper, to transcribe radio speech we started with the JHU ASpIRE speech-to-text model and \nreplaced its language model with one trained on the transcripts of various radio programs.  Our final Kaldi model files \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9079063592034674,
+        0.8272199613847404,
+        0.9252585671223964,
+        0.8031548075616258,
+        0.9004965744728015
+      ],
+      "excerpt": "The initial set of 50 radio stations for ingestion was chosen from the universe of all 1,912 talk radio stations as follows. First, we excluded certain stations from consideration: \n* stations without an online stream of their broadcasts, \n* stations in Alaska or Hawaii, and \n* the recently licensed category of \"low-power FM stations\". \nNext, we took a random sample of 50 stations from the remaining 1,842, stratifying by four variables: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8382620220692335
+      ],
+      "excerpt": "* Four-way Census region (Midwest, Northeast, South, West) based on the containing state, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "The RadioTalk dataset of talk radio transcripts",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/social-machines/RadioTalk/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Mon, 27 Dec 2021 08:29:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/social-machines/RadioTalk/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "social-machines/RadioTalk",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/social-machines/RadioTalk/master/word2vec/word2vec-eval.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/social-machines/RadioTalk/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RadioTalk",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RadioTalk",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "social-machines",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/social-machines/RadioTalk/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 45,
+      "date": "Mon, 27 Dec 2021 08:29:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This interface lets you listen to a sample of radio clips restricted to the topic and U.S. state of your choosing:   https://radio.cortico.ai/\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

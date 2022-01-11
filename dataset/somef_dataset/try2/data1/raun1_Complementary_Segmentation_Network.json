@@ -1,0 +1,241 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1804.00521 \n\n![alt text](https://github.com/raun1/Complementary_Segmentation_Network/blob/master/fig/Network_img.PNG",
+      "https://arxiv.org/abs/1505.04597] {PLEASE READ U-NET before reading this paper} and W-Net [https://arxiv.org/abs/1711.08506] {Optional}.\n* Please see line 1541 in comp_net_raw.py file in src for the main essence of complementary network - i.e. summing up the intermediate outputs of segmentation and complementary branches and then concatenating them for reconstruction layer.\n* Hyper parameters to be set - \n* l2_Lambda - used for regularizing/penalizing parameters of the current layer\n* Mainly used to prevent overfitting and is incorporated in the loss function\n* Please see keras.io for more details\n* DropP sets the % of dropout at the end of every dense block\n* Kernel_size is the kernel size of the convolution filters\n* Please see readme for additional resources.\n* Lines 73 - 648 is the common encoder of the segmentation and complementary branches. \n* Layers such as xconv1a,xmerge1........ belong to the complementary upsampling branch branch of the architecture.\n* The convolution layers's number indicates its level and so up6 and xup6 are at the same level\n* and are parallel to each other\n* Layers such as xxconv1a,xxmerge1 .... belong to the reconstruction branch. \n* For more details of the multi outputs please see my isbi repository here\nhttps://github.com/raun1/ISBI2018-Diagnostic-Classification-Of-Lung-Nodules-Using-3D-Neural-Networks\n* Basically to summarize, we have two branches one which has negative dice with ground truth brain mask \n and is the segmentation branch\n* We then have another branch with positive dice with ground truth masks\n* The THEME of comp-net is to sum up the two sections, future works will provide a better way to do this and a generalized version :",
+      "https://arxiv.org/abs/1711.08506] {Optional}.\n* Please see line 1541 in comp_net_raw.py file in src for the main essence of complementary network - i.e. summing up the intermediate outputs of segmentation and complementary branches and then concatenating them for reconstruction layer.\n* Hyper parameters to be set - \n* l2_Lambda - used for regularizing/penalizing parameters of the current layer\n* Mainly used to prevent overfitting and is incorporated in the loss function\n* Please see keras.io for more details\n* DropP sets the % of dropout at the end of every dense block\n* Kernel_size is the kernel size of the convolution filters\n* Please see readme for additional resources.\n* Lines 73 - 648 is the common encoder of the segmentation and complementary branches. \n* Layers such as xconv1a,xmerge1........ belong to the complementary upsampling branch branch of the architecture.\n* The convolution layers's number indicates its level and so up6 and xup6 are at the same level\n* and are parallel to each other\n* Layers such as xxconv1a,xxmerge1 .... belong to the reconstruction branch. \n* For more details of the multi outputs please see my isbi repository here\nhttps://github.com/raun1/ISBI2018-Diagnostic-Classification-Of-Lung-Nodules-Using-3D-Neural-Networks\n* Basically to summarize, we have two branches one which has negative dice with ground truth brain mask \n and is the segmentation branch\n* We then have another branch with positive dice with ground truth masks\n* The THEME of comp-net is to sum up the two sections, future works will provide a better way to do this and a generalized version :"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9501449444981015
+      ],
+      "excerpt": "Network Architecture for the MICCAI_2018 paper : CompNet: Complementary Segmentation Network for Brain MRI Extraction. To view the paper on Archive click the following https://arxiv.org/abs/1804.00521 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/raun1/MICCAI2018---Complementary_Segmentation_Network-Raw-Code",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-04-17T04:32:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-11T03:05:29Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Architecture of our complementary segmentation network, the optimal CompNet.\nThe dense blocks (DB), corresponding to the gray bars, are used in each encoder\nand decoder. The triple (x,y,z) in each dense block indicates that it has x convolutional\nlayers with a kernel size 3\u00d73; each layer has y filters, except for the last one that has z\nfilters. SO: segmentation output for the brain mask; CO: complementary segmentation\noutput for the non-brain mask; RO: reconstruction output for the input image. These\nthree outputs produced by the Sigmoid function are the final predictions; while all\nother Sigmoids produce intermediate outputs, except for the green one that is the concatenation of the summation from each intermediate layers. Best viewed in color.\n\n*ROI and CO branches - \nWe take the downsampling branch of a U-Net as it is, however we split the upsampling branch into two halves, one to obtain the Region of Interest and the other for Complementary aka non region of interest. Losses here are negative dice for ROI and positive dice for Non-ROI region.*\n\n*Reconstruction Branch - \nNext we merge these two ROI and non ROI outputs using \"Summation\" operation and then pass it into another U-Net, This U-Net is the reconstruction branch. The input is the summed image from previous step and the output is the \"original\" image that we start with. The loss of reconstruction branch is MSE.*\n\n```\nThe code in this repository provides only the stand alone code for this architecture. You may implement it as is, or convert it into modular structure\nif you so wish. The dataset of OASIS can obtained from the link above and the preprocessiong steps involved are mentioned in the paper. \nYou have to provide the inputs.\n```\n\n\nemail me - rd31879@uga.edu for any questions !! Am happy to discuss \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8251656023418839
+      ],
+      "excerpt": "Keras - Deep Learning Framework used \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8499170667914941
+      ],
+      "excerpt": "Sklearn - Scipy/Sklearn/Scikit-learn \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9021337005688398
+      ],
+      "excerpt": "Copy the upsampling branch of your U-Net \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8738283781145639,
+        0.8121546231279517,
+        0.9593099453375362
+      ],
+      "excerpt": "Use same loss functions as the original U-Net BUT change its sign {Warning - Make sure your loss function is defined for the opposite sign and try to think intuitively what it acheives. Example dice is simply overlap between two objects and optimizing negative dice gives us maximum possible overlap, but positive dice lowest value is 0 since you CANNOT quantify how much seperation is there between two objects using the DICE score but simply quantify if the two overlap or not and if they overlap how much } \nAdd the two upsampling branch outputs pairwise for each channel using keras's model.add layer \nFeed that into the new reconstruction U-Net where the loss function is MSE with the Input image of the first U-Net i.e. the original  input \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "The following is a new architecture for robust segmentation. It may perform better than a U-Net :) for binary segmentation. I will update the code when I have some spare time within the next month. However you can simply read this one and will soon notice the pattern after a bit",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/raun1/Complementary_Segmentation_Network/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Wed, 29 Dec 2021 16:35:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/raun1/MICCAI2018---Complementary_Segmentation_Network-Raw-Code/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "raun1/MICCAI2018---Complementary_Segmentation_Network-Raw-Code",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "Python - Python-2  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8233588558014837,
+        0.8775866478244584,
+        0.8411004553040458,
+        0.8201572251734318
+      ],
+      "excerpt": "Numpy - Numpy \nSklearn - Scipy/Sklearn/Scikit-learn \nCUDA - CUDA-8 \nCUDNN - CUDNN-5 You have to register to get access to CUDNN \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/raun1/MICCAI2018---Complementary_Segmentation_Network-Raw-Code/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 raun1\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Pretrained optimal-compnet model on 1st fold of Oasis Brain MRI dataset link - https://drive.google.com/file/d/1o70IS00y5psMI8G5FQAciu5A4xcnkhsX/view?usp=sharing (let me know if this gets corrupted )",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MICCAI2018---Complementary_Segmentation_Network-Raw-Code",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "raun1",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/raun1/MICCAI2018---Complementary_Segmentation_Network-Raw-Code/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This architecture can be understood after learning about the U-Net [https://arxiv.org/abs/1505.04597] {PLEASE READ U-NET before reading this paper} and W-Net [https://arxiv.org/abs/1711.08506] {Optional}.\n* Please see line 1541 in comp_net_raw.py file in src for the main essence of complementary network - i.e. summing up the intermediate outputs of segmentation and complementary branches and then concatenating them for reconstruction layer.\n* Hyper parameters to be set - \n* l2_Lambda - used for regularizing/penalizing parameters of the current layer\n* Mainly used to prevent overfitting and is incorporated in the loss function\n* Please see keras.io for more details\n* DropP sets the % of dropout at the end of every dense block\n* Kernel_size is the kernel size of the convolution filters\n* Please see readme for additional resources.\n* Lines 73 - 648 is the common encoder of the segmentation and complementary branches. \n* Layers such as xconv1a,xmerge1........ belong to the complementary upsampling branch branch of the architecture.\n* The convolution layers's number indicates its level and so up6 and xup6 are at the same level\n* and are parallel to each other\n* Layers such as xxconv1a,xxmerge1 .... belong to the reconstruction branch. \n* For more details of the multi outputs please see my isbi repository here\nhttps://github.com/raun1/ISBI2018-Diagnostic-Classification-Of-Lung-Nodules-Using-3D-Neural-Networks\n* Basically to summarize, we have two branches one which has negative dice with ground truth brain mask \n and is the segmentation branch\n* We then have another branch with positive dice with ground truth masks\n* The THEME of comp-net is to sum up the two sections, future works will provide a better way to do this and a generalized version :) \n* We do this theme of summing at every stage of the intermediate outputs i.e. the first intermediate output of segmentation branch \n is summed with first intermediate output of the complementary branch.\n* We obtain a final summary of the outputs of the segmentation branch and complementary branch and also sum these two new summaries\n* Finally we concat all of these summations and send to the reconstruction branch\n* reconstruction branch is a simple structure of dense multi-output U-Net and the ground truth is the input image and loss is MSE.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 23,
+      "date": "Wed, 29 Dec 2021 16:35:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "miccai-2018",
+      "comp-net",
+      "unet-image-segmentation",
+      "complementary-segmentation-network",
+      "mri-brain",
+      "invariant-to-large-distortions",
+      "state-of-art-general-segmentation"
+    ],
+    "technique": "GitHub API"
+  }
+}

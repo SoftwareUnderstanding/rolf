@@ -1,0 +1,632 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. https://www.kaggle.com/c/quora-insincere-questions-classification\n2. https://www.appliedaicourse.com/course/11/Applied-Machine-learning-course\n3. keras Attention layer implentation https://www.kaggle.com/qqgeogor/keras-lstm-attention-glove840b-lb-0-043\n4. https://colah.github.io/posts/2015-08-Understanding-LSTMs/\n5. https://machinelearningmastery.com/gentle-introduction-long-short-term-memory-networks-experts/",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "unknown_words = sorted(unknown_words.items(), key=operator.itemgetter(1))[::-1] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9104228192512072
+      ],
+      "excerpt": ": refer to https://gist.github.com/nealrs/96342d8231b75cf4bb82 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9954897360581914
+      ],
+      "excerpt": ": param_grid: Additive (Laplace/Lidstone) smoothing parameter : (10^(-10) to 10^(10)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9945006289868029,
+        0.9030859728368266
+      ],
+      "excerpt": "clf = GridSearchCV(estimator=mnb, param_grid={'alpha': list(map(lambda x: 10**x , range(-10,10))) }, cv=3, \n                   scoring='f1',verbose=10, n_jobs=-1) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suryachintu/Quora-Insincere-Questions-Kaggle",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-21T05:21:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-01T21:38:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9721428548510056,
+        0.8671152424344042
+      ],
+      "excerpt": "This blog post is about the challenge that is hosted on kaggle Quora Insincere Questions.  \nThis post is divided into five parts: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8242408151273174
+      ],
+      "excerpt": "Basic EDA and Data Preprocessing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.864734543539211
+      ],
+      "excerpt": "Deep Learning Models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9859166180732116
+      ],
+      "excerpt": "Quora is a platform that empowers people to learn from each other. One can go to Quora and ask their questions and get answers from others. But some questions asked by users may be toxic and contain divisive content. The aim of the competition is to tackle these situations. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879550142612448,
+        0.9766757805220326
+      ],
+      "excerpt": "<b>Precision</b>: The precision is the ratio tp / (tp + fp) where tp is the number of true positives and fp the number of false positives. The precision is intuitively the ability of the classifier not to label as positive a sample that is negative. \n<b>Recall</b>: The recall is the ratio tp / (tp + fn) where tp is the number of true positives and fn the number of false negatives. The recall is intuitively the ability of the classifier to find all the positive samples. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8954187196690775
+      ],
+      "excerpt": "The above plot clearly shows that the dataset is a imbalanced dataset with over 12,25,312 questions are sincere with target as 0 and 80810 are marked as insincere with target label as 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.880791801744531
+      ],
+      "excerpt": ": calculate length of question text \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9478036374419844
+      ],
+      "excerpt": "This question is has lot of math operations like powers mulitplications and all and the interesting part is question has been marked as insincere. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.889068581099701
+      ],
+      "excerpt": "Lets check distribution of length feature for sincere and insincere questions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for question in tqdm(question_texts): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9102727986236224
+      ],
+      "excerpt": "Distribution of bad_words_count for sincere and insincere questions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9901895335806268
+      ],
+      "excerpt": "Similarly we can find many other features like Country Count, Sentence Count, Word Count, Stop Word Count, Punctuation count, Average word length and code for all these feature is available in this notebook but none of these features found helpful. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9825140429439527,
+        0.8542803702517097
+      ],
+      "excerpt": "We will be using GloVe for obtaining vector representation of a word as this is useful for our Deep learning model which will be covered at the end. \nCode for loading the glove vector representations \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9561328697041201
+      ],
+      "excerpt": "Once we have loaded Glove vector representations into dictionary we can access vector representations of any word by embeddings_index[word]. So embeddings_index is generally a dictionary containing key as a word and its value is a vector representation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9366640992562034
+      ],
+      "excerpt": "    Helper function to create a vocab count for our data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076,
+        0.9560187895509076
+      ],
+      "excerpt": "    for sentence in sentences: \n        for word in sentence: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8367739924987074
+      ],
+      "excerpt": "    Helper function to check the code coverage with embedding matrix \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for word in vocab.keys(): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9761845364979879,
+        0.9831013493301697,
+        0.9888121070127063,
+        0.8021122861296891
+      ],
+      "excerpt": "Found embeddings for 33.02% of vocab<br/> \nFound embeddings for  88.15% of all text<br/> \nWe can only get vector representations for 33% of vocab(unique words) and 88.15% of all text. \nLets check what are missing in this \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9521666886063663,
+        0.9702074055534142
+      ],
+      "excerpt": "As we can see from the above cell lot of text processing needs to be done. India? has appeared 16,384 times in our question texts. \nNext step is to clean the raw questions by lower casing the text, expanding contractions and removing punctuations and check if our we can increase our vocab coverage. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for p in unknown_punctuations: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for p in known_puncts: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.941517031218062,
+        0.9831013493301697,
+        0.9779846705234505,
+        0.841602403868066
+      ],
+      "excerpt": "Found embeddings for 69.57% of vocab<br/> \nFound embeddings for  99.58% of all text<br/> \nNow the vocab coverage is increased from 33% to 69.57% and covers 99.58% of all text. So removing punctuations, lower casing and expanding contractions increased vocab coverage. \nWe can further increase the coverage by corecting the spellings as there are lot of spelling mistakes in question text. You can find detailed code on this notebook \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9014322619469559
+      ],
+      "excerpt": ": Estimator as MultinomialNB for GridSearchCV \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": ": verbose: for debugging \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8476927944217573
+      ],
+      "excerpt": "By using Naive Bayes Classifier we are able to get 0.583 F1-score on our test set as this a pretty good score we can use it as base line model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.985279386548148
+      ],
+      "excerpt": "We will be using Bidirectional LSTM with a Attention Layer folowed by a dense layer of 64 units and another dense layer of 32 units with elu activation function for our model. Attention Layer is based on the Dzmitry Bahdanau research paper https://arxiv.org/pdf/1409.0473.pdf and custom keras implementation is taken from kaggle kernel https://www.kaggle.com/qqgeogor/keras-lstm-attention-glove840b-lb-0-043 and detailed explaination will be found in this notebook, in this notebook there is a detailed explanation of input shapes and output shapes at of each operation used for the implementation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = Sequential() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298775026294136,
+        0.9298775026294136,
+        0.9298775026294136
+      ],
+      "excerpt": "model.add(Dense(64, activation='elu')) \nmodel.add(Dense(32, activation='elu')) \nmodel.add(Dense(1, activation='sigmoid')) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model.fit(x_train, y_train, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.807631595615733
+      ],
+      "excerpt": "score, acc = model.evaluate(x_val, y_val, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9599190473476981
+      ],
+      "excerpt": "After 7 epochs the training loss has decreased constantly but the validation loss does not decrease much and fluctuated from 0.11 to 0.12 . So we keep our checkpoint of the at epoch 7 and save the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Repo for Kaggle Quora Insincere Questions Challenge",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suryachintu/Quora-Insincere-Questions-Kaggle/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 15:00:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/suryachintu/Quora-Insincere-Questions-Kaggle/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "suryachintu/Quora-Insincere-Questions-Kaggle",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/Untitled.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/AttentionLayerDemo.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/QuoraInsincereQuestions-EDA.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/QuoraInsincereQuestions-ML-Models.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/QuoraInsincereQuestions-Text-Preprocessing.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/Quora-LSTM.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/.ipynb_checkpoints/QuoraInsincereQuestions-ML-Models-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/.ipynb_checkpoints/Quora-LSTM-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/.ipynb_checkpoints/QuoraInsincereQuestions-Text-Preprocessing-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/.ipynb_checkpoints/AttentionLayerDemo-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/notebooks/.ipynb_checkpoints/QuoraInsincereQuestions-EDA-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/suryachintu/Quora-Insincere-Questions-Kaggle/master/.ipynb_checkpoints/Untitled-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8379164527794947
+      ],
+      "excerpt": "You can find the notebook here for more detailed analysis.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9006694487032519
+      ],
+      "excerpt": "You can find the notebook here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9088063058459555
+      ],
+      "excerpt": " ('you?', 6295), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9006694487032519
+      ],
+      "excerpt": "You can find the notebook here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9006694487032519
+      ],
+      "excerpt": "You can find the notebook here \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8703426234067925
+      ],
+      "excerpt": "The dataset is a csv file you can download it from here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8897107595245954
+      ],
+      "excerpt": "train_df = pd.read_csv('train.csv') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9016131302841528,
+        0.8095867519849811
+      ],
+      "excerpt": "<img src=\"assets/dataset.png\"/> \n<img src=\"assets/distribution.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8770431529713146
+      ],
+      "excerpt": "print(\"Question text\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/max_len.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8770431529713146
+      ],
+      "excerpt": "print(\"Question text\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/min_len.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/length_dist.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/bad_words_df.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8830433511399133
+      ],
+      "excerpt": "print(train_df['bad_words_count'].min(), train_df['bad_words_count'].max()) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289669050403863
+      ],
+      "excerpt": "Output : 0, 9 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/bad_words_dist.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8808623741909329
+      ],
+      "excerpt": "    return word, np.asarray(arr, dtype='float32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8832194638909251,
+        0.8814916551562695
+      ],
+      "excerpt": "print('Found embeddings for {:.2%} of vocab'.format(len(known_words) / len(vocab))) \nprint('Found embeddings for  {:.2%} of all text'.format(nb_known_words / (nb_known_words + nb_unknown_words))) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8226440209499781
+      ],
+      "excerpt": "    return text \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9402641158207085
+      ],
+      "excerpt": "print(\"TFIDF train f1 score:\", f1_score(y_pred=clf.best_estimator_.predict(tfidf_train_vect), \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9409381729827072
+      ],
+      "excerpt": "print(\"TFIDF test f1 score:\", f1_score(y_pred=clf.best_estimator_.predict(tfidf_test_vect), \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003261166765615
+      ],
+      "excerpt": "TFIDF test f1 score: 0.5829645584491874 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8613907398621863
+      ],
+      "excerpt": "model.add(Bidirectional(LSTM(64, dropout=0.25, recurrent_dropout=0.25, return_sequences=True))) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9001125975623911
+      ],
+      "excerpt": "<img src='assets/model.png'/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.888062915772347,
+        0.919739916430246
+      ],
+      "excerpt": "print('Test Loss:', score) \nprint('Test F1 Score:', acc) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003261166765615,
+        0.8243368003308422,
+        0.853204239981019
+      ],
+      "excerpt": "Test F1 Score: 0.6746514823591312<br/> \nLets check the model loss plot on train and validation sets \n<img src='assets/loss.png'/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8404703018086997,
+        0.8836704212480256
+      ],
+      "excerpt": "Lets check the model f1-score plot on train and validation sets \n<img src='assets/f1score.png'/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/suryachintu/Quora-Insincere-Questions-Kaggle/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "HTML"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Predicting Insincere Questions on Quora",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Quora-Insincere-Questions-Kaggle",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "suryachintu",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suryachintu/Quora-Insincere-Questions-Kaggle/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 15:00:04 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

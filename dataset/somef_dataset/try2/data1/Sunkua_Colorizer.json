@@ -1,0 +1,217 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1603.08511\nBild-Kolorierung mittels eines Klassifikationsansatzes\n\n\n\n# Datens\u00e4tze\nF\u00fcr das Training der Modelle wurden Bild- und Videodatens\u00e4tze verwendet. Die Bilddatens\u00e4tze wurden zum Test der generellen Architektur verwendet und das Modell anschlie\u00dfend auf den Videodaten trainiert.\n\n## Youtube-Videos\nF\u00fcr das initiale Training wurden zuf\u00e4llig ca. 14.000 Youtube-Videos mit einer Aufl\u00f6sung von mindestens 640px in der Breite heruntergeladen. Eine Liste mit den Youtube-Video-IDs f\u00fcr den Download befindet sich im Dataset-Ordner. Die Videos k\u00f6nnen beispielsweise mit youtube-dl heruntergeladen werden.\n\n### Preprocessing\nDie Videos wurden mittels ffmpeg auf einheitliche 480 * 320 Pixel skaliert und gepadded. Nach ersten Tests wurde die Aufl\u00f6sung aufgrund des hohen Rechenleistungsbedarfs weiter auf 240 * 135 reduziert. \n\nF\u00fcr die Verarbeitung im CNN m\u00fcssen alle Videos in den LAB-Farbraum konvertiert werden. Um einen Zugriff via Index auf die Daten zu erm\u00f6glichen wurde ein Pre-Processing-Script geschrieben, dass auf meheren Knoten und mithilfe einer Redisdatenbank die Videos ins HDF5-Datenformat konvertiert. (/preprocess_lab/job.py"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.971679416046096
+      ],
+      "excerpt": "|   --trainingtype  |                  'regression'                 | String |                      Entweder 'regression' oder 'classification'                    | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9348574598256394
+      ],
+      "excerpt": "Dieses Projekt soll mittels Deeplearning-Technologien Graustufen-Videos in Farbvideos konvertieren. Hierbei soll der Fokus nicht auf einer m\u00f6glichst exakten Reproduktion der realen Farben liegen sondern das Video in glaubhaften Farben darstellen. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9826149458199532,
+        0.9482170090492044,
+        0.8109194328925066
+      ],
+      "excerpt": "Bei der Regression wird das Modell darauf trainiert die zwei Farbkan\u00e4le a und b des LAB Farbraums auf Basis der Eingabe des L-Kanals vorherzusagen. Als Fehler wird dabei auf Basis einer Distanzmetrik (In diesem Fall L2-Loss) zwischen Eingabe und Ausgabe bestimmt. \nKolorierung auf Basis eines Regressionsverfahrens funktioniert h\u00e4ufig nicht gut. Das hat sich in den durchgef\u00fchrten Experimenten und im Paper Colorful Image Colorization gezeigt. Der berechnete Fehler benachteiligt weniger h\u00e4ufig vorkommende Farben und zieht das Bild in einen Sepia-Grauton. Dieses Problem kann umgangen werden indem das Problem als Klassifikationsproblem betrachtet wird. Dabei werden statt der zwei Farbkan\u00e4le die Wahrscheinlichkeiten von Farbbins \u00fcber die quantisierten ab-Farbkan\u00e4le ausgegeben. Der Fehler wird dabei zus\u00e4tzlich pro Kanal-Bin gewichtet. Die Gewichte setzen sich aus den Gegenwahrscheinlichkeiten aller ab-Histogramme \u00fcber die gew\u00e4hlten Bins \u00fcber alle Bilder des Datensatzes zusammen. \nIm Projekt wurden die Gewichte aus den Bildern der ImageNet-Datensatzes berechnet.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9991961110730092,
+        0.8871272784945704
+      ],
+      "excerpt": "Da Videos meist zu lang sind, um sie vollst\u00e4ndig in einem Sample zu verarbeiten, kann das Training und die Inferenz durch Zwischenspeichern der LSTM-States verk\u00fcrzt werden. Anstelle des Zur\u00fccksetzens der States nach jedem Batch, wird f\u00fcr jedes Video der entsprechende Zustand mit in das Modell gegeben. Erst wenn ein Video beendet ist, wird der Zustand genullt. \nPytorch unterst\u00fctzt mit den Basisfunktionen nicht das inkrementelle Laden von Daten aus mehrere Streams. Daher musste f\u00fcr das Training ein Dataloader mit Multiprocessing implementiert werden, der parallel mehrere Videos l\u00e4dt und \u00fcber ein Flag das Modell informieren kann, ob ein Video beendet wurde. Diese Implementierung ist leider nicht performant genug um eine Grafikkarte vollst\u00e4ndig auszulasten. Aus diesem Grund wurde in den Trainings immer nur ein Video zur Zeit geladen und verarbeitet. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9981678233148301
+      ],
+      "excerpt": "Zur Evaluation der kolorierten Bilder und Videos gibt es keine Metrik, die die Genauigkeit des Modells misst. Verwandte Arbeiten haben hierf\u00fcr Befragungen durchgef\u00fchrt (vgl. Zhang et al. Colorful Image Colorization) und auf Basis der Befragungsergebnisse die G\u00fcte ihres Modells bewertet. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8563504103924288,
+        0.9476270722224395,
+        0.9474594503990351,
+        0.9063762281116176
+      ],
+      "excerpt": "Auch sehen die Ergebnisse der Videos besser aus, wenn die Modelle nur auf den beiden Bild-Datens\u00e4tzen trainiert werden. Das deutet ebenfalls darauf hin, dass der Youtube-Datensatz keine ausreichende Qualit\u00e4t aufweist. Alternativ kann die Ursache noch beim LSTM-Layer liegen, der unter Umst\u00e4nden nur Rauschen in die Daten einf\u00fcgt und das Ergebnis hinsichtlich der Kolorierung negativ verf\u00e4lscht. \nUm ein funktionierendes Modell zu trainieren muss zun\u00e4chst ein besserer Videodatensatz gefunden werden. Weiterhin m\u00fcssen die Videos parallel im Training vom Modell gesehen werden, da ansonsten das Modell nur auf dem aktuell gezeigten Video overfittet.  \nEs kann au\u00dferdem dar\u00fcber nachgedacht werden das LSTM durch einen Attention-Mechanismus zu ersetzen oder Temporal Convolutional Neural Networks zu verwenden (vgl. Temporal Source-Reference Attention Networks for Comprehensive Video Enhancement (Satoshi Iizuka, Edgar Simo-Serra)). Allerdings sind die Kontexte in beiden Ans\u00e4tzen begrenzt. Es kann also auch hier vorkommen, dass das Modell nach der L\u00e4nge des Kontexts pl\u00f6tzlich eine wahrnehmbar andere Farbgebung w\u00e4hlt. \nEin weiterer Aspekt der Verbesserung bringen w\u00fcrde, w\u00e4re die entsprechende Parametrierung der Loss-Funktion Tanh im letzten Layer der Regressions-Modell-Architekturen. Der Ausgabewert dieser Funktion liegt zwischen -1 und 1. Das Problem ist, dass der LAB-Farbraum deutlich mehr Farben abdeckt als der sRGB-Farbraum und es daher zu Artefakten kommen kann, wenn die Aktivierung f\u00fcr a oder b Werte annimmt, die au\u00dferhalb des sRGB-Zielfarbraums liegen. W\u00fcrde mann die Lossfunktion in ihrem Wertebereich beschr\u00e4nken, so k\u00f6nnten diese Artefakte vermieden werden.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/paul-grundmann/Colorizer",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-08T13:36:12Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-10T19:06:15Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Image and Video Colorization",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sunkua/Colorizer/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 23:29:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/paul-grundmann/Colorizer/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "paul-grundmann/Colorizer",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Sunkua/Colorizer/master/run.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8559124975642377
+      ],
+      "excerpt": "| --experiment_name |                     'lstm'                    | String |                  Name des Experiments. Erscheint so im Tensorboard                  | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/paul-grundmann/Colorizer/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Colorizer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Colorizer",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "paul-grundmann",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/paul-grundmann/Colorizer/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Ben\u00f6tigte Dependencies:\n- Python3\n- Pytorch\n- Torchvision\n- OpenCV\n- Scikit-Learn\n- Scikit-Video\n- Numpy\n- H5py\n- Hdf5plugin\n\nDas Projekt ist in Docker und Im  lauff\u00e4hig. Dazu das Dockerimage mit `docker build -t \"imagename\" .` bauen. \nAnschlie\u00dfend das Image in die Docker-Registry der Beuth-Hochschule oder die Datexis-Registry pushen.\nDie Pfade im Projekt sollten f\u00fcr alle Deployments im Kubernetes erreichbar sein. \nAlternativ m\u00fcssen die Pfade in den Dateien ImageDataset, VideoDataset und train_lstm.py angepasst werden.\nDas Projekt setzt eine Grafikkarte mit Cuda-Unterst\u00fctzung voraus. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 23:29:57 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

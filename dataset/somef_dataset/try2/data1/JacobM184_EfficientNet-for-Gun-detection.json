@@ -1,0 +1,362 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.999440238000156,
+        0.999440238000156
+      ],
+      "excerpt": "* Tan et al.: https://arxiv.org/pdf/1905.11946.pdf \n* Ramachandran et al.: https://arxiv.org/pdf/1710.05941v1.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JacobM184/EfficientNet-for-Gun-detection",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-16T05:21:57Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-16T05:54:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9516773785191017,
+        0.9934993348916266,
+        0.957079648654002,
+        0.997820809505315,
+        0.9831190613800082,
+        0.993601020620385,
+        0.9803350903015685,
+        0.8187839916432381
+      ],
+      "excerpt": "Mass shootings are an unfortunate reality in today's world. Stopping mass shootings have proven to be extremely difficult without drastic and extreme measures. We aim to develop a deep-learning-based solution that will help reduce casualties from shootings through early detection and reporting.  \nThe purpose of our planned system will be to detect guns in videos/surveillance footage and raise an alarm or notify authorities and affected persons if the need arises. Although outside of the scope of this project, our system should be accurate and precise enough to allow for active protection systems to act on our data. \nOur planned system will detect guns in a given image/frame and attempt to create a bounding box around any detected guns. However, it should be noted that for the purposes of this project we will focus more on detection than on bounding boxes, so the bounding boxes drawn by our model may not be as accurate as our model's detection accuracy. \nWe plan to use the EfficientNet architecture to detect guns in real-time. EfficientNet is an architecture that takes advantage of compound scaling (i.e. scaling in Depth, Width and Resolution dimensions) to achieve state-of-the-art accuracy with lower FLOPS and less parameters than models that scale a single dimension. A key point in the original development of this architecture was that the efficiency and accuracy of the model when scaled depends on how much you scale each dimension w.r.t each other. Therefore, the scaling factors (\u03b1, \u03b2 and \u03b3) can be found for the best results when using EfficientNet. Our scaling factors were taken from those used by other implementations. Another key feature of this model that was particularly attractive to us was the low inference times - an important factor to consider when making a gun detector. \nBelow is a representation of our basal model (EfficientNet B0) without any scaling from the original documentation: \nAnd here is a graphical representation of our model: \nWhen developing our model, we had to implement the following key features \n* Data transforms \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "  - Squeeze and Excitation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.992051432440527,
+        0.997433022402523,
+        0.9407869550524632,
+        0.977602434468717
+      ],
+      "excerpt": "These features of our model are self-explanatory. They define the transformations we will do to our data, and the directory from which our data is to be downloaded. The code then downloads the images and labels of each class and splits them into training and validation data. \nThe data augmentations help expose our model to a greater variety of guns (rotated/scaled/perspective), benefiting the generalisation ability of our model. Here is an example of our training augmentations. \nSwish activation is defined as \u03c3(x) \u00d7 x. That is, the sigmoid of x, multiplied by x. The Swish activation function, while it looks similar to the ReLU function, is smooth (i.e. it does not abruptly change its value like ReLU does at x = 0). A graph of this function can be seen below: \nThe reason behind using Swish activation for EfficientNet is because it was said to provide better results than ReLU from both the EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks paper by Mingxing Tan and Quoc V. Le as well as a Google Brain study from 2017 by Ramachandran et al.. Theoretically, unlike ReLU, Swish does not discard values below 0, hence reducing information loss. Note that the Swish activation was not used solely for MBConv layers, but also for the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9916640700441307,
+        0.9862407013003891,
+        0.9803297580282664,
+        0.9849302631750172,
+        0.9731816165289504
+      ],
+      "excerpt": "The MBConv layer is the largest component in our EfficientNet implementation. Basically, it is a convolutional layer with Inverted residuals, Squeeze and Excitation, as well as Dropout. These three modules of MBConv are explained below: \nInverted residuals firstly have a skip connection, or residual, allowing information and gradients to pass through the block. This allows for deeper models by easing the shrinking of gradients as the model becomes deeper, and also reduces loss of finer information in the earlier layers of the model. The Inverted residual uses another important idea, the 1x1 convolution (pointwise convolution). This convolution expands/decreases the number of feature maps, rather than the resolution. This allows the inverted residual block to increase the feature mapping into a higher dimension at the start of the block. This is so that non-linear activations can be applied within a expanded higher dimension of feature mappings.  \nNon-linear activations are essential for neural networks, but can lose information, especially in lower dimensions. The non-linear activation being applied in a higher number of dimensions mitigates the information loss effect. Additionally, depthwise separable convolutions are applied, where convolutions are applied on individual feature map layers. Afterwards, the 1x1 convolution is re-applied to shrink the number of feature mappings, and at the same time achieve spatial feature mapping. The linear output is then added to the skip connection. The use of a depthwise separable convolution increases efficiency by an order of magnitude, by reducing the number of parameters convolved. \nSqueeze and Excite blocks work by squeezing an input using Global Average Pooling to the shape  (1, 1, feature maps) and multiplying this back to the input. Multiplying the (1, 1, feature maps) tensor back to the input increases the weighting of feature maps that have more features, thus 'exciting' the weightings. \nOur implementation of Squeeze and Excite in PyTorch uses the following layers: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8762749988853344,
+        0.9991195200040844,
+        0.9905178152238745,
+        0.9805010264654406,
+        0.860059181823877,
+        0.9434111086251007
+      ],
+      "excerpt": "The output of the above layers is then multiplied to the input tensor. \nThe Dropout layer in our implementation works by randomly choosing nodes to deactivate at the end of an MBConv block (does not apply for all the layers, only the ones that are repeated). We chose to add this functionality to our MBConv layers because it helps mitigate the risk of the model 'memorising' data and allows for building new and better connections in the network. \nIn our testing we attempted two methods of implementing a Dropout layer: we tried using the built-in PyTorch Dropout layer as well as making our own function to randomly choose nodes to drop out. Interestingly, our tests showed that our function outperformed the built-in layer when used in our model. As a result of this testing, we decided upon continuing the use of the function rather than the PyTorch layer for our model. \nWe used some common scaling factors and other parameters (such as input channels, output channels, and repeats to name a few) to create an Excel sheet that will allow us to calculate the specific parameter to be changed for each model. This allowed us to quickly test different versions of EfficientNet, as the parameters to be changed in each scaled model could be easily found. We were also able to make quick changes to the scaling calculations to test out results from different scaling factors and/or rounding techniques. Examples from our Excel sheet are shown below: \nB3 model: \nB1 model (with repeats in raw form, and an extra column with all repeats rounded up): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9782669207096092,
+        0.9764625485867303,
+        0.9834376306600567,
+        0.9948743677215552,
+        0.9920051667941647,
+        0.9721419995262351
+      ],
+      "excerpt": "Over the course of this project we have trained various versions of EfficientNet with different optimisers, learning-rate schedulers, different datasets, and differing numbers of epochs. \nThe optimisers that we have tested are the Adam optimiser and the Stochastic Gradient Descent (SGD) optimiser. Initially, we were expecting the Adam optimiser to outperform SGD in our tests. However, SGD surprisingly  had better convergence than Adam. As a result, we chose to continue testing SGD. During our tests with SGD, we began experimenting with the use of Nesterov momentum. \nNesterov Momentum is a variant of SGD that speeds up training and improves convergence. It basically calculates the gradient term from an intermediate point rather than the current position. This allows for corrections to be made if the momentum overshoots the next point or is pointing in the incorrect direction. See more here. \nIn our testing with Nesterov momentum, we found that a momentum of 0.5 works well with our EfficientNet models. \nIn terms of epoch testing, we have trained our models for varying numbers of epochs ranging from 40 to 224. We found that while our training accuracy percentage easily manages to reach the high 90s within around 40-80 epochs, we needed to train for more epochs in order for our validation accuracy to be similarly as good. \nWe also found that the use of PyTorch's ReduceLROnPlateau learning rate scheduler was useful when our model validation accuracy does not increase for 15 epochs. The reduction in learning rate helps our model finely tune its parameters. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9908129803944513,
+        0.959333279586827,
+        0.9889246630765762,
+        0.9824221481066625,
+        0.9910951877894013,
+        0.8449960848413257,
+        0.9933587357728938,
+        0.976002954623871
+      ],
+      "excerpt": "In addition to our EfficientNet model, we decided to create a bounding box algorithm to daw boxes around any guns that we detect. This algorithm works alongside our model but is not actually part of the model itself. Our bounding box algorithm works by way of taking sections from an image containing a detected gun and using a 'sliding window' to check for where in that section a gun may be. \nThe positions of our sliding window in each input image are as shown below: \n(Note: blue is the area of the sliding window, green is the image. Initially, the program checks the entire image to ensure there is a gun in the input) \nAfter one round of the above sequence, the algorithm checks if the probabilities for guns in any of the boxes are greater than the threshold probability (which is updated to the highest probability found at the end of each sequence). If there is a higher probability, then the section of the image covered by the sliding window for the highest probability will become the input to the algorithm and so on. Eventually, the coordinates of the sliding window with the highest probability will become the coordinates of the bounding box. \nAlthough our bounding box is not as accurate as dedicated single-shot detectors like YOLO or sliding-window approaches which use many sliding windows, our method requires less computation per image \u2013 as our goal is real time output, fast inference time is essential. In our testing speed is quite slow but is likely due to model/image loading pipeline constraints, as our model only takes 20-30ms to inference one image, so most of the delay is likely PyTorch loading the model and image. An example of the bounding box algorithm's result can be seen below: \nOur dataset is a custom dataset containing images from Google Images, Gun Wiki, Sai Sasank's dataset, a Synthetic Gun Dataset, COCO and CIFAR10. We have two classes in our dataset, namely gun and not gun. The gun class will contain a combination of gun images from Google, Gun Wiki and the Synthetic Gun Dataset. The not gun class will contain a combination of random images from COCO and/or CIFAR10. Each class will have an equal number of images, with the total number of images being 12,250. This dataset will be further split into training and validation sets. For testing, we have a created a separate set of images (including images from Atulya Kumar and Prasun Roy's datasets) that were not used in our training or testing data. However, our main plan of action is to do real-time testing through a webcam using printouts of gun images. \nThe reason behind having two classes rather than just a gun class is that we do not want our model to learn that it can get the correct answer by always predicting there is a gun. This would defeat the purpose of the project because the model would predict a large number of false positives. \nHowever, we believe that we need an equal number of images in each class (i.e. balanced dataset) is to mitigate the chance of our model being biased to either class. This is because, while we do not want our model to guess gun every time, we also do not want it to be biased to the not gun class either. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9807824157596264,
+        0.9883483333079784
+      ],
+      "excerpt": "Due to hardware constraints and Google COLAB usage limits, our models were only trained for 100 epochs in general. Though, it may be noted that some models were trained for further epochs for the sake of understanding the effect of more epochs on a given model. \nOur final four models were limited to using variations of B0 and B1 models as we were limited in terms of time and hardware. The models we have used are outlined below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8739015853218309
+      ],
+      "excerpt": "The results and evaluation for each model are outlined below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9990619782026746,
+        0.9956431800103966,
+        0.9982675708797096,
+        0.9990230252406529,
+        0.9973884176379962,
+        0.9612343575301454
+      ],
+      "excerpt": "From the precision results for the B0 with Global Pooling model, we can see that we have a weighted average precision of 0.66. While this is not an inherently bad result, it is unsatisfactory for the purpose of our solution as it means that 0.34 of our positive predictions (for both classes) were false positives. The recall results, similar to the precision results, are good, but not good enough for our purposes. This is because having a weighted average recall of 0.65 means that 0.35 of labelled positives (for both classes) were predicted as false negatives. The F1-score is 0.65 is lower than what we would like to have for our solution. It is also relevant to note that testing resulted in an overall accuracy of 81.67% from 412 images with this network. However, considering that our test set is not perfectly balanced, F1-score may be a better metric to gauge accuracy. This result was not initially expected as this particular model achieved 99.5% validation accuracy in training. However, there was a decline in accuracy when it came to testing because the testing set has images that the model has never encountered before (e.g. cars, motorcycles, etc.), and that have similar features to those the model is trained to detect. \nFrom the precision results above we can see a good improvement with the weighted average precision value of 0.89. This means that only a weighted average of 0.11 of positive predictions (for both classes) were false positives. The recall values also seem to be generally better than the previous model, with the weighted average value of 0.87. This means that only 0.13 of labelled positives (for both classes) were predicted as false negatives. The F1-score has also improved to 0.87. It is also relevant to note that testing resulted in an overall accuracy of 87.56% from 412 images with this network. However, considering that our test set is not perfectly balanced, F1-score may be a better metric to gauge accuracy. This model was trained using a special dataset to reduce the adverse effect cars, motorcycles and other test set images have on the other models. This dataset incorporated a slightly more diverse set of images in the 'not gun' class to better narrow down the features that the model should be detecting. As we can see from the results, this model has managed to perform better on the test set. This gives us evidence to support the conclusion that having a more diverse dataset can improve our accuracy. \nFrom the above precision metrics, we can see that this model managed a weighted average precision of 0.82 which is the best precision result out of the four models. This means that only 0.18 of the predicted positives (for both classes) were false positives. The recall metric is also better than the other models with a weighted average recall of 0.79. This means that 0.21 of labelled positives (for both classes) were predicted as false negatives. The F1-score accuracy is also the highest at 0.79. It is also relevant to note that testing resulted in an overall accuracy of 84.05% from 412 images with this network. However, considering that our test set is not perfectly balanced, F1-score may be a better metric to gauge accuracy. As originally expected, this model has performed better than the Average Pool 5x5, although the ending validation accuracy for this model was 4% lower than that of the latter (due to limitations in number of epochs trained for). \nFrom the above precision metrics, we can see that this model has a weighted average precision of 0.62 which is the worst precision result out of the four models. This model has a very unsatisfactory precision, as this means that 0.38 of the predicted positives (for both classes) were false positives. The recall metric is also worse than the other models with a weighted average recall of 0.61. This means that 0.39 of labelled positives (for both classes) were predicted as false negatives. The F1-score accuracy is also the lowest at 0.61. It is also relevant to note that testing resulted in an overall accuracy of 67.62% from 412 images with this network. However, considering that our test set is not perfectly balanced, F1-score may be a better metric to gauge accuracy. The somewhat poor performance of this model was expected as we removed the Dropout layer to see the effect that would have on model performance. From the results of this model we can conclude that the Dropout layer is an important component of the EfficientNet architecture that allows the model to better generalise and fit to the data. \nFrom working on this project, we have learnt/reinforced many concepts and theories, as well as developed a feel for fine-tuning and tweaking features of a model to improve its convergence and overall performance. We have also developed our use and understanding of evaluation tools such as TensorBoard, Confusion Matrices, Precision, Recall, and F1 metrics. All these skills have allowed us to create an EfficientNet model that can accurately detect guns in images/video frames. However, though we have completed this project for the purposes of COMPSYS302, we believe that there is more we can do to improve our model. \nOur future aims for this project include the following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9640289937163293,
+        0.8768553169691129,
+        0.9562978029692237
+      ],
+      "excerpt": "* Collate more images to increase the size of our dataset \n* Diversify the images in our datasets (including more images of people holding guns, cars, motorcycles, trucks etc.) \n* Improving inference times of our models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An EfficientNet implementation for detecting Guns using PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JacobM184/EfficientNet-for-Gun-detection/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 03:50:19 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JacobM184/EfficientNet-for-Gun-detection/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JacobM184/EfficientNet-for-Gun-detection",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.823303862408498
+      ],
+      "excerpt": "python B0_global.py (training requires CUDA enabled GPU with VRAM of at least 4GB - tested on machine with 8GB VRAM) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9504904914204789
+      ],
+      "excerpt": "NOTE: These instructions are for use on a Windows machine. These may not work for Linux, MacOS, or other Operating Systems \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9144332352761025
+      ],
+      "excerpt": "These papers can be found at the following links: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8727487047449518
+      ],
+      "excerpt": "* COCO \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8557335928331257
+      ],
+      "excerpt": "Download project file(s) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.900105313012022
+      ],
+      "excerpt": "Test Script 2 - tests only prediction % (of all images in 'data/guntest' folder) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8447634792014815
+      ],
+      "excerpt": "Download dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8640820571200338
+      ],
+      "excerpt": "Put project files and dataset folder in the same directory \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.886412965736566
+      ],
+      "excerpt": "python Test.py  (for testing inference) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403300314053362,
+        0.8534269704230129
+      ],
+      "excerpt": "* To restart training from presaved checkpoint, edit b0_global.py(line 231): 'restart=0' -> 'restart=1' \n* By default, newly trained models will replace pretrained model file b0_global.pt  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.847868651487184,
+        0.8352040517005505
+      ],
+      "excerpt": "If you do, you will have to modify Test.py (line 200): model = torch.load('b0_global.pt').to(device) - replace b0_global.pt with your own model name \nTo add your own test gun images, place them into data/guntest/guntrain or data/guntest/gunval, as required \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8031741531288371
+      ],
+      "excerpt": "Models                                 | Dataset \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JacobM184/EfficientNet-for-Gun-detection/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EfficientNet for Gun Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EfficientNet-for-Gun-detection",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JacobM184",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JacobM184/EfficientNet-for-Gun-detection/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 03:50:19 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](graphics/B0_KERNEL9/trnacc_B0.png)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](graphics/B0_KERNEL9/trnloss_B0.png)\n\nWe can clearly see from the above graphs that there is a logarithmic relationship between epoch and accuracy/loss.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

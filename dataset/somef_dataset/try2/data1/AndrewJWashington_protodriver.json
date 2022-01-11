@@ -1,0 +1,366 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1312.5602"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "May 18, 2020:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8130052599129608,
+        0.887740735425048
+      ],
+      "excerpt": "OpenCV Optical Flow: https://docs.opencv.org/master/db/d7f/tutorial_js_lucas_kanade.html \nOptical flow in human vision: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "CUDA 10.1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906174419333412
+      ],
+      "excerpt": "OpenCV tutorials: https://docs.opencv.org/3.4/d7/da8/tutorial_table_of_content_imgproc.html \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/AndrewJWashington/protodriver",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-17T19:20:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-30T20:07:10Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9476175425050347,
+        0.9778773524978088
+      ],
+      "excerpt": "This is a weekend project by Andrew Washington. It's far from scalable, but it's a working project. Feel free to clone/fork as you wish (in accordance with MIT license) and let me know if you have any questions. You can message me at AndrewJWashington on GitHub or just comment on the repo. \nYears ago, I watched Sentdex create a self-driving GTA 5 bot on YouTube and it was the coolest thing I could imagine. At the time, my python skills were not at the level to implement sucha project. However, recently I found the video again and thought \"Hey, I can do that\". After all, I now have a degree in Machine Learning and a couple years of experience as a Data Scientist working with python. Plus, the entire software stack I'm using has become much more user-friendly since I first watched those videos years ago. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.996435813256647
+      ],
+      "excerpt": "Deep RL with curiousity component? Yeah that'd be cool. Scalable and working on TPU's? Also cool. Simulate controller input to get smoother fidelity? Again, would be awesome. What do all of these have in common? They don't actually help get started. This is why I chose a basic CNN with one layer and WASD controls to get started. After that, we can play with different deep learning frameworks, image processing techniques, and fancy features. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9680310773760613
+      ],
+      "excerpt": "I built this computer recently to play video games. Having an awesome deep learning machine is just a corollary. I don't want to deal with driver issues when I try to play Call of Duty: Warzone on Ultra quality. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.933248456808093
+      ],
+      "excerpt": "I spent a few hours triaging this error combo: \"could not create cudnn handle: CUDNN_STATUS_ALLOC_FAILED\" and \"Failed to get convolution algorithm. This is probably because cuDNN failed to initialize\". Almost all the Stack Overflow questions and GitHub Issues pointed to software version mismatches. It wasn't until I randomly checked Task Manager and saw a giant spike in GPU memory usage when starting the program, that I realized it was a GPU memory error. Turning down Grid Autosport's graphics settings settled the issue. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9852203534362676
+      ],
+      "excerpt": "The AI drives but mostly just runs into walls. It seems to almost always go straight. Everything up to the present has been focused on getting something running. Now that that's done, it's time to play with different deep learning and image processing techniques. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8471387915710002,
+        0.9775130070520268,
+        0.9157508981784028,
+        0.9068881198782033
+      ],
+      "excerpt": "Did some initial cleanup of the codebase.  \nNoticed test predictions are all identical (great for doing donuts when it learns to to nothing but press the gas and turn left!). This was fixed by initializing the weights of the FC layers to small random values. \nChanged to an AlexNet-inspired architecture with more layers and maxpooling. Decreased many settings to get down to around 13,000 trainable parameters. \nNoticed car was having a hard time anytime it went off track or into a wall. Added a pause functionality so I could pause the training, go off track, then unpause it to \"teach\" the AI to go back on track. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9598697934090444,
+        0.9463731846380203,
+        0.9077319294452068
+      ],
+      "excerpt": "Switched from RWD to FWD so the AI wouldn't have to deal with throttle-on oversteer \nSwtiched tracks to somewhere with clear walls as boundaries.  \nResults: AI is clearly turning to correct course, but still can't make it more than a few meters before running into a wall or completely turning around. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9548359080196844,
+        0.8660670531717725,
+        0.859551444152001,
+        0.887601810290341
+      ],
+      "excerpt": "Sat and gathered around 20,000 training samples. Now the AI is clearly exhibiting intelligent behavior, typically making it at least a hundred meters before doing anything too crazy. This is about on par with what I'd expect given the experience with donkeycar. \nGathered training examples where I first get close to a wall as if I had crashed. Then unpaused training and backed up and restarted course. And the AI learned to do the same! Although there might be too many training examples like this because the AI sometimes backs up when unnecessary. Maybe we still just need more training data. Maybe it needs to be more balanced. Another option is to add a few LSTM layers to give a sense of memory.  \nI've started thinking about a reinforcement learning paradigm. \nThe reward function: At first, I thought coming up with a reward function would be difficult since I want to use purely visual input. I don't want to pull anything from the game's internal code because I want this package to be game agnostic. One option is to look in specific places on the screen and read numbers that could serve as a reward function (e.g. look for speedometer, parse speed, then try to maximize average speed). That is one option, but there's another I like better. What if we try to maximize optic flow? In human vision, this is one thing that leads to a sense of speed. Better yet, it's already implemented in opencv (although only for a single point). We just have to use this to generate global optical flow rate. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8829606157463491,
+        0.9921341372041479,
+        0.9809753529320226
+      ],
+      "excerpt": "Moved to reinforcement learning (DQN, with much help from this medium article and the original paper).  \nThe reward function is based on optical flow. The optical flow for every pixel is calculated. Then, the following values are added together: the average leftward flow on the left side of the image, the average rightward flow on the right side of the image, and all downward flow. The goal of this is to capture the visuals of moving forward through space, with higher optical flow being associated with a higher rate of travel. The idea is that maximizing the forward rate of travel \nUnfortunately, the AI has learned to \"hack\" the system. There is a very large overall optical flow that comes from slamming into a wall. The AI has learned to turn sideways to run into the wall, then reverse into the other wall, and repeat this process to maximize the jolt of optical flow it gets from the camera shake when hitting walls. Ideas to fix this are to smooth overall flow to avoid short jolts or tune gamma towards longer term goals. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.892205764962473
+      ],
+      "excerpt": "Ran RL for 100,000 frames but it didn't seem to learn much \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8500284040819616,
+        0.9394449182630016,
+        0.8059299701148174
+      ],
+      "excerpt": "Deep learning framework \nCareful tuning for \nTested system hardware is described on PC Part Picker.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8564338475311042
+      ],
+      "excerpt": "It's usually easier to get started with a much simpler example and building out from there. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8602170330372713
+      ],
+      "excerpt": "~~Who would have thought the actual documentation would be helpful?~~ Follow the steps in order and make sure to read all the way through the bottom. It's easy to go to the Nvidia documentation and forget to come back to the TF documentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Autonomous driver trained on Grid Autosport using tensorflow (keras) accelerated by gpu (CUDA)",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://pillow.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/AndrewJWashington/protodriver/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 09:31:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/AndrewJWashington/protodriver/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "AndrewJWashington/protodriver",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9777444892947844,
+        0.9073990959842221
+      ],
+      "excerpt": "Installing python on Windows. As basic as this sounds, all of my prior python development has been on Mac or Linux. Going to the Windows Store to install python was a pretty foriegn concept to me. \nGPU Support for tensorflow.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.825924638011843
+      ],
+      "excerpt": "OpenCV Optical Flow: https://docs.opencv.org/master/db/d7f/tutorial_js_lucas_kanade.html \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "Python 3.8.3rc1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8794698181154068
+      ],
+      "excerpt": "Python packages described in requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8641115422530725,
+        0.8791262157650097,
+        0.978235090544517
+      ],
+      "excerpt": "Create a virtual environment: https://docs.python.org/3/library/venv.html \nPillow installation and documnentation: https://pillow.readthedocs.io/en/stable/installation.html \nOpenCV installation: https://pypi.org/project/opencv-python/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9061540545504814,
+        0.9613500363058439
+      ],
+      "excerpt": "PyDirectInput installation and documnentation: https://pypi.org/project/PyDirectInput/ \nkeyboard (python package) installation and documnentation: https://pypi.org/project/keyboard/ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8124949144443312
+      ],
+      "excerpt": "Protodriver is an autonomous driver trained on Grid Autosport.   \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/AndrewJWashington/protodriver/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Andrew Washington\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "protodriver",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "protodriver",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "AndrewJWashington",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/AndrewJWashington/protodriver/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 09:31:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "tensorflow",
+      "tensorflow2",
+      "cuda",
+      "gpu",
+      "computer-vision",
+      "opencv-python",
+      "deep-learning"
+    ],
+    "technique": "GitHub API"
+  }
+}

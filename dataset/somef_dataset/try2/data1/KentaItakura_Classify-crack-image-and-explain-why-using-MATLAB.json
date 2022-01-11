@@ -1,0 +1,427 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1602.07360",
+      "https://arxiv.org/abs/1602.07360 (2016).](https://arxiv.org/abs/1602.07360)\n\n[2] Matlab Documentation: [Train Deep Learning Network to Classify New Images](https://jp.mathworks.com/help/deeplearning/ug/train-deep-learning-network-to-classify-new-images.html)\n\n[3] Matlab Documentation: [Grad-CAM Reveals the Why Behind Deep Learning Decisions](https://jp.mathworks.com/help/deeplearning/ug/gradcam-explains-why.html?lang=en)\n\n[4] [Zhang, Lei, et al. \"Road crack detection using deep convolutional neural network.\" *2016 IEEE international conference on image processing (ICIP)*. IEEE, 2016.](https://ieeexplore.ieee.org/abstract/document/7533052)\n\n[5] [Concrete Crack Images for Classification](https://data.mendeley.com/datasets/5y9wdsg2zt/1) \n\n# Load Data\n\nFirst of all, please download \"Concrete Crack Images for Classification\" from [4]. Then unzip it to name as Concrete Crack Images for Classification. Please run this code after confirming that the file is in your current directory as shown below.  \n\n![image_0.png](README_images/image_0.png)\n\nUse `imageDatastore` function to store images with the label information. The label information was recognized based on the folder name in the file, Concrete Crack Images for Classification. \n\n```matlab:Code\nclear;clc;close all\nimds = imageDatastore('Concrete Crack Images for Classification','IncludeSubfolders',true, 'LabelSource','foldernames');\n```\n\nThis dataset contains normal (Negative) and crack images (Positive). Display some sample images.\n\n```matlab:Code\nnumExample=16;\nidx = randperm(numel(imds.Files),numExample);\nfor i=1:numExample\n    I=readimage(imds,idx(i));\n    I_tile{i"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "[Key words] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.998633531335446
+      ],
+      "excerpt": "[1] Iandola, Forrest N., Song Han, Matthew W. Moskewicz, Khalid Ashraf, William J. Dally, and Kurt Keutzer. \"SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5 MB model size.\" arXiv preprint arXiv:1602.07360 (2016). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9999999907444987
+      ],
+      "excerpt": "[4] Zhang, Lei, et al. \"Road crack detection using deep convolutional neural network.\" 2016 IEEE international conference on image processing (ICIP). IEEE, 2016. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "net = squeezenet; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "lgraph = layerGraph(net); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    'ValidationFrequency',30, ... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9289872550708828
+      ],
+      "excerpt": "Kenta (2020). Continuous activation map generation at training process (https://www.github.com/giants19/Continuous-class-activation-generation-during-training-process-using-Matlab), GitHub. Retrieved May 8, 2020. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-03T12:19:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-07T09:55:06Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9822442163791607
+      ],
+      "excerpt": "This demo shows how to fine-tune a pretrained deep convolutional network called SqueezeNet [1] to perform a crack/normal image classification. The classification output was discussed using a technique to \"explain why\" called grad-cam as shown below. This script was created based on the official documentation [2]. For the grad-cam, I referred to [3]. About fine-tuning, please refer to the additional explanation [a] at the end of this script. In this demo, we use a dataset of concrete crack images introduced by L. Zhang [4]. The data is available at [5].  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8009512079859675
+      ],
+      "excerpt": "clear;clc;close all \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "for i=1:numExample \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8046898370452756
+      ],
+      "excerpt": "Load the pretrained SqueezeNet neural network. Squeezenet is the smallest pre-trained network among the networks available officially supported by Matlab.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8827554612231232
+      ],
+      "excerpt": "Use analyzeNetwork to display an interactive visualization of the network architecture and detailed information about the network layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9833330863789778
+      ],
+      "excerpt": "As the original version of the SqueezeNet is a network for 1000 classes, we have to adapt it to normal/crack classification (2-classes).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8064834825070011
+      ],
+      "excerpt": "In most networks, the last layer with learnable weights is a fully connected layer. In some networks, such as SqueezeNet, the last learnable layer is a 1-by-1 convolutional layer instead. In this case, we added a fully connected layer before softmax layer.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9522431240170988
+      ],
+      "excerpt": "Remove the classification layer for 1000 classes and relace it by the new layers for our task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9604933408990795
+      ],
+      "excerpt": "Calculate the classification accuracy on the validation set. Accuracy is the fraction of labels that the network predicts correctly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9523109139049974
+      ],
+      "excerpt": "For the detail of grad-cam, please refer to  Matlab Documentation: Grad-CAM Reveals the Why Behind Deep Learning Decisions.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8258560970175434
+      ],
+      "excerpt": "To access the data that SqueezeNet uses for classification, remove its final classification layer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "for i = 1:dispNum \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.830573054002008
+      ],
+      "excerpt": "To use automatic differentiation, convert the sherlock image to a dlarray. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8170441046501941
+      ],
+      "excerpt": "Compute the Grad-CAM gradient for the image by calling dlfeval on the gradcam function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9441312386449614
+      ],
+      "excerpt": "Resize the gradient map to the SqueezeNet image size, and scale the scores to the appropriate levels for display. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372396012058242
+      ],
+      "excerpt": "hold on; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734
+      ],
+      "excerpt": "imagesc(imresize(gradcamMap,inputSize(1:2) ,'Method', 'bicubic'),'AlphaData',0.5); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9721116137044888,
+        0.963008006437776
+      ],
+      "excerpt": "Show the Grad-CAM levels on top of the image by using an 'AlphaData' value of 0.5. The 'jet' colormap has deep blue as the lowest value and deep red as the highest. \nThis kind of visualization to show where is important for the classification can be done during the traing process, too. We can confirm that the network graducally learns a good feature for the classification. For the demo, please look here.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8098925208744397
+      ],
+      "excerpt": "For the demo, please check here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This repo shows how to classify crack images and discuss the result with grad-cam",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 10:47:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The network requires input images of size 227-by-227-by-3, but the images in the image datastores have different sizes. Use an augmented image datastore to automatically resize the training images. Specify additional augmentation operations to perform on the training images: randomly flip the training images along the vertical axis, and randomly translate them up to 30 pixels horizontally and vertically. Data augmentation helps prevent the network from overfitting and memorizing the exact details of the training images.  \n\n```matlab:Code\npixelRange = [-30 30];\nimageAugmenter = imageDataAugmenter( ...\n    'RandXReflection',true, ...\n    'RandXTranslation',pixelRange, ...\n    'RandYTranslation',pixelRange);\naugimdsTrain = augmentedImageDatastore(inputSize(1:2),imdsTrain, ...\n    'DataAugmentation',imageAugmenter);\n```\n\nTo automatically resize the validation and test images without performing further data augmentation, use an augmented image datastore without specifying any additional preprocessing operations.\n\n```matlab:Code\naugimdsValidation = augmentedImageDatastore(inputSize(1:2),imdsValidation);\naugimdsTest = augmentedImageDatastore(inputSize(1:2),imdsTest);\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "lgraph = replaceLayer(newlgraph,'prob',[fullyConnectedLayer(numClasses,'Name','fc_add');softmaxLayer('Name','softmax_layer'); classificationLayer('Name','new_classoutput')]); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8392062818215038
+      ],
+      "excerpt": "Specify the name for Grad-cam.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8622092252084932
+      ],
+      "excerpt": "% use imtile function to tile out the example images \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.819184273895793
+      ],
+      "excerpt": "Divide the data into training, validation and test data sets. The function splitEachLabel splits the images datastore into two new datastores. This dataset contains 20k normal images and 20k crack images. As the dataset has numerous images, it takes some time to train. Just for enjoying this demo, you can set the ratio for training images low, such as 0.1 to get the number of images very small.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8066539533037812
+      ],
+      "excerpt": "Count the number of images in the training dataset. Confirm if the number is as expected from above.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8333427258807891
+      ],
+      "excerpt": "The first layer, the image input layer, requires input images of size 227-by-227-by-3, where 3 is the number of color channels.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "lgraph = replaceLayer(newlgraph,'prob',[fullyConnectedLayer(numClasses,'Name','fc_add');softmaxLayer('Name','softmax_layer'); classificationLayer('Name','new_classoutput')]); \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "MATLAB"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "url": "https://api.github.com/licenses/bsd-3-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Classify crack images and explain why using MATLAB",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Classify-crack-image-and-explain-why-using-MATLAB",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "KentaItakura",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "KentaItakura",
+        "body": "This demo was uploaded to github",
+        "dateCreated": "2021-10-03T12:19:45Z",
+        "datePublished": "2021-10-03T12:23:38Z",
+        "html_url": "https://github.com/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/releases/tag/v1.1",
+        "name": "First upload to github",
+        "tag_name": "v1.1",
+        "tarball_url": "https://api.github.com/repos/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/tarball/v1.1",
+        "url": "https://api.github.com/repos/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/releases/50697710",
+        "zipball_url": "https://api.github.com/repos/KentaItakura/Classify-crack-image-and-explain-why-using-MATLAB/zipball/v1.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 30 Dec 2021 10:47:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-learning",
+      "explainable-ai",
+      "matlab",
+      "fine-tuning",
+      "classification",
+      "ai",
+      "machine-learning",
+      "computer-vision",
+      "grad-cam"
+    ],
+    "technique": "GitHub API"
+  }
+}

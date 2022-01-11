@@ -1,0 +1,342 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805v1, 2018. Em: https://arxiv.org/pdf/1810.04805.pdf\n\nLe, Quoc; Mikolov, Tomas. Distributed Representations of Sentences and Documents. arXiv preprinted https://arxiv.org/abs/1405.4053v2, 2014. Em: https://arxiv.org/pdf/1405.4053v2.pdf\n\nRumelhart, David; Hinton, Geoffrey; Williams, Ronald. Learning representations by back-propagatings errors. Nature Vol 323, 1986. Em: https://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf ",
+      "https://arxiv.org/abs/1405.4053v2, 2014. Em: https://arxiv.org/pdf/1405.4053v2.pdf\n\nRumelhart, David; Hinton, Geoffrey; Williams, Ronald. Learning representations by back-propagatings errors. Nature Vol 323, 1986. Em: https://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf "
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9999999733321946,
+        0.9733794630186853
+      ],
+      "excerpt": "O objetivo do presente trabalho foi treinar um algoritmo de classifica\u00e7\u00e3o que pudesse identificar se um texto cient\u00edfico foi elaborado por uma empresa do setor de \u00d3leo & G\u00e1s. Para tal, foram extra\u00eddos cerca de 25.000 resumos de artigos cient\u00edficos em ingl\u00eas utilizando a API da Elsevier, uma das maiores editoras cient\u00edficas do mundo. Com os documentos extra\u00eddos foram preparadas as bases de treino e de teste. Foi utilizado um algoritmo de vetoriza\u00e7\u00e3o de texto, Doc2Vec (Le et al., 2014), para se criar os atributos necess\u00e1rios para se treinar um algoritmo de classifica\u00e7\u00e3o. Os algoritmos de vetoriza\u00e7\u00e3o de textos buscam, de forma n\u00e3o supervisionada, distribuir os textos em um espa\u00e7o vetorial levando em considera\u00e7\u00e3o a sem\u00e2ntica dos documentos. <br/> \nAp\u00f3s testar diversos algoritmos e hiperpar\u00e2metros, chegou-se a um F1-score de 86,5% na classifica\u00e7\u00e3o dos textos utilizando uma Multilayer Perceptron (MLP) (Rumelhart et al., 1986) com 5.000 camadas escondidas e vetoriza\u00e7\u00e3o dos textos de dimens\u00e3o 50. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9944291469313679
+      ],
+      "excerpt": "Para a tarefa de identificar quais os artigos eram relevantes foi utilizado o campo \u201cAfilia\u00e7\u00e3o\u201d dos autores. Ou seja, caso um dos autores do documento fosse \u201cafiliado\u201d a uma empresa de Petr\u00f3leo foi considerado que esse era um documento relevante. Esses artigos foram classificados como \u201cO&G\u201d = True. Ao total foram identificados cerca de 15.000 artigos das principais empresas de Petr\u00f3leo. Os termos utilizados para identificar as empresas de petr\u00f3leo foram: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9719634626091888
+      ],
+      "excerpt": "Para compor os documentos classificados como \u201cO&G\u201d = False, foram extra\u00eddos os primeiros 1.000 documentos de cada ano, iniciando em 2000 e terminando no ano de 2017.<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9892794222021172,
+        0.9779332705307948
+      ],
+      "excerpt": "\u2022   DOI \u2013 C\u00f3digo de identifica\u00e7\u00e3o do documento utilizado pela Elsevier<br/> \n\u2022   Title \u2013 T\u00edtulo do documento<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507374082549614
+      ],
+      "excerpt": "\u2022   O&G \u2013 Identifica\u00e7\u00e3o de que pelo menos um dos autores era afiliado a uma empresa de petr\u00f3leo.<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9970175614009024
+      ],
+      "excerpt": "Antes de iniciar as etapas de vetoriza\u00e7\u00e3o dos textos e de treinar os algoritmos de classifica\u00e7\u00e3o foi necess\u00e1rio realizar um pr\u00e9-processamento dos textos. Segue abaixo um exemplo t\u00edpico de como o texto foi extra\u00eddo: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9525675960743487
+      ],
+      "excerpt": "Pode-se notar a presen\u00e7a de \u201c\\n\u201d que denota quebra de linha, al\u00e9m de v\u00e1rios espa\u00e7os em branco no in\u00edcio e fim do par\u00e1grafo. Tamb\u00e9m notamos que diversos textos iniciaram com a palavra \u201cAbstract\u201d, ou outra similar (\u201cPublisher Summary\u201d, \"Summary\" ou \"Fundamento\"). Por fim, alguns textos estavam vazios contendo apenas a palavra \u201cUnknown\u201d.<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9630811906933039,
+        0.9999607997429768,
+        0.9999983647140324
+      ],
+      "excerpt": "Ao final do pr\u00e9-processamento restaram 25.645 artigos, sendo 14.418 de \u201cO&G\u201d e 11.227 de outras \u00e1reas.<br/> \nAntes de iniciar as etapas de vetoriza\u00e7\u00e3o dos documentos e treino dos algoritmos de classifica\u00e7\u00e3o o corpus foi dividido em base de treino e base de teste. A base de treino tinha 90% dos documentos e a de teste 10%. As vetoriza\u00e7\u00f5es e treinamentos foram realizadas apenas na base de treino. \nO algoritmo de vetoriza\u00e7\u00e3o de documentos utilizado foi o Doc2Vec. Este algoritmo \u00e9 a implanta\u00e7\u00e3o dos modelos de \u201cDocument Embeddings\u201d proposto por Le et al (2014). Foram propostos dois modelos de vetoriza\u00e7\u00e3o de documentos, um \u00e9 o Phrase Vector \u2013 Distributed Memory\u201d (PV-DM) e o outro \u00e9 o \u201cPhrase Vector \u2013 Distributed bag of words\u201d PV-DBOW. Os dois modelos s\u00e3o estruturas de redes neurais que utilizam vetores de palavras e vetores de documentos para prever as palavras seguintes de uma determinada \u201cjanela de palavras\u201d. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "\u2022   DM -  Algoritmo de treino a ser usado, PV-DM ou PV-DBOW<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "\u2022   Epochs \u2013 N\u00famero de itera\u00e7\u00f5es sobre o corpus<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968592401678916,
+        0.991553275592551
+      ],
+      "excerpt": "Inicialmente, os vetores s\u00e3o iniciados com um valor aleat\u00f3rio para cada documento. Conforme o treinamento vai ocorrendo ao longo dos diversos documentos e das diversas \u00e9pocas de itera\u00e7\u00e3o, os valores dos vetores v\u00e3o se aproximando da representa\u00e7\u00e3o sem\u00e2ntica do conte\u00fado do documento. <br/> \nAo final da fase de treinamento, o modelo treinado consegue inferir um vetor para um determinado texto que lhe \u00e9 informado. A fase seguinte, consequentemente, consiste em inferir um vetor para todos os artigos, tanto para a base de treino quanto para a base de teste. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8339103140509874,
+        0.823093396043115
+      ],
+      "excerpt": "A segunda abordagem iniciava treinando um algoritmo \u201cDecision tree\u201d exatamente da mesma forma que na primeira abordagem. Em seguida, utilizou-se o atributo \u201cfeature_importances_\u201d do algoritmo \u201cDecision tree\u201d para se identificar quais os atributos do vetor Doc2Vec eram mais importantes para se prever \u201cO&G\u201d. Dessa forma, foi poss\u00edvel utilizar no classificador um n\u00famero menor de atributos do que o tamanho do vetor treinado. Essa abordagem tentou representar os documentos em um espa\u00e7o vetorial mais amplo, permitindo uma representa\u00e7\u00e3o sem\u00e2ntica mais variada, e ao mesmo evitar \u201coverfiting\u201d dos modelos de classifica\u00e7\u00e3o.<br/> \nOs modelos de classifica\u00e7\u00e3o testado , sempre usando biblioteca Scikit Learn, foram:<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8592871015078041,
+        0.9970005095926127
+      ],
+      "excerpt": "As m\u00e9tricas de avalia\u00e7\u00e3o utilizadas para a escolha dos hiperpar\u00e2metros e algoritmos foi F1-score. Tamb\u00e9m foi calculado os valores de acur\u00e1cia, precis\u00e3o e revoca\u00e7\u00e3o. \nUma t\u00e9cnica testada foi o \u201cdata augmentation\u201d. O objetivo era ampliar o conjunto de treino possibilitando um melhor treinamento dos algoritmos de vetoriza\u00e7\u00e3o e de classifica\u00e7\u00e3o. Tamb\u00e9m foi aplicado um certo desbalanceamento de forma que os documentos \u201cO&G\u201d ficassem sobrerrepresentados. O intuito era de representar com mais detalhes os atributos relacionados aos documentos de \u201cO&G\u201d.<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8047696154562745,
+        0.9030859728368266
+      ],
+      "excerpt": "Algoritmo de Classifica\u00e7\u00e3o \u2013 Support Vector Machine<br/> \nTeste/ Treino \u2013 10% / 90%<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488,
+        0.8109194328925066
+      ],
+      "excerpt": "N\u00famero de atributos usados para treino \u2013 100<br/> \nAp\u00f3s treinar e classificar usando os hiperpar\u00e2metros do caso base chegou-se \u00e0s seguintes m\u00e9tricas de classifica\u00e7\u00e3o:<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8283216015784888,
+        0.9030859728368266
+      ],
+      "excerpt": "Algoritmo de Classifica\u00e7\u00e3o \u2013 Multilayer Perceptron com 5000 camadas escondidas<br/> \nTeste/ Treino \u2013 10% / 90%<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9990883107155913,
+        0.9999999750896226,
+        0.9999936979358408
+      ],
+      "excerpt": "A vetoriza\u00e7\u00e3o de texto pode ser utilizada em combina\u00e7\u00e3o com os algoritmos cl\u00e1ssicos em tarefas de classifica\u00e7\u00e3o. No entanto, apesar de se possuir um corpus relativamente grande e testando diversas combina\u00e7\u00f5es de hiperpar\u00e2mtros, essa t\u00e9cnica demonstrou n\u00e3o ultrapassar a barreira de F1-score de 87%. Para muitas tarefas esse resultado \u00e9 \u201cboa o suficiente\u201d e com certeza realiza a tarefa muito mais r\u00e1pido do que seres humanos. No entanto, se for necess\u00e1rio uma acur\u00e1cia maior ser\u00e1 preciso utilizar uma t\u00e9cnica mais robustas e com custo computacional maior, como as t\u00e9cnicas de Deep Learning para Processamento de Linguagem Natural. \nDevlin, Jacob; Chang, Ming-Wei; Lee, Kenton; Toutanova, Kristina. BERT: Pre-training of deep bidirectional transformers for language understanding. arXiv preprinted arXiv:1810.04805v1, 2018. Em: https://arxiv.org/pdf/1810.04805.pdf \nLe, Quoc; Mikolov, Tomas. Distributed Representations of Sentences and Documents. arXiv preprinted arXiv:1405.4053v2, 2014. Em: https://arxiv.org/pdf/1405.4053v2.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fabiocorreacordeiro/Elsevier_abstracts-Classification",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-03T09:58:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-22T14:36:54Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9993214485712676
+      ],
+      "excerpt": "\"\\n               Abstract\\n               \\n                  Technology advancements and the increasing need for fresh water resources have created the potential for desalination of oil field brine (produced water) to be a cost-effective fresh water resource for beneficial reuse. At the mature oil and gas production areas in the northeast of Brazil, the majority of wells produce a substantial amount of water in comparison with oil production (more than 90%). At these fields, the produced water has to be treated on site only for oil and solids removal aiming re-injection. The aim of this work is to assess the quality of the produced water stream after a reverse osmosis desalination process in terms of physicochemical characteristics influencing reuse of the water for irrigation or other beneficial uses.\\n               \\n            \" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8243307787453192
+      ],
+      "excerpt": "Para a classifica\u00e7\u00e3o foram testadas duas estrat\u00e9gias diferentes. A primeira consistia em utilizar os vetores do algoritmo Doc2Vec como atributos para os algoritmos de classifica\u00e7\u00e3o e a coluna \u201cO&G\u201d como classe a ser prevista. Em seguida utilizou alguns dos algoritmos da biblioteca Scikit Learn  para treinar e avaliar o classificador.<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8616362602843775
+      ],
+      "excerpt": "Os modelos de classifica\u00e7\u00e3o testado , sempre usando biblioteca Scikit Learn, foram:<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Augmentation \u2013 N\u00e3o<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Augmentation \u2013 N\u00e3o<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "O objetivo desse trabalho foi treinar um algoritmo de classifica\u00e7\u00e3o que pudesse identificar se um texto cient\u00edfico foi elaborado por uma empresa do setor de \u00d3leo & G\u00e1s. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fabiocorreacordeiro/Elsevier_abstracts-Classification/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 15:03:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fabiocorreacordeiro/Elsevier_abstracts-Classification/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fabiocorreacordeiro/Elsevier_abstracts-Classification",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/fabiocorreacordeiro/Elsevier_abstracts-Classification/master/Abstract%20Classification.ipynb",
+      "https://raw.githubusercontent.com/fabiocorreacordeiro/Elsevier_abstracts-Classification/master/Abstract%20Extration.ipynb",
+      "https://raw.githubusercontent.com/fabiocorreacordeiro/Elsevier_abstracts-Classification/master/Abstract%20Concatenation.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.853492186136904
+      ],
+      "excerpt": "\u2022   Total<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "\u2022   Epoch \u2013 100<br/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "\u2022   Epoch \u2013 100<br/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fabiocorreacordeiro/Elsevier_abstracts-Classification/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Elsevier_abstracts-Classification",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Elsevier_abstracts-Classification",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fabiocorreacordeiro",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fabiocorreacordeiro/Elsevier_abstracts-Classification/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 15:03:06 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

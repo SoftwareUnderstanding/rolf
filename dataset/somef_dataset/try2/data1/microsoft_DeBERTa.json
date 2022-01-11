@@ -1,0 +1,455 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2006.03654",
+      "https://arxiv.org/abs/2111.09543",
+      "https://arxiv.org/abs/2111.09543"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "``` latex\n@misc{he2021debertav3,\n      title={DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing}, \n      author={Pengcheng He and Jianfeng Gao and Weizhu Chen},\n      year={2021},\n      eprint={2111.09543},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\n```\n\n``` latex\n@inproceedings{\nhe2021deberta,\ntitle={DEBERTA: DECODING-ENHANCED BERT WITH DISENTANGLED ATTENTION},\nauthor={Pengcheng He and Xiaodong Liu and Jianfeng Gao and Weizhu Chen},\nbooktitle={International Conference on Learning Representations},\nyear={2021},\nurl={https://openreview.net/forum?id=XPZIaotutsD}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{\nhe2021deberta,\ntitle={DEBERTA: DECODING-ENHANCED BERT WITH DISENTANGLED ATTENTION},\nauthor={Pengcheng He and Xiaodong Liu and Jianfeng Gao and Weizhu Chen},\nbooktitle={International Conference on Learning Representations},\nyear={2021},\nurl={https://openreview.net/forum?id=XPZIaotutsD}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{he2021debertav3,\n      title={DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing}, \n      author={Pengcheng He and Jianfeng Gao and Weizhu Chen},\n      year={2021},\n      eprint={2111.09543},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/microsoft/DeBERTa/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/DeBERTa",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Pengcheng He(penhe@microsoft.com), Xiaodong Liu(xiaodl@microsoft.com), Jianfeng Gao(jfgao@microsoft.com), Weizhu Chen(wzchen@microsoft.com)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-08T15:57:14Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-30T09:11:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "DeBERTa (Decoding-enhanced BERT with disentangled attention) improves the BERT and RoBERTa models using two novel techniques. The first is the disentangled attention mechanism, where each word is represented using two vectors that encode its content and position, respectively, and the attention weights among words are computed using disentangled matrices on their contents and relative positions. Second, an enhanced mask decoder is used to replace the output softmax layer to predict the masked tokens for model pretraining. We show that these two techniques significantly improve the efficiency of model pre-training and performance of downstream tasks.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9895463739834367,
+        0.9983143017327776,
+        0.988090704362032,
+        0.8544839407090418,
+        0.9239241738979569
+      ],
+      "excerpt": "This repository is the official implementation of  DeBERTa: Decoding-enhanced BERT with Disentangled Attention  and DeBERTa V3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing \nDeBERTa-V3-XSmall is added. With only 22M backbone parameters which is only 1/4 of RoBERTa-Base and XLNet-Base, DeBERTa-V3-XSmall significantly outperforms the later on MNLI and SQuAD v2.0 tasks (i.e. 1.2% on MNLI-m, 1.5% EM score on SQuAD v2.0). This further demnostrates the efficiency of DeBERTaV3 models. \nThe models of our new work DeBERTa V3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing are publicly available at huggingface model hub now. The new models are based on DeBERTa-V2 models by replacing MLM with ELECTRA-style objective plus gradient-disentangled embedding sharing which further improves the model efficiency. \nScripts for DeBERTa V3 model fine-tuning are added \nCode of RTD task head is added \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9422738665777521
+      ],
+      "excerpt": "Masked language model task is added \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8273027555168238,
+        0.9849453070849047,
+        0.9335164705213219,
+        0.9145139506769193,
+        0.8877446582517101
+      ],
+      "excerpt": "SiFT code is added \nDeBERTa v2 code and the 900M, 1.5B model are here now. This includes the 1.5B model used for our SuperGLUE single-model submission and achieving 89.9, versus human baseline 89.8. You can find more details about this submission in our blog \nVocabulary In v2 we use a new vocabulary of size 128K built from the training data. Instead of GPT2 tokenizer, we use sentencepiece tokenizer. \nnGiE(nGram Induced Input Encoding) In v2 we use an additional convolution layer aside with the first transformer layer to better learn the local dependency of input tokens. We will add more ablation studies on this feature. \nSharing position projection matrix with content projection matrix in attention layer Based on our previous experiment, we found this can save parameters without affecting the performance. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9940663008019285,
+        0.991750212323445,
+        0.8898001110460524
+      ],
+      "excerpt": "900M model & 1.5B model In v2 we scale our model size to 900M and 1.5B which significantly improves the performance of downstream tasks. \nWith DeBERTa 1.5B model, we surpass T5 11B model and human performance on SuperGLUE leaderboard. Code and model will be released soon. Please check out our paper for more details. \nWe released the pre-trained models, source code, and fine-tuning scripts to reproduce some of the experimental results in the paper. You can follow similar scripts to apply DeBERTa to your own experiments or applications. Pre-training scripts will be released in the next step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8753648260591732
+      ],
+      "excerpt": "|V2-XXLarge-MNLI|128|1320|1536| 48|Fine-turned with MNLI | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8948573881213817,
+        0.8782134502690588,
+        0.8948573881213817
+      ],
+      "excerpt": "|XLarge-MNLI|50|700|1024|48|Fine-turned with MNLI| \n|Large-MNLI|50|350|1024|24|Fine-turned with MNLI| \n|Base-MNLI|50|86|768|12|Fine-turned with MNLI| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8479798994665543,
+        0.987922963166716,
+        0.900826632727817
+      ],
+      "excerpt": "|mDeBERTa-V3-Base<sup>2</sup>|250|86|768| 12| 250K new SPM vocab, multi-lingual model with 102 languages| \n1 This is the model(89.9) that surpassed T5 11B(89.3) and human performance(89.8) on SuperGLUE for the first time. 128K new SPM vocab.  \n2 These V3 DeBERTa models are deberta models pre-trained with ELECTRA-style objective plus gradient-disentangled embedding sharing which significantly improves the model efficiency. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465794484073736,
+        0.8910453251599003,
+        0.9736009373834602
+      ],
+      "excerpt": "You can also try our models with HF Transformers. But when you try XXLarge model you need to specify --sharded_ddp argument. Please check our XXLarge model card for more details. \nOur fine-tuning experiments are carried on half a DGX-2 node with 8x32 V100 GPU cards, the results may vary due to different GPU models, drivers, CUDA SDK versions, using FP16 or FP32, and random seeds.  \nWe report our numbers based on multple runs with different random seeds here. Here are the results from the Large model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9280046039349895
+      ],
+      "excerpt": "And here are the results from the Base model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550640068800098
+      ],
+      "excerpt": "We present the dev results on SQuAD 1.1/2.0 and several GLUE benchmark tasks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503673943126936
+      ],
+      "excerpt": "We present the dev results on XNLI with zero-shot crosslingual transfer setting, i.e. training with english data only, test on other languages. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9379729686588403
+      ],
+      "excerpt": "<sup>1</sup> Following RoBERTa, for RTE, MRPC, STS-B, we fine-tune the tasks based on DeBERTa-Large-MNLI, DeBERTa-XLarge-MNLI, DeBERTa-V2-XLarge-MNLI, DeBERTa-V2-XXLarge-MNLI. The results of SST-2/QQP/QNLI/SQuADv2 will also be slightly improved when start from MNLI fine-tuned models, however, we only report the numbers fine-tuned from pretrained base models for those 4 tasks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "The implementation of DeBERTa",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://deberta.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/DeBERTa/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 109,
+      "date": "Thu, 30 Dec 2021 10:46:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/DeBERTa/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft/DeBERTa",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/docker/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/microsoft/DeBERTa/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/run_docker.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/cola.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/download_data.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/qqp.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/mnli.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/mrpc.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/qnli.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/rte.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/stsb.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/glue/sst2.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/language_model/mlm.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/superglue/download_data.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/superglue/record.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/superglue/copa.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/my_exp/run.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/experiments/ner/ner.sh",
+      "https://raw.githubusercontent.com/microsoft/DeBERTa/master/docker/build.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "`pip install deberta`\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8727712628922192
+      ],
+      "excerpt": "Our fine-tuning experiments are carried on half a DGX-2 node with 8x32 V100 GPU cards, the results may vary due to different GPU models, drivers, CUDA SDK versions, using FP16 or FP32, and random seeds.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8912804829461899,
+        0.8912804829461899,
+        0.8912804829461899
+      ],
+      "excerpt": "|MNLI xxlarge v2|   experiments/glue/mnli.sh xxlarge-v2|  91.7/91.9 +/-0.1|   4h| \n|MNLI xlarge v2|    experiments/glue/mnli.sh xlarge-v2|   91.7/91.6 +/-0.1|   2.5h| \n|MNLI xlarge|   experiments/glue/mnli.sh xlarge|  91.5/91.2 +/-0.1|   2.5h| \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/DeBERTa/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'    MIT License\\n\\n    Copyright (c) Microsoft Corporation.\\n\\n    Permission is hereby granted, free of charge, to any person obtaining a copy\\n    of this software and associated documentation files (the \"Software\"), to deal\\n    in the Software without restriction, including without limitation the rights\\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\n    copies of the Software, and to permit persons to whom the Software is\\n    furnished to do so, subject to the following conditions:\\n\\n    The above copyright notice and this permission notice shall be included in all\\n    copies or substantial portions of the Software.\\n\\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\n    SOFTWARE\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeBERTa: Decoding-enhanced BERT with Disentangled Attention",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeBERTa",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/DeBERTa/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "BigBird01",
+        "body": "DeBERTa pre-trained models\r\n- **base**  is the model with same config as BERT base, e.g. 12 layers, 12 heads, 768 hidden dimension \r\n- **base_mnli** is the base model fine-tuned with MNLI data\r\n- **large**  is the model with same config as BERT large, e.g. 24 layers, 16 heads, 1024 hidden dimension \r\n- **large_mnli** is the large model fine-tuned with MNLI data\r\n- **xlarge**  is the model with 48 layers, 16 heads, 1024 hidden dimension \r\n- **xlarge_mnli** is the xlarge model fine-tuned with MNLI data\r\n\r\n\r\n- **bpe_encoder** is the GPT2 vocabulary package ",
+        "dateCreated": "2020-08-07T00:09:17Z",
+        "datePublished": "2020-08-07T00:18:36Z",
+        "html_url": "https://github.com/microsoft/DeBERTa/releases/tag/v0.1.8",
+        "name": " DeBERTa pre-trained models",
+        "tag_name": "v0.1.8",
+        "tarball_url": "https://api.github.com/repos/microsoft/DeBERTa/tarball/v0.1.8",
+        "url": "https://api.github.com/repos/microsoft/DeBERTa/releases/27402211",
+        "zipball_url": "https://api.github.com/repos/microsoft/DeBERTa/zipball/v0.1.8"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Linux system, e.g. Ubuntu 18.04LTS\n- CUDA 10.0\n- pytorch 1.3.0\n- python 3.6\n- bash shell 4.0\n- curl\n- docker (optional)\n- nvidia-docker2 (optional)\n\nThere are several ways to try our code,\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For glue tasks, \n1. Get the data\n``` bash\ncache_dir=/tmp/DeBERTa/\ncd experiments/glue\n./download_data.sh  $cache_dir/glue_tasks\n```\n\n2. Run task\n\n``` bash\ntask=STS-B \nOUTPUT=/tmp/DeBERTa/exps/$task\nexport OMP_NUM_THREADS=1\npython3 -m DeBERTa.apps.run --task_name $task --do_train  \\\n  --data_dir $cache_dir/glue_tasks/$task \\\n  --eval_batch_size 128 \\\n  --predict_batch_size 128 \\\n  --output_dir $OUTPUT \\\n  --scale_steps 250 \\\n  --loss_scale 16384 \\\n  --accumulative_update 1 \\  \n  --num_train_epochs 6 \\\n  --warmup 100 \\\n  --learning_rate 2e-5 \\\n  --train_batch_size 32 \\\n  --max_seq_len 128\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 819,
+      "date": "Thu, 30 Dec 2021 10:46:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "bert",
+      "deeplearning",
+      "representation-learning",
+      "roberta",
+      "language-model",
+      "natural-language-understanding",
+      "self-attention",
+      "transformer-encoder"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Docker is the recommended way to run the code as we already built every dependency into the our docker [bagai/deberta](https://hub.docker.com/r/bagai/deberta) and you can follow the [docker official site](https://docs.docker.com/engine/install/ubuntu/) to install docker on your machine.\n\nTo run with docker, make sure your system fullfil the requirements in the above list. Here are the steps to try the GLUE experiments: Pull the code, run `./run_docker.sh` \n, and then you can run the bash commands under `/DeBERTa/experiments/glue/`\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Pull the code and run `pip3 install -r requirements.txt` in the root directory of the code, then enter `experiments/glue/` folder of the code and try the bash commands under that folder for glue experiments.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "``` Python\n\n#: To apply DeBERTa into your existing code, you need to make two changes on your code,\n#: 1. change your model to consume DeBERTa as the encoder\nfrom DeBERTa import deberta\nimport torch\nclass MyModel(torch.nn.Module):\n  def __init__(self):\n    super().__init__()\n    #: Your existing model code\n    self.deberta = deberta.DeBERTa(pre_trained='base') #: Or 'large' 'base-mnli' 'large-mnli' 'xlarge' 'xlarge-mnli' 'xlarge-v2' 'xxlarge-v2'\n    #: Your existing model code\n    #: do inilization as before\n    #: \n    self.deberta.apply_state() #: Apply the pre-trained model of DeBERTa at the end of the constructor\n    #:\n  def forward(self, input_ids):\n    #: The inputs to DeBERTa forward are\n    #: `input_ids`: a torch.LongTensor of shape [batch_size, sequence_length] with the word token indices in the vocabulary\n    #: `token_type_ids`: an optional torch.LongTensor of shape [batch_size, sequence_length] with the token types indices selected in [0, 1]. \n    #:    Type 0 corresponds to a `sentence A` and type 1 corresponds to a `sentence B` token (see BERT paper for more details).\n    #: `attention_mask`: an optional parameter for input mask or attention mask. \n    #:   - If it's an input mask, then it will be torch.LongTensor of shape [batch_size, sequence_length] with indices selected in [0, 1]. \n    #:      It's a mask to be used if the input sequence length is smaller than the max input sequence length in the current batch. \n    #:      It's the mask that we typically use for attention when a batch has varying length sentences.\n    #:   - If it's an attention mask then if will be torch.LongTensor of shape [batch_size, sequence_length, sequence_length]. \n    #:      In this case, it's a mask indicate which tokens in the sequence should be attended by other tokens in the sequence. \n    #: `output_all_encoded_layers`: whether to output results of all encoder layers, default, True\n    encoding = deberta.bert(input_ids)[-1]\n\n#: 2. Change your tokenizer with the the tokenizer built in DeBERta\nfrom DeBERTa import deberta\nvocab_path, vocab_type = deberta.load_vocab(pretrained_id='base')\ntokenizer = deberta.tokenizers[vocab_type](vocab_path)\n#: We apply the same schema of special tokens as BERT, e.g. [CLS], [SEP], [MASK]\nmax_seq_len = 512\ntokens = tokenizer.tokenize('Examples input text of DeBERTa')\n#: Truncate long sequence\ntokens = tokens[:max_seq_len -2]\n#: Add special tokens to the `tokens`\ntokens = ['[CLS]'] + tokens + ['[SEP]']\ninput_ids = tokenizer.convert_tokens_to_ids(tokens)\ninput_mask = [1]*len(input_ids)\n#: padding\npaddings = max_seq_len-len(input_ids)\ninput_ids = input_ids + [0]*paddings\ninput_mask = input_mask + [0]*paddings\nfeatures = {\n'input_ids': torch.tensor(input_ids, dtype=torch.int),\n'input_mask': torch.tensor(input_mask, dtype=torch.int)\n}\n\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,521 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{manjavacas-etal-2019-improving,\n    title = \"Improving Lemmatization of Non-Standard Languages with Joint Learning\",\n    author = \"Manjavacas, Enrique  and\n      K{\\'a}d{\\'a}r, {\\'A}kos  and\n      Kestemont, Mike\",\n    booktitle = \"Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)\",\n    month = jun,\n    year = \"2019\",\n    address = \"Minneapolis, Minnesota\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/N19-1153\",\n    doi = \"10.18653/v1/N19-1153\",\n    pages = \"1493--1503\",\n    abstract = \"Lemmatization of standard languages is concerned with (i) abstracting over morphological differences and (ii) resolving token-lemma ambiguities of inflected words in order to map them to a dictionary headword. In the present paper we aim to improve lemmatization performance on a set of non-standard historical languages in which the difficulty is increased by an additional aspect (iii): spelling variation due to lacking orthographic standards. We approach lemmatization as a string-transduction task with an Encoder-Decoder architecture which we enrich with sentence information using a hierarchical sentence encoder. We show significant improvements over the state-of-the-art by fine-tuning the sentence encodings to jointly optimize a bidirectional language model loss. Crucially, our architecture does not require POS or morphological annotations, which are not always available for historical corpora. Additionally, we also test the proposed model on a set of typologically diverse standard languages showing results on par or better than a model without fine-tuned sentence representations and previous state-of-the-art systems. Finally, to encourage future work on processing of non-standard varieties, we release the dataset of non-standard languages underlying the present study, which is based on openly accessible sources.\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9982424580532824
+      ],
+      "excerpt": "If you find pie useful, please use the following reference: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507374082549614
+      ],
+      "excerpt": "$ echo \"el gato duerme encima de la silla\" | pie tag-pipe spanish-lemmatizer.rar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507374082549614,
+        0.8356013927728488
+      ],
+      "excerpt": "de  de \nla  el \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/emanjavacas/pie",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-04-25T13:52:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-12T15:17:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9926436908732424,
+        0.9805133753249023
+      ],
+      "excerpt": "PIE was primarily conceived to make experimentation on sequence labeling of variation-rich languages easy and user-friendly. PIE has been tested mostly for Lemmatization but other SoTA accuracies from other tasks like POS have been reproduced (cf. Plank et al ). PIE is highly configurable both in terms of input preprocessing and model definition, in principle not requiring users to write any code (instead experiments are defined with json files). It is highly modular and therefore easy to extend. It includes transductive lemmatization as an additional sequence labeling task and, finally, it is reasonably fast and memory efficient. \nDocumentation is work in progress and it will improve over the following months. A good place to learn about its functionality is to check pie/default_settings.json which explains all input parameters and shows a full example of a config file (minus input data). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9320311162487416
+      ],
+      "excerpt": "If you are planning to develop on top of PIE, the easiest way is to get setup is to download the repository and install the dependencies (see requirements.txt). The only step needed to have pie available from any place in the file system is to add the path to pie to the PYTHONPATH environment variable. There are two ways to accomplish this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9728052206967733
+      ],
+      "excerpt": "Common to both scripts is the model specification that allows to combine several models, where the output for a particular task is taken from a model that excels at that task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9899187613894483,
+        0.9552275144637101,
+        0.9177069412490385
+      ],
+      "excerpt": "PIE underlying model comprises a set of hierarchical feature extractors from the character-level up to the sentence-level. For each input token a sentence-level feature vector is extracted and used for the prediction of any number of target tasks (e.g. POS-tagging, lemmatization, ...). A visualization of the underlying model using bidirectional RNNs to extract word-level and sentence-level features is shown below. \nPrediction is accomplished with decoder modules. We provide implementations of a linear decoder trained to maximize the probability assigned by the model to the corpus data via a softmax function (similar to a MaxEnt classifier). A crf decoder, particularly suited for tasks that imply a dependency between neighboring output tags and an attentional decoder, suited for tasks that can be solved by generating the token-level output character by characters in a string transduction manner (e.g. lemmatization, normalization). \nTraining a model only requires a model specification and paths to training and dev datasets. Pie user interface employs a simple json file (in order to allow in-line comments, we make use of the package JSON_minify), an example of which can be seen below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9455924371039112
+      ],
+      "excerpt": "The very minimum set of options required to train a model includes input_path (path to files with training data), dev_path (path to files with development data), and tasks, which defines the model to be trained. Other parameters refer to model hyperparameters (cell, num_layers, hidden_size, wemb_dim, cemb_dim, cemb_type, cemb_layers), training (batch_size, epochs) and optimization (dropout, optimizer, patience, lr, lr_factor, `lr_patience). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9722151747439942,
+        0.8351337846663047
+      ],
+      "excerpt": "By setting a schedule we can fine-tune the learning dynamics of auxiliary tasks in a multi-task settings (see below for more information on this).  \nTo avoid verbosity, parameters invariant across auxiliary tasks can be specified only once using task_defaults. Similarly, learning schedule parameters invariant across tasks (factor, patience, threshold, min_weight) can be factored out of the task schedule definition. In summary, the previous configuration can be rewritten in the following form: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8385719912343439,
+        0.9642529919093576,
+        0.9795971723718773
+      ],
+      "excerpt": "PIE has built-in support for lemmatization as a string transduction task using an Encoder-Decoder architecture as shown below (lemmatizing Latin token \"esse\" to its lemma \"edo\"): \nPIE implements several state-of-the-art attention mechanisms to faciliate information flow between the encoder and the decoder. Additionally, the decoder can be conditioned on sentence-level features to help with disambiguating. \nA task configuration for lemmatization with an Encoder-Decoder model and integrated sentence-level features is shown below. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikekestemont/pie/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Wed, 29 Dec 2021 20:15:39 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/emanjavacas/pie/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "emanjavacas/pie",
+    "technique": "GitHub API"
+  },
+  "identifier": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://zenodo.org/badge/latestdoi/131014015",
+      "technique": "Regular expression"
+    }
+  ],
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "PIE is available from pypi, which means that all you should need to do is:\n\n```bash\npip install nlp-pie\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9247694547897379
+      ],
+      "excerpt": "If you are planning to develop on top of PIE, the easiest way is to get setup is to download the repository and install the dependencies (see requirements.txt). The only step needed to have pie available from any place in the file system is to add the path to pie to the PYTHONPATH environment variable. There are two ways to accomplish this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9449205374393601
+      ],
+      "excerpt": "From your python script, using sys: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9297560861355137
+      ],
+      "excerpt": "Training models is done with pie train path/to/config.json (or script python pie/scripts/train.py. All non-nested parameters can be overwritten directly from the command line using environment variables like PIE_DEVICE=cpu (for input parameter device. Warning: bear in mind that due to the way bash parses environment variables PIE_...=False will be parsed into a boolean True, which might be counter-intuitive. If you wish to get False for a parameter from the command line you can use PIE_...=\"\"). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "      \"name\": \"lemma\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "      \"name\": \"pos\",  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "      \"name\": \"pos\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8453631692294479
+      ],
+      "excerpt": "      \"name\": \"number\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "      \"name\": \"pos\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8453631692294479
+      ],
+      "excerpt": "      \"name\": \"number\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "      \"name\": \"lemma\", \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8603935258220534
+      ],
+      "excerpt": "If your input is in a file test.txt (with a sentence per line) you can use: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8190556329969172
+      ],
+      "excerpt": "and the output will be written to test.pie.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8666726748776729
+      ],
+      "excerpt": "\"input_path\": \"datasets/LLCT1/train.tsv\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "      \"name\": \"lemma\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "        \"bos\": true, \n        \"eos\": true, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.802159532225641
+      ],
+      "excerpt": "The very minimum set of options required to train a model includes input_path (path to files with training data), dev_path (path to files with development data), and tasks, which defines the model to be trained. Other parameters refer to model hyperparameters (cell, num_layers, hidden_size, wemb_dim, cemb_dim, cemb_type, cemb_layers), training (batch_size, epochs) and optimization (dropout, optimizer, patience, lr, lr_factor, `lr_patience). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "      \"name\": \"pos\",  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "      \"name\": \"pos\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8132178183277616
+      ],
+      "excerpt": "      \"name\": \"case\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8506275494895482
+      ],
+      "excerpt": "      \"name\": \"number\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "      \"name\": \"pos\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8132178183277616
+      ],
+      "excerpt": "      \"name\": \"case\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8506275494895482
+      ],
+      "excerpt": "      \"name\": \"number\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "      \"name\": \"lemma\", \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/emanjavacas/pie/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Enrique Manjavacas\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PIE: A Framework for Joint Learning of Sequence Labeling Tasks",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pie",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "emanjavacas",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/emanjavacas/pie/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2021-02-17T10:48:35Z",
+        "datePublished": "2021-03-02T09:14:39Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.3.7c",
+        "name": "",
+        "tag_name": "v0.3.7c",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.3.7c",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/39103988",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.3.7c"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2019-12-06T14:03:17Z",
+        "datePublished": "2019-12-06T14:04:12Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.2.5",
+        "name": "v0.2.5",
+        "tag_name": "v0.2.5",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.2.5",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/22029056",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.2.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2019-04-30T09:56:47Z",
+        "datePublished": "2019-04-30T18:07:11Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.2.3",
+        "name": "",
+        "tag_name": "v0.2.3",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.2.3",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/17073944",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.2.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2019-03-01T12:56:29Z",
+        "datePublished": "2019-03-01T12:58:28Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.2.2",
+        "name": "Pip installable and CLI tools",
+        "tag_name": "v0.2.2",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.2.2",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/15857847",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.2.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "Same but with LICENSE",
+        "dateCreated": "2019-01-17T09:15:44Z",
+        "datePublished": "2019-01-17T09:16:32Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.1.3",
+        "name": "",
+        "tag_name": "v0.1.3",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.1.3",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/15025654",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.1.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2019-01-17T08:58:15Z",
+        "datePublished": "2019-01-17T08:59:32Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.1.2",
+        "name": "",
+        "tag_name": "v0.1.2",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.1.2",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/15025308",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.1.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2019-01-13T19:21:57Z",
+        "datePublished": "2019-01-13T19:26:24Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.1.1",
+        "name": "",
+        "tag_name": "v0.1.1",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.1.1",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/14949403",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "emanjavacas",
+        "body": "",
+        "dateCreated": "2018-11-28T13:01:12Z",
+        "datePublished": "2018-11-28T15:21:16Z",
+        "html_url": "https://github.com/emanjavacas/pie/releases/tag/v0.1.0",
+        "name": "",
+        "tag_name": "v0.1.0",
+        "tarball_url": "https://api.github.com/repos/emanjavacas/pie/tarball/v0.1.0",
+        "url": "https://api.github.com/repos/emanjavacas/pie/releases/14234468",
+        "zipball_url": "https://api.github.com/repos/emanjavacas/pie/zipball/v0.1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 17,
+      "date": "Wed, 29 Dec 2021 20:15:39 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

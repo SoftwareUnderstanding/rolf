@@ -1,0 +1,208 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "                                  Kai Wang, Xiaojiang Peng, Jianfei Yang, Shijian Lu, and Yu Qiao\n                              Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences\n                                         Nanyang Technological University, Singapore\n                                            {kai.wang, xj.peng, yu.qiao}@siat.ac.cn\n\t\t\t\t   Kai Wang and Xiaojiang Peng are equally-contributted authors\n\t\t\t\t\t \n![image](https://github.com/kaiwang960112/Self-Cure-Network/blob/master/imgs/scn-moti.png)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaiwang960112/Self-Cure-Network",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-31T15:34:54Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T06:14:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9981894464535137,
+        0.9988314616196766
+      ],
+      "excerpt": "Annotating a qualitative large-scale facial expression dataset is extremely difficult due to the uncertainties caused by ambiguous facial expressions, low-quality facial images, and the subjectiveness of annotators. These uncertainties lead to a key challenge of large-scale Facial Expression Recognition (FER) in deep learning era. To address this problem, this paper proposes a simple yet efficient Self-Cure Network (SCN) which suppresses the uncertainties efficiently and prevents deep networks from over-fitting uncertain facial images. Specifically, SCN suppresses the uncertainty from two different aspects: 1) a self-attention mechanism over mini-batch to weight each training sample with a ranking regularization, and 2) a careful relabeling mechanism to modify the labels of these samples in the lowest-ranked group. Experiments on synthetic FER datasets and our collected WebEmotion dataset validate the effectiveness of our method. Results on public benchmarks demonstrate that our SCN outperforms current state-of-the-art methods with 88.14% on RAF-DB, 60.23% on AffectNet, and 89.35% on FERPlus. \nOur SCN is built upon traditional CNNs and consists of three crucial modules: i) self-attention importance weighting, ii) ranking regularization, and iii) relabeling, as shown in Figure 2. Given a batch of face images with some uncertain samples, we first extract the deep features by a backbone network. The self-attention importance weighting module assigns an importance weight for each image using a fully-connected (FC) layer and the sigmoid function. These weights are multiplied by the logits for a sample re-weighting scheme. To explicitly reduce the importance of uncertain samples, a rank regularization module is further introduced to regularize the attention weights. In the rank regularization module, we first rank the learned attention weights and then split them into two groups, i.e. high and low importance groups. We then add a constraint between the mean weights of these groups by a margin-based loss, which is called rank regularization loss (RR-Loss). To further improve our SCN, the relabeling module is added to modify some of the uncertain samples in the low importance group. This relabeling operation aims to hunt more clean samples and then to enhance the final model. The whole SCN can be trained in an end-to-end manner and easily added into any CNN backbones. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "- Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9365074424549199
+      ],
+      "excerpt": "--margin_1 denotes the margin in Rank Regularization which is set to 0.15 with batch size 1024 in the paper. Here --margin_1=0.07 with smaller batch size 64[default] in train.py can get similar results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8156192097044
+      ],
+      "excerpt": "Accuracy on test set should hit 87.03%, as the paper shows, when training with RAF-DB only. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This is a novel and easy method for annotation uncertainties.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaiwang960112/Self-Cure-Network/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 85,
+      "date": "Sat, 25 Dec 2021 19:46:24 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kaiwang960112/Self-Cure-Network/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kaiwang960112/Self-Cure-Network",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8262157230141619
+      ],
+      "excerpt": "- Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8282591668964766
+      ],
+      "excerpt": "- datasets/raf-basic/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "         train_00001_aligned.jpg \n             test_0001_aligned.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8407651001510851,
+        0.9503189345333785
+      ],
+      "excerpt": "- Start Training \n\u200bpython train.py --margin_1=0.07 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8414211697992455,
+        0.8102780086823556
+      ],
+      "excerpt": "--margin_1 denotes the margin in Rank Regularization which is set to 0.15 with batch size 1024 in the paper. Here --margin_1=0.07 with smaller batch size 64[default] in train.py can get similar results. \n- Result \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kaiwang960112/Self-Cure-Network/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# We find that SCN can correct about 50% noisy labels when train two fer datasets (add 10%~30% flip noises) together. We also find that scn can work in Face Recognition!!!",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Self-Cure-Network",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kaiwang960112",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaiwang960112/Self-Cure-Network/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 325,
+      "date": "Sat, 25 Dec 2021 19:46:24 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

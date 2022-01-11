@@ -1,0 +1,254 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{DBLP:journals/corr/SimonyanZ14a,\n  author    = {Karen Simonyan and\n               Andrew Zisserman},\n  title     = {Very Deep Convolutional Networks for Large-Scale Image Recognition},\n  journal   = {CoRR},\n  volume    = {abs/1409.1556},\n  year      = {2014},\n  url       = {http://arxiv.org/abs/1409.1556},\n  timestamp = {Wed, 01 Oct 2014 15:00:05 +0200},\n  biburl    = {http://dblp.uni-trier.de/rec/bib/journals/corr/SimonyanZ14a},\n  bibsource = {dblp computer science bibliography, http://dblp.org}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9799447404945762
+      ],
+      "excerpt": "Please cite the paper if you use the models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.999999152784728
+      ],
+      "excerpt": "Tran, Du, et al. \"Learning Spatiotemporal Features With 3D Convolutional Networks.\" Proceedings of the IEEE International Conference on Computer Vision. 2015. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertomontesg/keras-model-zoo",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing\nI encourage everybody to contribute and share their work with Keras. Have you created and trained a\nmodel with Keras? Have you ported a trained model from Caffe to Keras? This is the place to share\nthis models to the world.\nAdd a New Model to the Zoo\nAll the model's additions to this repository will be done by Pull Request. For each model will be\nrequired some information such as references, model definition and it's weights and means.\nAs this repository is a python package, new models should be added as new modules on\nkerasmodelzoo/models.\nIf the new model has multiple version create a folder with the generic name and subfiles for each\nversion of the model. If, on the other hand, it has only one version, create a new file with its\nname.\nkerasmodelzoo\n\u251c\u2500\u2500 models\n|   \u251c\u2500\u2500 __init__.py\n|   \u251c\u2500\u2500 modelA\n|   |   \u251c\u2500\u2500 __init__.py\n|   |   \u251c\u2500\u2500 modelA_v1.py\n|   |   \u2514\u2500\u2500 modelA_v2.py\n|   \u251c\u2500\u2500 modelB.py\nModel File\nFor each model file this variables and functions should be given.\n```python\nfrom keras.layers.convolutional import (Convolution2D, MaxPooling2D,\n                                        ZeroPadding2D)\nfrom keras.layers.core import Dense, Dropout, Flatten\nfrom keras.models import Sequential\nfrom kerasmodelzoo.utils.data import download_file, load_np_data\nURL to download the weights\n_MODEL_WEIGHTS_URL = 'https://www.url.edu/where/model/is/stored.hdf5\ndef model(weights=False, summary=False):\n    vgg16_model = Sequential()\n    '''\n    Here comes the definition of the model's architecture such as:\nvgg16_model.add(ZeroPadding2D((1, 1), input_shape=(3, 224, 224)))\nvgg16_model.add(Convolution2D(64, 3, 3, activation='relu'))\n'''\n\n# This lines are required to load the weights if they are asked\nif weights:\n    filepath = download_file('vgg16_weights.h5', _VGG_16_WEIGHTS_URL)\n    vgg16_model.load_weights(filepath)\n\nif summary:\n    print(vgg16_model.summary())\n\nA variable with the dataset mean the model was trained with.\nmean = load_np_data('{mean_file}.npy')\n```\nThe mean file should be placed at the kerasmodelzoo/data/{mean_file}.py.\nThe weights should be stored in a hdf5 file without being compressed. It must be stored on Keras.\nExtra information\nIt is also recommendable to give some additional resources such as examples of model usage or python\nnotebooks. All this resources should be stored on its corresponding directories.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2016-04-04T15:00:55Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-15T07:57:35Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9815107187595361,
+        0.8278087100961231
+      ],
+      "excerpt": "Repository to share all the models that the community has found and worked with the Keras framework. Official documentation here \nAt this moment the models available are: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9727411137106853
+      ],
+      "excerpt": "This is the Keras model of the 16-layer network used by the VGG team in the ILSVRC-2014 competition. Project site. Gist where the model was obtained here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8573755048547856
+      ],
+      "excerpt": "In the paper, the VGG-16 model is denoted as configuration D. It achieves 7.5% top-5 error on ILSVRC-2012-val, 7.4% top-5 error on ILSVRC-2012-test. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8911114447915771
+      ],
+      "excerpt": "of BVLC Caffe to support 3-Dimensional Convolutional Networks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9383088505814211,
+        0.9541070272511882
+      ],
+      "excerpt": "used to extract 3D-conv features. \nHere are some results from the paper using the C3D features. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Keras Model Zoo",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertomontesg/keras-model-zoo/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 28,
+      "date": "Thu, 23 Dec 2021 01:45:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/albertomontesg/keras-model-zoo/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "albertomontesg/keras-model-zoo",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/albertomontesg/keras-model-zoo/master/scripts/download/download_vgg-19_weights.sh",
+      "https://raw.githubusercontent.com/albertomontesg/keras-model-zoo/master/scripts/download/download_vgg-16_weights.sh",
+      "https://raw.githubusercontent.com/albertomontesg/keras-model-zoo/master/scripts/download/download_c3d_weights.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install this package you should first download this repository and then proceed with the installation:\n```bash\ngit clone https://github.com/albertomontesg/keras-model-zoo.git\ncd keras-model-zoo\npython setup.py install\n```\nAlso as a pyp package:\n```bash\npip install kerasmodelzoo\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8234001686035363
+      ],
+      "excerpt": "Dataset used to train: Sports1M \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/albertomontesg/keras-model-zoo/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License (MIT)\\n\\nCopyright (c) 2016 Alberto Montes\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Keras Model Zoo",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "keras-model-zoo",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "albertomontesg",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertomontesg/keras-model-zoo/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 186,
+      "date": "Thu, 23 Dec 2021 01:45:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "keras",
+      "deep-learning",
+      "model-zoo"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The usage is really easy. For each topology available you can load the model and also the mean which was trained with.\n\n```python\nfrom kerasmodelzoo.models.vgg import vgg16\n\nmodel = vgg16.model()\nmean = vgg16.mean\n```\n\nIt is also possible to load the weights or print the summary of the model if you give the parameters set to True:\n\n```python\nfrom kerasmodelzoo.models.vgg import vgg16\n\nmodel = vgg16.model(weights=True, summary=True)\nmean = vgg16.mean\nmodel.compile(loss='mse', optimizer='sgd')\nX = X - mean\nmodel.fit(X, Y)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

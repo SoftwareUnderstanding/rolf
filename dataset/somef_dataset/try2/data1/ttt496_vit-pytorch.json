@@ -1,0 +1,880 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2012.12877\">paper</a> has shown that use of a distillation token for distilling knowledge from convolutional nets to vision transformer can yield small and efficient vision transformers. This repository offers the means to do distillation easily.\n\nex. distilling from Resnet50 (or any teacher",
+      "https://arxiv.org/abs/2103.11886\">paper</a> notes that ViT struggles to attend at greater depths (past 12 layers",
+      "https://arxiv.org/abs/2103.17239\">This paper</a> also notes difficulty in training vision transformers at greater depths and proposes two solutions. First it proposes to do per-channel multiplication of the output of the residual block. Second, it proposes to have the patches attend to one another, and only allow the CLS token to attend to the patches in the last few layers.\n\nThey also add <a href=\"https://github.com/lucidrains/x-transformers#talking-heads-attention\">Talking Heads</a>, noting improvements\n\nYou can use this scheme as follows\n\n```python\nimport torch\nfrom vit_pytorch.cait import CaiT\n\nv = CaiT(\n    image_size = 256,\n    patch_size = 32,\n    num_classes = 1000,\n    dim = 1024,\n    depth = 12,             # depth of transformer for patch to patch attention only\n    cls_depth = 2,          # depth of cross attention of CLS tokens to patch\n    heads = 16,\n    mlp_dim = 2048,\n    dropout = 0.1,\n    emb_dropout = 0.1,\n    layer_dropout = 0.05    # randomly dropout 5% of the layers\n",
+      "https://arxiv.org/abs/2101.11986\">This paper</a> proposes that the first couple layers should downsample the image sequence by unfolding, leading to overlapping image data in each token as shown in the figure above. You can use this variant of the `ViT` as follows.\n\n```python\nimport torch\nfrom vit_pytorch.t2t import T2TViT\n\nv = T2TViT(\n    dim = 512,\n    image_size = 224,\n    depth = 5,\n    heads = 8,\n    mlp_dim = 512,\n    num_classes = 1000,\n    t2t_layers = ((7, 4",
+      "https://arxiv.org/abs/2104.05704\">CCT</a> proposes compact transformers\nby using convolutions instead of patching and performing sequence pooling. This\nallows for CCT to have high accuracy and a low number of parameters.\n\nYou can use this with two methods\n```python\nimport torch\nfrom vit_pytorch.cct import CCT\n\nmodel = CCT(\n        img_size=224,\n        embedding_dim=384,\n        n_conv_layers=2,\n        kernel_size=7,\n        stride=2,\n        padding=3,\n        pooling_kernel_size=3,\n        pooling_stride=2,\n        pooling_padding=1,\n        num_layers=14,\n        num_heads=6,\n        mlp_radio=3.,\n        num_classes=1000,\n        positional_embedding='learnable', # ['sine', 'learnable', 'none']\n        ",
+      "https://arxiv.org/abs/2103.14899\">This paper</a> proposes to have two vision transformers processing the image at different scales, cross attending to one every so often. They show improvements on top of the base vision transformer.\n\n```python\nimport torch\nfrom vit_pytorch.cross_vit import CrossViT\n\nv = CrossViT(\n    image_size = 256,\n    num_classes = 1000,\n    depth = 4,               # number of multi-scale encoding blocks\n    sm_dim = 192,            # high res dimension\n    sm_patch_size = 16,      # high res patch size (should be smaller than lg_patch_size",
+      "https://arxiv.org/abs/2103.16302\">This paper</a> proposes to downsample the tokens through a pooling procedure using depth-wise convolutions.\n\n```python\nimport torch\nfrom vit_pytorch.pit import PiT\n\nv = PiT(\n    image_size = 224,\n    patch_size = 14,\n    dim = 256,\n    num_classes = 1000,\n    depth = (3, 3, 3",
+      "https://arxiv.org/abs/2104.01136\">This paper</a> proposes a number of changes, including (1",
+      "https://arxiv.org/abs/2103.15808\">This paper</a> proposes mixing convolutions and attention. Specifically, convolutions are used to embed and downsample the image / feature map in three stages. Depthwise-convoltion is also used to project the queries, keys, and values for attention.\n\n```python\nimport torch\nfrom vit_pytorch.cvt import CvT\n\nv = CvT(\n    num_classes = 1000,\n    s1_emb_dim = 64,        # stage 1 - dimension\n    s1_emb_kernel = 7,      # stage 1 - conv kernel\n    s1_emb_stride = 4,      # stage 1 - conv stride\n    s1_proj_kernel = 3,     # stage 1 - attention ds-conv kernel size\n    s1_kv_proj_stride = 2,  # stage 1 - attention key / value projection stride\n    s1_heads = 1,           # stage 1 - heads\n    s1_depth = 1,           # stage 1 - depth\n    s1_mlp_mult = 4,        # stage 1 - feedforward expansion factor\n    s2_emb_dim = 192,       # stage 2 - (same as above",
+      "https://arxiv.org/abs/2104.13840\">paper</a> proposes mixing local and global attention, along with position encoding generator (proposed in <a href=\"https://arxiv.org/abs/2102.10882\">CPVT</a>",
+      "https://arxiv.org/abs/2102.10882\">CPVT</a>",
+      "https://arxiv.org/abs/2103.14030\">Swin</a>, without the extra complexity of shifted windows, CLS tokens, nor positional embeddings.\n\n```python\nimport torch\nfrom vit_pytorch.twins_svt import TwinsSVT\n\nmodel = TwinsSVT(\n    num_classes = 1000,       # number of output classes\n    s1_emb_dim = 64,          # stage 1 - patch embedding projected dimension\n    s1_patch_size = 4,        # stage 1 - patch size for patch embedding\n    s1_local_patch_size = 7,  # stage 1 - patch size for local attention\n    s1_global_k = 7,          # stage 1 - global attention key / value reduction factor, defaults to 7 as specified in paper\n    s1_depth = 1,             # stage 1 - number of transformer blocks (local attn -> ff -> global attn -> ff",
+      "https://arxiv.org/abs/2105.12723\">paper</a> decided to process the image in hierarchical stages, with attention only within tokens of local blocks, which aggregate as it moves up the heirarchy. The aggregation is done in the image plane, and contains a convolution and subsequent maxpool to allow it to pass information across the boundary.\n\nYou can use it with the following code (ex. NesT-T",
+      "https://arxiv.org/abs/2104.14294\">Dino</a>, with the following code.\n\n<a href=\"https://www.youtube.com/watch?v=h3ij3F3cPIk\">Yannic Kilcher</a> video\n\n```python\nimport torch\nfrom vit_pytorch import ViT, Dino\n\nmodel = ViT(\n    image_size = 256,\n    patch_size = 32,\n    num_classes = 1000,\n    dim = 1024,\n    depth = 6,\n    heads = 8,\n    mlp_dim = 2048\n",
+      "https://arxiv.org/abs/2102.03902\">Nystromformer</a>\n\n```bash\n$ pip install nystrom-attention\n```\n\n```python\nimport torch\nfrom vit_pytorch.efficient import ViT\nfrom nystrom_attention import Nystromformer\n\nefficient_transformer = Nystromformer(\n    dim = 512,\n    depth = 12,\n    heads = 8,\n    num_landmarks = 256\n",
+      "https://arxiv.org/abs/2002.05202\n        residual_attn = True        # ex. residual attention https://arxiv.org/abs/2012.11747\n    ",
+      "https://arxiv.org/abs/2012.11747\n    ",
+      "https://arxiv.org/abs/2104.05704},\n\teprint       = {2104.05704},\n\tarchiveprefix = {arXiv},\n\tprimaryclass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{dosovitskiy2020image,\n    title   = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},\n    author  = {Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},\n    year    = {2020},\n    eprint  = {2010.11929},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{touvron2020training,\n    title   = {Training data-efficient image transformers & distillation through attention}, \n    author  = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv\u00e9 J\u00e9gou},\n    year    = {2020},\n    eprint  = {2012.12877},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{yuan2021tokenstotoken,\n    title     = {Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet},\n    author    = {Li Yuan and Yunpeng Chen and Tao Wang and Weihao Yu and Yujun Shi and Francis EH Tay and Jiashi Feng and Shuicheng Yan},\n    year      = {2021},\n    eprint    = {2101.11986},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{zhou2021deepvit,\n    title   = {DeepViT: Towards Deeper Vision Transformer},\n    author  = {Daquan Zhou and Bingyi Kang and Xiaojie Jin and Linjie Yang and Xiaochen Lian and Qibin Hou and Jiashi Feng},\n    year    = {2021},\n    eprint  = {2103.11886},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{touvron2021going,\n    title   = {Going deeper with Image Transformers}, \n    author  = {Hugo Touvron and Matthieu Cord and Alexandre Sablayrolles and Gabriel Synnaeve and Herv\u00e9 J\u00e9gou},\n    year    = {2021},\n    eprint  = {2103.17239},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{chen2021crossvit,\n    title   = {CrossViT: Cross-Attention Multi-Scale Vision Transformer for Image Classification},\n    author  = {Chun-Fu Chen and Quanfu Fan and Rameswar Panda},\n    year    = {2021},\n    eprint  = {2103.14899},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{wu2021cvt,\n    title   = {CvT: Introducing Convolutions to Vision Transformers},\n    author  = {Haiping Wu and Bin Xiao and Noel Codella and Mengchen Liu and Xiyang Dai and Lu Yuan and Lei Zhang},\n    year    = {2021},\n    eprint  = {2103.15808},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{heo2021rethinking,\n    title   = {Rethinking Spatial Dimensions of Vision Transformers}, \n    author  = {Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},\n    year    = {2021},\n    eprint  = {2103.16302},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{graham2021levit,\n    title   = {LeViT: a Vision Transformer in ConvNet's Clothing for Faster Inference},\n    author  = {Ben Graham and Alaaeldin El-Nouby and Hugo Touvron and Pierre Stock and Armand Joulin and Herv\u00e9 J\u00e9gou and Matthijs Douze},\n    year    = {2021},\n    eprint  = {2104.01136},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{li2021localvit,\n    title   = {LocalViT: Bringing Locality to Vision Transformers},\n    author  = {Yawei Li and Kai Zhang and Jiezhang Cao and Radu Timofte and Luc Van Gool},\n    year    = {2021},\n    eprint  = {2104.05707},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{chu2021twins,\n    title   = {Twins: Revisiting Spatial Attention Design in Vision Transformers},\n    author  = {Xiangxiang Chu and Zhi Tian and Yuqing Wang and Bo Zhang and Haibing Ren and Xiaolin Wei and Huaxia Xia and Chunhua Shen},\n    year    = {2021},\n    eprint  = {2104.13840},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{su2021roformer,\n    title   = {RoFormer: Enhanced Transformer with Rotary Position Embedding}, \n    author  = {Jianlin Su and Yu Lu and Shengfeng Pan and Bo Wen and Yunfeng Liu},\n    year    = {2021},\n    eprint  = {2104.09864},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{zhang2021aggregating,\n    title   = {Aggregating Nested Transformers},\n    author  = {Zizhao Zhang and Han Zhang and Long Zhao and Ting Chen and Tomas Pfister},\n    year    = {2021},\n    eprint  = {2105.12723},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{caron2021emerging,\n    title   = {Emerging Properties in Self-Supervised Vision Transformers},\n    author  = {Mathilde Caron and Hugo Touvron and Ishan Misra and Herv\u00e9 J\u00e9gou and Julien Mairal and Piotr Bojanowski and Armand Joulin},\n    year    = {2021},\n    eprint  = {2104.14294},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{vaswani2017attention,\n    title   = {Attention Is All You Need},\n    author  = {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},\n    year    = {2017},\n    eprint  = {1706.03762},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n*I visualise a time when we will be to robots what dogs are to humans, and I\u2019m rooting for the machines.* \u2014 Claude Shannon"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bibtex\n@article{hassani2021escaping,\n\ttitle        = {Escaping the Big Data Paradigm with Compact Transformers},\n\tauthor       = {Ali Hassani and Steven Walton and Nikhil Shah and Abulikemu Abuduweili and Jiachen Li and Humphrey Shi},\n\tyear         = 2021,\n\turl          = {https://arxiv.org/abs/2104.05704},\n\teprint       = {2104.05704},\n\tarchiveprefix = {arXiv},\n\tprimaryclass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{dosovitskiy2020image,\n    title   = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},\n    author  = {Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},\n    year    = {2020},\n    eprint  = {2010.11929},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{touvron2020training,\n    title   = {Training data-efficient image transformers & distillation through attention}, \n    author  = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv\u00e9 J\u00e9gou},\n    year    = {2020},\n    eprint  = {2012.12877},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{yuan2021tokenstotoken,\n    title     = {Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet},\n    author    = {Li Yuan and Yunpeng Chen and Tao Wang and Weihao Yu and Yujun Shi and Francis EH Tay and Jiashi Feng and Shuicheng Yan},\n    year      = {2021},\n    eprint    = {2101.11986},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{zhou2021deepvit,\n    title   = {DeepViT: Towards Deeper Vision Transformer},\n    author  = {Daquan Zhou and Bingyi Kang and Xiaojie Jin and Linjie Yang and Xiaochen Lian and Qibin Hou and Jiashi Feng},\n    year    = {2021},\n    eprint  = {2103.11886},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{touvron2021going,\n    title   = {Going deeper with Image Transformers}, \n    author  = {Hugo Touvron and Matthieu Cord and Alexandre Sablayrolles and Gabriel Synnaeve and Herv\u00e9 J\u00e9gou},\n    year    = {2021},\n    eprint  = {2103.17239},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{chen2021crossvit,\n    title   = {CrossViT: Cross-Attention Multi-Scale Vision Transformer for Image Classification},\n    author  = {Chun-Fu Chen and Quanfu Fan and Rameswar Panda},\n    year    = {2021},\n    eprint  = {2103.14899},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{wu2021cvt,\n    title   = {CvT: Introducing Convolutions to Vision Transformers},\n    author  = {Haiping Wu and Bin Xiao and Noel Codella and Mengchen Liu and Xiyang Dai and Lu Yuan and Lei Zhang},\n    year    = {2021},\n    eprint  = {2103.15808},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{heo2021rethinking,\n    title   = {Rethinking Spatial Dimensions of Vision Transformers}, \n    author  = {Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},\n    year    = {2021},\n    eprint  = {2103.16302},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{graham2021levit,\n    title   = {LeViT: a Vision Transformer in ConvNet's Clothing for Faster Inference},\n    author  = {Ben Graham and Alaaeldin El-Nouby and Hugo Touvron and Pierre Stock and Armand Joulin and Herv\u00e9 J\u00e9gou and Matthijs Douze},\n    year    = {2021},\n    eprint  = {2104.01136},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{li2021localvit,\n    title   = {LocalViT: Bringing Locality to Vision Transformers},\n    author  = {Yawei Li and Kai Zhang and Jiezhang Cao and Radu Timofte and Luc Van Gool},\n    year    = {2021},\n    eprint  = {2104.05707},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{chu2021twins,\n    title   = {Twins: Revisiting Spatial Attention Design in Vision Transformers},\n    author  = {Xiangxiang Chu and Zhi Tian and Yuqing Wang and Bo Zhang and Haibing Ren and Xiaolin Wei and Huaxia Xia and Chunhua Shen},\n    year    = {2021},\n    eprint  = {2104.13840},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{su2021roformer,\n    title   = {RoFormer: Enhanced Transformer with Rotary Position Embedding}, \n    author  = {Jianlin Su and Yu Lu and Shengfeng Pan and Bo Wen and Yunfeng Liu},\n    year    = {2021},\n    eprint  = {2104.09864},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{zhang2021aggregating,\n    title   = {Aggregating Nested Transformers},\n    author  = {Zizhao Zhang and Han Zhang and Long Zhao and Ting Chen and Tomas Pfister},\n    year    = {2021},\n    eprint  = {2105.12723},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{caron2021emerging,\n    title   = {Emerging Properties in Self-Supervised Vision Transformers},\n    author  = {Mathilde Caron and Hugo Touvron and Ishan Misra and Herv\u00e9 J\u00e9gou and Julien Mairal and Piotr Bojanowski and Armand Joulin},\n    year    = {2021},\n    eprint  = {2104.14294},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{vaswani2017attention,\n    title   = {Attention Is All You Need},\n    author  = {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},\n    year    = {2017},\n    eprint  = {1706.03762},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n*I visualise a time when we will be to robots what dogs are to humans, and I\u2019m rooting for the machines.* \u2014 Claude Shannon\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{vaswani2017attention,\n    title   = {Attention Is All You Need},\n    author  = {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},\n    year    = {2017},\n    eprint  = {1706.03762},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{caron2021emerging,\n    title   = {Emerging Properties in Self-Supervised Vision Transformers},\n    author  = {Mathilde Caron and Hugo Touvron and Ishan Misra and Herv\u00e9 J\u00e9gou and Julien Mairal and Piotr Bojanowski and Armand Joulin},\n    year    = {2021},\n    eprint  = {2104.14294},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{zhang2021aggregating,\n    title   = {Aggregating Nested Transformers},\n    author  = {Zizhao Zhang and Han Zhang and Long Zhao and Ting Chen and Tomas Pfister},\n    year    = {2021},\n    eprint  = {2105.12723},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{su2021roformer,\n    title   = {RoFormer: Enhanced Transformer with Rotary Position Embedding}, \n    author  = {Jianlin Su and Yu Lu and Shengfeng Pan and Bo Wen and Yunfeng Liu},\n    year    = {2021},\n    eprint  = {2104.09864},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{chu2021twins,\n    title   = {Twins: Revisiting Spatial Attention Design in Vision Transformers},\n    author  = {Xiangxiang Chu and Zhi Tian and Yuqing Wang and Bo Zhang and Haibing Ren and Xiaolin Wei and Huaxia Xia and Chunhua Shen},\n    year    = {2021},\n    eprint  = {2104.13840},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{li2021localvit,\n    title   = {LocalViT: Bringing Locality to Vision Transformers},\n    author  = {Yawei Li and Kai Zhang and Jiezhang Cao and Radu Timofte and Luc Van Gool},\n    year    = {2021},\n    eprint  = {2104.05707},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{graham2021levit,\n    title   = {LeViT: a Vision Transformer in ConvNet's Clothing for Faster Inference},\n    author  = {Ben Graham and Alaaeldin El-Nouby and Hugo Touvron and Pierre Stock and Armand Joulin and Herv\u00e9 J\u00e9gou and Matthijs Douze},\n    year    = {2021},\n    eprint  = {2104.01136},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{heo2021rethinking,\n    title   = {Rethinking Spatial Dimensions of Vision Transformers}, \n    author  = {Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},\n    year    = {2021},\n    eprint  = {2103.16302},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{wu2021cvt,\n    title   = {CvT: Introducing Convolutions to Vision Transformers},\n    author  = {Haiping Wu and Bin Xiao and Noel Codella and Mengchen Liu and Xiyang Dai and Lu Yuan and Lei Zhang},\n    year    = {2021},\n    eprint  = {2103.15808},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{chen2021crossvit,\n    title   = {CrossViT: Cross-Attention Multi-Scale Vision Transformer for Image Classification},\n    author  = {Chun-Fu Chen and Quanfu Fan and Rameswar Panda},\n    year    = {2021},\n    eprint  = {2103.14899},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{touvron2021going,\n    title   = {Going deeper with Image Transformers}, \n    author  = {Hugo Touvron and Matthieu Cord and Alexandre Sablayrolles and Gabriel Synnaeve and Herv\u00e9 J\u00e9gou},\n    year    = {2021},\n    eprint  = {2103.17239},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{zhou2021deepvit,\n    title   = {DeepViT: Towards Deeper Vision Transformer},\n    author  = {Daquan Zhou and Bingyi Kang and Xiaojie Jin and Linjie Yang and Xiaochen Lian and Qibin Hou and Jiashi Feng},\n    year    = {2021},\n    eprint  = {2103.11886},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{yuan2021tokenstotoken,\n    title     = {Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet},\n    author    = {Li Yuan and Yunpeng Chen and Tao Wang and Weihao Yu and Yujun Shi and Francis EH Tay and Jiashi Feng and Shuicheng Yan},\n    year      = {2021},\n    eprint    = {2101.11986},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{touvron2020training,\n    title   = {Training data-efficient image transformers &amp; distillation through attention}, \n    author  = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv\u00e9 J\u00e9gou},\n    year    = {2020},\n    eprint  = {2012.12877},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{dosovitskiy2020image,\n    title   = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},\n    author  = {Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},\n    year    = {2020},\n    eprint  = {2010.11929},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{hassani2021escaping,\n    title        = {Escaping the Big Data Paradigm with Compact Transformers},\n    author       = {Ali Hassani and Steven Walton and Nikhil Shah and Abulikemu Abuduweili and Jiachen Li and Humphrey Shi},\n    year         = 2021,\n    url          = {https://arxiv.org/abs/2104.05704},\n    eprint       = {2104.05704},\n    archiveprefix = {arXiv},\n    primaryclass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9944484218006108
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2104.05704\">CCT</a> proposes compact transformers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9105368110547479
+      ],
+      "excerpt": "<a href=\"https://github.com/SHI-Labs/Compact-Transformers\">Official \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9748538152660589
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2103.16302\">This paper</a> proposes to downsample the tokens through a pooling procedure using depth-wise convolutions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9607166231062237
+      ],
+      "excerpt": "<a href=\"https://github.com/facebookresearch/LeViT\">Official repository</a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    s3_depth = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9279628677675321
+      ],
+      "excerpt": "<a href=\"https://www.youtube.com/watch?v=h3ij3F3cPIk\">Yannic Kilcher</a> video \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    depth = 12, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "        depth = 12, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9944484218006108,
+        0.9993470052537933
+      ],
+      "excerpt": "        ff_glu = True,              #: ex. feed forward GLU variant https://arxiv.org/abs/2002.05202 \n        residual_attn = True        #: ex. residual attention https://arxiv.org/abs/2012.11747 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ttt496/vit-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-10T04:07:00Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-08T07:52:01Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.93417752778925,
+        0.8950606142086208,
+        0.8691990834611633
+      ],
+      "excerpt": "Implementation of <a href=\"https://openreview.net/pdf?id=YicbFdNTTy\">Vision Transformer</a>, a simple way to achieve SOTA in vision classification with only a single transformer encoder, in Pytorch. Significance is further explained in <a href=\"https://www.youtube.com/watch?v=TrdevFK_am4\">Yannic Kilcher's</a> video. There's really not much to code here, but may as well lay it out for everyone so we expedite the attention revolution. \nFor a Pytorch implementation with pretrained models, please see Ross Wightman's repository <a href=\"https://github.com/rwightman/pytorch-image-models\">here</a>. \nThe official Jax repository is <a href=\"https://github.com/google-research/vision_transformer\">here</a>. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8700728345710151
+      ],
+      "excerpt": "Number of classes to classify. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8479167923301352
+      ],
+      "excerpt": "    temperature = 3,           #: temperature of distillation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8803713883949499
+      ],
+      "excerpt": "The DistillableViT class is identical to ViT except for how the forward pass is handled, so you should be able to load the parameters back to ViT after you have completed distillation training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9146400860774145
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2103.17239\">This paper</a> also notes difficulty in training vision transformers at greater depths and proposes two solutions. First it proposes to do per-channel multiplication of the output of the residual block. Second, it proposes to have the patches attend to one another, and only allow the CLS token to attend to the patches in the last few layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8405882074104905
+      ],
+      "excerpt": "    cls_depth = 2,          #: depth of cross attention of CLS tokens to patch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8564032008099622
+      ],
+      "excerpt": "    layer_dropout = 0.05    #: randomly dropout 5% of the layers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9753401858756361
+      ],
+      "excerpt": "    t2t_layers = ((7, 4), (3, 2), (3, 2)) #: tuples of the kernel size and stride of each consecutive layers of the initial token to token module \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9116217687035653,
+        0.9441799367165344
+      ],
+      "excerpt": "by using convolutions instead of patching and performing sequence pooling. This \nallows for CCT to have high accuracy and a low number of parameters. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = CCT( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = cct_14( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9795714134849164
+      ],
+      "excerpt": "Repository</a> includes links to pretrained model checkpoints. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8202828365601206
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2103.14899\">This paper</a> proposes to have two vision transformers processing the image at different scales, cross attending to one every so often. They show improvements on top of the base vision transformer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.884730211453574
+      ],
+      "excerpt": "    depth = (3, 3, 3),     #: list of depths, indicating the number of rounds of each stage before a downsample \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8261120075901476
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2104.01136\">This paper</a> proposes a number of changes, including (1) convolutional embedding instead of patch-wise projection (2) downsampling in stages (3) extra non-linearity in attention (4) 2d relative positional biases instead of initial absolute positional bias (5) batchnorm in place of layernorm. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9798811210445426
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2103.15808\">This paper</a> proposes mixing convolutions and attention. Specifically, convolutions are used to embed and downsample the image / feature map in three stages. Depthwise-convoltion is also used to project the queries, keys, and values for attention. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = TwinsSVT( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "pred = model(img) #: (1, 1000) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9870006295434464
+      ],
+      "excerpt": "This <a href=\"https://arxiv.org/abs/2105.12723\">paper</a> decided to process the image in hierarchical stages, with attention only within tokens of local blocks, which aggregate as it moves up the heirarchy. The aggregation is done in the image plane, and contains a convolution and subsequent maxpool to allow it to pass information across the boundary. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = ViT( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    transformer=model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312356895748882,
+        0.8678835409349526,
+        0.9668094701451861
+      ],
+      "excerpt": "    mask_prob=0.15,          #: probability of using token in masked prediction task \n    random_patch_prob=0.30,  #: probability of randomly replacing a token being used for mpp \n    replace_prob=0.50,       #: probability of replacing a token being used for mpp with the mask token \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = ViT( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9280166720837253,
+        0.8200743561289551,
+        0.8665375565371936,
+        0.8993324030339356
+      ],
+      "excerpt": "    local_upper_crop_scale = 0.4,      #: upper bound for local crop - 0.4 was recommended in the paper  \n    global_lower_crop_scale = 0.5,     #: lower bound for global crop - 0.5 was recommended in the paper \n    moving_average_decay = 0.9,        #: moving average of encoder - paper showed anywhere from 0.9 to 0.999 was ok \n    center_moving_average_decay = 0.9, #: moving average of teacher centers - paper showed anywhere from 0.9 to 0.999 was ok \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8783716303289512
+      ],
+      "excerpt": "    learner.update_moving_average() #: update moving average of teacher encoder and teacher centers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9624742347082674,
+        0.8315338094020465
+      ],
+      "excerpt": "v = v.eject()  #: wrapper is discarded and original ViT instance is returned \nThere may be some coming from computer vision who think attention still suffers from quadratic costs. Fortunately, we have a lot of new techniques that may help. This repository offers a way for you to plugin your own sparse attention transformer. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ttt496/vit-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- How do I pass in non-square images?\n\nYou can already pass in non-square images - you just have to make sure your height and width is less than or equal to the `image_size`, and both divisible by the `patch_size`\n\nex.\n\n```python\nimport torch\nfrom vit_pytorch import ViT\n\nv = ViT(\n    image_size = 256,\n    patch_size = 32,\n    num_classes = 1000,\n    dim = 1024,\n    depth = 6,\n    heads = 16,\n    mlp_dim = 2048,\n    dropout = 0.1,\n    emb_dropout = 0.1\n)\n\nimg = torch.randn(1, 3, 256, 128) #: <-- not a square\n\npreds = v(img) #: (1, 1000)\n```\n\n- How do I pass in non-square patches?\n\n```python\nimport torch\nfrom vit_pytorch import ViT\n\nv = ViT(\n    num_classes = 1000,\n    image_size = (256, 128),  #: image size is a tuple of (height, width)\n    patch_size = (32, 16),    #: patch size is a tuple of (height, width)\n    dim = 1024,\n    depth = 6,\n    heads = 16,\n    mlp_dim = 2048,\n    dropout = 0.1,\n    emb_dropout = 0.1\n)\n\nimg = torch.randn(1, 3, 256, 128)\n\npreds = v(img)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 20:02:27 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ttt496/vit-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ttt496/vit-pytorch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ttt496/vit-pytorch/main/examples/cats_and_dogs.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n$ pip install vit-pytorch\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8175923902236196
+      ],
+      "excerpt": "For a Pytorch implementation with pretrained models, please see Ross Wightman's repository <a href=\"https://github.com/rwightman/pytorch-image-models\">here</a>. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8300761503891266
+      ],
+      "excerpt": "You can also use the handy .to_vit method on the DistillableViT instance to get back a ViT instance. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8855597211244317
+      ],
+      "excerpt": "Alternatively you can use one of several pre-defined models [2,4,6,7,8,14,16] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9743031433002655
+      ],
+      "excerpt": "You can use it with the following code (ex. NesT-T) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389682891476739,
+        0.851165034364533
+      ],
+      "excerpt": "from vit_pytorch.nest import NesT \nnest = NesT( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.851165034364533
+      ],
+      "excerpt": "pred = nest(img) #: (1, 1000) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.999746712887969
+      ],
+      "excerpt": "$ pip install nystrom-attention \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.999746712887969
+      ],
+      "excerpt": "$ pip install x-transformers \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8341177043401105
+      ],
+      "excerpt": "depth: int. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/distill.png\" width=\"300px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8900486270063179,
+        0.8801854956928516,
+        0.8869264826052469
+      ],
+      "excerpt": "from torchvision.models import resnet50 \nfrom vit_pytorch.distill import DistillableViT, DistillWrapper \nteacher = resnet50(pretrained = True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.deepvit import DeepViT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.cait import CaiT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8417524933751013
+      ],
+      "excerpt": "    depth = 12,             #: depth of transformer for patch to patch attention only \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/t2t.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.t2t import T2TViT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 5, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.cct import CCT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.cct import cct_14 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/cross_vit.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.cross_vit import CrossViT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/pit.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.pit import PiT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/levit.png\" width=\"300px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.levit import LeViT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/cvt.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.cvt import CvT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/twins_svt.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.twins_svt import TwinsSVT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661346750570985
+      ],
+      "excerpt": "<img src=\"./images/nest.png\" width=\"400px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch import ViT \nfrom vit_pytorch.mpp import MPP \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth=6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671904599658984
+      ],
+      "excerpt": "<img src=\"./images/dino.png\" width=\"350px\"></img> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch import ViT, Dino \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from vit_pytorch.vit import ViT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823869479906596,
+        0.8801854956928516
+      ],
+      "excerpt": ": import Recorder and wrap the ViT \nfrom vit_pytorch.recorder import Recorder \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8350000266809386
+      ],
+      "excerpt": "attns #: (1, 6, 16, 65, 65) - (batch x layers x heads x patch x patch) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from nystrom_attention import Nystromformer \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ttt496/vit-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Phil Wang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Vision Transformer - Pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vit-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ttt496",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ttt496/vit-pytorch/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 20:02:27 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\nimport torch\nfrom vit_pytorch import ViT\n\nv = ViT(\n    image_size = 256,\n    patch_size = 32,\n    num_classes = 1000,\n    dim = 1024,\n    depth = 6,\n    heads = 16,\n    mlp_dim = 2048,\n    dropout = 0.1,\n    emb_dropout = 0.1\n)\n\nimg = torch.randn(1, 3, 256, 256)\n\npreds = v(img) #: (1, 1000)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

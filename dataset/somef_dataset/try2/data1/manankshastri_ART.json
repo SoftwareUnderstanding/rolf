@@ -1,0 +1,382 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1508.06576",
+      "https://arxiv.org/abs/1508.06576",
+      "https://arxiv.org/abs/1508.06576"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The Neural Style Transfer algorithm was due to Gatys et al. (2015). Harish Narayanan and Github user \"log0\" also have highly readable write-ups from which we drew inspiration. The pre-trained network used in this implementation is a VGG network, which is due to Simonyan and Zisserman (2015). Pre-trained weights were from the work of the MathConvNet team. \n\n- Leon A. Gatys, Alexander S. Ecker, Matthias Bethge, (2015). A Neural Algorithm of Artistic Style (https://arxiv.org/abs/1508.06576) \n- Harish Narayanan, Convolutional neural networks for artistic style transfer. https://harishnarayanan.org/writing/artistic-style-transfer/\n- Log0, TensorFlow Implementation of \"A Neural Algorithm of Artistic Style\". http://www.chioka.in/tensorflow-implementation-neural-algorithm-of-artistic-style\n- Karen Simonyan and Andrew Zisserman (2015). Very deep convolutional networks for large-scale image recognition (https://arxiv.org/pdf/1409.1556.pdf)\n- MatConvNet. http://www.vlfeat.org/matconvnet/pretrained/\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9997729767021067
+      ],
+      "excerpt": "Neural Style Transfer - algorithm created by Gatys et al. (2015) (https://arxiv.org/abs/1508.06576).  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manankshastri/Art-Generation-using-Neural-Style-Transfer",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-10-18T16:27:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-19T18:08:30Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9828434567949317,
+        0.8274506961455412,
+        0.8765982010073258
+      ],
+      "excerpt": "Neural Style Transfer (NST) uses a previously trained convolutional network, and builds on top of that. The idea of using a network trained on a different task and applying it to a new task is called transfer learning.  \nFollowing the original NST paper (https://arxiv.org/abs/1508.06576), we will use the VGG network. Specifically, we'll use VGG-19, a 19-layer version of the VGG network. This model has already been trained on the very large ImageNet database, and thus has learned to recognize a variety of low level features (at the earlier layers) and high level features (at the deeper layers). \nThe model is stored in a python dictionary where each variable name is the key and the corresponding value is a tensor containing that variable's value. To run an image through this network, we just have to feed the image to the model. In TensorFlow, we can do so using the tf.assign function. In particular, we will use the assign function like this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9060543179006085
+      ],
+      "excerpt": "This assigns the image as an input to the model. After this, if we want to access the activations of a particular layer, say layer 4_2 when the network is run on this image, we would run a TensorFlow session on the correct tensor conv4_2, as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289023334354552,
+        0.9485701499626283,
+        0.9678426825803378
+      ],
+      "excerpt": "Put it together to get J(G) = &#945; J<sub>content</sub>(C,G) + &#946; J<sub>style</sub>(S,G) \nThe earlier (shallower) layers of a ConvNet tend to detect lower-level features such as edges and simple textures, and the later (deeper) layers tend to detect higher-level features such as more complex textures as well as object classes.  \nWe would like the \"generated\" image G to have similar content as the input image C. Suppose we have chosen some layer's activations to represent the content of an image. In practice, we'll get the most visually pleasing results if we choose a layer in the middle of the network--neither too shallow nor too deep.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9896089867508986
+      ],
+      "excerpt": "Here, n_H, n_W and n_C are the height, width and number of channels of the hidden layer we have chosen, and appear in a normalization term in the cost. For clarity, note that a<sup>(C)</sup> and a<sup>(G)</sup> are the volumes corresponding to a hidden layer's activations. In order to compute the cost J<sub>content</sub>(C,G), it might also be convenient to unroll these 3D volumes into a 2D matrix, as shown below. (Technically this unrolling step isn't needed to compute J<sub>content</sub>, but it will be good practice for when you do need to carry out a similar operation later for computing the style const J<sub>style</sub>.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9786041989157765
+      ],
+      "excerpt": "The style matrix is also called a \"Gram matrix.\" In linear algebra, the Gram matrix G of a set of vectors (v<sub>1</sub>,... ,v<sub>n</sub>) is the matrix of dot products, whose entries are <img src=\"images/eq2.PNG\" style=\"width:750px;height:200px;\">. In other words, G<sub>ij</sub> compares how similar v_i is to v_j: If they are highly similar, you would expect them to have a large dot product, and thus for G<sub>ij</sub> to be large.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9895359917442091,
+        0.9710302611073658,
+        0.987344332431372,
+        0.9785643287960348
+      ],
+      "excerpt": "The result is a matrix of dimension (n<sub>C</sub>,n<sub>C</sub>) where n<sub>C</sub> is the number of filters. The value G<sub>ij</sub> measures how similar the activations of filter i are to the activations of filter j.  \nOne important part of the gram matrix is that the diagonal elements such as G<sub>ii</sub> also measures how active filter i is. For example, suppose filter i is detecting vertical textures in the image. Then G<sub>ii</sub> measures how common vertical textures are in the image as a whole: If G<sub>ii</sub> is large, this means that the image has a lot of vertical texture.  \nBy capturing the prevalence of different types of features (G<sub>ii</sub>), as well as how much different features occur together (G<sub>ij</sub>), the Style matrix G measures the style of an image. \nAfter generating the Style matrix (Gram matrix), your goal will be to minimize the distance between the Gram matrix of the \"style\" image S and that of the \"generated\" image G. For now, we are using only a single hidden layer a<sup>[l]</sup>, and the corresponding style cost for this layer is defined as:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9401135203121077,
+        0.9141320937926467
+      ],
+      "excerpt": "where G<sup>(S)</sup> and G<sup>(G)</sup> are respectively the Gram matrices of the \"style\" image and the \"generated\" image, computed using the hidden layer activations for a particular hidden layer in the network. \nSo far we have captured the style from only one layer. We'll get better results if we \"merge\" style costs from several different layers. Feel free to experiment with different weights to see how it changes the generated image G.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8430022561044495
+      ],
+      "excerpt": "Finally, let's create a cost function that minimizes both the style and the content cost. The formula is:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95850923333222
+      ],
+      "excerpt": "The content cost takes a hidden layer activation of the neural network, and measures how different a<sup>(C)</sup> and a<sup>(G)</sup> are.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9640453441758141,
+        0.8752590896589755,
+        0.8976566563219368,
+        0.8899653701638384
+      ],
+      "excerpt": "The style of an image can be represented using the Gram matrix of a hidden layer's activations. However, we get even better results combining this representation from multiple different layers. This is in contrast to the content representation, where usually using just a single hidden layer is sufficient. \nMinimizing the style cost will cause the image G to follow the style of the image S.  \nThe total cost is a linear combination of the content cost J<sub>content</sub>(C,G) and the style cost J<sub>style</sub>(C,G) \n&#945; and &#946; are hyperparameters that control the relative weighting between content and style. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9913709951837071
+      ],
+      "excerpt": "The beautiful ruins of the ancient city of Persepolis (Iran) with the style of Van Gogh (The Starry Night) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9863680276796402
+      ],
+      "excerpt": "The tomb of Cyrus the great in Pasargadae with the style of a Ceramic Kashi from Ispahan. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9783617335029595
+      ],
+      "excerpt": "A scientific study of a turbulent fluid with the style of a abstract blue fluid painting. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8472351053321793,
+        0.8046016710521232
+      ],
+      "excerpt": "Neural Style Transfer is an algorithm that given a content image C and a style image S can generate an artistic image \nIt uses representations (hidden layer activations) based on a pretrained ConvNet.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8307992937002988
+      ],
+      "excerpt": "The style cost function for one layer is computed using the Gram matrix of that layer's activations. The overall style cost function is obtained using several hidden layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Art generation using Neural Style Transfer",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manankshastri/ART/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Neural Style Transfer (NST) is one of the most fun techniques in deep learning. As seen below, it merges two images, namely, a \"content\" image (C) and a \"style\" image (S), to create a \"generated\" image (G). The generated image G combines the \"content\" of the image C with the \"style\" of image S. \n\nFor example, an image of the Louvre museum in Paris (content image C), mixed with a painting by Claude Monet, a leader of the impressionist movement (style image S).\n\n<img src=\"images/louvre_generated.png\" style=\"width:750px;height:200px;\">\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Finally, let's put everything together to implement Neural Style Transfer!\n\n1. Create an Interactive Session\n2. Load the content image \n3. Load the style image\n4. Randomly initialize the image to be generated \n5. Load the VGG19 model\n7. Build the TensorFlow graph:\n    - Run the content image through the VGG19 model and compute the content cost\n    - Run the style image through the VGG19 model and compute the style cost\n    - Compute the total cost\n    - Define the optimizer and the learning rate\n8. Initialize the TensorFlow graph and run it for a large number of iterations, updating the generated image at every step.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 22:22:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/manankshastri/Art-Generation-using-Neural-Style-Transfer/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "manankshastri/Art-Generation-using-Neural-Style-Transfer",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/manankshastri/ART/master/art1.ipynb",
+      "https://raw.githubusercontent.com/manankshastri/ART/master/.ipynb_checkpoints/art1-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/manankshastri/ART/master/.ipynb_checkpoints/video1-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/eq1.PNG\" style=\"width:800px;height:400px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/NST_LOSS.png\" style=\"width:800px;height:400px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/NST_GM.png\" style=\"width:900px;height:300px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/eq3.PNG\" style=\"width:750px;height:200px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/eq4.PNG\" style=\"width:750px;height:200px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8128195485866104
+      ],
+      "excerpt": "Here are few examples: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/perspolis_vangogh.png\" style=\"width:750px;height:300px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763
+      ],
+      "excerpt": "<img src=\"images/pasargad_kashi.png\" style=\"width:750px;height:300px;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.896692072947763,
+        0.855496087920785,
+        0.9083041718225592,
+        0.9083041718225592,
+        0.9083041718225592
+      ],
+      "excerpt": "<img src=\"images/circle_abstract.png\" style=\"width:750px;height:300px;\"> \n<img src=\"z/11.jpg\" style=\"width:500;height:500px;\"> \n<img src=\"z/22.jpg\" style=\"width:500;height:500px;\"> \n<img src=\"z/33.jpg\" style=\"width:500;height:500px;\"> \n<img src=\"z/44.jpg\" style=\"width:500;height:500px;\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/manankshastri/Art-Generation-using-Neural-Style-Transfer/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Art Generation using Neural Style Transfer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Art-Generation-using-Neural-Style-Transfer",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "manankshastri",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/manankshastri/Art-Generation-using-Neural-Style-Transfer/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 22:22:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "python",
+      "cnn",
+      "neural-style-transfer"
+    ],
+    "technique": "GitHub API"
+  }
+}

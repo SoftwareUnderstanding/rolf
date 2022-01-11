@@ -1,0 +1,289 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1609.02907",
+      "https://arxiv.org/abs/1710.10903"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "* Hits@10: 0.0007%  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "* Hits@10: 0.0000%  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "* Hits@10: 0.0000%  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "* Hits@10: 0.0002%  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "* Hits@10: 0.0210% \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "* Hits@10: 0.0254% \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giuseppefutia/link-prediction-code",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-13T11:40:21Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-17T10:31:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9785028622328542,
+        0.8520662835700697
+      ],
+      "excerpt": "This repository provides an experiment on link prediction tasks using the ogbl-ddi dataset. The dataset is a homogeneous, unweighted, undirected graph representing the drug-drug interaction network. Using a feature-less approach (one-hot encoding representation of the nodes), I will try to test the capability of a Graph Neural Network (GNNs) model to reconstruct the edges in the original graph. \nThe ogbl-ddi graph includes: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9386119232564434,
+        0.9490870263197282
+      ],
+      "excerpt": "The good practice is to select the model that achieves the best performance on the validation dataset after the training process. However, considering the amount of available time for this experiment, I will skip this step, and I will test the link prediction mechanism directly on the test edges, using the model resulting from the last epoch of the training process. \nThe evaluation metric for this experiment is the Mean Reciprocal Rank (MRR). In a nutshell, it is the count of how many correct links (positive examples) are ranked in the top-n positions against a bunch of synthetic negative examples. In this specific experiment, for each drug interaction, a set of approximately 100.000 randomly sampled negative examples are created. Then, I compute the count of the ratio of positive edges ranked at the K-place or above (Hits@K). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9416330030032743
+      ],
+      "excerpt": "Before running a real experiment, I need to make some tests on the training process to ensure that the process concludes with unexpected interruptions. It can be helpful to avoid discovering bugs only at the end of the training step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9161350283084612
+      ],
+      "excerpt": "The further step is to estimate the total training time. For this reason, I run 5 epochs using the original configuration. I test 5 epochs because, considering the dimension of the training graph, it can not be directly used for the training process. For this reason, I apply a sampling process, which selects a fixed number of neighbors for all the nodes (https://docs.dgl.ai/en/0.6.x/generated/dgl.sampling.sample_neighbors.html). Then, I want to test that each epoch has the same duration. Considering a --n-sample = 500 hyperparameter, the number of sampled edges for each epoch is around 30.000 over 1067911. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8127725381640677
+      ],
+      "excerpt": "Training 5 epochs took around 6 minutes for both GCN and GAT. This time was predictable because the two models have a close number of parameters: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9510516311601508
+      ],
+      "excerpt": "The additional parameters to GAT are related to the attention coefficients. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9643352591152178
+      ],
+      "excerpt": "I decided to perform a 1-hour training for both the models using a very low number of parameters and edge samples. The results achieved by both the models are in terms of MRR are: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9696619123989252,
+        0.9701947880189251
+      ],
+      "excerpt": "The GCN model seems the most promising one. The more likely reason is that the edge sampling process does not allow attention coefficients to be learned correctly. Indeed, the attention coefficients try to grasp the relevance of each neighbor for the central node. Unfortunately, due to the sampling process, the local graph structure around each node changes for each training step. \nFor this experiment, I decided to increase the value of some hyperparameters and check the impact in terms of MRR values. I applied the following changes: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9430333686089765
+      ],
+      "excerpt": "Adding another GCN layer allows aggregating the features of the 2-hop neighbors. Consider this new sampling value. The number of sampled edges for each epoch is around 70.000 over 1067911. The training duration has been of 3.7 hours. The resulting value in terms of MRRs are: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giuseppefutia/link-prediction-code/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 17:33:26 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/giuseppefutia/link-prediction-code/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "giuseppefutia/link-prediction-code",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npython3 -m venv venv\nsource venv/bin/activate\npip3 install -r requirements.txt\n```\n\nTested with Python 3.8.5.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8446629554180438
+      ],
+      "excerpt": "The experiment has been performed using hardware with the following features: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.869168122573533
+      ],
+      "excerpt": "* GPU: NVIDIA GeForce RTX 3090 (shared with other processes) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9151666818487133
+      ],
+      "excerpt": "To start a speedy training process, you can run the following command: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8945551247499196
+      ],
+      "excerpt": "python embeddings.py --n-epochs 1 --n-samples 10 --hidden-dim 8 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8524457426084595
+      ],
+      "excerpt": "python embeddings.py --n-epochs 5 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/giuseppefutia/link-prediction-code/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Link Prediction Task",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "link-prediction-code",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "giuseppefutia",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giuseppefutia/link-prediction-code/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Tue, 21 Dec 2021 17:33:26 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\r\n#: -- xR2RML mapping file (Mandatory):\r\n#: path relative to the configuration directory given in parameter --configDir\r\nmappingdocument.file.path=mapping1.ttl\r\n\r\n#: -- Server mode: true|false. Default: false\r\n#: false: stand-alone application that performs either graph materialization or query rewriting\r\n#: true:  SPARQL endpoint with query rewriting\r\nserver.active=false\r\n\r\n#: -- Server port number, ignored when \"server.active=false\". Default: 8080\r\nserver.port=8080\r\n\r\n#: -- Processing result output file, relative to --configDir. Default: result.txt\r\noutput.file.path=result.txt\r\n\r\n#: -- Max number of triples to generate in output file. Default: 0 (no limit)\r\n#: If the max number is reached, file name is suffixed with an index e.g. result.txt.0, result.txt.1, result.txt.2 etc.\r\noutput.file.max_triples=0\r\n\r\n#: -- Output RDF syntax: RDF/XML|N-TRIPLE|TURTLE|N3|JSON-LD. Default: TURTLE\r\n#: Applies to the graph materialization and the rewriting of SPARQL CONSTRUCT and DESCRIBE queries\r\noutput.syntax.rdf=TURTLE\r\n\r\n#: -- Output syntax for SPARQL result set (SPARQL SELECT and ASK queries): XML|JSON|CSV|TSV. Default: XML\r\n#: When \"server.active = true\", this may be overridden by the Accept HTTP header of the request\r\noutput.syntax.result=XML\r\n\r\n#: -- Display the result on the std output after the processing: true|false. Default: true\r\noutput.display=false\r\n\r\n#: -- File containing the SPARQL query to process, relative to --configDir. Default: none. \r\n#: Ignored when \"server.active = true\"\r\nquery.file.path=query.sparql\r\n\r\n#: -- Database connection type and configuration\r\nno_of_database=1\r\ndatabase.type[0]=MongoDB\r\ndatabase.driver[0]=\r\ndatabase.url[0]=mongodb://127.0.0.1:27017\r\ndatabase.name[0]=test\r\ndatabase.user[0]=user\r\ndatabase.pwd[0]=user\r\n\r\n\r\n#: -- Reference formulation: Column|JSONPath|XPath. Default: Column\r\ndatabase.reference_formulation[0]=JSONPath\r\n\r\n#: -- Runner factory. Mandatory.\r\n#: For MongoDB: fr.unice.i3s.morph.xr2rml.mongo.engine.MorphJsondocRunnerFactory\r\n#: For RDBs:    es.upm.fi.dia.oeg.morph.rdb.engine.MorphRDBRunnerFactory\r\nrunner_factory.class.name=fr.unice.i3s.morph.xr2rml.mongo.engine.MorphMongoRunnerFactory\r\n\r\n\r\n#: -- URL-encode reserved chars in database values. Default: true\r\n#: uricolumn.encode_unsafe_chars_dbvalues=true\r\n\r\n#: -- URL-encode reserved chars IRI template string. Default: true \r\n#: uricolumn.encode_uri=true\r\n\r\n\r\n#: -- Cache the result of previously executed queries for MongoDB. Default: false\r\n#: Caution: high memory consumption, to be used for RefObjectMaps only\r\nquerytranslator.cachequeryresult=false\r\n\r\n\r\n#: -- Primary SPARQL query optimization. Default: true\r\nquerytranslator.sparql.optimize=true\r\n\r\n#: -- Abstract query optimization: self join elimination. Default: true\r\nquerytranslator.abstract.selfjoinelimination=true\r\n\r\n#: -- Abstract query optimization: self union elimination. Default: true\r\nquerytranslator.abstract.selfunionelimination=true\r\n\r\n#: -- Abstract query optimization: propagation of conditions in a inner/left join. Default: true\r\nquerytranslator.abstract.propagateconditionfromjoin=true\r\n\r\n```\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9883826457690833
+      ],
+      "excerpt": "In Proceedings of the 11th International Confenrence on Web Information Systems and Technologies (WEBIST 2015), Lisbon, Portugal, 2015. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.958947192383734,
+        0.9708911763986656
+      ],
+      "excerpt": "Research report, CNRS, 2015. https://hal.archives-ouvertes.fr/hal-01066663 \n[3] C. Callou, F. Michel, C. Faron-Zucker, C. Martin, J. Montagnat. Towards a Shared Reference Thesaurus for Studies on History of Zoology, Archaeozoology and Conservation Biology. In Semantic Web For Scientific Heritage (SW4SH), Workshops of the ESWC\u201915 conference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9986957141065697,
+        0.8288020915780282
+      ],
+      "excerpt": "In Proceedings of the 12th International Confenrence on Web Information Systems and Technologies (WEBIST 2016), Roma, Italy, 2016. \n[5] F. Michel, C. Faron-Zucker, and J. Montagnat. Mapping-based SPARQL access to a MongoDB database. Research report, CNRS, 2016.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9980821762717562
+      ],
+      "excerpt": "[6] F. Michel, C. Faron-Zucker, and J. Montagnat. A Mapping-Based Method to Query MongoDB Documents with SPARQL. In 27th International Conference on Database and Expert Systems Applications (DEXA 2016), 2016. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/frmichel/morph-xr2rml",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2014-10-10T11:55:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-09T13:36:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nSee a detailed [description of the project code and architecture](doc/README_code_architecture.md).\r\n\r\n----------\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9982844907203711,
+        0.8894089896166836
+      ],
+      "excerpt": "Morph-xR2RML is an implementation of the xR2RML mapping language that enables the description of mappings from relational or non relational databases to RDF. xR2RML is an extension of R2RML and RML. \nMorph-xR2RML comes with connectors for relational databases (MySQL, PostgreSQL, MonetDB) and the MongoDB NoSQL document store. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9949081778723422,
+        0.9974235706656681,
+        0.9737998090357007,
+        0.981411229918034,
+        0.8981756545327919,
+        0.9553723676765037
+      ],
+      "excerpt": "Morph-xR2RML was developed by the I3S laboratory as an extension of the Morph-RDB project which is an implementation of R2RML. It is made available under the Apache 2.0 License. \nThe SPARQL-to-SQL rewriting is an adaptation of the former Morph-RDB implementation, it supports SPARQL SELECT and DESCRIBE queries. \nThe SPARQL-to-MongoDB rewriting is a fully new component, it supports the SELECT, ASK, CONSTRUCT and DESCRIBE query forms. \n[1] F. Michel, L. Djimenou, C. Faron-Zucker, and J. Montagnat. Translation of Relational and Non-Relational Databases into RDF with xR2RML. \nIn Proceedings of the 11th International Confenrence on Web Information Systems and Technologies (WEBIST 2015), Lisbon, Portugal, 2015. \n[2] F. Michel, L. Djimenou, C. Faron-Zucker, and J. Montagnat. xR2RML: Relational and Non-Relational Databases to RDF Mapping Language. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9827282689501484
+      ],
+      "excerpt": "[3] C. Callou, F. Michel, C. Faron-Zucker, C. Martin, J. Montagnat. Towards a Shared Reference Thesaurus for Studies on History of Zoology, Archaeozoology and Conservation Biology. In Semantic Web For Scientific Heritage (SW4SH), Workshops of the ESWC\u201915 conference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8414758884695628,
+        0.9814450163571987,
+        0.8295001742500647,
+        0.822939180340785
+      ],
+      "excerpt": "[6] F. Michel, C. Faron-Zucker, and J. Montagnat. A Mapping-Based Method to Query MongoDB Documents with SPARQL. In 27th International Conference on Database and Expert Systems Applications (DEXA 2016), 2016. \nThe query rewriting is implemented for RDBs and MongoDB, with the restriction that no mixed syntax paths be used. Doing query rewriting with mixed syntax paths is a much more complex problem, that may not be possible in all situations (it would require to \"revert\" expressions such as JSONPath or XPath to retrieve source data base values). \nOnly one join condition is supported in a referencing object map. \nTo run Morph-xR2RML as a SPARQL endpoint, simply edit the configuration file (see reference) and set the property sever.active=true. The default access URL is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of the xR2RML mapping language and SPARQL-to-MongoDB prototype",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nPre-requisite: have **Java SDK 10** installed\r\n\r\nYou can download the last release or snapshot published in [this repository](https://www.dropbox.com/sh/djnztipsclvcskw/AABT1JagzD4K4aCALDNVj-yra?dl=0).\r\nThe latest on-going version is the 1.3.2 snapshot.\r\n\r\nAlternatively, you can build the application using [Maven](http://maven.apache.org/): in a shell, CD to the root directory morph-xr2rml, then run the command: `mvn clean package`. A jar with all dependencies is generated in `morph-xr2rml-dist/target`.\r\n\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/frmichel/morph-xr2rml/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Mon, 20 Dec 2021 14:14:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/frmichel/morph-xr2rml/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "frmichel/morph-xr2rml",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/frmichel/morph-xr2rml/master/morph-xr2rml-dist/run_xr2rml.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/frmichel/morph-xr2rml/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Scala",
+      "Shell",
+      "Batchfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "What is it?",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "morph-xr2rml",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "frmichel",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/frmichel/morph-xr2rml/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "frmichel",
+        "body": "",
+        "dateCreated": "2021-01-06T15:14:15Z",
+        "datePublished": "2021-07-30T10:00:44Z",
+        "html_url": "https://github.com/frmichel/morph-xr2rml/releases/tag/morph-xr2rml-1.3.1",
+        "name": "1.3.1",
+        "tag_name": "morph-xr2rml-1.3.1",
+        "tarball_url": "https://api.github.com/repos/frmichel/morph-xr2rml/tarball/morph-xr2rml-1.3.1",
+        "url": "https://api.github.com/repos/frmichel/morph-xr2rml/releases/47034964",
+        "zipball_url": "https://api.github.com/repos/frmichel/morph-xr2rml/zipball/morph-xr2rml-1.3.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "frmichel",
+        "body": "With the growing amount of data being continuously produced, it is crucial to come up with solutions to expose data from ever more heterogeneous databases (e.g. NoSQL systems) as linked data.\n\nxR2RML is a language designed to describe the mapping of various types of databases to RDF. It flexibly adapts to heterogeneous query languages and data models while remaining free from any specific language or syntax. It extends R2RML, the W3C recommendation for the mapping of relational databases to RDF, and relies on RML for the handling of various data representation formats.\n",
+        "dateCreated": "2015-04-02T12:35:05Z",
+        "datePublished": "2015-04-02T12:52:31Z",
+        "html_url": "https://github.com/frmichel/morph-xr2rml/releases/tag/morph-xr2rml-1.0",
+        "name": "First implementation of the xR2RML mapping language",
+        "tag_name": "morph-xr2rml-1.0",
+        "tarball_url": "https://api.github.com/repos/frmichel/morph-xr2rml/tarball/morph-xr2rml-1.0",
+        "url": "https://api.github.com/repos/frmichel/morph-xr2rml/releases/1119450",
+        "zipball_url": "https://api.github.com/repos/frmichel/morph-xr2rml/zipball/morph-xr2rml-1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nThe application takes two options: `--configDir` gives the configuration directory and `--configFile` give the configuration file within this directory. Option `--configFile` defaults to `morph.properties`.\r\n\r\nAdditionally, several parameter given in the configuration file can be overridden using the following options: \r\n- mapping file: `--mappingFile` \r\n- output file : `--output`\r\n- maximum number of triples generated in a single output file: `--outputMaxTriples`\r\n\r\n\r\n**From a command line interface**, CD to directory morph-xr2rml-dist and run the application as follows:\r\n\r\n```\r\njava -jar target/morph-xr2rml-dist-<version>-jar-with-dependencies.jar \\\r\n   --configDir <configuration directory> \\\r\n   --configFile <configuration file within this directory>\r\n```\r\n\r\nBesides, the logger configuration can be overriden by passing the `log4j.configuration` parameter to the JVM:\r\n\r\n```\r\njava -Dlog4j.configuration=file:/path/to/my/log4j.configuration -jar ...\r\n```\r\n\r\n**From an IDE** such as Eclipse or IntelliJ: In project morph-xr2rml-dist locate main class `fr.unice.i3s.morph.xr2rml.engine.MorphRunner`, and run it as a Scala application with arguments `--configDir` and `--configFile`.\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 19,
+      "date": "Mon, 20 Dec 2021 14:14:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- The generation of RDF collection and containers is supported in all cases (from a list of values resulting of the evaluation of a mixed syntax path typically, from the result of a join query implied by a referencing object map), except in the case of a regular R2RML join query applied to a relational database: the result of the join SQL query cannot be translated into an RDF collection or container.\r\n- Named graphs are supported although they are not printed out in Turtle which does not support named graphs. It would be quite easy to extend it with a N-Quad or Trig serialization to allow for writing triples in named graphs.\r\n\r\nThe former limitation on NestedTermMaps was lifted in Sept. 2017. All types of NestedTermMaps are now fully implemented, so that any complex iterations and collection/container nesting can be defined.\r\n\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nIn directories `morph-xr2rml-dist/example_mongo` and `morph-xr2rml-dist/example_mongo_rewriting` we provide example databases and corresponding mappings. Directory `example_mongo` runs the graph materialization mode, `example_mongo_rewriting` runs the query rewriting mode.\r\n\r\n- `testdb_dump.json` is a dump of the MongoDB test database: copy and paste the content of that file into a MongoDB shell window to create the database;\r\n- `morph.properties` provides database connection details;\r\n- `mapping1.ttl` to `mapping4.ttl` contain xR2RML mapping graphs illustrating various features of the language;\r\n- `result1.txt` to `result4.txt` contain the expected result of the mappings 1 to 4;\r\n- `query.sparql` (in directory `example_mongo_rewriting` only) contains a SPARQL query to be executed against the test database.\r\n\r\nEdit `morph.properties` and change the database URL, name, user and password with appropriate values.\r\n\r\n> _**Note about query optimization**_: the xR2RML xrr:uniqueRef notation is of major importance for query optimization as it allows for self-joins elimination. Check example in `morph-xr2rml-dist/example_taxref_rewriting`.\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nIn directories `morph-xr2rml-dist/example_mysql` and `morph-xr2rml-dist/example_mysql_rewriting` we provide example databases and corresponding mappings. Directory `example_mysql` runs the graph materialization mode, `example_mysql_rewriting` runs the query rewriting mode.\r\n\r\n- `testdb_dump.sql` is a dump of the MySQL test database. You may import it into a MySQL instance by running command `mysql -u root -p test < testdb_dump.sql`;\r\n- `morph.properties` provides database connection details;\r\n- `mapping.ttl` contains an example xR2RML mapping graph;\r\n- `result.txt` contains the expected result of applying this mapping to that database;\r\n- `query.sparql` (in directory `example_mysql_rewriting` only) contains a SPARQL query to be executed against the test database.\r\n\r\nEdit `morph.properties` and change the database url, name, user and password with appropriate values.\r\n\r\n----------\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

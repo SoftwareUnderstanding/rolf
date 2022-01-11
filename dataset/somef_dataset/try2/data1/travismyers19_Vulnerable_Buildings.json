@@ -1,0 +1,347 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.02002\n\n### `imagefunctions.py`\nThis module contains functions for saving a single image and for loading a single image into a numpy array that can be fed to the model for prediction.\n\n## Collecting Data\nThe folder `Small_Data` contains a small amount of data that can be used.  The following scripts provide functionality for collecting more data and, by default, saving it in the `Data` folder.  Each of these scripts requires a Google API Key.  By default, it is assumed that the api key is located in the project directory in a text file called `api_key.txt`.\n\n### `get_random_addressees.py`\nGets random addresses from a region specified by latitude and longitude coordinates and writes them to a csv file.  A file with 100 such random addresses is provided in `Addresses/random_addresses.csv`.\n\nType `python get_random_addresses.py -h` in the command line to view the list of arguments that can be passed to this script.\n\n### `get_soft_story_images.py`\nGets Google Street View images given a csv file of addresses and saves them to the `Data` folder by default.  A list of soft-story addresses provided by the city of San Francisco is located at `Addresses/Soft-Story-Properties.csv`.\n\nType `python get_soft_story_images.py -h` in the command line to view the list of arguments that can be passed to this script.\n\n### `get_non_soft_story_images.py`\nGiven a csv file of addresses, displays the Google Street View image of each one for the user to manually label as \"non-soft-story\" (press \"y' when the image appears"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/travismyers19/Vulnerable_Buildings",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-16T18:14:23Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-17T15:22:19Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9841172991824618,
+        0.9551426912268786,
+        0.8439256990233955,
+        0.983928879158594,
+        0.8968008881806535
+      ],
+      "excerpt": "A soft-story building is a multiple-story building in which the first floor is \"soft\", meaning it consists mostly of garage door openings or windows or other openings.  Soft-story buildings are particularly vulnerable to earthquakes, and thus the ability to quickly inventory soft-story buildings in an area may be of use to city or state officials.  This repo contains code to leverage transfer learning to create and train a custom Inception V3 image classifier to detect soft-story buildings and deploy the model in a user-friendly Streamlit app. \nThe Streamlit app takes as input from the user latitude and longitude coordinates specifying a bounding box region of the world and also a number of addresses.  The app generates random latitude and longitude locations within that bounding box and uses reverse geocoding to obtain addresses.  Then it uses those addresses to obtain Google Street View images.  The images are then sent through the trained image classifier, the bad images are discarded, and the results are presented to the user: \"Soft-Story\" means that the image is of a soft-story building and \"Non-Soft-Story\" means that the image is of a non-soft-story buildng. \nThere are two types of models that can be used: \nTernary classification:  A single model classifies the images into the three categories:  \"Soft\", \"Non-Soft\", and \"Bad Image\" (a bad image is one in which there is no building in the image or the building is obscured or it's unclear which building the image is an image of). \nBinary classification:  One model classifies the image as good or bad, and then a second model classifies the image as soft or non-soft. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9190615726971945,
+        0.9147801316570704,
+        0.8678248907663128
+      ],
+      "excerpt": "The Modules folder contains all of the custom modules in this repo. \nThis module contains the class Addresses which provides functionality for grabbing random addresses using reverse geocoding and for getting images from Google Street View corresponding to given addresses. \nThis module contains the class BuildingClassifier which provides functionality for creating and training custom Inception V3 models for either ternary classification or binary classification, as well as functions for evaluating a model to determine the following statistics given a directory containing test images: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8175568854241674,
+        0.9451225447112465,
+        0.9837532449533103
+      ],
+      "excerpt": "This module contains custom loss functions for binary crossentropy and categorical cross entropy which incorporate the focal loss modification described in this paper:  https://arxiv.org/abs/1708.02002 \nThis module contains functions for saving a single image and for loading a single image into a numpy array that can be fed to the model for prediction. \nThe folder Small_Data contains a small amount of data that can be used.  The following scripts provide functionality for collecting more data and, by default, saving it in the Data folder.  Each of these scripts requires a Google API Key.  By default, it is assumed that the api key is located in the project directory in a text file called api_key.txt. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9237075184581437
+      ],
+      "excerpt": "Given a csv file of addresses, displays the Google Street View image of each one for the user to manually label as \"non-soft-story\" (press \"y' when the image appears) or \"bad image\" (press \"u\" when the image appears).  By default it saves the manually labeled images to the Data folder. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9405176422707527,
+        0.8477678735851494
+      ],
+      "excerpt": "                        The location to save the created model. Default is \n                        'Models/model.h5'. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801228894402763,
+        0.9168192977157363
+      ],
+      "excerpt": "                        The number of output categories for the model (3 = \n                        ternary classifier, 1 = binary classifier). Default is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9738223986406368,
+        0.9084254858117198
+      ],
+      "excerpt": "                        A list of the sizes of the dense layers to be added \n                        onto the pretrained model. Default is '[1024, 512, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8153096028258069,
+        0.9891785691729262
+      ],
+      "excerpt": "                        The number of layers to unfreeze for training. Default \n                        is 21. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9268038402560491,
+        0.802561713848812,
+        0.8393057106977172
+      ],
+      "excerpt": "MODEL_FILENAME:  the location of the model to be trained.  Default:  Models/model.h5. \nTRAINED_MODEL_FILENAME:  the location to save the trained model.  Default:  Models/trained_model.h5. \nMETRICS_FILENAME:  the location to save the loss and accuracy.  It will be saved as a numpy array where the first row is the accuracy in each epoch and the second row is the loss in each epoch.  Default:  metrics.npy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707806180434961
+      ],
+      "excerpt": "                        The file location of the model to serve. Default is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8853574578497392,
+        0.808692312873265
+      ],
+      "excerpt": "                        classifier, set to 'None'. Default is 'None'. \nFor instance, to specify the api_key_filename argument: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Machine Learning Project for the Insight Fellows Program to classify soft story buildings that are vulnerable to earthquakes.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/travismyers19/Vulnerable_Buildings/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 04:50:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/travismyers19/Vulnerable_Buildings/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "travismyers19/Vulnerable_Buildings",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/travismyers19/Vulnerable_Buildings/master/train.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Clone the Github repo:\n\n```\ngit clone https://github.com/travismyers19/Vulnerable_Buildings\n```\n\nChange current directory to the project directory:\n\n```\ncd Vulnerable_Buildings\n```\n\nAll command line commands below assume that the user is in the project directory unless otherwise specified.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9834170722867204,
+        0.9554169436001461,
+        0.999833231880651,
+        0.999746712887969,
+        0.9808189105336415,
+        0.9632347459754548,
+        0.9940837022706414,
+        0.9554169436001461,
+        0.9936566121254942,
+        0.9979947896609701
+      ],
+      "excerpt": "Activate the tensorflow 2.0 with Python 3.6 environment: \nsource activate tensorflow2_p36 \nInstall Streamlit: \npip install streamlit \nCreate a conda environment from \"configs/environment.yml: \nconda env create -f Configs/environment.yml \nActivate the conda environment: \nsource activate tensorflow2_p36 \nInstall from requirements.txt: \npip install -r requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9296255849831722
+      ],
+      "excerpt": "Set the following variables within the train.sh bash script: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8590081600241005
+      ],
+      "excerpt": "Gets random addresses from a region specified by latitude and longitude coordinates and writes them to a csv file.  A file with 100 such random addresses is provided in Addresses/random_addresses.csv. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8930455438888298,
+        0.9246227682586091,
+        0.8342864196194066
+      ],
+      "excerpt": "Run create_inception_model.py in the command line to create and save a custom Inception V3 model: \npython create_inception_model.py \nType python create_inception_model.py -h in the command line to view the arguments that can be passed to the script: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8835120816073699
+      ],
+      "excerpt": "Run train.sh to train a model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8077351973170765
+      ],
+      "excerpt": "TRAINED_MODEL_FILENAME:  the location to save the trained model.  Default:  Models/trained_model.h5. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9271704360331706,
+        0.9364541555520881
+      ],
+      "excerpt": "Run plot_metrics.py in the command line: \nstreamlit run plot_metrics.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8298390081829593,
+        0.892738223002154,
+        0.8577537941381306
+      ],
+      "excerpt": "streamlit run plot_metrics.py -- --metrics_filename \"Models/metrics.npy\" \nRun product.py in the command line: \nstreamlit run product.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8518120344862331
+      ],
+      "excerpt": "Type python product.py -h n the command line to view the arguments to pass to the script: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.84831563063864
+      ],
+      "excerpt": "                        The file location of a text file containing a Google \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/travismyers19/Vulnerable_Buildings/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Matthew Rubashkin\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vulnerable Building Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vulnerable_Buildings",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "travismyers19",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/travismyers19/Vulnerable_Buildings/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 04:50:38 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.07243",
+      "https://arxiv.org/abs/1710.03957",
+      "https://arxiv.org/abs/1811.00207",
+      "https://arxiv.org/abs/1506.03340",
+      "https://arxiv.org/abs/1511.02301",
+      "https://arxiv.org/abs/1610.00956",
+      "https://arxiv.org/abs/1605.07683",
+      "https://arxiv.org/abs/1506.08909",
+      "https://arxiv.org/abs/1811.00945",
+      "https://arxiv.org/abs/1611.08669",
+      "https://arxiv.org/abs/1705.06476",
+      "https://arxiv.org/abs/1705.06476",
+      "https://arxiv.org/abs/1705.06476](https://arxiv.org/abs/1705.06476)\nor see these [more up-to-date slides](https://drive.google.com/file/d/1JfUW4AVrjSp8X8Fp0_rTTRoLxUfW0aUm/view?usp=sharing).\n\nFollow us on [Twitter](https://twitter.com/parlai_parley) and check out our [Release\nnotes](https://github.com/facebookresearch/ParlAI/releases) to see the latest\ninformation about new features & updates, and the website\n[http://parl.ai](http://parl.ai) for further docs. For an archived list of updates,\ncheck out [NEWS.md](https://github.com/facebookresearch/ParlAI/blob/main/NEWS.md).\n\n<p align=\"center\"><img width=\"90%\" src=\"https://raw.githubusercontent.com/facebookresearch/ParlAI/main/docs/source/_static/img/parlai_example.png\" /></p>\n\n## Interactive Tutorial\n\nFor those who want to start with ParlAI now, you can try our [Colab Tutorial](https://colab.research.google.com/drive/1bRMvN0lGXaTF5fuTidgvlAl-Lb41F7AD#scrollTo=KtVz5dCUmFkN).\n\n## Installing ParlAI\n\nParlAI currently requires Python3.7+ and [Pytorch](https://pytorch.org) 1.6 or higher.\nDependencies of the core modules are listed in [`requirements.txt`](https://github.com/facebookresearch/ParlAI/blob/main/requirements.txt). Some\nmodels included (in [`parlai/agents`](https://github.com/facebookresearch/ParlAI/tree/main/parlai/agents)) have additional requirements.\nWe *strongly* recommend you install ParlAI in a [venv](https://docs.python.org/3/library/venv.html) or [conda](https://www.anaconda.com/) environment.\n\nWe do not support Windows at this time, but many users [report success on Windows using Python 3.8](https://github.com/facebookresearch/ParlAI/issues/3989) and issues with Python 3.9. We are happy to accept patches that improve Windows support.\n\n**Standard Installation**\n\nIf you want to use ParlAI without modifications, you can install it with:\n\n```bash\npip install parlai\n```\n\n**Development Installation**\n\nMany users will want to modify some parts of ParlAI. To set up a development\nenvironment, run the following commands to clone the repository and install\nParlAI:\n\n```bash\ngit clone https://github.com/facebookresearch/ParlAI.git ~/ParlAI\ncd ~/ParlAI; python setup.py develop\n```\n\nAll needed data will be downloaded to `~/ParlAI/data`. If you need to clear out\nthe space used by these files, you can safely delete these directories and any\nfiles needed will be downloaded again.\n\n## Documentation\n\n - [Quick Start](https://parl.ai/docs/tutorial_quick.html)\n - [Basics: world, agents, teachers, action and observations](https://parl.ai/docs/tutorial_basic.html)\n - [Creating a new dataset/task](http://parl.ai/docs/tutorial_task.html)\n - [List of available tasks/datasets](https://parl.ai/docs/tasks.html)\n - [Creating a seq2seq agent](https://parl.ai/docs/tutorial_torch_generator_agent.html)\n - [List of available agents](https://parl.ai/docs/agents_list.html)\n - [Model zoo (list pretrained models)](https://parl.ai/docs/zoo.html)\n - [Running crowdsourcing tasks](http://parl.ai/docs/tutorial_crowdsourcing.html)\n - [Plug into Facebook Messenger](https://parl.ai/docs/tutorial_chat_service.html)\n\n\n## Examples\n\nA large set of scripts can be found in [`parlai/scripts`](https://github.com/facebookresearch/ParlAI/tree/main/parlai/scripts). Here are a few of them.\nNote: If any of these examples fail, check the [installation section](#installing-parlai) to see if you have missed something.\n\nDisplay 10 random examples from the SQuAD task\n```bash\nparlai display_data -t squad\n```\n\nEvaluate an IR baseline model on the validation set of the Personachat task:\n```bash\nparlai eval_model -m ir_baseline -t personachat -dt valid\n```\n\nTrain a single layer transformer on PersonaChat (requires pytorch and torchtext).\nDetail: embedding size 300, 4 attention heads,  2 epochs using batchsize 64, word vectors are initialized with fasttext and the other elements of the batch are used as negative during training.\n```bash\nparlai train_model -t personachat -m transformer/ranker -mf /tmp/model_tr6 --n-layers 1 --embedding-size 300 --ffn-size 600 --n-heads 4 --num-epochs 2 -veps 0.25 -bs 64 -lr 0.001 --dropout 0.1 --embedding-type fasttext_cc --candidates batch\n```\n\n## Code Organization\n\nThe code is set up into several main directories:\n\n- [**core**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/core): contains the primary code for the framework\n- [**agents**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/agents): contains agents which can interact with the different tasks (e.g. machine learning models)\n- [**scripts**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/scripts): contains a number of useful scripts, like training, evaluating, interactive chatting, ...\n- [**tasks**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/tasks): contains code for the different tasks available from within ParlAI\n- [**mturk**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/mturk): contains code for setting up Mechanical Turk, as well as sample MTurk tasks\n- [**messenger**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/chat_service/services/messenger): contains code for interfacing with Facebook Messenger\n- [**utils**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/utils): contains a wide number of frequently used utility methods\n- [**crowdsourcing**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/crowdsourcing): contains code for running crowdsourcing tasks, such as on Amazon Mechanical Turk\n- [**chat_service**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/chat_service/services/messenger): contains code for interfacing with services such as Facebook Messenger\n- [**zoo**](https://github.com/facebookresearch/ParlAI/tree/main/parlai/zoo): contains code to directly download and use pretrained models from our model zoo\n\n## Support\nIf you have any questions, bug reports or feature requests, please don't hesitate to post on our [Github Issues page](https://github.com/facebookresearch/ParlAI/issues).\nYou may also be interested in checking out our [FAQ](https://parl.ai/docs/faq.html) and\nour [Tips n Tricks](https://parl.ai/docs/tutorial_tipsntricks.html).\n\nPlease remember to follow our [Code of Conduct](https://github.com/facebookresearch/ParlAI/blob/main/CODE_OF_CONDUCT.md).\n\n## Contributing\nWe welcome PRs from the community!\n\nYou can find information about contributing to ParlAI in our\n[Contributing](https://github.com/facebookresearch/ParlAI/blob/main/CONTRIBUTING.md)\ndocument.\n\n\n## The Team\nParlAI is currently maintained by Moya Chen, Emily Dinan, Dexter Ju, Mojtaba\nKomeili, Spencer Poff, Pratik Ringshia, Stephen Roller, Kurt Shuster,\nEric Michael Smith, Megan Ung, Jack Urbanek, Jason Weston, Mary Williamson,\nand Jing Xu. Stephen Roller is the current Tech Lead.\n\nFormer major contributors and maintainers include Alexander H. Miller, Margaret\nLi, Will Feng, Adam Fisch, Jiasen Lu, Antoine Bordes, Devi Parikh, Dhruv Batra,\nFilipe de Avila Belbute Peres, Chao Pan, and Vedant Puri.\n\n## Citation\n\nPlease cite the [arXiv paper](https://arxiv.org/abs/1705.06476) if you use ParlAI in your work:\n\n```\n@article{miller2017parlai,\n  title={ParlAI: A Dialog Research Software Platform",
+      "https://arxiv.org/abs/{1705.06476"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite the [arXiv paper](https://arxiv.org/abs/1705.06476) if you use ParlAI in your work:\n\n```\n@article{miller2017parlai,\n  title={ParlAI: A Dialog Research Software Platform},\n  author={{Miller}, A.~H. and {Feng}, W. and {Fisch}, A. and {Lu}, J. and {Batra}, D. and {Bordes}, A. and {Parikh}, D. and {Weston}, J.},\n  journal={arXiv preprint arXiv:{1705.06476}},\n  year={2017}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{miller2017parlai,\n  title={ParlAI: A Dialog Research Software Platform},\n  author={{Miller}, A.~H. and {Feng}, W. and {Fisch}, A. and {Lu}, J. and {Batra}, D. and {Bordes}, A. and {Parikh}, D. and {Weston}, J.},\n  journal={arXiv preprint arXiv:{1705.06476}},\n  year={2017}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/ParlAI",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to ParlAI\nWhile we are seeding this project with an initial set of popular tasks and a few\nmodels and examples, ongoing contributions from the research community are\ndesired to increase the pool of tasks, models, and baselines.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and then clone the forked repository. (See this github guide on forking for more info).\n   If you have already cloned the repo directly and committed changes, follow the steps in the section below\nCreate your branch from main. Set up your environment\n   and run pre-commit install once.\nMake your changes\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nAutoformat and lint your code (bash autoformat.sh)\n(Optional) Ensure the test suite passes. Run python -m pytest -m unit.\nIf you've added a new dataset, you should also run\n   python -m pytest -m data. Copy-paste the output into a comment in your PR.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\nLink CircleCI to your github account\n   if you haven't done so previously (and make sure the CircleCI tests run\n   successfully on the PR after you push your changes).\nPush your changes!\nOnce the PR is accepted and CI is passing, we will merge the PR for you.\n\nMoving changes you've committed to a fork\n\nFork the repo\nIn your local repo, rename your origin remote to upstream\n   git remote rename origin upstream\nPoint origin to the forked repo (instead of to the original repo)\n   git remote add origin git@github...&lt;FORK&gt;\nFetch from the new origin\n   git fetch origin\nMake your local branch track the remote branch (of the forked repo)\n   git branch --set-upstream-to origin/main main\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues for general feature discussion, Q&A and public bugs tracking.\nPlease ensure your description is clear and has sufficient instructions to be able to\nreproduce the issue or understand the problem.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nCoding Style\nWe try to follow the PEP style guidelines and encourage you to as well. You\nshould run the lint_changed.sh script before you submit.\nLicense\nBy contributing to ParlAI, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-04-24T17:10:44Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-28T05:11:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9705301540711192,
+        0.9393497471070656
+      ],
+      "excerpt": "core: contains the primary code for the framework \nagents: contains agents which can interact with the different tasks (e.g. machine learning models) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8193516920526722,
+        0.9612037949513151
+      ],
+      "excerpt": "mturk: contains code for setting up Mechanical Turk, as well as sample MTurk tasks \nmessenger: contains code for interfacing with Facebook Messenger \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9063157888787542,
+        0.9710461926650575
+      ],
+      "excerpt": "crowdsourcing: contains code for running crowdsourcing tasks, such as on Amazon Mechanical Turk \nchat_service: contains code for interfacing with services such as Facebook Messenger \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.915604608179956
+      ],
+      "excerpt": "ParlAI is currently maintained by Moya Chen, Emily Dinan, Dexter Ju, Mojtaba \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9301932303574165
+      ],
+      "excerpt": "and Jing Xu. Stephen Roller is the current Tech Lead. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A framework for training and evaluating AI models on a variety of openly available dialogue datasets.",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " - [Quick Start](https://parl.ai/docs/tutorial_quick.html)\n - [Basics: world, agents, teachers, action and observations](https://parl.ai/docs/tutorial_basic.html)\n - [Creating a new dataset/task](http://parl.ai/docs/tutorial_task.html)\n - [List of available tasks/datasets](https://parl.ai/docs/tasks.html)\n - [Creating a seq2seq agent](https://parl.ai/docs/tutorial_torch_generator_agent.html)\n - [List of available agents](https://parl.ai/docs/agents_list.html)\n - [Model zoo (list pretrained models)](https://parl.ai/docs/zoo.html)\n - [Running crowdsourcing tasks](http://parl.ai/docs/tutorial_crowdsourcing.html)\n - [Plug into Facebook Messenger](https://parl.ai/docs/tutorial_chat_service.html)\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/ParlAI/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1727,
+      "date": "Wed, 29 Dec 2021 07:44:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/facebookresearch/ParlAI/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "facebookresearch/ParlAI",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/facebookresearch/ParlAI/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/autoformat.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/projects/babi/memnn/memnn_bAbI_10k_task_parameter_sweep.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/projects/babi/memnn/memnn_bAbI_1k_task_parameter_sweep.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/image_chat/download_data.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_download_docs.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_select_docs_launcher.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_merge_docs_launcher.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_merge_docs.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_select_docs.sh",
+      "https://raw.githubusercontent.com/facebookresearch/ParlAI/main/parlai/tasks/eli5/data_creation/slurm_scripts/eli_download_docs_launcher.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "ParlAI currently requires Python3.7+ and [Pytorch](https://pytorch.org) 1.6 or higher.\nDependencies of the core modules are listed in [`requirements.txt`](https://github.com/facebookresearch/ParlAI/blob/main/requirements.txt). Some\nmodels included (in [`parlai/agents`](https://github.com/facebookresearch/ParlAI/tree/main/parlai/agents)) have additional requirements.\nWe *strongly* recommend you install ParlAI in a [venv](https://docs.python.org/3/library/venv.html) or [conda](https://www.anaconda.com/) environment.\n\nWe do not support Windows at this time, but many users [report success on Windows using Python 3.8](https://github.com/facebookresearch/ParlAI/issues/3989) and issues with Python 3.9. We are happy to accept patches that improve Windows support.\n\n**Standard Installation**\n\nIf you want to use ParlAI without modifications, you can install it with:\n\n```bash\npip install parlai\n```\n\n**Development Installation**\n\nMany users will want to modify some parts of ParlAI. To set up a development\nenvironment, run the following commands to clone the repository and install\nParlAI:\n\n```bash\ngit clone https://github.com/facebookresearch/ParlAI.git ~/ParlAI\ncd ~/ParlAI; python setup.py develop\n```\n\nAll needed data will be downloaded to `~/ParlAI/data`. If you need to clear out\nthe space used by these files, you can safely delete these directories and any\nfiles needed will be downloaded again.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/facebookresearch/ParlAI/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "HTML",
+      "JavaScript",
+      "CSS",
+      "Shell",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\nAttribution-NonCommercial 4.0 International\\n\\n=======================================================================\\n\\nCreative Commons Corporation (\"Creative Commons\") is not a law firm and\\ndoes not provide legal services or legal advice. Distribution of\\nCreative Commons public licenses does not create a lawyer-client or\\nother relationship. Creative Commons makes its licenses and related\\ninformation available on an \"as-is\" basis. Creative Commons gives no\\nwarranties regarding its licenses, any material licensed under their\\nterms and conditions, or any related information. Creative Commons\\ndisclaims all liability for damages resulting from their use to the\\nfullest extent possible.\\n\\nUsing Creative Commons Public Licenses\\n\\nCreative Commons public licenses provide a standard set of terms and\\nconditions that creators and other rights holders may use to share\\noriginal works of authorship and other material subject to copyright\\nand certain other rights specified in the public license below. The\\nfollowing considerations are for informational purposes only, are not\\nexhaustive, and do not form part of our licenses.\\n\\n     Considerations for licensors: Our public licenses are\\n     intended for use by those authorized to give the public\\n     permission to use material in ways otherwise restricted by\\n     copyright and certain other rights. Our licenses are\\n     irrevocable. Licensors should read and understand the terms\\n     and conditions of the license they choose before applying it.\\n     Licensors should also secure all rights necessary before\\n     applying our licenses so that the public can reuse the\\n     material as expected. Licensors should clearly mark any\\n     material not subject to the license. This includes other CC-\\n     licensed material, or material used under an exception or\\n     limitation to copyright. More considerations for licensors:\\n\\twiki.creativecommons.org/Considerations_for_licensors\\n\\n     Considerations for the public: By using one of our public\\n     licenses, a licensor grants the public permission to use the\\n     licensed material under specified terms and conditions. If\\n     the licensor\\'s permission is not necessary for any reason--for\\n     example, because of any applicable exception or limitation to\\n     copyright--then that use is not regulated by the license. Our\\n     licenses grant only permissions under copyright and certain\\n     other rights that a licensor has authority to grant. Use of\\n     the licensed material may still be restricted for other\\n     reasons, including because others have copyright or other\\n     rights in the material. A licensor may make special requests,\\n     such as asking that all changes be marked or described.\\n     Although not required by our licenses, you are encouraged to\\n     respect those requests where reasonable. More_considerations\\n     for the public: \\n\\twiki.creativecommons.org/Considerations_for_licensees\\n\\n=======================================================================\\n\\nCreative Commons Attribution-NonCommercial 4.0 International Public\\nLicense\\n\\nBy exercising the Licensed Rights (defined below), You accept and agree\\nto be bound by the terms and conditions of this Creative Commons\\nAttribution-NonCommercial 4.0 International Public License (\"Public\\nLicense\"). To the extent this Public License may be interpreted as a\\ncontract, You are granted the Licensed Rights in consideration of Your\\nacceptance of these terms and conditions, and the Licensor grants You\\nsuch rights in consideration of benefits the Licensor receives from\\nmaking the Licensed Material available under these terms and\\nconditions.\\n\\nSection 1 -- Definitions.\\n\\n  a. Adapted Material means material subject to Copyright and Similar\\n     Rights that is derived from or based upon the Licensed Material\\n     and in which the Licensed Material is translated, altered,\\n     arranged, transformed, or otherwise modified in a manner requiring\\n     permission under the Copyright and Similar Rights held by the\\n     Licensor. For purposes of this Public License, where the Licensed\\n     Material is a musical work, performance, or sound recording,\\n     Adapted Material is always produced where the Licensed Material is\\n     synched in timed relation with a moving image.\\n\\n  b. Adapter\\'s License means the license You apply to Your Copyright\\n     and Similar Rights in Your contributions to Adapted Material in\\n     accordance with the terms and conditions of this Public License.\\n\\n  c. Copyright and Similar Rights means copyright and/or similar rights\\n     closely related to copyright including, without limitation,\\n     performance, broadcast, sound recording, and Sui Generis Database\\n     Rights, without regard to how the rights are labeled or\\n     categorized. For purposes of this Public License, the rights\\n     specified in Section 2(b)(1)-(2) are not Copyright and Similar\\n     Rights.\\n  d. Effective Technological Measures means those measures that, in the\\n     absence of proper authority, may not be circumvented under laws\\n     fulfilling obligations under Article 11 of the WIPO Copyright\\n     Treaty adopted on December 20, 1996, and/or similar international\\n     agreements.\\n\\n  e. Exceptions and Limitations means fair use, fair dealing, and/or\\n     any other exception or limitation to Copyright and Similar Rights\\n     that applies to Your use of the Licensed Material.\\n\\n  f. Licensed Material means the artistic or literary work, database,\\n     or other material to which the Licensor applied this Public\\n     License.\\n\\n  g. Licensed Rights means the rights granted to You subject to the\\n     terms and conditions of this Public License, which are limited to\\n     all Copyright and Similar Rights that apply to Your use of the\\n     Licensed Material and that the Licensor has authority to license.\\n\\n  h. Licensor means the individual(s) or entity(ies) granting rights\\n     under this Public License.\\n\\n  i. NonCommercial means not primarily intended for or directed towards\\n     commercial advantage or monetary compensation. For purposes of\\n     this Public License, the exchange of the Licensed Material for\\n     other material subject to Copyright and Similar Rights by digital\\n     file-sharing or similar means is NonCommercial provided there is\\n     no payment of monetary compensation in connection with the\\n     exchange.\\n\\n  j. Share means to provide material to the public by any means or\\n     process that requires permission under the Licensed Rights, such\\n     as reproduction, public display, public performance, distribution,\\n     dissemination, communication, or importation, and to make material\\n     available to the public including in ways that members of the\\n     public may access the material from a place and at a time\\n     individually chosen by them.\\n\\n  k. Sui Generis Database Rights means rights other than copyright\\n     resulting from Directive 96/9/EC of the European Parliament and of\\n     the Council of 11 March 1996 on the legal protection of databases,\\n     as amended and/or succeeded, as well as other essentially\\n     equivalent rights anywhere in the world.\\n\\n  l. You means the individual or entity exercising the Licensed Rights\\n     under this Public License. Your has a corresponding meaning.\\n\\nSection 2 -- Scope.\\n\\n  a. License grant.\\n\\n       1. Subject to the terms and conditions of this Public License,\\n          the Licensor hereby grants You a worldwide, royalty-free,\\n          non-sublicensable, non-exclusive, irrevocable license to\\n          exercise the Licensed Rights in the Licensed Material to:\\n\\n            a. reproduce and Share the Licensed Material, in whole or\\n               in part, for NonCommercial purposes only; and\\n\\n            b. produce, reproduce, and Share Adapted Material for\\n               NonCommercial purposes only.\\n\\n       2. Exceptions and Limitations. For the avoidance of doubt, where\\n          Exceptions and Limitations apply to Your use, this Public\\n          License does not apply, and You do not need to comply with\\n          its terms and conditions.\\n\\n       3. Term. The term of this Public License is specified in Section\\n          6(a).\\n\\n       4. Media and formats; technical modifications allowed. The\\n          Licensor authorizes You to exercise the Licensed Rights in\\n          all media and formats whether now known or hereafter created,\\n          and to make technical modifications necessary to do so. The\\n          Licensor waives and/or agrees not to assert any right or\\n          authority to forbid You from making technical modifications\\n          necessary to exercise the Licensed Rights, including\\n          technical modifications necessary to circumvent Effective\\n          Technological Measures. For purposes of this Public License,\\n          simply making modifications authorized by this Section 2(a)\\n          (4) never produces Adapted Material.\\n\\n       5. Downstream recipients.\\n\\n            a. Offer from the Licensor -- Licensed Material. Every\\n               recipient of the Licensed Material automatically\\n               receives an offer from the Licensor to exercise the\\n               Licensed Rights under the terms and conditions of this\\n               Public License.\\n\\n            b. No downstream restrictions. You may not offer or impose\\n               any additional or different terms or conditions on, or\\n               apply any Effective Technological Measures to, the\\n               Licensed Material if doing so restricts exercise of the\\n               Licensed Rights by any recipient of the Licensed\\n               Material.\\n\\n       6. No endorsement. Nothing in this Public License constitutes or\\n          may be construed as permission to assert or imply that You\\n          are, or that Your use of the Licensed Material is, connected\\n          with, or sponsored, endorsed, or granted official status by,\\n          the Licensor or others designated to receive attribution as\\n          provided in Section 3(a)(1)(A)(i).\\n\\n  b. Other rights.\\n\\n       1. Moral rights, such as the right of integrity, are not\\n          licensed under this Public License, nor are publicity,\\n          privacy, and/or other similar personality rights; however, to\\n          the extent possible, the Licensor waives and/or agrees not to\\n          assert any such rights held by the Licensor to the limited\\n          extent necessary to allow You to exercise the Licensed\\n          Rights, but not otherwise.\\n\\n       2. Patent and trademark rights are not licensed under this\\n          Public License.\\n\\n       3. To the extent possible, the Licensor waives any right to\\n          collect royalties from You for the exercise of the Licensed\\n          Rights, whether directly or through a collecting society\\n          under any voluntary or waivable statutory or compulsory\\n          licensing scheme. In all other cases the Licensor expressly\\n          reserves any right to collect such royalties, including when\\n          the Licensed Material is used other than for NonCommercial\\n          purposes.\\n\\nSection 3 -- License Conditions.\\n\\nYour exercise of the Licensed Rights is expressly made subject to the\\nfollowing conditions.\\n\\n  a. Attribution.\\n\\n       1. If You Share the Licensed Material (including in modified\\n          form), You must:\\n\\n            a. retain the following if it is supplied by the Licensor\\n               with the Licensed Material:\\n\\n                 i. identification of the creator(s) of the Licensed\\n                    Material and any others designated to receive\\n                    attribution, in any reasonable manner requested by\\n                    the Licensor (including by pseudonym if\\n                    designated);\\n\\n                ii. a copyright notice;\\n\\n               iii. a notice that refers to this Public License;\\n\\n                iv. a notice that refers to the disclaimer of\\n                    warranties;\\n\\n                 v. a URI or hyperlink to the Licensed Material to the\\n                    extent reasonably practicable;\\n\\n            b. indicate if You modified the Licensed Material and\\n               retain an indication of any previous modifications; and\\n\\n            c. indicate the Licensed Material is licensed under this\\n               Public License, and include the text of, or the URI or\\n               hyperlink to, this Public License.\\n\\n       2. You may satisfy the conditions in Section 3(a)(1) in any\\n          reasonable manner based on the medium, means, and context in\\n          which You Share the Licensed Material. For example, it may be\\n          reasonable to satisfy the conditions by providing a URI or\\n          hyperlink to a resource that includes the required\\n          information.\\n\\n       3. If requested by the Licensor, You must remove any of the\\n          information required by Section 3(a)(1)(A) to the extent\\n          reasonably practicable.\\n\\n       4. If You Share Adapted Material You produce, the Adapter\\'s\\n          License You apply must not prevent recipients of the Adapted\\n          Material from complying with this Public License.\\n\\nSection 4 -- Sui Generis Database Rights.\\n\\nWhere the Licensed Rights include Sui Generis Database Rights that\\napply to Your use of the Licensed Material:\\n\\n  a. for the avoidance of doubt, Section 2(a)(1) grants You the right\\n     to extract, reuse, reproduce, and Share all or a substantial\\n     portion of the contents of the database for NonCommercial purposes\\n     only;\\n\\n  b. if You include all or a substantial portion of the database\\n     contents in a database in which You have Sui Generis Database\\n     Rights, then the database in which You have Sui Generis Database\\n     Rights (but not its individual contents) is Adapted Material; and\\n\\n  c. You must comply with the conditions in Section 3(a) if You Share\\n     all or a substantial portion of the contents of the database.\\n\\nFor the avoidance of doubt, this Section 4 supplements and does not\\nreplace Your obligations under this Public License where the Licensed\\nRights include other Copyright and Similar Rights.\\n\\nSection 5 -- Disclaimer of Warranties and Limitation of Liability.\\n\\n  a. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE\\n     EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS\\n     AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF\\n     ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,\\n     IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,\\n     WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR\\n     PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,\\n     ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT\\n     KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT\\n     ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\\n\\n  b. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE\\n     TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,\\n     NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,\\n     INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,\\n     COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR\\n     USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN\\n     ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR\\n     DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR\\n     IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\\n\\n  c. The disclaimer of warranties and limitation of liability provided\\n     above shall be interpreted in a manner that, to the extent\\n     possible, most closely approximates an absolute disclaimer and\\n     waiver of all liability.\\n\\nSection 6 -- Term and Termination.\\n\\n  a. This Public License applies for the term of the Copyright and\\n     Similar Rights licensed here. However, if You fail to comply with\\n     this Public License, then Your rights under this Public License\\n     terminate automatically.\\n\\n  b. Where Your right to use the Licensed Material has terminated under\\n     Section 6(a), it reinstates:\\n\\n       1. automatically as of the date the violation is cured, provided\\n          it is cured within 30 days of Your discovery of the\\n          violation; or\\n\\n       2. upon express reinstatement by the Licensor.\\n\\n     For the avoidance of doubt, this Section 6(b) does not affect any\\n     right the Licensor may have to seek remedies for Your violations\\n     of this Public License.\\n\\n  c. For the avoidance of doubt, the Licensor may also offer the\\n     Licensed Material under separate terms or conditions or stop\\n     distributing the Licensed Material at any time; however, doing so\\n     will not terminate this Public License.\\n\\n  d. Sections 1, 5, 6, 7, and 8 survive termination of this Public\\n     License.\\n\\nSection 7 -- Other Terms and Conditions.\\n\\n  a. The Licensor shall not be bound by any additional or different\\n     terms or conditions communicated by You unless expressly agreed.\\n\\n  b. Any arrangements, understandings, or agreements regarding the\\n     Licensed Material not stated herein are separate from and\\n     independent of the terms and conditions of this Public License.\\n\\nSection 8 -- Interpretation.\\n\\n  a. For the avoidance of doubt, this Public License does not, and\\n     shall not be interpreted to, reduce, limit, restrict, or impose\\n     conditions on any use of the Licensed Material that could lawfully\\n     be made without permission under this Public License.\\n\\n  b. To the extent possible, if any provision of this Public License is\\n     deemed unenforceable, it shall be automatically reformed to the\\n     minimum extent necessary to make it enforceable. If the provision\\n     cannot be reformed, it shall be severed from this Public License\\n     without affecting the enforceability of the remaining terms and\\n     conditions.\\n\\n  c. No term or condition of this Public License will be waived and no\\n     failure to comply consented to unless expressly agreed to by the\\n     Licensor.\\n\\n  d. Nothing in this Public License constitutes or may be interpreted\\n     as a limitation upon, or waiver of, any privileges and immunities\\n     that apply to the Licensor or You, including from the legal\\n     processes of any jurisdiction or authority.\\n\\n=======================================================================\\n\\nCreative Commons is not a party to its public\\nlicenses. Notwithstanding, Creative Commons may elect to apply one of\\nits public licenses to material it publishes and in those instances\\nwill be considered the \\xe2\\x80\\x9cLicensor.\\xe2\\x80\\x9d The text of the Creative Commons\\npublic licenses is dedicated to the public domain under the CC0 Public\\nDomain Dedication. Except for the limited purpose of indicating that\\nmaterial is shared under a Creative Commons public license or as\\notherwise permitted by the Creative Commons policies published at\\ncreativecommons.org/policies, Creative Commons does not authorize the\\nuse of the trademark \"Creative Commons\" or any other trademark or logo\\nof Creative Commons without its prior written consent including,\\nwithout limitation, in connection with any unauthorized modifications\\nto any of its public licenses or any other arrangements,\\nunderstandings, or agreements concerning use of licensed material. For\\nthe avoidance of doubt, this paragraph does not form part of the\\npublic licenses.\\n\\nCreative Commons may be contacted at creativecommons.org.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Interactive Tutorial",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ParlAI",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "facebookresearch",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/ParlAI/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v1.5.1\r\n\r\n## Project Releases\r\n\r\n[Hi, my name is Martha](https://parl.ai/projects/dialogue_bias/) - New reduced-bias dialogue models! (#3981)\r\n\r\n## Minor features\r\n\r\n* Allow the style classifier to save output probabilities (#4026)\r\n* Add gpu option to torchscript BART models (#3979)\r\n\r\n## Crowdsourcing\r\n\r\n* Upgrade to Mephisto 0.4.0 (#3982, #4043)\r\n* Save model chat data in the Mephisto database (#4005)\r\n* Add Last Turn Annotation Only option to turn annotations static task (#3436)\r\n* Crowdsourcing data compiler class for using Mephisto abstractions (#4029, #4034)\r\n* Force model chats starting with \"Hi!\" to use BST-style context (#4004)\r\n\r\n## Datasets\r\n\r\n* [LIGHT] Jericho World dataset (#3957)\r\n\r\n## Bugfixes\r\n\r\n* [RAG] Fix ReGReT Cuda Issue (#4022)\r\n* [BlenderBot2] Handle distributed (#4023)\r\n* [mutators] Prevent name collisions in mutators (#4006)\r\n* [crowdsourcing] Fix model chat frame height by (#4030)\r\n\r\n## Other\r\n\r\n* Various error message improvements (#3987, #4018, #4007)\r\n* Various typos and documentation clarifications (#4053, #4052, #4008, #4002, #4064)\r\n* Various project-specific small additions and mutators (#3997, #3996, #3999, #4000, #3966, #4062)\r\n\r\n## Developer changes\r\n\r\n* [Modular] Update Transformer Layer `__init__`s by @klshuster in #4061\r\n* Migrate to the `main` branch by @stephenroller (#3998, #4010)\r\n* Allow more subclassing of self-chat world (#3955)\r\n* Moving Wizard of Internet task to crowdsourcing/projects directory. by @mojtaba-komeili in #3978\r\n* Improve internal facebook compatibility (#3964, #3994, #4032, #3991)\r\n* Various dependency bumps (#3995, #4072, #4017, #4077)\r\n",
+        "dateCreated": "2021-10-12T19:28:49Z",
+        "datePublished": "2021-10-12T19:29:24Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.5.1",
+        "name": "v1.5.1",
+        "tag_name": "v1.5.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.5.1",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/51235538",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.5.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v1.5.0\r\n\r\n## Major Features\r\n\r\nModel Cards have now been added to ParlAI. We support [automatically generating](https://parl.ai/docs/tutorial_model_cards.html) cards for different models. See an [example of BlenderBot2's model card](https://github.com/facebookresearch/ParlAI/blob/master/parlai/zoo/blenderbot2/model_card.md). (#3857, #3865, #3899, #3884, #3915, #3965, #3860, #3863)\r\n\r\n## Minor Features\r\n\r\n- Add support for an extra final evaluation in training scripts with custom opts (#3883)\r\n- Add `--checkpoint-activations` to lower memory usage of training transformers (#3864)\r\n\r\n## Crowdsourcing\r\n\r\n- Open source the Wizard of Internet crowdsourcing tooling (#3924)\r\n- Open source the Personal Knowledge crowdsourcing tooling (#3945)\r\n- More customization for the [Static Turn Annotations] task.  (#3926)\r\n- More flexibility in model-chat analysis code (#3844, #3958, #3935)\r\n\r\n## Bug Fixes\r\n\r\n- [world logs] Fix a bug where dynamic batching didn't use episode boundaries in world logs (#3867)\r\n- [self chat] Fix the order of openers so output is deterministic (#3923)\r\n- [parser] Fix bug where parse_kwargs couldn't handle mutator args (#3900)\r\n- [parser] Fix bug where `nargs=+` wasn't working with `parse_kwargs` (#3930)\r\n- [teachers] Fixed an issue where some preprocessing was missing from `labels` field (#3874)\r\n- [blenderbot2] Fix a crash when not using internet search (#3950)\r\n- [regret] Fix a regression in Regret (#3934)\r\n- [rag] Fix a bug when receiving NaN scores\r\n\r\n# Teachers\r\n\r\n- Auxillary data added in the Wizard of Internet Task (#3897)\r\n\r\n# Documentation changes\r\n\r\n- Updates/improvements to some project documentations in Hallucination/RAG/etc (#3869, #3888, #3917, #3873)\r\n- Remove a false statement in chat services tutorial\r\n- Update a link to datasets in Contradiction (#3878)\r\n- Repo-wide spelling corrections (#3894, #3960)\r\n\r\n## Developer changes\r\n\r\n- Minor refactors (#3892)\r\n- CI fixes and improvements (#3954, #3837, #3889)\r\n- Small extensibilities to the torchscript functionality (#3851)\r\n- Enable self_chat to seed messages from tasks in parlai_internal (#3852)\r\n- Avoid exception in core/agents.py when arg is missing from dict (#3893)\r\n- Allow customization of the AcceptabilityChecker (#3846)\r\n",
+        "dateCreated": "2021-08-24T21:47:35Z",
+        "datePublished": "2021-08-25T13:23:32Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.5.0",
+        "name": "v1.5.0",
+        "tag_name": "v1.5.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.5.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/48428871",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.5.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "klshuster",
+        "body": "Includes a fix to make sure that BlenderBot2 can be used with a `pip` install (#3848)\r\n\r\nAlso includes a teacher for training a Wikipedia Page Title Generator from the Wizard of Wikipedia Dataset (#3845)",
+        "dateCreated": "2021-07-23T14:01:42Z",
+        "datePublished": "2021-07-23T14:14:36Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/1.4.1",
+        "name": "v1.4.1",
+        "tag_name": "1.4.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/1.4.1",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/46677252",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/1.4.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "klshuster",
+        "body": "# v1.4.0 Changelog\r\n\r\n## Major Features/Paper Releases\r\n\r\n### BlenderBot 2.0 Models, Code, Datasets\r\n\r\nThis release of ParlAI includes all the code, models, and datasets used to build [BlenderBot 2.0](https://parl.ai/projects/blenderbot2/) - please see the project page for more information, including how to access and use the models themselves (#3790, #3793, #3794, #3795, #3796, #3797, #3798, #3801, #3802, #3805, #3803, #3815, #3817)\r\n\r\n### Internet-Augmented Dialogue Generation\r\n\r\nBuild and release a crowd-sourced dataset of humans searching the internet and talking in depth about a vast array of topics; [search-engine-augmented dialogue models](https://parl.ai/projects/sea/) are trained on the dataset, and are shown to be more knowledgeable than their non-search-augmented counterparts. (#3792, #3800, #3814)\r\n\r\n### Multi-Session Chat\r\n\r\nBuild and release a dataset of [multi-session chats](https://parl.ai/projects/msc/) for the purpose of studying long-term open-domain conversation. Models trained on the dataset prove to perform better at recalling information from the distant past in the chats. (#3791, #3799, #3814)\r\n\r\n### Safety Benchmark Tests\r\n\r\nWith the release of [Anticipating Safety Issues in E2E Conversational AI: Framework and Tooling](https://arxiv.org/abs/2107.03451), ParlAI now supports running safety unit tests for conversational models. Check out [the project page](https://parl.ai/projects/safety_bench/) to see how to run the safety benchmarks. (#3767, #3768, #3769, #3784)\r\n\r\n### Convenience Functions for Agents\r\n\r\nWith a recent update to ParlAI's agent API, you can now bypass the act/observe loop for interacting with agents. (#3775)\r\n\r\n```python\r\nIn [1]: from parlai.core.agents import create_agent\r\n\r\nIn [2]: from parlai.core.params import ParlaiParser\r\n\r\nIn [3]: opt = ParlaiParser(True, True).parse_args(['--model_file', 'zoo:blender/blender_90M/model'])\r\n\r\nIn [4]: agent = create_agent(opt)\r\n\r\nIn [5]: agent.respond(\"Hi! How's it going?\")\r\nOut[5]: \"it ' s going well . i ' m getting ready to go to work . how about you ?\"\r\n```\r\n\r\n## Minor Features\r\n\\[Metrics\\] AUC Metrics added to `parlai eval_model` (#3751)\r\n\r\n## Bug Fixes\r\n\\[Crowdsourcing\\] Crowdsourcing Fixes concerning Left Pane Text and Model Chat (#3773, #3780, #3789, #3831)\r\n\\[RAG\\] Fix some issues with RAG/FiD agents (#3787, #3818, #3834, #3833, #3836)\r\nFix JSON serialization in `interactive_web.py` script (#3821)\r\nFix CI test issues (#3825, #3823)\r\nMisc. README typos (#3807, #3839, #3841)\r\n\r\n## Developer Changes\r\nStripping before processing Conversations to allow leniency (#3772)\r\n\\[ACUTE-Eval\\] Dev improvements to running ACUTE-Eval (#3781, #3782, #3783)\r\nAllow self-chat in nested folders (#3785)\r\nAllow opt presets from `parlai_internal` folders (#3819)",
+        "dateCreated": "2021-07-22T18:42:10Z",
+        "datePublished": "2021-07-22T19:19:33Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/1.4.0",
+        "name": "v1.4.0",
+        "tag_name": "1.4.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/1.4.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/46633042",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/1.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v1.3.0 Changelog\r\n\r\n## Major Features\r\n\r\n### Fully Sharded Data Parallel\r\n\r\nImplementation of DeepSpeed/[FairScale](https://fairscale.readthedocs.io/en/latest/)'s Zero2 sharding. Improves training speed and reduces memory usage over vanilla DistributedDataParallel. Switch to the new mode with `--ddp-backend zero2` to see free improvements in your training! (#3740)\r\n\r\n### Swappable Transformer Components\r\n\r\nWe've added support for overriding [internal components within Transformers](https://parl.ai/docs/tutorial_swap_components.html). It is now easy to swap only an attention module, or customize your layers, without having to fully override all classes. (#3567, #3703, #3708, #3715, #3638)\r\n\r\n### ChunkTeacher no longer requires num_examples/num_episodes to be correct\r\n\r\nFor as long as we've had ChunkTeacher, the value of `num_examples/num_episodes` must be exactly correct, or your training would hang. Furthermore, that calculation would need to be done outside of ParlAI. We've relaxed this restriction: these methods can now return arbitrary values, and you will correctly iterate through all of your data. However, using the wrong value of `num_examples` can cause the \"epoch\" counter (used in `parlai train`) to be wrong relative to your dataset. (#3681, #3745)\r\n\r\n### Eliminate dummy batches and init_cuda_buffer\r\n\r\nYou are no longer required to implement dummy batches in your Generator agents, when using custom batch formats. Additionally, you will no longer see a dummy batch as the first batch when debugging. Instead, the first batch your agent sees will be reserved as the future dummy batch. (#3732, #3744)\r\n\r\n## Paper Releases\r\n\r\n### Reducing Hallucination\r\n\r\nExploratory architectures that add [retrieval mechanisms to dialogue models](https://parl.ai/projects/hallucination/), reducing hallucination while maintaining conversational ability. (#3611, #3657, #3693, #3688, #3668)\r\n\r\n### Hash Layers & Ladder Transformers\r\n\r\n[More Parameters or More Compute?](https://parl.ai/projects/params_vs_compute) Answer: Both! Two new methods that explore this question: Hash Layers for more parameters, and Staircase Attention for more power per parameter. (#3697, #3699, #3700, #3746, #3747)\r\n\r\n## Minor Features\r\n\r\n- [TGA] Substantial speedups during generation on GPUs (#3730, #3729, #3669)\r\n- [Datasets] Add GLUE teachers, and support for HuggingFace datasets (#3570, #3624)\r\n- [Datasets] [Safety] Release the Non Adversarial Data (#3684)\r\n- [TA] Support temp history via special field in observation (#3617)\r\n- [TGA] Allow setting prefix tokens (#3760)\r\n- [TCA] Classifier on generator for TGA (#3716)\r\n- [ChunkTeacher] Remove exception for specifying non-streaming data (#3653)\r\n- [Transformer] Better initiaization for segment embeddings (#3680)\r\n- [Message] Add a new `json_safe_payload` method for serialization (#3643, #3726, #3686)\r\n- [JIT] Support special tokens in torchscript module. (#3644)\r\n- [JIT] Fix a parsing error with `parlai torchscript` in Python 3.8 (#3641)\r\n- [ACUTE] Support randomize_conversations (#3636, #3642)\r\n\r\n## Bugfixes\r\n\r\n- [train] Fix bugs with loading validation impatience. (#3713)\r\n- [train] Fix LR scheduler cooldown (#3719)\r\n- [train] Dynamic Batching doesn't choke with really small datasets (#3721)\r\n- [Logging] Fix a bug with world logging and multitasking (#3718)\r\n- [Mutators] Ensure mutations do not persist across epochs (#3649)\r\n- [BART] Do not add start/end tokens multiple times (#3714)\r\n- [TCA] weighted_f1 no longer assumes binary classification (#3728)\r\n- [Safety] Fix a Static Task bug and Safety README (#3612)\r\n- [logging] Fix an issue where `--loglevel debug` was ignored (#3658)\r\n- [Tensorboard] Fix an exception in some versions of Tensorboard (#3637)\r\n- [vacuum] Add support for PathManager in vacuum (#3635)\r\n- [Crowdsourcing] Slightly improve the analysis script to make it more robust (#3683, #3629) \r\n- Various locations where the change to `is_padding` caused issues (#3704, #3634, #3674)\r\n- Various typos/lint (#3621, #3622, #3646)\r\n\r\n## Developer changes\r\n\r\n- Helper functions for building deterministic data splits (#3676)\r\n- Teacher URL updates (#3749, #3627, #3678)\r\n- CI bugfixes & version bumps (#3754, #3724, #3672, #3652, #3710, #3628, #3452, #3720)\r\n- Documentation updates (#3748, #3690, #3742, #3671)\r\n- Mutators and Scripts support for parlai_internal (#3623, #3625)\r\n- [Crowdsourcing] Small refactor in Model-Chat\r\n\r\n",
+        "dateCreated": "2021-07-07T18:57:36Z",
+        "datePublished": "2021-07-07T19:56:35Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.3.0",
+        "name": "v1.3.0",
+        "tag_name": "v1.3.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.3.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/45863323",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "This Saturday marks the 4 year anniversary since the initial release of ParlAI. I'd like to offer my sincere gratitude to our users, our contributors, and all of the core development team. ParlAI wouldn't be what it is without all of you. -@stephenroller\r\n\r\n## Major new features\r\n\r\n**Background Preprocessing**\r\n\r\nImprove your training speeds by 1.25x-5.0x by switching from `--num-workers 0` to `--num-workers N`. See our [Speeding up training](https://parl.ai/docs/tutorial_fast.html) docs for details. (#3527, #3586, #3575, #3533, #3389)\r\n\r\n**(Beta) Support for torch.jit**\r\nDeploy faster models by exporting models with TorchScript. Currently limited to BART models only. (#3459)\r\n\r\n**Support for T5**\r\nWe now have agents for Google's T5 models (#3519)\r\n\r\n**Opt Presets**\r\n[Opt presets](https://parl.ai/docs/opt_presets.html). Easily use prepackaged opt files as shorthand for long command line arguments (#3564)\r\n\r\n**Log/validate/stop based on number of steps**\r\nGet up to a 10% speedup of distributed training by switching from `-vtim` or `-veps` to `-vstep` (#3379, #3555)\r\n\r\n## Backwards-incompatible changes\r\n\r\n- DictionaryAgent.text2vec now requires input to be a string (#3472)\r\n- A number of older projects have been archived: DrQA (#3559), Controllable Dialogue (#3557), and Self-Feeding Chatbot (#3557).\r\n\r\n## Minor improvements\r\n\r\n- Performance speedup in generation using Transformer Generators (#3550)\r\n- Improvements to the Transformer API, making Transformer models more easily extensible. More to come soon. (#3486, #3545, #3466, #3501)\r\n- Various performance improvements when loading ParlAI or performing some activities (#3544, #3482)\r\n- Metrics:\r\n\t- New truncation metrics show you how much context/label you're losing (#3458, #3508)\r\n\t- Additional metrics in the Wizard of Wikipedia teacher (#3566, #3592, #3503)\r\n\t- New token_em metric, an equivalent to `accuracy` with `--skip-generation true` (#3497)\r\n- Self-chat can now use seed messages (#3580)\r\n- New \"normalized\" ConvAI2 teachers for the non-standard variants (#3509)\r\n- Update FusedAdam support to use FairScale (#3522)\r\n- Add --wandb-entity flag to the logger (#3562)\r\n- Tensorboard now provides nicer names of metrics (#3534)\r\n\r\n## Bugfixes\r\n\r\n- [core] Fix a bug when resuming with the cosine LR scheduler after preemption (#3599)\r\n- [core] Improve robustness to serialization of Observations (#3591)\r\n- [core] ParlaiDialogTeacher now parses the `rewards` field as a number (#3517)\r\n- [core] Fix recently introduced ChunkTeacher bugs (#3549, #3542, #3543)\r\n- [core] Minor FP16 fixes when converting old checkpoints (#3514)\r\n- [core] Fix annoying ambiguity issues with commandline parsing in Python 3.8 (#3598)\r\n- [core] Fix a rare situation in case a dictionary contained tokens with leading whitespace (#3613)\r\n- [mutators] Fix a bug with the flatten mutator providing the wrong history (#3578, #3584)\r\n- [metrics] Fix a bug with computation of fairseq metrics (#3518)\r\n- [task] Fix a bug with Wizard of Wikipedia teacher causing some data to be omitted (#3585)\r\n- [task] Fix a crash in Wizard of Wikipedia end2end agent when given zero documents (#3602)\r\n- [task] Update a dead dataset to a new link (#3520)\r\n- [task] Fix an issue with CCPE (#3487)\r\n- [tga] Fix a case where TGA used as a ranking model could crash (#3541)\r\n- [agent] Fix a crash in BertDictionaryAgent (#3560)\r\n- [other] Various rare issues (#3505) and quality improvements (#3496)\r\n\r\n## Crowdsourcing improvements\r\n\r\n- Add new option to avoid randomizing pairs in ACUTE-Eval (#3528)\r\n- ACUTE-Eval provides additional warnings when options are not set to recommended values (#3536, #3524)\r\n\r\n## New Datasets\r\n\r\n- MetaLWoZ (#3583)\r\n- CMU_DoG (#3593, #3615)\r\n\r\n## Doc improvements\r\n\r\n- New tutorial: How to write a PR contributing (moving to a fork) tutorial (#3490)\r\n- New reference manual of [standard ParlAI metrics](https://parl.ai/docs/tutorial_metrics.html#list-of-metrics) (#3498)\r\n- Fix a bug keeping some tasks from being listed in our docs (#3495)\r\n- Various minor doc changes (#3513, #3561, #3596)\r\n\r\n## Developer improvements\r\n\r\n- Update to pytorch 1.8. No changes necessary. (#3607)\r\n- Various reliability improvements and speed ups to our CI and tests (#3603, #3597, #3604, #3606, #3605, #3587, #3588, #3590, #3539, #3535, #3526, #3521)\r\n- Various dependency bumps (#3553, #3537, #3515)\r\n- Switched logging.warn to logging.warning (#3569)\r\n- TorchAgent.history prettier debug printing (#3510)\r\n- Small other improvements (#3506)\r\n",
+        "dateCreated": "2021-04-23T13:39:27Z",
+        "datePublished": "2021-04-23T13:45:44Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.2.0",
+        "name": "v1.2.0",
+        "tag_name": "v1.2.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.2.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/41904649",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.2.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# Bug fix release\r\n\r\nFix a bug introduced in v1.1.0 caused by the removal of APEX, which increased the numerical instability of training with fp16. See #3532 for details.",
+        "dateCreated": "2021-03-17T18:32:51Z",
+        "datePublished": "2021-03-17T18:35:13Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.1.1",
+        "name": "v1.1.1",
+        "tag_name": "v1.1.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.1.1",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/39960904",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Breaking changes\r\n- Removed dependence on APEX. `--fp16-impl safe` is the new standard (#3469)\r\n- Change DialoGPT default to medium as that's the best results and most common setup (#3401)\r\n\r\nMajor new features\r\n- Mutators are a new way to perform transformations on arbitrary datasets (#3448)\r\n- Support for WandB (#3417)\r\n- `display_model` now displays teacher-metrics, and world loggers store them (#3388, #3419)\r\n\r\nMinor new features\r\n- Make convenience script for dumping out chat to conversations format (#3354)\r\n- Allow a variable number of transformer heads in distillation, and improved loss normalization (#3424, #3447, #3430)\r\n- Better error messages when incorrectly providing a model zoo file (#3445)\r\n- Add --no-backup option to vacuum. (#3431)\r\n- Release BST human annotations (#3405)\r\n\r\nCrowdsourcing changes\r\n- Abstract class for compiling annotation results (#3422, #3423, #3464)\r\n- Improvements to output format for some tasks (#3400, #3425)\r\n- Configuration option for setting soft blocks (#3435)\r\n\r\nBug fixes\r\n- [security] RCE fixed in chat services (#3402, #3429)\r\n- Speedups when using conversation openers in self-chat (#3461)\r\n- Speedups in metrics accumulation (#3474)\r\n- Fix an error bounds error when manually applying vec2txt with `--dict-tokenizer bytelevelbpe` (#3437)\r\n- Add pathmanager support to BERT agent (#3439)\r\n- Fixes to Natural Questions (#3440, #3438)\r\n- Remove a warning in `--fp16-impl mem_efficient` (#3443)\r\n- Fix an issue with windows compatibility (#3428)\r\n- Update data urls for Taskmaster-1 (`-t taskmaster`) (#3475)\r\n- Fix a bug with terminal chat where the socket would close early (#3457)\r\n\r\nDeveloper features\r\n- New abstract method for ranking candidates in TorchGeneratorAgent (#3455)\r\n- Improved type annotations and code cleanup (#3413, #3462, #3420)\r\n- Various documentation immprovements (#3398, #3399, #3349, #3384, #3385, #3427, #3446, #3441)\r\n- Test fixes (#3442, #3467)\r\n",
+        "dateCreated": "2021-03-01T18:31:22Z",
+        "datePublished": "2021-03-01T18:32:02Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.1.0",
+        "name": "v1.1.0",
+        "tag_name": "v1.1.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.1.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/39071320",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "This marks a major release for ParlAI worthy of celebration. Thank you to the team, our numerous external contributors, and all of our users.\r\n\r\n## Major changes\r\n\r\n### MTurk is dead, long live Crowdsourcing\r\n\r\nAs the primary impetus for the release of v1.0.0, we have officially removed `parlai.mturk` from our repo, fully migrating to the newer, [Mephisto](https://github.com/facebookresearch/Mephisto)-based `parlai.crowdsourcing`. If you have any questions about upgrading, please make sure to [check the new tutorial](https://parl.ai/docs/tutorial_crowdsourcing.html) and feel free to ask questions in our new [Discussions forum](https://github.com/facebookresearch/ParlAI/discussions)\r\n\r\n### New discussions forum\r\n\r\nWe've enabled [GitHub Discussions](https://github.com/facebookresearch/ParlAI/discussions) as a new place for individuals to ask more long-lived questions. We still encourage using issues for bug reports, but many \"How do I...?\" questions are better for Discussions now.\r\n\r\n### Distilled models\r\n\r\nWe have released several distilled BlenderBot models (#3313, #3314), as well as code for distilling your own models. See [project page](https://parl.ai/projects/anti_scaling/).\r\n\r\n### DECODE model releases\r\n\r\nNew project on addressing contradictions in dialogue models (#3324, #3325, #3327, #3334, #3309). See [project page](https://parl.ai/projects/contradiction/) for more information.\r\n\r\n## Backwards incompatible changes\r\n\r\n* `parlai.mturk` has been removed in favor of `parlai.crowdsourcing` (#3362, #3371)\r\n* The API for `add_cmdline_args` has changed. Please see the PR for information on upgrading. This enables things like defaults that depend on other values, or arguments that depend on other arguments. (#3328)\r\n* Improvements to world logger arguments (#3380)\r\n\r\n## New features in core\r\n\r\n* New distinct metrics (including intra-distinct and inter-distinct). (#3347)\r\n* 40% Speedups in `--model-parallel true` generations and training (#3326)\r\n* Updated README, autodoc descriptions, PR templates (#3359, #3342, #3345, #3322))\r\n* [developer] Many more task regression tests (#3240)\r\n\r\n## New features in crowdsourcing\r\n\r\n* General improvements to ACUTE-Eval implementation, docs, and introduction of analysis framework (#3374, #3333, #3344, #3305, #3323)\r\n* Conversion of turn annotations to Mephisto (#3262, #3356)\r\n* Mephisto QA data collection (#3318, #3330)\r\n* Mephisto image-chat task (#3320)\r\n* Documentation improvements (#3319, #3373)\r\n* Fixing flaky tests (#3363, #3372, #3321, #3355)\r\n\r\n## Smaller bugfixes\r\n\r\n* Allow differing arguments for  dynamic batching in eval/train (#3382)\r\n* fix: deprecated argument when calling transformers>4.0.0 (#3393)\r\n* Small bugs with crowdsourcing (#3346, #3386, #3387)\r\n* Fix a misparse of `-o` (#3347)\r\n* Fix bert models in distributed. (#3351)\r\n* Suppress PermissionErrors in windows deletions. (#3340)\r\n* Fix for Interactive Web with TF-IDF models (#3381)\r\n* Fix a small bug in Wizard of Wikipedia task (#3100)\r\n* Fix minor idx not-existing issue in world_logging (#3317)\r\n",
+        "dateCreated": "2021-01-19T19:06:09Z",
+        "datePublished": "2021-01-19T19:07:24Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v1.0.0",
+        "name": "v1.0.0",
+        "tag_name": "v1.0.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v1.0.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/36617515",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v1.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Backwards compatibility breakages:\r\n- TorchClassifierAgent changed use_reply default from 'label' to 'none' (#3128) \r\n- [BERT] Deprecate Adam with Decay (#3235)\r\n\r\nMajor features\r\n- [safety] Open source Sensitive Topics classifier and data (#3253, #3259, #3260, #3258, #3230, #3227, #3252)\r\n- Support for model distillation (#3274)\r\n- [docs] Link to request Multi-Modal BlenderBot weights (#3281)\r\n\r\nMinor features\r\n- DialogTeacher provides verbose warning if opt['datafile'] is not set (#3140)\r\n- [bpe] Support BPE dropout (#3232)\r\n- Support special tokens in non-HF BPE dictionaries. (#3213)\r\n- Unify verbose & display_verbose, enable verbose during interactive (#3205, #3248)\r\n- BART Supports incremental decoding (#3231)\r\n- Use more modern metrics reporting with data_stats. (#2854)\r\n- Ease-of-use improvements to wrapper teacher (#3247)\r\n- Add classifier for style-controlled generation (#2829)\r\n- Add support for frozen encoders (only train head) in TorchClassifierAgent (#3215)\r\n\r\nMephisto Migrations & Upgrades\r\n- [CrowdSourcing] Turn annotation edits (#3234)\r\n- Fast ACUTE in Mephisto (#3297)\r\n- Mephisto API upgrades (#3275, #3285)\r\n- Remove two old MTurk tasks (#3225)\r\n- Port static turn annotations to Hydra (#3149)\r\n- Add command for viewing all Hydra parameters (#3210)\r\n- Analysis script for static turn annotations (#3263)\r\n- Make the log rate an adjustable parameter (#3189)\r\n\r\nBug Fixes:\r\n- Fix argparse issues in python 3.8 (#3284)\r\n- Torch 1.8 Compatibility (#3228)\r\n- Fix dialogpt dual usage of END_IDX (#3256), broken by adding support by adding batchsize > 1\r\n- Fix minor bugs with GPT2 (#3261, #3207, #3208)\r\n- Fix an issue where ChunkTeacher would sometimes repeat examples (#3244, #3301)\r\n- make dir at start of dict.save (#3250)\r\n- Fix a bug in distributed sync when metrics dicts become large (#3291)\r\n- [BART] Some smaller bug fixes (#3272, #3236)\r\n- Data parallel is now false in Offensive Language Classifier (#3212)\r\n- Fix a bug with LR scheduler loading from disk in TCA (#3229)\r\n\r\nDeveloper changes:\r\n- Task regression testing (#3223)\r\n- Stabilized distributed gpt2 test (#3219)\r\n- CI for Mephisto tasks (#3206, #3238, #3246, #3254)\r\n- CircleCI refactor (#3245)\r\n- Documentation improvements (#3226, #3251)\r\n- Deprecated some dead code (#3257)\r\n- Various CI fixes (#3310, #3264)\r\n",
+        "dateCreated": "2020-12-16T19:25:52Z",
+        "datePublished": "2020-12-16T22:09:22Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.10.0",
+        "name": "v0.10.0",
+        "tag_name": "v0.10.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.10.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/35384089",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.10.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v0.9.4 release\r\n\r\n## Known issues\r\n- Short options like `-m` and `-t` do fail in Python 3.8. Use `--model` and `--task`\r\n\r\n## New project/paper releases\r\n- Safety recipes project (#3190, #3199)\r\n- Gender bias project (#3171, #3146, #3131))\r\n- Multimodal Blender Bot (#3152, #3151, #3144)\r\n- LIGHT Quests project (#3153, #3156)\r\n\r\n## Major MTurk changes\r\n- [Removal] Deleting 2/3 of MTurk (#3161)\r\n- [Upgrade] Porting ACUTE-Eval task to Hydra (#3103)\r\n- [Task] Adding option for file with annotation indices per conversation and other features to turn annotations static (#3154, #3142)\r\n- [Docs] AcceptabilityChecker doc (#3124)\r\n\r\n## New Features\r\n- [ParlAI] Adding tensorboard_logdir argument to TensorboardLogger. (#3184)\r\n- [ParlAI] [TGA] Return text for all beams (#3123, #3179)\r\n- [ParlAI] Using the parlai color (#3137)\r\n- [ParlAI] Add a --version flag to the parlai command #3163 (#3164)\r\n- [Task] Improvements to Taskmaster-2 (#3135, #3134, #3129)\r\n- [Task] Flag to enable polarity categories in ImageChat (#3132)\r\n- [Model] Allow Polyencoder to resize token embs (#3194)\r\n\r\n## Bug Fixes\r\n- [Model] Fix GPT-2 generation when using batchsize >1\r\n- [ParlAI] Show subcommand help error messages on parse error in supercommand. (#3196)\r\n- [ParlAI] Fixes to --init-model options and --init-opt.  (#3162, #3112)\r\n- [ParlAI] Update requests version (#3155)\r\n- [HuggingFace/GPT2] Check directory depending on size param for gpt2 files (#3158)\r\n- [Docs] Correct swapped README links (#3166)\r\n- [Task] ConvAI2: Bug fix in convai2:normalized NormalizedTeacher (#3168)\r\n- [Task] COCO: Make sure folder is always created when unzipping COCO (#3143)\r\n\r\n## Developer notes & Tests\r\n- [Tests] New/fixed tests (#3167, #3117, #3114, #3082)\r\n- [Feature] Add ability for Metrics to add metrics from another Metrics object (#3145)\r\n- [Docs] Comments in AbstractWrapperTeacher.act() (#3160)\r\n- [Docs] Documentation improvements to poly-encoder (#3159)\r\n- [Quality] distributed_eval now mimics distributed_train (#3157)\r\n- [Quality] Add \"fb\" option to autoformat script for `parlai_fb` (#3165)\r\n\r\n",
+        "dateCreated": "2020-10-16T17:58:35Z",
+        "datePublished": "2020-10-16T18:05:43Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.9.4",
+        "name": "v0.9.4",
+        "tag_name": "v0.9.4",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.9.4",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/32685530",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.9.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Known issues\r\n- Short options like `-m` and `-t` do fail in Python 3.8. Use `--model` and `--task`\r\n\r\nBreaking Changes\r\n- A number of old MTurk tasks have been archived and removed from the code (#3085)\r\n\r\nNew Features\r\n- [image] Detectron feature extraction (#3083)\r\n- [data] Natural questions (#3070)\r\n- [data] TaskMaster-2 (#2678)\r\n- [data] New versions of multiwoz (#3072)\r\n- [distributed] Allow non-tcp based distributed setup (#3095)\r\n- [core] Move torch.load/torch.save to PathManager. (#3094, #3077)\r\n- [mturk] New task on static turn annotations (#3053)\r\n- [mturk] New features in human+model annotation (#3006)\r\n- [core] TorchClassifierAgent now prints its number of prameters (#3086)\r\n\r\nDoc Changes:\r\n- New Worlds tutorial (#3049)\r\n- Tutorial on using `-t jsonfile` (#3061)\r\n- Better help message for --init-model (#3090)\r\n- Additions to FAQ (#3073)\r\n- Updated model zoo descriptions for BlenderBot (#3096)\r\n\r\nBug Fixes\r\n- Distributed evaluation now writes to world logs earlier (#3122)\r\n- An argument was updated from store_true to bool (#3113)\r\n- Self-chat now fails loudly with unexpected batchsize (#3081)\r\n- Update drqa default tokenizer away from removed (#3069)\r\n- Using wizard of wikipedia in interactive mode downloads data (#3079)\r\n\r\nDeveloper notes:\r\n- New pre-commit git-secrets (#3106)\r\n- Code coverage improvements (#3110, #3091)\r\n- More reliable tests. (#3108, #3097, #3055)\r\n- Mephisto task dependencies have been updates due to security bugs (#3111, #3101, #3104)\r\n- MTurk config folders are exempt from __init__.py requirements (#3105)\r\n",
+        "dateCreated": "2020-09-28T14:43:43Z",
+        "datePublished": "2020-09-28T14:44:44Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.9.3",
+        "name": "v0.9.3",
+        "tag_name": "v0.9.3",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.9.3",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/31890353",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.9.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v0.9.2 release notes\r\n\r\nBreaking changes:\r\n- Fix no-op mask fill in some of the the transformer/ranker models (#3068). We believe this to be fine, but it *may* change the performance of some ranking models. If you are training a transformer/ranker or polyencoder model and you notice your model no longer gets the same performance, please file an issue on GitHub.\r\n\r\nBugfixes:\r\n- Fix a bug where using tensorboard in training caused a crash (#3067)\r\n- Fix a bug where BART failed to load from checkpoint properly (#3060)\r\n- Fix an issue where some arguments could not be overridden in BART (#3065)\r\n\r\nOther:\r\n- fromfile now emits a warning about using valid/test (#3063)",
+        "dateCreated": "2020-09-10T17:17:03Z",
+        "datePublished": "2020-09-10T17:22:25Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.9.2",
+        "name": "v0.9.2",
+        "tag_name": "v0.9.2",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.9.2",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/31073807",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.9.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# Version 0.9.1 Changelog:\r\n\r\nParlAI now supports pytorch 1.6.\r\n\r\nBreaking changes:\r\n- Change the arguments for JsonFile teacher, and fix some bugs (#3054)\r\n- ParlAI now expects HuggingFace tokenizers >=0.8.0 (#2967)\r\n\r\n\r\nNew features/Improvements:\r\n- Release of LIGHT-WILD project (#2992)\r\n- HRED has now been added as a standard model (#2989)\r\n- DialoGPT has been added as a standard model (#3007)\r\n- Allow colored logging in jupyter notebooks. (#3024)\r\n- [Squad2] Add option to change label for impossible answers (#3020)\r\n- ChunkTeacher has support to prevent auto enqueuing (#2993)\r\n- Add support for PathManager. (#3011)\r\n- DistilGPT2 has been added as an option of GPT2 model (#2997)\r\n- tfidf_retriever now reports doc ids (#3008)\r\n\r\n\r\n**Lots of new/updated documentation**\r\n- Custom metrics tutorial (#2975)\r\n- Chat Services tutorial clarification (#3048)\r\n- Release of Mephisto ACUTE-Evals (#3002)\r\n- Writing custom scripts and integration with `parlai` command (#3046)\r\n- Writing tests for ParlAI (#3044)\r\n- Contributor guide (#3047)\r\n- Mark deprecation of ParlAI MTurk for Mephisto (#2988)\r\n- Updates to docs on how to build docs (#3041)\r\n- Update Link and Commands Display format (#2952)\r\n- Small modifications (#3036, #2994, #3031, #2916)\r\n\r\n\r\n\r\nBugfixes:\r\n- Upgrade to pytorch 1.6 (#3022)\r\n- Linear/Cosine LR schedulers don't crash in distributed (#3000)\r\n- Fix unexpected crashes in convo_render (#3052)\r\n- Context block segfault fix (#3019)\r\n- Fix crash in loading from checkpoint in Cosine/Linear LR schedulers (#3025)\r\n- Upgrade schedulers to be Pytorch 1.6 friendly (#3025)\r\n- Fix bug where \"restart conversation\" didn't work in chat_services browser (#3050)\r\n- Faster amazon QA teacher (#2851)\r\n- Fix crashes to Reward Unlikelihood agent (#3034)\r\n- Fix a misalignment in BART agent between generation and training (#3021)\r\n- Prevent mixing model parallel and multiprocessing. (#2964)\r\n- [ACUTE][Mephisto] Fix extend that should append (#3029)\r\n- Adding option to load pretrained model from directory for gpt2 (#3027)\r\n- Fix an obscure crash with dict_file and GPT2 (#3038)\r\n\r\n\r\nDeveloper:\r\n- Improve coverage of some base agents (#3026)\r\n- CircleCI now produces a build of website as an artifact (#3035)\r\n- Rework sphinx docs and upgrade docs to MarkDown (#2972, #2999, #3003)\r\n- Minor refactor of transformer decoder forward (#3009)",
+        "dateCreated": "2020-09-08T17:39:24Z",
+        "datePublished": "2020-09-08T17:44:36Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.9.1",
+        "name": "v0.9.1",
+        "tag_name": "v0.9.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.9.1",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/30925986",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.9.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "# v0.9.0 ChangeLog\r\n\r\n## Breaking Changes\r\n- Removed support for HogWild and ExecutableWorld (#2919)\r\n- Archived a number of older projects (Mastering the dungeon, TalkTheWalk, Memnn_feed) (#2919)\r\n\r\n## New Features\r\n- [Dynamic Batching] Add world logging capability (#2941)\r\n- [Torch Generator Agent] Option to block full context (#2928)\r\n- [Safety] can supply custom offensive language file (#2968)\r\n- [Safety] Add new model file argument to safety classifiers (#2955)\r\n- Script for comparing two different opts (#2932)\r\n- [Image S2S] Standardize Image Seq2Seq Image Processing (#2911)\r\n\r\n## Bug fixes\r\n- [Chunk teacher] Bug with distributed evaluation (#2935)\r\n- Add encoding to \"with open\"s in teachers.py (#2946)\r\n- Fix an issue where `parlai` suppercommand wasn't handling set_params appropriately (#2956)\r\n- Fix a bug where Git was trying to be called regard (#2961)\r\n- Project specific: Personality Captions interactive mode fix (#2963)\r\n- Project specific: fix openers loading opt (#2965)\r\n- Fix underscore opt not being handled by parlai supercommand (#2938)\r\n- [Style] Add style-controlled generation agent (#2913)\r\n- Add return in report of wrapper agents (#2907)\r\n\r\n## Doc updates\r\n- Fixed a mistake in documentation for creating tasks based on ParlAIDialogTeacher. (#2973)\r\n- Updated link for LICENSE file (#2970)\r\n- Added pip installation guide to Readme.md (#2959)\r\n- Mention colab tutorial in our quickstart tutorial (#2936)\r\n\r\n## Other\r\n- Tweak colors of logs. (#2940)\r\n- Add printing of opts into scripts. (#2933)\r\n- [Dodeca] Split Dodeca tar file (#2934)\r\n- [BART/TGA] BART and TGA API Updates (#2840)\r\n- Show all stdout on GPU tests (#2929)",
+        "dateCreated": "2020-08-18T14:23:14Z",
+        "datePublished": "2020-08-18T16:11:14Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.9.0",
+        "name": "v0.9.0",
+        "tag_name": "v0.9.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.9.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/29825452",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.9.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Tying off a \"pieces of 8\" release, with an arbitrary version number to switch to semantic versioning.\r\n\r\nNotable additions:\r\n- Fix a bug in distributed launching (#2850)\r\n- Add support for reversed history in TorchAgent (`--history-reversed true`), which reverses `text_vec`. (#2786, #2888 )\r\n- A new parlai super command, with a script registry. This replaces all the usage of \"examples/train_model.py\" etc. (#2859, #2845, #2860, #2887, #2889)\r\n- Some improvements to model parallelization (#2839)\r\n- Add some timing metrics, including `tps` (tokens per second), etc. (#2878)\r\n- Self-chat can set up two models talking to each other with different options (#2803)\r\n- An mturk task with per-turn annotations (#2877, #2886)\r\n- An abstract class for writing \"wrapper\" teachers, which contain some transformation of data (#2842)\r\n- Support writing to a log in an interactive script (#2881)\r\n\r\nBug fixes:\r\n- Fix a type error in valid_step (#2890)\r\n- Improve the output when listing differences between an init model and specified options (#2880)\r\n- Upgrade TGA to be compatible with pytorch 1.6 (#2902)\r\n- Fix a bug in `seq2seq` that broke with pytorch 1.6 (#2910)\r\n\r\nBreaking changes:\r\n- Switch `--load-from-checkpoint` to `True` by default in `train_model`\r\n- Upgrade dependency to pillow 7.2.0 for a security reason (#2896)\r\n- Switch to using a suffix on the model file, instead of a `NamedTemporaryFile`, for atomic save (#2898)\r\n- Removed some old deprecated pytorch data teacher text (#2883)",
+        "dateCreated": "2020-08-04T03:46:38Z",
+        "datePublished": "2020-08-04T03:57:33Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.8.0",
+        "name": "v0.8.0",
+        "tag_name": "v0.8.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.8.0",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/29255139",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.8.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Notable additions since 2020-07-13:\r\n- Support for adding special to tokenizers (#2828)\r\n- Distributed Evaluation, to help scale generations/evaluations across many GPUs (#2775)\r\n- Google SGD dataset (#2738).\r\n\r\nOther notable features since 2020-06-16:\r\n- Multi-turn chunk teacher (#2805)\r\n- Fromfile jsonl teacher; works directly from files dumped by `self_chat`, ACUTE logs, etc. (#2717)\r\n- BART model now part of parlai (`-m bart`) (#2781)\r\n- Atomic saves to be more robust to preemption (#2760)\r\n\r\nRecent bugfixes:\r\n- #2789: crash when printing an empty report\r\n- #2788: multi-tasking failed to sample appropriately with `--datatype train:stream`.\r\n\r\n\r\n",
+        "dateCreated": "2020-07-16T19:15:52Z",
+        "datePublished": "2020-07-16T20:39:30Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.1.20200716",
+        "name": "2020-07-16",
+        "tag_name": "v0.1.20200716",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.1.20200716",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/28650334",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.1.20200716"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "Release of jupyter notebook features for ODSC tutorial. You can already try the [interactive colab notebook](https://colab.research.google.com/drive/1bRMvN0lGXaTF5fuTidgvlAl-Lb41F7AD#scrollTo=0Pl8VVl5plfm).",
+        "dateCreated": "2020-04-17T02:04:51Z",
+        "datePublished": "2020-04-17T02:37:34Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.1.20200416",
+        "name": "2020-04-16",
+        "tag_name": "v0.1.20200416",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.1.20200416",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/25595546",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.1.20200416"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephenroller",
+        "body": "For pip",
+        "dateCreated": "2020-04-09T18:12:17Z",
+        "datePublished": "2020-04-09T20:03:22Z",
+        "html_url": "https://github.com/facebookresearch/ParlAI/releases/tag/v0.1.20200409",
+        "name": "2020-04-09",
+        "tag_name": "v0.1.20200409",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/ParlAI/tarball/v0.1.20200409",
+        "url": "https://api.github.com/repos/facebookresearch/ParlAI/releases/25375589",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/ParlAI/zipball/v0.1.20200409"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8517,
+      "date": "Wed, 29 Dec 2021 07:44:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you have any questions, bug reports or feature requests, please don't hesitate to post on our [Github Issues page](https://github.com/facebookresearch/ParlAI/issues).\nYou may also be interested in checking out our [FAQ](https://parl.ai/docs/faq.html) and\nour [Tips n Tricks](https://parl.ai/docs/tutorial_tipsntricks.html).\n\nPlease remember to follow our [Code of Conduct](https://github.com/facebookresearch/ParlAI/blob/main/CODE_OF_CONDUCT.md).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For those who want to start with ParlAI now, you can try our [Colab Tutorial](https://colab.research.google.com/drive/1bRMvN0lGXaTF5fuTidgvlAl-Lb41F7AD#scrollTo=KtVz5dCUmFkN).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A large set of scripts can be found in [`parlai/scripts`](https://github.com/facebookresearch/ParlAI/tree/main/parlai/scripts). Here are a few of them.\nNote: If any of these examples fail, check the [installation section](#installing-parlai) to see if you have missed something.\n\nDisplay 10 random examples from the SQuAD task\n```bash\nparlai display_data -t squad\n```\n\nEvaluate an IR baseline model on the validation set of the Personachat task:\n```bash\nparlai eval_model -m ir_baseline -t personachat -dt valid\n```\n\nTrain a single layer transformer on PersonaChat (requires pytorch and torchtext).\nDetail: embedding size 300, 4 attention heads,  2 epochs using batchsize 64, word vectors are initialized with fasttext and the other elements of the batch are used as negative during training.\n```bash\nparlai train_model -t personachat -m transformer/ranker -mf /tmp/model_tr6 --n-layers 1 --embedding-size 300 --ffn-size 600 --n-heads 4 --num-epochs 2 -veps 0.25 -bs 64 -lr 0.001 --dropout 0.1 --embedding-type fasttext_cc --candidates batch\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

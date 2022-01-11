@@ -1,0 +1,814 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\n1. ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "def plotAccuracy20(history): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8937710860532944
+      ],
+      "excerpt": "  plt.title('model accuracy') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "num_classes = 10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": ": Copyright (c) 2020, Chang LI. All rights reserved. MIT License. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "    if bias: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8592871015078071,
+        0.8550101043698384,
+        0.8550101043698384
+      ],
+      "excerpt": "        super(Net, self).init() \n        self.conv1 = nn.Conv2d(1, 10, kernel_size=5) \n        self.conv2 = nn.Conv2d(10, 20, kernel_size=5) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "        if batch_idx % args.log_interval == 0: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "    kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "if __name__ == '__main__': \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Neatware/SynaNN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-07T02:41:45Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-07T13:45:57Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nSynapses play an important role in biological neural networks.  They're joint points of neurons where learning and memory happened. The picture below demonstrates that two neurons (red) connected through a branch chain of synapses which may  link to other neurons. \r\n\r\n<p align='center'>\r\n<img src=\"./picture/synapse.jpg\" alt=\"synapse\" width=\"80%\" />\r\n</p>\r\n\r\nInspired by the synapse research of neuroscience, we construct a simple model that can describe some key properties of a synapse. \r\n\r\n<p align='center'>\r\n<img src=\"./picture/synapse-unit.png\" alt=\"synpase\" width=\"70%\" /> \r\n</p>\r\n\r\nA Synaptic Neural Network (SynaNN) contains non-linear synapse networks that connect to neurons. A synapse consists of an input from the excitatory-channel, an input from the inhibitory-channel, and an output channel which sends a value to other synapses or neurons. The synapse function is\r\n\r\n<p align='center'>\r\n<img src=\"https://latex.codecogs.com/svg.latex?S(x,y;\\alpha,\\beta)=\\alpha%20x(1-\\beta%20y)\"\r\n</p>\r\n\r\nwhere x\u2208(0,1) is the open probability of all excitatory channels and \u03b1 >0 is the parameter of the excitatory channels; y\u2208(0,1) is the open probability of all inhibitory channels and \u03b2\u2208(0,1) is the parameter of the inhibitory channels. The surface of the synapse function is  \r\n\r\n<p align='center'>\r\n<img src=\"./picture/synpase.png\" alt=\"synpase\" width=\"50%\" />\r\n</p>\r\n\r\nBy combining deep learning, we expect to build ultra large scale neural networks to solve real-world AI problems. At the same time, we want to create an explainable neural network model to better understand what an AI model doing instead of a black box solution.\r\n\r\n<p align='center'>\r\n<img src=\"./picture/E425.tmp.png\" alt=\"synpase\" width=\"60%\" />\r\n</p>\r\n\r\nA synapse graph is a connection of synapses. In particular, a synapse tensor is fully connected synapses from input neurons to output neurons with some hidden layers. Synapse learning can work with gradient descent and backpropagation algorithms. SynaNN can be applied to construct MLP, CNN, and RNN models.\r\n\r\nAssume that the total number of input of the synapse graph equals the total number of outputs, the fully-connected synapse graph is defined as \r\n\r\n<p align='center'>\r\n<img src=\"https://latex.codecogs.com/svg.latex?y_{i}(\\textbf{x};%20\\pmb\\beta_i)%20=%20\\alpha_i%20x_{i}{\\prod_{j=1}^{n}(1-\\beta_{ij}x_{j})},\\%20for\\%20all\\%20i%20\\in%20[1,n]\"/>\r\n</p>\r\n\r\nwhere \r\n\r\n<p align='center'>\r\n<img src=\"https://latex.codecogs.com/svg.latex?\\textbf{x}=(x_1,\\cdots,x_n),\\textbf{y}=(y_1,\\cdots,y_n),x_i,y_i\\in(0,1),\\alpha_i \\geq 1,\\beta_{ij}\\in(0,1))\"/>\r\n</p>\r\n\r\nTransformed to tensor/matrix representation, we have the synapse log formula, \r\n\r\n<p align='center'>\r\n<img src=\"https://latex.codecogs.com/svg.latex?log(\\textbf{y})=log(\\textbf{x})+{\\textbf{1}_{|x|}}*log(\\textbf{1}_{|\\beta|}-diag(\\textbf{x})*\\pmb{\\beta}^T)\"/>\r\n</p>\r\n\r\nWe are going to implement this formula for fully-connected synapse network with Tensorflow and PyTorch in the examples.\r\n\r\nMoreover, we can design synapse graph like circuit below for some special applications. \r\n\r\n<p align='center'>\r\n<img src=\"./picture/synapse-flip.png\" alt=\"synapse-flip\" width=\"50%\" />\r\n</p>\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9832759432038755,
+        0.8239227046028843,
+        0.9394989957470136,
+        0.8822736082390524,
+        0.893949219078215
+      ],
+      "excerpt": "Synapses are joint points of neurons with electronic and chemical functions, location of learning and memory \nA synapse function is nonlinear, log concavity, infinite derivative in surprisal space (negative log space) \nSurprisal synapse is Bose-Einstein distribution with coefficient as negative chemical potential \nSynaNN graph & tensor, surprisal space, commutative diagram, topological conjugacy, backpropagation algorithm \nSynaNN for MLP, CNN, RNN are models for various neural network architecture \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863692485223581,
+        0.9654746022568753,
+        0.9777313145429091,
+        0.9691621930131102
+      ],
+      "excerpt": "Swap equation links between swap and odds ratio for healthcare, fin-tech, and insurance applications \nTensorflow 2 is an open source machine learning framework with Keras included. TPU is the tensor processor unit that can accelerate the computing of neural networks with multiple cores and clusters. \nMNIST is a data sets for hand-written digit recognition in machine learning. It is split into three parts: 60,000 data points of training data (mnist.train), 10,000 points of test data (mnist.test), and 5,000 points of validation data (mnist.validation). \nBy using Synapse layer and simple multiple layers of CNN (Conv2D), MaxPooling, Layer, Activation, Droupout, and Adam for optimization, we achieved very good 99.59% accuracy . \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.867013255735157
+      ],
+      "excerpt": "These are imports for later use. We are going to apply tensorflow, keras, numpy, and matplotlib. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9194963474155629
+      ],
+      "excerpt": ": This is the TPU initialization code that has to be at the beginning. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9796278610308067
+      ],
+      "excerpt": "This code clip is for TPU using in colab environment.  Below is the output of TPU initialization. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9852508113250447
+      ],
+      "excerpt": "This is the procedure to draw the accuracy graph. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9396837584358001
+      ],
+      "excerpt": "  #: output_dim is the number of output of Synapse \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9967298166982327
+      ],
+      "excerpt": "This is the implementation of Syanapse in Tensorflow. It is a layer to replace Dense in the Keras. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": ": model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "       Dense(num_classes)]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9787258431299153
+      ],
+      "excerpt": "We created 4 Conv2D as feature extraction along with relu activation. GlobalMaxPooling2D is applied to simplify the Convolution layers. The Synapse layer that implemented SynaNN model is used for fully connected layer. That is the key to classify the images from features. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9551404704234255
+      ],
+      "excerpt": "This is the pre-processing procedure for machine learning. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9777313145429091,
+        0.9908941747340823
+      ],
+      "excerpt": "MNIST is a data sets for hand-written digit recognition in machine learning. It is split into three parts: 60,000 data points of training data (mnist.train), 10,000 points of test data (mnist.test), and 5,000 points of validation data (mnist.validation). \nA hard task to implement SynaNN by PyTorch to solve MNIST problem  is to  define the Synapse class in nn.Module so that we can apply the Synapse module to work with other modules of PyTorch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8391879686155642
+      ],
+      "excerpt": ": SynaNN for Image Classification with MNIST Dataset by PyTorch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9663560679907932
+      ],
+      "excerpt": "Here is the default API specification of a class in the neural network module of PyTorch.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8408070275798518
+      ],
+      "excerpt": "    r\"\"\"Applies a synapse function to the incoming data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9459293810715548
+      ],
+      "excerpt": "    weight: the learnable weights of the module of shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9616927493141404
+      ],
+      "excerpt": "    bias:   the learnable bias of the module of shape :math:`(\\text{out\\_features})`. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8226525502478987
+      ],
+      "excerpt": "    #: synapse core \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9567956677383838
+      ],
+      "excerpt": "One challenge was to represent the links of synapses as tensors so we can apply the neural network framework such as PyTorch for deep learning. A key step is to construct a Synapse layer so we can embed synapse in deep learning neural network. This has been done by defining a class Synapse.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8178707826071376
+      ],
+      "excerpt": "    self.fcn = Synapse(64,64) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.960642216117322
+      ],
+      "excerpt": "There are two CNN layers for feature retrieving. fc1 is the linear input layer, fcn from Synapse is the hidden layer, and fc2 is the output layer.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9776020945590982,
+        0.8178707826071376,
+        0.8676650368825723
+      ],
+      "excerpt": "    #: fcn is the output of synapse \n    x = self.fcn(x) \n    #: fcb is the batch no)rmal  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9255743562550492,
+        0.9047098203404887
+      ],
+      "excerpt": "    for batch_idx, (data, target) in enumerate(train_loader): \n        data, target = data.to(device), target.to(device) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    model.eval() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9255743562550492,
+        0.9047098203404887
+      ],
+      "excerpt": "    for data, target in test_loader: \n        data, target = data.to(device), target.to(device) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9299604146651093
+      ],
+      "excerpt": "    model = Net().to(device) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9272693772406295
+      ],
+      "excerpt": "A Non-linear Synaptic Neural Network Based on Excitation and Inhibition \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Synaptic Neural Network",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Neatware/SynaNN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 11:40:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Neatware/SynaNN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Neatware/SynaNN",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9096104964140866
+      ],
+      "excerpt": "#: Build Synapse \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8634358626921252
+      ],
+      "excerpt": "#: get config \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8411004553040458
+      ],
+      "excerpt": "          allone = allone.cuda() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8754765969927353
+      ],
+      "excerpt": "use_cuda is the tag for gpu availability.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8401558704798054,
+        0.9457175861910134,
+        0.9000504886472166,
+        0.925671696398174,
+        0.9012248701992861,
+        0.9133368656218674,
+        0.8989138794816011
+      ],
+      "excerpt": "import os, datetime \nimport numpy as np \n: tensorflow import \nimport tensorflow as tf \nimport tensorflow_datasets as tfds \n: keras import \nfrom tensorflow.keras.models import Sequential \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8628110089442617,
+        0.8964914778212654,
+        0.9122608480166436,
+        0.8855298618768842,
+        0.8855298618768842
+      ],
+      "excerpt": "from tensorflow.keras.layers import Flatten, Conv2D, GlobalMaxPooling2D \nfrom tensorflow.keras.layers import Input, Layer, BatchNormalization \nfrom tensorflow.keras.models import Model \nfrom tensorflow.keras.optimizers import Adam, SGD \nfrom tensorflow.keras import regularizers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8855298618768842
+      ],
+      "excerpt": "from tensorflow.keras.callbacks import LearningRateScheduler, ModelCheckpoint, ReduceLROnPlateau \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9068127677393759
+      ],
+      "excerpt": "import matplotlib.pyplot as plt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8085086627029008,
+        0.8085086627029008,
+        0.8146904777960605,
+        0.8146904777960605
+      ],
+      "excerpt": "INFO:tensorflow:Initializing the TPU system: grpc://10.116.65.130:8470 \nINFO:tensorflow:Initializing the TPU system: grpc://10.116.65.130:8470 \nINFO:tensorflow:Clearing out eager caches \nINFO:tensorflow:Clearing out eager caches \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8559451073616267,
+        0.8559451073616267,
+        0.8559451073616267,
+        0.8559451073616267,
+        0.8827046457131337,
+        0.8827046457131337
+      ],
+      "excerpt": "INFO:tensorflow:*** Num TPU Cores: 8 \nINFO:tensorflow:*** Num TPU Cores: 8 \nINFO:tensorflow:*** Num TPU Workers: 1 \nINFO:tensorflow:*** Num TPU Workers: 1 \nINFO:tensorflow:*** Num TPU Cores Per Worker: 8 \nINFO:tensorflow:*** Num TPU Cores Per Worker: 8 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.809255262799504,
+        0.809255262799504
+      ],
+      "excerpt": "INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:XLA_CPU:0, XLA_CPU, 0, 0) \nINFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:XLA_CPU:0, XLA_CPU, 0, 0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8539464288592398,
+        0.8819126912114895,
+        0.8668258580770863,
+        0.8310159060815993
+      ],
+      "excerpt": "  plt.xlabel('epoch') \n  plt.legend(['train', 'validation'], loc='upper left') \n  plt.show() \n  plt.tight_layout() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8867901100917429
+      ],
+      "excerpt": "    initializer = tf.keras.initializers.RandomUniform(minval=-0.00, maxval=0.01, seed=3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828212322721523,
+        0.8123763140827432
+      ],
+      "excerpt": "    shapex = tf.reshape(tf.linalg.diag(xx), [-1, self.output_dim]) \n    betax = tf.math.log1p(-tf.matmul(shapex, ww2)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8013889909416548
+      ],
+      "excerpt": "    return xxtf.exp(tf.tensordot(allone, betax, 1)) #:self.bias \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8311246209928544
+      ],
+      "excerpt": "#: get output shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8728256926973063,
+        0.8594142235991984,
+        0.8738435994149011
+      ],
+      "excerpt": "  datasets, info = tfds.load(name='mnist',  \n                             with_info=True, as_supervised=True, try_gcs=True) \n  mnist_train, mnist_test = datasets['train'], datasets['test'] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8693966703616267
+      ],
+      "excerpt": "#: get train and test dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207266322022777
+      ],
+      "excerpt": "  new_model=tf.keras.models.load_model(checkpoint_path, custom_objects={'Synapse': Synapse}) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8474285472183882
+      ],
+      "excerpt": "                loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8959310575027931,
+        0.8213380337316241,
+        0.8213380337316241,
+        0.8929280077706311
+      ],
+      "excerpt": "print(\"Restored model: accuracy = {:5.2f}%\".format(100*acc)) \n: predict \nprobs = new_model.predict(test_dataset) \nprint(probs.argmax(axis=1), len(probs)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674,
+        0.9133368656218674
+      ],
+      "excerpt": "import math \nimport argparse \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import torchvision \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9068127677393759
+      ],
+      "excerpt": "import matplotlib.pyplot as plt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8275366699481186,
+        0.8629936370160864
+      ],
+      "excerpt": "    in_features:  size of each input sample \n    out_features: size of each output sample \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8581390369338854
+      ],
+      "excerpt": "                  Default: ``True`` \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389366373277504
+      ],
+      "excerpt": "         are the same shape as the input and :math:`H_{out} = \\text{out\\_features}`. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8422054059559062
+      ],
+      "excerpt": "            :math:`(\\text{out\\_features}, \\text{in\\_features})`. The values are \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8101994995950509
+      ],
+      "excerpt": "            :math:`k = \\frac{1}{\\text{in\\_features}}` \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8101994995950509
+      ],
+      "excerpt": "            :math:`k = \\frac{1}{\\text{in\\_features}}` \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8507119671058654,
+        0.8737873112808705
+      ],
+      "excerpt": "def train(args, model, device, train_loader, optimizer, epoch): \n    model.train() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8901065026153029
+      ],
+      "excerpt": "        output = model(data) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9529282315587808,
+        0.892174996976255,
+        0.8158375077716002
+      ],
+      "excerpt": "            print('Train Epoch: {} [{}/{} ({:.0f}%)]\\tLoss: {:.6f}'.format( \n                epoch, batch_idx * len(data), len(train_loader.dataset), \n                100. * batch_idx / len(train_loader), loss.item())) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8237235045383738
+      ],
+      "excerpt": "            train_counter.append((batch_idx64) + ((epoch-1)len(train_loader.dataset))) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8195225793152846
+      ],
+      "excerpt": "def test(args, model, device, test_loader): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8901065026153029
+      ],
+      "excerpt": "        output = model(data) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8326971499392
+      ],
+      "excerpt": "        pred = output.max(1, keepdim=True)[1] #: get the index of the max log-probability \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8520186037847441
+      ],
+      "excerpt": "test_loss /= len(test_loader.dataset) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8520186037847441,
+        0.8806468650275484
+      ],
+      "excerpt": "    test_loss, correct, len(test_loader.dataset), \n    100. * correct / len(test_loader.dataset))) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8286572695472
+      ],
+      "excerpt": "#: Training settings \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079704324688302
+      ],
+      "excerpt": "  \"batch_size\": 100, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9427389208782531
+      ],
+      "excerpt": "        datasets.MNIST('../data', train=True, download=True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8209658350705685
+      ],
+      "excerpt": "        batch_size=args.batch_size, shuffle=True, kwargs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8584865702155933
+      ],
+      "excerpt": "        batch_size=args.test_batch_size, shuffle=True, kwargs) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150101638972983
+      ],
+      "excerpt": "test_counter = [i*len(train_loader.dataset) for i in range(args.epochs)] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8822572286366867,
+        0.8764063352976937
+      ],
+      "excerpt": "    train(args, model, device, train_loader, optimizer, epoch) \n    test(args, model, device, test_loader) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8808185061092532,
+        0.9214935356103424,
+        0.849165140068371,
+        0.8365867256846197,
+        0.9280488043405597
+      ],
+      "excerpt": "    fig = plt.figure() \n    plt.plot(train_counter, train_losses, color='blue') \n    plt.scatter(test_counter, test_losses, color='red') \n    plt.legend(['Train Loss', 'Test Loss'], loc='upper right') \n    plt.xlabel('number of training examples seen') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8142835995138061
+      ],
+      "excerpt": "  main() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8162385949004234
+      ],
+      "excerpt": "<img src=\"./picture/synapse-pytorch-99p.jpg\" alt=\"synapse-pytorch-99p\" style=\"width: 80%;\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Neatware/SynaNN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SynaNN: A Synaptic Neural Network",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SynaNN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Neatware",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Neatware/SynaNN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 28 Dec 2021 11:40:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\n```python\r\n#: get dataset\r\ntrain_dataset, test_dataset = get_dataset()\r\n\r\n#: create model and compile\r\nwith strategy.scope():\r\n  model = create_model()\r\n  model.compile(optimizer=Adam(lr=0.01),\r\n                loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),\r\n                metrics=['accuracy'])\r\n#: show model information\r\nmodel.summary()\r\n\r\n#: checkpoint setting\r\ncheckpoint_path = 'synann_mnist_tpu_model.h5'\r\ncheckpoint_dir = os.path.dirname(checkpoint_path)\r\ncheckpoint = ModelCheckpoint(filepath=checkpoint_path, monitor='val_accuracy', verbose=1, save_weights_only=False, save_best_only=True)\r\ndef lr_sch(epoch):\r\n    if epoch < 12:\r\n        return 1e-3\r\n    if epoch < 30:\r\n        return 1e-4\r\n    if epoch < 65:\r\n        return 1e-5\r\n    if epoch < 90:\r\n        return 1e-6\r\n    return 1e-6\r\n      \r\n#: scheduler and reducer setting\r\nlr_scheduler = LearningRateScheduler(lr_sch)\r\nlr_reducer = ReduceLROnPlateau(monitor='accuracy',factor=0.2,patience=5, mode='max',min_lr=1e-5)\r\ncallbacks = [checkpoint, lr_scheduler, lr_reducer]\r\n\r\n#: training start\r\nhistory = model.fit(train_dataset, epochs=epochs, validation_data=test_dataset,verbose=1, callbacks=callbacks)\r\n\r\n#: plot accuracy graph\r\nplotAccuracy20(history)\r\n```\r\n\r\nCreate model, compile, set checking point, sec scheduler and reducer, start training and plot accuracy graph. The output result with the best accuracy **99.59%** is showed below. The number of iteration is only 31. Excellent!\r\n\r\n```text\r\nEpoch 00028: val_accuracy did not improve from 0.99590\r\n938/938 [==============================] - 30s 32ms/step - loss: 0.0035 - accuracy: 0.9990 - val_loss: 0.0225 - val_accuracy: 0.9959\r\nEpoch 29/31\r\n936/938 [============================>.] - ETA: 0s - loss: 0.0027 - accuracy: 0.9992\r\nEpoch 00029: val_accuracy did not improve from 0.99590\r\n938/938 [==============================] - 30s 32ms/step - loss: 0.0027 - accuracy: 0.9992 - val_loss: 0.0258 - val_accuracy: 0.9956\r\nEpoch 30/31\r\n937/938 [============================>.] - ETA: 0s - loss: 0.0026 - accuracy: 0.9992se\r\nEpoch 00030: val_accuracy did not improve from 0.99590\r\n938/938 [==============================] - 29s 31ms/step - loss: 0.0026 - accuracy: 0.9992 - val_loss: 0.0284 - val_accuracy: 0.9954\r\nEpoch 31/31\r\n937/938 [============================>.] - ETA: 0s - loss: 0.0029 - accuracy: 0.9992\r\nEpoch 00031: val_accuracy did not improve from 0.99590\r\n938/938 [==============================] - 29s 31ms/step - loss: 0.0029 - accuracy: 0.9992 - val_loss: 0.0265 - val_accuracy: 0.9956\r\n\r\n```\r\n\r\n<p align='center'>\r\n<img src=\"./picture/mnist-accuracy.png\" alt=\"synapse-flip\" width=\"50%\" />\r\n</p>\r\n\r\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

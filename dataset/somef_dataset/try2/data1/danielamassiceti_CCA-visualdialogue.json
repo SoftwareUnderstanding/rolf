@@ -1,0 +1,258 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1512.03385",
+      "https://arxiv.org/abs/1812.06417"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@article{massiceti2018visual,\n  title={Visual Dialogue without Vision or Dialogue},\n  author={Massiceti, Daniela and Dokania, Puneet K and Siddharth, N and Torr, Philip HS},\n  journal={arXiv preprint arXiv:1812.06417},\n  year={2018}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{massiceti2018visual,\n  title={Visual Dialogue without Vision or Dialogue},\n  author={Massiceti, Daniela and Dokania, Puneet K and Siddharth, N and Torr, Philip HS},\n  journal={arXiv preprint arXiv:1812.06417},\n  year={2018}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9064347685164287
+      ],
+      "excerpt": "Our NeurIPS 2018 Critiquing and Correcting Trends in Machine Learning workshop paper can be found here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "associated 10 questions. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/danielamassiceti/CCA-visualdialogue",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-02-01T11:57:55Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-25T06:01:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9850205968118028,
+        0.9930756441059084
+      ],
+      "excerpt": "We apply the classical statistical method of Canonical Correlation Analysis (CCA) [Hotelling, 1926; Kettenring, 1971] to the task of visual dialogue - a sequential question-answering task where the questions and \nanswers are related to an image. With CCA, we learn mappings for questions and answers (and images) to a joint embedding space, within which we measure correlation between test set questions and their corresponding candidate answers in order to rank the answers. We show comparable performance in mean rank (MR), one of the established metrics on the Visual Dialogue dataset, to state-of-the-art models which have at least an order of magnitude more parameters. We use this surprising result to comment on potential issues regarding the current formulation and evaluation of the visual dialogue task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9421410743441705,
+        0.9797638435806443,
+        0.8675685508492768
+      ],
+      "excerpt": "where your_dataset_dir and your_results_dir defaults to /data and /results in the root folder respectively.  \nThis computes average FastText vectors for the questions and answers, and then applies two-view CCA on the (train) representations to obtain a pair of projection matrices which maximises their correlation in the joint embedding space. Using the learned matrices, the test questions and their corresponding candidate answers are projected into the space, and the cosine distance between the projections is used to rank the candidates. By observing the position of the assigned ground-truth answer in the ranked list, the mean rank (MR), mean reciprocal rank (MRR) and recall@{1, 5, 10} are computed across the dataset. \nIt is also possible to run three-view CCA on the questions, answers and images (represented by their ResNet34 features) using --input_vars answer --condition_vars img_question. Here, the projected answers and questions (rather than images) are used to rank the candidate answers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8068350664296725,
+        0.8859643976039984,
+        0.9564398602958354,
+        0.9918725846947881,
+        0.9057339197002704,
+        0.9822593238323627
+      ],
+      "excerpt": "however, to construct candidate answer sets on-the-fly using CCA: the closest questions to the test question are drawn from the training set, and their corresponding answers \nextracted. The ranking metrics (MR, MRR and recall) cannot be computed in this case since the labelled ground-truth answer is no longer valid. Use the --on_the_fly k \nflag to construct a set of k candidates, and, as before, --interative --batch_size 1 to qualitatively view the ranked (by correlation) on-the-fly candidate answers for a given image and its questions. \nWe quantify the validity of the top-ranked answers from the VisDial candidates in relation to the ground truth using a heuristic based on their correlations: \nFor any given question and candidate answer set, we cluster the answers \nbased on an automatic binary thresholding (Otsu (1979)) of their \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9219864729947896,
+        0.9507974853658757,
+        0.9883871241161108,
+        0.9777832057509073,
+        0.8999504025215926,
+        0.9384890688329585,
+        0.9594259745573782
+      ],
+      "excerpt": "(1) The average standard deviation of the correlations in the lower-ranked split, \n(2) The number of answers (out of 100) falling in the lower-ranked split, and \n(2) The fraction of questions whose correlation with the ground truth answer is higher than the threshold. \nThis quantifies (1) how closely clustered the top answers are, (2) how large the set of highly correlated answers is, and (3) how often the \nground-truth answer is in this cluster, respectively. Low values for the first, and high values for the second and third \nwould indicate that there exists an equivalence class of answers, all relatively close to the ground-truth \nanswer in terms of their ability to answer the question. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Applies Canonical Correlation Analysis to the task of visual dialogue.",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The project uses the [Visual Dialog](http://www.visualdialog.org) dataset. To download and prepare the necessary datasets, run:\n```\nbash download_and_prepare.sh -d <data_dir> #: if left unspecified, datasets are downloaded to ./data\n```\nThis will download [Microsoft COCO](http://www.mscoco.org/dataset) `train2014` and `val2014` images as well as *v0.9* and *v1.0* of the Visual Dialog dataset (images and dialogues).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/danielamassiceti/CCA-visualdialogue/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 00:46:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/danielamassiceti/CCA-visualdialogue/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "danielamassiceti/CCA-visualdialogue",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/danielamassiceti/CCA-visualdialogue/master/download_and_prepare.sh",
+      "https://raw.githubusercontent.com/danielamassiceti/CCA-visualdialogue/master/install_deps.sh",
+      "https://raw.githubusercontent.com/danielamassiceti/CCA-visualdialogue/master/main.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is implemented in [PyTorch](http://www.pytorch.org). It is recommended to create an Anaconda environment for the project and all associated package dependencies:\n```\nconda create -n cca_visdial python=3.6 pip\nsource activate cca_visdial\nconda install pytorch torchvision cuda80 -c pytorch\nbash install_deps.sh\n```\n\nThe project was built using Python 3.6, PyTorch 1.0 and CUDA 8.0. Check [PyTorch](http://www.pytorch.org) for other versions and operating systems.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9462949883926144
+      ],
+      "excerpt": "To run the CCA algorithm on the Visual Dialogue v0.9 dataset with default settings, use the following command: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/danielamassiceti/CCA-visualdialogue/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CCA for Visual Dialogue",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CCA-visualdialogue",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "danielamassiceti",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/danielamassiceti/CCA-visualdialogue/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is implemented in [PyTorch](http://www.pytorch.org). It is recommended to create an Anaconda environment for the project and all associated package dependencies:\n```\nconda create -n cca_visdial python=3.6 pip\nsource activate cca_visdial\nconda install pytorch torchvision cuda80 -c pytorch\nbash install_deps.sh\n```\n\nThe project was built using Python 3.6, PyTorch 1.0 and CUDA 8.0. Check [PyTorch](http://www.pytorch.org) for other versions and operating systems.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Fri, 24 Dec 2021 00:46:33 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

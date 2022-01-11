@@ -1,0 +1,435 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1511.05644",
+      "https://arxiv.org/abs/1312.6114"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9003007284368706
+      ],
+      "excerpt": "Code Dim=2 | Code Dim=10 |  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8332634440095511
+      ],
+      "excerpt": "Dimention of z | 10 | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/conan7882/adversarial-autoencoders",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-08-02T14:32:19Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-14T19:21:51Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9695777215622368,
+        0.9615613183651034,
+        0.9258906893161578
+      ],
+      "excerpt": "Similar to variational autoencoder (VAE), AAE imposes a prior on the latent variable z. Howerver, instead of maximizing the evidence lower bound (ELBO) like VAE, AAE utilizes a adversarial network structure to guides the model distribution of z to match the prior distribution. \nThis repository contains reproduce of several experiments mentioned in the paper. \nAll the models of AAE are defined in src/models/aae.py.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9109328631821095,
+        0.9370269803020848
+      ],
+      "excerpt": "Images are normalized to [-1, 1] before fed into the encoder and tanh is used as the output nonlinear of decoder. \nAll the sub-networks are optimized by Adam optimizer with beta1 = 0.5. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9126581932261603,
+        0.9126581932261603
+      ],
+      "excerpt": "--train_supervised: Train the model of Fig 6 in the paper. \n--train_semisupervised: Train the model of Fig 8 in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9896931123231387,
+        0.8200524432472766,
+        0.8382760893385077,
+        0.8044290029079794,
+        0.9599251247001905
+      ],
+      "excerpt": "--viz: Visualize latent space and data manifold (only when --ncode is 2). \n--supervise: Sampling from supervised model (Fig 6 in the paper) when --generate is True. \n--load: The epoch ID of pre-trained model to be restored. \n--ncode: Dimension of code. Default: 2 \n--dist_type: Type of the prior distribution used to impose on the hidden codes. Default: gaussian. gmm for Gaussian mixture distribution.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8051827439867294,
+        0.8106732861126471
+      ],
+      "excerpt": "--encw: Weight of autoencoder loss. Default: 1.0. \n--genw: Weight of z generator loss. Default: 6.0. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8106732861126471
+      ],
+      "excerpt": "--ygenw: Weight of y generator loss. Default: 6.0. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9410890656628179
+      ],
+      "excerpt": "<img src = 'figs/s_1.png' width = '1500px'> | The top row is an autoencoder. z is sampled through the re-parameterization trick discussed in variational autoencoder paper. The bottom row is a discriminator to separate samples generate from the encoder and samples from the prior distribution p(z). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9476020625757762,
+        0.9823363545216852
+      ],
+      "excerpt": "For 2D Gaussian, we can see sharp transitions (no gaps) as mentioned in the paper. Also, from the learned manifold, we can see almost all the sampled images are readable. \nFor mixture of 10 Gaussian, I just uniformly sample images in a 2D square space as I did for 2D Gaussian instead of sampling along the axes of the corresponding mixture component, which will be shown in the next section. We can see in the gap area between two component, it is less likely to generate good samples.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9685864136339857
+      ],
+      "excerpt": "<img src = 'figs/s_2.png' width = '1500px'> | The only difference from previous model is that the one-hot label is used as input of encoder and there is one extra class for unlabeled data. For mixture of Gaussian prior, real samples are drawn from each components for each labeled class and for unlabeled data, real samples are drawn from the mixture distribution. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8853576434345687,
+        0.9277130127550556,
+        0.8609370725186495
+      ],
+      "excerpt": "Compare with the result in the previous section, incorporating labeling information provides better fitted distribution for codes. \nThe learned manifold images demonstrate that each Gaussian component corresponds to the one class of digit. However, the style representation is not consistently represented within each mixture component as shown in the paper. For example, the right most column of the first row experiment, the lower right of digit 1 tilt to left while the lower right of digit 9 tilt to right. \nNumber of Label Used | Learned Coding Space | Learned Manifold \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8901752343501304
+      ],
+      "excerpt": "<img src = 'figs/s_3.png' width = '800px'> | The decoder takes code as well as a one-hot vector encoding the label as input. Then it forces the network learn the code independent of the label. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507448804004454
+      ],
+      "excerpt": "When code dimension is 2, we can see each column consists the same style clearly. But for dimension 10, we can hardly read some digits. Maybe there are some issues of implementation or the hyper-parameters are not properly picked, which makes the code still depend on the label.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9255663370817288
+      ],
+      "excerpt": "<img src = 'figs/s_4.png' width = '1500px'> |  The encoder outputs code z as well as the estimated label y. Encoder again takes code z and one-hot label y as input. A Gaussian distribution is imposed on code z and a Categorical distribution is imposed on label y. In this implementation, the autoencoder is trained by semi-supervised classification phase every ten training steps when using 1000 label images and the one-hot label y is approximated by output of softmax. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Tensorflow implementation of Adversarial Autoencoders",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/conan7882/adversarial-autoencoders/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 39,
+      "date": "Thu, 30 Dec 2021 04:57:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/conan7882/adversarial-autoencoders/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "conan7882/adversarial-autoencoders",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Download the MNIST dataset from [here](http://yann.lecun.com/exdb/mnist/).\n- Setup path in [`experiment/aae_mnist.py`](experiment/aae_mnist.pyy):\n`DATA_PATH ` is the path to put MNIST dataset.\n`SAVE_PATH ` is the path to save output images and trained model.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8679670312462341
+      ],
+      "excerpt": "All the models of AAE are defined in src/models/aae.py.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150992282361024,
+        0.8150992282361024,
+        0.8187595971596054
+      ],
+      "excerpt": "Model corresponds to fig 6 in the paper can be found here: train and test. \nModel corresponds to fig 8 in the paper can be found here: train and test. \nExamples of how to use AAE models can be found in experiment/aae_mnist.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8884300879063488
+      ],
+      "excerpt": "--generate: Randomly sample images from trained model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8036868233215435
+      ],
+      "excerpt": "--load: The epoch ID of pre-trained model to be restored. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8430718834731352
+      ],
+      "excerpt": "--bsize: Batch size. Default: 128. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9189294123074008
+      ],
+      "excerpt": "name | value | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823687576256224
+      ],
+      "excerpt": "Batch Size | 128 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.897953614168866,
+        0.897953614168866
+      ],
+      "excerpt": "<img src = 'figs/gaussian.png' height = '230px'> | <img src = 'figs/gaussian_latent.png' height = '230px'> | <img src = 'figs/gaussian_manifold.png' height = '230px'> \n<img src = 'figs/gmm.png' height = '230px'> | <img src = 'figs/gmm_latent.png' height = '230px'> | <img src = 'figs/gmm_manifold.png' height = '230px'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9008718713874682,
+        0.9096319900017521
+      ],
+      "excerpt": "Use full label| <img src = 'figs/gmm_full_label.png' width = '350px'> | <img src = 'figs/gmm_full_label_2.png' height = '150px'> <img src = 'figs/gmm_full_label_1.png' height = '150px'><img src = 'figs/gmm_full_label_0.png' height = '150px'> <img src = 'figs/gmm_full_label_9.png' height = '150px'> \n10k labeled data and 40k unlabeled data | <img src = 'figs/gmm_10k_label.png' width = '350px'> | <img src = 'figs/gmm_10k_label_2.png' height = '150px'> <img src = 'figs/gmm_10k_label_1.png' height = '150px'><img src = 'figs/gmm_10k_label_0.png' height = '150px'> <img src = 'figs/gmm_10k_label_9.png' height = '150px'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.897953614168866
+      ],
+      "excerpt": "<img src = 'figs/supervise_code2.png' height = '230px'>| <img src = 'figs/supervise_code10.png' height = '230px'>| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9189294123074008
+      ],
+      "excerpt": "name | value | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823687576256224
+      ],
+      "excerpt": "Batch Size | 128 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8164056622300612
+      ],
+      "excerpt": "1280 labels are used (128 labeled images per class) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/conan7882/adversarial-autoencoders/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Qian Ge\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Adversarial Autoencoders (AAE)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "adversarial-autoencoders",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "conan7882",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/conan7882/adversarial-autoencoders/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3.3+\n- [TensorFlow 1.9+](https://www.tensorflow.org/)\n- [TensorFlow Probability](https://github.com/tensorflow/probability)\n- [Numpy](http://www.numpy.org/)\n- [Scipy](https://www.scipy.org/)\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 229,
+      "date": "Thu, 30 Dec 2021 04:57:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "adversarial-autoencoders",
+      "adversarial-networks",
+      "tensorflow",
+      "autoencoder",
+      "semi-supervised-learning"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The script [experiment/aae_mnist.py](experiment/aae_mnist.py) contains all the experiments shown here. Detailed usage for each experiment will be describe later along with the results.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Training. Summary, randomly sampled images and latent space during training will be saved in `SAVE_PATH`.\n\n ```\n python aae_mnist.py --train \\\n   --ncode CODE_DIM \\\n   --dist_type TYPE_OF_PRIOR (`gaussian` or `gmm`)\n ```\n \n - Random sample data from trained model. Image will be saved in `SAVE_PATH` with name `generate_im.png`.\n ```\n python aae_mnist.py --generate \\\n   --ncode CODE_DIM \\\n   --dist_type TYPE_OF_PRIOR (`gaussian` or `gmm`)\\\n   --load RESTORE_MODEL_ID\n ```\n - Visualize latent space and data manifold (only when code dim = 2). Image will be saved in `SAVE_PATH` with name `generate_im.png` and `latent.png`. For Gaussian distribution, there will be one image for data manifold. For mixture of 10 2D Gaussian, there will be 10 images of data manifold for each component of the distribution.\n ```\n python aae_mnist.py --viz \\\n   --ncode CODE_DIM \\\n   --dist_type TYPE_OF_PRIOR (`gaussian` or `gmm`)\\\n   --load RESTORE_MODEL_ID\n ```\n <!---\n*name* | *command* \n:--- | :---\nTraining |``python aae_mnist.py --train --dist_type <TYPE_OF_PRIOR>``|\nRandom sample data |``python aae_mnist.py --generate --dist_type <TYPE_OF_PRIOR> --load <RESTORE_MODEL_ID>``|\nVisualize latent space and data manifold (only when code dim = 2) |``python aae_mnist.py --viz --dist_type <TYPE_OF_PRIOR> --load <RESTORE_MODEL_ID>``|\nOption | ``--bsize``\n--->\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Training. Summary, randomly sampled images and latent space will be saved in `SAVE_PATH`.\n\n ```\n python aae_mnist.py --train --label\\\n   --ncode CODE_DIM \\\n   --dist_type TYPE_OF_PRIOR (`gaussian` or `gmm`)\n ```\n \n- Random sample data from trained model. Image will be saved in `SAVE_PATH` with name `generate_im.png`.\n ```\n python aae_mnist.py --generate --ncode <CODE_DIM> --label --dist_type <TYPE_OF_PRIOR> --load <RESTORE_MODEL_ID>\n ```\n \n- Visualize latent space and data manifold (only when code dim = 2). Image will be saved in `SAVE_PATH` with name `generate_im.png` and `latent.png`. For Gaussian distribution, there will be one image for data manifold. For mixture of 10 2D Gaussian, there will be 10 images of data manifold for each component of the distribution.\n ```\n python aae_mnist.py --viz --label \\\n   --ncode CODE_DIM \\\n   --dist_type TYPE_OF_PRIOR (`gaussian` or `gmm`) \\\n   --load RESTORE_MODEL_ID\n ```\n ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Training. Summary and randomly sampled images will be saved in `SAVE_PATH`.\n\n ```\n python aae_mnist.py --train_supervised \\\n   --ncode CODE_DIM\n ```\n \n - Random sample data from trained model. Image will be saved in `SAVE_PATH` with name `sample_style.png`.\n ```\n python aae_mnist.py  --generate --supervise\\\n   --ncode CODE_DIM \\\n   --load RESTORE_MODEL_ID\n ```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Training. Summary will be saved in `SAVE_PATH`.\n\n ```\n python aae_mnist.py \\\n   --ncode 10 \\\n   --train_semisupervised \\\n   --lr 2e-4 \\\n   --maxepoch 250\n ```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akrapukhin/MobileNetV3",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-29T13:43:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-09T20:21:51Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Here is a brief summary of the three MobileNet versions. Only MobileNetV3 is implemented.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9844046880135717
+      ],
+      "excerpt": "An implementation of the MobileNetV3 models in Pytorch with scripts for training, testing and measuring latency. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9865248155387432,
+        0.834352679656635
+      ],
+      "excerpt": "The neural net uses deapthwise separable convolutions instead of standard convolutions. In standard convolutions each filter has the same number of channels as the input tensor it is applied to. In deapthwise separable convolutions each channel of the input tensor is filtered by a 1-channel filter (depthwise convolution), and then the resulting features are combined using multichannel 1x1 filters (pointwise convolution). It allows to significantly reduce the number of operations and parameters as well as lower the latency. Accuracy almost stays at the same level. Two hyperparameters are used to trade off accuracy for size and latency: width multiplier (uniformly changes the number of channels inside the layers) and resolution multiplier (changes the resolution of input images). \nMobileNetV2: Inverted Residuals and Linear Bottlenecks<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928648249718616
+      ],
+      "excerpt": "The second version is based on a novel layer module: the inverted residual with linear bottleneck. This module takes as an input a compressed tensor with small number of channels, expands it using 1x1 convolutions (increasing the number of channels), filters it using 1-channel filters (depthwise convolutions as in V1) and then compresses it using 1x1 convolution. Non-linearity is not applied to the output of the last 1x1 compressing convolution (hence the name \"linear bottleneck\"). The output of the module is then feeded to the next module. The shortcuts are applied to the bottlenecks. Using inverted residuals and linear bottlenecks allows to decrease the number of parameters and operations, and reduce latency compared to MobileNetV1. Accuracy stays at the same level. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9945977214785291
+      ],
+      "excerpt": "Authors present two models which are targeted for high and low resource use cases - MobileNetV3-Large and MobileNetV3-Small. The models are created using automated architecture search algorithms and then improved through novel architecture techniques. First, platform-aware neural architecture search (NAS) is used to search for the global network structures by optimizing each network block. Second, NetAdapt is utilized to search for the optimal number of filters in each layer. Then, in the resulting models authors halve the number of filters in the first layer and move the final convolution layer past the average pooling layer to reduce the latency. Also, hard swish is used instead of Relu in the second half of the net to improve accuracy. Moreover, the squeeze-and-excite block is utilized which is basically an attention mechanism allowing the net to learn to amplify important channels and attenuate less important ones. As a result, the model consists of practically the same blocks as V2 - 1x1 expansion convolution, depthwise convolution, 1x1 compression convolution, shortcut. The differences are in using hard swish instead of Relu and in applying squeeze-and-excite module to the output of the depthwise convolution layer. V3 is faster and more accurate than V2. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.870790393822343
+      ],
+      "excerpt": "To start training, use the following command. By default, the small model is trained with width multiplier 1.0 for 20 iterations with the batch size of 128.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8256565160726806,
+        0.9684546934810976
+      ],
+      "excerpt": "The script will measure the latency of the small and large models with different width multipliers (0.25, 0.5, 1.0) on both CPU and GPU (if available). \nThe stride in the initial layers is set to 1 by default instead of 2 to adapt for the small 32x32 resolution of the CIFAR dataset. If you want to use stride 2 as in the paper, set the si parameter of the network to 2 at initialization. Example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An implementation of the MobileNetV3 models in Pytorch with scripts for training, testing and measuring latency.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akrapukhin/MobileNetV3/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 22:06:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akrapukhin/MobileNetV3/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akrapukhin/MobileNetV3",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.944133584914205
+      ],
+      "excerpt": "The nets are trained on the CIFAR100 dataset. If your Pytorch installation comes with CUDA support and CUDA is avaliable on your machine the training will be done on a GPU. Otherwise, CPU will be used.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8139098584374035,
+        0.9503189345333785
+      ],
+      "excerpt": "To start training, use the following command. By default, the small model is trained with width multiplier 1.0 for 20 iterations with the batch size of 128.  \npython train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9079575076001517,
+        0.8345321312610161,
+        0.9503189345333785
+      ],
+      "excerpt": "python train.py --model large --width 0.5 --iter 40 --batch 64 \nRead more info with the help command: \npython train.py -h \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9515752551715031,
+        0.8073000355324658
+      ],
+      "excerpt": "python test.py \nFor each model present in the trained_models folder the script will do classification of all images from the test_images folder. There is already one trained model in trained_models and 20 images in test_images. All trained models will be placed in trained_models. And you can add other images to test_images. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python latency.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/akrapukhin/MobileNetV3/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MobileNetV3",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MobileNetV3",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "akrapukhin",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/akrapukhin/MobileNetV3/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You need to install Pytorch with torchvision.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 22:06:07 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

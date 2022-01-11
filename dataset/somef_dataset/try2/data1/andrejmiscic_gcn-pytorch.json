@@ -1,0 +1,231 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1609.02907",
+      "https://arxiv.org/abs/1606.09375",
+      "https://arxiv.org/abs/1609.02907"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [Official GCN Tensorflow implementation](https://github.com/tkipf/gcn)\n* [Spectral graph Convnets (ChebNets) implementation](https://github.com/xbresson/spectral_graph_convnets)\n\n```bibtex\n@article{kipf2016semi,\n  title={Semi-supervised classification with graph convolutional networks},\n  author={Kipf, Thomas N and Welling, Max},\n  journal={arXiv preprint arXiv:1609.02907},\n  year={2016}\n}\n```\n\n```bibtex\n@inproceedings{defferrard2016convolutional,\n  title={Convolutional neural networks on graphs with fast localized spectral filtering},\n  author={Defferrard, Micha{\\\"e}l and Bresson, Xavier and Vandergheynst, Pierre},\n  booktitle={Advances in neural information processing systems},\n  pages={3844--3852},\n  year={2016}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{defferrard2016convolutional,\n  title={Convolutional neural networks on graphs with fast localized spectral filtering},\n  author={Defferrard, Micha{\\\"e}l and Bresson, Xavier and Vandergheynst, Pierre},\n  booktitle={Advances in neural information processing systems},\n  pages={3844--3852},\n  year={2016}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{kipf2016semi,\n  title={Semi-supervised classification with graph convolutional networks},\n  author={Kipf, Thomas N and Welling, Max},\n  journal={arXiv preprint arXiv:1609.02907},\n  year={2016}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andrejmiscic/gcn-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-26T22:10:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T06:45:13Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.970932784233939,
+        0.9505224254482059,
+        0.9872821057299758,
+        0.9787552546941554
+      ],
+      "excerpt": "Re-implementation of the work described in Semi-Supervised Classification with Graph Convolutional Networks. \nThe implementation contains two different propagation models, the one from original GCN as described in the above paper and the Chebyshev filter based one from Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering. \nTest set accuracy for this implementation in comparison to the original paper. All results are based on public splits of analyzed datasets. \nIn our results we report standard deviation of accuracy based on 100 repetitions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9909394268027498
+      ],
+      "excerpt": "Results of experiments with model depth and residual connections are shown below. Same as in the original paper the whole dataset is used and the mean accuracy of 5-fold cross validation is plotted. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of the Graph Convolutional Networks in Pytorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andrejmiscic/gcn-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Sun, 26 Dec 2021 17:50:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andrejmiscic/gcn-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andrejmiscic/gcn-pytorch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/andrejmiscic/gcn-pytorch/main/notebooks/gcn_testing.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To quickly check: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andrejmiscic/gcn-pytorch/blob/main/notebooks/gcn_testing.ipynb)\n\n```bash\ngit clone https://github.com/andrejmiscic/gcn-pytorch.git\ncd gcn-pytorch\n```\n\nThe requirements are dependent on whether you want to use a GPU or not:\n\n```bash\npip install -r requirements_gpu.txt\n```\nor\n```bash\npip install -r requirements_cpu.txt\n```\n\nA simple evaluation of the model on Cora dataset:\n\n```python\nimport torch\n\nfrom gcn.model import TwoLayerGCN\nfrom gcn.trainer import Trainer, RunConfig\nfrom gcn.utils import Dataset, load_data\n\nfeatures, labels, train_labels, val_labels, test_labels, adjacency_matrix, \\\n    laplacian_matrix, num_classes = load_data(Dataset.Cora)\n    \ndevice = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n\n#: training parameters\nrun_config = RunConfig(learning_rate=0.1, num_epochs=200, weight_decay=5e-4, output_dir=\"gcn/\")\n\n#: constructing a GCN model\nmodel = TwoLayerGCN(\n        input_size=features.size(1),\n        hidden_size=16,\n        output_size=num_classes,\n        dropout=0.5\n    )\n\n#: training\ntrainer = Trainer(model)\ntrainer.train(features, train_labels, val_labels, adjacency_matrix, device, run_config, log=False)\n\n#: evaluating\nce_loss, accuracy = trainer.evaluate(features, test_labels, adjacency_matrix, device)\n```\n\nYou can check out `notebooks/gcn_testing.ipynb` that contains all the code for reproducing the results.\n\nTo run the notebook on Google Colab follow the link \n[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andrejmiscic/gcn-pytorch/blob/main/notebooks/gcn_testing.ipynb)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8890818307099057,
+        0.8890818307099057,
+        0.8890818307099057
+      ],
+      "excerpt": "  <img src=\"./cora.png\" width=\"600\" /> \n  <img src=\"./citeseer.png\" width=\"600\" />  \n  <img src=\"./pubmed.png\" width=\"600\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andrejmiscic/gcn-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Andrej Miscic\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Graph Convolutional Networks in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gcn-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andrejmiscic",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andrejmiscic/gcn-pytorch/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Sun, 26 Dec 2021 17:50:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To quickly check: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andrejmiscic/gcn-pytorch/blob/main/notebooks/gcn_testing.ipynb)\n\n```bash\ngit clone https://github.com/andrejmiscic/gcn-pytorch.git\ncd gcn-pytorch\n```\n\nThe requirements are dependent on whether you want to use a GPU or not:\n\n```bash\npip install -r requirements_gpu.txt\n```\nor\n```bash\npip install -r requirements_cpu.txt\n```\n\nA simple evaluation of the model on Cora dataset:\n\n```python\nimport torch\n\nfrom gcn.model import TwoLayerGCN\nfrom gcn.trainer import Trainer, RunConfig\nfrom gcn.utils import Dataset, load_data\n\nfeatures, labels, train_labels, val_labels, test_labels, adjacency_matrix, \\\n    laplacian_matrix, num_classes = load_data(Dataset.Cora)\n    \ndevice = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n\n#: training parameters\nrun_config = RunConfig(learning_rate=0.1, num_epochs=200, weight_decay=5e-4, output_dir=\"gcn/\")\n\n#: constructing a GCN model\nmodel = TwoLayerGCN(\n        input_size=features.size(1),\n        hidden_size=16,\n        output_size=num_classes,\n        dropout=0.5\n    )\n\n#: training\ntrainer = Trainer(model)\ntrainer.train(features, train_labels, val_labels, adjacency_matrix, device, run_config, log=False)\n\n#: evaluating\nce_loss, accuracy = trainer.evaluate(features, test_labels, adjacency_matrix, device)\n```\n\nYou can check out `notebooks/gcn_testing.ipynb` that contains all the code for reproducing the results.\n\nTo run the notebook on Google Colab follow the link \n[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andrejmiscic/gcn-pytorch/blob/main/notebooks/gcn_testing.ipynb)\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

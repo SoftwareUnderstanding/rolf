@@ -1,0 +1,438 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1809.00888",
+      "https://arxiv.org/abs/1511.07289"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- <a  id=\"ref-1\">[1]</a> Afchar, Darius, et al. [Mesonet: a compact facial video forgery detection network](https://arxiv.org/abs/1809.00888).\n- <a  id=\"ref-2\">[2]</a> Djork-Arn\u00e9 Clevert, Thomas Unterthiner, & Sepp Hochreiter. (2015). [Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)](https://arxiv.org/abs/1511.07289).\n- <a  id=\"ref-3\">[3]</a> Andrew L. Maas. (2013). [Rectifier Nonlinearities Improve Neural Network Acoustic Models](https://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf).\n- <a  id=\"ref-4\">[4]</a> Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, & Ruslan Salakhutdinov (2014). [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](http://jmlr.org/papers/v15/srivastava14a.html). Journal of Machine Learning Research, 15(56), 1929-1958.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "<div align=\"center\" style=\"padding: 10px;\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MalayAgr/MesoNet-DeepFakeDetection",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-31T20:42:52Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-08T22:11:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is part of the requirements to finish my Bachelor's degree in Computer Science (2017-2021).\n\nIt aims to demonstrate a solution to a small part of the misinformation problem. In particular, I detail here my approach in implementing a CNN-based DeepFake detector, first detailed in a paper published by Darius Afchar ([Github](https://github.com/DariusAf)) et al. in 2018 [[1]](#ref-1), called **MesoNet**. The official implementation (without any training code) is available [here](https://github.com/DariusAf/MesoNet).\n\nThe overall project consists of three parts:\n\n- [Part 1: Model Construction and Training](https://github.com/MalayAgr/MesoNet-DeepFakeDetection) - This builds and trains various MesoNet variants, with the objective of obtaining multiple well-performing variants in the end. It is implemented using [TensorFlow](https://github.com/tensorflow/tensorflow).\n- [Part 2: API](https://github.com/MalayAgr/MesoNet-DeepfakeDetection-API) - This is an API that can be used to fetch results from a trained MesoNet model. It is implemented using [Django](https://github.com/django/django) and the [Django Rest Framework](https://github.com/encode/django-rest-framework).\n- [Part 3: Frontend](https://github.com/MalayAgr/MesoNet-DeepfakeDetection-WebApp) - This is a webapp app which uses the above API to allow any Internet user to explore the inner workings of MesoNet. It is implemented in [Node.js](https://github.com/nodejs/node).\n\n**You're currently reading about Part 1**.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9618420854774585
+      ],
+      "excerpt": "The problem of misinformation has concerned me for a long time. Having witnessed the drastic effects of it in both my country and elsewhere, I think my concerns are rightly placed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906128909950556
+      ],
+      "excerpt": "1. Introduction \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9302287581602335,
+        0.951232532257774
+      ],
+      "excerpt": "2.2. The Model \n2.3. The Data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9199357654932253
+      ],
+      "excerpt": "The main focus in constructing and training the model was to make it modular and portable. A secondary focus was also to make it easier you to use MesoNet without tinkering with the code. With these objectives in mind, the code has been broken up into two packages: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9528575041803309,
+        0.8821405239700627,
+        0.9404845505494576,
+        0.8409054785716079,
+        0.928895688318293,
+        0.928895688318293,
+        0.9152707066636429
+      ],
+      "excerpt": "The model, as mentioned above, is based on a paper published by Darius Afchar et al. in 2018 [1]. It is a binary classifier built as a relatively shallow Convolutional Neural Network (CNN), trained to classify images into one of two classes. One class refers to \"real\" images (images of real people) and the other refers to \"fake\" images (images generated by DeepFake AI). \nNote: The actual names of the classes is arbitrary and can be set according to the your wishes. \nBy default, the CLI works with the architecture detailed in the paper, which is as follows: \n3 X 256 X 256 input layer, with the input being scaled by 255 and augmentations applied on it. \nConvolutional layer with 8 filters, 3 x 3 in size and stride of 1, followed by a max pooling layer of size 2 x 2. \nConvolutional layer with 8 filters, 5 x 5 in size and stride of 1, followed by a max pooling layer of size 2 x 2. \nTwo convolutional layers with 16 filters, 5 x 5 in size and stride of 1, followed by max pooling layers with pooling window of 2 x 2. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9286185575206446,
+        0.9778760444755729,
+        0.953961911139596
+      ],
+      "excerpt": "This leads to a modest 27,977 trainable parameters for the model. \nWhile this architecture is closely followed, experiments with various activation functions have been carried out and the code is designed such that it is extremely convenient to switch the activation function for the entire model. Specifically, in addition to using the standard ReLU activation, experiments with ELU [2] and LeakyReLU [3] have also been carried out. \nReLU is the activation function of choice since there is no apparent risk of dead neurons. Additionally, there exists a LeakyReLU activation after the fully-connected 16-unit layer. There is no apparent reason behind this other than this is what the paper uses. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "\u2514\u2500\u2500 data/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9183576957855389
+      ],
+      "excerpt": "Note: df is short for deepfake. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9725982239382391
+      ],
+      "excerpt": "The images of faces have been extracted from publicly-available videos on the Internet. According to the paper, for the fake images, 175 videos have been downloaded from different online platforms. Their duration is between 2 seconds and 3 minutes, with a minimum resolution of 854 x 450 px. They have been compressed using the H.264 codec but using different compression levels. More details on dataset collection are available in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8582751716778458,
+        0.8549249306578367,
+        0.9586084514383302
+      ],
+      "excerpt": "This section summarizes results from the two pre-trained models provided in trained_models. Here, \"best\" is in terms of accuracy. \nThe dataset used to train these models is available here. In both the cases, the default augmentations used in the paper have been applied on the dataset. These are listed here. \nMoreover, 20% of the training data was reserved for the validation set. This led to the following distribution of training data: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.943584259363435,
+        0.9807470031533045,
+        0.8866439981991429
+      ],
+      "excerpt": "Training was meant to be carried out for 30 epochs with a batch size of 32. In fact, the model was trained for only 18 epochs since the results were already satisfactory. \nFor this particular model, when using a learning rate schedule, the number of steps after which one step of decay should be applied is calculated dynamically based on a decay limit (the lowest learning rate), decay steps and the number of epochs. The reason behind this is that using a fixed number made the decay either too slow or too fast. This makes it more gradual. This feature wasn't implemented during training of the second model. \nThus, a learning rate schedule with an initial learning rate of 0.001, decay rate of 0.10 and a maximum decay limit of 0.000001 was also used. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9327482296755418,
+        0.9410804267126813
+      ],
+      "excerpt": "On the test set, the model reported an accuracy of 96.25%. \nThe ROC report (generated using sklearn) is as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9500136217807515
+      ],
+      "excerpt": "Training was meant to be carried out for 18 epochs with a batch size of 64. A learning rate schedule with an initial learning rate of 0.001, decay rate of 0.10, decayed every 5 epochs. The model was trained for 17 epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8082623732082899
+      ],
+      "excerpt": "The loss curve is shown below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9327482296755418,
+        0.8490037945672047
+      ],
+      "excerpt": "On the test set, the model reported an accuracy of 90.79%. \nThe ROC report: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A CNN-based DeepFake detector called MesoNet, replicated from a 2018 paper available at https://arxiv.org/abs/1809.00888",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The documentation for the `mesonet` module and details on using the CLI are available in the [`docs`](./docs/) folder and [here](https://malayagr.github.io/MesoNet-DeepFakeDetection/).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MalayAgarwal-Lee/MesoNet-DeepFakeDetection/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 17:53:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MalayAgr/MesoNet-DeepFakeDetection/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MalayAgr/MesoNet-DeepFakeDetection",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/MalayAgarwal-Lee/MesoNet-DeepFakeDetection/tree/main/docs",
+      "https://github.com/MalayAgarwal-Lee/MesoNet-DeepFakeDetection/tree/main/docs/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/MalayAgarwal-Lee/MesoNet-DeepFakeDetection/main/notebook/Meso_4.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9431210945663379
+      ],
+      "excerpt": "2.4. Requirements \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.820958902658881
+      ],
+      "excerpt": "mesonet - This is the main package containing modules which construct and build MesoNet variants. While not currently set up as a PyPI package, you can copy the directory to your project and obtain the necessary functionality to build, train and obtain predictions from MesoNet. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507155305353506
+      ],
+      "excerpt": "Alternatively, you can use any dataset of your choice as long as the directory structure matches the one above. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9147330445624482
+      ],
+      "excerpt": "    <img src=\"imgs/model_schematic.png\" width=\"500\" height=\"600\" alt=\"Model\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8761446465230811
+      ],
+      "excerpt": "Note: For some reason, the downloaded dataset's training samples are in a folder called train:test. You might face issues when unzipping this. Rename the folder to train. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    \u251c\u2500\u2500 train/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313,
+        0.8633989807152664
+      ],
+      "excerpt": "| Training | 5111                           | 7250                     | 12361 | \n| Test     | 2889                           | 4259                     | 7148  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313,
+        0.8633989807152664
+      ],
+      "excerpt": "| Training | 7175                           | 10337                    | 17512 | \n| Test     | 773                            | 1172                     | 1945  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9391820741338666,
+        0.9393215397225024
+      ],
+      "excerpt": "| Train | <img src=\"./imgs/train_forged_sample.jpg\" width=\"100\" height=\"100\" /> | <img src=\"./imgs/train_real_sample.jpg\" width=\"100\" height=\"100\" /> | \n| Test  | <img src=\"./imgs/test_forged_sample.jpg\" width=\"100\" height=\"100\" />  | <img src=\"./imgs/test_real_sample.jpg\" width=\"100\" height=\"100\" />  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "| Training   | 5740                           | 8270                     | 14020 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "| Train      | 0.1583 | 93.53%   | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8796698585445977
+      ],
+      "excerpt": "<img src=\"./imgs/model1_18epochs_valacc0.9252_loss.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8796698585445977
+      ],
+      "excerpt": "<img src=\"./imgs/model2_17epochs_valacc0.89_loss.png\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MalayAgr/MesoNet-DeepFakeDetection/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "<!-- omit in toc --> MesoNet - A Deepfake Detector Built Using Python and Deep Learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MesoNet-DeepFakeDetection",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MalayAgr",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MalayAgr/MesoNet-DeepFakeDetection/blob/main/readme.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The project has been developed on Python 3.8.8. It is recommended that you use this version to ensure that things do not break.\n\nOther requirements are as follows:\n\n| Package      | Version |\n| ------------ | ------- |\n| TensorFlow   | 3.4.1   |\n| Matplotlib   | 2.4.1   |\n| Scikit-Learn | 0.24.1  |\n\n> **Note**: Worried about Numpy and the other stuff? Don't be. These will be installed automatically by pip if you run the standard command to install packages using a requirements.txt file.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 17:53:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "cnn",
+      "keras",
+      "python",
+      "numpy",
+      "tensorflow",
+      "jupyter-notebook",
+      "mesonet",
+      "cli",
+      "deepfake",
+      "deep-learning",
+      "machine-learning"
+    ],
+    "technique": "GitHub API"
+  }
+}

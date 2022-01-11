@@ -1,0 +1,262 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2101.00440\" target=\"blank\" >[arXiv preprint]</a>\n&nbsp;&nbsp;&nbsp;\n<a href=\"https://openaccess.thecvf.com/content/ICCV2021/html/Stergiou_Refining_Activation_Downsampling_With_SoftPool_ICCV_2021_paper.html\" target=\"_blank\">[CVF open access]</a>\n&nbsp;&nbsp;&nbsp;\n<a href=\"https://www.youtube.com/watch?v=iqsMoVQSyDw\" target=\"blank\" >[video presentation]</a>\n</p>\n\nImage based pooling. Images are sub-sampled in both height and width by half.\n\n|Original|<img src=\"images/buildings.jpg\" width=\"130\" />|<img src=\"images/otters.jpg\" width=\"130\" />|<img src=\"images/tennis_ball.jpg\" width=\"130\" />|<img src=\"images/puffin.jpg\" width=\"130\" />|<img src=\"images/tram.jpg\" width=\"130\" />|<img src=\"images/tower.jpg\" width=\"130\" />|\n|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|\n|Soft Pool|<img src=\"images/buildings_soft.jpg\" width=\"130\" />|<img src=\"images/otters_soft.jpg\" width=\"130\" />|<img src=\"images/tennis_ball_soft.jpg\" width=\"130\" />|<img src=\"images/puffin_soft.jpg\" width=\"130\" />|<img src=\"images/tram_soft.jpg\" width=\"130\" />|<img src=\"images/tower_soft.jpg\" width=\"130\" />|\n\nVideo based pooling. Videos are sub-sampled in time, height and width by half.\n\n\n|Original|<img src=\"images/cars.gif\" width=\"130\" />|<img src=\"images/basketball.gif\" width=\"130\" />|<img src=\"images/parkour.gif\" width=\"130\" />|<img src=\"images/bowling.gif\" width=\"130\" />|<img src=\"images/pizza_toss.gif\" width=\"130\" />|<img src=\"images/pass.gif\" width=\"130\" />|\n|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|\n|Soft Pool|<img src=\"images/cars_soft.gif\" width=\"130\" />|<img src=\"images/basketball_soft.gif\" width=\"130\" />|<img src=\"images/parkour_soft.gif\" width=\"130\" />|<img src=\"images/bowling_soft.gif\" width=\"130\" />|<img src=\"images/pizza_toss_soft.gif\" width=\"130\" />|<img src=\"images/pass_soft.gif\" width=\"130\" />|\n\n## Dependencies\nAll parts of the code assume that `torch` is of version 1.4 or higher. There might be instability issues on previous versions.\n\n> ***! Disclaimer:*** This repository is heavily structurally influenced on Ziteng Gao's LIP repo [https://github.com/sebgao/LIP](https://github.com/sebgao/LIP"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@inproceedings{stergiou2021refining,\n  title={Refining activation downsampling with SoftPool},\n  author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},\n  booktitle={International Conference on Computer Vision (ICCV)},\n  year={2021},\n  pages={10357-10366},\n  organization={IEEE}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{stergiou2021refining,\n  title={Refining activation downsampling with SoftPool},\n  author={Stergiou, Alexandros, Poppe, Ronald and Kalliatakis Grigorios},\n  booktitle={International Conference on Computer Vision (ICCV)},\n  year={2021},\n  pages={10357-10366},\n  organization={IEEE}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.999997484051558
+      ],
+      "excerpt": "<i><p align=\"center\"> To appear in <a href=\"http://iccv2021.thecvf.com/home\"> IEEE International Conference on Computer Vision (ICCV) 2021</a></p></i> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9999208036753454
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2101.00440\" target=\"blank\" >[arXiv preprint]</a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8800501583125663
+      ],
+      "excerpt": "<a href=\"https://openaccess.thecvf.com/content/ICCV2021/html/Stergiou_Refining_Activation_Downsampling_With_SoftPool_ICCV_2021_paper.html\" target=\"_blank\">[CVF open access]</a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9279628677675321
+      ],
+      "excerpt": "<a href=\"https://www.youtube.com/watch?v=iqsMoVQSyDw\" target=\"blank\" >[video presentation]</a> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrosstergiou/SoftPool",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-13T10:12:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-11T09:36:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9463428922622684,
+        0.9945751468551043
+      ],
+      "excerpt": "We have extended this work with in our paper: AdaPool: Exponential Adaptive Pooling for Information-Retaining Downsampling. Info, code and resources are available at alexandrosstergiou/adaPool \nConvolutional Neural Networks (CNNs) use pooling to decrease the size of activation maps. This process is crucial to increase the receptive fields and to reduce computational requirements of subsequent convolutions. An important feature of the pooling operation is the minimization of information loss, with respect to the initial activation maps, without a significant impact on the computation and memory overhead. To meet these requirements, we propose SoftPool: a fast and efficient method for exponentially weighted activation downsampling. Through experiments across a range of architectures and pooling methods, we demonstrate that SoftPool can retain more information in the reduced activation maps. This refined downsampling leads to improvements in a CNN's classification accuracy. Experiments with pooling layer substitutions on ImageNet1K show an increase in accuracy over both original architectures and other pooling methods. We also test SoftPool on video datasets for action recognition. Again, through the direct replacement of pooling layers, we observe consistent performance improvements while computational loads and memory requirements remain limited. <p align=\"center\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[ICCV 2021] Code for approximated exponential maximum pooling ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrosstergiou/SoftPool/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 37,
+      "date": "Wed, 22 Dec 2021 11:16:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/alexandrosstergiou/SoftPool/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alexandrosstergiou/SoftPool",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can build the repo through the following commands:\n```\n$ git clone https://github.com/alexandrosstergiou/SoftPool.git\n$ cd SoftPool-master/pytorch\n$ make install\n--- (optional) ---\n$ make test\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9429894595837878
+      ],
+      "excerpt": "ImageNet weight can be downloaded from the following links: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.927522658699092
+      ],
+      "excerpt": "|Original|<img src=\"images/buildings.jpg\" width=\"130\" />|<img src=\"images/otters.jpg\" width=\"130\" />|<img src=\"images/tennis_ball.jpg\" width=\"130\" />|<img src=\"images/puffin.jpg\" width=\"130\" />|<img src=\"images/tram.jpg\" width=\"130\" />|<img src=\"images/tower.jpg\" width=\"130\" />| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.927180145685046
+      ],
+      "excerpt": "|Soft Pool|<img src=\"images/buildings_soft.jpg\" width=\"130\" />|<img src=\"images/otters_soft.jpg\" width=\"130\" />|<img src=\"images/tennis_ball_soft.jpg\" width=\"130\" />|<img src=\"images/puffin_soft.jpg\" width=\"130\" />|<img src=\"images/tram_soft.jpg\" width=\"130\" />|<img src=\"images/tower_soft.jpg\" width=\"130\" />| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.887107509251392
+      ],
+      "excerpt": "|Original|<img src=\"images/cars.gif\" width=\"130\" />|<img src=\"images/basketball.gif\" width=\"130\" />|<img src=\"images/parkour.gif\" width=\"130\" />|<img src=\"images/bowling.gif\" width=\"130\" />|<img src=\"images/pizza_toss.gif\" width=\"130\" />|<img src=\"images/pass.gif\" width=\"130\" />| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885760538046843
+      ],
+      "excerpt": "|Soft Pool|<img src=\"images/cars_soft.gif\" width=\"130\" />|<img src=\"images/basketball_soft.gif\" width=\"130\" />|<img src=\"images/parkour_soft.gif\" width=\"130\" />|<img src=\"images/bowling_soft.gif\" width=\"130\" />|<img src=\"images/pizza_toss_soft.gif\" width=\"130\" />|<img src=\"images/pass_soft.gif\" width=\"130\" />| \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/alexandrosstergiou/SoftPool/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Refining activation downsampling with SoftPool",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SoftPool",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alexandrosstergiou",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrosstergiou/SoftPool/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All parts of the code assume that `torch` is of version 1.4 or higher. There might be instability issues on previous versions.\n\n> ***! Disclaimer:*** This repository is heavily structurally influenced on Ziteng Gao's LIP repo [https://github.com/sebgao/LIP](https://github.com/sebgao/LIP)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 208,
+      "date": "Wed, 22 Dec 2021 11:16:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can load any of the 1D, 2D or 3D variants after the installation with:\n\n```python\nimport softpool_cuda\nfrom SoftPool import soft_pool1d, SoftPool1d\nfrom SoftPool import soft_pool2d, SoftPool2d\nfrom SoftPool import soft_pool3d, SoftPool3d\n```\n\n+ `soft_poolxd`: Is a functional interface for SoftPool.\n+ `SoftPoolxd`: Is the class-based version which created an object that can be referenced later in the code.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

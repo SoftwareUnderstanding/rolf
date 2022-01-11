@@ -1,0 +1,294 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2003.05863"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use our code or models in your research, please cite with:\r\n```\r\n@InProceedings{Yang_2020_CVPR,\r\nauthor = {Yang, Han and Zhang, Ruimao and Guo, Xiaobao and Liu, Wei and Zuo, Wangmeng and Luo, Ping},\r\ntitle = {Towards Photo-Realistic Virtual Try-On by Adaptively Generating-Preserving Image Content},\r\nbooktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\r\nmonth = {June},\r\nyear = {2020}\r\n}\r\n```\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\n![image](https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/images/formula.png)\r\n\r\nwhere t is a certain key point, Mp' is the set of key point we take into consideration, and N is the size of the set. \r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@InProceedings{Yang_2020_CVPR,\nauthor = {Yang, Han and Zhang, Ruimao and Guo, Xiaobao and Liu, Wei and Zuo, Wangmeng and Luo, Ping},\ntitle = {Towards Photo-Realistic Virtual Try-On by Adaptively Generating-Preserving Image Content},\nbooktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\nmonth = {June},\nyear = {2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8280741988845871
+      ],
+      "excerpt": "Rearranged code of CVPR 2020 paper 'Towards Photo-Realistic Virtual Try-On by Adaptively Generating\u2194Preserving Image Content' for open-sourcing. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8181283085417378
+      ],
+      "excerpt": "[Sample Try-on Video] [Checkpoints]  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.887167692142383
+      ],
+      "excerpt": "10 -&gt; Right_leg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "12 -&gt; Face \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/switchablenorms/DeepFashion_Try_On",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-12-18T06:50:10Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-28T23:42:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8428307367193918,
+        0.8637625174468295,
+        0.9887365082453974,
+        0.8324185677800836
+      ],
+      "excerpt": "Rearranged code of CVPR 2020 paper 'Towards Photo-Realistic Virtual Try-On by Adaptively Generating\u2194Preserving Image Content' for open-sourcing. \nWe rearrange the VITON dataset for easy access.  \nNotably, virtual try-on is a difficult research topic, and our solution is of course not perfect. Please refer to our failure cases and limitations before using this repo. \nThe code is not fully tested. If you meet any bugs or want to improve the system, please feel free to raise in the Issue and we can disscuss. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8886738004856204,
+        0.9880913041228264,
+        0.9817489653299954
+      ],
+      "excerpt": "[2021-12-13] We remove the random dropout, and we use AdamW with weight decay to stablize training. clothes are pasted back before computing GAN loss and vgg loss. The light point artifacts are largely reduced. Code is Updated. \n[2021-12-3] The light point artifacts seem to be caused by the variance of the imprecise human parsing when we rearrange the data for open-sourcing. We recommend to use the ATR model in https://github.com/PeikeLi/Self-Correction-Human-Parsing to get the human parsing with neck label to stablize training. To note that, face and neck part should be treated as non-target body part in mask inpainting and mask composition. With neck label, we can paste back the background before computing vgg loss and gan loss. The uncertainty of background might be another cause of the light point on the neck. \n[2021-10-22] The light point artifacts would occur in current training results. This may be due to some version differences of our training codes when we rearranged them since we didn't observe same artifacts in our released checkpoints. It might be caused by the instablity in training the preservation (identical mapping) of clothes region in Content Fusion Module. Try to paste back the ground-truth clothes to the CFM results when calculating the VGG loss, Gan loss, Feature Matching loss (All except L1), since the above loss might degenerate the results when learning identical mapping. L1 loss can be applied to the reconstruction of clothes region to learn this identical mapping. This ISSUE addressed this problem. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9601275162363281
+      ],
+      "excerpt": "Note that the results of our pretrained model are only guaranteed in VITON dataset only, you should re-train the pipeline to get good results in other datasets. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9282137850370423,
+        0.8347948252109659,
+        0.8708794086646148,
+        0.8516597324391011
+      ],
+      "excerpt": "Note that The released checkpoints are different from what we used in the paper which generate better visual results but may have different (lower or higher) quantitative statistics. Same results of the paper can be reproduced by re-training with different training epochs. \nThe results for computing IS and SSIM are same-clothes reconstructed results.  \nThe code defaultly generates random clothes-model pairs, so you need to modify ACGPN_inference/data/aligned_dataset.py to generate the reconstructed results. \nHere, we also offer the reconstructed results on test set of VITON dataset by inferencing this github repo,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8622901000486551
+      ],
+      "excerpt": "The results here can be directly used to compute the IS and SSIM evalutations. You can get identical results using this github repo. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9750783247916581
+      ],
+      "excerpt": "Compute the score with window size = 11. The SSIM score should be 0.8664, which is a higher score than reported in paper since it is a better checkpoint. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9882955859261767,
+        0.9918531400908046,
+        0.9153590162993565,
+        0.861974230905543
+      ],
+      "excerpt": "Note that the released checkpoints produce IS score 2.82, which is slightly lower (but still SOTA) than the paper since it is a different checkpoint with better SSIM performance. \nWe use the pose map to calculate the difficulty level of try-on. The key motivation behind this is the more complex the occlusions and layouts are in the clothing area, the harder it will be. And the formula is given below. Also, manual selection is involved to improve the difficulty partition. \nVariations of the pose map predictions largely affect the absolute value of try-on complexity, so you may have different partition size using our reported separation values.  \nRelative ranking of complexity best depicts the complexity distribution. Try top 100 or bottom 100 and you can see the effectiveness of our criterion. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Official code for \"Towards Photo-Realistic Virtual Try-On by Adaptively Generating\u2194Preserving Image Content\"\uff0cCVPR\u201820 https://arxiv.org/abs/2003.05863",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/switchablenorms/DeepFashion_Try_On/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 157,
+      "date": "Thu, 30 Dec 2021 03:03:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/switchablenorms/DeepFashion_Try_On/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "switchablenorms/DeepFashion_Try_On",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9821742365342049
+      ],
+      "excerpt": "Use the pytorch SSIM repo. https://github.com/Po-Hsun-Su/pytorch-ssim \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9821742365342049
+      ],
+      "excerpt": "Use the pytorch inception score repo. https://github.com/sbarratt/inception-score-pytorch \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9515752551715031
+      ],
+      "excerpt": "python test.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8030524260933875
+      ],
+      "excerpt": "The code defaultly generates random clothes-model pairs, so you need to modify ACGPN_inference/data/aligned_dataset.py to generate the reconstructed results. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/switchablenorms/DeepFashion_Try_On/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Towards Photo-Realistic Virtual Try-On by Adaptively Generating\u2194Preserving Image Content, CVPR'20.",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeepFashion_Try_On",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "switchablenorms",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/switchablenorms/DeepFashion_Try_On/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 502,
+      "date": "Thu, 30 Dec 2021 03:03:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deepfashion",
+      "acgpn",
+      "generative-adversarial-network",
+      "visual-try-on"
+    ],
+    "technique": "GitHub API"
+  }
+}

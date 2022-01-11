@@ -1,0 +1,357 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [Bag of Tricks for Efficient Text Classification](https://arxiv.org/pdf/1607.01759.pdf)\n2. [Keras Example IMDB FastText](https://github.com/keras-team/keras/blob/master/examples/imdb_fasttext.py)\n3. [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181)\n4. [Keras Example IMDB CNN](https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py)\n5. [Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf)\n6. [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)\n7. [Feed-Forward Networks with Attention Can Solve Some Long-Term Memory Problems](https://arxiv.org/pdf/1512.08756.pdf)\n8. [cbaziotis's Attention](https://gist.github.com/cbaziotis/6428df359af27d58078ca5ed9792bd6d)\n9. [Hierarchical Attention Networks for Document Classification](http://www.aclweb.org/anthology/N16-1174)\n10. [Richard's HAN](https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-HATN/)\n11. [Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9745/9552)\n12. [airalcorn2's RCNN](https://github.com/airalcorn2/Recurrent-Convolutional-Neural-Network-Text-Classifier)",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ShawnyXiao/TextClassification-Keras",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-03T15:56:00Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T09:59:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/RCNN.png\">\n</p>\n\n1. **Word Representation Learning**. RCNN uses a recurrent structure, which is a **bi-directional recurrent neural network**, to capture the contexts. Then, combine the word and its context to present the word. And apply a **linear transformation** together with the `tanh` activation fucntion to the representation.\n2. **Text Representation Learning**. When all of the representations of words are calculated, it applys a element-wise **max-pooling** layer in order to capture the most important information throughout the entire text. Finally, do the **linear transformation** and apply the **softmax** function.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/HAN.png\">\n</p>\n\n1. **Word Encoder**. Encoding by **bidirectional GRU**, an annotation for a given word is obtained by concatenating the forward hidden state and backward hidden state, which summarizes the information of the whole sentence centered around word in current time step.\n2. **Word Attention**. By a one-layer **MLP** and softmax function, it is enable to calculate normalized importance weights over the previous word annotations. Then, compute the sentence vector as a **weighted sum** of the word annotations based on the weights.\n3. **Sentence Encoder**. In a similar way with word encoder, use a **bidirectional GRU** to encode the sentences to get an annotation for a sentence.\n4. **Sentence Attention**. Similar with word attention, use a one-layer **MLP** and softmax function to get the weights over sentence annotations. Then, calculate a **weighted sum** of the sentence annotations based on the weights to get the document vector.\n5. **Document Classification**. Use the **softmax** function to calculate the probability of all classes.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/FeedForwardAttention.png\">\n</p>\n\nIn the paper [Feed-Forward Networks with Attention Can Solve Some Long-Term Memory Problems](https://arxiv.org/pdf/1512.08756.pdf), the **feed forward attention** is simplified as follows,\n\n<p align=\"center\">\n\t<img src=\"image/FeedForwardAttetion_fomular.png\">\n</p>\n\nFunction `a`, a learnable function, is recognized as a **feed forward network**. In this formulation, attention can be seen as producing a fixed-length embedding `c` of the input sequence by computing an **adaptive weighted average** of the state sequence `h`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/TextRNN.png\">\n</p>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/TextCNN.png\">\n</p>\n\n1. Represent sentence with **static and non-static channels**.\n2. **Convolve** with multiple filter widths and feature maps.\n3. Use **max-over-time pooling**.\n4. Use **fully connected layer** with **dropout** and **softmax** ouput.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n\t<img src=\"image/FastText.png\">\n</p>\n\n1.\tUsing a look-up table, **bags of ngram** covert to **word representations**.\n2.\tWord representations are **averaged** into a text representation, which is a hidden variable.\n3.\tText representation is in turn fed to a **linear classifier**.\n4.\tUse the **softmax** function to compute the probability distribution over the predefined classes.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9956884981456909
+      ],
+      "excerpt": "This code repository implements a variety of deep learning models for text classification using the Keras framework, which includes: FastText, TextCNN, TextRNN, TextBiRNN, TextAttBiRNN, HAN, RCNN, RCNNVariant, etc. In addition to the model implementation, a simplified application is included. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9183659216872403,
+        0.8198619918695985
+      ],
+      "excerpt": "FastText was proposed in the paper Bag of Tricks for Efficient Text Classification. \nNetwork structure of FastText: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8092192630384103,
+        0.8198619918695985
+      ],
+      "excerpt": "TextCNN was proposed in the paper Convolutional Neural Networks for Sentence Classification. \nNetwork structure of TextCNN: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8265784989551683,
+        0.8198619918695985
+      ],
+      "excerpt": "TextRNN has been mentioned in the paper Recurrent Neural Network for Text Classification with Multi-Task Learning. \nNetwork structure of TextRNN: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9757058084621202,
+        0.8198619918695985
+      ],
+      "excerpt": "TextBiRNN is an improved model based on TextRNN. It improves the RNN layer in the network structure into a bidirectional RNN layer. It is hoped that not only the forward encoding information but also the reverse encoding information can be considered. No related papers have been found yet. \nNetwork structure of TextBiRNN: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9853238621626094,
+        0.9614994263089661,
+        0.8198619918695985
+      ],
+      "excerpt": "TextAttBiRNN is an improved model which introduces attention mechanism based on TextBiRNN. For the representation vectors obtained by bidirectional RNN encoder, the model can focus on the information most relevant to decision making through the attention mechanism. The attention mechanism was first proposed in the paper Neural Machine Translation by Jointly Learning to Align and Translate, and the implementation of the attention mechanism here is referred to this paper Feed-Forward Networks with Attention Can Solve Some Long-Term Memory Problems. \nThe implementation of attention is not described here, please refer to the source code directly. \nNetwork structure of TextAttBiRNN: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.812533486200809,
+        0.9958157827929619,
+        0.8198619918695985
+      ],
+      "excerpt": "HAN was proposed in the paper Hierarchical Attention Networks for Document Classification. \nThe implementation of attention here is based on FeedForwardAttention, which is the same as the attention in TextAttBiRNN. \nNetwork structure of HAN: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.974504427884459,
+        0.8108468129542781
+      ],
+      "excerpt": "The TimeDistributed wrapper is used here, since the parameters of the Embedding, Bidirectional RNN, and Attention layers are expected to be shared on the time step dimension. \nRCNN was proposed in the paper Recurrent Convolutional Neural Networks for Text Classification. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9541563674835631,
+        0.9751165247688511
+      ],
+      "excerpt": "RCNNVariant is an improved model based on RCNN with the following improvements. No related papers have been found yet. \nThe three inputs are changed to single input. The input of the left and right contexts is removed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8198619918695985
+      ],
+      "excerpt": "Network structure of RCNNVariant: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Text classification models implemented in Keras, including: FastText, TextCNN, TextRNN, TextBiRNN, TextAttBiRNN, HAN, RCNN, RCNNVariant, etc.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shawnyxiao/textclassification-keras/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 182,
+      "date": "Wed, 29 Dec 2021 12:13:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ShawnyXiao/TextClassification-Keras/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ShawnyXiao/TextClassification-Keras",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "Python 3.7 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/FastText_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/TextCNN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/TextRNN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/TextBiRNN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/TextAttBiRNN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/HAN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/RCNN_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519087160785439
+      ],
+      "excerpt": "    <img src=\"image/RCNNVariant_network_structure.png\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ShawnyXiao/TextClassification-Keras/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TextClassification-Keras",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TextClassification-Keras",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ShawnyXiao",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ShawnyXiao/TextClassification-Keras/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 702,
+      "date": "Wed, 29 Dec 2021 12:13:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "text-classification",
+      "nlp",
+      "keras",
+      "fasttext",
+      "textcnn",
+      "textrnn",
+      "han",
+      "rcnn"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All codes are located in the directory ```/model```, and each kind of model has a corresponding directory in which the model and application are placed.\n\nFor example, the model and application of FastText are located under ```/model/FastText```, the model part is ```fast_text.py```, and the application part is ```main.py```.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

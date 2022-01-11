@@ -1,0 +1,364 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2109.01134",
+      "https://arxiv.org/abs/2103.00020",
+      "https://arxiv.org/abs/2109.01134"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use this code in your research, please kindly cite the following paper\n\n```bash\n@article{zhou2021coop,\n    title={Learning to Prompt for Vision-Language Models},\n    author={Zhou, Kaiyang and Yang, Jingkang and Loy, Chen Change and Liu, Ziwei},\n    journal={arXiv preprint arXiv:2109.01134},\n    year={2021}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{zhou2021coop,\n    title={Learning to Prompt for Vision-Language Models},\n    author={Zhou, Kaiyang and Yang, Jingkang and Loy, Chen Change and Liu, Ziwei},\n    journal={arXiv preprint arXiv:2109.01134},\n    year={2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9949147839882485
+      ],
+      "excerpt": "Authors: Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9631265751612096
+      ],
+      "excerpt": "Please email Kaiyang Zhou if you need the results' raw numbers. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/KaiyangZhou/CoOp",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-01T14:33:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T06:51:49Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9362538374320933
+      ],
+      "excerpt": "CoOp (Context Optimization) is a differentiable approach that focuses on continuous prompt learning to facilitate deployment of pre-trained vision language models (like CLIP) in downstream datasets. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9687383521918032,
+        0.9117116884030473,
+        0.9634216639945858
+      ],
+      "excerpt": "15.10.2021: We find that the best_val model and the last_step model achieve similar performance, so we set TEST.FINAL_MODEL = \"last_step\" for all datasets to save training time. Why we used best_val: the (tiny) validation set was designed for the linear probe approach, which requires extensive tuning for its hyperparameters, so we used the best_val model for CoOp as well for fair comparison (in this way, both approaches have access to the validation set). \n09.10.2021: Important changes are made to Dassl's transforms.py. Please pull the latest commits from https://github.com/KaiyangZhou/Dassl.pytorch and this repo to make sure the code works properly. In particular, 1) center_crop now becomes a default transform in testing (applied after resizing the smaller edge to a certain size to keep the image aspect ratio), and 2) for training, Resize(cfg.INPUT.SIZE) is deactivated when random_crop or random_resized_crop is used. Please read this issue on how these changes might affect the performance. \n18.09.2021: We have fixed an error in Dassl which could cause a training data loader to have zero length (so no training will be performed) when the dataset size is smaller than the batch size (due to drop_last=True). Please pull the latest commit for Dassl (>= 8eecc3c). This error led to lower results for CoOp in EuroSAT's 1- and 2-shot settings (others are all correct). We will update the paper on arxiv to fix this error. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8182155180375617
+      ],
+      "excerpt": "CFG means which config file to use, such as rn50, rn101 or vit_b32 (see CoOp/configs/trainers/CoOp/). Note that for ImageNet, we use CoOp/configs/trainers/CoOp/*_ep50.yaml for all settings (please follow the implementation details shown in the paper). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8162883575088707
+      ],
+      "excerpt": "After the experiments are finished, you can use parse_test_res.py to calculate the average results instead of manually looking into the log files. Say the structure of output/ is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.824310474403077
+      ],
+      "excerpt": "How to initialize the context tokens with pre-trained word vectors? Specify the words for the parameter TRAINER.COOP.CTX_INIT in your config file. In our paper, we use configs/trainers/rn50_ctxv1.yaml (give this file to --config-file, see scripts/main.sh), which uses \"a photo of a\" as the initialization words. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8815744030606973
+      ],
+      "excerpt": "The command is provided in CoOp/scripts/eval.sh. The key arguments are --model-dir, --load-epoch and --eval-only. --model-dir indicates the directory where the models are saved (i.e. the entire folder containing log.txt, the tensorboard file and prompt_learner/). --load-epoch tells the code to load the model saved at a specific epoch, like --load-epoch 50 for ImageNet (see the source code for more details). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8338132748855325
+      ],
+      "excerpt": "The default setting is SHOTS=16. Feel free to modify the script. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Learning to Prompt for Vision-Language Models.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaiyangzhou/coop/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 20,
+      "date": "Wed, 22 Dec 2021 05:42:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/KaiyangZhou/CoOp/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "KaiyangZhou/CoOp",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kaiyangzhou/coop/main/scripts/zeroshot.sh",
+      "https://raw.githubusercontent.com/kaiyangzhou/coop/main/scripts/eval.sh",
+      "https://raw.githubusercontent.com/kaiyangzhou/coop/main/scripts/main.sh",
+      "https://raw.githubusercontent.com/kaiyangzhou/coop/main/lpclip/linear_probe.sh",
+      "https://raw.githubusercontent.com/kaiyangzhou/coop/main/lpclip/feat_extractor.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This code is built on top of the awesome toolbox [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytorch) so you need to install the `dassl` environment first. Simply follow the instructions described [here](https://github.com/KaiyangZhou/Dassl.pytorch#installation) to install `dassl` as well as PyTorch. After that, run `pip install -r requirements.txt` under `CoOp/` to install a few more packages required by [CLIP](https://github.com/openai/CLIP) (this should be done when `dassl` is activated). Then, you are ready to go.\n\nFollow [DATASETS.md](DATASETS.md) to install the datasets.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8591223913132765,
+        0.8591223913132765,
+        0.8591223913132765,
+        0.8591223913132765,
+        0.8287927238571292
+      ],
+      "excerpt": "- 1 shot: bash main.sh caltech101 rn50_ep50 middle 16 1 False \n- 2 shots: bash main.sh caltech101 rn50_ep100 middle 16 2 False \n- 4 shots: bash main.sh caltech101 rn50_ep100 middle 16 4 False \n- 8 shots: bash main.sh caltech101 rn50 middle 16 8 False \n- 16 shots: bash main.sh caltech101 rn50 middle 16 16 False \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9222901060549229
+      ],
+      "excerpt": "Then, you will see something like this in your terminal \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8318906146467951
+      ],
+      "excerpt": "bash eval.sh imagenetv2 rn50 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955375573592956
+      ],
+      "excerpt": "See CoOp/scripts/zeroshot.sh. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8794519040153407
+      ],
+      "excerpt": "DATASET takes as input a dataset name, like imagenet or caltech101. The valid names are the files' names in CoOp/configs/datasets/. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8143497136309633,
+        0.8143497136309633,
+        0.8143497136309633,
+        0.8143497136309633
+      ],
+      "excerpt": "- 1 shot: bash main.sh caltech101 rn50_ep50 middle 16 1 False \n- 2 shots: bash main.sh caltech101 rn50_ep100 middle 16 2 False \n- 4 shots: bash main.sh caltech101 rn50_ep100 middle 16 4 False \n- 8 shots: bash main.sh caltech101 rn50 middle 16 8 False \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8441655188875332,
+        0.8441655188875332,
+        0.8441655188875332,
+        0.8441655188875332,
+        0.8170633261107703
+      ],
+      "excerpt": "- 1 shot: bash main.sh caltech101 rn50_ep50 middle 16 1 True \n- 2 shots: bash main.sh caltech101 rn50_ep100 middle 16 2 True \n- 4 shots: bash main.sh caltech101 rn50_ep100 middle 16 4 True \n- 8 shots: bash main.sh caltech101 rn50 middle 16 8 True \n- 16 shots: bash main.sh caltech101 rn50 middle 16 16 True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9393031009800269
+      ],
+      "excerpt": "python parse_test_res.py output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8343175212854553,
+        0.9056564928047043,
+        0.8441339219932423
+      ],
+      "excerpt": "file: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed1/log.txt. accuracy: 91.81%. error: 8.19%. \nfile: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed2/log.txt. accuracy: 92.01%. error: 7.99%. \nfile: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed3/log.txt. accuracy: 92.17%. error: 7.83%. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8263361766302918
+      ],
+      "excerpt": "Summary of directory: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.829046482360246
+      ],
+      "excerpt": "The command is provided in CoOp/scripts/eval.sh. The key arguments are --model-dir, --load-epoch and --eval-only. --model-dir indicates the directory where the models are saved (i.e. the entire folder containing log.txt, the tensorboard file and prompt_learner/). --load-epoch tells the code to load the model saved at a specific epoch, like --load-epoch 50 for ImageNet (see the source code for more details). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8200184820400535
+      ],
+      "excerpt": "Again, you can use parse_test_res.py to automate the calculation of average performance. This time you should append --test-log, e.g., python parse_test_res.py directory --test-log. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/KaiyangZhou/CoOp/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Kaiyang Zhou\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# CoOp\n\nPaper: [Learning to Prompt for Vision-Language Models](https://arxiv.org/abs/2109.01134)\n\nAuthors: [Kaiyang Zhou](https://kaiyangzhou.github.io/), [Jingkang Yang](https://jingkang50.github.io/), [Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/index.html), [Ziwei Liu](https://liuziwei7.github.io/)\n\nCoOp (Context Optimization) is a differentiable approach that focuses on continuous prompt learning to facilitate deployment of pre-trained vision language models (like [CLIP](https://arxiv.org/abs/2103.00020)) in downstream datasets.\n\n<div align=\"center\">\n  <img src=\"https://drive.google.com/uc?export=view&id=1sQYVV6-haWvo8p4ACC4JxLtZHvGQeEAW\" width=\"900px\" />\n</div>\n\n## Updates\n\n- **15.10.2021**: We find that the `best_val` model and the `last_step` model achieve similar performance, so we set `TEST.FINAL_MODEL = \"last_step\"` for all datasets to save training time. Why we used `best_val`: the ([tiny](https://github.com/KaiyangZhou/CoOp/blob/main/datasets/oxford_pets.py#L32)) validation set was designed for the linear probe approach, which requires extensive tuning for its hyperparameters, so we used the `best_val` model for CoOp as well for fair comparison (in this way, both approaches have access to the validation set).\n\n- **09.10.2021**: Important changes are made to Dassl's transforms.py. Please pull the latest commits from https://github.com/KaiyangZhou/Dassl.pytorch and this repo to make sure the code works properly. In particular, 1) `center_crop` now becomes a default transform in testing (applied after resizing the smaller edge to a certain size to keep the image aspect ratio), and 2) for training, `Resize(cfg.INPUT.SIZE)` is deactivated when `random_crop` or `random_resized_crop` is used. Please read this [issue](https://github.com/KaiyangZhou/CoOp/issues/8) on how these changes might affect the performance.\n\n- **18.09.2021**: We have fixed an error in Dassl which could cause a training data loader to have zero length (so no training will be performed) when the dataset size is smaller than the batch size (due to `drop_last=True`). Please pull the latest commit for Dassl (>= `8eecc3c`). This error led to lower results for CoOp in EuroSAT's 1- and 2-shot settings (others are all correct). We will update the paper on arxiv to fix this error.\n\nPlease email [Kaiyang Zhou](https://kaiyangzhou.github.io/) if you need the results' raw numbers.\n\n## How to Install\nThis code is built on top of the awesome toolbox [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytorch) so you need to install the `dassl` environment first. Simply follow the instructions described [here](https://github.com/KaiyangZhou/Dassl.pytorch#installation) to install `dassl` as well as PyTorch. After that, run `pip install -r requirements.txt` under `CoOp/` to install a few more packages required by [CLIP](https://github.com/openai/CLIP) (this should be done when `dassl` is activated). Then, you are ready to go.\n\nFollow [DATASETS.md](DATASETS.md) to install the datasets.\n\n## How to Run\n\nWe provide the running scripts in `scripts/`. Make sure you change the path in `DATA` and run the commands under `CoOp/scripts/`.\n\n### Few-Shot Learning\nAll you need is `CoOp/scripts/main.sh`, which contains six input arguments.\n\n`DATASET` takes as input a dataset name, like `imagenet` or `caltech101`. The valid names are the files' names in `CoOp/configs/datasets/`.\n\n`CFG` means which config file to use, such as `rn50`, `rn101` or `vit_b32` (see `CoOp/configs/trainers/CoOp/`). Note that for ImageNet, we use `CoOp/configs/trainers/CoOp/*_ep50.yaml` for all settings (please follow the implementation details shown in the paper).\n\nBelow we provide examples on how to run CoOp on Caltech101.\n\n**CLIP + CoOp (M=16, end)**:\n- 1 shot: `bash main.sh caltech101 rn50_ep50 end 16 1 False`\n- 2 shots: `bash main.sh caltech101 rn50_ep100 end 16 2 False`\n- 4 shots: `bash main.sh caltech101 rn50_ep100 end 16 4 False`\n- 8 shots: `bash main.sh caltech101 rn50 end 16 8 False`\n- 16 shots: `bash main.sh caltech101 rn50 end 16 16 False`\n\n**CLIP + CoOp (M=16, mid)**:\n- 1 shot: `bash main.sh caltech101 rn50_ep50 middle 16 1 False`\n- 2 shots: `bash main.sh caltech101 rn50_ep100 middle 16 2 False`\n- 4 shots: `bash main.sh caltech101 rn50_ep100 middle 16 4 False`\n- 8 shots: `bash main.sh caltech101 rn50 middle 16 8 False`\n- 16 shots: `bash main.sh caltech101 rn50 middle 16 16 False`\n\n**CLIP + CoOp (M=16, end, CSC)**:\n- 1 shot: `bash main.sh caltech101 rn50_ep50 end 16 1 True`\n- 2 shots: `bash main.sh caltech101 rn50_ep100 end 16 2 True`\n- 4 shots: `bash main.sh caltech101 rn50_ep100 end 16 4 True`\n- 8 shots: `bash main.sh caltech101 rn50 end 16 8 True`\n- 16 shots: `bash main.sh caltech101 rn50 end 16 16 True`\n\n**CLIP + CoOp (M=16, mid, CSC)**:\n- 1 shot: `bash main.sh caltech101 rn50_ep50 middle 16 1 True`\n- 2 shots: `bash main.sh caltech101 rn50_ep100 middle 16 2 True`\n- 4 shots: `bash main.sh caltech101 rn50_ep100 middle 16 4 True`\n- 8 shots: `bash main.sh caltech101 rn50 middle 16 8 True`\n- 16 shots: `bash main.sh caltech101 rn50 middle 16 16 True`\n\nAfter the experiments are finished, you can use `parse_test_res.py` to calculate the average results instead of manually looking into the log files. Say the structure of `output/` is\n\n```\noutput\n|\u2013\u2013 caltech101/\n|   |\u2013\u2013 CoOp/\n|   |   |\u2013\u2013 rn50_16shots/\n|   |   |   |\u2013\u2013 nctx16_cscFalse_ctpend/\n|   |   |   |   |\u2013\u2013 seed1/\n|   |   |   |   |\u2013\u2013 seed2/\n|   |   |   |   |\u2013\u2013 seed3/\n|   |   |\u2013\u2013 rn50_8shots/\n|   |   |   |\u2013\u2013 nctx16_cscFalse_ctpend/\n|   |   |   |   |\u2013\u2013 seed1/\n|   |   |   |   |\u2013\u2013 seed2/\n|   |   |   |   |\u2013\u2013 seed3/\n```\n\nTo calculate the average results for the folder `rn50_16shots/nctx16_cscFalse_ctpend/`, you can run\n\n```bash\npython parse_test_res.py output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend\n```\n\nThen, you will see something like this in your terminal\n\n```bash\nParsing files in output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend\nfile: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed1/log.txt. accuracy: 91.81%. error: 8.19%.\nfile: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed2/log.txt. accuracy: 92.01%. error: 7.99%.\nfile: output/caltech101/CoOp/rn50_16shots/nctx16_cscFalse_ctpend/seed3/log.txt. accuracy: 92.17%. error: 7.83%.",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CoOp",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "KaiyangZhou",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/KaiyangZhou/CoOp/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We provide the running scripts in `scripts/`. Make sure you change the path in `DATA` and run the commands under `CoOp/scripts/`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 217,
+      "date": "Wed, 22 Dec 2021 05:42:48 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@misc{veli\u010dkovi\u01072018graph,\n      title={Graph Attention Networks}, \n      author={Petar Veli\u010dkovi\u0107 and Guillem Cucurull and Arantxa Casanova and Adriana Romero and Pietro Li\u00f2 and Yoshua Bengio},\n      year={2018},\n      eprint={1710.10903},\n      archivePrefix={arXiv},\n      primaryClass={stat.ML}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{veli\u010dkovi\u01072018graph,\n      title={Graph Attention Networks}, \n      author={Petar Veli\u010dkovi\u0107 and Guillem Cucurull and Arantxa Casanova and Adriana Romero and Pietro Li\u00f2 and Yoshua Bengio},\n      year={2018},\n      eprint={1710.10903},\n      archivePrefix={arXiv},\n      primaryClass={stat.ML}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tatp22/pytorch-fast-GAT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-18T12:04:43Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-12T07:49:38Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9899990757946979
+      ],
+      "excerpt": "This is my implementation of an old paper, Graph Attention Networks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9846218454199578,
+        0.9457792406896058,
+        0.9752555614545935
+      ],
+      "excerpt": "What is great about this paper is that, besides its state of the art performance on a number of benchmarks, \nis that it could be applied to any graph, regardless of its structure. However, this algorithm has a runtime \nthat depends on the number of edges, and when the graph is dense, this means that it can run in nodes^2 time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8217748819479098,
+        0.9068497587878707,
+        0.984227523613693,
+        0.9754519328222555,
+        0.9658750221571074,
+        0.8109634234378342
+      ],
+      "excerpt": "a different method: Reducing the number of nodes in the interior representation. This will be done similarly to how \nthe Linformer decreases the memory requirement of the internal matrices, which \nis by adding a parameterized matrix to the input that transforms it. A challenge here is that since this is a graph, \nnot all nodes will connect to all other nodes. My plan is to explore techniques to reduce the size of the graph (the \nnodes, that is), pass it into the GAT, and then upscale it back to the original size. \nSeeing that sparse attention has shown to perfom just as well as traditional attention, could it be the same for graphs? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8722511303020981
+      ],
+      "excerpt": "This is not yet implemented. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9340607989996722,
+        0.9683670242339076
+      ],
+      "excerpt": "The first downsampling method that I came up with here takes advantage of the disjoint set data structure, in order \nto achieve downsampling in just O(n\u03b1(n)) time. This works as follows: until the graph is at the desired number of nodes, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9307064450434808,
+        0.9024886573298337,
+        0.9633745429358805,
+        0.8175125523055768
+      ],
+      "excerpt": "node, and we replace the starting node with this combination. \nIn this method, the disjoint set data structure allows preserve our edges such that if nodes i and j were connected \nby a path of length k in the original graph G, at any point in the downsampling, for our graph G', the nodes i' \nand j' (or whatever they were merged into) are still connected by a path of length k' &lt;= k, and the information on \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8358837036467501,
+        0.8673717641570791,
+        0.8598122625399331,
+        0.952764650884501
+      ],
+      "excerpt": "of that downsampling, but for now I will just test the above method. \nThe downsampling method returns the edges that were merged in order; this makes the upsampling easy, as we just run a \nreverse nn.Linear that upsamples it from 1 to 2 nodes. \nWhat's nice about this method is that it requires no assumptions on the graph structure. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A PyTorch implementation of Graph Attention Networks, with experimental speedup features.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tatp22/pytorch-fast-GAT/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 19:23:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tatp22/pytorch-fast-GAT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tatp22/pytorch-fast-GAT",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npip install fast_gat\n```\n\nAlternatively,\n\n```\ngit clone https://github.com/tatp22/pytorch-fast-GAT.git\ncd fast_gat\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/tatp22/pytorch-fast-GAT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Peter Tatkowski\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Pytorch Fast GAT Implementation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pytorch-fast-GAT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tatp22",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/tatp22/pytorch-fast-GAT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 23 Dec 2021 19:23:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Right now, there exist two different versions of GAT: one for sparse graphs, and one for dense graphs. The idea in\nthe end is to use only the dense version, since the sparse version runs slower. It is currently not possible to use\nthe dense version on very large graphs, since it creates a matrix of size `(n,n)`, which will quickly drain the\nsystem's memory.\n\nAs an example, this is how to use the sparse version:\n\n```python\nimport torch\nfrom fast_gat import GraphAttentionNetwork\n\nnodes = torch.tensor([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9], [1.0, 1.1, 1.2]], dtype= torch.float)\nedges = {0: {1,2}, 1: {0,2,3}, 2: {0,1}, 3: {1}}\n\ndepth = 3\nheads = 3\ninput_dim = 3\ninner_dim = 2\n\nnet = GraphAttentionNetwork(depth, heads, input_dim, inner_dim)\n\noutput = net(nodes, edges)\nprint(output)\n```\n\nA point of interest here that one may notice is that the modules assume the graph is directed and that the edges\nhave already been processed such that the nodes are zero indexed.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

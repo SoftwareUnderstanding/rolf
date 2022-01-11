@@ -1,0 +1,992 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.01497",
+      "https://arxiv.org/abs/1409.1556"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9674552645921696
+      ],
+      "excerpt": "        if (snip_Y_min>=0) and (snip_Y_min+target_size<=image_size) and (snip_X_min>=0) and (snip_X_min+target_size<=image_size): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "        if no_intersect(c_X,c_Y,bboxes): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "    if len(fg_inds) > num_fg: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456806903995955
+      ],
+      "excerpt": "if len(bg_inds) &gt; num_bg: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "        if len(true_bboxes)==0: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456806903995955
+      ],
+      "excerpt": "        if len(rois) &lt;= 0 : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "            if (len(batch_rois)==BATCH_SIZE):  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456806903995955
+      ],
+      "excerpt": "                if (i &lt; len(rois)-1): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8823261952630096
+      ],
+      "excerpt": "  image = Image.open(image_file).resize((image_size ,image_size ), Image.NEAREST) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "  if post_nms_N > 0: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "  if fg_inds.size > 0: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "  if bg_inds.size > 0: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ehijano/Faster-RCNN-Global-Wheat-Detection",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-21T15:15:48Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-07T01:59:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9428803011414376
+      ],
+      "excerpt": "In these notes I will explain in detail how to create a model that performs an object recognition task. This will be done using the architecture known as Faster RCNN (see the original arxiv paper). The resources I have learned the most from while doing this are this repo, and this very clear explanation of the structure of faster RCNN.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.989364397882952
+      ],
+      "excerpt": "Before diving into the details it is necessary to understand the general structure of Faster RCNN. It consists of three separate machine learning models acting in series as shown in this image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914203933757777,
+        0.997035250380216,
+        0.9905488779434402,
+        0.9933608837118267,
+        0.9408151119501807,
+        0.9522466252362348
+      ],
+      "excerpt": "The first model is a convolutional neural network (CNN) that processes the incoming image into a set of feature maps that capture the locations of the different features in the image. Usually, Faster RCNN uses a pre-trained classifier like VGG16. These models are trained to classify ~1000 classes of objects in a wide variety of images. Here we will not make use of a pre-trained model. We will construct our own 2-class CNN that classifies imagines containing a spike and images containing background. \nThe second model is a region proposal network (RPN) that takes these feature maps and returns some regions of interests where it is likely that an object in the image is located. The way this is done is by placing a set of \"anchors\" at each point in the feature map. Each anchor corresponds to a region in the original image and it is determined by four numbers, which are the coordinates of the upper left corner and the lower bottom corner. The Network returns two different outputs; A score for each anchor that measures the likelyhood of the anchor containing an object, and a set of four numbers for each anchor indicating how the region should be modify to better contain a spike. \nLastly, the \"region based convolutional neural net\" (R-CNN) takes the highest rated regions proposed by the RPN (known as Regions of Interest - RoIs) and returns the likelihood of them containing a spike, and how the region has to be modified in order for it to capture the spike better. \nHaving discussed the general strategy, lets dive into the details of each of these networks, starting with the CNN \nIn this section I will explain the construction of a convolutional neural net that classifies images into two categories: spike vs background. The inputs/outputs of the net are \ninput: A 128x128 image consisting on a snip of the full 1024x1024 image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8954907928015408
+      ],
+      "excerpt": "In order to be able to train such network, we need images containing a spike (class 1) and images containing background (class 0). I will choose images of size 128x128, which are the average size of the spikes in the data set. An example of these two classes is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for image_name in training_files: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8365966456639072
+      ],
+      "excerpt": "    data =  asarray(image) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8113744161801809,
+        0.9560187895509076
+      ],
+      "excerpt": "    #: Generate snips with spikes \n    for bbox in bboxes: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "            snip = data[snip_Y_min:snip_Y_min+target_size,snip_X_min:snip_X_min+target_size,:] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "            snip = data[snip_Y_min:snip_Y_min+target_size,snip_X_min:snip_X_min+target_size,:] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9779760969609387
+      ],
+      "excerpt": "The lists x_full and x_empty contain the regions of all images containing a spike or background. y_full and y_empty are the labels attributed to each class. We now select an equal amount of samples from each list and randomly mix them together. This generates a set of training samples with the same amount of spikes and background samples. The part of the code that does this readsPython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9779816007876859
+      ],
+      "excerpt": "The lists constructed here contain a huge amount of data. This will be an issue when constructing the CNN, so we will save each element of the training data in our hard drive in separate files, and we will keep track of where we save that data with a new array containing the file names. This will allow us to call the data in batches.Python \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9531805873786642,
+        0.9834135677931798
+      ],
+      "excerpt": "As can be seen, we have also decided to split this data into training data which we will use to train our CNN, and test data that we will use to verify the model.  \nHaving training and test data at hand, we are ready to construct and train our CNN. The code can be found in CNN.py. The structure of the network is summarized in the following image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.989333113885116
+      ],
+      "excerpt": "We start with a 128x128x3 image and convolute it with 16 3x3 filters and ReLU activation. We then add a batch normalization layer, a MaxPool layer that divides the size of the output by 2, and a dropout layer. At each new depth level, we perform a convolution by twice the amount of filters and ReLU, and we again perform batch normalization + MaxPool + dropout. We finish with a flatten layer and a dense layer of size 2 whose outcome are the probabilities for the image being a spike or background. The code for the model using keras is very simple \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298775026294136
+      ],
+      "excerpt": "model.add(Dense(number_classes, activation='softmax')) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9892747428572707
+      ],
+      "excerpt": "The CNN described above has been engineered so that the perceptive field of the last layer is big enough to contain a decently sized spike. Here, the field of view is around 280 pixels. If one constructs a CNN with a small FOV, the RPN will not have enough information to do a good job! We are almost ready to fit the model using our training data. The line of code to do so would bePython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9210762742754705
+      ],
+      "excerpt": "Here, we have used two generators of training and test data, which are defined in the code asPython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9671497149477206
+      ],
+      "excerpt": "The class Snip_Generator is a generator of data that returns the different snips containing spikes/background as well as their labels 1/0. The code defining such class is very simplePython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9743170847489854,
+        0.911015092834817
+      ],
+      "excerpt": "Thanks to this generator, we are able to fit the model loading only the snips participating in a single batch. Training the model using the entire data set would surely yield a memory error in most home computers.  \nTraining the model for 30 epochs takes about 15 minutes and yields a decent accuracy. The results I got were 98.416% accuracy and 0.092 binary cross-entropy loss. The plot for the loss was \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9561901400842814,
+        0.9777444427708916
+      ],
+      "excerpt": "Having trained the CNN, we are ready for the next step. The region proposal network or RPN. \nThe structure of the RPN consists of a shallow convolutional network with two heads.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.917423653601962,
+        0.9427453163028875,
+        0.9691759817738694,
+        0.9882799803482473
+      ],
+      "excerpt": "The inputs/outputs of the network are \ninputs: A feature map constructed out of the original image using the CNN trained above \noutputs: For each pixel in the feature map, a set of 9 scores corresponding to 9 anchors placed at that pixel, and a set of 9*4 numbers corresponding to displacements of those anchors. The scores meassure the likelihood of the anchor containing an object inside, and the displacements specify how the anchor has to be modified to better contain such object. \nThe region proposal network takes the feature maps of the image as the input. The first layer of the network is a simple convolution with 256 3x3 filters. The outcome of the first layer is sent to two different layers. One of them is a convolutional layer with 9 filters (one for each anchor) and sigmoid activation that yields anchor scores. The other one is a convolutional layer with 9*4 = 36 filters (one for each anchor coordinate) and linear activation that yields anchor displacements. In the code, this network is very easy to construct using keras \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9961864227838526
+      ],
+      "excerpt": "We are now ready to discuss the construction of the anchors and their role in the RPN. Lets first discuss our input. Feature maps are the outcome of the CNN at a layer before Flatten+Dense.  In this project we will mostly be using the outcome of the last convolutional layer, which for me was named 'batch_normalization_9'. Code-wise, we cut the CNN at that layer using the following lines \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9267754363820139
+      ],
+      "excerpt": "The new model model_CNN_cut takes the original 1024x1024x3 image as input, and returns the feature maps as output. In my case, the feature maps have dimensions 32x32x512. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9349834941258216
+      ],
+      "excerpt": "In terms of code, we obtain the feature maps as follows \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.994213334943524
+      ],
+      "excerpt": "The other input of the RPN are anchors. Anchors are simply boxes placed uniformly all over the input image. The way we choose the set of anchors is as follows. Each pixel in the feature map discussed above corresponds to several pixels in the original image, which we refer to as the \"receptive field\" of each feature map pixel. The size of the receptive field is known as \"feature_stride\" and it is given by image_size / feature_size. In my case, feature_stride = 512/16 = 32. In this image, I show the receptive field associated to a particular feature pixel \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9805732804030586
+      ],
+      "excerpt": "At each pixel of the feature map, we place anchor_number = 9 anchors, which correspond to 9 different regions in the original image. Each different anchor will correspond to a different region in the original image. One of the anchors usually corresponds to the region of the image spanning the entire receptive field of one of the feature map pixels. Such anchor is a square region of size feature_stride. Usually, one generates additional anchors by applying three scales and three ratios. I choose the following parameters \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9941419190161248
+      ],
+      "excerpt": "Something very important one has to make sure of is that the regions associated to each of the resulting anchors fit in the receptive field associated to the 3x3 window of the feature map that participates in the convolution performed by the RPN. This means that no anchor can have a length greater than feature_stride*3. If anchors are bigger than the receptive field seen by the convolutional window, we are expecting the model to fit using data it doesn't have access to, which will surely yield undesired results. For the pixel shown in the last figure, the corresponding anchors are \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8898787708359932
+      ],
+      "excerpt": "There is a total of 16x16x9 anchors in the image, and if we plot them we of course get a mess like this \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9978029502547376,
+        0.8327550337315128
+      ],
+      "excerpt": "The job of the RPN is to tells us which of those anchors is interesting in the sense that it could contain an object, and how to modify the region spanned by the anchor so that it better contains it. In order to fit the RPN, we need to generate training data. We will follow a strategy where each image is scanned sepparately. For each image, we have to determine which of the anchors are good and how to move them. In the code, this is performed by the function input_generator(). This function scans all images in the training directory and produces a batch using the function produce_batch(image_file, true_boxes). This function takes an image and its spike-containing boxes, and it returns regions of interest containing foreground and background, their scores (1 or 0), their displacements (set of four numbers), and the 3x3 tile of the feature map they correspond to.  \nAfter opening the original image and building the feature map, the code constructs the anchors in the image. First we construct the base anchors \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9321555134118568
+      ],
+      "excerpt": "and then we add shifts to construct all anchors in the image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9762745774641045
+      ],
+      "excerpt": "Some of the anchors we have constructed intersect the border of the image, so we can get rid of them as follows \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9761613397433523
+      ],
+      "excerpt": "The objective now is to see which of these anchors overlap nicely with the true bounding boxes. The ones which overlap nicely will be considered as foreground and given a score of 1, while the ones that do not will be considered background and will be given a score of 0. Usually, there is many more background than foreground anchors, so we will have to ignore some of the background anchors by giving them a score of -1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9460100882133886
+      ],
+      "excerpt": "We now can label our anchors accordingly. We start by setting all labels to -1 (ignore). Then we attribute a score of 1 to two groups of anchors: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9786643238229992
+      ],
+      "excerpt": "Generally speaking, FG_THRESHOLD is chosen to be 0.7. I have played around with this number and it seemed 0.7 was a good choice. We now have to decide which anchors are background. These are anchors whose overlap is very poor with the true bboxes. Any anchor with maximum overlap below BG_THRESHOLD=0.3  is considered background. Code-wise, we have \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879991852449319
+      ],
+      "excerpt": "The problem we face now is that we could have many more anchors that are background than foreground. This is not good when training our model, we should strive to have the same amount of foreground and background (BG_FG_FRAC = 1). We thus subsamplePython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9439912957803499
+      ],
+      "excerpt": "We have determined what anchors will be considered foreground and which background in this batch, so we store this information in two arrays. One of them is the relevant anchor indices, and the other one is the relevant feature map pixel those anchors are located atPython  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9137039961449033
+      ],
+      "excerpt": "    np.random.shuffle(anchor_batch_inds)  #:randomly shuffling so each batch is different and also there is not so many corner contributions.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.893217137747797
+      ],
+      "excerpt": "Having stored which anchors are relevant for the batch, we are ready to construct their 3x3 feature map tilesPython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9848158398165656
+      ],
+      "excerpt": "    batch_x = [] #:initialize the batch of locations of the tile. ONLY USED FOR DEBUGGING \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076,
+        0.8490348337999541
+      ],
+      "excerpt": "    for ind in feature_batch_inds: \n        #: x,y are the point in the feature map pointed at by feature_batch_inds indices \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9227422436749644
+      ],
+      "excerpt": "        fc_snip=padded_fcmap[y:y+FILTER_SIZE,x:x+FILTER_SIZE,:]  #:snip a FILTER_SIZExFILTER_SIZE window of the feature map \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8969471338166366
+      ],
+      "excerpt": "We now need to specify how the relevant anchors have to be modified to overlap better with the true bboxes. For this, we use \"targets\", which are defined as \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914948873642884,
+        0.9680456248662094
+      ],
+      "excerpt": "Here, the coordinates with a subscript are the coordinates for the center and the width/height of the anchor, while the other coordinates refer to the true box. We will feed these targets to the RPN for the anchors with label 1. By optimizing a smoothL1 loss for the outcome of the second head of the network, the RPN will learn to displace anchors towards regions containing spikes.  \nHaving computed the labels for the relevant anchors, their associated feature map tiles, and their targets, the code assemples all this information in lists and produces a batch to train the RPN. For the sake of clarity, if you tell the code to plot the batches, we get these kinds of images as the network trains: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9912476495932514,
+        0.968730986027438
+      ],
+      "excerpt": "These images show the receptive field of the 3x3 tile of the feature map used in the elements of the batch. The red rectangle is the original foreground anchor, and the blue rectangle is the highest overlap true box with that anchor. The third image is an example of a background sample, where no anchor is considered foreground.  \nWe are ready to train. We just need to compile the model with our favourite optimizer and learning rate. In this case I used adam and a simple learning schedule that can be found in the code.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.989890050707534
+      ],
+      "excerpt": "The loss functions can also be found in the code. One of them corresponds to binary_crossentropy for the scores (A custom loss function is needed here so that the code ignores the label=-1 anchors). The other one is a smoothL1 loss function for the targets which only takes the positive label anchors into account. Something very important to make sure of is that each of these loss functions is divided by the size of the batch. Otherwise the loss will reward smaller batches giving undesired results! In my case this was taken care of by using keras.losses.Huber() for the targets and applying keras.mean() to the binary_crossentropy loss.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9981905557464681,
+        0.9967262832790812,
+        0.9853520880099153,
+        0.9630412264376035
+      ],
+      "excerpt": "The outcome of the RPN is a score and a target vector for each of the anchors in the image. There is a total of 16169=2304 anchors. We can choose the 1000 anchors with the best score to get 1000 regions of interest. Many of these regions will overlap greatly and so they are highly redundant. In order to get rid of so much redundancy, we perform Non-Maximal Supression. It is an algorithm that gets rid of all regions of interest that overlap greatly with another region of interest with a higher score. I will come back to this concept when discussing the RCNN, so I wont explain any detail here. After non-maximal supression, we are left with a fixed amount of regions of interest. In my case, I chose 300 regions. Here are a couple of images showing such regions for images that were not used in the training of the RPN \nThe input for the RCNN are the regions of interest determined by the RPN, together with the feature maps participating in the CNN. Each region of interest can have different size and shape. In order to create a fixed size input, we perform \"RoI pooling\". See this article for a neat explanation of this technique. To keep thinks simple in this work, we will simply use the crop_and_resize tensorflow function. It simply takes a snip of a given image and resizes it to a fixed shape. In our case, we will crop the snips of the feature maps associated to each region of interest, and resize them to a 7x7 window, which will be the input of the network.  \nOne of the outputs of the RCNN is a set of targets for each region, which indicate how to modify that region to better contain a spike. Another output of the RCNN is a classifying score that indicates the probability of the object being a spike. Usually, the classification involves a lot of classes (cats, dogs, humans, etc). Here, we will use a two-category classifier involving spikes and background categories.  \nThe code for the network is very simple \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "fc1 = Dense( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "output_deltas = Dense( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "output_scores = Dense( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9934514727499385
+      ],
+      "excerpt": "Here, we will choose RoI_Pool_size = 7. As can be seen, the input is the 7x7 window, which is flattened and connected to a large dense layer, which is in turn connected to a Dense(4) layer for the targets and a Dense(2) layer for the scores. The loss is binary crossentropy for the scores, and smoothL1 for the targets. Pictorially, we have  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9815018535064729
+      ],
+      "excerpt": "As can be seen, we regard RoI pooling as pre-processing of the input, which is then fed into the keras model constructed above. We now need to construct a generator of training data. The code is the following \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076,
+        0.8155898296495849
+      ],
+      "excerpt": "    for f in listdir(filesDIR): \n        data =  asarray(Image.open(filesDIR+f))/255.0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "        del data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8892753027595874
+      ],
+      "excerpt": "            crop = extract_crop(rois[i]) #: Exchanges x and y and divides by image_size \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8392661130705286
+      ],
+      "excerpt": "                #: Scanning of rois in image continues if scan over rois hasnt ended. We need to keep the corresponding fmap! \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9965368603640088
+      ],
+      "excerpt": "The main purpose of the generator shown here is to take the regions of interest constructed by the RPN, and assemble batches of RoI pooled 7x7 pictures that are then fed to the network. Of course the network is also fed with the training targets associated to those RoIs and their training scores. As can be seen, the function crop_and_resize is being used to extract 7x7 windows from the feature maps. This generator thus takes care of the preprocessing of RoIs into RoI pooled maps. The training targets and scores associated to each RoI are generated using the function produce_batch, which we show herePython \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8365966456639072
+      ],
+      "excerpt": "  data =  asarray(image)/255.0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259,
+        0.8979411005071259
+      ],
+      "excerpt": "proposals, anchor_probs = generate_proposals( data ) \n  del data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9888161803908234,
+        0.9957765212148048
+      ],
+      "excerpt": "The logic is very similar as the one used in the RPN generator. We extract the results of the RPN, perform non maximal supression, compute overlaps with ground truth, and select foreground RoIs with high overlap and background RoIs with low overlap. The function generate_proposals simply returns the proposals and scores which result as the output of the RPN.  \nTraining the RCNN takes a long time. One of the reasons is that some of the RoIs contain spikes, but those spikes are not centered propperly and so they are considered background. It is thus hard for a neural net to learn that even though there is spike in the picture, the RoI is not foreground because there is no good overlap with the ground truth. Training over night I obtained a binary_crossentropy loss of 0.33, which is still significant. Nonetheless, the results are not too bad. Here is one for the test images (not used during training) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ehijano/Faster-RCNN-Global-Wheat-Detection/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 10:08:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ehijano/Faster-RCNN-Global-Wheat-Detection/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ehijano/Faster-RCNN-Global-Wheat-Detection",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The data set for this project can be found in [kaggle](https://www.kaggle.com/c/global-wheat-detection). It consists of 3423 RGB images of size 1024x1024 containing wheat fields. The objective is to train a model to be able to detect the spikes (the grain-bearing tips of the plant) in similar images. Each training image is accompanied with a list of bounding boxes that can be found in the train.csv file. Each bounding box corresponds to the location of a spike. As an example, here is one of the images with its bounding boxes\n\n<img src=\"https://user-images.githubusercontent.com/31777294/88112438-ba3dc580-cb64-11ea-87fc-02599db708c3.png\" width=\"256\">\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name=\"fmapconvolution\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name=\"deltas1\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name=\"scores1\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "Python  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "```Python  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "        name=\"fc2\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "        name=\"deltas2\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "        name=\"scores2\" \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8704622922205283
+      ],
+      "excerpt": ": Initialize training data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008116474922117
+      ],
+      "excerpt": "    #: Generate snips with background \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8497342115868302
+      ],
+      "excerpt": "size = min(12000, len(y_full), len(y_empty)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8545014829842235,
+        0.8545014829842235
+      ],
+      "excerpt": "x_full, y_full = zip(random.sample(list(zip(x_full, y_full)), size )) \nx_empty, y_empty = zip(random.sample(list(zip(x_empty, y_empty)), size )) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8441733632071726
+      ],
+      "excerpt": "x_train_list, y_train_list = zip(random.sample(list(zip(x_train_list, y_train_list)),  int(2size)  )) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8172342705654815
+      ],
+      "excerpt": "data_size = len(x_train_list) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8815269671159721
+      ],
+      "excerpt": ": Store train data and their file names \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8118675733675335
+      ],
+      "excerpt": "model.add(Conv2D(16, (3,3), padding='same',  activation=\"relu\", kernel_regularizer=regularizers.l2(weight_decay), input_shape=sample_image.shape)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8267342832899857
+      ],
+      "excerpt": "class Snips_Generator(keras.utils.Sequence) : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.895132753635669
+      ],
+      "excerpt": "    return (np.ceil(len(self.image_filenames) / float(self.batch_size))).astype(np.int) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9244695280989067
+      ],
+      "excerpt": "    return np.array([load(str('data/'+file_name.replace('\\','/'))).astype('float32') for file_name in batch_x])/255.0 , np.array(batch_y) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144338362021298
+      ],
+      "excerpt": "feature_map_tile = keras.Input(shape=(FILTER_SIZE,FILTER_SIZE,number_feature_maps)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "    name=\"fmapconvolution\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "    name=\"deltas1\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "    name=\"scores1\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8805774505449567
+      ],
+      "excerpt": "feature_map = model_CNN_cut.predict(data.reshape(-1,data.shape[0],data.shape[1],data.shape[2])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8893671507898273
+      ],
+      "excerpt": "ANCHOR_SCALES = np.asarray([1,1.5,2]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8318792921650605
+      ],
+      "excerpt": "inds_inside = np.where( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8710441295716163
+      ],
+      "excerpt": "    labels = np.empty((useful_anchor_number, ), dtype=np.float32) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8029862670218101
+      ],
+      "excerpt": "    num_fg = int(BATCH_SIZE/(1+BG_FG_FRAC)) #:desired number of fg anchors \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042315102636473
+      ],
+      "excerpt": "      disable_inds = np.random.choice(fg_inds, size=(len(fg_inds) - num_fg), replace=False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.836937193093525
+      ],
+      "excerpt": "num_bg = int(len(fg_inds) * BG_FG_FRAC) #:desired number of bg anchors \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042315102636473
+      ],
+      "excerpt": "    disable_inds = np.random.choice(bg_inds, size=(len(bg_inds) - num_bg), replace=False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8489069599966664
+      ],
+      "excerpt": "    feature_batch_inds=(anchor_batch_inds / anchor_number).astype(np.int) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8558822155768088
+      ],
+      "excerpt": "    padded_fcmap=np.pad(feature_map,((0,0),(pad_size,pad_size),(pad_size,pad_size),(0,0)),mode='constant')  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "        name=\"fc2\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "        name=\"deltas2\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "        name=\"scores2\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8805774505449567
+      ],
+      "excerpt": "        feature_map_for_RoIPool = CNN_model_RoI.predict(data.reshape(-1,data.shape[0],data.shape[1],data.shape[2])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8813516794690208,
+        0.8997243352845468
+      ],
+      "excerpt": "        feature_map_mean = np.mean(feature_map_for_RoIPool) \n        feature_map_std = np.std(feature_map_for_RoIPool) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9039602588421416
+      ],
+      "excerpt": "                all_fmaps = np.zeros((len(batch_rois),feature_map_for_RoIPool.shape[1],feature_map_for_RoIPool.shape[2],feature_map_for_RoIPool.shape[3]))  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9024868498885268
+      ],
+      "excerpt": "                batch_pooled_rois = tf.image.crop_and_resize( np.asarray(all_fmaps) ,  np.asarray(batch_rois) , np.asarray(batch_inds) , (RoI_Pool_size,RoI_Pool_size)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.883357186878773,
+        0.8807504355140465
+      ],
+      "excerpt": "                    print(\"empty array found.\") \n                yield batch_pooled_rois , [np.asarray(batch_targets),to_categorical(np.asarray(batch_scores))] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8997243352845468
+      ],
+      "excerpt": "  keep = py_cpu_nms(np.hstack((proposals , anchor_probs)), NSM_THRESHOLD) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8012190004405667,
+        0.8318792921650605,
+        0.8069569665290764
+      ],
+      "excerpt": "#: sub sample foreground and background \n  fg_inds = np.where(proposal_max_overlaps >= FG_THRESHOLD_RCNN )[0] \n  fg_rois_in_image = min( int(BATCH_SIZE/(1+BG_FG_FRAC_RCNN))  , fg_inds.size ) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8318792921650605
+      ],
+      "excerpt": "bg_inds = np.where((proposal_max_overlaps < BG_THRESH_HI) & (proposal_max_overlaps >= BG_THRESH_LO))[0] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8737288687529231
+      ],
+      "excerpt": "  np.random.shuffle(keep_inds) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9167135371870004
+      ],
+      "excerpt": "  new_scores = np.zeros(len(proposals))  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9028883180077019
+      ],
+      "excerpt": "  targets = np.zeros((len(proposals),4)).reshape(-1,4) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ehijano/Faster-RCNN-Global-Wheat-Detection/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Faster-RCNN-Global-Wheat-Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Faster-RCNN-Global-Wheat-Detection",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ehijano",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ehijano/Faster-RCNN-Global-Wheat-Detection/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Sat, 25 Dec 2021 10:08:09 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

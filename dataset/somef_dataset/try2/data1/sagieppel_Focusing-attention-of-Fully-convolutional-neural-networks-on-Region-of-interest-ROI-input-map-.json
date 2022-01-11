@@ -1,0 +1,236 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.08711"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-08-19T01:20:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-27T05:08:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9967066770686703,
+        0.9720266121609155
+      ],
+      "excerpt": "This project contains code for a fully convolutional neural network (FCN) for semantic segmentation with a region of interest (ROI) map as an additional input (figure 1). The net receives image and ROI as a binary map with pixels corresponding to ROI marked 1, and produce pixel-wise annotation of the ROI region of the image.  This code was tested on for semantic segmentation task of materials in transparent vessels where the vessel area of the image was set as the ROI.  \nThe method is discussed in the paper: Setting an attention region for convolutional neural networks using region selective features, for recognition of materials within glass vessels \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9987719032632516,
+        0.9784297652701582
+      ],
+      "excerpt": "Convolutional neural networks have emerged as the leading methods in detection classification and segmentation of images. Many problems in image recognition require the recognition to be performed only on a specific predetermined region of interest (ROI) in the image. One example of such a case is the recognition of the contents of glass vessels such as bottles or jars, where the glassware region in the image is known and given as the ROI input (Figure 1). Directing the attention of a convolutional neural net (CNN) to a given ROI region without loss of background information is a major challenge in this case. This project uses a valve filter approach to focus the attention of a fully convolutional neural net (FCN) on a given ROI in the image. The ROI mask is inserted into the CNN, along with the image in the form of a binary map, with pixels belonging to the ROI set to one and the background set to zero. The processing of the ROI in the net is done using the valve filter approach presented in Figure 2. In general, for each filter that acts on the image, a corresponding valve filter exists that acts on (convolves) the ROI map (Figure 2). The output of the valve filter convolution is multiplied element-wise with the output of the image filter convolution, to give a normalized feature map (Figure 2). This map is used as input for the next layers of the net. In this case, the net is a standard fully convolutional net (FCN) for semantic segmentation (pixel-wise classification). Valve filters can be seen as a kind of valve that regularizes the activation of image filters in different regions of the image.  \nFigure 2) The valve filter approach for introduction of ROI map as input to ConvNets. The image and the ROI input are each passed through a separate convolution layer to give feature map and Relevance map, respectively. Each element in the features map is multiplied by the corresponding element in the feature map to give a normalized features map that passed (after RELU) as input for the next layer of the net. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9537655695641738,
+        0.9746887911774986,
+        0.9883200685161105,
+        0.9900545679558594,
+        0.9718229616822169,
+        0.8825453427656901,
+        0.9006320955937349,
+        0.8214191397254068,
+        0.9839156841285127,
+        0.9657492577359673,
+        0.9592066684663864,
+        0.980072981706677,
+        0.9342779027871478,
+        0.9643833122034181,
+        0.9845881483525926,
+        0.9197501827593878
+      ],
+      "excerpt": "See the top of each script for an explanation as for how to use it. \nThe detail  implementation of the valve filters  given in Figures 2 and described below: \n1) The ROI map is inserted to the net along with the image. The ROI map is represented as a binary image with pixels corresponding to ROI marked 1 and the rest marked 0.  \n2) A set of image filters is convolved (with bias addition) with the image to give a feature map.  \n3) A set of valve filters convolved with the ROI map to give a relevance map with the same size and dimension as the feature map (again with bias addition). \n4) The feature map is multiplied element wise by the relevance map. Hence,  Each element in the relevance map is multiplied by the corresponding element in the feature map to give normalized feature map.  \n5) The normalized feature map is then passed through a Rectified Linear Unit (ReLU)  which zero out any negative map element. The output is used as input for the next layer of the net.   \nThe net, in this case, is standard fully convolutional neural net for semantic segmentation. \nIn this way each valve filter act as kind of a valve that regulates the activation the corresponding image filter in different regions of the image. Hence, the valve filter will inhibit some filters in the background zone and others in the ROI zone.  \nThe valve filters weights are learned by the net in the same way the image filters are learned. Therefore the net learns both the features and the region for which they are relevant.  \nIn the current implementation, the valve filter act only on the first layer of the convolutional neural net and the rest of the net remained unchanged. \nThe input for the net (Figure 1) are RGB image and ROI map the ROI map is a 2d binary image with pixels corresponding to ROI marked 1 and background marked 0. \nThe net produce pixel wise annotation as a matrix in size of the image with the value of each pixel is the pixel label (This should be the input in training). \nThe net is based on fully convolutional neural net described in the paper Fully Convolutional Networks for Semantic Segmentation.  The code is based on  \nhttps://github.com/shekkizh/FCN.tensorflow by Sarath Shekkizhar with encoder  replaced to VGG16. The net is based on the pre-trained VGG16 model by Marvin Teichmann \nFor newer much stronger models for detecting/segmenting matarials in vessels see: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This project contains code for a fully convolutional neural network (FCN) for semantic segmentation with a region of interest (ROI) map as an additional input (Figure 1). The net receives image and ROI as a binary map with pixels corresponding to ROI marked 1, and produce pixel-wise annotation of the ROI region of the image. The method is based on using region selective features This code was tested on for semantic segmentation task of materials in transparent vessels where the vessel area of the image was set as the ROI. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Tue, 28 Dec 2021 19:00:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1) Download the code from the repository.\n2) Download a pre-trained vgg16 net and put in the /Model_Zoo subfolder in the main code folder. A pre-trained vgg16 net can be download from here[https://drive.google.com/file/d/0B6njwynsu2hXZWcwX0FKTGJKRWs/view?usp=sharing] or from here [ftp://mi.eng.cam.ac.uk/pub/mttt2/models/vgg16.npy]\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9572144646269317,
+        0.8252092804337223,
+        0.9364541555520881
+      ],
+      "excerpt": "Run: Train.py \nRun: Inference.py \nRun: Evaluate_Net_IOU.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Focusing attention of Fully convolutional neural networks on Region of interest (ROI) input map, using the valve filters method.",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sagieppel",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "sagieppel",
+        "body": "1",
+        "dateCreated": "2021-05-04T10:19:40Z",
+        "datePublished": "2021-09-16T06:39:29Z",
+        "html_url": "https://github.com/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/releases/tag/1",
+        "name": "1.0",
+        "tag_name": "1",
+        "tarball_url": "https://api.github.com/repos/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/tarball/1",
+        "url": "https://api.github.com/repos/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/releases/49650763",
+        "zipball_url": "https://api.github.com/repos/sagieppel/Focusing-attention-of-Fully-convolutional-neural-networks-on-Region-of-interest-ROI-input-map-/zipball/1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This network was run and trained with Python 3.6  Anaconda package and Tensorflow 1.1. The training was done using Nvidia GTX 1080, on Linux Ubuntu 16.04.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 44,
+      "date": "Tue, 28 Dec 2021 19:00:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The net was tested on a [dataset of annotated images of materials in glass vessels](https://github.com/sagieppel/Materials-in-Vessels-data-set). The glass vessel region in the image was taken as the ROI map.\nThis dataset can be downloaded from  https://drive.google.com/file/d/0B6njwynsu2hXRFpmY1pOV1A4SFE/view?usp=sharing\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1312.6114.\n\nThis tool, implemented in TensorFlow 1.x, is designed to work similar to familiar dimensionality reduction methods such as scikit-learn's t-SNE or UMAP, but also go beyond their capabilities in some notable ways, making full use of the VAE as a generative model.\n\nWhile I decided to call the tool itself CompressionVAE, or CVAE for short, I mainly chose this to give it a unique name.\nIn practice, it is based on a standard VAE, with the (optional"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8530270232072884
+      ],
+      "excerpt": "For details on the IAF layers, I refer you to the original paper: https://arxiv.org/pdf/1606.04934.pdf. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "                               iaf_flow_length=10, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maxfrenzel/CompressionVAE",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-10T07:57:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-08T23:48:07Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9974959307566837,
+        0.8173449104917254,
+        0.9768525251210503
+      ],
+      "excerpt": "This tool, implemented in TensorFlow 1.x, is designed to work similar to familiar dimensionality reduction methods such as scikit-learn's t-SNE or UMAP, but also go beyond their capabilities in some notable ways, making full use of the VAE as a generative model. \nWhile I decided to call the tool itself CompressionVAE, or CVAE for short, I mainly chose this to give it a unique name. \nIn practice, it is based on a standard VAE, with the (optional) addition of Inverse Autoregressive Flow (IAF) layers to allow for more flexible posterior distributions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8151104287747578,
+        0.9777411320413508,
+        0.9839725792181427,
+        0.9494367188342079,
+        0.9600714479849908,
+        0.9133586650990616,
+        0.9706962667729748,
+        0.9541846081344894
+      ],
+      "excerpt": "CompressionVAE has several unique advantages over the common manifold learning methods like t-SNE and UMAP: \n* Rather than just a transformation of the training data, it provides a reversible and deterministic function, mapping from data space to embedding space. \n* Due to the reversibility of the mapping, the model can be used to generate new data from arbitrary latent variables. It also makes them highly suitable as intermediary representations for downstream tasks. \n* Once a model is trained, it can be reused to transform new data, making it suitable for use in live settings. \n* Like UMAP, CVAE is fast and scales much better to large datasets, and high dimensional input and latent spaces. \n* The neural network architecture and training parameters are highly customisable through the simple API, allowing more advanced users to tailor the system to their needs. \n* VAEs have a very strong theoretical foundation, and the learned latent spaces have many desirable properties. There is also extensive literature on different variants, and CVAE can easily be extended to keep up with new research advances. \nNow we can create a CompressionVAE object/model based on this data. The minimal code to do this is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9491974050799491
+      ],
+      "excerpt": "By default, this creates a model with two-dimensional latent space, splits the data X randomly into 90% train and 10% validation data, applies feature normalization, and tries to match the model architecture to the input and latent feature dimensions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8422651039869736,
+        0.8809192982630093
+      ],
+      "excerpt": "We will look at customising all this later, but for now let's move on to training. \nOnce a CVAE object is initialised and associated with data, we can train the embedder using its train method. This works similar to t-SNE or UMAP's fit method. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8967912541302373,
+        0.807325977330939,
+        0.9410846197658141
+      ],
+      "excerpt": "This will train the model, applying automatic learning rate scheduling based on the validation data loss, and stop either when the model converges or after 50k training steps. \nWe can also stop the training process early through a KeyboardInterrupt (ctrl-c or 'interrupt kernel' in Jupyter notebook). The model will be saved at this point. \nIt is also possible to stop training and then re-start with different parameters (see more details below). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9154899474309635
+      ],
+      "excerpt": "Once we have a trained model (well, technically even before training, but the results would be random), we can use CVAE to compress data, embedding it into the latent space. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9895042681929931
+      ],
+      "excerpt": "To embed the entire MNIST data: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9518693503207232,
+        0.8727961463780415
+      ],
+      "excerpt": "But note that other than t-SNE or UMAP, this data does not have to be the same as the training data. It can be new and previously unseen data. \nFor two-dimensional latent spaces, CVAE comes with a built-in visualization method, visualize. It provides a two-dimensional plot of the embeddings, including class information if available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8561341428965294,
+        0.94894195441393
+      ],
+      "excerpt": "We could also passed the string labels mnist.target directly to labels, but in that case they would not necessarily be ordered from 0 to 9.  \nOptionally, if we pass labels as a list of integers like above, we can also pass the categories parameter, a list of strings associating names with the labels. In the case of MNIST this is irrelevant since the label and class names are the same. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029529158201389,
+        0.8717799506155284
+      ],
+      "excerpt": "Finally, we can use CVAE as a generative model, generating data by decoding arbitrary latent vectors using the decode method. \nIf we simply want to 'undo' our MNIST embedding and try to re-create the input data, we can run our embeddings z through the decode method. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8779561626503785,
+        0.8417750192115869
+      ],
+      "excerpt": "As a more interesting example, we can use this for data interpolation. Let's say we want to create the data that's halfway between the first and the second MNIST datapoint (a '5' and a '0' respectively). \nWe can achieve this with the following code \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8579957819938313
+      ],
+      "excerpt": ": Decode the new latent vector. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9903011766958686
+      ],
+      "excerpt": "In the case of image data, such as MNIST, CVAE also has a method that allows us to quickly visualize the latent space as seen through the decoder. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9800592037525897,
+        0.9971500312178777,
+        0.9947518476466528
+      ],
+      "excerpt": "train_valid_split controls the random splitting into train and test data. Here 99% of X is used for training, and only 1% is reserved for validation. \nAlternatively, to get more control over the data the user can also provide X_valid as an input. In this case train_valid_split is ignored and the model uses X for training and X_valid for validation. \ndim_latent specifies the dimensionality of the latent space. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9331078429162721,
+        0.9399976077409492,
+        0.8734073812274571
+      ],
+      "excerpt": "cells_encoder determines the number, as well as size of the encoders fully connected layers. In the case above, we have three layers with 512, 256, and 128 units respectively. The decoder uses the mirrored version of this. \nIf this parameter is not set, CVAE creates a two layer network with sizes adjusted to the input dimension and latent dimension. The logic behind this is very handwavy and arbitrary for now, and I generally recommend setting this manually. \ninitializer controls how the model weights are initialized, with options being orthogonal (default), truncated_normal, and lecun_normal. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9413215413808954,
+        0.9251375900801433
+      ],
+      "excerpt": "logdir specifies the path to the model, and also acts as the model name. The default, 'temp', gets overwritten every time it is used, but other model names can be used to save and restore models for later use or even to continue training. \nfeature_normalization tells CVAE whether it should internally apply feature normalization (zero mean, unit variance, based on the training data) or not. If True, the normalisation factors are stored with the model and get applied to any future data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8096507748376848
+      ],
+      "excerpt": "In the simple example we called the train method without any parameter. A more advanced call might look like \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8203952555124036
+      ],
+      "excerpt": "test_every sets the frequency of test steps. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9856736920020713,
+        0.9503051501316166
+      ],
+      "excerpt": "For more arguments/details, for example controlling the details of the learning rate scheduler and the convergence criteria, check the method definition. \nAlternatively to providing the input data X as a single numpy array, as done with t-SNE and UMAP, CVAE also allows for much larger datasets that do not fit into a single array. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.983408003302438
+      ],
+      "excerpt": "When initialising a model based on this kind of data pass the root directory of the dataset as X. E.g. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9628677805191461,
+        0.8076665078734403
+      ],
+      "excerpt": "Initialising will take slightly longer than if X is passed as an array, even for the same number of data points. But this method scales in principle to arbitrarily large datasets, and only loads one batch at a time during training. \nIf a CompressionVAE object is initialized with logdir='temp' it always starts from a new untrained model, possible overwriting any previous temp model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "General-purpose dimensionality reduction and manifold learning tool based on Variational Autoencoder, implemented in TensorFlow.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maxfrenzel/CompressionVAE/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 19,
+      "date": "Thu, 23 Dec 2021 12:10:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/maxfrenzel/CompressionVAE/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "maxfrenzel/CompressionVAE",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "CompressionVAE is distributed through PyPI under the name `cvae` (https://pypi.org/project/cvae/). To install the latest version, simply run\n```\npip install cvae\n```\nAlternatively, to locally install CompressionVAE, clone this repository and run the following command from the CompressionVAE root directory.\n```\npip install -e .\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8255210678994147
+      ],
+      "excerpt": "We can achieve this with the following code \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9457175861910134
+      ],
+      "excerpt": "import numpy as np \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8973933083440926
+      ],
+      "excerpt": "z_interp = np.expand_dims(0.5z[0] + 0.5z[1], axis=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.828188349012648
+      ],
+      "excerpt": "                               tb_logging=True) \ntrain_valid_split controls the random splitting into train and test data. Here 99% of X is used for training, and only 1% is reserved for validation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8599178771146168,
+        0.8067475405731016
+      ],
+      "excerpt": "To prepare such a dataset, create a new directory, e.g. '~/my_dataset', and save the training data as individual npy files per example in this directory.  \n(Note: the data can also be saved in nested sub-directories, for example one directory per category. CVAE will look through the entire directory tree for npy files.) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/maxfrenzel/CompressionVAE/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CompressionVAE",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CompressionVAE",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "maxfrenzel",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/maxfrenzel/CompressionVAE/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 117,
+      "date": "Thu, 23 Dec 2021 12:10:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To use CVAE to learn an embedding function, we first need to import the cvae library.\n```\nfrom cvae import cvae\n```\n\nWhen creating a CompressionVAE object for a new model, it needs to be provided a training dataset. \nFor small datasets that fit in memory we can directly follow the sklean convention. Let's look at this case first and take MNIST as an example.\n\nFirst, load the MNIST data. (Note: this example requires scikit-learn which is not installed with CVAE. You might have to install it first by running `pip install sklearn`.)\n```\nfrom sklearn.datasets import fetch_openml\nmnist = fetch_openml('mnist_784', version=1, cache=True)\nX = mnist.data\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The example above shows the simplest usage of CVAE. However, if desired a user can take much more control over the system and customize the model and training processes.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

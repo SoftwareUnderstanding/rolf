@@ -1,0 +1,414 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "When referencing the data or the models provided, please cite this\npaper: \n\n*The manuscript is not ready yet. As soon as it is done, we will update this section and advertised it in the\n[ News & Announcements forum](https://www.iarai.ac.at/weather4cast/forums/forum/news-announcements/), please subscribe!*\n\n```\n@InProceedings{tbd}\n```",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "Study satellite multi-channel weather movies. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8140351764578231
+      ],
+      "excerpt": "A valid submission for the transfer-learning-competition (R4, R5, R6, R9, R10, R11) using a single UNet trained on region R1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9865374311292784
+      ],
+      "excerpt": "  -r REGION, --region REGION \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9983698891790892
+      ],
+      "excerpt": "1. A short scientific paper with a sufficiently detailed description of your approach (4-6 pages plus references) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iarai/weather4cast",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-01T17:19:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-11T11:04:04Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The following table summarizes the data provided, detailing the requested target variables and all other variables provided. For a detailed explanation of each of the variables, see the link provided in the Introduction. Please, in order to keep the size of the provided prediction files small, just deliver them in uint16 format with each variable within its own range. When computing the score,  we will divide each channel by its maximum value to have them in the interval [0, 1]:\n\nName | Folder | Variables | Target Variable | type | Range | Scale Factor | Offset\n:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|\nTemperature at Ground/Cloud | CTTH |  `temperature` <br /> `ctth_tempe` <br /> `ctth_pres` <br /> `ctth_alti` <br /> `ctth_effectiv` `ctth_method` <br /> `ctth_quality` <br /> `ishai_skt` <br /> `ishai_quality` | `temperature` | uint16 | 0-11000 | 10 | 0\nConvective Rainfall Rate | CRR | `crr` <br /> `crr_intensity` <br /> `crr_accum` <br /> `crr_quality` | `crr_intensity` | uint16 | 0-500 | 0.1 | 0\nProbability of Occurrence of Tropopause Folding | ASII | `asii_turb_trop_prob` <br /> `asiitf_quality` | `asii_turb_trop_prob` | uint8 | 0-100 | 1 | 0\nCloud Mask | CMA | `cma_cloudsnow` <br /> `cma` <br /> `cma_dust` <br /> `cma_volcanic` <br /> `cma_smoke` <br /> `cma_quality` | `cma` | uint8 | 0-1 | 1 | 0\nCloud Type | CT | `ct` <br /> `ct_cumuliform` <br /> `ct_multilayer` <br /> `ct_quality` | `None` | uint8 | `None` | `None` | `None`\n\nCloud Type is provided since it has rich information that might help the models but no variable is required from this product. For the other products, we expect predictions for [`temperature, crr_intensity, asii_turb_trop_prob, cma`] in this order for the channel dimension in the submitted tensor.\n\nData obtained in collaboration with AEMet - Agencia Estatal de Meteorolog\u00eda/ NWC SAF.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The aim of our core competition is to predict the next 32 images (8h ahead in 15 minutes intervals) in our weather movies, which encode four different variables: (i) Temperature from the [Cloud Top Temperature](https://www.nwcsaf.org/ctth2) or the ground [Skin Temperature](https://www.nwcsaf.org/ishai_description) if there are no clouds, (ii) [Convective Rainfall Rate](https://www.nwcsaf.org/crr3), (iii) [Probability of Occurrence of Tropopause Folding](https://www.nwcsaf.org/asii-tf), and (iv) [Cloud Mask](https://www.nwcsaf.org/cma3). Each image is an observation of these 4 channels in a 15 minutes period where pixels correspond to a spatial area of ~3km x 3km, and there are 11 regions of 256 x 256 pixels to provide test predictions. From these regions, 5 of them contain also training and validation data for learning purposes but the other 6 only inference is requested, to assess the Transfer Learning capabilities of models.\n\n![Regions](/images/IEEE_BigData_regions.png?raw=true \"Train/Validation/test Regions\")\n\nThe submission format in each day of the test set is a multi-dimensional array (tensor) of shape (32, 4, 256, 256) and the objective function of all submitted tensors (one for each day in the test set and region) is the **mean squared error** of all pixel channel values to pixel channel values derived from true observations. We note that we normalize these pixel channel values to lie between 0 and 1 by dividing the pixel channel value by the maximum value of each variable (see below).\n\nThere are **two competitions** running in parallel that expect independent submission (participants can join one or both of them):\n- [Core Competition](https://www.iarai.ac.at/weather4cast/competitions/ieee-big-data-core/): Train your models on these regions with the provided data and submit predictions on the test subset.\n- [Transfer Learning Competition](https://www.iarai.ac.at/weather4cast/competitions/ieee-big-data-transfer-learning/): Only the test subset is provided for these regions, test the generalization capacity of your models.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.878354255525733
+      ],
+      "excerpt": "Apply transfer learning to new earth regions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9205601432911252
+      ],
+      "excerpt": "Get the data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data summary \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8871034399107195
+      ],
+      "excerpt": "We provide a notebook (2. Submission_UNet.ipynb) where we show how to create a submission using pre-trained UNet models, in particular, we will produce 3 sets of predictions: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029206675642787,
+        0.9309717797885253,
+        0.9650115675667212,
+        0.8684288114555605
+      ],
+      "excerpt": "A valid submission for the transfer-learning-competition (R4, R5, R6, R9, R10, R11) using a single UNet trained on region R1 \nUse the ensamble of models trained in regions R1-3 to generate a valid submission for the transfer-learning-competition (R4, R5, R6, R9, R10, R11) by averaging their predictions \nThe weights needed to generate such submission for the UNets can be downloaded once registered to the competition here. The notebook uses an architecture and a PyTorch Lightning class defined in weather4cast/benchmarks/, but it is not required to understand them when learning how to generate the submissions from a pre-trained model. \nWe provide a script (3-train-UNet-example.py) with all necessary code to train a UNet model from scratch or fine tune from any of the provided checkpoints for 2. Submission_UNet.ipynb. The same code with the flag -m val can be used to evaluate a model on the validation data split. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9103562419987351
+      ],
+      "excerpt": "#: b.1) evaluate an untrained model (with random weights) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8189542587435222,
+        0.948177955464728,
+        0.8795391018345075,
+        0.8121562154129368,
+        0.9275647617546299,
+        0.9675308413299429,
+        0.9468267788280766
+      ],
+      "excerpt": "Every time we run the script PyTorch Lightning will create a new folder lightning_logs/version_i/, increasing version i automatically. This is where the model parameters and checkpoints will be saved together with the files explained below. \nThe class LeadTimeEval in benchmarks/validation_metrics.py is used by the UNet model to store the error per variable in the evaluation of the validation data split. After the evaluation all errors are shown by the standard output. Furthermore, a plot lead_times_mse_fig_R1.png with the evolution of the mean error across time (from 1 to 32 future predictions) is produced saving also the values to disk lead_times_mse_fig_R1.csv, in the respective lightning_logs/version_i/ folder. The latter can be used to compare different models across time.  \nThe image above shows the mean error per time bin (y-axis) and its standard deviation up to 8 hours (32 time bins ahead, x-axis). The further the prediction the worst the error. The title of the picture indicates that this model used latitude/longitude and elevations (l-e), and indicates the mean error per variable averaging all 32 lead times. \nAt the end of the competition you must provide: \n1. A short scientific paper with a sufficiently detailed description of your approach (4-6 pages plus references) \n2. The code and models (with their learned weights) that you used for your predictions, with explanations to reproduce it. \nWe will notify participants of how to provide the paper. For the code, you will need to submit it to a public repository like GitHub, providing a link to download the model's learned weights. Ideally, your repository should at least contain: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012384224399764
+      ],
+      "excerpt": "- b) Code, models, and a folder with all model's weights. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code accompanying our IARAI Weather4cast Challenge",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iarai/weather4cast/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 13,
+      "date": "Mon, 27 Dec 2021 05:10:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/iarai/weather4cast/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "iarai/weather4cast",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/iarai/weather4cast/master/utils/2.%20Submission_UNet.ipynb",
+      "https://raw.githubusercontent.com/iarai/weather4cast/master/utils/1.%20Onboarding.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Currently, the competition data provided comes in a zip file that has the following folder structure.\n```\n+-- RegionX -- ...\n+-- RegionY \n        +-- training -- ... (~96 files per variable)\n        +-- validation -- ... (~96 files per variable)\n        +-- test -- (4 files each variable)\n            +-- 2019047\n            +-- ... \n            +-- 2019074\n                +-- ASII -- ...\n                +-- CMA -- ...\n                +-- CRR -- ...\n                +-- CTTH\n                    + -- S_NWC_CTTH_MSG4_Europe-VISIR_20190216T170000Z.nc\n                    + -- S_NWC_CTTH_MSG4_Europe-VISIR_20190216T171500Z.nc\n                    + -- S_NWC_CTTH_MSG4_Europe-VISIR_20190216T173000Z.nc\n                    + -- S_NWC_CTTH_MSG4_Europe-VISIR_20190216T174500Z.nc\n```\nEach region has three splits training/validation/test, and each split has a folder yyyyddd that corresponds to the day number in that year *day_in_year*, e.g. 2019365 would refer to the last day in 2019. Each *day_in_year* has 4 folders containing the weather variables. All 15-minute period images available for that day are contained inside. We note that there is a maximum of 96 files for training/validation (4 images/hour * 24 hour), and exactly 4 files in test (1 hour as input for the next 32 requested consecutive images).\n\nEach of the files S_NWC_`variable`_MSG4_Europe-VISIR_`yyyymmdd`T`hhmm`00Z.nc is a [netCDF](https://unidata.github.io/netcdf4-python/) encoding the respective requested target variable and other attributes that might help, for the same region of 256 x 256 pixels in the same 15-minutes interval. \n\nFor the submission, we expect a zip file back that, when unpacked, decomposes into the following folder structure:\n```\n+-- RegionX -- ...\n+-- RegionY \n        +-- test -- (1 file per day, encoding 32 images of 4 channels each)\n            + -- 2019047.h5\n            + -- ... \n            + -- 2019074.h5\n```\nwhere now each [h5](https://docs.h5py.org/en/stable/quick.html) file `yyyyddd`.h5 contains a uint16 tensor of shape (32, 4, 256, 256) that contains the predictions of 32 successive images following the sequence of 4 images given in the corresponding input test folders for all regions of the competition data. \nNote that each variable should be in its own range since we will scale it as mentioned above.\n\nTo check if the shape of a predicted tensor is appropriate (32, 4, 256, 256), the following script should give us exactly that:\n```\npython3 utils/h5file.py -i path_to_RegionY/test/yyyyddd.h5\n```\n\nTo generate the compressed folder, `cd` to the parent folder containing the regions folders (RegionX, ..., RegionY) and zip all regions together like in the following example:\n```\nuser@comp:~/tmp_files/core-competition-predictions$ ls\nR1/ R2/ R3/ R7/ R8/\nuser@comp:~/tmp_files/core-competition$ zip -r ../core-predictions.zip .\n...\nuser@comp:~/tmp_files/core-competition$ ls ../\ncore-competition-predictions/   transfer-learning-competition-predictions/  core-predictions.zip\n```\nPlease, delete any file that makes your submission not to match the requested structure. An example of finding and deleting non-expected files is shown below: \n```\nuser@comp:~/tmp_files/core-competition-predictions$ find . -wholename *nb* -print\nuser@comp:~/tmp_files/core-competition-predictions$ find . -wholename *DS* -print\n./.DS_Store\n./R1/.DS_Store\n./R3/.DS_Store\n./R2/.DS_Store\nuser@comp:~/tmp_files/core-competition-predictions$ find . -wholename *DS* -delete\nuser@comp:~/tmp_files/core-competition-predictions$ find . -wholename *DS* -print\n```\n\nThe submission file can be uploaded in the corresponding following submission link:\n- [Core Competition](https://www.iarai.ac.at/weather4cast/competitions/ieee-big-data-core/?submissions)\n- [Transfer Learning Competition](https://www.iarai.ac.at/weather4cast/competitions/ieee-big-data-transfer-learning/?submissions)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.865449700310164
+      ],
+      "excerpt": "                        specify a gpu ID. 1 as default \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8234486763146338
+      ],
+      "excerpt": "cd utils \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869566660130537
+      ],
+      "excerpt": "- a) A list of dependencies. In the case of using Python, we suggest using conda/pip to generate them: conda env export &gt; environment.yml. Make sure that your code can be executed from a fresh environment using the provided list of requirements: conda env create -f environment.yml. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8234486763146338
+      ],
+      "excerpt": "cd utils \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.812205643246237
+      ],
+      "excerpt": "Start here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8040445375520707
+      ],
+      "excerpt": "Train/evaluate a UNet \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8415766949806094
+      ],
+      "excerpt": "We provide a script (3-train-UNet-example.py) with all necessary code to train a UNet model from scratch or fine tune from any of the provided checkpoints for 2. Submission_UNet.ipynb. The same code with the flag -m val can be used to evaluate a model on the validation data split. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9349428845975258,
+        0.9406767944449327
+      ],
+      "excerpt": "user@comp:~/projects/weather4cast-participants/utils$ python 3-train-UNet-example.py --h                                   \nusage: 3-train-UNet-example.py [-h] [-g GPU_ID] [-r REGION] [-m MODE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8040155815968255
+      ],
+      "excerpt": "                        region_id to load data from. R1 as default \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401000673178086,
+        0.8012239702840642,
+        0.917168748945696
+      ],
+      "excerpt": "cd utils \n#: a.1) train from scratch \npython 3-train-UNet-example.py --gpu_id 1 --region R1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8882114155214363
+      ],
+      "excerpt": "python 3-train-UNet-example.py --gpu_id 2 --region R1 -c 'epoch=03-val_loss_epoch=0.027697.ckpt' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9138955029656239,
+        0.8142919803327506,
+        0.8968414190045564
+      ],
+      "excerpt": "python 3-train-UNet-example.py --gpu_id 3 --region R1 --mode val \n#: b.2) evaluate a trained model from a checkpoint \npython 3-train-UNet-example.py --gpu_id 4 --region R1 --mode val -c 'epoch=03-val_loss_epoch=0.027697.ckpt' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8246925181904385
+      ],
+      "excerpt": "- c) An out-of-the-box script to use your best model to generate predictions. The script will read the inputs for the model from a given path and region, using its test folder (like the one used for the leaderboard), and save the outputs on a given path. The path to the folder containing the weights to be loaded by the models can also be an argument of the script. We provide an example in utils/4-inference.py with Python. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401000673178086
+      ],
+      "excerpt": "cd utils \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8087019914803245
+      ],
+      "excerpt": "python 4-inference.py -d $INPUT_PATH -r $R -w $WEIGHTS -o $OUT_PATH -g 1 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/iarai/weather4cast/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "[Weather4cast](https://www.iarai.ac.at/weather4cast/): Multi-sensor weather forecasting competition & benchmark dataset",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "weather4cast",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "iarai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iarai/weather4cast/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 24,
+      "date": "Mon, 27 Dec 2021 05:10:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "deep-learning",
+      "dataset",
+      "weather-forecast",
+      "benchmark",
+      "competition",
+      "video-prediction",
+      "transfer-learning",
+      "satellite-imagery",
+      "precipitation",
+      "temperature",
+      "nowcasting"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can download the data once registered in the competition.\n- Core Competition [Join and get the data](https://www.iarai.ac.at/weather4cast/forums/forum/competition/weather4cast-2021/)\n- Transfer Learning Competition [Join and get the data](https://www.iarai.ac.at/weather4cast/forums/forum/competition/weather4cast-2021-transfer-learning/): \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We provide an introduction notebook in `utils/1. Onboarding.ipynb` where we cover all basic concepts for the competition from ~*scratch*:\n\n1. How to read, explore, and visualize netCDF4 files\n2. Load and transform context variables: *altitudes* and *latitude*/*longitude* \n3. Data split training/validation/test, and list of days with missing time-bins\n4. Data Loader Example\n5. Generate a valid submission for the Persistence model\n\nFurthermore, you can find all explained methods in the notebook ready to be used in the files `utils/data_utils.py` and `utils/context_variables.py`, so you can import them out of the box.\n\nThe code assumes that if you download the regions for the core or transfer learning competition, they are located like follows:\n```\n+-- data\n    +-- core-w4c\n        +-- R1\n        +-- R2\n        +-- R3\n        +-- R7\n        +-- R8\n    +-- transfer-learning-w4c\n        +-- R4\n        +-- R5\n        +-- R6\n        +-- R9\n        +-- R10\n        +-- R11\n    +-- static\n        +-- Navigation_of_S_NWC_CT_MSG4_Europe-VISIR_20201106T120000Z.nc\n        +-- S_NWC_TOPO_MSG4_+000.0_Europe-VISIR.raw\n```\nPlease, provide the path to the parent folder `data` as the argument `data_path` of the function `get_params(...)` in `config.py`. \n\nJust in the same way, if you consider using the provided [static context variables](https://www.iarai.ac.at/weather4cast/forums/topic/weather4cast-2021-static-channels-common-files-for-any-competition/), provide the parent folder of the files `data/static` as the argument `static_data_path` of the function `get_params(...)`.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

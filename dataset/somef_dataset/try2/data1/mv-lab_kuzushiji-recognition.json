@@ -1,0 +1,319 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We would like to thank the organizers:\n\n- [Center for Open Data in the Humanities (CODH)](http://codh.rois.ac.jp/)\n- [The National Institute of Japanese Literature (NIJL)](https://www.nijl.ac.jp/en/)\n- [The National Institute of Informatics (NII)](https://www.nii.ac.jp/en/)\n- [Kaggle](https://www.kaggle.com/)\n\nand the Official Collaborators: Mikel Bober-Irizar (anokas) Kaggle Grandmaster and Alex Lamb (MILA. Quebec Artificial Intelligence Institute)\n\n\n\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1812.01718",
+      "https://arxiv.org/abs/1904.08189",
+      "https://arxiv.org/abs/1809.06839"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- [Deep Learning for Classical Japanese Literature](https://arxiv.org/abs/1812.01718)\n- [ROIS-DS Center for Open Data in the Humanities (CODH)](http://codh.rois.ac.jp/)\n- [CenterNet: Keypoint Triplets for Object Detection](https://arxiv.org/abs/1904.08189)\n- [Albumentations: fast and flexible image augmentations](https://arxiv.org/abs/1809.06839)\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9962769099674239
+      ],
+      "excerpt": "<a href=\"https://www.kaggle.com/c/kuzushiji-recognition/overview\"><img src=\"https://i.ibb.co/6PTh3Fs/Screenshot-from-2019-10-15-20-45-26.png\" border=\"0\"></a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9893817914426906
+      ],
+      "excerpt": "  <img src=\"japanese-culture-ai-2019-flyer.svg\" width=\"350\" title=\"hover text\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9999893614494532
+      ],
+      "excerpt": "<a href=\"https://www.kaggle.com/c/kuzushiji-recognition/leaderboard\"><img src=\"https://i.ibb.co/Jt4x47C/Screenshot-from-2019-10-15-21-06-43.png\" alt=\"Screenshot-from-2019-10-15-21-06-43\" border=\"0\"></a><br /><a target='_blank' href='https://es.imgbb.com/'></a><br /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9078860349130703
+      ],
+      "excerpt": "Please check the notebook: Kuzushiji Recognition Starter  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mv-lab/kuzushiji-recognition",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-14T21:46:55Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-13T04:41:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8760247641397366
+      ],
+      "excerpt": "We were invited to present this solution at Japanese Culture and AI Symposium 2019 in Tokyo, Japan on November 11. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9647842658717727,
+        0.9362958668879314,
+        0.9754229756944937,
+        0.9969841080429901
+      ],
+      "excerpt": "Imagine the history contained in a thousand years of books. What stories are in those books? What knowledge can we learn from the world before our time? What was the weather like 500 years ago? What happened when Mt. Fuji erupted? How can one fold 100 cranes using only one piece of paper? The answers to these questions are in those books. \nJapan has millions of books and over a billion historical documents such as personal letters or diaries preserved nationwide. Most of them cannot be read by the majority of Japanese people living today because they were written in \u201cKuzushiji\u201d. \nEven though Kuzushiji, a cursive writing style, had been used in Japan for over a thousand years, there are very few fluent readers of Kuzushiji today (only 0.01% of modern Japanese natives). Due to the lack of available human resources, there has been a great deal of interest in using Machine Learning to automatically recognize these historical texts and transcribe them into modern Japanese characters. Nevertheless, several challenges in Kuzushiji recognition have made the performance of existing systems extremely poor.  \nThe hosts need help from machine learning experts to transcribe Kuzushiji into contemporary Japanese characters. With your help, Center for Open Data in the Humanities (CODH) will be able to develop better algorithms for Kuzushiji recognition. The model is not only a great contribution to the machine learning community, but also a great help for making millions of documents more accessible and leading to new discoveries in Japanese history and culture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968810859206587,
+        0.924540861818328,
+        0.9406301411654947,
+        0.9948588197171468,
+        0.9287505138632148
+      ],
+      "excerpt": "Our approach to detection was directly inspired by K_mat's kernel, with the main takeaway being the idea of predicting a heatmap showing the centers of characters. Initially, we used a U-Net with a resnet18 backbone to predict a heatmap consisting of ellipses placed at the centers of characters, with the radii proportional to the width and height of the bounding box, with the input to the model being a 1024x1024 pixel crop of the page resized to 256x256 pixels.  \nPredictions for the centers were then obtained by picking the local maxima (note that the width and height of the bounding box were not predicted). Performance was improved by changing the ellipses to circles of constant radius. \nWe tried using focal loss and binary cross-entropy as loss functions, but using mean squared error resulted in the cleanest predictions for us (though more epochs were needed to get sensible-looking predictions). \nOne issue with using 1024x1024 crops of the page as the input were \"artifacts\" around the edges of the input. We tried a few things to try to counteract this, such as moving the sliding window over the page with a stride less than 1024x1024, then removing duplicate predictions by detecting when two predicted points of the same class were within a certain distance of each other. However, these did not give an improvement on the LB - we think that tuning parameters for these methods on the validation set, as well as the parameters for selecting maxima in the heatmap, might have caused us to \"overfit\". \nThese artifacts were related with the drawings and annotations! \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8337090810583986
+      ],
+      "excerpt": "We used as starter code the great kernel: CenterNet -Keypoint Detector- by @kmat2019 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9650979571093177
+      ],
+      "excerpt": "At the end we used Hourglass and the output are boxes instead of only the centers (like the original paper). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "- MSELoss, dice and IOU (oss=0.00179, dice=0.6270, F1=0.9856, iou=0.8142) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9667247699994304
+      ],
+      "excerpt": "The classification model was a resnet18, pretrained on ImageNet, with the input being a fixed 256x256 pixel area, scaled down to 128x128, centered at the (predicted) center of the character.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.975999243109575
+      ],
+      "excerpt": "This model achieved a Classification accuracy of 93.6% on a validation set (20% of the train data, group split by book). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9379000381301182
+      ],
+      "excerpt": "We had a problem... our centers weren't ordered! so in order to improve the accuracy and delete false positives we thought in the following ensemble method. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Kuzushiji Recognition Kaggle 2019. Build a DL model to transcribe ancient Kuzushiji into contemporary Japanese characters. Opening the door to a thousand years of Japanese culture.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mv-lab/kuzushiji-recognition/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Wed, 29 Dec 2021 00:04:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mv-lab/kuzushiji-recognition/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mv-lab/kuzushiji-recognition",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/centernet%20experiment%20-%20using%20BCE%20loss.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Classification%20512x512px.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/centernet%20experiment%20-%20predict%20heatmap%20for%20whole%20page.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/detection.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Centernet%20experiment.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Trying%20to%20beat%200.896.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/CenterNet%20with%20circular%20center%20points.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Model%20Interpretation.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Classification%20256x256px.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Predict%20classes%20given%20bounding%20boxes.ipynb",
+      "https://raw.githubusercontent.com/mv-lab/kuzushiji-recognition/master/Classification%20%28256x256%2C%20all%20data%29.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8699935075875512
+      ],
+      "excerpt": "&gt; Can you tell me wich one is the real one? \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8127714641036686
+      ],
+      "excerpt": "The training data included a background class, whose training examples were random 256x256 crops of the pages with no labelled characters.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import albumentations \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mv-lab/kuzushiji-recognition/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Kuzushiji Recognition",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kuzushiji-recognition",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mv-lab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mv-lab/kuzushiji-recognition/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Wed, 29 Dec 2021 00:04:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "kaggle",
+      "deep-learning",
+      "computer-vision",
+      "kuzushiji-recognition",
+      "fastai",
+      "centernet",
+      "ocr",
+      "japanese",
+      "deeplearning"
+    ],
+    "technique": "GitHub API"
+  }
+}

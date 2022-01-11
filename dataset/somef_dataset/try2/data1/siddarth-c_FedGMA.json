@@ -1,0 +1,239 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1412.6980"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@article{Tenison2021GradientMF,\n  title={Gradient Masked Federated Optimization},\n  author={Irene Tenison and Sreya Francis and I. Rish},\n  journal={ArXiv},\n  year={2021},\n  volume={abs/2104.10322}\n  \n  @inproceedings{McMahan2017CommunicationEfficientLO,\n  title={Communication-Efficient Learning of Deep Networks from Decentralized Data},\n  author={H. B. McMahan and Eider Moore and D. Ramage and S. Hampson and B. A. Y. Arcas},\n  booktitle={AISTATS},\n  year={2017}\n}\n\n@article{Ahuja2020InvariantRM,\n  title={Invariant Risk Minimization Games},\n  author={Kartik Ahuja and Karthikeyan Shanmugam and K. Varshney and Amit Dhurandhar},\n  journal={ArXiv},\n  year={2020},\n  volume={abs/2002.04692}\n}\n}\n\n\n```\n\n\\* This is not the official implementation of FedGMA :exclamation:\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{Ahuja2020InvariantRM,\n  title={Invariant Risk Minimization Games},\n  author={Kartik Ahuja and Karthikeyan Shanmugam and K. Varshney and Amit Dhurandhar},\n  journal={ArXiv},\n  year={2020},\n  volume={abs/2002.04692}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{Tenison2021GradientMF,\n  title={Gradient Masked Federated Optimization},\n  author={Irene Tenison and Sreya Francis and I. Rish},\n  journal={ArXiv},\n  year={2021},\n  volume={abs/2104.10322}\n@inproceedings{McMahan2017CommunicationEfficientLO,\n  title={Communication-Efficient Learning of Deep Networks from Decentralized Data},\n  author={H. B. McMahan and Eider Moore and D. Ramage and S. Hampson and B. A. Y. Arcas},\n  booktitle={AISTATS},\n  year={2017}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8242042398837521
+      ],
+      "excerpt": "Results and Observation \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/siddarth-c/FedGMA",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-17T16:54:36Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-12T08:05:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9977434120776009
+      ],
+      "excerpt": "This work is inspired by the intuitive approach used in Gradient-Masked Federated Learning. FedGMA is a modified version of FedAvg that ensures better convergence of server model, especially in the case of NIID data.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8081859116492318
+      ],
+      "excerpt": "Results and Observation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9945324518779028,
+        0.9971637277649018,
+        0.9901904077949426,
+        0.968504203574595
+      ],
+      "excerpt": "Federated learning (also known as collaborative learning) is a machine learning technique that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach stands in contrast to traditional centralized machine learning techniques where all the local datasets are uploaded to one server, as well as to more classical decentralized approaches which often assume that local data samples are identically distributed. (Wikipedia) <br> \n<br> FedAvg, or Federated Average, is one of such algorithms introduced by Google in 2017. It is the first ever FL algorithm, and serves as a baseline now for the new methods to beat. For more info on FedAvg, refer to Communication-Efficient Learning of Deep Networks from Decentralized Data. <br> \nFedGMA is an FL algorithm devised by the people at MILA. It uses an AND-Masked gradient update along with parameter averaging to ensure update steps in the direction of the optimal minima across clients. This ensures that the direction of gradient descent is similar to the majority of the participating clients. Find my implementation here \nThe authors of the paper use the MNIST dataset to test their proposed work. It contains 60,000 training images and 10,000 testing images. The numbers are color coded with a self-induced noise. In the training set, the numbers below 5 are coloured with red, and the rest with green. This is inverted for the test set inorder to assess the generalization of the model. For more info, refer to the FedGMA paper and section 5.2 in the paper Invariant Risk Minimization \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9905051710800123,
+        0.9884878248123344
+      ],
+      "excerpt": "The client probability threshold, P \u2208 [0.5, 0.6, 0.7, 0.8, 0.9] was tested and compared with the FedAvg model (E = 3). All these were trained for communication rounds = 50 and local client epochs = 3. The test accuracy was calculated at the end of every communication round and is reported below. Note that the model trained with a probability threshold of 0.7 achieves the maximum accuracy in most of the communication rounds. <br><br> \nThe local client epochs, E \u2208 [1, 3, 5, 7, 9] was tested and compared with the FedAvg model (E = 3). All these were trained for communication rounds = 50 and client probability threshold = 0.7. The test accuracy was calculated at the end of every communication round and is reported below. Note that the model trained for local client epochs of 9 achieves the maximum accuracy in most of the communication rounds.<br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9848331849721035,
+        0.8495266359598318,
+        0.9097138892088731,
+        0.9962669928079079
+      ],
+      "excerpt": "Notice, there is an initial dip in the performance of all the models before rising. One possible explaination could be the way the model learns. The model could have learnt to classify via 2 different features: \n1. Based on colour - Classiying based on colour would be the easiest. Red-> class 0, Green-> class1. But due to the induced errors, this would not be the ideal solution \n2. Based on integers - Classying the images based on the pixel locations (the integers itself), which is compartively tough, would be the ideal solution <br> \nTo speculate, the model could have chosen the easier way at the begininig of classying by colour (local minima), but later realize that this is not the best solution and begins learning it based in the integers itself (global minima). <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9362024570709176
+      ],
+      "excerpt": "Also the graphs were interpolated for the purpose of visualization. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An FL algorithm inspired by FedGMA",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/siddarth-c/FedGMA/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 30 Dec 2021 10:45:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/siddarth-c/FedGMA/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "siddarth-c/FedGMA",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/siddarth-c/FedGMA/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FedGMA*",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FedGMA",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "siddarth-c",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/siddarth-c/FedGMA/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To run the code, follow the following steps:\n1. Download the MNIST data from [here](http://yann.lecun.com/exdb/mnist/)\n2. Extract the downloaded zip files into a new folder in the root directory titled 'samples'\n3. Download this repository as a zip from [here](https://github.com/siddarth-c/FedGMA/archive/refs/heads/main.zip) and extract the files. \n4. Copy all the files in the directory 'working-directory/FedGMA-main/FedGMA-main/' to 'working-directory/'\n5. Install the required python packages using the command ```pip install -r requirements.txt```\n6. First run the DataDistributor.py file to generate training samples\n7. Next run the FedGMA.py to train the model and save the results\n   \nYour directory after step 4 should resemble the following:\n```\nworking-directory/\n    DataDistributor.py\n    FedGMA.py\n    README.md\n    requirements.txt\n    Extras/\n        Epochs.png\n        FL.png\n        GRADIENT-MASKED FEDERATED OPTIMIZATION.pdf\n        Probability.png\n        README.md\n    samples/\n        t10k-images-idx3-ubyte\n        t10k-labels-idx1-ubyte\n        train-images-idx3-ubyte\n        train-labels-idx1-ubyte\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 30 Dec 2021 10:45:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "federated-learning",
+      "pytorch",
+      "fedgma",
+      "fedavg"
+    ],
+    "technique": "GitHub API"
+  }
+}

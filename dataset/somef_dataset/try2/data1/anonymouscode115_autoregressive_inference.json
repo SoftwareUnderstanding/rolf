@@ -1,0 +1,958 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1803.02155"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "--first_layer region --final_layer indigo \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "--num_epochs 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "--first_layer region --final_layer indigo \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "--first_layer region --final_layer indigo \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "--batch_size 4 --beam_size 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "--first_layer region --final_layer indigo \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anonymouscode115/autoregressive_inference",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-01T17:58:04Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-25T06:49:20Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This package contains the source code implementation of the paper \"Discovering Autoregressive Orderings with Variational Inference\".\n\nIt implements the Variational Order Inference (VOI) algorithm mentioned in the paper, where the encoder generates nonsequential autoregressive orders as the latent variable, and the decoder maximizes the joint probability of generating the target sequence under these nonsequential orders. In conditional text generation tasks, the encoder is implemented as non-causal Transformer, and the decoder is implemented as Transformer-InDIGO (Gu et al., 2019) which generates target sequences through insertion.\n\nTaking away the encoder Transformer (we also call it as the Permutation Transformer (PT), which outputs latent orderings) and the VOI algorithm, this repo is also a standalone implementation of Transformer-INDIGO. Training Transformer-INDIGO with left-to-right ordering is equivalent to training a Transformer with relative position representations ([Link](https://arxiv.org/abs/1803.02155)) (Shaw et al., 2018).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.846094121454817
+      ],
+      "excerpt": "During training, one process of order inference is to obtain permutation matrices from doubly stochastic matrices. This is accomplished through the Hungarian algorithm. Since tf.py_function only allows one gpu to run the function at any time, multi-gpu training is very slow if we use scipy.optimize.linear_sum_assignment (which requires wrapping it with tf.py_function to call). Therefore, we use a pre-written Hungarian-op script and compile it through g++ into dynamic library. During runtime, we can import the dynamic library using tensorflow api. This leads to much faster distributed training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8916683750658502
+      ],
+      "excerpt": "Alternatively, we could also generate the op from the repo munkres-tensorflow.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8430748885053878
+      ],
+      "excerpt": "Extract COCO 2017 into a format compatible with our package. There are several arguments that you can specify to control how the dataset is processed. You may leave all arguments as default except out_caption_folder and annotations_file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8364402981912913
+      ],
+      "excerpt": "Process the COCO 2017 captions and extract integer features on which to train a non sequential model. There are again several arguments that you can specify to control how the captions are processed. You may leave all arguments as default except out_feature_folder and in_folder, which depend on where you extracted the COCO dataset in the previous step. Note that if vocab_file doesn't exist before, it will be automatically generated. Since we have provided the train2017_vocab.txt we used to train our model, this vocab file will be directly loaded to create integer representations of tokens. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8598146081271686
+      ],
+      "excerpt": "Extract corpus with truecase to train the truecaser, which is used for evaluation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9072667250264492
+      ],
+      "excerpt": "Remove the diacritics of Romanian: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9524347999614502
+      ],
+      "excerpt": "Generate the vocab file (joint vocab for the source and target languages). Since we forgot to remove the diacritics during our initial experiments and we appended all missing vocabs in the diacritics-removed corpus afterwards, the vocab file we used to train our model is slightly different from the one generated through the scripts below, so we have uploaded the vocab file we used to train our model as ro_en_vocab.txt. To use this vocab file, set the vocab_file argument to be {voi_repo}/ro_en_vocab.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9547671551247242
+      ],
+      "excerpt": "In practice, training with the sequence-level distillation dataset (Link) generated using the L2R model with beam size 5 leads to about 2 BLEU improvement on WMT16 Ro-En, intuitively because the target sequences in this new dataset are more consistent. We release the this distilled dataset at {placeholder}. To train on this dataset, replace src_train.BPE.txt and tgt_train.BPE.txt accordingly before running create_tfrecords_wmt.py. Training on this distilled dataset obtains very similar ordering observations (i.e. the model generates all descriptive tokens before generating the auxillary tokens) compared to training on the original dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9815816489796363,
+        0.97506219911197,
+        0.9772696560150551,
+        0.9928171757722831,
+        0.9169779256638189
+      ],
+      "excerpt": "(1) Due to limited computational budget, the hyperparameters and training schemes of our VOI model were not tuned carefully, but we still got strong results. We believe that there exist better training schemes (e.g. using larger batch size, \n(2) For some datasets (COCO, WMT16 RO-EN), training the decoder Transformer for too long after PT has converged to a single permutation per data while keeping the constant learning rate could lead to overfitting and a degradation of performance. Thus we save the model every 10k iterations for COCO and 50k iterations for WMT. Finetuning with fixed PT and linear learning rate decay, along with the evaluation afterwards, are done using the best model. \n(3) We find that, after PT has converged to a single permutation per data, finetuning the decoder Transformer with larger batch size, fixed PT, and linear learning rate decay can improve the performance of Gigaword and WMT (by about 2.0 ROUGE / 1.5 BLEU). The performance slightly improves for Django, but is harmed for COCO (in fact, we observe that if the baseline fixed ordering models, e.g. L2R, are trained for too long on COCO, then the performance also drops). However, for COCO and Django, finetuning is not necessary to outperform fixed orderings like L2R. \n(4) embedding_align_coeff adds a cosine alignment loss between the PT's vocab and decoder Transformer's vocab to the loss of PT. We found this helpful in Gigaword and WMT to encourage PT to learn better orderings. For COCO and Django we didn't add this loss when we trained our models, but this could also improve our results. \n(5) The number of GPUs below are based on the assumption that each GPU has 12 Gigabytes of memory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8697274086501446,
+        0.8464027119153832,
+        0.9442115584581308,
+        0.8606998708054514
+      ],
+      "excerpt": ": Note that we could also add embedding alignment loss like in gigaword. We didn't \n: try this when we ran the experiments. This could further improve the results. \n: We also observe that the performance is slightly harmed if the model is trained for too long, so \n: we save every 10k iterations and evaluate using the best model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8697274086501446,
+        0.8464027119153832
+      ],
+      "excerpt": ": Note that we could also add embedding alignment loss like in gigaword. We didn't \n: try this when we ran the experiments. This could further improve the results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8634962274045429
+      ],
+      "excerpt": ": Finally fix the encoder Transformer and finetune the decoder Transformer with larger batch size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8083129812686081,
+        0.9190166047776704
+      ],
+      "excerpt": ": training steps for the decoder and for the encoder, respectively, before switching to training \n: the other model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8738567802022644
+      ],
+      "excerpt": ": Note that we also add a cosine alignment loss between the encoder Transformer and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8634962274045429
+      ],
+      "excerpt": ": Finally fix the encoder Transformer and finetune the decoder Transformer with larger batch size. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8083129812686081,
+        0.9190166047776704
+      ],
+      "excerpt": ": training steps for the decoder and for the encoder, respectively, before switching to training \n: the other model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9443047288012958
+      ],
+      "excerpt": ": Finetune the model with PT fixed, larger batch size, and learning rate linear decay. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9806935256153231
+      ],
+      "excerpt": "You may evaluate a trained model with the following commands. Interestingly, on COCO and Gigaword, we found that our model achieves better performance when the beam size is small and larger than 1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9356078267121418
+      ],
+      "excerpt": "These scripts visualize the generation orders of our model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Learning Autoregressive Orderings with Variational Permutation Inference (in submission)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anonymouscode115/autoregressive_inference/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 07:51:59 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/anonymouscode115/autoregressive_inference/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "anonymouscode115/autoregressive_inference",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install this package, first download the package from github, then install it using pip. For CUDA 10.1 (as configured in `setup.py`), the package versions are Tensorflow 2.3 and PyTorch 1.5, with their corresponding `tensorflow_probability` and `torchvision` versions. For CUDA 11.0, you may need to change the package versions in `setup.py` to be `tensorflow==2.4`, `torch==1.6`, `tensorflow_probability==0.12.1`, and `torchvision==0.7.0`.\n\n```bash\ngit clone git@github.com:{name/voi}\npip install -e voi\n```\n\nInstall helper packages for word tokenization and part of speech tagging. Enter the following statements into the python interpreter where you have installed our package.\n\n```python\nimport nltk\nnltk.download('punkt')\nnltk.download('brown')\nnltk.download('universal_tagset')\n```\n\nInstall `nlg-eval` that contains several helpful metrics for evaluating image captioning. Tasks other than captioning are evaluated through the `vizseq` package we already installed through `setup.py`.\n\n```bash\npip install git+https://github.com/Maluuba/nlg-eval.git@master\nnlg-eval --setup\n```\n\nClone `wmt16-scripts` for machine translation preprocessing.\n\n```\ngit clone https://github.com/rsennrich/wmt16-scripts\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9844432608120487,
+        0.9702717945002866,
+        0.8474895321345809
+      ],
+      "excerpt": "git clone https://github.com/brandontrabucco/tensorflow-hungarian \ncd tensorflow-hungarian \nmake hungarian_op \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9844432608120487
+      ],
+      "excerpt": "git clone https://github.com/mbaradad/munkres-tensorflow \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8829542445856257
+      ],
+      "excerpt": "Process images from the COCO 2017 dataset and extract features using a pretrained Faster RCNN FPN backbone from pytorch checkpoint. Note this script will distribute inference across all visible GPUs on your system. There are several arguments you can specify, which you may leave as default except out_feature_folder and in_folder, which depend on where you extracted the COCO dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8849592511463347
+      ],
+      "excerpt": "cd {dataroot}/gigaword \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8849592511463347
+      ],
+      "excerpt": "cd {dataroot}/wmt16_translate/ro-en \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466,
+        0.9879863063452118,
+        0.9906248903846466
+      ],
+      "excerpt": "cd {repo_with_mosesdecoder} \ngit clone https://github.com/moses-smt/mosesdecoder \ncd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9855576342260282
+      ],
+      "excerpt": "git clone https://github.com/rsennrich/wmt16-scripts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd {folder_with_voi_repo} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "Step1: nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288381840679016
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9449331611960733,
+        0.9449331611960733
+      ],
+      "excerpt": "TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(\" \".join(tf.sysconfig.get_compile_flags()))') ) \nTF_LFLAGS=( $(python -c 'import tensorflow as tf; print(\" \".join(tf.sysconfig.get_link_flags()))') ) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8438411624059754
+      ],
+      "excerpt": "However, this function requires all entries in a matrix to be different (otherwise some strange behaviors will occur), so we also need to uncomment the line sample_permu = sample_permu * 1000 + tf.random.normal(tf.shape(sample_permu)) * 1e-7 in voi/nn/layers/permutation_sinkhorn.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8271092776403115
+      ],
+      "excerpt": "python scripts/data/create_tagger.py --out_tagger_file tagger.pkl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8819121569240495,
+        0.8819121569240495
+      ],
+      "excerpt": "python scripts/data/extract_coco.py --out_caption_folder ~/captions_train2017 --annotations_file ~/annotations/captions_train2017.json \npython scripts/data/extract_coco.py --out_caption_folder ~/captions_val2017 --annotations_file ~/annotations/captions_val2017.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.845311557417389
+      ],
+      "excerpt": "python scripts/data/process_captions.py --out_feature_folder ~/captions_train2017_features --in_folder ~/captions_train2017 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.845311557417389
+      ],
+      "excerpt": "python scripts/data/process_captions.py --out_feature_folder ~/captions_val2017_features --in_folder ~/captions_val2017 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8024166913869457,
+        0.8024166913869457
+      ],
+      "excerpt": "python scripts/data/process_images.py --out_feature_folder ~/train2017_features --in_folder ~/train2017 --batch_size 4 \npython scripts/data/process_images.py --out_feature_folder ~/val2017_features --in_folder ~/val2017 --batch_size 4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.845311557417389
+      ],
+      "excerpt": "python scripts/data/create_tfrecords_captioning.py --out_tfrecord_folder ~/train2017_tfrecords \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.845311557417389
+      ],
+      "excerpt": "python scripts/data/create_tfrecords_captioning.py --out_tfrecord_folder ~/val2017_tfrecords \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.807923966523918
+      ],
+      "excerpt": "For convenience, we ran the script from NL2code to extract the cleaned dataset from drive and place them in django_data. Alternatively, you may download raw data from ase15-django and run python scripts/data/extract_django.py --data_dir {path to all.anno and all.code) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8193240460985537,
+        0.8478624804334653
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/process_django.py --data_folder ./django_data \\ \n--vocab_file ./django_data/djangovocab.txt --one_vocab --dataset_type train/dev/test \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8193240460985537,
+        0.8315707700434394
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/create_tfrecords_django.py --out_tfrecord_folder ./django_data \\ \n--dataset_type train/dev/test --feature_folder ./django_data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503098465386054
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/extract_gigaword.py --data_dir {dataroot} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503098465386054
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/process_gigaword.py --out_feature_folder {dataroot}/gigaword \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029479879478918,
+        0.8911808958566143
+      ],
+      "excerpt": "--dataset_type train/validation/test --one_vocab \nFinally, generate the train/validation/test tfrecords files. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503098465386054,
+        0.9124819247613369
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/create_tfrecords_gigaword.py --out_tfrecord_folder {dataroot}/gigaword \\ \n--feature_folder {dataroot}/gigaword --samples_per_shard 4096 --dataset_type train/validation/test \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8603566535746334
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/extract_wmt.py --language_pair 16 ro en --data_dir {dataroot} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8603566535746334,
+        0.8390429914860049,
+        0.8390429914860049
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/extract_wmt.py --language_pair 16 ro en --data_dir {dataroot} --truecase \n{path_to_mosesdecoder}/scripts/recaser/train-truecaser.perl -corpus {dataroot}/wmt16_translate/ro-en/src_truecase_train.txt -model {dataroot}/wmt16_translate/ro-en/truecase-model.ro \n{path_to_mosesdecoder}/scripts/recaser/train-truecaser.perl -corpus {dataroot}/wmt16_translate/ro-en/tgt_truecase_train.txt -model {dataroot}/wmt16_translate/ro-en/truecase-model.en \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503098465386054
+      ],
+      "excerpt": "CUDA_VISIBLE_DEVICES=0 python scripts/data/process_wmt.py --out_feature_folder {dataroot}/wmt16_translate/ro-en \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029479879478918,
+        0.8911808958566143,
+        0.8503098465386054,
+        0.9124819247613369
+      ],
+      "excerpt": "--dataset_type train/validation/test --one_vocab \nFinally, generate the train/validation/test tfrecords files. \nCUDA_VISIBLE_DEVICES=0 python scripts/data/create_tfrecords_wmt.py --out_tfrecord_folder {dataroot}/wmt16_translate/ro-en \\ \n--feature_folder {dataroot}/wmt16_translate/ro-en --samples_per_shard 4096 --dataset_type train/validation/test \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8768801849289117
+      ],
+      "excerpt": "--kl_coeff 0.5 --action_refinement 4 --share_embedding True \\ \n--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "Step1: nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder django_data/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "--share_embedding True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder django_data/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder django_data/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_gigaword}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8768801849289117
+      ],
+      "excerpt": "--share_embedding True \\ \n--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_gigaword}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_gigaword}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8044290599680651
+      ],
+      "excerpt": "--batch_size 128 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_wmt}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8768801849289117
+      ],
+      "excerpt": "--share_embedding True \\ \n--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7,8 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_wmt}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968
+      ],
+      "excerpt": "--kl_coeff 0.3 --kl_log_linear 0.01 \\           #: --kl_coeff 0.01 --kl_log_linear 0.0007 afterwards \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654435799632442
+      ],
+      "excerpt": "nohup bash -c \"CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -u scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "--train_folder {path_to_wmt}/train \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8044290599680651
+      ],
+      "excerpt": "--batch_size 128 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768801849289117
+      ],
+      "excerpt": "--pt_pg_type sinkhorn --pt_relative_embedding False --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8209190961965669
+      ],
+      "excerpt": "python scripts/calc_gigaword_score.py --files hyp_caps_list_cleaned.txt ref_caps_list_cleaned.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8209190961965669
+      ],
+      "excerpt": "python scripts/calc_wmt_score.py --files hyp_caps_list_cleaned2.txt ref_caps_list_cleaned2.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "--policy_gradient without_bvn --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "--policy_gradient without_bvn --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "--policy_gradient without_bvn --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "--policy_gradient without_bvn --pt_positional_attention True \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/anonymouscode115/autoregressive_inference/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Discovering Non-monotonic Autoregressive Orderings with Variational Inference",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "autoregressive_inference",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "anonymouscode115",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/anonymouscode115/autoregressive_inference/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 07:51:59 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

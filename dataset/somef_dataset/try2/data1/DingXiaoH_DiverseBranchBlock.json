@@ -1,0 +1,272 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2103.13425\n\nUpdate: released the code for building the block, transformations and verification.\n\nUpdate: a more efficient implementation of BNAndPadLayer\n\nUpdate: MobileNet, ResNet-18 and ResNet-50 models released. You can download them from Google Drive or Baidu Cloud. For the 1x1-KxK branch of MobileNet, we used internal_channels = 2x input_channels for every depthwise conv. 1x also worked but the accuracy was slightly lower (72.71% v.s. 72.88%",
+      "https://arxiv.org/abs/2105.01883",
+      "https://arxiv.org/abs/2101.03697",
+      "https://arxiv.org/abs/2007.03260",
+      "https://arxiv.org/abs/2103.13425"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{ding2021diverse,\ntitle={Diverse Branch Block: Building a Convolution as an Inception-like Unit},\nauthor={Ding, Xiaohan and Zhang, Xiangyu and Han, Jungong and Ding, Guiguang},\nbooktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},\npages={10886--10895},\nyear={2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9977994744046882
+      ],
+      "excerpt": "Paper: https://arxiv.org/abs/2103.13425 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9998428023306214,
+        0.9999999984528145
+      ],
+      "excerpt": "author={Ding, Xiaohan and Zhang, Xiangyu and Han, Jungong and Ding, Guiguang}, \nbooktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DingXiaoH/DiverseBranchBlock",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "dxh17@mails.tsinghua.edu.cn\n\nGoogle Scholar Profile: https://scholar.google.com/citations?user=CIjw0KoAAAAJ&hl=en\n\nMy open-sourced papers and repos: \n\nThe **Structural Re-parameterization Universe**:\n\n1. (preprint, 2021) **A powerful MLP-style CNN building block**\\\n[RepMLP: Re-parameterizing Convolutions into Fully-connected Layers for Image Recognition](https://arxiv.org/abs/2105.01883)\\\n[code](https://github.com/DingXiaoH/RepMLP).\n\n2. (CVPR 2021) **A super simple and powerful VGG-style ConvNet architecture**. Up to **83.55%** ImageNet top-1 accuracy!\\\n[RepVGG: Making VGG-style ConvNets Great Again](https://arxiv.org/abs/2101.03697)\\\n[code](https://github.com/DingXiaoH/RepVGG).\n\n3. (preprint, 2020) **State-of-the-art** channel pruning\\\n[Lossless CNN Channel Pruning via Decoupling Remembering and Forgetting](https://arxiv.org/abs/2007.03260)\\\n[code](https://github.com/DingXiaoH/ResRep).\n\n4. ACB (ICCV 2019) is a CNN component without any inference-time costs. The first work of our Structural Re-parameterization Universe.\\\n[ACNet: Strengthening the Kernel Skeletons for Powerful CNN via Asymmetric Convolution Blocks](http://openaccess.thecvf.com/content_ICCV_2019/papers/Ding_ACNet_Strengthening_the_Kernel_Skeletons_for_Powerful_CNN_via_Asymmetric_ICCV_2019_paper.pdf).\\\n[code](https://github.com/DingXiaoH/ACNet). \n\n5. DBB (CVPR 2021) is a CNN component with higher performance than ACB and still no inference-time costs. Sometimes I call it ACNet v2 because \"DBB\" is 2 bits larger than \"ACB\" in ASCII (lol).\\\n[Diverse Branch Block: Building a Convolution as an Inception-like Unit](https://arxiv.org/abs/2103.13425)\\\n[code](https://github.com/DingXiaoH/DiverseBranchBlock).\n\n**Model compression and acceleration**:\n\n1. (CVPR 2019) Channel pruning: [Centripetal SGD for Pruning Very Deep Convolutional Networks with Complicated Structure](http://openaccess.thecvf.com/content_CVPR_2019/html/Ding_Centripetal_SGD_for_Pruning_Very_Deep_Convolutional_Networks_With_Complicated_CVPR_2019_paper.html)\\\n[code](https://github.com/DingXiaoH/Centripetal-SGD)\n\n2. (ICML 2019) Channel pruning: [Approximated Oracle Filter Pruning for Destructive CNN Width Optimization](http://proceedings.mlr.press/v97/ding19a.html)\\\n[code](https://github.com/DingXiaoH/AOFP)\n\n3. (NeurIPS 2019) Unstructured pruning: [Global Sparse Momentum SGD for Pruning Very Deep Neural Networks](http://papers.nips.cc/paper/8867-global-sparse-momentum-sgd-for-pruning-very-deep-neural-networks.pdf)\\\n[code](https://github.com/DingXiaoH/GSM-SGD)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-17T05:00:52Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T08:03:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9902593510434173,
+        0.9205879070073381
+      ],
+      "excerpt": "DBB is a powerful ConvNet building block to replace regular conv. It improves the performance without any extra inference-time costs. This repo contains the code for building DBB and converting it into a single conv. You can also get the equivalent kernel and bias in a differentiable way at any time (get_equivalent_kernel_bias in diversebranchblock.py). This may help training-based pruning or quantization. \nThis is the PyTorch implementation. The MegEngine version is at https://github.com/megvii-model/DiverseBranchBlock \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9132686377641607,
+        0.9466572740258901,
+        0.9687113781772688,
+        0.8742292290206884
+      ],
+      "excerpt": "Update: released the code for building the block, transformations and verification. \nUpdate: a more efficient implementation of BNAndPadLayer \nUpdate: MobileNet, ResNet-18 and ResNet-50 models released. You can download them from Google Drive or Baidu Cloud. For the 1x1-KxK branch of MobileNet, we used internal_channels = 2x input_channels for every depthwise conv. 1x also worked but the accuracy was slightly lower (72.71% v.s. 72.88%). On dense conv like ResNet, we used internal_channels = input_channels, and larger internal_channels seemed useless. \nSometimes I call it ACNet v2 because 'DBB' is two bits larger than 'ACB' in ASCII. (lol) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9981573944270449
+      ],
+      "excerpt": "We propose a universal building block of Convolutional Neural Network (ConvNet) to improve the performance without any inference-time costs. The block is named Diverse Branch Block (DBB), which enhances the representational capacity of a single convolution by combining diverse branches of different scales and complexities to enrich the feature space, including sequences of convolutions, multi-scale convolutions, and average pooling. After training, a DBB can be equivalently converted into a single conv layer for deployment. Unlike the advancements of novel ConvNet architectures, DBB complicates the training-time microstructure while maintaining the macro architecture, so that it can be used as a drop-in replacement for regular conv layers of any architecture. In this way, the model can be trained to reach a higher level of performance and then transformed into the original inference-time structure for inference. DBB improves ConvNets on image classification (up to 1.9% higher top-1 accuracy on ImageNet), object detection and semantic segmentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.938136866688131,
+        0.973694916081679
+      ],
+      "excerpt": "Note that the argument \"deploy\" builds an inference-time model. \nThe multi-processing training script in this repo is based on the official PyTorch example for the simplicity and better readability. The modifications include the model-building part and cosine learning rate scheduler.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Diverse Branch Block: Building a Convolution as an Inception-like Unit",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DingXiaoH/DiverseBranchBlock/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**Q**: Is the inference-time model's output the _same_ as the training-time model?\n\n**A**: Yes. You can verify that by\n```\npython dbb_verify.py\n```\n\n**Q**: What is the relationship between DBB and RepVGG?\n\n**A**: RepVGG is a plain architecture, and the RepVGG-style structural re-param is designed for the plain architecture. On a non-plain architecture, a RepVGG block shows no superiority compared to a single 3x3 conv (it improves Res-50 by only 0.03%, as reported in the RepVGG paper). DBB is a universal building block that can be used on numerous architectures.\n\n**Q**: How to quantize a model with DBB?\n\n**A1**: Post-training quantization. After training and conversion, you may quantize the converted model with any post-training quantization method. Then you may insert a BN after the conv converted from a DBB and finetune to recover the accuracy just like you quantize and finetune the other models. This is the recommended solution. Please see the quantization example of [RepVGG](https://github.com/DingXiaoH/RepVGG).\n\n**A2**: Quantization-aware training. During the quantization-aware training, instead of constraining the params in a single kernel (e.g., making every param in {-127, -126, .., 126, 127} for int8) for an ordinary conv, you should constrain the equivalent kernel of a DBB (get_equivalent_kernel_bias()). \n\n**Q**: I tried to finetune your model with multiple GPUs but got an error. Why are the names of params like \"xxxx.weight\" in the downloaded weight file but sometimes like \"module.xxxx.weight\" (shown by nn.Module.named_parameters()) in my model?\n\n**A**: DistributedDataParallel may prefix \"module.\" to the name of params and cause a mismatch when loading weights by name. The simplest solution is to load the weights (model.load_state_dict(...)) before DistributedDataParallel(model). Otherwise, you may insert \"module.\" before the names like this\n```\ncheckpoint = torch.load(...)    #: This is just a name-value dict\nckpt = {('module.' + k) : v for k, v in checkpoint.items()}\nmodel.load_state_dict(ckpt)\n```\nLikewise, if the param names in the checkpoint file start with \"module.\" but those in your model do not, you may strip the names like\n```\nckpt = {k.replace('module.', ''):v for k,v in checkpoint.items()}   #: strip the names\nmodel.load_state_dict(ckpt)\n```\n**Q**: So a DBB derives the equivalent KxK kernels before each forwarding to save computations?\n\n**A**: No! More precisely, we do the conversion only once right after training. Then the training-time model can be discarded, and every resultant block is just a KxK conv. We only save and use the resultant model.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 27,
+      "date": "Thu, 23 Dec 2021 01:06:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DingXiaoH/DiverseBranchBlock/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DingXiaoH/DiverseBranchBlock",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8301659092006253
+      ],
+      "excerpt": "This is the PyTorch implementation. The MegEngine version is at https://github.com/megvii-model/DiverseBranchBlock \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9171302070853417,
+        0.8216270093103228,
+        0.8585374741749484
+      ],
+      "excerpt": "python convert.py [weights file of the training-time model to load] [path to save] -a [architecture name] \nFor example, \npython convert.py ResNet-18_DBB_7101.pth ResNet-18_DBB_7101_deploy.pth -a ResNet-18 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863982298261704
+      ],
+      "excerpt": "python test.py IMGNET_PATH deploy ResNet-18_DBB_7101_deploy.pth -a ResNet-18 -t DBB \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DingXiaoH/DiverseBranchBlock/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Diverse Branch Block: Building a Convolution as an Inception-like Unit (PyTorch) (CVPR-2021)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DiverseBranchBlock",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DingXiaoH",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DingXiaoH/DiverseBranchBlock/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 176,
+      "date": "Thu, 23 Dec 2021 01:06:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You may download the models reported in the paper (ResNet-18, ResNet-50, MobileNet) from Google Drive (https://drive.google.com/drive/folders/1BPuqY_ktKz8LvHjFK5abD0qy3ESp8v6H?usp=sharing) or Baidu Cloud (https://pan.baidu.com/s/1wPaQnLKyNjF_bEMNRo4z6Q, the access code is \"dbbk\"). For the ease of transfer learning on other tasks, we provide both training-time and inference-time models. For ResNet-18 as an example, assume IMGNET_PATH is the path to your directory that contains the \"train\" and \"val\" directories of ImageNet, you may test the accuracy by running\n```\npython test.py IMGNET_PATH train ResNet-18_DBB_7101.pth -a ResNet-18 -t DBB\n```\nHere \"train\" indicates the training-time structure\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Assume your model is like\n```\nclass SomeModel(nn.Module):\n    def __init__(self, ...):\n        ...\n        self.some_conv = nn.Conv2d(...)\n        self.some_bn = nn.BatchNorm2d(...)\n        ...\n        \n    def forward(self, inputs):\n        out = ...\n        out = self.some_bn(self.some_conv(out))\n        ...\n```\nFor training, just use DiverseBranchBlock to replace the conv-BN. Then SomeModel will be like\n```\nclass SomeModel(nn.Module):\n    def __init__(self, ...):\n        ...\n        self.some_dbb = DiverseBranchBlock(..., deploy=False)\n        ...\n        \n    def forward(self, inputs):\n        out = ...\n        out = self.some_dbb(out)\n        ...\n```\nTrain the model just like you train the other regular models. Then call **switch_to_deploy** of every DiverseBranchBlock, test, and save.\n```\nmodel = SomeModel(...)\ntrain(model)\nfor m in train_model.modules():\n    if hasattr(m, 'switch_to_deploy'):\n        m.switch_to_deploy()\ntest(model)\nsave(model)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2107.02314\n\n[2] UNet++: A Nested U-Net Architecture for Medical Image Segmentation: https://arxiv.org/abs/1807.10165\n\n[3] Long Short-term Memory: https://www.researchgate.net/publication/13853244_Long_Short- term_Memory\n\n[4] segmentation model pytorch: https://github.com/qubvel/segmentation_models.pytorch \n\n[5] timm: https://github.com/rwightman/pytorch-image-models\n\n## 12. Future issues\nIf you find any problems running the code, or have any questions regarding the solution, please contact me at: namnguyen6101@gmail.com and create an issue on the Repo's Issue tab",
+      "https://arxiv.org/abs/1807.10165\n\n[3] Long Short-term Memory: https://www.researchgate.net/publication/13853244_Long_Short- term_Memory\n\n[4] segmentation model pytorch: https://github.com/qubvel/segmentation_models.pytorch \n\n[5] timm: https://github.com/rwightman/pytorch-image-models\n\n## 12. Future issues\nIf you find any problems running the code, or have any questions regarding the solution, please contact me at: namnguyen6101@gmail.com and create an issue on the Repo's Issue tab"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] The RSNA-ASNR-MICCAI BraTS 2021 Benchmark on Brain Tumor Segmentation and Radiogenomic Classification: https://arxiv.org/abs/2107.02314\n\n[2] UNet++: A Nested U-Net Architecture for Medical Image Segmentation: https://arxiv.org/abs/1807.10165\n\n[3] Long Short-term Memory: https://www.researchgate.net/publication/13853244_Long_Short- term_Memory\n\n[4] segmentation model pytorch: https://github.com/qubvel/segmentation_models.pytorch \n\n[5] timm: https://github.com/rwightman/pytorch-image-models\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gallegi/T4E_MICCAI_BrainTumor",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-20T03:47:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-18T03:00:23Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8325333254383263
+      ],
+      "excerpt": "Here is the hardware we used to produce the result \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.825101015536765
+      ],
+      "excerpt": "  - Number of GPUs: 4 (The final model was trained on a single Tesla V100) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9680692355281001
+      ],
+      "excerpt": "Our best model on the private leaderboard is the one that combined a 2 stage training and inference.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8140814050995557,
+        0.9732771284222285,
+        0.9361700701008414,
+        0.9924854056922209,
+        0.8360153729081423,
+        0.9477874166422193,
+        0.9396641988136252
+      ],
+      "excerpt": "- The second stage was the classification stage, where a classification model was trained. We used the trained segmentation model to generate the tumor masks, combining with the original images to form a 3-channel inputs that were taken by the classification model to train and run inference on. \n- All the models approached the problem using 2D image. Segmentation stage used a Unet++ model with Densenet121 backbone and the classification stage utilized an architecture of Long Short Term Memory with Eca NFNet L0 backbone as a feature extractor. \nThere is a parrallel track held by the same host called Task 1, besides Task 2 which was hosted on Kaggle. The dataset is provided in 3D arrays with shape (240,240,155), stored in nii.gz files. \nRemove data of patients overlapping with those in Task 2 data: Task 1 data has 1251 samples corresponding to 1251 unique patients. However, there are about 574 patients with IDs overlapping with Task 2 data. In order to prevent data leakage, it was safer to remove data of overlapping patients. Thus, only the non-overlapping part was kept, which had about 677 3D samples. \nData preparation: with each 3D sample, we extracted 2D slices and their corresponding masks from each plane: Coronal, Sagital and Axial. To illustrate, if there are 600 3D samples, 4 MRI types each, 3 different plane views, and within each 3D sample we were able to extract 100 slices, then the total 2D images received is 600x4x3x100.  \nSampling: Because nearby slices in the same plane are usually very similar to each other, we used a sampling method to keep only relatively distinct images. We believed that it did no harm for training the model, and certainly reduced the training time. \nFiltering: Only images with tumor area over brain area more than 0.01 were kept. We think that would make the model model stable during training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9814495959258855,
+        0.9302422904789521,
+        0.9702907609578918,
+        0.977477167552867,
+        0.9681457388854126,
+        0.9428966829187403
+      ],
+      "excerpt": "Mask: Refer to the competition paper [1], we constructed 2 types of masks for each 2D image: Whole Tumor (WT) and Enhancing Tumor (ET). WT represents the morphology of the whole tumor while ET is the middle layer wrapping the necrotic part to form the tumor core. \nModel: Densenet121 backbone with a linear classifier layer at top, pretrained on imagenet \nTraining: All images regardless of mri types and planes after the filtering step above are used. Note that a set of 20% patient was held out to validate the model during training. At first, the backbone was freezed to warm up in 10 epochs, then, we unfreezed it and trained to more than 180 epochs when the improvement are minor. \nData preparation: Using the trained segmentation model on Task 2 data to generate 2 types of mentioned masks, we concatenated them with the original image to create 3-channel 2D images as the input for this second stage. \nFiltering: We used the predicted masks to determine which images should be kept during training. Only images with predicted tumor area over brain area larger than 0.025 were considered as informative. Besides, we also decided to remove ones with total number of separated tumor contours more than 5 to avoid noises, because it was unlikely that we have a brain with multiple tumors. \nChunking: By using LSTM, we inputed a series of 3-channel images into the model at the same time, we needed to determine how many time-step per series. By viewing the distribution of number of images in each series and after doing some tuning, we decided that the sequence length was 35. This would not be an optimal one, but we found the result acceptable. Larger sequence lenght might lead to unstable training and much resource comsumption. So, for each series, we create consecutive 35-step chunks with stride 5 and treated them as independent samples when training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9934243611104006,
+        0.886274817076712,
+        0.9972222246721822,
+        0.942795767076934
+      ],
+      "excerpt": "Model: Biderectional LSTM with Eca nfnet l0 backbone extractor. The backbone is shared between time steps and output an embedding of size 2034. The hidden size of the LSTM cell is 64. All the embedding from all the time steps are concatenated before going to a linear classifier.  \nTraining: We trained a model for each MRI type separatedly, data from 20% patients was held out for validation. The backbone was freeze and warm up for 5 epochs before unfreezing and continued training.  \nInference: Because we splitted 1 series of 1 patients to many chunks, the final prediction of 1 patient was the average of all the probability outputs of those chunks. We observe that this kind of emsembling make the model more robust.  \nTTA: Specific for test set, we checked that the ratio of tumor area over brain area was smaller in some cases, so we decided use TTA Zoom In 1.2 as the post processing step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9019281067284086
+      ],
+      "excerpt": "We were pretty confident with the segmentation model because the results it outputted were good, and the training and validation loss perfectly correlated. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707550335626098,
+        0.9495165277340405
+      ],
+      "excerpt": "While training we found that the classification model could quickly go overfiting, we still think that this task need more data to be trained on, before we can conclude that whether or not this is feasible in practice. \nNote that the AUC is calculated among patients, which requires averaging predictions of all chunks belong to each patient to obtain that person's prediciton. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9296826289737902
+      ],
+      "excerpt": "Note that the log you see on training did not reflect the patient AUC, instead it was the chunk AUC. To get the patient AUC you need to average the prediction of all the chunk belonging to that patient. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9825502488868901,
+        0.9991149842804784,
+        0.8156816514123472
+      ],
+      "excerpt": "We have spent a lot of time and with many different approaches but it did not work, or at least we were not able to make it work. \nAt first we tried 3D model because we believed that the information represented in 3D space was much more rational and the data was easier to manage. But the point was how to normalize the 3D arrays of voxels in some consistent ways. We used both simple and complex methods form rotating the brain onto the similar plane and direction then resizing to a fixed shape, to registering to SRI24 as done in Task 1 data by the host. We found out that the registration data was good and it not only preserved the spacing of the voxels in space but also ensured all the brains to lie consitently on a direction. However, no matter good the registration data looked, the model still perform badly on the public leaderboard. Besides, lack of pretrained weights for 3D model was another factor that could affect the model performance, especially when the number of training data was small. \nIn exploring external dataset, we found some that could be relevant to the problem: IXI dataset, fastMRI dataset, TCIA dataset and tried to manipulate them for self-supervised training and speudo labeling but we failed to have a better result. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  - Download raw dicom dataset from the competition home page and extract it to *data/raw_dicom_data* folder: https://www.kaggle.com/c/rsna-miccai-brain-tumor-radiogenomic-classification/data. The directory contains:\n    - train/\n    - test/ \n    - sample_submission.csv\n    - train_labels.csv\n  - Download jpg data (converted from dicom files) and extract it to *data/raw_jpg_data* from url: https://www.kaggle.com/namgalielei/miccaibraintumorjpgdata. The directory contains:\n    - data/\n  - Download task 1 data (BraTS21 3D tumor segmentation dataset) and extract to *data/task1_data* from url: https://www.kaggle.com/dschettler8845/brats-2021-task1 (Credit for Darien Schettler who uploaded it). The directory contains something like:\n    - BraTS2021_00000/\n    - BraTS2021_00002/\n    - BraTS2021_00003/\n    - ....\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  - We provided our already trained models that can be loaded and run inference\n  - Run this command to automatically download all the models. They are saved inside the *model/* directory\n````\n    python download_models.py\n````\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gallegi/T4E_MICCAI_BrainTumor/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 07:11:31 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gallegi/T4E_MICCAI_BrainTumor/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gallegi/T4E_MICCAI_BrainTumor",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Make sure you have already downloaded the dicom data and the trained models from the challenge as guided above.\n````\n    python inference_on_test.py --gpu <gpu id> --classification_batch_size <bs1> --classification_batch_size <bs2> --fast_sub 0\n````\n- This will create a csv prediction file: data/test_prediction.csv\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "````\n    pip install -r requirements.txt\n````\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9114809092308644
+      ],
+      "excerpt": "  - GPU specs: Nvidia Tesla V100 32GB  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8852925720948421,
+        0.8837680365796365,
+        0.9422055079498199
+      ],
+      "excerpt": "Cuda: 11.0 \nPython: 3.6.9 \nPython packages are listed in requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8641244168243438
+      ],
+      "excerpt": "Notebook after update dataset version T4E Final Submiision Update DS \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9246227682586091,
+        0.887111276770114
+      ],
+      "excerpt": "python prepare_segmentation_data.py \nTrain segmentation model. This will create folder: models/densenet121_2d_segment. NOTE: It will overwrite the prexisting weights and training log files in this folder \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8666957586215029
+      ],
+      "excerpt": "Train classification model. This will create folder: models/eca_nfnet_l0_2d_classification. NOTE: It will overwrite the prexisting weights and training log files in this folder \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gallegi/T4E_MICCAI_BrainTumor/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Train4Ever\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RSNA-MICCAI 2021 Brain Tumor Challenge",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "T4E_MICCAI_BrainTumor",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gallegi",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gallegi/T4E_MICCAI_BrainTumor/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Wed, 29 Dec 2021 07:11:31 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

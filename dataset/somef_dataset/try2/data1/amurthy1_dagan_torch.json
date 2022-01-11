@@ -1,0 +1,286 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- As mentioned earlier, this work was adopted from [this paper](https://arxiv.org/abs/1711.04340) and [this repo](https://github.com/AntreasAntoniou/DAGAN) by A. Antoniou et al.\n\n- The omniglot dataset was originally sourced from [this github repo](https://github.com/brendenlake/omniglot/) by user [brendanlake](https://github.com/brendenlake).\n\n- The PyTorch Wasserstein GAN (WGAN) implementation in this repo was closely adopted from [this repo](https://github.com/EmilienDupont/wgan-gp) by user [EmilienDupont](https://github.com/EmilienDupont/).\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1711.04340",
+      "https://arxiv.org/abs/1704.00028",
+      "https://arxiv.org/abs/1711.04340"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amurthy1/dagan_torch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-07T17:27:43Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-30T12:06:54Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9584073373517014
+      ],
+      "excerpt": "<i>Time-lapse of DAGAN generations on the omniglot dataset over the course of the training process.</i> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9653756773199089,
+        0.9100654680710171,
+        0.9896426589488976,
+        0.8982960299723914,
+        0.9306599643582691,
+        0.9705635454694547
+      ],
+      "excerpt": "This is a PyTorch implementation of Data Augmentation GAN (DAGAN), which was first proposed in this paper with a corresponding TensorFlow implementation. \nThis repo uses the same generator and discriminator architecture of the original TF implementation, while also including a classifier script for the omniglot dataset to test out the quality of a trained DAGAN. \nThe motivation for this work is to train a Generative Adversarial Network (GAN) which takes in an image of a given class (e.g. a specific letter in an alphabet) and outputs another image of the same class that is sufficiently different looking than the input. This GAN is then used as a tool for data augmentation when training an image classifier. \nStandard data augmentation includes methods such as adding noise to, rotating, or cropping images, which increases variation in the training samples and improves the robustness of the trained classifier. Randomly passing some images through the DAGAN generator before using them in training serves a similar purpose. \nTo measure the quality of the DAGAN, classifiers were trained both with and without DAGAN augmentations to see if there was improvement in classifier accuracy with augmentations. The original paper showed improvement on the omniglot dataset using 5, 10, and 15 images per class to train the classifier. As expected, the fewer samples used, the more impactful the augmentations were. \nThis PyTorch implementation showed statistically significant improvment on the omniglot dataset with 1-4 samples per class but had negligible gains with 5+ samples per class. The below table shows the classifier accuracy with and without DAGAN augmentations as well as the statistical significance level that the augmentations are in fact better. (More details on confidence interval methodology can be found here). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8069748593692834,
+        0.8606108997024248
+      ],
+      "excerpt": "| <b>Confidence level that augmentations are better | 97.6% | 99.9% | 97.4% | 97.8% | 60.7% | \nThe easiest way to train your own DAGAN or augmented omniglot classifier is through Google Colab. The Colab notebooks used to produce the results shown here can be found below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9377439096217036
+      ],
+      "excerpt": "Running those notebooks as is should reproduce the results presented in this readme. One of the advantages of PyTorch relative to TensorFlow is the ease of modifying and testing out changes in the training process, particulary to the network architecture. To test out changes, you can fork this repo, make necessary changes, and re-run the colab script using the forked repo. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8197696657139246
+      ],
+      "excerpt": "    - Pass source, generated target to D to recognize as fake \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9596711411373462
+      ],
+      "excerpt": "  - Thus, G provides varied images that are somewhat similar to the source, which is our ultimate goal \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394062198105593,
+        0.8023434238122231,
+        0.9139602390355279
+      ],
+      "excerpt": "The network was trained using the Adam optimizer and the Improved Wasserstein loss function, which has some useful properties allowing signal to better pass from D to G during the training of G. More details can be found in the Improved Wasserstein GAN paper. \nOmniglot classifiers were trained on classes #1420-1519 (100 classes) of the dataset for 200 epochs. Classifiers were trained with and without augmentations. When trained with augmentations, every other batch was passed through the DAGAN, so the total number of steps was the same in both configurations. \nTo estimate more robustly the accuracy in each configuration, 10 classifiers were trained, each on a slightly different dataset. More specifically, out of the 20 samples available for each class, a different subset of k images was chosen for each of the 10 classifiers. A two-sample t-test was then used to determine confidence level that the 2 distributions of accuracies were sufficiently different (i.e. statistical significance of accuracy improvement from augmentation). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9865237823128642,
+        0.9303473122127597
+      ],
+      "excerpt": "The DAGAN architectures are described in detail in the paper and can also be seen in the PyTorch implementation of the generator and discriminator. \nIn a nutshell, the generator is a UNet of dense convolutional blocks. Each block has 4 conv layers, while the UNet itself is 4 blocks deep on each side. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch Implementation of Data Augmentation GAN (originally proposed in arXiv:1711.04340)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amurthy1/dagan_torch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Wed, 22 Dec 2021 09:54:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/amurthy1/dagan_torch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "amurthy1/dagan_torch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/amurthy1/dagan_torch/master/notebook.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.903281498235012,
+        0.8882332739684562
+      ],
+      "excerpt": "<img src=\"resources/dagan_tracking_images.png\" width=560 height=56/> \n<img src=\"resources/dagan_training_progress.gif\" width=560 height=56/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8148894528203959
+      ],
+      "excerpt": "| Samples per Class                            | 1     | 2     | 3     | 4     | 5     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137,
+        0.8278121020599903
+      ],
+      "excerpt": "- Train omniglot DAGAN \n- Train omniglot classifier with DAGAN augmentations \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303798559955017,
+        0.8281726253693199
+      ],
+      "excerpt": "  - To train D \n    - Randomly sample images from G and train D to recognize as fake \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303798559955017
+      ],
+      "excerpt": "  - To train G \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8094480695273372
+      ],
+      "excerpt": "    - Train/modify G to increase likelihood D classifies given samples as real \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303798559955017
+      ],
+      "excerpt": "  - To train D \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303798559955017
+      ],
+      "excerpt": "  - To train G \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/amurthy1/dagan_torch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Data Augmentation GAN in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dagan_torch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "amurthy1",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amurthy1/dagan_torch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Wed, 22 Dec 2021 09:54:23 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

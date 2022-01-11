@@ -1,0 +1,306 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1705.02315"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/nhatanh81096/Pneumonia-Detection-from-Chest-X-Rays",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-06T16:59:50Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-06T00:03:51Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9960251379802186
+      ],
+      "excerpt": "In this project, you will apply the skills that you have acquired in this 2D medical imaging course  to analyze data from the NIH Chest X-ray Dataset and train a CNN to classify a given chest x-ray for the presence or absence of pneumonia. This project will culminate in a model that can predict the presence of pneumonia with human radiologist-level accuracy that can be prepared for submission to the FDA for 510(k) clearance as software as a medical device. As part of the submission preparation, you will formally describe your model, the data that it was trained on, and a validation plan that meets FDA criteria. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9562099484052093
+      ],
+      "excerpt": "The project will include access to a GPU for fast training of deep learning architecture, as well as access to 112,000 chest x-rays with disease labels  acquired from 30,000 patients. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9912488864888862,
+        0.9967940013694948,
+        0.9444386237508038,
+        0.9634566936046125
+      ],
+      "excerpt": "When it comes to pneumonia, chest X-rays are the best available method for diagnosis. More than 1 million adults are hospitalized with pneumonia and around 50,000 die from the disease every \nyear in the US alone. The high prevalence of pneumonia makes it a good candidate for the development of a deep learning application for two reasons: 1) Data availability in a high enough quantity for training deep learning models for image classification 2) Opportunity for clinical aid by providing higher accuracy image reads of a difficult-to-diagnose disease and/or reduce clinical burnout by performing automated reads of very common scans.  \nThe diagnosis of pneumonia from chest X-rays is difficult for several reasons:  \n1. The appearance of pneumonia in a chest X-ray can be very vague depending on the stage of the infection \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9917525483215579,
+        0.9865861111494237,
+        0.8642222810537064,
+        0.8434837336189211
+      ],
+      "excerpt": "For these reasons, common methods of diagnostic validation performed in the clinical setting are to obtain sputum cultures to test for the presence of bacteria or viral bodies that cause pneumonia, reading the patient's clinical history and taking their demographic profile into account, and comparing a current image to prior chest X-rays for the same patient if they are available. \nThe dataset provided to you for this project was curated by the NIH specifically to address the problem of a lack of large x-ray datasets with ground truth labels to be used in the creation of disease detection algorithms.  \nThe data is mounted in the Udacity Jupyter GPU workspace provided to you, along with code to load the data. Alternatively, you can download the data from the kaggle website and run it locally. You are STRONGLY recommended to complete the project using the Udacity workspace since the data is huge, and you will need GPU to accelerate the training process. \nThere are 112,120 X-ray images with disease labels from 30,805 unique patients in this dataset.  The disease labels were created using Natural Language Processing (NLP) to mine the associated radiological reports. The labels include 14 common thoracic pathologies:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9495862137011373
+      ],
+      "excerpt": "The biggest limitation of this dataset is that image labels were NLP-extracted so there could be some erroneous labels but the NLP labeling accuracy is estimated to be >90%. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9269713122602348
+      ],
+      "excerpt": "Indications for Use: It is well-used for both male and female from 1-100 years old. Patient can also exihit other diseases (Atelectasis, Cardiomegaly, Consolidation, Edema, Effusion, Emphysema, Fibrosis, Hernia, Infiltration, Mass, Nodule, Pleural_Thickening, Pneumonia, Pneumothorax) in comorbid with pneumonia. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9307115714914621
+      ],
+      "excerpt": "Clinical Impact of Performance: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.938274812719469
+      ],
+      "excerpt": "Preprocessing Steps: Rescale the image by dividing by 255.0, then normalize the image with the mean and standard deviation retrieved from the training data. Finally, resize the image to (1, 224, 224, 3) to fit in the network. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9273649060032132
+      ],
+      "excerpt": "- VGG19 model architecture is used for transfer learning.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "    * Dense 1024, Activation = ReLU \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "    * Dense 512, Activation = ReLU \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875,
+        0.8577302739126875
+      ],
+      "excerpt": "    * Dense 256, Activation = ReLU \n    * Dense 1, Activation = Sigmoid \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9837811772141661,
+        0.8149422155226979,
+        0.853838607723825,
+        0.8953199122912259,
+        0.8002813488568639
+      ],
+      "excerpt": "Based on the F1-Score vs Threshold Chart, to balance between the Precision and Recall, the threshold of 0.728 will give the max value of F1-Score. \nThe databases contains 112,120 X-Ray images. The number of Pneumonia Positive images is only 1430 (1.27%). \nTherefore, to split the databases for training, I will have to: \nObtain all the postive cases of Pneumonia. \nDivide the positive cases into 80%-20% for the Training and Validation Dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9067871959934117
+      ],
+      "excerpt": "- Balance the number of negative and positive cases in the training data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9725167171856569
+      ],
+      "excerpt": "The ground truth is NLP-derived labels. NLP at this stage is not complex enough to capture all the existing information of the reports. Hence, the accuracy is roughly 90%. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9960898467140084
+      ],
+      "excerpt": "- Male and female patients in the age of 1 to 100. The gender distribution is slightly toward Male patient, the male to female ratio is approximately 1.2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8317610263218047
+      ],
+      "excerpt": "- Establish a silver standard of radiologist reading \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Pneumonia Detection from Chest X-Rays using CNN",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/nhatanh81096/Pneumonia-Detector/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 09:55:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/nhatanh81096/Pneumonia-Detection-from-Chest-X-Rays/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "nhatanh81096/Pneumonia-Detection-from-Chest-X-Rays",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/nhatanh81096/Pneumonia-Detector/master/Build%20and%20train%20model.ipynb",
+      "https://raw.githubusercontent.com/nhatanh81096/Pneumonia-Detector/master/Inference.ipynb",
+      "https://raw.githubusercontent.com/nhatanh81096/Pneumonia-Detector/master/EDA.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9363234133454684
+      ],
+      "excerpt": "Your Name: Nguyen Nhat Anh Vo \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.878293670171697
+      ],
+      "excerpt": "- The patient may exihibit the following comorbid with Pneumonia: Atelectasis, Cardiomegaly, Consolidation, Edema, Effusion, Emphysema, Fibrosis, Hernia, Infiltration, Mass, Nodule, Pleural_Thickening, Pneumonia, Pneumothorax -  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/nhatanh81096/Pneumonia-Detection-from-Chest-X-Rays/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Pneumonia Detection from Chest X-Rays",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Pneumonia-Detection-from-Chest-X-Rays",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "nhatanh81096",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/nhatanh81096/Pneumonia-Detection-from-Chest-X-Rays/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 09:55:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "healthcare",
+      "ai"
+    ],
+    "technique": "GitHub API"
+  }
+}

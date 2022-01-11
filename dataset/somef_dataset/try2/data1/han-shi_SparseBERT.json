@@ -1,0 +1,211 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/han-shi/SparseBERT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-19T13:29:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-11T17:59:43Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9934765041188007,
+        0.9780052905278482,
+        0.9963627805295915,
+        0.9747145082750801,
+        0.9137262620576158,
+        0.9575495135507034
+      ],
+      "excerpt": "This repository provides a script and recipe to search the BERT model with sparse attention mask for PyTorch to balance the performance and efficiency. \nOur implementation is an further version of the NVIDIA implementation, which leverages mixed precision arithmetic and Tensor Cores on Volta V100 and Ampere A100 GPUs for faster training times while maintaining target accuracy. \nBERT, or Bidirectional Encoder Representations from Transformers, is a new method of pre-training language representations which obtains state-of-the-art results on a wide array of Natural Language Processing (NLP) tasks. This model is based on the BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding paper. \nThe BERT model uses the same architecture as the encoder of the Transformer. Input sequences are projected into an embedding space before being fed into the encoder structure. Additionally, positional and segment encodings are added to the embeddings to preserve positional information. The encoder structure is simply a stack of Transformer blocks, which consist of a multi-head attention layer followed by successive stages of feed-forward networks and layer normalization. The multi-head attention layer accomplishes self-attention on multiple input representations. \nAn illustration of the architecture taken from the Transformer paper is shown below. \nIn this work, we just focus on BERT-base with following configuration. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/han-shi/SparseBERT/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 13:08:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/han-shi/SparseBERT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "han-shi/SparseBERT",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/bind.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/data_download.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/run_squad.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/run_swag.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/run_glue.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/run_pretraining.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/configs/squad_config.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/configs/glue_config.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/configs/pretrain_config.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/docker/launch.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/scripts/docker/build.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/evaluate.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/wait_for_triton_server.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/run_perf_client.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/export_model.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/generate_figures.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/triton/launch_triton_server.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/data/create_datasets_from_start.sh",
+      "https://raw.githubusercontent.com/han-shi/SparseBERT/master/data/squad/squad_download.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " \nOur main difference is `run_pretraining.py` and `modeling.py`.\nFor quick start guide, you can refer to NVIDIA's repository.\n\nTo run on a single node 8 x V100 32G cards, from within the container, you can use the following script to run pre-training.  \n`bash scripts/run_pretraining.sh`\n\nThe default hyperparameters are set to run on 8x V100 32G cards.\n\n|  <img width=200/> |**Sparsity ratio**|**MNLI&#8209;(m/mm)**| **QQP** | **QNLI**|  **SST&#8209;2** | **COLA** |  **STS&#8209;B**| **MRPC**| **RTE**| **Average**|\n|:--------|:--------:|:----------:|:----:|:---:|:--------:|:---:|:----:|:----:|:----:|:----:|\n|Strided [1]|     70.4 | 81.9/81.9 | 87.1 | 89.0 | 91.7 | 58.4 | 86.6 | 86.1 | 52.7 | 79.5 |\n|Fixed  [1] |    72.7 | 81.4/81.8 | 86.4 | 88.1 | 91.3 | 54.2 | 85.9 | 88.7 | 59.2 | 79.7|\n|Longformer [2]|  88.7 | 80.5/81.0 | 86.8 | 88.4 | 91.8 | 57.9 | 86.9 | 81.7 | 65.3 | 80.1 |\n|LogSparse [3] | 89.8 | 77.9/78.2 | 85.9 | 84.6 | 92.0 | 58.5 | 83.2 | 82.0 | 58.8 | 77.9 |\n|BigBird [4]   | 93.2 | 80.2/80.1 | 86.4 | 87.6 | 91.6 | 54.3 | 84.7 | 84.1 | 66.0 | 79.4 |\n|Star   [5]   | 96.1 | 79.1/79.0 | 86.2 | 86.4 | 91.2 | 59.6 | 84.7 | 83.9 | 60.3 | 78.9 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-4}\">)   | 78.9 | 82.2/82.6 | 87.3 | 89.7 | 92.4 | 57.3 | 86.5 | 89.2 | 70.8 | 82.0|\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-3}\">)   | 79.2 | 82.2/82.4 | 87.1 | 89.5 | 92.3 | 57.2 | 86.2 | 89.1 | 67.9 | 81.6 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-2}\">)   | 79.8 | 81.7/82.3 | 86.8 | 89.4 | 92.1 | 57.2 | 86.1 | 89.0 | 67.1 | 81.3 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-1}\">)   | 85.8 | 81.4/82.2 | 86.5 | 89.1 | 92.1 | 56.6 | 84.4 | 88.3 | 66.8 | 80.8 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-4}\">)   | 91.2 | 81.7/81.7 | 87.0 | 88.3 | 92.5 | 59.4 | 86.7 | 88.4 | 63.2 | 80.9 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-3}\">)   | 91.6 | 81.0/81.2 | 86.9 | 88.0 | 92.4 | 58.6 | 86.2 | 85.7 | 62.8 | 80.3 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-2}\">)   | 91.7 | 81.1/80.9 | 86.9 | 87.9 | 92.3 | 57.9 | 84.8 | 85.4 | 61.0 | 79.8 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-1}\">)   | 93.5 | 80.9/81.0 | 86.7 | 87.7 | 92.2 | 57.7 | 84.8 | 85.2 | 59.9 | 79.6 |\n\n[1] [Generating Long Sequences with Sparse Transformers](https://arxiv.org/pdf/1904.10509.pdf)  \n[2] [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf)  \n[3] [Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting](https://papers.nips.cc/paper/2019/file/6775a0635c302542da2c32aa19d86be0-Paper.pdf)  \n[4] [Big Bird: Transformers for Longer Sequences](https://proceedings.neurips.cc/paper/2020/file/c8512d142a2d849725f31a9a7a361ab9-Paper.pdf)  \n[5] [Star-Transformer](https://www.aclweb.org/anthology/N19-1133.pdf)  \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/han-shi/SparseBERT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SparseBERT",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SparseBERT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "han-shi",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/han-shi/SparseBERT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Tue, 28 Dec 2021 13:08:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " \nOur main difference is `run_pretraining.py` and `modeling.py`.\nFor quick start guide, you can refer to NVIDIA's repository.\n\nTo run on a single node 8 x V100 32G cards, from within the container, you can use the following script to run pre-training.  \n`bash scripts/run_pretraining.sh`\n\nThe default hyperparameters are set to run on 8x V100 32G cards.\n\n|  <img width=200/> |**Sparsity ratio**|**MNLI&#8209;(m/mm)**| **QQP** | **QNLI**|  **SST&#8209;2** | **COLA** |  **STS&#8209;B**| **MRPC**| **RTE**| **Average**|\n|:--------|:--------:|:----------:|:----:|:---:|:--------:|:---:|:----:|:----:|:----:|:----:|\n|Strided [1]|     70.4 | 81.9/81.9 | 87.1 | 89.0 | 91.7 | 58.4 | 86.6 | 86.1 | 52.7 | 79.5 |\n|Fixed  [1] |    72.7 | 81.4/81.8 | 86.4 | 88.1 | 91.3 | 54.2 | 85.9 | 88.7 | 59.2 | 79.7|\n|Longformer [2]|  88.7 | 80.5/81.0 | 86.8 | 88.4 | 91.8 | 57.9 | 86.9 | 81.7 | 65.3 | 80.1 |\n|LogSparse [3] | 89.8 | 77.9/78.2 | 85.9 | 84.6 | 92.0 | 58.5 | 83.2 | 82.0 | 58.8 | 77.9 |\n|BigBird [4]   | 93.2 | 80.2/80.1 | 86.4 | 87.6 | 91.6 | 54.3 | 84.7 | 84.1 | 66.0 | 79.4 |\n|Star   [5]   | 96.1 | 79.1/79.0 | 86.2 | 86.4 | 91.2 | 59.6 | 84.7 | 83.9 | 60.3 | 78.9 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-4}\">)   | 78.9 | 82.2/82.6 | 87.3 | 89.7 | 92.4 | 57.3 | 86.5 | 89.2 | 70.8 | 82.0|\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-3}\">)   | 79.2 | 82.2/82.4 | 87.1 | 89.5 | 92.3 | 57.2 | 86.2 | 89.1 | 67.9 | 81.6 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-2}\">)   | 79.8 | 81.7/82.3 | 86.8 | 89.4 | 92.1 | 57.2 | 86.1 | 89.0 | 67.1 | 81.3 |\n|DAM<sub>u</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-1}\">)   | 85.8 | 81.4/82.2 | 86.5 | 89.1 | 92.1 | 56.6 | 84.4 | 88.3 | 66.8 | 80.8 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-4}\">)   | 91.2 | 81.7/81.7 | 87.0 | 88.3 | 92.5 | 59.4 | 86.7 | 88.4 | 63.2 | 80.9 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-3}\">)   | 91.6 | 81.0/81.2 | 86.9 | 88.0 | 92.4 | 58.6 | 86.2 | 85.7 | 62.8 | 80.3 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-2}\">)   | 91.7 | 81.1/80.9 | 86.9 | 87.9 | 92.3 | 57.9 | 84.8 | 85.4 | 61.0 | 79.8 |\n|DAM<sub>s</sub> (<img src=\"https://render.githubusercontent.com/render/math?math=\\lambda=10^{-1}\">)   | 93.5 | 80.9/81.0 | 86.7 | 87.7 | 92.2 | 57.7 | 84.8 | 85.2 | 59.9 | 79.6 |\n\n[1] [Generating Long Sequences with Sparse Transformers](https://arxiv.org/pdf/1904.10509.pdf)  \n[2] [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf)  \n[3] [Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting](https://papers.nips.cc/paper/2019/file/6775a0635c302542da2c32aa19d86be0-Paper.pdf)  \n[4] [Big Bird: Transformers for Longer Sequences](https://proceedings.neurips.cc/paper/2020/file/c8512d142a2d849725f31a9a7a361ab9-Paper.pdf)  \n[5] [Star-Transformer](https://www.aclweb.org/anthology/N19-1133.pdf)  \n",
+      "technique": "Header extraction"
+    }
+  ]
+}

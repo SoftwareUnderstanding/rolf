@@ -1,0 +1,373 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355",
+      "https://arxiv.org/abs/1904.01355",
+      "https://arxiv.org/abs/1904.01355 \n\nThe full paper is available at: [https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355). \n\n## Highlights\n- **Totally anchor-free:**  FCOS completely avoids the complicated computation related to anchor boxes and all hyper-parameters of anchor boxes.   \n- **Memory-efficient:** FCOS uses 2x less training memory footprint than its anchor-based counterpart RetinaNet.\n- **Better performance:** The very simple detector achieves better performance (37.1 vs. 36.8) than Faster R-CNN.\n- **Faster training and inference:** With the same hardwares, FCOS also requires less training hours (6.5h vs. 8.8h) and faster inference speed (71ms vs. 126 ms per im) than Faster R-CNN.\n- **State-of-the-art performance:** Without bells and whistles, FCOS achieves state-of-the-art performances.\nIt achieves **41.5%** (ResNet-101-FPN) and **43.2%** (ResNeXt-64x4d-101) in AP on coco test-dev.\n\n## Updates\n### 23 July 2019\n   - A trick of using a small central region of the BBox for training improves AP by nearly 1 point [as shown here](https://github.com/yqyao/FCOS_PLUS).\n\n### 3 July 2019\n   - FCOS with HRNet backbones is available at [HRNet-FCOS](https://github.com/HRNet/HRNet-FCOS).\n    \n### 30 June 2019\n   - FCOS with AutoML searched FPN (R50, R101, ResNeXt101 and MobileNetV2 backbones) is available at [NAS-FCOS](https://github.com/Lausannen/NAS-FCOS).\n    \n### 17 May 2019\n   - FCOS has been implemented in [mmdetection](https://github.com/open-mmlab/mmdetection). Many thanks to [@yhcao6](https://github.com/yhcao6) and [@hellock](https://github.com/hellock).\n\n## Required hardware\nWe use 8 Nvidia V100 GPUs. \\\nBut 4 1080Ti GPUs can also train a fully-fledged ResNet-50-FPN based FCOS since FCOS is memory-efficient.  \n\n## Installation\n\nThis FCOS implementation is based on [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark). Therefore the installation is the same as original maskrcnn-benchmark.\n\nPlease check [INSTALL.md](INSTALL.md) for installation instructions.\nYou may also want to see the original [README.md](MASKRCNN_README.md) of maskrcnn-benchmark.\n\n## A quick demo\nOnce the installation is done, you can follow the below steps to run a quick demo.\n    \n    # assume that you are under the root directory of this project,\n    # and you have activated your virtual environment if needed.\n    wget https://cloudstor.aarnet.edu.au/plus/s/dDeDPBLEAt19Xrl/download -O FCOS_R_50_FPN_1x.pth\n    python demo/fcos_demo.py\n\n\n## Inference\nThe inference command line on coco minival split:\n\n    python tools/test_net.py \\\n        --config-file configs/fcos/fcos_R_50_FPN_1x.yaml \\\n        MODEL.WEIGHT FCOS_R_50_FPN_1x.pth \\\n        TEST.IMS_PER_BATCH 4    \n\nPlease note that:\n1) If your model's name is different, please replace `FCOS_R_50_FPN_1x.pth` with your own.\n2) If you enounter out-of-memory error, please try to reduce `TEST.IMS_PER_BATCH` to 1.\n3) If you want to evaluate a different model, please change `--config-file` to its config file (in [configs/fcos](configs/fcos)) and `MODEL.WEIGHT` to its weights file.\n\nFor your convenience, we provide the following trained models (more models are coming soon).\n\n**ResNe(x)ts:**\n\n*All ResNe(x)t based models are trained with 16 images in a mini-batch and frozen batch normalization (i.e., consistent with models in [maskrcnn_benchmark](https://github.com/facebookresearch/maskrcnn-benchmark)).*\n\nModel | Total training mem (GB) | Multi-scale training | Testing time / im | AP (minival) | AP (test-dev) | Link\n--- |:---:|:---:|:---:|:---:|:--:|:---:\nFCOS_R_50_FPN_1x | 29.3 | No | 71ms | 37.1 | 37.4 | [download](https://cloudstor.aarnet.edu.au/plus/s/dDeDPBLEAt19Xrl/download)\nFCOS_R_101_FPN_2x | 44.1 | Yes | 74ms | 41.4 | 41.5 | [download](https://cloudstor.aarnet.edu.au/plus/s/vjL3L0AW7vnhRTo/download)\nFCOS_X_101_32x8d_FPN_2x | 72.9 | Yes | 122ms | 42.5 | 42.7 | [download](https://cloudstor.aarnet.edu.au/plus/s/U5myBfGF7MviZ97/download)\nFCOS_X_101_64x4d_FPN_2x | 77.7 | Yes | 140ms | 43.0 | 43.2 | [download](https://cloudstor.aarnet.edu.au/plus/s/wpwoCi4S8iajFi9/download)\n\n**MobileNets:**\n\n*We update batch normalization for MobileNet based models. If you want to use SyncBN, please install pytorch 1.1 or later.*\n\nModel | Training batch size | Multi-scale training | Testing time / im | AP (minival) | Link\n--- |:---:|:---:|:---:|:---:|:---:\nFCOS_syncbn_bs32_c128_MNV2_FPN_1x | 32 | No | 19ms | 30.9 | [download](https://cloudstor.aarnet.edu.au/plus/s/3GKwaxZhDSOlCZ0/download)\nFCOS_syncbn_bs32_MNV2_FPN_1x | 32 | No | 59ms | 33.1 | [download](https://cloudstor.aarnet.edu.au/plus/s/OpJtCJLj104i2Yc/download)\nFCOS_bn_bs16_MNV2_FPN_1x | 16 | No | 59ms | 31.0 | [download](https://cloudstor.aarnet.edu.au/plus/s/B6BrLAiAEAYQkcy/download)\n\n[1] *1x and 2x mean the model is trained for 90K and 180K iterations, respectively.* \\\n[2] *We report total training memory footprint on all GPUs instead of the memory footprint per GPU as in maskrcnn-benchmark*. \\\n[3] *All results are obtained with a single model and without any test time data augmentation such as multi-scale, flipping and etc..* \\\n[4] *Our results have been improved since our initial release. If you want to check out our original results, please checkout commit [f4fd589](https://github.com/tianzhi0549/FCOS/tree/f4fd58966f45e64608c00b072c801de7f86b4f3a)*. \\\n[5] *`c128` denotes the model has 128 (instead of 256) channels in towers (i.e., `MODEL.RESNETS.BACKBONE_OUT_CHANNELS` in [config](https://github.com/tianzhi0549/FCOS/blob/master/configs/fcos/fcos_syncbn_bs32_c128_MNV2_FPN_1x.yaml#L10)).*\n## Training\n\nThe following command line will train FCOS_R_50_FPN_1x on 8 GPUs with Synchronous Stochastic Gradient Descent (SGD):\n\n    python -m torch.distributed.launch \\\n        --nproc_per_node=8 \\\n        --master_port=$((RANDOM + 10000)) \\\n        tools/train_net.py \\\n        --skip-test \\\n        --config-file configs/fcos/fcos_R_50_FPN_1x.yaml \\\n        DATALOADER.NUM_WORKERS 2 \\\n        OUTPUT_DIR training_dir/fcos_R_50_FPN_1x\n        \nNote that:\n1) If you want to use fewer GPUs, please change `--nproc_per_node` to the number of GPUs. No other settings need to be changed. The total batch size does not depends on `nproc_per_node`. If you want to change the total batch size, please change `SOLVER.IMS_PER_BATCH` in [configs/fcos/fcos_R_50_FPN_1x.yaml](configs/fcos/fcos_R_50_FPN_1x.yaml).\n2) The models will be saved into `OUTPUT_DIR`.\n3) If you want to train FCOS with other backbones, please change `--config-file`.\n4) The link of ImageNet pre-training X-101-64x4d in the code is invalid. Please download the model [here](https://cloudstor.aarnet.edu.au/plus/s/k3ys35075jmU1RP/download).\n5) If you want to train FCOS on your own dataset, please follow this instruction [#54](https://github.com/tianzhi0549/FCOS/issues/54#issuecomment-497558687).\n## Contributing to the project\n\nAny pull requests or issues are welcome.\n\n## Citations\nPlease consider citing our paper in your publications if the project helps your research. BibTeX reference is as follows.\n```\n@inproceedings{tian2019fcos,\n  title   =  {{FCOS"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please consider citing our paper in your publications if the project helps your research. BibTeX reference is as follows.\n```\n@inproceedings{tian2019fcos,\n  title   =  {{FCOS}: Fully Convolutional One-Stage Object Detection},\n  author  =  {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},\n  booktitle =  {Proc. Int. Conf. Computer Vision (ICCV)},\n  year    =  {2019}\n}\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{tian2019fcos,\n  title   =  {{FCOS}: Fully Convolutional One-Stage Object Detection},\n  author  =  {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},\n  booktitle =  {Proc. Int. Conf. Computer Vision (ICCV)},\n  year    =  {2019}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.999887409463429,
+        0.9996044701773054,
+        0.9992393194923946
+      ],
+      "excerpt": "Tian Zhi, Chunhua Shen, Hao Chen, and Tong He; \nIn: Proc. Int. Conf. Computer Vision (ICCV), 2019. \narXiv preprint arXiv:1904.01355 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8622732070401696
+      ],
+      "excerpt": "FCOS_R_50_FPN_1x | 29.3 | No | 71ms | 37.1 | 37.4 | download \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ZhZiKai/VisDrone_FCOS",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to Mask-RCNN Benchmark\nWe want to make contributing to this project as easy and transparent as\npossible.\nOur Development Process\nMinor changes and improvements will be released on an ongoing basis. Larger changes (e.g., changesets implementing a new paper) will be released on a more periodic basis.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and create your branch from master.\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues to track public bugs. Please ensure your description is\nclear and has sufficient instructions to be able to reproduce the issue.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nCoding Style\n\n4 spaces for indentation rather than tabs\n80 character line length\nPEP8 formatting following Black\n\nLicense\nBy contributing to Mask-RCNN Benchmark, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-22T08:23:14Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-17T05:51:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9816033234106806
+      ],
+      "excerpt": "This project hosts the code for implementing the FCOS algorithm for object detection, as presented in our paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9128335827099135
+      ],
+      "excerpt": "Totally anchor-free:  FCOS completely avoids the complicated computation related to anchor boxes and all hyper-parameters of anchor boxes.    \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8712856699370062,
+        0.8676470230271273,
+        0.9461093850786065,
+        0.8126017098673813,
+        0.9605562223693086,
+        0.953020428299875,
+        0.9730502938800532
+      ],
+      "excerpt": "Better performance: The very simple detector achieves better performance (37.1 vs. 36.8) than Faster R-CNN. \nFaster training and inference: With the same hardwares, FCOS also requires less training hours (6.5h vs. 8.8h) and faster inference speed (71ms vs. 126 ms per im) than Faster R-CNN. \nState-of-the-art performance: Without bells and whistles, FCOS achieves state-of-the-art performances. \nIt achieves 41.5% (ResNet-101-FPN) and 43.2% (ResNeXt-64x4d-101) in AP on coco test-dev. \nA trick of using a small central region of the BBox for training improves AP by nearly 1 point as shown here. \nFCOS with HRNet backbones is available at HRNet-FCOS. \nFCOS with AutoML searched FPN (R50, R101, ResNeXt101 and MobileNetV2 backbones) is available at NAS-FCOS. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8303182212292588
+      ],
+      "excerpt": "But 4 1080Ti GPUs can also train a fully-fledged ResNet-50-FPN based FCOS since FCOS is memory-efficient. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8612812871265699
+      ],
+      "excerpt": "For your convenience, we provide the following trained models (more models are coming soon). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801200475740159
+      ],
+      "excerpt": "All ResNe(x)t based models are trained with 16 images in a mini-batch and frozen batch normalization (i.e., consistent with models in maskrcnn_benchmark). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8308355721681991
+      ],
+      "excerpt": "[1] 1x and 2x mean the model is trained for 90K and 180K iterations, respectively. \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9655093622057656,
+        0.8535773407177233,
+        0.898668381073099
+      ],
+      "excerpt": "[3] All results are obtained with a single model and without any test time data augmentation such as multi-scale, flipping and etc.. \\ \n[4] Our results have been improved since our initial release. If you want to check out our original results, please checkout commit f4fd589. \\ \n[5] c128 denotes the model has 128 (instead of 256) channels in towers (i.e., MODEL.RESNETS.BACKBONE_OUT_CHANNELS in config). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8722557863059223
+      ],
+      "excerpt": "4) The link of ImageNet pre-training X-101-64x4d in the code is invalid. Please download the model here. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ZhZiKai/VisDrone_FCOS/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 14:51:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ZhZiKai/VisDrone_FCOS/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ZhZiKai/VisDrone_FCOS",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/docker/Dockerfile",
+      "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/docker/docker-jupyter/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/train_1100_cocopretrained_P2.sh",
+      "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/test_1100_cocopretrained_P2.sh",
+      "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/maskrcnn_benchmark/csrc/soft_nms/setup.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This FCOS implementation is based on [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark). Therefore the installation is the same as original maskrcnn-benchmark.\n\nPlease check [INSTALL.md](INSTALL.md) for installation instructions.\nYou may also want to see the original [README.md](MASKRCNN_README.md) of maskrcnn-benchmark.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8353358824596112
+      ],
+      "excerpt": "For your convenience, we provide the following trained models (more models are coming soon). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030942951198009
+      ],
+      "excerpt": "We update batch normalization for MobileNet based models. If you want to use SyncBN, please install pytorch 1.1 or later. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8838377520179606
+      ],
+      "excerpt": "Note that: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9333574343066754
+      ],
+      "excerpt": "python demo/fcos_demo.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8368441649934927,
+        0.8318549392002752,
+        0.8633989807152664
+      ],
+      "excerpt": "    --config-file configs/fcos/fcos_R_50_FPN_1x.yaml \\ \n    MODEL.WEIGHT FCOS_R_50_FPN_1x.pth \\ \n    TEST.IMS_PER_BATCH 4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8498248166945727
+      ],
+      "excerpt": "Model | Total training mem (GB) | Multi-scale training | Testing time / im | AP (minival) | AP (test-dev) | Link \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8093462416429912
+      ],
+      "excerpt": "Model | Training batch size | Multi-scale training | Testing time / im | AP (minival) | Link \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8271039667125692
+      ],
+      "excerpt": "[2] We report total training memory footprint on all GPUs instead of the memory footprint per GPU as in maskrcnn-benchmark. \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664,
+        0.8368441649934927
+      ],
+      "excerpt": "    --skip-test \\ \n    --config-file configs/fcos/fcos_R_50_FPN_1x.yaml \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ZhZiKai/VisDrone_FCOS/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Dockerfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/ZhZiKai/VisDrone_FCOS/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'FCOS for non-commercial purposes\\n\\nCopyright (c) 2019 the authors\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FCOS: Fully Convolutional One-Stage Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VisDrone_FCOS",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ZhZiKai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ZhZiKai/VisDrone_FCOS/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Tue, 21 Dec 2021 14:51:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Once the installation is done, you can follow the below steps to run a quick demo.\n    \n    ",
+      "technique": "Header extraction"
+    }
+  ]
+}

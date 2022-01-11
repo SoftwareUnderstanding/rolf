@@ -1,0 +1,291 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2002.08910",
+      "https://arxiv.org/abs/1910.13461"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shmsw25/bart-closed-book-qa",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please email [Sewon Min](https://shmsw25.github.io) or write a Github issue for any question.\n\n\n[1]: http://nlp.cs.washington.edu/ambigqa/models/nq-bart-closed-qa/nq-bart-closed-qa.zip\n[2]: http://nlp.cs.washington.edu/ambigqa/models/nq-bart-closed-qa/predictions.zip\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-11T06:34:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-17T13:13:07Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9744007162336481,
+        0.9771997948422709,
+        0.9919963339053877,
+        0.9799544855189358,
+        0.9579919336861685
+      ],
+      "excerpt": "This is a BART version of sequence-to-sequence model for open-domain QA in a closed-book setup, based on PyTorch and Huggingface's Transformers. \nThe model is a sequence-to-sequence model that takes a question as an input and outputs the answer, without reading any external resource (e.g. passages). \nPlease refer to Roberts et al., 2020, How Much Knowledge Can You Pack Into the Parameters of a Language Model? to learn more about closed-book QA setup and the original model based on T5. Their code and model checkpoints are available here. \nThe model is based on BART-large. Please refer to Lewis et al., ACL 2020, BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension to learn more about BART. \nWe experiment with Natural Questions open-domain data (NQ-open), but the code should work on any QA data with question-answer pairs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9749600410064444
+      ],
+      "excerpt": "- eval_period: interval to evaluate on the dev data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9290480029055947
+      ],
+      "excerpt": "- debug: train and evaluate on a subset of the dev data for debugging purposes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8491154549712137
+      ],
+      "excerpt": "Our model that we reports the result below was trained with train_batch_size=1024, predict_batch_size 256 using eight 32GB gpus. Training took roughly 34 hours. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.822640015507016
+      ],
+      "excerpt": "- This script saves the pre-tokenized data in data/ once question-answer pairs are tokenized for the first time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9355982558767225
+      ],
+      "excerpt": "- Inference on multi-gpus is not working for now; we will update the code once it is fixed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9056010795108107,
+        0.9099282253016682
+      ],
+      "excerpt": "The final Exact Match score we get is 25.05 on the dev data and 24.10 on the test data. \nWe made the best model checkpoint and the predictions on the dev/test data available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A BART version of an open-domain QA model in a closed-book setup",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shmsw25/bart-closed-book-qa/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Wed, 29 Dec 2021 05:12:15 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/shmsw25/bart-closed-book-qa/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "shmsw25/bart-closed-book-qa",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/shmsw25/bart-closed-book-qa/master/download_data.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9410095428803538
+      ],
+      "excerpt": "You can use train_batch_size and predict_batch_size depending on the gpu availability. With one 16GB gpu, you can use train_batch_size=64, predict_batch_size=64. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8238404648107593
+      ],
+      "excerpt": "        --append_another_bos --prefix dev_ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8238404648107593
+      ],
+      "excerpt": "        --append_another_bos --prefix test_ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8705975187451429,
+        0.9128385327249784
+      ],
+      "excerpt": "python cli.py --do_train --output_dir out/nq-bart-closed-qa \\ \n        --train_file data/nqopen-train.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8011475843687924
+      ],
+      "excerpt": "The script will save the log and the best checkpoint inside out/nq-bart-closed-qa. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9407961145806966
+      ],
+      "excerpt": "- verbose: print a progress bar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8705975187451429
+      ],
+      "excerpt": "python cli.py --do_predict --output_dir out/nq-bart-closed-qa \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8705975187451429,
+        0.9142782348131894
+      ],
+      "excerpt": "python cli.py --do_predict --output_dir out/nq-bart-closed-qa \\ \n        --predict_file data/nqopen-test.json \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8842325556894942
+      ],
+      "excerpt": "It will save the prediction file as out/nq-bart-closed-qa/{dev|test}_predictions.json. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/shmsw25/bart-closed-book-qa/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BART version of closed-book QA",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bart-closed-book-qa",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "shmsw25",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shmsw25/bart-closed-book-qa/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This code is tested on Python 3.6.9.\n\nInstall PyTorch and Transformers:\n```\npip install torch==1.1.0\npip install git+https://github.com/huggingface/transformers.git@7b75aa9fa55bee577e2c7403301ed31103125a35\n```\n\nDownload NQ-open data:\n```\nchmod +x download_data.sh; ./download_data.sh\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 89,
+      "date": "Wed, 29 Dec 2021 05:12:15 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

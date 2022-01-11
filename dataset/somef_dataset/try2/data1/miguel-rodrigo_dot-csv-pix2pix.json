@@ -1,0 +1,209 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1611.07004",
+      "https://arxiv.org/abs/1804.07723"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9988342644152218,
+        0.9999597154288207,
+        0.8854398367006624,
+        0.9811934373974328,
+        0.9890933732685616
+      ],
+      "excerpt": "\u00bfHay algo de tu cara que no te gusta? \u00bfTienes problemas de acn\u00e9 o de mmm...calvicie? Ah\u00f3rrate millones en tratamientos. Con este proyecto podr\u00e1s arreglar tus problemas en tus im\u00e1genes. \u00bfA qui\u00e9n le importa la realidad? Lo importante en la vida es que salgas bien y feliz en Instagram! \nEste proyecto tiene por objetivo demostrar una aplicaci\u00f3n de utilidad de la arquitectura Pix2pix (https://arxiv.org/abs/1611.07004). Este \nproyecto ha sido motivado por el concurso de DotCSV publicado en https://www.youtube.com/watch?v=BNgAaCK920E&t=607s. \nEl caso propuesto consiste en eliminar de manera autom\u00e1tica imperfecciones faciales. Desde la publicaci\u00f3n del paper pix2pix original, han \nsurgido otros m\u00e9todos que parecen resolver este problema mejor (por ejemplo, https://arxiv.org/abs/1804.07723), pero ese no es el \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9495649196196054,
+        0.9995006663801135,
+        0.999999999998721,
+        0.8995448329980722,
+        0.9991144885555023
+      ],
+      "excerpt": "El proyecto se ha basado en el c\u00f3digo del notebook de pix2pix disponible en la documentaci\u00f3n de Tensorflow (https://www.tensorflow.org/beta/tutorials/generative/pix2pix). \nLa arquitectura se ha dejado intacta con respecto al c\u00f3digo original. Consiste en un esquema tipo GAN. El generador es de tipo U-Net (una arquitectura codificador-decodificador con skip-connections entre las capas an\u00e1logas de cod- y decodificador). El discriminador se denomina PatchGAN y consiste en un conjunto de discriminadores, cada uno \"vigilando\" una regi\u00f3n de 70x70 p\u00edxeles. \nLa justificaci\u00f3n de este tipo de discriminador, seg\u00fan los autores, reside en la observaci\u00f3n de que una regulaci\u00f3n L1 \u00f3 L2 logra una calidad m\u00e1s o menos buena en las caracter\u00edsticas de baja frecuencia de la imagen generada, pero no en las de alta frecuencia. En otras palabras, que la imagen generada es algo borrosilla. Al discriminar de manera independiente regiones m\u00e1s peque\u00f1as se pretende resolver este problema. En los experimentos mostrados, no parece que haya diferencias apreciables visualmente entre discriminar regiones de 70x70 o discriminar la imagen completa, pero seg\u00fan su propia m\u00e9trica (consistente en medir la calidad de la segmentaci\u00f3n de una red tipo FCN) es ligeramente menor. No he experimentado personalmente, pero seg\u00fan eso el PatchGAN no tendr\u00eda ning\u00fan beneficio objetivo en el resultado, aunque s\u00ed que imagino que har\u00e1 la computaci\u00f3n de la discriminaci\u00f3n m\u00e1s eficiente. \nEl esquema original toma una imagen que consiste en dos mitades juntas: la primera mitad corresponde a la imagen real de una fachada que se quiere generar y la segunda del dibujo que se emplea como input. \nEl esquema que se ha empleado es id\u00e9ntico. En este caso la primera mitad corresponde a la imagen original de una cara y la segunda a la misma imagen donde se han eliminado aleatoriamente algunas regiones. M\u00e1s adelante se explica c\u00f3mo se lleva a cabo esta eliminaci\u00f3n aleatoria. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9999978048478161,
+        0.9985267879071801
+      ],
+      "excerpt": "El modelo del paper trabaja con im\u00e1genes de 256x256 p\u00edxeles. Algunos de los recortes de las caras son bastante m\u00e1s peque\u00f1os que ese tama\u00f1o y por tanto han sido aumentados. Las im\u00e1genes que resultan evidentemente tienen una calidad muy pobre. Otros datasets de caras incluyen mucha imagen alrededor de la cara. Esto es un problema ya que al aplicar la m\u00e1scara se borrar\u00e1n cosas que no necesariamente interesa ense\u00f1ar el modelo a reconstruir para este proyecto. Ser\u00eda interesante experimentar los resultados obtenidos eliminando las im\u00e1genes de menor calidad, ya que el paper muestra que con unas 400 im\u00e1genes puede ser suficiente. \nEn general, el dataset es muy heterog\u00e9neo en cuanto a la calidad y tama\u00f1o de las im\u00e1genes, adem\u00e1s de la posici\u00f3n e iluminaci\u00f3n de las caras. Probablemente este sea el mayor punto de debilidad del modelo desarrollado. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9513733337966637,
+        0.9977615020049698,
+        0.9243188970772274,
+        0.9287913210266059,
+        0.9995211140636435,
+        0.996646006960799
+      ],
+      "excerpt": "1. Crear m\u00e1scaras en paint. Se crean las formas que se van a borrar en las im\u00e1genes. Son im\u00e1genes de 50x50. Algunos ejemplos a continuaci\u00f3n. \n2. Para cada imagen original se escogen aleatoriamente entre 1 y el m\u00e1ximo de m\u00e1scaras que se quiera. En nuestro caso 2, ya que 3 era demasiado borrar. Para cada m\u00e1scara se escoge un escalado aleatorio entre 1 y 5 veces, y una posici\u00f3n aleatoria con la \u00fanica condici\u00f3n de que quede dentro de la imagen. \n3. Una vez escogidas la escala y posici\u00f3n aleatorias, se multiplica la imagen por las m\u00e1scaras. Este proceso se repite varias veces (3 en nuestro caso, ya que 5 generaba demasiadas im\u00e1genes y hab\u00eda problemas varios). \n4. Se \"pegan\" juntas la imagen original y la imagen \"enmascarada\", ambas escaladas para medir 256x256 y as\u00ed coincidir con las dimensiones establecidas en el paper. \nEl conjunto de entrenamiento y validaci\u00f3n ha sido generado simplemente cogiendo un pu\u00f1ado de im\u00e1genes y copi\u00e1ndolas en la carpeta destinada para test, y el resto en la carpeta train, tal y como est\u00e1n distribuidas las im\u00e1genes originales. IMPORTANTE: si se generan los conjuntos aleatoriamente, hay que tener en cuenta que hay tres copias de cada imagen con distintas m\u00e1scaras de borrado aplicadas. No tendr\u00eda mucho sentido que algunas de las copias est\u00e9n en el entrenamiento y otras en la validaci\u00f3n. Esto ser\u00eda hacer trampas. Cuidado. \nCrear la estructura de carpetas tal y como est\u00e1 en el repositorio. Los archivos de im\u00e1genes son s\u00f3lo una muestra ya que github no permite subirlos todos. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9923927503057437,
+        0.9871859645224971
+      ],
+      "excerpt": "Crear conjuntos test y entrenamiento. Para ello, hay que tomar subsets del directorio anterior y colocarlos en las carpetas test y train dentro de la carpeta final_faces. Es importante que todas las copias de la misma imagen queden dentro del mismo subconjunto, y no mezclarlas. Yo simplemente he tomado un corte donde me ha parecido que m\u00e1s o menos fuera 80/20 a ojillo, pero como hay bastantes m\u00e1s que las que dice el paper que hacen falta (>400), da un poco igual el tama\u00f1o (siempre que sea algo con sentido). \nComprimir la carpeta final_faces en un .7z llamado final_faces.7z. Esto lo he hecho porque al subir a google Drive, si son muchos peque\u00f1os archivos tarda como varios siglos por alg\u00fan motivo. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miguel-rodrigo/dot-csv-pix2pix",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-09-15T14:12:08Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-12-28T16:59:15Z",
+    "technique": "GitHub API"
+  },
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miguel-rodrigo/dot-csv-pix2pix/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 30 Dec 2021 00:10:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/miguel-rodrigo/dot-csv-pix2pix/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "miguel-rodrigo/dot-csv-pix2pix",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/miguel-rodrigo/dot-csv-pix2pix/master/faces_image_completion.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8828654461897705
+      ],
+      "excerpt": "Ejecutar el script download_face_images.py. Este script leer\u00e1 todas las rutas del archivo JSON y descargar\u00e1 las im\u00e1genes en la carpeta raw_face_images \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8717804435625485
+      ],
+      "excerpt": "Ejecutar el script create_masked_faces_data.py. Este script crear\u00e1 las im\u00e1genes enmascaradas junto con la imagen original en el formato listo para consumir por el notebook y las almacena en el directorio masked_faces. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/miguel-rodrigo/dot-csv-pix2pix/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DotCSV-pix2pix-demo",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dot-csv-pix2pix",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "miguel-rodrigo",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miguel-rodrigo/dot-csv-pix2pix/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 30 Dec 2021 00:10:32 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

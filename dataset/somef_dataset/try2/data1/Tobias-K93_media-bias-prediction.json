@@ -1,0 +1,212 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1911.11423"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Tobias-K93/media-bias-prediction",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-10T17:29:47Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-17T14:27:03Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9097792489044413,
+        0.8807355757162276,
+        0.9709143447891347
+      ],
+      "excerpt": "This repository provides the code I produced for my master thesis with the same title. Necessary packages are stated in the dependencies file. In the following, all steps needed to make use of it and to reproduce results are explained. \nThe bert_model.ipynb notebook contains the code to train BERT on all datasets and save the resulting metrics. The desired constellation can be selected at the beginning. Besides the augmented datasets also the cost-sensitive version can be chosen.  \nThe deep-learning benchmark model SHA-BiLSTM (https://arxiv.org/abs/1911.11423) is trained with the bilstm_benchmark.ipynb notebook, only on the specific dataset of which news aggregators, tabloids, and frequent sentences are removed at the beginning of the file.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.855659570806052
+      ],
+      "excerpt": "The non_deep_learning_model directory contains all code necessary to prepare the linguistic variables (also for the SemEval dataset after its creation) and run the random forest model.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9835370571102521
+      ],
+      "excerpt": "To create all semeval related results, except for the RF predictions explained above, apply the semeval_results_notebook.ipynb and (similar to the BERT notebook) select model type and model weights at the beginning of the notebook and run it once for each constellation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for thesis on political bias prediction of news media articles",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Tobias-K93/media-bias-prediction/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 20:06:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Tobias-K93/media-bias-prediction/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Tobias-K93/media-bias-prediction",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Tobias-K93/media-bias-prediction/master/other_notebooks/removed_source_groups_from_training.ipynb",
+      "https://raw.githubusercontent.com/Tobias-K93/media-bias-prediction/master/other_notebooks/LIME_notebook.ipynb",
+      "https://raw.githubusercontent.com/Tobias-K93/media-bias-prediction/master/deep_learning_models/bert_model.ipynb",
+      "https://raw.githubusercontent.com/Tobias-K93/media-bias-prediction/master/deep_learning_models/bilstm_benchmark.ipynb",
+      "https://raw.githubusercontent.com/Tobias-K93/media-bias-prediction/master/sem_eval/semeval_results_notebook.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First the NELA-GT-2018 dataset needs to be downloaded from https://doi.org/10.7910/DVN/ULHLCB, specifically the `articles.db` and `labels.csv` files. `labels.csv` needs to be moved to the `data_preparation` directory (done already). \n\nThen run the `0_select_news_sources.py` script to save bias labels of sources as well as to create the SQLite command needed to select articles from the `articles.db` file. Use the printed command to delete all articles from the database that are not needed and export the remaining articles to a csv-file (e.g. with the help of SQLite browser https://sqlitebrowser.org/). Save the file as `allsides_articles.csv`  to the `data_preparation/allsides_data` directory.  \n\nAfterwards, the remaining data_preparation scripts can be run in the order of numbering from 1 to 4. To receive also the train set with frequent sentences removed, set the respective variable at the beginning of `1_data_preparation_cleaning_tokenizing.py` to ```True```, adjust the ```affix``` variable at the beginning of files 2 to 4, and run all scripts from 1 to 4 again. \n\nNote that data preparation code is divided into 4 files for easier memory handling. To run given files 16 GB of RAM are recommended.  \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8405724230745273
+      ],
+      "excerpt": "The bert_model.ipynb notebook contains the code to train BERT on all datasets and save the resulting metrics. The desired constellation can be selected at the beginning. Besides the augmented datasets also the cost-sensitive version can be chosen.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8730358833407507
+      ],
+      "excerpt": "At first the non_dl_benchmark_data_preparation script needs to be run that creates all linguistic variables except for the part of speech (POS) variables and saves them as numpy arrays. Next the non_dl_benchmark_pos_variables_preparation.py file needs to be run to create the remaining variables and save them to numpy files as well. Last, the random forest model can be trained and used for predictions by running the non_dl_benchmark_model.py file.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Tobias-K93/media-bias-prediction/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Tobias-K93\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Predicting media bias of news articles using deep-learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "media-bias-prediction",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Tobias-K93",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Tobias-K93/media-bias-prediction/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 20:06:38 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

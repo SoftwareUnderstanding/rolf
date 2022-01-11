@@ -1,0 +1,602 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2008.10546",
+      "https://arxiv.org/abs/1806.07366\n\n\n### The advantages of this method are as follows:\n\n1. Faster testing time than RNN, but slower training time.\n\n2. Time series prediction is more accurate.\n\n3. Open the realm of new optimizing method.\n\n4. The slope calculation takes less memory.\n\n---------------------------------------------\n## Stochastic Differential Equation(SDE",
+      "https://arxiv.org/abs/1612.01474",
+      "https://arxiv.org/abs/2008.10546",
+      "https://arxiv.org/abs/1806.07366"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "> [\"SDE-Net: Equipping Deep Neural Networks with Uncertainty Estimates\"](https://arxiv.org/abs/2008.10546) (2020, ICML) - Lingkai Kong et al.  \n> https://en.wikipedia.org/wiki/Euler%E2%80%93Maruyama_method  \n> [\"Neural Ordinary Differential Equations\"](https://arxiv.org/abs/1806.07366) - Chen et al.  \n> https://en.wikipedia.org/wiki/Euler_method  \n> https://github.com/msurtsukov/neural-ode/blob/master/Neural%20ODEs.ipynb  \n> https://github.com/Lingkai-Kong/SDE-Net  \n \n\n\n\n\n\n\n\n\n\n\n  \n  \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9507374082549614
+      ],
+      "excerpt": "(f : drift net, g : diffusion net)   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9352760691521764
+      ],
+      "excerpt": "As shown above, take turns learning the drift net and the diffuse net. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Junghwan-brian/SDE-Net",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-18T06:32:59Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-29T11:07:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The traditional methods of estimating uncertainties were mainly Bayesian methods. Bayesian methods should introduce the preor to estimate the distribution of the posteror.\nBut DNN has too many parameters, so it's hard to calculate. So there are also non-bayesian methods that are most famous for modelling methods. \nThis method learns several DNNs to obtain an uncertainty with different degrees of prediction. \nThis method has a large computational cost because it requires the learning of several models. \nOther methods have problems that cannot be measured by distinguishing between an entity's data from an entity's internal uncertainty.\n\nSolve these problems using SDE-Net. SDE-Net alternates between drift net and diffuse net. \nThe drift net increases the accuracy of the prediction and allows the measurement of the analistic entity, and the epistemical entity is measured with the diffusion net.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9663582907387672,
+        0.9937307973253081,
+        0.8747671855974697
+      ],
+      "excerpt": "Respond to noise inherent in the data (such as distinguishing between 3 and 8). \nRespond to randomness of data (such as tossing coins). \nData does not decrease even if there is more data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8758861767576692
+      ],
+      "excerpt": "The more data you learn, the smaller the value becomes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9880952027827,
+        0.9641014723285597,
+        0.9436287598079267,
+        0.8853701760579497
+      ],
+      "excerpt": "In this paper, a new optimize method was presented. The use of an orderary differential calculation is typical of the Euler method. \nThe Euler method is a method used to find unknown curves. This method assumes that you know the starting point and the differential equation of the corresponding curve (the slope at all points can be obtained). \nEX) As shown in the figure below, assume that A0 is the starting point (initial value). The points of A1 can be obtained by multiplying the slope at A0 by \u0394t. \nAssuming that the points obtained are above the curve, the same process can be repeated to obtain up to A4. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9566532401943307
+      ],
+      "excerpt": "if f(x,t) is replaced with dx/dt, it is  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8640102646361791,
+        0.9854789950540648,
+        0.9743770722923369
+      ],
+      "excerpt": "If the expression above is generalized, it is  \nIf \u0394x is 1 in the Euler method, it is consistent with the expression in the residual net above. This can be understood as a process of finding a single curve. \nThe paper used the Adjoint Sensitivity method as the ODE solver to obtain the slope, reduce and update the error. (See thesis for details) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8764241383036111,
+        0.983620615857547
+      ],
+      "excerpt": "Time series prediction is more accurate. \nOpen the realm of new optimizing method. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8274634822274144,
+        0.9401107807860482,
+        0.9303683601223118,
+        0.9462506106200236
+      ],
+      "excerpt": "ODE is deterministic and does not estimate uncertainty. Therefore, use one method (SDE) that is stochastic.  \nIn addition to that, add brownian motion term (a phenomenon in which small particles move irregularly in a liquid or gas) to obtain epistemic uncertainty. \nI think the idea of adding brownian motioin term to get an epistemic certificate seems fresh. \nIn the Euler method, if t is expressed as \u0394t and \u0394t\u21920, the above expression of ResNet can be expressed as follows. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9897283215629047
+      ],
+      "excerpt": "This is the normal ODE expression, and the SDE expression with the addition of Brownian motion term is as follows. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9769906953796295,
+        0.9077107545753962,
+        0.9245334818096025,
+        0.909395852711334,
+        0.9929159941569348
+      ],
+      "excerpt": "f(x,t) is the goal to make a good prediction and g(x,t) is to know the uncertainty. Therefore, if there is sufficient training data and the empirical unity is low,  \nthe variance of Brownian motion will be low, and if there is a lack of training data, the variance of Brownian motion will be large. \nIn principle, stochastic dynamics can be simulated with high-order numerical solver, but the input data of deep leading usually has high dimension, so the cost is amazing.  \nTherefore, a method called Euler-Maruyama is used here in a fixed step size for efficient training. \nThis method is a generalization of the Euler method from the ordinal differential equation(ODE) to the static differential equation(SDE). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9111927916344502,
+        0.8685168912234228
+      ],
+      "excerpt": "Initial condition X0=x0 W(t) attempts to resolve the SDE at a certain time interval in the Wiener process, [0, T].  \nThe Euler-Maruyama approximation for solution X is then the Markov chain Y defined as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9675557213135236
+      ],
+      "excerpt": "The above is represented in code and the simulation results are as follows.(See Wikipedia) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8490037945672047
+      ],
+      "excerpt": "    \"\"\"Implement the Ornstein\u2013Uhlenbeck mu.\"\"\"  #: = \\theta (\\mu-Y_t) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8490037945672047
+      ],
+      "excerpt": "    \"\"\"Implement the Ornstein\u2013Uhlenbeck sigma.\"\"\"  #: = \\sigma \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8186748057881161,
+        0.9746797325409021,
+        0.9842778897763728
+      ],
+      "excerpt": "The following formula is used for actual training. \nDrift Net f aims to learn good predictive accuracy. It is also aimed at measuring the Aletoric uncertainty.  \nIn the case of the regression task, print mean and variance and learn to the NLL (such as Simple and Scalable Predictive Uncertificate Estimation Using Deep Ensemble). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9049280115484303
+      ],
+      "excerpt": "Diffusion Net g aims to obtain an epistemic uncertainty. In-distribution (ID) data should have a smaller variance of Brownian motion.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9498074060874362,
+        0.880461894287822,
+        0.9783087883061063,
+        0.9792024968327071
+      ],
+      "excerpt": "On the other hand, out-of-distribution (OOD) data should have a large variation of Brownian motion and the system should be chatic.  \nWhen learning, use a binary cross entropy error to learn to distinguish between fake(OOD) and true(ID). \nThe code below makes it easier to understand. The SDENet class shows that the out is repeated and updated (in the case not training_diffusion) by layer_depth (this uses the Euler-Maruyama method above).  \nHere it can be seen that all other variables are fixed and the std value of random normal variables is determined by whether the diffuse term is high or low. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8227100871956646
+      ],
+      "excerpt": "        self.downsampling_layers = Dense(50)  #: batch, 50 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "            [ReLU(), Dense(2)] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734
+      ],
+      "excerpt": "            )  #: Euler-Maruyama method \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8573214435596964
+      ],
+      "excerpt": "(L: loss function, P_train: distribution for training data, P_ood: OOD data, T: terminal time of the stochastic process) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9539054780487936,
+        0.9015150873003944
+      ],
+      "excerpt": " third term : When out of distribution data is inserted, let the diffusion net output high diffusion. (In actual learning, a fake label is given to minimize loss.) \n (out of distribution data is the value added by Gaussian noise to the original value.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8440056625457214
+      ],
+      "excerpt": "Obtain out-of-distribution data and pass down sampling layer to obtain (2). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9089616070188945,
+        0.8507266316596087
+      ],
+      "excerpt": "Give each true label and fake label to learn the diffusion net with the binary contextropy. (Learning that diffusion net separates ID from OOD) \nAs shown above, take turns learning the drift net and the diffuse net. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9033688096357878
+      ],
+      "excerpt": "Then, update the diffusion layer by learning the in-distribution data and out-of-distribution data alternately. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    zip(drift_gradient, model.drift.trainable_variables) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    zip(dsl_gradient, model.downsampling_layers.trainable_variables) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "optimizer_fc.apply_gradients(zip(fc_gradient, model.fc_layers.trainable_variables)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319708861235405
+      ],
+      "excerpt": "    with tf.GradientTape(watch_accessed_variables=False) as real_tape_diffusion: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319708861235405
+      ],
+      "excerpt": "with tf.GradientTape(watch_accessed_variables=False) as fake_tape_diffusion: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9789843528307692
+      ],
+      "excerpt": "    #: fake std is 2 in official code, but in paper it is 4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    grad1 + grad2 for grad1, grad2 in zip(diffusion_gradient1, diffusion_gradient2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9645092135695863,
+        0.9438013709294051,
+        0.9517558083818352,
+        0.9722096791314246,
+        0.9933103127535884
+      ],
+      "excerpt": "A model that estimates the uncertificate using Stochastic Differential Equation and Brownian motion is presented. \nThe model will be divided into drift net and diffuse net to study and take charge of acuracy and epistemic certificate, respectively. \nUse the Euler-Maruyama method to proceed with learning. \nThe advantages of the model are as follows. \nUsing only one model, the cost of learning is smaller (than the ensemble method). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8270255193829175
+      ],
+      "excerpt": "It is efficient because there is no need to specify the prior distribution and no need to estimate the posterior distribution. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9463844588483291,
+        0.9631436645559092
+      ],
+      "excerpt": "The official code is in Github with pytorch, so when I train it using a colab, I got a similar result as suggested in the paper.   \nThe file converted to Tensorflow placed on the github, but the performance was different from that of Torch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "implementations sde-net",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Junghwan-brian/SDE-Net/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 02:02:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Junghwan-brian/SDE-Net/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Junghwan-brian/SDE-Net",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Junghwan-brian/SDE-Net/master/colab_sdenet_tensorflow.ipynb",
+      "https://raw.githubusercontent.com/Junghwan-brian/SDE-Net/master/colab_sdenet_torch.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.9068127677393759
+      ],
+      "excerpt": "import numpy as np \nimport matplotlib.pyplot as plt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8883273186998016
+      ],
+      "excerpt": "    return np.random.normal(loc=0.0, scale=np.sqrt(delta_t)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8826917448272372
+      ],
+      "excerpt": "ys = np.zeros(N + 1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9223462766780322
+      ],
+      "excerpt": "    plt.plot(ts, ys) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8310159060815993
+      ],
+      "excerpt": "h = plt.ylabel(\"y\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8538648003131722
+      ],
+      "excerpt": "        )  #: input : 50, output : mean, variance \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8805403980800443
+      ],
+      "excerpt": "                * tf.random.normal(tf.shape(out), dtype=\"float64\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8932771122592772,
+        0.826960080259946
+      ],
+      "excerpt": "    with tf.GradientTape(persistent=True) as tape: \n        mean, sigma = model(x, training_diffusion=False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199871081011977,
+        0.8199871081011977,
+        0.8199871081011977
+      ],
+      "excerpt": "drift_gradient = [(tf.clip_by_norm(grad, 100)) for grad in drift_gradient] \ndsl_gradient = [(tf.clip_by_norm(grad, 100)) for grad in dsl_gradient] \nfc_gradient = [(tf.clip_by_norm(grad, 100)) for grad in fc_gradient] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389134937653027
+      ],
+      "excerpt": "    zip(drift_gradient, model.drift.trainable_variables) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389134937653027
+      ],
+      "excerpt": "    zip(dsl_gradient, model.downsampling_layers.trainable_variables) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389134937653027
+      ],
+      "excerpt": "optimizer_fc.apply_gradients(zip(fc_gradient, model.fc_layers.trainable_variables)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8544707328539867
+      ],
+      "excerpt": "    with tf.GradientTape(watch_accessed_variables=False) as real_tape_diffusion: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8555222710657248,
+        0.8779795841842539
+      ],
+      "excerpt": "        real_y = tf.fill((real_x.shape[0], 1), real_label) \n        real_pred = model(real_x, training_diffusion=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199871081011977,
+        0.8544707328539867
+      ],
+      "excerpt": "diffusion_gradient1 = [(tf.clip_by_norm(grad, 100)) for grad in diffusion_gradient] \nwith tf.GradientTape(watch_accessed_variables=False) as fake_tape_diffusion: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432,
+        0.8827391372769927
+      ],
+      "excerpt": "        tf.cast( \n            tf.random.normal((real_x.shape[0], 90), mean=0, stddev=2), \"float64\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8555222710657248,
+        0.8779795841842539
+      ],
+      "excerpt": "    fake_y = tf.fill((real_x.shape[0], 1), fake_label) \n    fake_pred = model(fake_x, training_diffusion=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199871081011977
+      ],
+      "excerpt": "diffusion_gradient2 = [(tf.clip_by_norm(grad, 100)) for grad in diffusion_gradient] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8389134937653027
+      ],
+      "excerpt": "    zip(diffusion_gradient, model.diffusion.trainable_variables) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Junghwan-brian/SDE-Net/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SDE-Net : [SDE-Net: Equipping Deep Neural Networks with Uncertainty Estimates](https://arxiv.org/abs/2008.10546)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SDE-Net",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Junghwan-brian",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Junghwan-brian/SDE-Net/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Tensorflow 2.3 ver.\n- tensorflow_addons 0.11.2 ver.\n- numpy 1.19.4 ver.\n- pandas 1.1.4 ver.\n----------------------------------------------------------------------------------------------\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Sun, 26 Dec 2021 02:02:54 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2005.12872"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* **The DETR paper:** Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, Sergey Zagoruyko, *End-to-end Object Detection with Transformers*, 2020, from the Facebook AI group. [link to paper](https://arxiv.org/abs/2005.12872)\n\n* **The official Pytorch implementation:** https://github.com/facebookresearch/detr\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Leonardo-Blanger/detr_tensorflow",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-27T23:12:44Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-08T14:56:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9595373825478858
+      ],
+      "excerpt": "This project is my attempt at a Tensorflow implementation of the DETR architecture for Object Detection, from the paper End-to-end Object Detection with Transformers (Carion et al.). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9907552157375199,
+        0.9828096246964261,
+        0.9904432270148918,
+        0.9614295695289502,
+        0.9754780478041579,
+        0.9923643591578692,
+        0.9888023059341968,
+        0.9478027811335583,
+        0.9666729867695306
+      ],
+      "excerpt": "DETR, which stands for Detection Transformers, was proposed by a team from the Facebook AI group, and it is, as of today, a radical shift from the current approaches to perform Deep Learning based Object Detection. \nInstead of filtering and refining a set of object proposals, as done by two-stage techniques like Faster-RCNN and its adaptations, or generating dense detection grids, as done by single-stage techniques like SSD and YOLO, DETR frames the detection problem as an image to set mapping. With this formulation, both the architecture and the training process become significantly simpler. There is no need for hand-designed anchor matching schemes or post-processing steps like Non Max Suppression to discard redundant detections. \nDETR uses a CNN backbone to extract a higher level feature representation of the image, which is then fed into a Transformer model. The Transformer Encoder is responsible for processing this image representation, while the Decoder maps a fixed set of learned object queries to detections, performing attention over the Encoder's output. \nDETR is trained with a set-based global loss that finds a bipartite matching between the set of detections and ground-truth objects (non matched detections are assigned to a special no object class), which in turn forces unique detections. \nFor more details into the technique, please refer to their paper (Carion et al.) and blog post. Both are very well written. \nAfter spending some time working with Object Detection for my Master's degree, and wanting to learn more about this apparently useful thing called Transformers that everybody keeps talking about, I came across this very cool idea that proposes a completely different way of doing Object Detection. So I decided to make it accessible to the Tensorflow community as well. This implementation had the main purpose of allowing myself to understand the technique more in depth, while also being an exercise on the Tensorflow framework.  \nI tried my best to replicate the precise behavior of the original Pytorch implementation, trying to account for small details like the difference between how convolutions use padding in the two frameworks. This way, we can convert the existing Pytorch weights to the Tensorflow/Keras format and load them in this implementation. This turned out to be a great exercise to better understand not only the DETR architecture, but also how both frameworks work at a greater level of detail. \nCurrently, I still have not implemented any training related code, so the only way to use this implementation is by loading the converted Pytorch weights. I also did not implement the Panoptic Segmentation part yet. Regarding the Object Detection part, that is already working. \nBellow are the results for the COCO val2017 dataset, as reported by the official Pytorch version, and achieved by this implementation using the converted weights. The small deviations are probably mostly due to the differences between how the two frameworks and implementations perform image loading and resizing, as well as floating point errors from differences in how they perform certain low level operations. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Tensorflow implementation of the DETR object detection architecture.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Leonardo-Blanger/detr_tensorflow/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Mon, 27 Dec 2021 07:31:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Leonardo-Blanger/detr_tensorflow/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Leonardo-Blanger/detr_tensorflow",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Leonardo-Blanger/detr_tensorflow/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Leonardo Blanger\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DETR Tensorflow",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "detr_tensorflow",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Leonardo-Blanger",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Leonardo-Blanger/detr_tensorflow/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code was tested with `python 3.8.10` and `tensorflow-gpu 2.4.1`. For running the evaluation, we used the `pycocotools 2.0.2` library. You can create a local environment with `conda` and install the requirements with:\n\n```bash\n#: inside the repo's root directory\nconda env create --file=env.yml --prefix=./env\nconda activate ./env\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "I provided an `eval.py` script that evaluates the model on the COCO val2017 dataset, same as reported in the paper. Note that you don't need to download the whole COCO dataset for this, only the val2017 partition (~1GB) and annotations (~241MB), from [here](https://cocodataset.org/#download).\n\n```bash\npython eval.py --coco_path=/path/to/coco \\\n               --backbone=resnet50-dc5 \\\n               --frozen_weights=detr-r50-dc5-f0fb7ef5.h5 \\\n               --results_file=resnet50_dc5_results.json\n               --batch_size=1\n```\n\nIt will save the detections into the `resnet50_dc5_results.json` file, in the COCO dictionary format, so you can run evaluation again with the `--from_file` flag, and it won't need to perform image inference this time.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 54,
+      "date": "Mon, 27 Dec 2021 07:31:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "detr",
+      "object-detection",
+      "tensorflow"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can install it as a package as follows. If you are testing on a local environment (see above), make sure it is active.\n\n```bash\n#: inside the repo's root directory\npython -m pip install .\n```\n\nIn order to use the same models as in the official version, download the converted Pytorch weights in the TF/Keras `.h5` file format for the model version you want to use from [here](https://drive.google.com/drive/folders/1OMzJNxsx-D5lyLgrQokLvbpvrZ5rM9rW?usp=sharing).\n\nYou can use one of the pre-built loading methods from the `models.default` package to instantiate one of the four versions that are equivalent to the ones provided by the original implementation.\n\n```python\nfrom detr_tensorflow.models.default import build_detr_resnet50\ndetr = build_detr_resnet50(num_classes=91) #: 91 classes for the COCO dataset\ndetr.build()\ndetr.load_weights(\"detr-r50-e632da11.h5\")\n```\n\nOr directly instantiate the `models.DETR` class to create your own custom combination of backbone CNN, transformer architecture, and positional encoding scheme. Please, check the files `models/default.py` and `models/detr.py` for more details.\n\nThe `detr_tensorflow.utils.preprocess_image` function is designed to perform all the preprocessing required before running the model, including data normalization, resizing following the scheme used for training, and generating the image masks. It is completely implemented using only Tensorflow operations, so you can use it in combination with the `map` functionality from `tf.data.Dataset`.\n\nFinally, to get the final detections, call the model on your data with the `post_processing` flag. This way, it returns softmax scores instead of the pre-activation logits, and also discards the `no-object` dimension from the output. It doesn't discard low scored detections tough, so as to give more flexibility in how to use the detections, but the output from DETR is simple enough that this isn't hard to do.\n\n```python\nfrom detr_tensorflow.utils import preprocess_image, absolute2relative\n\ninp_image, mask = preprocess_image(image)\ninp_image = tf.expand_dims(inp_image, axis=0)\nmask = tf.expand_dims(mask, axis=0)\n\noutputs = detr((inp_image, mask), post_process=True)\nlabels, scores, boxes = [outputs[k][0].numpy() for k in ['labels', 'scores', 'boxes']]\n\nkeep = scores > 0.7\nlabels = labels[keep]\nscores = scores[keep]\nboxes = boxes[keep]\nboxes = absolute2relative(boxes, (image.shape[1], image.shape[0])).numpy()\n```\n\n(so much easier than anchor decoding + Non Max Suppression)\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Short demo script that summarizes the above instructions.\n\n```bash\npython demo.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

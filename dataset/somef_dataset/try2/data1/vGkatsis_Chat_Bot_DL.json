@@ -1,0 +1,343 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1409.3215\u200b\n4. Cho et al. \n   https://arxiv.org/pdf/1406.1078v3.pdf\u200b\n5. Luong et al. \n   https://arxiv.org/abs/1508.04025\u200b\n6. Bahdanau et al \n   https://arxiv.org/abs/1409.0473\u200b\n7. Python Questions from Stack Overflow \n   https://www.kaggle.com/stackoverflow/pythonquestions\u200b\n",
+      "https://arxiv.org/abs/1508.04025\u200b\n6. Bahdanau et al \n   https://arxiv.org/abs/1409.0473\u200b\n7. Python Questions from Stack Overflow \n   https://www.kaggle.com/stackoverflow/pythonquestions\u200b\n",
+      "https://arxiv.org/abs/1409.0473\u200b\n7. Python Questions from Stack Overflow \n   https://www.kaggle.com/stackoverflow/pythonquestions\u200b\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. ChatbotTutorial by Matthew Inkawhich  \n   https://pytorch.org/tutorials/beginner/chatbot_tutorial.html\u200b\n2. Pytorch Chatbot by Wu,Yuan-Kuei \n   https://github.com/ywk991112/pytorch-chatbot\u200b\n3. Sutskever et al. \n   https://arxiv.org/abs/1409.3215\u200b\n4. Cho et al. \n   https://arxiv.org/pdf/1406.1078v3.pdf\u200b\n5. Luong et al. \n   https://arxiv.org/abs/1508.04025\u200b\n6. Bahdanau et al \n   https://arxiv.org/abs/1409.0473\u200b\n7. Python Questions from Stack Overflow \n   https://www.kaggle.com/stackoverflow/pythonquestions\u200b\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vGkatsis/Chat_Bot_DL",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-11T16:55:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-21T13:42:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Chat-bots are becoming more and more useful in various simple professional tasks as they get more and more able to capture the essence of communicating with people. Still the development of good chat-bots that will answer more complicated questions, in general subjects, is a growing domain of research. \n\nThe goal of this project is to create a chat-bot able to answer python related questions.  Our project started with the main idea being that a programming assistant would be a much needed help by many people working or studying computer science. Although it sounds simple it soon proved to be a difficult task. The main challenge is that the model has to extract a technical correlation between Questions and Answers in order to be able to communicate effectively. The model that we used in order to achieve our goal is a recurrent sequence-to-sequence model. The main steps that we followed are described bellow.\n\n- We found, downloaded, and processed data taken from stack overflow concerning questions that contained at least one python tag.[7]\n- Implement a sequence-to-sequence model.\n- Jointly train encoder and decoder models using mini-batches\n- Used greedy-search decoding\n- Interact with trained chatbot\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9830145024364125,
+        0.8631788814221608,
+        0.9800384750942839,
+        0.9184240152712312
+      ],
+      "excerpt": "For this project we used the pytorch framework of python. The project code is  located in the Python-Chatbot.ipynb  jupyter notebook. It was executed in Google Colab environment, using a GPU.  \nAnyone who wants to run the code can do it from the beginning or if a pre-trained model is available they can jump directly to the part where the model is loaded. Comments inside the notebook explain which parts can be skipped. \nSince data files are very large (approximately 800Mb each) we are not going to upload them on this repository. Instead we provide the download link in the References section and we suggest that they should be uploaded to a goole drive account. Then the google account can be easily connected with the colab platform in order for the files to be loaded. Code for this purpose already exists in the jupyter notebook. \nData preprocessing is done in two phases. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9490560835545464
+      ],
+      "excerpt": "That last step is needed in order to simplify the task, as feeding code blocks to the model would require special handling. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8247712610091056
+      ],
+      "excerpt": "Filter pairs containing  rare words (words with an appearance frequency lower than a given value). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8244808098568667,
+        0.8770940073180831,
+        0.8608029169613667
+      ],
+      "excerpt": "One that is fed the input sequence in normal sequential order.  \nAnd one that is fed the input sequence in reverse order.  \nThe outputs of each network are summed at each time step. Using a bidirectional GRU. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8656961344663369
+      ],
+      "excerpt": "The decoder RNN generates the response sentence in a token-by-token fashion using: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8398721219643704
+      ],
+      "excerpt": "from the encoder to generate the next word in the sequence.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9926668568983756,
+        0.8089981110730096
+      ],
+      "excerpt": "So the flow of our seq2seq model is: \nGet embedding of current input word.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8276164447507893
+      ],
+      "excerpt": "Gradient clipping. Commonly technique for countering the \u201cexploding gradient\u201d problem. In essence, by clipping or thresholding gradients to a maximum value, we prevent the gradients from growing exponentially and either overflow (NaN), or overshoot steep cliffs in the cost function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734
+      ],
+      "excerpt": "Decoding Method \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8544446798308232
+      ],
+      "excerpt": "Initialize tensors to append decoded words to.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "Record token and score.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8468671229039854
+      ],
+      "excerpt": "Return collections of word tokens and scores. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9569732156539089,
+        0.852243724236674,
+        0.9666560690344925
+      ],
+      "excerpt": "Greedy decoding is the decoding method that we use during training when we are NOT using teacher forcing.  \nFor each time step we choose the word from decoder_output with the highest softmax value.  \nThis decoding method is optimal on a single time-step level. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9519500679807645,
+        0.9561385179943636
+      ],
+      "excerpt": "Format the sentence to be evaluated as an input batch of word indexes with batch_size==1.  \nCreate a lengths tensor which contains the length of the input sentence. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9458603060896327,
+        0.9816951697600568,
+        0.9469897530994377
+      ],
+      "excerpt": "Convert the response\u2019s indexes to words and return the list of decoded words. \nWhen chatting with the bot this evaluation process is followed in order for it to respond. \nExperiment results confirm the this is a complicated task and that further work may still to be done. Bellow are some good and some bad examples from different training and executions of the program: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vGkatsis/Chat_Bot_DL/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 08:55:53 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vGkatsis/Chat_Bot_DL/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vGkatsis/Chat_Bot_DL",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/vGkatsis/Chat_Bot_DL/main/Python_Chatbot.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Now it is time to prepare our data to be fed in to the model. For this reason the following steps are followed:\n\n- Create torch tensors of data.\n- Create tensors of shape (max_length, batch_size) in order to help train using mini-batches instead of 1 sentence at a time. \n\n- Zero pad tensors to fit the maximum sentence length.\n- Create tensors of length for each sentence in the batch.\n- Create mask tensors with a value of  1 if token is not a PAD_Token else value is 0.\n\n \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.888619965215373
+      ],
+      "excerpt": "Keep all questions with at least one answer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8074361519140683
+      ],
+      "excerpt": "Iteratively decode one word token at a time:  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8262157230141619
+      ],
+      "excerpt": "Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8225516113304734
+      ],
+      "excerpt": "Predict next word.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363947685988246
+      ],
+      "excerpt": "Initialize decoder's first input as SOS_token.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8298313952073542
+      ],
+      "excerpt": "Format the sentence to be evaluated as an input batch of word indexes with batch_size==1.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9515405382649069,
+        0.9515405382649069
+      ],
+      "excerpt": "<img src=\"./images/good_res1.png\" alt=\"alt text\" width=\"400\" height=\"100\" /> \n<img src=\"./images/good_res2.png\" alt=\"alt text\" width=\"400\" height=\"100\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vGkatsis/Chat_Bot_DL/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Introduction",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Chat_Bot_DL",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vGkatsis",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vGkatsis/Chat_Bot_DL/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 08:55:53 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

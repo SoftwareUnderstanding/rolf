@@ -1,0 +1,396 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2104.10157",
+      "https://arxiv.org/abs/1904.10509",
+      "https://arxiv.org/abs/1812.01717",
+      "https://arxiv.org/abs/1606.03498"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please consider using the follow citation when using our code:\n```\n@misc{yan2021videogpt,\n      title={VideoGPT: Video Generation using VQ-VAE and Transformers}, \n      author={Wilson Yan and Yunzhi Zhang and Pieter Abbeel and Aravind Srinivas},\n      year={2021},\n      eprint={2104.10157},\n      archivePrefix={arXiv},\n      primaryClass={cs.CV}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{yan2021videogpt,\n      title={VideoGPT: Video Generation using VQ-VAE and Transformers}, \n      author={Wilson Yan and Yunzhi Zhang and Pieter Abbeel and Aravind Srinivas},\n      year={2021},\n      eprint={2104.10157},\n      archivePrefix={arXiv},\n      primaryClass={cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8944178096468923,
+        0.9469350209406443,
+        0.8944178096468923
+      ],
+      "excerpt": "video = read_video(video_filename, pts_unit='sec')[0] \nvideo = preprocess(video, resolution, sequence_length).unsqueeze(0).to(device) \nencodings = vqvae.encode(video) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wilson1yan/VideoGPT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-27T21:53:13Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T12:31:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9214939858121882,
+        0.989866313248191
+      ],
+      "excerpt": "Integrated to Huggingface Spaces with Gradio. See demo:  \nWe present VideoGPT: a conceptually simple architecture for scaling likelihood based generative modeling to natural videos. VideoGPT uses VQ-VAE that learns downsampled discrete latent representations of a raw video by employing 3D convolutions and axial self-attention. A simple GPT-like architecture is then used to autoregressively model the discrete latents using spatio-temporal position encodings. Despite the simplicity in formulation and ease of training, our architecture is able to generate samples competitive with state-of-the-art GAN models for video generation on the BAIR Robot dataset, and generate high fidelity natural images from UCF-101 and Tumbler GIF Dataset (TGIF). We hope our proposed architecture serves as a reproducible reference for a minimalistic implementation of transformer based video generation models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9086674859676774
+      ],
+      "excerpt": "There are four available pre-trained VQ-VAE models. All strides listed with each model are downsampling amounts across THW for the encoders. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9139485213975151
+      ],
+      "excerpt": "* kinetics_stride2x4x4: trained on 16 frame 128 x 128 videos from Kinetics-600, with 2x larger temporal latent codes (achieves slightly better reconstruction) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9599504929620042,
+        0.8842361862923547
+      ],
+      "excerpt": "--n_codes 2048: number of codes in the codebook \n--n_hiddens 240: number of hidden features in the residual blocks \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9032908675987981
+      ],
+      "excerpt": "--downsample 4 4 4: T H W downsampling stride of the encoder \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8813692522202955
+      ],
+      "excerpt": "--sync_batchnorm: uses SyncBatchNorm instead of BatchNorm3d when using > 1 gpu \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8659015571206241,
+        0.836533529124136
+      ],
+      "excerpt": "* bair_gpt: single frame-conditional BAIR model using discrete encodings from bair_stride4x2x2 VQ-VAE \n* ucf101_uncond_gpt: unconditional UCF101 model using discrete encodings from ucf101_stride4x4x4 VQ-VAE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8871562843746056
+      ],
+      "excerpt": "--n_cond_frames 0: number of frames to condition on. 0 represents a non-frame conditioned model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979360105165388,
+        0.8769304940127091
+      ],
+      "excerpt": "--hidden_dim 576: number of transformer hidden features \n--heads 4: number of heads for multihead attention \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.861679193043329
+      ],
+      "excerpt": "--dropout 0.2': dropout probability applied to features after attention and positionwise feedforward layers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8646505898801053
+      ],
+      "excerpt": "--attn_dropout 0.3: dropout probability applied to the attention weight matrix \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wilson1yan/VideoGPT/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 39,
+      "date": "Sun, 26 Dec 2021 16:09:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wilson1yan/VideoGPT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wilson1yan/VideoGPT",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/wilson1yan/VideoGPT/master/notebooks/Using_VideoGPT.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/wilson1yan/VideoGPT/master/scripts/preprocess/bair/create_bair_dataset.sh",
+      "https://raw.githubusercontent.com/wilson1yan/VideoGPT/master/scripts/preprocess/ucf101/create_ucf_dataset.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Change the `cudatoolkit` version compatible to your machine.\n```bash\nconda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0\npip install git+https://github.com/wilson1yan/VideoGPT.git\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.99167166476945,
+        0.999746712887969
+      ],
+      "excerpt": "sudo apt-get install llvm-9-dev \nDS_BUILD_SPARSE_ATTN=1 pip install deepspeed \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.874151004149097,
+        0.8943755112154899
+      ],
+      "excerpt": "sh scripts/preprocess/bair/create_bair_dataset.sh datasets/bair  \nAlternatively, the code supports a dataset with the following directory structure: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.874151004149097,
+        0.8584620847213478
+      ],
+      "excerpt": "sh scripts/preprocess/ucf101/create_ucf_dataset.sh datasets/ucf101  \nYou may need to install unrar and unzip for the code to work correctly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8655523078340078
+      ],
+      "excerpt": "Note that both pre-trained models use sparse attention. For purposes of fine-tuning, you will need to install sparse attention, however, sampling does not required sparse attention to be installed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9923128486307206
+      ],
+      "excerpt": "VideoGPT models can be sampled using the scripts/sample_videogpt.py. You can specify a path to a checkpoint during training, or the name of a pretrained model. You may need to install ffmpeg: sudo apt-get install ffmpeg \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8877899062330397
+      ],
+      "excerpt": "The default code accepts data as an HDF5 file with the specified format in videogpt/data.py. An example of such a dataset can be constructed from the BAIR Robot data by running the script: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    train/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664
+      ],
+      "excerpt": "    test/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8240984441894277
+      ],
+      "excerpt": "An example of such a dataset can be constructed from UCF-101 data by running the script  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8116641699404498,
+        0.8175409543894306
+      ],
+      "excerpt": "* ucf101_stride4x4x4: trained on 16 frame 128 x 128 videos from UCF-101 \n* kinetics_stride4x4x4: trained on 16 frame 128 x 128 videos from Kinetics-600 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8494750539946466,
+        0.8801854956928516,
+        0.9079185768576028
+      ],
+      "excerpt": "from torchvision.io import read_video \nfrom videogpt import load_vqvae \nfrom videogpt.data import preprocess \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8450327681261468
+      ],
+      "excerpt": "Use the scripts/train_vqvae.py script to train a VQ-VAE. Execute python scripts/train_vqvae.py -h for information on all available training settings. A subset of more relevant settings are listed below, along with default values. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.877012419103656
+      ],
+      "excerpt": "--batch_size 16: batch size per gpu \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.888488280881142,
+        0.8597982822472034
+      ],
+      "excerpt": "You can download a pretrained VQ-VAE, or train your own. Afterwards, use the scripts/train_videogpt.py script to train an VideoGPT model for sampling. Execute python scripts/train_videogpt.py -h for information on all available training settings. A subset of more relevant settings are listed below, along with default values. \n--vqvae kinetics_stride4x4x4: path to a vqvae checkpoint file, OR a pretrained model name to download. Available pretrained models are: bair_stride4x2x2, ucf101_stride4x4x4, kinetics_stride4x4x4, kinetics_stride2x4x4. BAIR was trained on 64 x 64 videos, and the rest on 128 x 128 videos \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.869262142429409
+      ],
+      "excerpt": "--batch_size 8: batch size per gpu \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wilson1yan/VideoGPT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Wilson Yan\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VideoGPT: Video Generation using VQ-VAE and Transformers",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VideoGPT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wilson1yan",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wilson1yan/VideoGPT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 379,
+      "date": "Sun, 26 Dec 2021 16:09:34 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

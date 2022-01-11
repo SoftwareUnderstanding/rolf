@@ -1,0 +1,177 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1508.07909\n  - https://google.github.io/seq2seq/inference/#unk-token-replacement-using-a-copy-mechanism\n- train on all the data that exists for all themes, plugins, projects\n  - this gives us more data to train on, but will make it harder to evaluate\n- calculate some sort of confidence score (maybe based on beam search data"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Automattic/wp-translate",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-06-28T13:40:14Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-30T07:43:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.853286452521798
+      ],
+      "excerpt": "Translate WordPress strings with a character based sequence to sequence neural network. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Neural Machine Translation of WordPress Strings",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Automattic/wp-translate/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "WordPress's mission is to democratize publishing, and one of the great challenges to meeting that goal is how do we enable people to build web sites in whatever language they prefer. Only 5.5% of the world is a native English speaker. Currently the strings in WordPress core, plugins, and themes get translated by an army of volunteers who work to keep up with the constant changes. Spanish (one of the most active) for instance has over 800 contributors: https://make.wordpress.org/polyglots/teams/?locale=es_ES\n\nAlthough that method does a good job for translating core into most languages, the full power of WordPress comes from the tens of thousands of plugins and themes for customizing it. Even in a popular language like Spanish, only 56 of the 53,000 plugins are 90% or more translated.\n\nSo why not just throw this data at Google Translate? Google Translate is really good, and with neural machine translation (NMT) has recently gotten much better: https://arxiv.org/pdf/1609.08144.pdf\n\nBut, WordPress strings are not just human words. They contain structure. They contain HTML, and in many cases they have sprintf() style arguments in the strings. When a translation is done, this structure needs to be preserved and properly placed into the translated string. Here are some examples:\n\n```\nmsgid \"If you're an existing Jetpack Professional customer, you have immediate access to these themes. Visit <a href=\\\"%s\\\">wordpress.com/themes</a> to see what's available.\"\nmsgstr \"Si ya eres cliente de Jetpack Professional, tienes acceso inmediato a estos temas. Visita <a href=\\\"%s\\\">https://es.wordpress.org/themes/</a> para ver los que hay disponibles.\"```\n```\n\n```\nmsgid \"In reply to <a %1$s>%2$s</a>\"\nmsgstr \"En respuesta a <a %1$s>%2$s</a>\"\n```\n\n#: The Approach\n\n\n\n\n#: Setup\n\nFor running on AWS and using GPUs (p2.xlarge is about 150x faster than my macbook pro) I used the instructions and config setup from the Fast AI class: http://wiki.fast.ai/index.php/AWS_install\n\nSetup from there:\n\n```\nsudo apt-get install libcupti-dev\ngit clone git@github.com:Automattic/wp-translate.git\ncd wp-translate\npip install -r requirements.txt\ncd ..\ngit clone git@github.com:google/seq2seq.git tf-seq2seq\ncd tf-seq2seq\n```\n\nWe need to work around an prevent matplotlib from causing some failures (from the seq2seq instructions):\n\n```\necho \"backend : Agg\" >> $HOME/.config/matplotlib/matplotlibrc\n```\n\nAdd to your LD_LIBRARY_PATH:\n\n```\nexport LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH\n```\n\nWe need to apply a patch to seq2seq to get it working with TF 1.2 https://github.com/google/seq2seq/pull/254\n\nKinda hacky, probably a better way...\n\nEdit the tf-seq2seq/.git/config and add this like to the origin:\n\n```\n fetch = +refs/pull/*/head:refs/remotes/origin/pr/*\n```\n\nNow you can build/install with the necessary PR with:\n\n```\ngit fetch origin\ngit checkout pr/254\npip install -e .\n```\n\nTo test the seq2seq installation run:\n\n```\npython -m unittest seq2seq.test.pipeline_test\n```\n\n#:#: How to run\n\nWe need to encode our text data so that it can go into the model. The desired output is two parallel text files, one for the source language (always English in our case) and one for the target language. The lines of each file align with each other. To be able to efficiently encode all characters, we build a character mapping which maps an index to a unicode data point (theoretically we could map to sequences of characters also there are some tools in the seq2seq lib for doing this).\n\nSo to build training data, we need a charmap for the target and source languages, then we use them to build the parallel text files which will just consist of the index numbers for the characters separated by whitespace.\n\n#:#:#: Build the charmaps\n\nCreate English/Spanish character mapping (encoding) from a .po file:\n\n```\npython wp_translate_charmap.py wp-data/all-es.po msgid charmaps/wp-en.tsv\npython wp_translate_charmap.py wp-data/all-es.po msgstr charmaps/wp-es.tsv\n```\n\nWe also train on generic translation data, so we need a charmap that works across all our data.\n\nCreate an English/Spanish character mapping (encoding) from a text file:\n\n```\npython wp_translate_charmap_text.py nmt-data/wmt16/raw/common-crawl/commoncrawl.es-en.en charmaps/nmt-en.tsv\npython wp_translate_charmap_text.py nmt-data/wmt16/raw/common-crawl/commoncrawl.es-en.es charmaps/nmt-es.tsv\n```\n\nThe different charmaps will not perfectly overlap, so we can hackily merge them with something like:\n\n```\ncut -f 2 charmaps/wp-en.tsv | sort -n > tmp.chars\ncut -f 2 charmaps/nmt-en.tsv | sort -n > tmp2.chars\ndiff tmp.chars tmp2.chars | grep -e \"^<\" >> charmaps/all-en.tsv\n```\n\nAnd then edit the last couple of lines of all-en.tsv to give those missing characters some indices. There should only be a small handful of missing characters.\n\n#:#:#: Data organization\n\n```\n/\n- charmaps - the list of\n- wp-data\n - 2015 - downloaded wpcom and jetpack translation files from 2015\n - 2017 - downloaded translation files from 2017\n - wponly-processed - preprocessed/encoded training files from the 2015 and 2017 dirs\n- models\n  - goldilocks - the trained model for en to es translation\n- predictions - output files from\n```\n\n#:#:#: Prep the training data\n\nCreating the generic training data from common crawl corpus:\n\n```\npython wp_translate_ptf_filter.py charmaps/en.tsv charmaps/es.tsv nmt-data/wmt16/raw/common-crawl/commoncrawl.es-en.en nmt-data/wmt16/raw/common-crawl/commoncrawl.es-en.es nmt-data/wmt16/commoncrawl.es-en.en nmt-data/wmt16/commoncrawl.es-en.es\npython wp_translate_ptf_encode.py charmaps/en.tsv nmt-data/wmt16/commoncrawl.es-en.en wp-data/wp-nmt-processed/commoncrawl.es-en.en.txt\npython wp_translate_ptf_encode.py charmaps/es.tsv nmt-data/wmt16/commoncrawl.es-en.es wp-data/wp-nmt-processed/commoncrawl.es-en.es.txt\n```\n\nWhen using generic data, we want training sets that are balanced 50-50 between the wp data and a subset of the generic data. This way we can generalize better and make up for lack of vocab in the wp data. Putting them in the same file means that we will have mini-batches that contain both sets of data.\n\nTake the generic NMT training data and randomize it, split it up, and then append the wp data onto it:\n\n```\nwc -l nmt-data/wmt16/commoncrawl.es-en.en  #get the number of lines total\nseq 1 316368 | shuf > seq.num\npaste seq.num nmt-data/wmt16/commoncrawl.es-en.en | sort | sed \"s/^[0-9]*\\s//\" | head -n 260000 > wp-data/mixed-nmt-wp/en2es.en.rnd\npaste seq.num nmt-data/wmt16/commoncrawl.es-en.es | sort | sed \"s/^[0-9]*\\s//\" | head -n 260000 > wp-data/mixed-nmt-wp/en2es.es.rnd\n\npython wp_translate_ptf_encode.py charmaps/en.tsv wp-data/mixed-nmt-wp/en2es.en.rnd wp-data/mixed-nmt-wp/en2es.en.rnd.txt\npython wp_translate_ptf_encode.py charmaps/es.tsv wp-data/mixed-nmt-wp/en2es.es.rnd wp-data/mixed-nmt-wp/en2es.es.rnd.txt\n\nsplit -l 13000 -d wp-data/mixed-nmt-wp/en2es.en.rnd.txt wp-data/mixed-nmt-wp/en2es.en.rnd.txt.segment\nsplit -l 13000 -d wp-data/mixed-nmt-wp/en2es.es.rnd.txt wp-data/mixed-nmt-wp/en2es.es.rnd.txt.segment\n./append-data-segs.sh\n```\n\nThat should generate 20 segments of training data that can be cycled through during training.\n\nCreate the parallel text formatted files that contain the encoded data.\n\nEncode the common crawl generic data.\n\n```\n> python wp_translate_ptf_encode.py charmaps/all-en.tsv nmt-data/wmt16/raw/common-crawl/commoncrawl.es-en.en wp-data/wp-nmt-processed/commoncrawl.es-en.en.txt\n```\n\nEncode the WP data (and then decode to check it):\n\n```\n> python wp_translate_po2ptf.py wp-data/2015/wpcom-es.po charmaps/en.tsv charmaps/es.tsv wp-data/wponly-processed/wpcom-es-source.txt wp-data/wponly-processed/wpcom-es-target.txt\n > python wp_translate_ptf_decode.py charmaps/en.tsv wp-data/processed/wpcom-es-source.txt tmp.txt\n ```\n\nThis same final step can get used for generating data for evaluation also.\n\n#:#:#: Run the training\n\nOur training script will alternatively run on the generic data (to learn the language) and on the WP data to learn the unique WP structure.\n\n```\n./wp-translate-train.sh\n```\n\nVerify you are using the GPU:\n\n```\nnvidia-smi\n```\n\n\n#:#:#: Infer results\n\nPredict results:\n\n```\n./wp-translate-pred.sh\n```\n\nDecode the results from the output\n\n```\ncp models/en2es/pred/predictions.txt predictions/jetpack-2015.enc\npython wp_translate_ptf_decode.py charmaps/es.tsv predictions/jetpack-2015.enc predictions/jetpack-2015.txt\n```\n\n#:#:#: Evaluate results\n\n```\npython wp_translate_eval.py charmaps/es.tsv predictions/jetpack-2015.enc wp-data/wponly-processed/jetpack-es-target.txt predictions/jetpack-2015-output.diff\n```\n\n\n#:#: Notes from training prototype model\n\nThe prototype model consists of:\n- a 3 layer bidirectional encoder\n- a 3 layer attention decoder\n- 512 units in the internal layers\n- LTSM cells\n- max character length of 500 chars\n\nTrained to translate from en data to es_ES\n\nIt was trained on:\n- 100k steps of combo data from common crawl data and wpcom data from 2015\n- 120k steps of just the wpcom data from 2015\n\nHere is a sampling of the loss across those steps:\n\n![Training Loss](https://raw.githubusercontent.com/automattic/wp-translate/master/trainingloss.png)\n\nThe large decrease is when we switched from the joint training data to only using wpcom data.\n\n#:#: Notes from evaluating prototype model\n\nWe ran predictions for the following data:\n- jetpack 2015 strings - 1655 strings\n- jetpack 2017 strings - 2541 strings\n- vantage theme 2017 strings - 573 strings\n- yoast strings - 1092 strings\n- wpcom 2017 strings - 17874 strings (note that this is a superset of the 13226 strings we trained on)\n- wpcom 2017 new strings - 990 strings (this is a manual diff between 2017 and 2015 data)\n- jetpack readme - 198 strings\n- yoast readme - 99 strings\n\nAll predictions were run using beam search with a width of 5.\n\nWe evaluated the results based on what percentage of the strings were 100% translated correctly character for character.\n\n| Project        | Exact Matches | Off by < 4 chars est |\n| -------------- |:-------------:| --------------------:|\n| jetpack 2015   | 54.32% (899)  | 2.59%                |\n| jetpack 2017   | 36.36% (924)  | 1.50%                |\n| yoast plugin   | 06.59% (72)   | 1.33%                |\n| vantage theme  | 12.04% (69)   | 3.93%                |\n| wpcom 2017     | 49.75% (8893) | 1.45%                |\n| wpcom 2017 diff| 3.13% (31)    | 2.50%                |\n| jetpack readme | 0%    (0)     | 0%                   |\n| yoast readme   | 0%    (0)     | 0%                   |\n\n\nDiffs of all errors:\n- [Jetpack 2015](https://github.com/Automattic/wp-translate/blob/master/predictions/jetpack-2015-output.diff)\n- [Jetpack 2017](https://github.com/Automattic/wp-translate/blob/master/predictions/jetpack-2017-output.diff)\n- [Yoast Plugin](https://github.com/Automattic/wp-translate/blob/master/predictions/wordpress-seo-2017-output.diff)\n- [Vantage Theme](https://github.com/Automattic/wp-translate/blob/master/predictions/vantage-2017-output.diff)\n- [WP.com 2017](https://github.com/Automattic/wp-translate/blob/master/predictions/wpcom-2017-output.diff)\n- [Jetpack Readme](https://github.com/Automattic/wp-translate/blob/master/predictions/wp-plugins-jetpack-stable-readme-es-pred.diff)\n- [Yoast Readme](https://github.com/Automattic/wp-translate/blob/master/predictions/wp-plugins-wordpress-seo-stable-readme-es-pred.diff)\n\n\nThe percent off by less than 4 chars is determined using. This is completely wrong. Double counts and over counts, so I divide by two to use it as an estimate.\n\n```\ngrep \"^?\" predictions/jetpack-2015-output.diff | tr -d '? ' | awk 'length($1) < 4 { print $1 }' | wc -l\n```\n\n#:#: Translating with Google Translate API\n\n```\npython gt_po_eval.py wp-data/2017/wp-plugins-jetpack-stable-readme-es.po es gt-translated/wp-plugins-jetpack-stable-readme-es.po gt-translated/wp-plugins-jetpack-stable-readme-es.diff\n```\n\nI spent about $30 translating these (including some testing):\n\n\n| Project        | Exact Matches | Off by < 4 chars est |\n| -------------- |:-------------:| --------------------:|\n| jetpack 2017   | 20.77% (529)  | 15.80%               |\n| yoast plugin   | 16.33% (179)  | 12.80%               |\n| vantage theme  | 19.83% (114)  | 16.66%               |\n| wpcom 2017     | 20.76% (3694) | 14.20% (8% off by 1) |\n| wpcom 2017 diff| 07.27%  (72)  | 23.94%               |\n| jetpack readme | 12.00%  (24)  | 07.25%               |\n| yoast readme   | 07.27%  (12)  | 06.25%               |\n\n8.8% of the wpcom 2017 errors are only off by a single character.\n\nDiffs of all errors:\n- [Jetpack 2017](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wp-plugins-jetpack-stable-es.diff)\n- [Yoast Plugin](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wp-plugins-wordpress-seo-stable-es.diff)\n- [Vantage Theme](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wp-themes-vantage-es.diff)\n- [WP.com 2017](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wpcom-es.diff)\n- [Jetpack Readme](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wp-plugins-jetpack-stable-readme-es.diff)\n- [Yoast Readme](https://github.com/Automattic/wp-translate/blob/master/gt-translated/wp-plugins-wordpress-seo-stable-readme-es.diff)\n\n\n#:#: Ideas for Improvements\n\n- Switch from one char per byte pair encoding and handle unknown words\n  - https://google.github.io/seq2seq/nmt/#:data-format and https://arxiv.org/abs/1508.07909\n  - https://google.github.io/seq2seq/inference/#:unk-token-replacement-using-a-copy-mechanism\n- train on all the data that exists for all themes, plugins, projects\n  - this gives us more data to train on, but will make it harder to evaluate\n- calculate some sort of confidence score (maybe based on beam search data)\n  - this can then be a cutoff where we only accept translations that we are pretty certain about\n- use a more complex model\n  - Google translate uses a much larger network: https://research.googleblog.com/2016/09/a-neural-network-for-machine.html\n  - this probably requires getting the model to train across multiple gpus: https://github.com/google/seq2seq/issues/44\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Sat, 25 Dec 2021 15:53:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Automattic/wp-translate/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Automattic/wp-translate",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Automattic/wp-translate/master/wp-translate-pred.sh",
+      "https://raw.githubusercontent.com/Automattic/wp-translate/master/append-data-segs.sh",
+      "https://raw.githubusercontent.com/Automattic/wp-translate/master/wp-translate-train.sh",
+      "https://raw.githubusercontent.com/Automattic/wp-translate/master/bin/prep_nmt_data.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8031566795093165
+      ],
+      "excerpt": "Mostly built on https://github.com/google/seq2seq with the main idea coming from http://karpathy.github.io/2015/05/21/rnn-effectiveness/ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Automattic/wp-translate/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WP Translate",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wp-translate",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Automattic",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Automattic/wp-translate/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 18,
+      "date": "Sat, 25 Dec 2021 15:53:22 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

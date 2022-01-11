@@ -1,0 +1,322 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1704.00028",
+      "https://arxiv.org/abs/1704.00028\n\nAlec Radford, Luke Metz, Soumith Chintala, \"Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks\", https://arxiv.org/abs/1511.06434\n\nTKarras's PGGAN repository, https://github.com/tkarras/progressive_growing_of_gan",
+      "https://arxiv.org/abs/1511.06434\n\nTKarras's PGGAN repository, https://github.com/tkarras/progressive_growing_of_gan"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/henry32144/wgan-gp-tensorflow",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-09T08:34:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-29T03:27:32Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.985697639677808,
+        0.88673109223763,
+        0.9743372835493493
+      ],
+      "excerpt": "This repo is the TF2.0 implementation of Improved Training of Wasserstein GANs.  \nNote that this implementation is not totally the same as the paper. There might be some differences. \nThis image is from the original paper. The code below is functions of single training step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319708861235405
+      ],
+      "excerpt": "        with tf.GradientTape() as gp_tape: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8676718440070261
+      ],
+      "excerpt": "#: Apply the gradients to the optimizer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319708861235405
+      ],
+      "excerpt": "    with tf.GradientTape() as g_tape: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8676718440070261
+      ],
+      "excerpt": "    #: Apply the gradients to the optimizer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9646821403707744
+      ],
+      "excerpt": "The notebook trains WGAN-GP using aligned CelebA dataset, the image resolution is adjusted to 64*64. Due to the limitation of computation resource, I train the models for only 40 epochs. It may be able to produce better images if trained for more epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Tensorflow 2.0 implementation of WGAN-GP",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/henry32144/wgan-gp-tensorflow/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 10:01:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/henry32144/wgan-gp-tensorflow/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "henry32144/wgan-gp-tensorflow",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/henry32144/wgan-gp-tensorflow/master/WGAN-GP-celeb64.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365,
+        0.8932966694060598
+      ],
+      "excerpt": "Python 3 \njupyter or jupyterlab \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8005495155371051,
+        0.8781284762502207
+      ],
+      "excerpt": "    noise = tf.random.normal([batch_size, NOISE_DIM]) \n    epsilon = tf.random.uniform(shape=[batch_size, 1, 1, 1], minval=0, maxval=1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    #: Train D \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8932771122592772,
+        0.8134972907485951
+      ],
+      "excerpt": "    with tf.GradientTape(persistent=True) as d_tape: \n        with tf.GradientTape() as gp_tape: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432,
+        0.8301989832291473
+      ],
+      "excerpt": "            fake_image_mixed = epsilon * tf.dtypes.cast(real_image, tf.float32) + ((1 - epsilon) * fake_image) \n            fake_mixed_pred = discriminator([fake_image_mixed], training=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.848772914385775,
+        0.8189934579708896,
+        0.8301989832291473,
+        0.8301989832291473,
+        0.8123763140827432
+      ],
+      "excerpt": "    grad_norms = tf.sqrt(tf.reduce_sum(tf.square(grads), axis=[1, 2, 3])) \n    gradient_penalty = tf.reduce_mean(tf.square(grad_norms - 1)) \n    fake_pred = discriminator([fake_image], training=True) \n    real_pred = discriminator([real_image], training=True) \n    D_loss = tf.reduce_mean(fake_pred) - tf.reduce_mean(real_pred) + LAMBDA * gradient_penalty \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8005495155371051
+      ],
+      "excerpt": "    noise = tf.random.normal([batch_size, NOISE_DIM]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    #: Train G \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8134972907485951
+      ],
+      "excerpt": "    with tf.GradientTape() as g_tape: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301989832291473,
+        0.8123763140827432
+      ],
+      "excerpt": "        fake_pred = discriminator([fake_image], training=True) \n        G_loss = -tf.reduce_mean(fake_pred) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8017285540429218
+      ],
+      "excerpt": "    G_optimizer.apply_gradients(zip(G_gradients, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8137556200664927
+      ],
+      "excerpt": "Result at 40 epoch \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/henry32144/wgan-gp-tensorflow/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 WU, CHENG-HAN\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WGAN-GP Tensorflow 2.0",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wgan-gp-tensorflow",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "henry32144",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/henry32144/wgan-gp-tensorflow/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "There are two ways to run this repo.\n\n*   1. Download the dataset you want.\n\n    2. Clone this repo, then use Juypter Notebook or Lab to open the `WGAN-GP-celeb64.ipynb`     file, and modify the dataset path in the **Prepare dataset** section.\n\n* Run in Google Colab [:smiley_cat:](https://colab.research.google.com/drive/12nvXHacUtAsaoh3uN9uK-QXXIP_JD7uh)\n\n(In the default setting, training one epoch would take about 300~500 seconds.)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 10:01:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "wgan-gp",
+      "tensorflow2",
+      "gan"
+    ],
+    "technique": "GitHub API"
+  }
+}

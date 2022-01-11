@@ -1,0 +1,286 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Thanks to [Wouter Kool\u2019s \u201cAttention, Learn to Solve Routing Problems!\u201d](https://github.com/wouterkool/attention-learn-to-route) for getting us started with the code for the Attention Network.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1803.08475\n   \n   [2] Schulman, J. (2017, July 20",
+      "https://arxiv.org/abs/1707.06347\n   \n   [3] \u201cTensorBoard:TensorFlow.\u201d TensorFlow, www.tensorflow.org/tensorboard\n   \n   [4] Weights & Biases \u2013 Developer Tools for ML, www.wandb.com/\n   \n   [5] Proximal policy optimization\u00b6. (n.d."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "   [1] Kool, W. (2018, March 22). Attention, Learn to Solve Routing Problems! Retrieved from https://arxiv.org/abs/1803.08475\n   \n   [2] Schulman, J. (2017, July 20). Proximal Policy Optimization Algorithms. Retrieved from https://arxiv.org/abs/1707.06347\n   \n   [3] \u201cTensorBoard:TensorFlow.\u201d TensorFlow, www.tensorflow.org/tensorboard\n   \n   [4] Weights & Biases \u2013 Developer Tools for ML, www.wandb.com/\n   \n   [5] Proximal policy optimization\u00b6. (n.d.). Retrieved March 04, 2021, from https://spinningup.openai.com/en/latest/algorithms/ppo.html\n   \n   [6] Sweeps. (n.d.). Retrieved March 14, 2021, from https://docs.wandb.ai/sweeps#common-use-cases  \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/theresearchai/vehicle_routing_rl_2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-19T03:08:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-21T00:48:57Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* The Vehicle Routing Problem is a combinatorial optimization problem which asks \"What is the optimal set of routes for a fleet of vehicles to traverse in order to deliver to a given set of customers?\u201c\n* Capacitated Vehicle Routing Problem (CVRP) is a variant of the Vehicle Routing Problem in which the vehicles have a limited capacity of the goods.\n* This repository leverages Deep Reinforcement Learning to solve the CVRP problem. \n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9951071959022655,
+        0.9533687749354192,
+        0.9469968132195699,
+        0.9093938861927616,
+        0.9262735594785466,
+        0.9655095469083647,
+        0.9626957550853443,
+        0.9797539395543147,
+        0.9869022493933196,
+        0.9484993346343763
+      ],
+      "excerpt": "Finding suboptimal heuristics is a tedious task because of the large number of states and paths. Therefore, Deep Reinforcement Learning (RL) is used to determine these suboptimal heuristics without any human intervention. \nWouter Kool\u2019s \u201cAttention, Learn to Solve Routing Problems!\u201d  uses an end-to-end approach. It uses an encoder and decoder to train a model to learn to solve the CVRP problem. \nA proximal policy optimization (PPO) algorithm that uses fixed-length trajectory segments. PPO is a family of first-order methods that use a clipping to keep new policies close to old. \nThe attention paper uses an end-to-end approach.  \nIt uses an encoder and decoder to train a model to learn to solve the CVRP problem.  \nWe use a system of N nodes such that each node is represented in a 2D coordinate plane to describe the input. The input is fed into the encoder, consisting of a Multi-Headed Attention layer and a Feed-Forward layer. \nRunning the input through N sequential layers of encoder we generate two outputs: node embeddings and graph embeddings. The node embeddings are the continuous vector representations of coordinates and the graph embeddings are the aggregated (mean) node embeddings. \n* The decoder uses the outputs from the encoder along with the outputs from the previous timestamp. The process is sequential in time, which means the decoder produces an output at every timestamp. Combining the inputs in the decoder we generate a context node to represent the decoding context of the problem. Using the context nodes and node embeddings we then work towards generating normalized output probabilities, which then decides the next node in the routing plan. The training of the model is done by minimizing the expected cost of the tour length using a policy gradient method. \nPPO is motivated by the question: how can we take the biggest possible improvement step on a policy using the data we currently have, without stepping so far that we accidentally cause performance collapse? PPO is a family of first-order methods that use a few other tricks to keep new policies close to old. PPO methods are significantly simple to implement. \nThere are two primary variants of PPO: PPO-Penalty and PPO-Clip. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8162475052484298,
+        0.8968913207761179,
+        0.989822663608963,
+        0.9882409153243141,
+        0.9788417222952751,
+        0.9199186668808844
+      ],
+      "excerpt": "We use the PPO-Clip with the loss as: \nWeights & Biases is used to track machine learning projects. \nIn this project, the product \u2018Sweep\u2019 is used for hyperparameter tuning. \nVarious combinations of the hyperparameters- learning rates, decay rates and number of epochs are used to tune the model. Different configurations are compared to each other based on average cost/distance. \nThe generalizability of the trained model is also checked by running it for different distributions. \nTo generate simulated data, we will leverage this repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9855438037976484,
+        0.9929750601538448,
+        0.9169627444975698,
+        0.9884855127356307,
+        0.9718217948694297
+      ],
+      "excerpt": "Depot: It is the start and the end point for the vehicle routing problem. For example: An Amazon delivery vehicle starts from the warehouse, delivers all packages and comes back to the warehouse. The data format is a list of length 2. It represents a coordinate in the xy plane. \nNodes: The points where the vehicle is required to visit. An effective strategy is required to identify a path to all these points. For example: The delivery address are the points that the Amazon vehicle has to visit. The data format is a list of lists of length 20, 30, or 50. Each inner list is of length 2 that represents a coordinate in the xy plane. \nDemand: Each node has a demand or a requirement. For example: Every address requires the correct number of packages to be delivered to their address. This represents the demand and is a list of length 20, 30, or 50. Each demand value corresponds to a node. \nCapacity: It is the maximum capacity of a vehicle. For example: An Amazon truck can carry only x amount of packages in one iteration of traversal to each point. This is a scalar value that represents the capacity of the vehicle. \nTraining data is generated on the fly. To generate validation and test data (same as used in the paper) for all problems: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9610809882721151,
+        0.8845352749933441,
+        0.9884926497607546
+      ],
+      "excerpt": "Validation results shows comparable performance to State-of-the-Art or reference model. \nHyperparameter optimization enabled comparable results in just 10 iterations of model training as compared to 100 iterations for State-of-the-Art model. \nThe reference model and new implementation work well for different distributions of nodes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "MSDS Capstone Project, University of Washington, 2021",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/theresearchai/vehicle_routing_rl_2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 30 Dec 2021 07:00:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/theresearchai/vehicle_routing_rl_2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "theresearchai/vehicle_routing_rl_2",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/theresearchai/vehicle_routing_rl_2/main/plot_vrp.ipynb",
+      "https://raw.githubusercontent.com/theresearchai/vehicle_routing_rl_2/main/simple_tsp.ipynb",
+      "https://raw.githubusercontent.com/theresearchai/vehicle_routing_rl_2/main/Weights%20and%20Biases/3_ppo.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/theresearchai/vehicle_routing_rl_2/main/problems/op/install_compass.sh",
+      "https://raw.githubusercontent.com/theresearchai/vehicle_routing_rl_2/main/problems/tsp/install_concorde.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.884120256181721,
+        0.9165666554274764
+      ],
+      "excerpt": "!python generate_data_validation.py --problem all --name validation --seed 4321 -f \n!python generate_data_test.py --problem all --name test --seed 4321 -f \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.847899819620302,
+        0.8390392382460907
+      ],
+      "excerpt": "!python run.py --graph_size 20 --baseline rollout --problem 'cvrp' --n_epoch 10 --epoch_size 1280000 #:for PPO reinforce \n!python run.py --graph_size 20 --baseline critic_lstm --problem 'cvrp' --n_epoch 10 --epoch_size 1280000 #: for PPO LSTM \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/theresearchai/vehicle_routing_rl_2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Wouter Kool\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vehicle routing using reinforcement learning*",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vehicle_routing_rl_2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "theresearchai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/theresearchai/vehicle_routing_rl_2/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python>=3.6\n* NumPy\n* SciPy\n* [PyTorch](http://pytorch.org/)>=1.1\n* tqdm\n* [tensorboard_logger](https://github.com/TeamHG-Memex/tensorboard_logger)\n* Matplotlib (optional, only for plotting)\n* Wandb\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Thu, 30 Dec 2021 07:00:32 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "operations-research",
+      "machine-learning",
+      "reinforcement-learning"
+    ],
+    "technique": "GitHub API"
+  }
+}

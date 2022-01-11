@@ -1,0 +1,392 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1406.2661",
+      "https://arxiv.org/abs/1511.06434",
+      "https://arxiv.org/abs/1511.06434",
+      "https://arxiv.org/abs/1701.07875",
+      "https://arxiv.org/abs/1704.00028"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/donand/GAN_pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-02-18T16:27:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-25T09:09:12Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9358165415426285,
+        0.8280518646460017,
+        0.9968029537584643
+      ],
+      "excerpt": "In this repository I implement several versions of Generative Adversarial Networks in PyTorch. \nAll comments and discussions are welcome. \nTable of contents \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9377677639760282
+      ],
+      "excerpt": "In this section I implemented the original version of GAN as described in the paper Generative Adversarial Networks by Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8981373727003878,
+        0.935873870119961,
+        0.9622767908847437,
+        0.9765903820973043
+      ],
+      "excerpt": "As we can see, the generator correctly replicated the original distribution, that was a Gaussan distribution with mean = 3 and std = 1. \nA possible next step could be to reduce the size of the networks (reducing the number of neurons per layer or the number of layers) in order to obtain more stable models. \nBelow are reported some charts of the results of the experiment. As you can see, the generator matched the  real data distribution.<br> \nWe can also see that the mean and standard deviation of the generated distribution successfully converged to the real ones. We can note that there is still a decreasing trend in the standard deviation, so more training steps could be beneficial.<br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9592527100375609,
+        0.9082915209225365
+      ],
+      "excerpt": "As we can see, the generator was able to catch the real mean of the data after around 5k steps.<br><br> \nMean of the Generated Distribution                                          |  STD of the Generated Distribution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9570858496776551,
+        0.8963409989129946
+      ],
+      "excerpt": "This will be the implementation of GAN using Deep Convolutional Neural Networks as described in Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks by Alec Radford, Luke Metz and Soumith Chintala. \nI used the same architecture for the discriminator and the generator used in the paper, where the generator is the following \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8861661615269186
+      ],
+      "excerpt": "The discriminator has 5 convolutional layers with a kernel size of 4 and stride 2. In this way we don't have to use MaxPooling.<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9221670781760869
+      ],
+      "excerpt": "There are no fully connected layers in the network, and at the end a Sigmoid activation is applied. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8945956239081113
+      ],
+      "excerpt": "The generator has the same number of filters, starting from 1024 and going down to 128 to the last ConvTranspose layer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9594412319318061
+      ],
+      "excerpt": "For the implementation of WGAN I followed the paper Wasserstein GAN by Martin Arjovsky, Soumith Chintala, L\u00e9on Bottou. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9713584110957548,
+        0.9573836894540628,
+        0.9949961101651814,
+        0.9880180695037508
+      ],
+      "excerpt": "The main innovation brought by WGAN is the use of the Wasserstein distance as the loss function to evaluate distance between the real distribution of the data and the generated one, instead of the Jensen\u2013Shannon divergence.<br> \nWasserstein distance has a much better behaviour in case of disjoint distributions and when the distributions lay on a low-dimensional manifold. This means that the loss function gives more significative gradients to the critic and the generator. \nAnother important advantage of using the Wasserstein distance is that the loss function of the critic is now much more informative. In fact, the loss is directly linked to the quality of generated samples, and this means that it's a useful estimator of the performance of the GAN. This was not true for traditional GAN and for DCGAN, where the loss function of the discriminator was dependent on the performance of the generator, and the other way around. \nThe structure of the critic is similar to the structure of the discriminator in DCGAN, with the exception that Batch Normalization is not used anymore and the output has a linear activation function instead of the Sigmoid.<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9738859640555777,
+        0.9790184993469938,
+        0.8898746181245557,
+        0.874478702071588,
+        0.9640714221488736
+      ],
+      "excerpt": "An important contraint for the critic to be an estimator of the Wasserstein distance is to be a 1-Lipschitz continuous function.<br> \nThis is achieved by clipping the weights of the critic network into a small interval, the one used in the paper is [-0.01, 0.01]. In this way they are enforcing the critic function to be K-Lipschitz continuous. \nThe generator is the same that was used in DCGAN. \nThis experiment produced not very exciting results. The training was a bit noisy and unstable as we can see from the plots of the loss functions. The losses were slowly decreasing.<br> \nThe estimation of the Wasserstein distance is provided by the negative loss of the critic. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9454415124939792
+      ],
+      "excerpt": "In any case, we can observe that a good variety of faces is generated, even if in some cases there are still some artifacts. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9795605853228213,
+        0.9960536281474364
+      ],
+      "excerpt": "In the next section I will present WGAN-GP, that produces better results and stabilizes the training of the GAN by removing the weight clipping used to enforce the K-Lipschitz continuity of the critic function and using a new gradient penalty. \nThis is the implementation of WGAN-GP that is described in Improved Training of Wasserstein GANs by Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, Aaron Courville. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.977035626973655,
+        0.979465895231425,
+        0.9739546233988766,
+        0.9520196715875285,
+        0.9428625378926426
+      ],
+      "excerpt": "The main contribution of WGAN-GP is the method used to enforce that the function approximated by the critic is a 1-Lipschitz continuous function. This is achieved by adding a penalty for gradients larger or smaller than 1 in the loss function of the critic.<br> \nThe weight clipping used in WGAN is a quite hard contraint and it limits the expressive power of the critic network. \nThe gradient penalty is computed on gradients of the critic w.r.t. a linear combination of real inputs and input noise of the generator. It's a two-way penalty, so it penalizes both gradients larger and smaller than one, to make them equal to one. \nThe use of Gradient Penalty stabilizes a lot the training of the GAN and, in my case, produced better results compared to WGAN. \nI ran experiments with different architectures for both the generator and the critic networks, varying the number of filters respectively in the last and the first layer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9447361935101621,
+        0.9483286030024061
+      ],
+      "excerpt": "The critic and the generator were trained for 14 epochs and we can clearly see that both the negative loss of the critic and the Wasserstein distance estimate are steadily decreasing, indicating a very stable training. \nAs we can see, the both the critic loss and the Wasserstein distance are very significative, since a decrease means that the generated samples improved, as we can see in the gif reported after the charts. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9594267191002827,
+        0.9861275632840636
+      ],
+      "excerpt": "Probably by training the WGAN-GP for more epochs we could still improve the quality of the generated faces. \nThis is an esperiment were I tried to reduce the number of filters of both the critic and the generator networks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9660634439852875
+      ],
+      "excerpt": "Also in this experiment, like the previous one, both the critic loss and the Wasserstein distance are steadily decreasing, representing a good and costant learning. Also in this case, training for additional epochs could bring an improvement in the quality of the generated samples. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860697566426354,
+        0.9115819521793371,
+        0.9245651898443492,
+        0.8645731858925304
+      ],
+      "excerpt": "We can see the quality of the faces increasing epoch by epoch, until the last one.<br> \nThe samples are not as good as the ones from the previous experiment with a double number of filters, but they are still quite good. \nIn this experiment I increased the image size from 64x64 to 128x128. In order to do this, I added an additional layer to the generator to double the size of its output. \nUnfortunately the training times with the increased complexity of the GAN were very high, so I had to stop the training earlier after only 5 epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9591290299502566
+      ],
+      "excerpt": "As we can see, both the critic loss and the Wasserstein distance estimate are still decreasing at the end of the training, meaning that we would have obtained better results by training more. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of various Generative Adversarial Networks in PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/donand/GAN_pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 08:11:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/donand/GAN_pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "donand/GAN_pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The target distribution was a Normal distribution with mean=3 and std=1, and the input noise to the generator was sampled from a uniform distribution. Both the target and noise samples are monodimensional, but this can be changed in the config.yml file in order to extend to multiple dimensions.\n\nThe discriminator is composed by 3 hidden layers with 16, 16 and 8 neurons respectively, with ReLU activation functions and dropout after each layer with a probability of 0.5. The output layer is composed by only 1 neuron with sigmoid activation function, providing the probability of the input sample belonging to the real distribution and not being generated by the generator.\n\nThe generator is composed by 3 hidden layers of sizes 16, 32, 16 relatively, with ReLU activation functions. The output layer has the same size of the number of dimensions of the target samples, so in our case is 1. The output activation function is linear, because we don't want to limit the output values.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8130120444614933
+      ],
+      "excerpt": "<p align=\"center\"><img src=\"GAN/results/generated_vs_real_distribution.png\" alt=\"Distributions\" width=\"500\" height=\"400\"></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199171328842276,
+        0.8475143826631767
+      ],
+      "excerpt": "  <img hspace=20 src=\"DCGAN/results_celeba/video/celeba.gif\" width=\"300\" /> \n  <img hspace=20 src=\"DCGAN/results_celeba/video/frame_10.png\" width=\"300\" />  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8534853697962017,
+        0.8534853697962017
+      ],
+      "excerpt": "  <img hspace=20 src=\"WGAN/results_19-03-23_19-40_e50_d128_g128/discriminator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN/results_19-03-23_19-40_e50_d128_g128/generator_loss_smoothed.png\" width=\"300\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100916419993076
+      ],
+      "excerpt": "  <img hspace=0 src=\"WGAN/results_19-03-23_19-40_e50_d128_g128/video/frame_20.png\" width=\"400\" />  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017
+      ],
+      "excerpt": "  <img hspace=20 src=\"WGAN-GP/results_19-03-19_13-59_e20_d128_g128_64x64/discriminator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_13-59_e20_d128_g128_64x64/generator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_13-59_e20_d128_g128_64x64/wasserstein_distance.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_13-59_e20_d128_g128_64x64/gradient_penalty.png\" width=\"300\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100916419993076
+      ],
+      "excerpt": "  <img hspace=0 src=\"WGAN-GP/results_19-03-19_13-59_e20_d128_g128_64x64/video/frame_13.png\" width=\"400\" />  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017
+      ],
+      "excerpt": "  <img hspace=20 src=\"WGAN-GP/results_19-03-19_21-34_e20_d64_g64_64x64/discriminator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_21-34_e20_d64_g64_64x64/generator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_21-34_e20_d64_g64_64x64/wasserstein_distance.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_21-34_e20_d64_g64_64x64/gradient_penalty.png\" width=\"300\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100916419993076
+      ],
+      "excerpt": "  <img hspace=0 src=\"WGAN-GP/results_19-03-19_21-34_e20_d64_g64_64x64/video/frame_15.png\" width=\"400\" />  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017,
+        0.8534853697962017
+      ],
+      "excerpt": "  <img hspace=20 src=\"WGAN-GP/results_19-03-19_18-41_e20_d128_g64_128x128/discriminator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_18-41_e20_d128_g64_128x128/generator_loss_smoothed.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_18-41_e20_d128_g64_128x128/wasserstein_distance.png\" width=\"300\" /> \n  <img hspace=20 src=\"WGAN-GP/results_19-03-19_18-41_e20_d128_g64_128x128/gradient_penalty.png\" width=\"300\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100916419993076
+      ],
+      "excerpt": "  <img hspace=0 src=\"WGAN-GP/results_19-03-19_18-41_e20_d128_g64_128x128/video/frame_4.png\" width=\"400\" />  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/donand/GAN_pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GAN in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GAN_pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "donand",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/donand/GAN_pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Sun, 26 Dec 2021 08:11:33 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2110.09455",
+      "https://arxiv.org/abs/2110.09455",
+      "https://arxiv.org/abs/2103.03230",
+      "https://arxiv.org/abs/2110.09455"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please consider citing the following paper in your publications if this helps your research.\n\n```\n@article{KLAL21,\n title = {TLDR: Twin Learning for Dimensionality Reduction},\n author = {Kalantidis, Y. and Lassance, C. and Almaz\\'an, J. and Larlus, D.}\n journal = {arXiv:2110.09455},\n year = {2021}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{KLAL21,\n title = {TLDR: Twin Learning for Dimensionality Reduction},\n author = {Kalantidis, Y. and Lassance, C. and Almaz\\'an, J. and Larlus, D.}\n journal = {arXiv:2110.09455},\n year = {2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9104388306336967
+      ],
+      "excerpt": "- Citation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8629711733945958
+      ],
+      "excerpt": "tldr = TLDR(n_components=32, n_neighbors=10, encoder='linear', projector='mlp-1-2048', device='cuda', verbose=2) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/naver/tldr",
+    "technique": "GitHub API"
+  },
+  "contributor": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This code has been developed by Jon Almazan, Carlos Lassance, Yannis Kalantidis and Diane Larlus at [NAVER Labs Europe](https://europe.naverlabs.com).\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-15T11:31:04Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T04:34:32Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9727339139190169,
+        0.9918936778966995,
+        0.9223572132888926
+      ],
+      "excerpt": "TLDR (Twin Learning for Dimensionality Reduction) is an unsupervised dimensionality reduction method that combines neighborhood embedding learning with the simplicity and effectiveness of recent self-supervised learning losses. \nInspired by manifold learning, TLDR uses nearest neighbors as a way to build pairs from a training set and a redundancy reduction loss to learn an encoder that produces representations invariant across such pairs.  Similar to other neighborhood embeddings, TLDR effectively and unsupervisedly learns low-dimensional spaces where local neighborhoods of the input space are preserved; unlike other manifold learning methods, it simply consists of an offline nearest neighbor computation step and a straightforward learning process that does not require mining negative samples to contrast, eigendecompositions, or cumbersome optimization solvers. \nMore details and evaluation can be found in our paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9877090030496972
+      ],
+      "excerpt": "Overview of TLDR: Given a set of feature vectors in a generic input space, we use nearest neighbors to define a set of feature pairs whose proximity we want to preserve. We then learn a dimensionality-reduction function (theencoder) by encouraging neighbors in the input space to havesimilar representations. We learn it jointly with an auxiliary projector that produces high dimensional representations, where we compute the Barlow Twins loss over the (d\u2032 \u00d7 d\u2032) cross-correlation matrix averaged over the batch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.979245330650316,
+        0.870906035408029
+      ],
+      "excerpt": "The TLDR library can be used to learn dimensionality reduction models using an API and functionality that mimics similar methods in the scikit-learn library, i.e. you can learn a dimensionality reduction on your training data using fit() and you can project new data using transform(). \nTo illustrate the different functionalities we present a dummy example on randomly generated data. Let's import the library and generate some random training data (we will use 100K training examples with a dimensionality of 2048), i.e.: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8745816771351443
+      ],
+      "excerpt": "When instantiating a TLDR model one has to specify the output dimension (n_components), the number of nearest neighbors to use (n_neighbors) as well as the encoder and projector architectures that are specified as strings. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9256951831945364,
+        0.9936973941036107
+      ],
+      "excerpt": "For a more detailed list of optional arguments please refer to the function documentation below; architecture specification string formatting guide is described in this section below. \nWe learn the parameters of the dimensionality reduction model by using the fit() method: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465335505036838,
+        0.953300459361536
+      ],
+      "excerpt": "By default, fit() first collects the k nearest neighbors for each training data point using FAISS and then optimizes the Barlow Twin loss using the batch size and number of epochs provided. Note that, apart from the dimensionality reduction function (the encoder), a projector function that is part of the training process is also learned (see also the Figure above); the projector is by default discarded after training. \nOnce the model has been trained we can use transform() to project the training data to the new learned space: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8355284490397438,
+        0.9420829764951528,
+        0.8899237825316691
+      ],
+      "excerpt": "The optional l2_norm=True argument  of transform() further applies L2 normalization to all features after projection. \nAgain, we refer the user to the functions' documentation below for argument details. \nThe TLDR model and the array of nearest neighbors per training datapoint can be saved using the save() and save_knn() functions, repsectively: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9185662727088431,
+        0.8200059714874023
+      ],
+      "excerpt": "Note that by default the projector weights will not be saved. To also save the projector (e.g. for subsequent fine-tuning of the model) one must set the retain_projector=True argument when calling fit(). \nOne can use the load() method to load a pre-trained model from disk. Using the init=True argument when loading also loads the hyper-parameters of the model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9618169522731392
+      ],
+      "excerpt": "Description of selected arguments (see code for full list): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9842418854506811
+      ],
+      "excerpt": "* pin_memory: pin all data to the memory of the device (Default: False). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9483590487798111
+      ],
+      "excerpt": "* knn_approximation: Amount of approximation to use during the knn computation; accepted values are [None, \"low\", \"medium\" and \"high\"] (Default: None). No approximation will calculate exact neighbors while setting the approximation to either low, medium or high will use product quantization and create the FAISS index using the index_factory with an \"IVF1,PQ[X]\" string, where X={32,16,8} for {\"low\",\"med\",\"high\"}. The PQ parameters are learned using 10% of the training data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8296709484069966
+      ],
+      "excerpt": "* batch_size: size of the training mini batch (Default: 1024). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.877530212939594
+      ],
+      "excerpt": "* snapshot_freq: number of epochs to save a new snapshot (Default: None). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8198096539638866,
+        0.8741529933829151
+      ],
+      "excerpt": "save() saves to disk both model parameters and weights. \nload() loads the weights of the model. If init=True it initializes the model with the hyper-parameters found in the file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088035500581138,
+        0.8589363098148012
+      ],
+      "excerpt": "linear: a linear function parametrized by a weight matrix W of size input_dim X num_components. \nflinear: a factorized linear model in a sequence of linear layers, each composed of a linear layer followed by a batch normalization layer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9432999436492455,
+        0.8933917492527512
+      ],
+      "excerpt": "NUM_HIDDEN_LAYERS: selects the number of hidden (ie. intermediate) layers for the factorized linear model and the MLP \nNUM_DIMENSIONS_PER_LAYER: selects the dimensionality of the hidden layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TLDR is an unsupervised dimensionality reduction method that combines neighborhood embedding learning with the simplicity and effectiveness of recent self-supervised learning losses",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/naver/tldr/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 17:39:02 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/naver/tldr/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "naver/tldr",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Requirements:\n- Python 3.6 or greater\n- PyTorch 1.8 or greater\n- numpy\n- [FAISS](https://github.com/facebookresearch/faiss)\n- [rich](https://github.com/willmcgugan/rich)\n\nIn order to install the TLDR library, one should first make sure that [FAISS](https://github.com/facebookresearch/faiss/blob/main/INSTALL.md) and [Pytorch](https://pytorch.org/get-started/locally/) are installed. We recommend using a new [conda](https://www.anaconda.com/products/individual) environment:\n\n ```bash\n conda create --name ENV_NAME python=3.6.8\n conda activate ENV_NAME\n conda install -c pytorch faiss-gpu cudatoolkit=10.2\n conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch\n ```\n\n After ensuring that you have installed both FAISS and numpy, you can install TLDR by using the two commands below:\n\n```bash\ngit clone git@github.com:naver/tldr.git\npython3 -m pip install -e tldr\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8044995030495156
+      ],
+      "excerpt": "- Installing the TLDR library \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911372378453574
+      ],
+      "excerpt": "You can specify the network configuration using a string with the following format: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8801854956928516,
+        0.8233893896221521,
+        0.896953195413792
+      ],
+      "excerpt": "import numpy as np \nfrom tldr import TLDR \n: Generate random data \nX = np.random.rand(100000, 2048)  #: replace with training (N x D) array \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8050462130702183
+      ],
+      "excerpt": "tldr.fit(X, epochs=100, batch_size=1024, output_folder='data/', print_every=50) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8737288687529231
+      ],
+      "excerpt": "X = np.random.rand(5000, 2048) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8505073322190598
+      ],
+      "excerpt": "* n_neighbors: number of nearest neighbors used to sample training pairs (Default: 5). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from tldr import TLDR \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768139006474637,
+        0.8069425137588035,
+        0.816504258624706
+      ],
+      "excerpt": "* X: NxD training data array containing N training samples of dimension D. \n* epochs: number of training epochs (Default: 100). \n* batch_size: size of the training mini batch (Default: 1024). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9457175861910134
+      ],
+      "excerpt": "from tldr import TLDR \nimport numpy as np \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8559128299862585
+      ],
+      "excerpt": "X = np.random.rand(10000, 2048) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184394336364812
+      ],
+      "excerpt": "* Z: Nxn_components array \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8705440398872791
+      ],
+      "excerpt": "tldr.save(\"data/model.pth\")  #: Saves weights and params \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9155935855028813
+      ],
+      "excerpt": "tldr.load(\"data/model.pth\", init=True)  #: Initialize model with params in file and loads the weights \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/naver/tldr/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/naver/tldr/main/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Twin Learning for Dimensionality Reduction, Copyright (c) 2021 Naver Corporation, is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0.\\n\\nA summary of the CC BY-NC-SA 4.0 license is located here:\\n\\thttps://creativecommons.org/licenses/by-nc-sa/4.0/\\n\\nThe CC BY-NC-SA 4.0 license is located here:\\n\\thttps://creativecommons.org/licenses/by-nc-sa/4.0/legalcode\\n\\n\\nATTRIBUTIONS:\\n\\nThe class TLDRNetwork in the file tldr/tldr.py is derived from the class BarlowTwins in the file main.py available here:\\nhttps://github.com/facebookresearch/barlowtwins/, which was made available under the MIT License available here:\\nhttps://github.com/facebookresearch/barlowtwins/blob/main/LICENSE,\\nwhich is reproduced below:\\n\\nMIT License\\n\\nCopyright (c) Facebook, Inc. and its affiliates.\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TLDR: Twin Learning for Dimensionality Reduction",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tldr",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "naver",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/naver/tldr/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 70,
+      "date": "Wed, 29 Dec 2021 17:39:02 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "dimensionality-reduction",
+      "unsupervised-machine-learning",
+      "pytorch-implementation",
+      "manifold-learning"
+    ],
+    "technique": "GitHub API"
+  }
+}

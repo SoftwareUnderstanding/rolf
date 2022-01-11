@@ -1,0 +1,172 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2006.07733",
+      "https://arxiv.org/abs/2006.07733"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@article{grill2020bootstrap,\n  title={Bootstrap your own latent: A new approach to self-supervised learning},\n  author={Grill, Jean-Bastien and Strub, Florian and Altch{\\'e}, Florent and Tallec, Corentin and Richemond, Pierre H and Buchatskaya, Elena and Doersch, Carl and Pires, Bernardo Avila and Guo, Zhaohan Daniel and Azar, Mohammad Gheshlaghi and others},\n  journal={arXiv preprint arXiv:2006.07733},\n  year={2020}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{grill2020bootstrap,\n  title={Bootstrap your own latent: A new approach to self-supervised learning},\n  author={Grill, Jean-Bastien and Strub, Florian and Altch{\\'e}, Florent and Tallec, Corentin and Richemond, Pierre H and Buchatskaya, Elena and Doersch, Carl and Pires, Bernardo Avila and Guo, Zhaohan Daniel and Azar, Mohammad Gheshlaghi and others},\n  journal={arXiv preprint arXiv:2006.07733},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SaeedShurrab/Simple-BYOL",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-19T05:00:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-19T05:26:02Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.966977261430559
+      ],
+      "excerpt": "A simple pytorch implementation of Bootstrap your own latent: A new approach to self-supervised Learning which is developed by Google DeepMind group as a self-supervised learning approach that omits the need for negative samples. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A simple implementation of Bootstrap Your Own latent paper",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SaeedShurrab/Simple-BYOL/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 07:20:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SaeedShurrab/Simple-BYOL/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SaeedShurrab/Simple-BYOL",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SaeedShurrab/Simple-BYOL/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Simple-BYOL",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Simple-BYOL",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SaeedShurrab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SaeedShurrab/Simple-BYOL/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 07:20:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this implementation example, the original hyper-parameters specified by the original paper are set. Feel free to play with other  hyper-parameters:\n\n```python\nfrom torchvision.models import resnet18\n\nmodel = resnet18()\n\nlearner = BYOL(model)\n\nopt = torch.optim.Adam(learner.parameters(), lr=3e-4)\n\ncriterion = NormalizedMSELoss()\n\ndef sample_unlabelled_images():\n    return torch.randn(20, 3, 256, 256)\n\nfor _ in range(100):\n    images1 = sample_unlabelled_images()\n    images2 = sample_unlabelled_images() * 0.9\n    v1_on, v2_tar, v2_on, v1_tar = learner(images1, images2)\n    loss = criterion(v1_on, v2_tar, v2_on, v1_tar)\n    opt.zero_grad()\n    loss.backward()\n    opt.step()\n    learner.update_target_network()\n    print(loss)\n```\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

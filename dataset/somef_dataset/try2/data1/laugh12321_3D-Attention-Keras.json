@@ -1,0 +1,343 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1807.06521.\n    \"\"\"\n    def __init__(self, ratio=8, **kwargs",
+      "https://arxiv.org/abs/1807.06521.\n    \"\"\"\n    def __init__(self, kernel_size=7, **kwargs",
+      "https://arxiv.org/abs/1807.06521v2 (2018).\n```\n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/CBAM.png\"/></div>\n\n#### Channel Attention Module -3D\n\n```python\nclass channel_attention(tf.keras.layers.Layer):\n    \"\"\" \n    channel attention module \n    \n    Contains the implementation of Convolutional Block Attention Module(CBAM) block.\n    As described in https://arxiv.org/abs/1807.06521.\n    \"\"\"\n    def __init__(self, ratio=8, **kwargs):\n        self.ratio = ratio\n        super(channel_attention, self).__init__(**kwargs)\n\n    def build(self, input_shape):\n        channel = input_shape[-1]\n        self.shared_layer_one = tf.keras.layers.Dense(channel // self.ratio,\n                                                 activation='relu',\n                                                 kernel_initializer='he_normal',\n                                                 use_bias=True,\n                                                 bias_initializer='zeros')\n        self.shared_layer_two = tf.keras.layers.Dense(channel,\n                                                 kernel_initializer='he_normal',\n                                                 use_bias=True,\n                                                 bias_initializer='zeros')\n        super(channel_attention, self).build(input_shape)\n\n    def compute_output_shape(self, input_shape):\n        return input_shape\n\n    def call(self, inputs):\n        channel = inputs.get_shape().as_list()[-1]\n\n        avg_pool = tf.keras.layers.GlobalAveragePooling3D()(inputs)    \n        avg_pool = tf.keras.layers.Reshape((1, 1, 1, channel))(avg_pool)\n        avg_pool = self.shared_layer_one(avg_pool)\n        avg_pool = self.shared_layer_two(avg_pool)\n\n        max_pool = tf.keras.layers.GlobalMaxPooling3D()(inputs)\n        max_pool = tf.keras.layers.Reshape((1, 1, 1, channel))(max_pool)\n        max_pool = self.shared_layer_one(max_pool)\n        max_pool = self.shared_layer_two(max_pool)\n\n        feature = tf.keras.layers.Add()([avg_pool, max_pool])\n        feature = tf.keras.layers.Activation('sigmoid')(feature)\n\n        return tf.keras.layers.multiply([inputs, feature])\n```\n\n#### Spatial Attention Module -3D\n\n```python\nclass spatial_attention(tf.keras.layers.Layer):\n    \"\"\" spatial attention module \n        \n    Contains the implementation of Convolutional Block Attention Module(CBAM) block.\n    As described in https://arxiv.org/abs/1807.06521.\n    \"\"\"\n    def __init__(self, kernel_size=7, **kwargs):\n        self.kernel_size = kernel_size\n        super(spatial_attention, self).__init__(**kwargs)\n\n    def build(self, input_shape):\n        self.conv3d = tf.keras.layers.Conv3D(filters=1, kernel_size=self.kernel_size,\n                                             strides=1, padding='same', activation='sigmoid',\n                                             kernel_initializer='he_normal', use_bias=False)\n        super(spatial_attention, self).build(input_shape)\n\n    def compute_output_shape(self, input_shape):\n        return input_shape\n\n    def call(self, inputs):\n        avg_pool = tf.keras.layers.Lambda(lambda x: tf.keras.backend.mean(x, axis=-1, keepdims=True))(inputs)\n        max_pool = tf.keras.layers.Lambda(lambda x: tf.keras.backend.max(x, axis=-1, keepdims=True))(inputs)\n        concat = tf.keras.layers.Concatenate(axis=-1)([avg_pool, max_pool])\n        feature = self.conv3d(concat)\t\n            \n        return tf.keras.layers.multiply([inputs, feature])\n```\n\n### [DANet: Dual Attention Network for Scene Segmentation](https://github.com/laugh12321/3D-Attention-Keras/blob/main/model/DANet_attention3D.py)\n\n```\nJun Fu, et al. \"Dual attention network for scene segmentation.\" \nProceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019.\n```\n\n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/CA.png\"/></div>\n\n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/PA.png\"/></div>\n\n#### Channel Attention -3D\n\n```python\nclass Channel_attention(tf.keras.layers.Layer):\n    \"\"\" \n    Channel attention module \n    \n    Fu, Jun, et al. \"Dual attention network for scene segmentation.\" \n    Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019.\n    \"\"\"\n    def __init__(self,\n                 gamma_initializer=tf.zeros_initializer(),\n                 gamma_regularizer=None,\n                 gamma_constraint=None,\n                 **kwargs):\n        super(Channel_attention, self).__init__(**kwargs)\n        self.gamma_initializer = gamma_initializer\n        self.gamma_regularizer = gamma_regularizer\n        self.gamma_constraint = gamma_constraint\n\n    def build(self, input_shape):\n        self.gamma = self.add_weight(shape=(1,),\n                                     initializer=self.gamma_initializer,\n                                     name='gamma',\n                                     regularizer=self.gamma_regularizer,\n                                     constraint=self.gamma_constraint)\n        super(Channel_attention, self).build(input_shape)\n\n    def compute_output_shape(self, input_shape):\n        return input_shape\n\n    def call(self, inputs):\n        input_shape = inputs.get_shape().as_list()\n\n        proj_query = tf.keras.layers.Reshape((input_shape[1] * input_shape[2] * input_shape[3],\n                                              input_shape[4]))(inputs)\n        proj_key = tf.keras.backend.permute_dimensions(proj_query, (0, 2, 1))\n        energy = tf.keras.backend.batch_dot(proj_query, proj_key)\n        attention = tf.keras.activations.softmax(energy)\n\n        outputs = tf.keras.backend.batch_dot(attention, proj_query)\n        outputs = tf.keras.layers.Reshape((input_shape[1], input_shape[2], input_shape[3],\n                                           input_shape[4]))(outputs)\n        outputs = self.gamma * outputs + inputs\n\n        return outputs\n```\n\n#### Position Attention -3D\n\n```python\nclass Position_attention(tf.keras.layers.Layer):\n    \"\"\" \n    Position attention module \n        \n    Fu, Jun, et al. \"Dual attention network for scene segmentation.\" \n    Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019.\n    \"\"\"\n    def __init__(self,\n                 ratio = 8,\n                 gamma_initializer=tf.zeros_initializer(),\n                 gamma_regularizer=None,\n                 gamma_constraint=None,\n                 **kwargs):\n        super(Position_attention, self).__init__(**kwargs)\n        self.ratio = ratio\n        self.gamma_initializer = gamma_initializer\n        self.gamma_regularizer = gamma_regularizer\n        self.gamma_constraint = gamma_constraint\n\n    def build(self, input_shape):\n        super(Position_attention, self).build(input_shape)\n        self.query_conv = tf.keras.layers.Conv3D(filters=input_shape[-1] // self.ratio, \n                                                 kernel_size=(1, 1, 1), use_bias=False, \n                                                 kernel_initializer='he_normal')\n        self.key_conv = tf.keras.layers.Conv3D(filters=input_shape[-1] // self.ratio, \n                                               kernel_size=(1, 1, 1), use_bias=False, \n                                               kernel_initializer='he_normal')\n        self.value_conv = tf.keras.layers.Conv3D(filters=input_shape[-1], kernel_size=(1, 1, 1),\n                                                 use_bias=False, kernel_initializer='he_normal')\n        self.gamma = self.add_weight(shape=(1,),\n                                     initializer=self.gamma_initializer,\n                                     name='gamma',\n                                     regularizer=self.gamma_regularizer,\n                                     constraint=self.gamma_constraint)\n\n    def compute_output_shape(self, input_shape):\n        return input_shape\n\n    def call(self, inputs):\n        input_shape = inputs.get_shape().as_list()\n\n        proj_query = tf.keras.layers.Reshape((input_shape[1] * input_shape[2] * input_shape[3],\n                                              input_shape[4] // self.ratio))(self.query_conv(inputs))\n        proj_query = tf.keras.backend.permute_dimensions(proj_query, (0, 2, 1))\n        proj_key = tf.keras.layers.Reshape((input_shape[1] * input_shape[2] * input_shape[3],\n                                            input_shape[4] // self.ratio))(self.key_conv(inputs))\n        energy = tf.keras.backend.batch_dot(proj_key, proj_query)\n        attention = tf.keras.activations.softmax(energy)\n\n        proj_value = tf.keras.layers.Reshape((input_shape[1] * input_shape[2] * input_shape[3],\n                                              input_shape[4]))(self.value_conv(inputs))\n\n        outputs = tf.keras.backend.batch_dot(attention, proj_value)\n        outputs = tf.keras.layers.Reshape((input_shape[1], input_shape[2], input_shape[3],\n                                           input_shape[4]))(outputs)\n        outputs = self.gamma * outputs + inputs\n\n        return outputs\n``"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9999523849487317,
+        0.9288707923186814
+      ],
+      "excerpt": "Sanghyun Woo, et al. \"CBAM: Convolutional Block Attention Module.\" arXiv preprint arXiv:1807.06521v2 (2018). \n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/CBAM.png\"/></div> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9668253207263927
+      ],
+      "excerpt": "As described in https://arxiv.org/abs/1807.06521. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9668253207263927
+      ],
+      "excerpt": "As described in https://arxiv.org/abs/1807.06521. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9929624472567816,
+        0.9999999955794721,
+        0.9288707923186814,
+        0.9288707923186814
+      ],
+      "excerpt": "Jun Fu, et al. \"Dual attention network for scene segmentation.\"  \nProceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019. \n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/CA.png\"/></div> \n<div align=center><img alt=\"\" src=\"https://github.com/laugh12321/3D-Attention-Keras/blob/main/img/PA.png\"/></div> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9929624472567816,
+        0.9999999955794721
+      ],
+      "excerpt": "Fu, Jun, et al. \"Dual attention network for scene segmentation.\"  \nProceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9929624472567816,
+        0.9999999955794721
+      ],
+      "excerpt": "Fu, Jun, et al. \"Dual attention network for scene segmentation.\"  \nProceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/laugh12321/3D-Attention-Keras",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-10T07:21:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T20:21:04Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9189640770993897
+      ],
+      "excerpt": "Contains the implementation of Convolutional Block Attention Module(CBAM) block. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8045177522689043,
+        0.9189640770993897
+      ],
+      "excerpt": "    \"\"\" spatial attention module  \nContains the implementation of Convolutional Block Attention Module(CBAM) block. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This repo contains the 3D implementation of the commonly used attention mechanism for imaging.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/laugh12321/3D-Attention-Keras/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Sun, 26 Dec 2021 16:12:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/laugh12321/3D-Attention-Keras/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "laugh12321/3D-Attention-Keras",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "                                 name='gamma', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "                                 name='gamma', \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8325038074124481
+      ],
+      "excerpt": "class channel_attention(tf.keras.layers.Layer): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "                                             use_bias=True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "                                             use_bias=True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8325038074124481
+      ],
+      "excerpt": "class spatial_attention(tf.keras.layers.Layer): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8514404827017527,
+        0.832918417322924,
+        0.8348161799540633
+      ],
+      "excerpt": "    avg_pool = tf.keras.layers.Lambda(lambda x: tf.keras.backend.mean(x, axis=-1, keepdims=True))(inputs) \n    max_pool = tf.keras.layers.Lambda(lambda x: tf.keras.backend.max(x, axis=-1, keepdims=True))(inputs) \n    concat = tf.keras.layers.Concatenate(axis=-1)([avg_pool, max_pool]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8325038074124481
+      ],
+      "excerpt": "class Channel_attention(tf.keras.layers.Layer): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "             gamma_initializer=tf.zeros_initializer(), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "                                 name='gamma', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "    attention = tf.keras.activations.softmax(energy) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8325038074124481
+      ],
+      "excerpt": "class Position_attention(tf.keras.layers.Layer): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "             gamma_initializer=tf.zeros_initializer(), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "                                 name='gamma', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8123763140827432
+      ],
+      "excerpt": "    attention = tf.keras.activations.softmax(energy) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/laugh12321/3D-Attention-Keras/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Laugh\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "3D-Attention-Keras",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "3D-Attention-Keras",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "laugh12321",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/laugh12321/3D-Attention-Keras/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Sun, 26 Dec 2021 16:12:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "3d-attention",
+      "cbam",
+      "attention-model",
+      "channel-attention",
+      "spatial-attention",
+      "position-attention",
+      "attention"
+    ],
+    "technique": "GitHub API"
+  }
+}

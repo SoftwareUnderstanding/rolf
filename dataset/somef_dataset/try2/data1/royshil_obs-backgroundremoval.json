@@ -1,0 +1,468 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1911.09099 and MODNet: https://arxiv.org/pdf/2011.11961.pdf\nThe pre-trained model weights were taken from:\n- https://github.com/anilsathyan7/Portrait-Segmentation/tree/master/SINet\n- https://github.com/ZHKKKe/MODNet\n\nSome more information about how I built it: https://www.morethantechnical.com/2021/04/15/obs-plugin-for-portrait-background-removal-with-onnx-sinet-model/\n\n## Building\n\nThe plugin was built and tested on Mac OSX, Windows and Ubuntu Linux. Help is appreciated in building on other OSs and formalizing the one-click installers.\n\n### Prerequisites for building\n- OpenCV v4.2+: https://github.com/opencv/opencv/\n- ONNXRuntime: https://github.com/microsoft/onnxruntime\n\n### Mac OSX\n\n#### Install dependencies\n\nYou may use homebrew:\n```\n$ brew install opencv onnxruntime\n```\n\nOr - you may also build a (very minimal"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/royshil/obs-backgroundremoval",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-15T00:44:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T13:13:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This plugin is meant to make it easy to replace the background in portrait images and video.\nIt is using a neural network to predict the mask of the portrait and remove the background pixels.\nIt's easily composable with other OBS plugins to replace the background with e.g. an image or\na transparent color.\n\n![](demo.gif)\n\nThe models used for background detection are SINet: https://arxiv.org/abs/1911.09099 and MODNet: https://arxiv.org/pdf/2011.11961.pdf\nThe pre-trained model weights were taken from:\n- https://github.com/anilsathyan7/Portrait-Segmentation/tree/master/SINet\n- https://github.com/ZHKKKe/MODNet\n\nSome more information about how I built it: https://www.morethantechnical.com/2021/04/15/obs-plugin-for-portrait-background-removal-with-onnx-sinet-model/\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.926797736065783
+      ],
+      "excerpt": "The plugin was built and tested on Mac OSX, Windows and Ubuntu Linux. Help is appreciated in building on other OSs and formalizing the one-click installers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8956296008747514
+      ],
+      "excerpt": "Building for Arch in Docker (host OS e.g. MacOSX): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An OBS plugin for removing background in portrait images (video), making it easy to replace the background when screen recording.",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Check out the [latest releases](https://github.com/royshil/obs-backgroundremoval/releases) for downloads and install instructions.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/royshil/obs-backgroundremoval/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 40,
+      "date": "Thu, 23 Dec 2021 08:43:53 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/royshil/obs-backgroundremoval/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "royshil/obs-backgroundremoval",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/scripts/makeOnnxruntime_osx.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/scripts/makeOpenCV_osx.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/macos/install-build-obs-macos.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/macos/package-macos.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/macos/build-macos.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/macos/install-dependencies-macos.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/linux/install-dependencies-ubuntu.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/linux/package-ubuntu.sh",
+      "https://raw.githubusercontent.com/royshil/obs-backgroundremoval/main/ci/linux/build-ubuntu.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n$ cmake .. -DobsPath=\"$HOME\\Downloads\\obs-studio\\\"\n$ cmake --build . --config Release\n$ cpack\n$ Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force\n```\n\nTo build with CUDA support, tell cmake to use the CUDA version of OnnxRuntime\n```\n$ cmake .. -DobsPath=\"$HOME\\Downloads\\obs-studio\\\" -DWITH_CUDA=ON\n```\nThe rest of the build process is similar, but the result archive will be\n`obs-backgroundremoval-win64-cuda.zip`.\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install OpenCV via `vcpkg`:\n```\n$ mkdir build\n$ cd build\n$ git clone https://github.com/microsoft/vcpkg\n$ cd vcpkg\n$ .\\bootstrap-vcpkg.bat\n$ .\\vcpkg.exe install opencv[core]:x64-windows-static\n```\n\nInstall Onnxruntime with NuGet:\n```\n$ cd build\n$ mkdir nuget\n$ Invoke-WebRequest https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -UseBasicParsing -OutFile nuget.exe\n$ nuget.exe install Microsoft.ML.OnnxRuntime.DirectML -Version 1.7.0\n$ nuget.exe install Microsoft.ML.OnnxRuntime.Gpu -Version 1.7.1\n```\n\nClone the OBS repo, `Downloads\\ $ git clone --single-branch -b 27.0.1 git@github.com:obsproject/obs-studio.git`, to e.g. Downloads.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Unpack the package to the plugins directory of the system's Library folder (which is Apple's preffered way)\n```\n$ unzip -o obs-backgroundremoval-macosx.zip -d \"/Library/Application Support/obs-studio/plugins\"\n```\n\nor directly to your OBS install directory, e.g.\n```\n$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/\n```\n\nThe first is recommended as it preserves the plugins over the parallel installation of OBS versions (i.e. running the latest productive version and a release candidate) whereas the latter will also remove the plugin if you decide to delete the OBS application.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You may use homebrew:\n```\n$ brew install opencv onnxruntime\n```\n\nOr - you may also build a (very minimal) version of OpenCV and ONNX Runtime for static-linking, instead of the homebrew ones:\n```\n<root>/build/ $ ../scripts/makeOpenCV_osx.sh\n<root>/build/ $ ../scripts/makeOnnxruntime_osx.sh\n```\nStatic linking should be more robust across versions of OSX, as well as building for 10.13.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8792004858975346,
+        0.8098084860123702,
+        0.9932320396010824
+      ],
+      "excerpt": "Linux (Ubuntu, Arch) \nThe plugin was built and tested on Mac OSX, Windows and Ubuntu Linux. Help is appreciated in building on other OSs and formalizing the one-click installers. \nIf you install the desktop OBS app (https://obsproject.com/download) you already have the binaries \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9916793300225252,
+        0.9935309876697507
+      ],
+      "excerpt": "But you don't have the headers - so clone the main obs repo e.g. git clone --single-branch -b 27.1.3 git@github.com:obsproject/obs-studio.git (match the version number to your OBS install. Right now on OSX it's 27.1.3) \n$ mkdir -p build &amp;&amp; cd build \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9576269629993504,
+        0.933720198329639
+      ],
+      "excerpt": "$ apt install -y libobs-dev libopencv-dev language-pack-en wget git build-essential cmake \n$ wget https://github.com/microsoft/onnxruntime/releases/download/v1.7.0/onnxruntime-linux-x64-1.7.0.tgz \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9765559985291062,
+        0.9935309876697507,
+        0.9042879606054351
+      ],
+      "excerpt": "Then build and install: \n$ mkdir build &amp;&amp; cd build \n$ cmake .. &amp;&amp; cmake --build . &amp;&amp; cmake --install . \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9714207429223904
+      ],
+      "excerpt": "$ cd scripts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9322777356051437
+      ],
+      "excerpt": ": pacman -Sy --needed --noconfirm sudo fakeroot binutils gcc make \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9739064597775641
+      ],
+      "excerpt": ": sudo -u builduser bash -c 'cd /src/scripts && makepkg -s' \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8510671490032293
+      ],
+      "excerpt": "$ docker run -it -v $(pwd):/src archlinux:latest /bin/bash \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/royshil/obs-backgroundremoval/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Shell",
+      "CMake",
+      "Ruby",
+      "Batchfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Roy Shilkrot\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "OBS Plugin: Background Removal",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "obs-backgroundremoval",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "royshil",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/royshil/obs-backgroundremoval/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "## In this release\r\n* Upgrade to OBS v27.1.3 (latest) support\r\n* New realtime model Robust Video Matting (https://github.com/PeterL1n/RobustVideoMatting)\r\n* Calculate mask every X frame - save on CPU cycles! (set to 2 for a 50% performance gain with unnoticeable quality drop)\r\n* Some internal abstraction of the models to make it easy to add more models in the future\r\n* More advancement on CUDA - but still no stable version... need help on this plz.\r\n\r\nI'm taking the releases off of \"Pre-Release\" since it seems 10,000s of people were able to successfully use the plugin.\r\n\r\n## Install:\r\n\r\n* Windows (64bit): Unzip the obs-backgroundremoval-win64.zip file in the OBS directory (e.g. C:\\Program Files\\obs-studio), for example: > Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force\r\n* Mac OSX: Unzip obs-backgroundremoval-macosx.zip to /Applications/OBS.app/Contents/. e.g. $ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/\r\n* Archlinux: install the package e.g. pacman -U obs-backgroundremoval*.tar.zst\r\n\r\n## What's Changed\r\n* (rough) use CUDA by @packysauce in https://github.com/royshil/obs-backgroundremoval/pull/29\r\n* Process Mask every X frames of video by @royshil in https://github.com/royshil/obs-backgroundremoval/pull/31\r\n* Add \"obs\" path suffix to allow compilation with OBS Studio 27.1.3 (ppa) by @fubar-coder in https://github.com/royshil/obs-backgroundremoval/pull/45\r\n\r\n## New Contributors\r\n* @packysauce made their first contribution in https://github.com/royshil/obs-backgroundremoval/pull/29\r\n* @royshil made their first contribution in https://github.com/royshil/obs-backgroundremoval/pull/31\r\n* @fubar-coder made their first contribution in https://github.com/royshil/obs-backgroundremoval/pull/45\r\n\r\n**Full Changelog**: https://github.com/royshil/obs-backgroundremoval/compare/v0.3.0-beta...v0.4.0",
+        "dateCreated": "2021-11-03T17:20:26Z",
+        "datePublished": "2021-11-03T23:27:05Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.4.0",
+        "name": "v0.4.0 - OBS v27.1.3 and new RVM model",
+        "tag_name": "v0.4.0",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.4.0",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/52638764",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n* Added 2 new lightweight segmentation models: Google Mediapipe \"Meet\" model, and the \"Selfie Segmentation\" model, both from https://github.com/PINTO0309/PINTO_model_zoo \r\n* Upgrade to OBS v27.0.1 (following OBS production releases on OSX and Windows)\r\n* Upgrade onnxruntime on OSX to v1.7.2\r\n* Fix issue with RGB vs BGR background color flip\r\n\r\nInstall:\r\n\r\n* Windows (64bit): Unzip the obs-backgroundremoval-win64.zip file in the OBS directory (e.g. C:\\Program Files\\obs-studio), for example: > Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force\r\n* Mac OSX: Unzip obs-backgroundremoval-macosx.zip to /Applications/OBS.app/Contents/. e.g. $ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/\r\n* Archlinux: install the package e.g. pacman -U obs-backgroundremoval*.tar.zst\r\n",
+        "dateCreated": "2021-06-17T14:30:18Z",
+        "datePublished": "2021-06-17T19:56:27Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.3.0-beta",
+        "name": "v0.3.0 - 2 New models!",
+        "tag_name": "v0.3.0-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.3.0-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/44822987",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.3.0-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Archlinux build and package\r\n\r\nInstall:\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`), for example: `> Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force`\r\n- Mac OSX: Unzip `obs-backgroundremoval-macosx.zip` to `/Applications/OBS.app/Contents/`. e.g. `$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/`\r\n- Archlinux: install the package e.g. `pacman -U obs-backgroundremoval*.tar.zst`",
+        "dateCreated": "2021-05-25T11:32:19Z",
+        "datePublished": "2021-05-25T13:56:14Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.2.5-beta",
+        "name": "v0.2.5 - Archlinux build",
+        "tag_name": "v0.2.5-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.2.5-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/43519672",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.2.5-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Adding the MODNet segmentation model. Slightly better in segmentation and resources.\r\n- Dropdown to choose model (SINet or MODNet)\r\n\r\nInstall:\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`), for example: `> Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force`\r\n- Mac OSX: Unzip `obs-backgroundremoval-macosx.zip` to `/Applications/OBS.app/Contents/`. e.g. `$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/`",
+        "dateCreated": "2021-05-11T02:16:31Z",
+        "datePublished": "2021-05-11T02:19:13Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.2.4-beta",
+        "name": "v0.2.4 Beta - MODNet model",
+        "tag_name": "v0.2.4-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.2.4-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42741858",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.2.4-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Optimized ONNX model with slightly better runtime/resources performance (5-10%)\r\n- Fix to DirectML build (including the DLL)\r\n\r\nInstall:\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`), for example: `> Expand-Archive .\\obs-backgroundremoval-win64.zip -DestinationPath 'C:\\Program Files\\obs-studio\\' -Force`\r\n- Mac OSX: Unzip `obs-backgroundremoval-macosx.zip` to `/Applications/OBS.app/Contents/`. e.g. `$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/`",
+        "dateCreated": "2021-05-07T14:13:35Z",
+        "datePublished": "2021-05-07T14:22:27Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.2.3-beta",
+        "name": "v0.2.3 Beta - Optimized model",
+        "tag_name": "v0.2.3-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.2.3-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42607796",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.2.3-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Better versioning of the plugin\r\n- GPU support on Windows through DirectML (any available GPU)\r\n\r\nInstall:\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`)\r\n- Mac OSX: Unzip `obs-backgroundremoval-macosx.zip` to `/Applications/OBS.app/Contents/`. e.g. `$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/`",
+        "dateCreated": "2021-05-04T13:52:44Z",
+        "datePublished": "2021-05-04T14:06:45Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.2.2-beta",
+        "name": "v0.2.2 Beta - Windows GPU support",
+        "tag_name": "v0.2.2-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.2.2-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42417765",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.2.2-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Fixing the problem of down&up scaling the original image. Instead - apply the mask to the original image size, without reducing its resolution.\r\n\r\nInstall\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`)\r\n- Mac OSX: Unzip `obs-backgroundremoval-macosx.zip` to `/Applications/OBS.app/Contents/`. e.g. `$ unzip -o obs-backgroundremoval-macosx.zip -d /Applications/OBS.app/Contents/`\r\n-Linux: TBD\r\n",
+        "dateCreated": "2021-05-03T15:48:51Z",
+        "datePublished": "2021-05-03T15:49:27Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/v0.2.1-beta",
+        "name": "v0.2.1 Beta",
+        "tag_name": "v0.2.1-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/v0.2.1-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42361887",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/v0.2.1-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "This release features\r\n- Omni color space handling\r\n- Slightly better performance\r\n\r\nInstall\r\n- Windows (64bit): Unzip the `obs-backgroundremoval-win64.zip` file in the OBS directory (e.g. `C:\\Program Files\\obs-studio`)\r\n- Mac OSX: Copy `obs-backgroundremoval.so` to `/Applications/OBS.app/Contents/PlugIns`. Copy `SInet_Softmax.onnx` to `/Applications/OBS.app/Contents/Resources/data/obs-plugins/obs-backgroundremoval`\r\n-Linux: TBD",
+        "dateCreated": "2021-05-02T01:08:44Z",
+        "datePublished": "2021-05-02T01:38:30Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/0.2-beta",
+        "name": "v0.2 Beta",
+        "tag_name": "0.2-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/0.2-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42319279",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/0.2-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "In this release\r\n- Windows support\r\n- Linux (Ubuntu) support\r\n- More streamlined build\r\n- Colorspaces conversions\r\n\r\nTo install\r\n- Windows: Copy `.dll`s to e.g. `C:\\Program Files\\obs-studio\\obs-plugins\\64bit`, and `.onnx` file to e.g. `C:\\Program Files\\obs-studio\\data\\obs-plugins\\obs-backgroundremoval`\r\n- MacOSX: Copy `.so` file to `/Applications/OBS.app/Contents/PlugIns` and `.onnx` file to `/Applications/OBS.app/Contents/Resources/data/obs-plugins/obs-backgroundremoval`\r\n\r\nLinux install TBD",
+        "dateCreated": "2021-04-26T21:00:40Z",
+        "datePublished": "2021-04-26T21:09:27Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/0.1-beta",
+        "name": "v0.1 Beta",
+        "tag_name": "0.1-beta",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/0.1-beta",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/42033994",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/0.1-beta"
+      },
+      {
+        "authorType": "User",
+        "author_name": "royshil",
+        "body": "This is an alpha pre-release just to provide the pre-built binaries, to avoid having to build them. The plugin binary and model are supplied and they should be copied to the OBS plugins directory manually, e.g.\r\n```\r\n$ cp obs-backgroundremoval.so /Applications/OBS.app/Contents/PlugIns\r\n$ cp SINet_Softmax.onnx /Applications/OBS.app/Contents/Resources/data/obs-plugins/obs-backgroundremoval/\r\n```\r\n\r\nOpenCV and ONNXRuntime are still needed for the plugin to run. Use homebrew to install them:\r\n```\r\n$ brew install opencv onnxruntime\r\n```\r\n\r\nIn case homebrew doesn't install v1.7.2 of onnxruntime - i've included the dylib.",
+        "dateCreated": "2021-04-23T18:13:33Z",
+        "datePublished": "2021-04-23T18:24:46Z",
+        "html_url": "https://github.com/royshil/obs-backgroundremoval/releases/tag/0.1-alpha",
+        "name": "Alpha v0.1",
+        "tag_name": "0.1-alpha",
+        "tarball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/tarball/0.1-alpha",
+        "url": "https://api.github.com/repos/royshil/obs-backgroundremoval/releases/41919328",
+        "zipball_url": "https://api.github.com/repos/royshil/obs-backgroundremoval/zipball/0.1-alpha"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- OpenCV v4.2+: https://github.com/opencv/opencv/\n- ONNXRuntime: https://github.com/microsoft/onnxruntime\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You may use homebrew:\n```\n$ brew install opencv onnxruntime\n```\n\nOr - you may also build a (very minimal) version of OpenCV and ONNX Runtime for static-linking, instead of the homebrew ones:\n```\n<root>/build/ $ ../scripts/makeOpenCV_osx.sh\n<root>/build/ $ ../scripts/makeOnnxruntime_osx.sh\n```\nStatic linking should be more robust across versions of OSX, as well as building for 10.13.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install OpenCV via `vcpkg`:\n```\n$ mkdir build\n$ cd build\n$ git clone https://github.com/microsoft/vcpkg\n$ cd vcpkg\n$ .\\bootstrap-vcpkg.bat\n$ .\\vcpkg.exe install opencv[core]:x64-windows-static\n```\n\nInstall Onnxruntime with NuGet:\n```\n$ cd build\n$ mkdir nuget\n$ Invoke-WebRequest https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -UseBasicParsing -OutFile nuget.exe\n$ nuget.exe install Microsoft.ML.OnnxRuntime.DirectML -Version 1.7.0\n$ nuget.exe install Microsoft.ML.OnnxRuntime.Gpu -Version 1.7.1\n```\n\nClone the OBS repo, `Downloads\\ $ git clone --single-branch -b 27.0.1 git@github.com:obsproject/obs-studio.git`, to e.g. Downloads.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 424,
+      "date": "Thu, 23 Dec 2021 08:43:53 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "obs",
+      "obs-plugin",
+      "libobs",
+      "mac-osx"
+    ],
+    "technique": "GitHub API"
+  }
+}

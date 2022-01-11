@@ -1,0 +1,277 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@conference{yecheetal21,\n  title = {Neighborhood Contrastive Learning Applied to Online Patient Monitoring},\n  author = {Y\u00e8che, H. and Dresdner, G. and Locatello, F. and H{\\\"user}, M. and R{\\\"a}tsch, G.},\n  booktitle = {38th International Conference on Machine Learning},\n  month = jul,\n  year = {2021},\n  doi = {},\n  month_numeric = {7}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@conference{yecheetal21,\n  title = {Neighborhood Contrastive Learning Applied to Online Patient Monitoring},\n  author = {Y\u00e8che, H. and Dresdner, G. and Locatello, F. and H{\\\"user}, M. and R{\\\"a}tsch, G.},\n  booktitle = {38th International Conference on Machine Learning},\n  month = jul,\n  year = {2021},\n  doi = {},\n  month_numeric = {7}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8031849865465941
+      ],
+      "excerpt": "<img src=\"https://github.com/ratschlab/ncl/blob/main/bin/NCL_figure.png\" width=\"400\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "sh bin/run_scripts/mimic3/train_eval_NCL_w \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ratschlab/ncl",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-04T12:26:20Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-09T16:16:30Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9881786402898911
+      ],
+      "excerpt": "This repository contains the code used for the paper \"Neighborhood Contrastive Learning Applied to Online Patient Monitoring\" accepted for a short talk at ICML 2021. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9786883605779279
+      ],
+      "excerpt": "In this part we pre-process the data to make it compatible with our pipeline. To do so, we have two scripts data/preprocess/build_physionet-2019 and data/preprocess/build_mimic-III-benchmark. The only thing to do is to insert the previously mentioned paths at the first line of each file. For instance with data/preprocess/build_physionet-2019, I will go from : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9927334983607733,
+        0.9448183659360111
+      ],
+      "excerpt": "This will create h5 dataset files in either data/preprocess/physionet2019_resources/ or /data/preprocess/mimic3_resources/, called non_scaled.h5 and scaled.h5. non_scaled.h5 contains the forward imputed version of the data whereas scaled.h5 is sthe scaled version of it that we used as input to our pipeline. \nIn this part, we detail how to train all the methods we report in our paper.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9495005096153284,
+        0.8234455971946983,
+        0.9803088656141031,
+        0.9434771240166607
+      ],
+      "excerpt": "This folder contains everything relative to data loading and preprocessing. The most important file is data/loader.py containing the loader (all on CPU) fo the ICU data. \nThis folder contains every relative to the model used to train a representation: \n - model/architectures/ contains the different building blocks of the representation model, encoder, critic, data augmentations, losses, and neighborhood functions. \n - model/methods/ contains the file for the different approaches employed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9785142920974415,
+        0.9758827082413623
+      ],
+      "excerpt": " - eval/architectures/ contains the different building blocks of the classifier model. \n - eval/down_stream_tasks/ contains the different classifier used AddOnClassification or AddOnBinnedClassification for length-of-stay. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code of the paper \"Neighborhood Contrastive Learning Applied to Online Patient Monitoring\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ratschlab/ncl/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 07:20:16 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ratschlab/ncl/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ratschlab/ncl",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9707104731521539,
+        0.9637533202261083,
+        0.9632347459754548,
+        0.9470775104522373,
+        0.9574866771063938,
+        0.9770335174395833
+      ],
+      "excerpt": "To run the code you need to set up a conda environment with the environment.yml file. \nFirst, ensure you have conda installed. Then, if you intend to run the model on GPU, do: \nconda env create -f environment.yml \nWe don't recommend running the code on CPU as it will be very slow to train models. If you still intend to, you will need to modify tensorflow-gpu by tensorflow in the environment.yml file. \nOnce the command runs without errors, you should have a new environment available, called ncl, that you can activate with : \nconda activate ncl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879863063452118,
+        0.9906248903846466
+      ],
+      "excerpt": "git clone https://github.com/YerevaNN/mimic3-benchmarks/ \ncd mimic3-benchmarks/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9374480669417847
+      ],
+      "excerpt": "As it name indicates, this script train and evaluates NCL(n_w) method over 20 seeds on the MIMIC-III benchmark dataset. One important thing to note is that we base our pipeline on gin-config files (https://github.com/google/gin-config). You can run it the following way : \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9368214916296991
+      ],
+      "excerpt": "python data/preprocess/build_dataset.py --dataset physionet2019 --load_path $load_path --save_path $save_path --resource_path $resource_path --static_columns $static_col \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9368214916296991
+      ],
+      "excerpt": "python data/preprocess/build_dataset.py --dataset physionet2019 --load_path $load_path --save_path $save_path --resource_path $resource_path --static_columns $static_col \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8963105555678258
+      ],
+      "excerpt": "python main.py -m train_eval -tc configs/mimic3/NCL/train_unsupervised.gin \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.886034463304534
+      ],
+      "excerpt": " - train.py is the common run file called by main. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8360664887684331
+      ],
+      "excerpt": " - evaluate.py is the common run file called by main. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ratschlab/ncl/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 ETH Zurich; Biomedical Informatics Group; Hugo Y\\xc3\\xa8che, Gideon Dresdner\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Neighborhood Contrastive Learning Applied to Online Patient Monitoring",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ncl",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ratschlab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ratschlab/ncl/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Tue, 21 Dec 2021 07:20:16 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

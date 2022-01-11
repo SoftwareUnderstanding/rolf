@@ -1,0 +1,197 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597](https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1505.04597"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8684816314147163
+      ],
+      "excerpt": "It is based on U-Net convolutional network https://arxiv.org/abs/1505.04597 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9708707373945832
+      ],
+      "excerpt": "<div style=\"width:image width px; font-size:80%; text-align:center;\"><img src=\"https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png\" width=\"70%\" alt=\"alternate text\"/> U-Net model architecture, https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/ </div> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/neshitov/Kaggle-ship-detection-UNet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-13T18:11:02Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-06T12:32:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The script unet.py does the model construction and training. The script inference.py takes the model constructed in unet.py and performs the prediction. The file nonempty.txt is auxiliary, contains the list of image names that contain ships.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8680296682808183
+      ],
+      "excerpt": "This is a solution for Kaggle ship detection competition \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8000307191647281,
+        0.9905227508568538,
+        0.9718240615673271
+      ],
+      "excerpt": "implemented in PyTorch. \nData contains 192k images of open sea seashore, docks, etc. Around 40k images contain ships, and the rest of the images do not. The aim of the model is to predict is to locate separate ships in the image and find the masks of the ships, i.e. parts of the image where ships are located. The labels for the training set are contained in train_ship_segmentation2.csv (data available at https://www.kaggle.com/c/airbus-ship-detection/data). For every ship in every image the file contains a row with image id and the binary mask for the ship in run-length encoding. \nInput images are resized to 224x224.The model is constructed as follows: we start with pretrianed resnet34 model available from torchvision. Two fully connected layers are added on top of wtih 2d softmax output. Then the model is trained on the set of all images to predict if an image contains a ship. All the layers of the resnet34 ecept the last one are frozen during the training. Now the U-Net conists of resnet followed by transpose convolution layers: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9870320774274122,
+        0.8630253110140039,
+        0.93027552968989
+      ],
+      "excerpt": "Every transpose convolution takes as input one of the intermediate features in the resnet network and the result of the previous transpose convolution step. The output of the 4th layer of resnet model is (n_samples,n_channels,224/23,224/32) Each transpose convolution layer multiplies width and height by 2, and the output of the U-Net has shape (n_samples,224,224), where the value for each pixel in the output is the probability that this pixel is a part of the ship image. The U-Net model is trained only on the set of images containing ships. All layers except three first layers of the resnet model are trained. The loss function used is a combination of dice loss and focal loss functions. \nModel does prediction in two steps. First the modified resnet network predicts if the image contains ships. If it does, the image is fed to U-Net network that predicts the mask. It outputs one mask per image. This mask is split into connected pieces and the run-length encoded. \nAfter training for 50 epochs the network has 0.6005 intersection over union score on the validation set (consisting of images with ships only). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Pytorch implementation of UNet",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/neshitov/UNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 20 Dec 2021 15:20:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/neshitov/Kaggle-ship-detection-UNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "neshitov/Kaggle-ship-detection-UNet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This model uses PyTorch 0.4.0, cv2 and skimage for image processing.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/neshitov/Kaggle-ship-detection-UNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "U-Net implementation for mask prediciton.",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Kaggle-ship-detection-UNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "neshitov",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/neshitov/Kaggle-ship-detection-UNet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 20 Dec 2021 15:20:00 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8356013927728488,
+        0.9559715772848645
+      ],
+      "excerpt": "| Focal  |  800  |  31.9  |  20.1  |  8.7  |  20.2  |  12.4  |  \n| OHEM  |  200  |  35.1  |  18.7  |  6.3  |  20.0  |  11.3  |  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9686679014285212,
+        0.8854398367006655
+      ],
+      "excerpt": "| OHEM  |  600  |  37.6  |  23.4  |  11.2  |  24.1  |  12.5  |  \n| OHEM  | 800 | 36.8 | 24.3 | 12.2 | 24.4 | 12.3| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "| Focal | ResNet18 | 35.1 | 18.9 | 8.1 | 20.7 | 15.3 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| OHEM | ResNet101 | 36.6 | 20.1 | 7.4 | 21.3 | 12.3 | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Viveksbawa/SARAS-ESAD-Baseline",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-28T13:46:10Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-13T07:05:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Here, we implement basic data-handling tools for [SARAS-ESAD](https://saras-esad.grand-challenge.org/Dataset/) dataset with FPN training process. We implement a pure pytorch code for train FPN with [Focal-Loss](https://arxiv.org/pdf/1708.02002.pdf) or [OHEM/multi-box-loss](https://arxiv.org/pdf/1512.02325.pdf) paper. \n<!-- Aim of this repository try different loss functions and make a fair comparison in terms of performance on SARAR-ESAD dataset. -->\n\nWe hope this will help kick start more teams to get up to the speed and allow the time for more innovative solutions. We want to eliminate the pain of building data handling and training process from scratch. Our final aim is to get this repository the level of [realtime-action-detection](https://github.com/gurkirt/realtime-action-detection).\n\nAt the moment we support the latest pytorch and ubuntu with Anaconda distribution of python. Tested on a single machine with 2/4/8 GPUs.\n\nYou can found out about architecture and loss function on parent repository, i.e. [RetinaNet implementation in pytorch.1.x](https://github.com/gurkirt/RetinaNet.pytorch.1.x).\n\nResNet is used as a backbone network (a) to build the pyramid features (b). \nEach classification (c) and regression (d) subnet is made of 4 convolutional layers and finally a convolutional layer to predict the class scores and bounding box coordinated respectively.\n\nSimilar to the original paper, we freeze the batch normalisation layers of ResNet based backbone networks. Also, few initial layers are also frozen, see `fbn` flag in training arguments. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8205086025813012
+      ],
+      "excerpt": "Data preparation instructions for SARAS-ESAD 2020 challenge \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941131525717524
+      ],
+      "excerpt": "Focal loss: Same as in the original paper we use sigmoid focal loss, see RetinaNet. We use pure pytorch implementation of it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8304378343544359
+      ],
+      "excerpt": "By default it evaluate using the model store at max_iters, but you can change it any other snapshot/checkpoint. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9642500888425446
+      ],
+      "excerpt": "Results of the baseline models with different loss function and input image sizes, where  backbone network fixed to ResNet50. AP_10, AP_30, AP_50, and AP_mean are presented on validation-set, while Test-AP_mean is computed based on test-set similar to AP_mean. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.975311464187023
+      ],
+      "excerpt": "Results of the baseline models with different loss function, backbone networks, where input image size is fixed to 400. AP_10, AP_30, AP_50, and AP_mean are presented on validation-set, while Test-AP_mean is computed based on test-set similar to AP_mean. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8859087413251502,
+        0.8090740376771209,
+        0.9384395210765435
+      ],
+      "excerpt": "Outputs from the lastest model (800 OHEM) are uploaded in the sample folder. These are generated using the same model (800 OHEM). See flag at line evaluate.py 114 to select validation or testing set (which will be available on 10th June). \nInput image size (height x width)is 600x1067 or 800x1422. \nBatch size is set to 16, the learning rate of 0.01. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.977848118544393,
+        0.8106028758414222
+      ],
+      "excerpt": "SGD is used for the optimisation \ninitial learning rate is set to 0.01 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "RetinaNet with different loss function types",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code is adopated from [RetinaNet implementation in pytorch.1.x](https://github.com/gurkirt/RetinaNet.pytorch.1.x).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Please visit [SARAS-ESAD](https://saras-esad.grand-challenge.org) website to download the dataset for surgeon action detection. \n- Extract all the sets (train and val) from zip files and put them under a single directory. Provide the path of that directory as data_root in train file. Data preprocessing and feeding pipeline is in [detectionDatasets.py](https://github.com/Viveksbawa/SARAS-ESAD-baseline/blob/master/data/detectionDatasets.py) file.\n- rename the data directory `esad`. \n- Your directory will look like\n  - esad\n    - train\n      - set1\n        - file.txt\n        - file.jpg\n        - ..\n    - val\n      - obj\n        - file.txt\n        - file.jpg\n        - ..\n\n- Now your dataset is ready, that is time to download imagenet pretrained weights for ResNet backbone models. \n- Weights are initialised with imagenet pretrained models, specify the path of pre-saved models, `model_dir` in `train.py`. Download them from [torchvision models](https://github.com/pytorch/vision/blob/master/torchvision/models/resnet.py). After you have download weights, please rename then appropriately under `model_dir` e.g. resnet50 resen101 etc. from This is a requirement of the training process. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Viveksbawa/SARAS-ESAD-Baseline/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Wed, 22 Dec 2021 21:05:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Viveksbawa/SARAS-ESAD-Baseline/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Viveksbawa/SARAS-ESAD-Baseline",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You will need the following to run this code successfully\n- Anaconda python\n- Pytorch latest\n- Visualisation \n  - if you want to visualise set tensorboard flag equal to true while training\n  - [TensorboardX](https://github.com/lanpa/tensorboardX)\n  - Tensorflow for tensorboard\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8886773471120337
+      ],
+      "excerpt": "Once you have pre-processed the dataset, then you are ready to train your networks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9672383366037828
+      ],
+      "excerpt": "To train run the following command.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9144004985385483
+      ],
+      "excerpt": "python train.py --loss_type=mbox --data_root=\\home\\gurkirt\\ --tensoboard=true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8227866668282061
+      ],
+      "excerpt": "Please check the arguments in train.py to adjust the training process to your liking. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9144104404859776
+      ],
+      "excerpt": "You can evaluate and save the results in text file using evaluate.py. It follow the same arguments train.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363927309551648
+      ],
+      "excerpt": "This will dump a log file with results(mAP) on the validation set and as well as a submission file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8611551405923265
+      ],
+      "excerpt": "Outputs from the lastest model (800 OHEM) are uploaded in the sample folder. These are generated using the same model (800 OHEM). See flag at line evaluate.py 114 to select validation or testing set (which will be available on 10th June). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8197535048063456
+      ],
+      "excerpt": "Weights for initial layers are frozen see freezeupto flag in train.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Viveksbawa/SARAS-ESAD-Baseline/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Gurkirt Singh\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Surgeon Action Detection for endoscopic images/videos",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SARAS-ESAD-Baseline",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Viveksbawa",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Viveksbawa/SARAS-ESAD-Baseline/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Wed, 22 Dec 2021 21:05:30 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

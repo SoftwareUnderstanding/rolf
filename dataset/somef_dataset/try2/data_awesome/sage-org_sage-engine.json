@@ -1,0 +1,469 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9999386344538305
+      ],
+      "excerpt": "The complete approach and experimental results are available in a Research paper accepted at The Web Conference 2019, available here. Thomas Minier, Hala Skaf-Molli and Pascal Molli. \"SaGe: Web Preemption for Public SPARQL Query services\" in Proceedings of the 2019 World Wide Web Conference (WWW'19), San Francisco, USA, May 13-17, 2019. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sage-org/sage-engine",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-04-09T09:11:10Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-31T22:41:48Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9306028696852894,
+        0.9273059161441531,
+        0.9807213882495186,
+        0.9850236342170846,
+        0.8486176409907823,
+        0.9766987391598511
+      ],
+      "excerpt": "SaGe is a SPARQL query engine for public Linked Data providers that implements Web preemption. The SPARQL engine includes a smart Sage client \nand a Sage SPARQL query server hosting RDF datasets using HDT, postgres, sqlite, or hbase \nThis repository contains the Python implementation of the SaGe SPARQL query server. \nSPARQL queries are suspended by the web server after a fixed quantum of time and resumed upon client request. Using Web preemption, Sage ensures stable response times for query execution and completeness of results under high load. \nThe complete approach and experimental results are available in a Research paper accepted at The Web Conference 2019, available here. Thomas Minier, Hala Skaf-Molli and Pascal Molli. \"SaGe: Web Preemption for Public SPARQL Query services\" in Proceedings of the 2019 World Wide Web Conference (WWW'19), San Francisco, USA, May 13-17, 2019. \nWe appreciate your feedback/comments/questions to be sent to our mailing list or our issue tracker on github. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data ingestion \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8818044945665298
+      ],
+      "excerpt": "A SaGe server is configured using a configuration file in YAML syntax. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9645999796287924
+      ],
+      "excerpt": "The quota and max_results fields are used to set the maximum time quantum and the maximum number of results \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9903337403790731,
+        0.9940265571785611,
+        0.9341873772058431,
+        0.954331961726523,
+        0.9890056529785682
+      ],
+      "excerpt": "- the postgres backend allows a SaGe server to create, query and update RDF datasets stored in PostgreSQL. Each dataset is stored in a single table composed of 3 columns; S (subject), P (predicate) and O (object). Tables are created with B-Tree indexes on SPO, POS and OSP. SaGe uses psycopg2 to interact with PostgreSQL. \n- the postgres-catalog backend uses a different schema than postgres to store datasets. Triples terms are mapped to unique identifiers and a dictionary table that is common to all datasets is used to map RDF terms with their identifiers. This schema allows to reduce the space required to store datasets. \n- the sqlite backend allows a SaGe server to create, query and update RDF datasets stored in SQLite. Datasets are stored using the same schema as the postgres backend. \n- the sqlite-catalog is another backend for SQLite that uses a dictionary based schema as the postgres-catalog backend. \n- the hbase backend allows a SaGe server to create, query and update RDF datasets stored in HBase. To have a sorted access on dataset triples, triples are inserted three times in three different tables using SPO, POS and OSP as triples keys. SaGe uses happybase to interact with HBase. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.945965942221311
+      ],
+      "excerpt": "To ensure stable performance when using PostgreSQL with SaGe, PostgreSQL needs to be configured. Open the file postgresql.conf in the PostgreSQL main directory and apply the following changes in the Planner Method Configuration section: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9249405628239101,
+        0.81234203867726,
+        0.9455723545192434
+      ],
+      "excerpt": "- Set enable_indexscan, enable_indexonlyscan and enable_nestloop to on \n- Set all the other enable_XYZ options to off \nThese changes force the PostgreSQL query optimizer to generate the desired query plan for the SaGe resume queries. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911478160601604
+      ],
+      "excerpt": ": Insert the RDF triples in SQLite \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8436166775333536
+      ],
+      "excerpt": ": Create the SPO, OSP and POS indexes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911478160601604
+      ],
+      "excerpt": ": Insert the RDF triples in PostgreSQL \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8436166775333536
+      ],
+      "excerpt": ": Create the SPO, OSP and POS indexes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911478160601604
+      ],
+      "excerpt": ": Insert the RDF triples in HBase \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9304428869926643,
+        0.8206998731430568
+      ],
+      "excerpt": "The Sage server is also available through a Docker image. \nIn order to use it, do not forget to mount in the container the directory that contains you configuration file and your datasets. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\ud83e\uddd9 Sage: a SPARQL query engine for public Linked Data providers",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To generate the documentation, navigate in the `docs` directory and generate the documentation\n\n```bash\ncd docs/\nmake html\nopen build/html/index.html\n```\n\nCopyright 2017-2019 - [GDD Team](https://sites.google.com/site/gddlina/), [LS2N](https://www.ls2n.fr/?lang=en), [University of Nantes](http://www.univ-nantes.fr/)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://happybase.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sage-org/sage-engine/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Mon, 20 Dec 2021 12:55:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sage-org/sage-engine/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sage-org/sage-engine",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/sage-org/sage-engine/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/sage-org/sage-engine/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The SaGe SPARQL query server can also be manually installed using the [poetry](https://github.com/sdispater/poetry) dependency manager.\n```bash\ngit clone https://github.com/sage-org/sage-engine\ncd sage-engine\npoetry install --extras \"hdt postgres hbase\"\n```\nAs with pip, the various SaGe backends are installed as extras dependencies, using the  `--extras` flag.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The core engine of the SaGe SPARQL query server with [HDT](http://www.rdfhdt.org/) as a backend can be installed as follows:\n```bash\npip install sage-engine[hdt,postgres,hbase]\n```\nThe SaGe query engine uses various **backends** to load RDF datasets.\nThe various backends available are installed as extras dependencies. The above command install both the HDT, the PostgreSQL and the HBase backends.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Installation in a [virtualenv](https://virtualenv.pypa.io/en/stable/) is **strongly advised!**\n\nRequirements:\n* Python 3.7 (*or higher*)\n* [pip](https://pip.pypa.io/en/stable/)\n* **gcc/clang** with **c++11 support**\n* **Python Development headers**\n> You should have the `Python.h` header available on your system.   \n> For example, for Python 3.6, install the `python3.6-dev` package on Debian/Ubuntu systems.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  name: dbpedia \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  name: my_dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8608782773899524
+      ],
+      "excerpt": ": Create the required SQLite tables to store the dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8608782773899524
+      ],
+      "excerpt": ": Create the required PostgreSQL tables to store the dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8608782773899524
+      ],
+      "excerpt": ": Create the required HBase tables to store the dataset \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8128041215650162
+      ],
+      "excerpt": "name: SaGe Test server \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  name: dbpedia \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.804861592764361,
+        0.8453583214594693
+      ],
+      "excerpt": "To load a dataset from a HDT file, just declare a new dataset in your configuration file using the hdt-file backend. \nTo load a N-Triples file using one of the postgres, postgres-catalog, hbase, sqlite and sqlite-catalog backends, first declare a new dataset in your configuration file. For example, to load the file my_dataset.nt using the sqlite backend, we start by declaring a new dataset named my_dataset in our configuration file my_config.yaml. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  name: my_dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8424518780473191
+      ],
+      "excerpt": "sage-sqlite-put my_dataset.nt my_config.yaml my_dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8424518780473191
+      ],
+      "excerpt": "sage-postgres-put my_dataset.nt my_config.yaml my_dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8424518780473191
+      ],
+      "excerpt": "sage-hbase-put my_dataset.nt my_config.yaml my_dataset \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sage-org/sage-engine/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "HTML",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Thomas Minier\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sage: a SPARQL query engine for public Linked Data providers",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sage-engine",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sage-org",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sage-org/sage-engine/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "momo54",
+        "body": "# Major features\r\n\r\n* **Support for SQLite and HBase BAckends**\r\n  * As an Embedded backend, SQLite deliver faster performance than Postgres.\r\n  * Hbase support has been tested with Watdiv10m\r\n  * new commands sage-sqlite-init, sage-sqlite-put. idem for hbase\r\n* **New database layout with Dictionaries**\r\n  * Postgres and SQLite are now available with dictionary support. It greatly reduces the space required to store data.\r\n  * just declare the option \"backend: sqlite-catalog\" in the config file.\r\n* **Preemption support improved**\r\n  * New way to support web preemption. Deliver faster performances and better ensures quantums\r\n\r\n## What's Changed\r\n* Develop by @momo54 in https://github.com/sage-org/sage-engine/pull/12\r\n\r\n## New Contributors\r\n* @momo54 made their first contribution in https://github.com/sage-org/sage-engine/pull/12\r\n\r\n**Full Changelog**: https://github.com/sage-org/sage-engine/compare/v2.2.0...v2.3.0",
+        "dateCreated": "2021-04-19T18:26:51Z",
+        "datePublished": "2021-04-19T18:37:32Z",
+        "html_url": "https://github.com/sage-org/sage-engine/releases/tag/v2.3.0",
+        "name": "SQLite and HBase Supports",
+        "tag_name": "v2.3.0",
+        "tarball_url": "https://api.github.com/repos/sage-org/sage-engine/tarball/v2.3.0",
+        "url": "https://api.github.com/repos/sage-org/sage-engine/releases/41663412",
+        "zipball_url": "https://api.github.com/repos/sage-org/sage-engine/zipball/v2.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Callidon",
+        "body": "# Major features\r\n\r\n* **Add support for SPARQL [INSERT DATA](https://www.w3.org/TR/2013/REC-sparql11-update-20130321/#insertData) and [DELETE DATA](https://www.w3.org/TR/2013/REC-sparql11-update-20130321/#deleteData) queries**. \r\n  * They are sent to the server using the SPARQL 1.1 protocol and must completely run inside a quantum. \r\n  * Quads that could be processed inside the quantum will be ignored.\r\n  * Upon query completion, the SaGe server returns the set of quads that were successfully processed during the quantum. Quads that could not be processed due to an error are ignored, to avoid a crash of query execution.\r\n* **Add support for [PostgreSQL](https://www.postgresql.org/) as a backend**. Two backends are available: `postgres` and `postgres-mvcc`, where the later rely on multi-version concurrency control to provide reads against consistent snapshots of the RDF graphs. More details on these backends are available in the technical documentation.\r\n* **All HTTP interfaces have been unified under the [SPARQL 1.1 protocol](https://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/)**. Consequently, all previous APIs have been deprecated.\r\n* The HTTP server has been rewritten using [FastAPI](https://fastapi.tiangolo.com/) and [Uvicorn](https://www.uvicorn.org/). This new version provides cleaner errors when the API is misused and **significantly increase performance under heavy load**.\r\n* **The SaGe Web interface has been externalized as a standalone project** called [`sage-web`](https://github.com/sage-org/sage-web). Consequently, it is no longer included with `sage-engine` and must be used separately.\r\n* **A complete technical documentation is available** in the `docs` directory and can be built using [sphinx](http://www.sphinx-doc.org/en/master/). It describes the `sage-engine` software, how to use it, how to configure each backend and includes the complete autodoc of the `sage` package. Upon merge, this doc will be hosted on the Github page of this repo.\r\n\r\n# Minor features\r\n\r\n* Update the syntax of YAML config files.\r\n  * The `datasets` field has been renamed to `graphs`. This change is part of a general effort to align the vocabulary used inside the package with the RDF and SPARQL specifications.\r\n  * Added the `stateless` field to switch the server between stateless and stateful mode.\r\n  * The `quota` and `max_results` can now be set to `\"inf\"` to use an infinite quantum and disable the limit of results sent per HTTP request, respectively. Doing so will trigger warning messages when starting the server, but it's fine if you know what you are doing \ud83d\ude09 \r\n* Support for RDF config files, but it is currently reserved for advanced usage of the engine.\r\n* Increase test coverage.\r\n* Add [type hints](https://docs.python.org/3/library/typing.html) to all functions, methods & classes in the `sage` package.\r\n* Complete rewriting of the pydoc of all functions, methods & classes in the `sage` package.\r\n\r\n## What's Changed\r\n* SPARQL UPDATE and PostgreSQL support by @Callidon in https://github.com/sage-org/sage-engine/pull/9\r\n\r\n\r\n**Full Changelog**: https://github.com/sage-org/sage-engine/compare/v2.1.0...2.1.0",
+        "dateCreated": "2020-01-09T12:54:21Z",
+        "datePublished": "2020-01-09T12:55:44Z",
+        "html_url": "https://github.com/sage-org/sage-engine/releases/tag/2.1.0",
+        "name": "SPARQL UPDATE and PostgreSQL support",
+        "tag_name": "2.1.0",
+        "tarball_url": "https://api.github.com/repos/sage-org/sage-engine/tarball/2.1.0",
+        "url": "https://api.github.com/repos/sage-org/sage-engine/releases/22709823",
+        "zipball_url": "https://api.github.com/repos/sage-org/sage-engine/zipball/2.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "Callidon",
+        "body": "# Changes from 1.0\r\n\r\n## New functionnalities\r\n\r\n* SPARQL Unions are supported natively.\r\n* Some SPARQL Filters are supported natively. For now, only logical expression (<, =, &&, \u2026) are allowed.\r\n* The Sage server API now supports plain text SPARQL queries: you can send a SPARQL query using a GET/POST request. See [the API documentation](http://sage.univ-nantes.fr/documentation) for details. You can try it using [this link](http://sage.univ-nantes.fr/sparql?query=SELECT+%3Fcc+WHERE+%7B+++%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2FBarack_Obama%3E+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23sameAs%3E+%3Fcc+.+%7D+&default-graph-uri=http://sage.univ-nantes.fr/sparql/sameAs).\r\n* Basic [VoID descriptors](https://www.w3.org/TR/void/) are now generated automatically for each RDF dataset.\r\n* Standard [JSON](https://www.w3.org/TR/2013/REC-sparql11-results-json-20130321/) and [XML](https://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321/) SPARQL query results format are now supported.\r\n\r\n## Internals\r\n* New package architecture, compatible with python standards.\r\n* HDT installation is now optional. In the future, all backends for the sage server will installed as optional depdencies.\r\n* The time shared engine now uses [`uvloop`](https://github.com/MagicStack/uvloop), which dratically speed up query execution.\r\n* New system to dynamically declare and load backend for the Sage server (but it lacks proper documentation).\r\n* Updated [sage-widget](https://github.com/sage-org/sage-widget), using v2.1.1\r\n\r\n## What's Changed\r\n* Online client integrated by @Slaanaroth in https://github.com/sage-org/sage-engine/pull/1\r\n* Prepare for official release by @Callidon in https://github.com/sage-org/sage-engine/pull/2\r\n* Basic GRAPH support using Quad patterns by @Callidon in https://github.com/sage-org/sage-engine/pull/5\r\n\r\n## New Contributors\r\n* @Slaanaroth made their first contribution in https://github.com/sage-org/sage-engine/pull/1\r\n\r\n**Full Changelog**: https://github.com/sage-org/sage-engine/commits/v1.1",
+        "dateCreated": "2019-02-28T08:59:58Z",
+        "datePublished": "2019-03-01T08:04:55Z",
+        "html_url": "https://github.com/sage-org/sage-engine/releases/tag/v1.1",
+        "name": "Release 1.1",
+        "tag_name": "v1.1",
+        "tarball_url": "https://api.github.com/repos/sage-org/sage-engine/tarball/v1.1",
+        "url": "https://api.github.com/repos/sage-org/sage-engine/releases/15852686",
+        "zipball_url": "https://api.github.com/repos/sage-org/sage-engine/zipball/v1.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 33,
+      "date": "Mon, 20 Dec 2021 12:55:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "rdf",
+      "rdf-store",
+      "preemptive",
+      "sparql",
+      "sparql-query",
+      "sparql-endpoints"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The `sage` executable, installed alongside the SaGe server, allows to easily start a SaGe server from a configuration file using [Uvicorn](https://www.uvicorn.org/), a Python ASGI HTTP Server.\n\n```bash\n#: launch Sage server with 4 workers on port 8000\nsage my_config.yaml -w 4 -p 8000\n```\n\nThe full usage of the `sage` executable is detailed below:\n```\nUsage: sage [OPTIONS] CONFIG\n\n  Launch the Sage server using the CONFIG configuration file\n\nOptions:\n  -p, --port INTEGER              The port to bind  [default: 8000]\n  -w, --workers INTEGER           The number of server workers  [default: 4]\n  --log-level [debug|info|warning|error]\n                                  The granularity of log outputs  [default:\n                                  info]\n  --help                          Show this message and exit.\n```\n\nOnce started, you can interact with the SaGe server on http://localhost:8000/docs\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

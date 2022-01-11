@@ -1,0 +1,630 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9297402158684717
+      ],
+      "excerpt": "In this case, results would look like: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "                [?person :foaf/age ?age]]]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "        [:bgp [?individual :foaf/knows ?person] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "        [:bgp [?individual :foaf/knows ?person] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arachne-framework/aristotle",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-11-01T18:38:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-08T10:01:49Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9366150997236241
+      ],
+      "excerpt": "An RDF/OWL library for Clojure, providing a data-oriented wrapper for \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8930901044020226
+      ],
+      "excerpt": "Key features: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8470099012923736,
+        0.908925214220865
+      ],
+      "excerpt": "SPARQL queries expressed using Clojure data structures. \nPluggable inferencing and reasoners. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.975347040141073,
+        0.9881694434555682,
+        0.9973609785378362,
+        0.8871350060811123,
+        0.9518602519746595
+      ],
+      "excerpt": "RDF is a powerful framework for working with highly-annotated data in very abstract ways. Although it isn't perfect, it is highly researched, well defined and understood, and the industry standard for \"rich\" semi-structured, open-ended information modeling. \nMost of the existing Clojure tools for RDF are focused mostly on creating and manipulating RDF graphs in pure Clojure at a low level. I desired a more comprehensive library with the specific objective of bridging existing idioms for working with Clojure data to RDF graphs. \nApache Jena is a very capable, well-designed library for working with RDF and the RDF ecosystem. It uses the Apache software license, which unlike many other RDF tools is compatible with Clojure's EPL. However, Jena's core APIs can only be described as agressively object-oriented. Since RDF is at its core highly data-oriented, and Clojure is also data-oriented, using an object-oriented or imperative API seems especially cumbersome. Aristotle attempts to preserve \"good parts\" of Jena, while replacing the cumbersome APIs with clean data-driven interfaces. \nAristotle does not provide direct access to other RDF frameworks (such as RDF4j, JSONLD, Commons RDF, OWL API, etc.) However, Jena itself is highly pluggable, so if you need to interact with one of these other systems it is highly probably that a Jena adapter already exists or can be easily created. \nData Model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.986149034506818,
+        0.9330522296824194
+      ],
+      "excerpt": "To express RDF data as Clojure, Aristotle provides two protocols. arachne.aristotle.graph/AsNode converts Clojure literals to RDF Nodes of the appropriate type, while arachne.aristotle.graph/AsTriples converts Clojure data structures to sets of RDF triples. \nClojure primitive values map to Jena Node objects of the appropriate type. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9491843768258443
+      ],
+      "excerpt": "|keyword|IRI (see explanation of IRI/keyword registry below)| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8582076955240129
+      ],
+      "excerpt": "|symbols starting with ?| variable node (for patterns or queries)| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8861247676163838
+      ],
+      "excerpt": "|symbols starting with _| named blank node| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.904480425951195,
+        0.9204109251001952
+      ],
+      "excerpt": "Since IRIs are usually long strings, and tend to be used repeatedly, using the full string expression can be cumbersome. Furthermore, Clojure tends to prefer keywords to strings, especially for property/attribute names and enumerated or constant values. \nTherefore, Aristotle provides a mechanism to associate a namespace with an IRI prefix. Keywords with a registered namespace will be converted to a corresponding IRI. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9856852047742306
+      ],
+      "excerpt": "The registry is stored in the global dynamic Var arachne.aristotle.registry/*registry*, which can be also overridden on a thread-local basis using the arachne.aristotle.registry/with macro, which takes a map of namespaces (as keywords) and IRI prefixes. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.904720339274228
+      ],
+      "excerpt": "  ;; Code using keywords with :foaf and :dc namespaces \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9382456409959995
+      ],
+      "excerpt": "You can also register a prefix in RDF/EDN data, using the #rdf/prefix tagged literal. The prefix will be added to the thread-local binding and is scoped to the same triple expansion. This allows you to define a prefix alongside the data that uses it, without installing it globally or managing it in your code. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8746728576942335
+      ],
+      "excerpt": "This means that keywords with a namespace that starts with an arachne namespace segment will use the supplied prefix. Any additional namespace segments will be appended to the prefix, separated by a forward slash (/). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8657465881737292,
+        0.9935923078490854,
+        0.918923553928664
+      ],
+      "excerpt": "If multiple wildcard prefixes overlap, the system will use whichever is more specific, and will prefer non-wildcard registrations to wildcard registrations in the case of ambiguity. \nUsing # or any other character as a prefix separator for wildcard prefixes, instead of /, is currently not supported. \nYou can use the arachne.aristotle.graph/triples function to convert any compatible Clojure data structure to a collection of RDF Triples (usually in practice it isn't necessary to call triples explicitly, as the higher-level APIs do it for you.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8016068558788977
+      ],
+      "excerpt": "            [arachne.aristotle.graph :as g])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8360981401101368
+      ],
+      "excerpt": "The call to g/triples returns a collection containing a single Jena Triple with a subject of &lt;http://arachne-framework.org/example#luke&gt;, a predicate of &lt;http://xmlns.com/foaf/0.1/firstName&gt; an the string literal \"Luke\" as the object. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8351322626098383,
+        0.9899906929240667
+      ],
+      "excerpt": "Note the use of symbols; in this case, the nodes for both Luke and Nola are represented as blank nodes (without explicit IRIs.) \nMaps may be used to represent multiple statements about a single subject, with each key indicating an RDF property. The subject of the map is indicated using the special :rdf/about key, which is not interpreted as a property, but rather as identifying the subject of the map. If no :rdf/about key is present,  a blank node will be used as the subject. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9046282878119296
+      ],
+      "excerpt": "This is equivalent to two triples: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9062453240537085
+      ],
+      "excerpt": "If the value for a key is a single literal, it is interpreted as a single triple. If the value is a collection, it is intererpreted as multiple values for the same property. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "Expands to:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9729373415819526
+      ],
+      "excerpt": "In addition to literals, the values of keys may be additional maps (or collections of maps). The subject of the nested map will be both the object of the property under which it is specified, and the subject if statements in its own map. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9742552224584903
+      ],
+      "excerpt": "Expressed in expanded triples, this is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298837446052094,
+        0.9824018076330054,
+        0.8925265495707148,
+        0.8625823391809193
+      ],
+      "excerpt": "Aristotle's primary API is exposed in its top-level namespace, arachne.aristotle, which defines functions to create and interact with graphs. \nA graph is a collection of RDF data, together with (optionally) logic and/or inferencing engines. Graphs may be stored in memory or be a facade to an external RDF database (although all the graph constructors shipped with Aristotle are for in-memory graphs.) \nGraphs are instances of org.apache.jena.graph.Graph, which are \nstateful mutable objects (mutability is too deeply ingrained in Jena \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9696979809108534
+      ],
+      "excerpt": "To create a new graph, invoke the arachne.aristotle/graph multimethod. The first argument to graph is a keyword specifying the type of graph to construct, additional arguments vary depending on the type of graph. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9820200399981721,
+        0.9643027493193905,
+        0.9975923545578514
+      ],
+      "excerpt": "|:jena-mini| In-memory triple store that performs OWL 1 inferencing using Jena's \"Mini\" inferencer (a subset of OWL Full with restrictions on some of the less useful forward entailments.) \n|:jena-rules| In-memory triple store supporting custom rules, using Jena's hybrid backward/forward rules engine. Takes a collection of org.apache.jena.reasoner.rulesys.Rule objects as an additional argument (the prebuilt collection of rules for Jena Mini is provided at arachne.aristotle.inference/mini-rules) | \nClients may wish to provide additional implementations of the graph multimethod to support additional underlying graphy or inference types; the only requirement is that the method return an instance of org.apache.jena.rdf.graph.Graph. For example, for your project, you may wish to create a Graph backed by on-disk or database storag, or which uses the more powerful Pellet reasoner, which has Jena integration but is not shipped with Aristotle due to license restrictions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9810736544977703
+      ],
+      "excerpt": "To add data programatically, use the arachne.aristotle/add function, which takes a graph and some data to add. The data is processed into RDF triples using  arachne.aristotle.graph/triples, using the data format documented above. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9412655529626559,
+        0.9521272528477732,
+        0.965676103910884,
+        0.9957480341406774,
+        0.9928255695420143,
+        0.845602245445179
+      ],
+      "excerpt": "Jena will detect what format the file is in, which may be one of RDF/XML, Turtle, N3, or N-Triples. All of the statements it contains will be added to the graph. Example: \nAristotle provides a data-oriented interface to Jena's SPARQL query engine. Queries themselves are expressed as Clojure data, and can be programatically generated and combined (similar to queries in Datomic.) \nTo invoke a query, use the arachne.aristotle.query/query function, which takes a query data structure, a graph, and any query inputs. It returns the results of the query. \nSPARQL itself is string oriented, with a heavily lexical grammar that does not translate cleanly to data structures. However, SPARQL has an internal algebra that is very clean and composable. Aristotle's query data uses this internal SPARQL alegebra (which is exposed by Jena's ARQ data graph) ignoring SPARQL syntax. All queries expressible in SPARQL syntax are also expressible in Aristotle's query data, modulo some features that are not implemented yet (e.g, query fedration across remote data sources.) \nUnfortunately, the SPARQL algebra has no well documented syntax. A rough overview is available, and this readme will document some of the more common forms. For more details, see the query specs with their associated docstrings. \nAristotle queries are expressed as compositions of algebraic operations, using the generalized form [operation expression* sub-operation*] These operation vectors may be nested arbitrarily. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8883492285157154,
+        0.9357024073293078
+      ],
+      "excerpt": "This query is a single pattern match (using a \"basic graph pattern\" or \"bgp\"), binding the :foaf/name property of each entity that is the subject of :foaf/knows for an entity identified by :example/luke.  \nAn example of the results that might be returned by this query is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8335547002610538
+      ],
+      "excerpt": "This is the same query, but using a binding vector \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9834018652115043
+      ],
+      "excerpt": "This example expands on the previous query, using a :filter operation with an expression to only return acquaintances above the age of 18:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9355715154247856
+      ],
+      "excerpt": "It is also possible to bind multiple possibilities for the value of ?individual:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9584722043713663
+      ],
+      "excerpt": "One common use case is to take a given Graph and \"validate\" it, ensuring its internal consistency (including whether entities in it conform to any OWL or RDFS schema that is present.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9653398228142986,
+        0.8562774745614852
+      ],
+      "excerpt": "The built-in reasoners use the standard open-world assumption of RDF and OWL. This means that many scenarios that would intuitively be \"invalid\" to a human (such as a missing min-cardinality attribute) will not be identified, because the reasoner alwas operates under the assumption that it doesn't yet know all the facts. \nHowever, for certain use cases, it can be desirable to assert that yes, the graph actually does contain all pertinent facts, and that we want to make some assertions based on what the graph actually knows at a given moment, never mind what facts may be added in the future. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9727376518436816,
+        0.8034850480988975,
+        0.9249356080584918
+      ],
+      "excerpt": "Each of these validator functions takes a graph as its argument, and returns a sequence of validation error maps. An empty sequence implies that the graph is valid. \nThe \"min-cardinality\" situation mentioned above has a built in validator, arachne.aristotle.validators/min-cardinality. It works by running a SPARQL query on the provided graph that detects if any min-cardinality attributes are missing from entities known to be of an OWL class where they are supposed to be present. \nTo use it, just provide it in the list of custom validators passed to validate:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.970328158179342
+      ],
+      "excerpt": "This will return the set not only of built in OWL validation errors, but also any min-cardinality violations that are discovered. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "RDF, SPARQL and OWL for Clojure",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arachne-framework/aristotle/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 13,
+      "date": "Mon, 20 Dec 2021 16:37:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/arachne-framework/aristotle/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "arachne-framework/aristotle",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8053804429658877,
+        0.8853261457839796
+      ],
+      "excerpt": "(reg/prefix 'foaf \"http://xmlns.com/foaf/0.1/\") \nThen, keywords with a :foaf namespace will be interpreted as IRI nodes. For example, with the above declaration :foaf/name will be interpreted as &lt;http://xmlns.com/foaf/0.1/name&gt;. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8238404648107593
+      ],
+      "excerpt": "|Namespace |IRI Prefix| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800580235048558
+      ],
+      "excerpt": "[#:rdf/prefix [:ex \"http://example.com/\"] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  :foaf/name \"Luke\"}] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "                          :foaf/name \"Nola\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "                          :foaf/name \"Jim\"}}])  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "                       [?person :foaf/name ?name]]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301942871575154
+      ],
+      "excerpt": "(q/run my-graph '[?name] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "              [?person :foaf/name ?name]]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301942871575154
+      ],
+      "excerpt": "(q/run my-graph '[?name] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "                [?person :foaf/name ?name] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301942871575154
+      ],
+      "excerpt": "(q/run my-graph '[?name] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "              [?person :foaf/name ?name]] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301942871575154
+      ],
+      "excerpt": "(q/run my-graph '[?name] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "              [?person :foaf/name ?name]] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091908364719688
+      ],
+      "excerpt": "                               [?person :foaf/name ?name]])) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8248328724624491
+      ],
+      "excerpt": "Data Model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  :foaf/name \"Luke\"}] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8778487586960795
+      ],
+      "excerpt": "(ns arachne.aristotle.example \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228
+      ],
+      "excerpt": "For example,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228
+      ],
+      "excerpt": "For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "                          :foaf/name \"Nola\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "                          :foaf/name \"Jim\"}}])  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.806151665404674
+      ],
+      "excerpt": "To add data from a file, use the arachne.aristotle/read function, which takes a graph and a file. The file may be specified by a: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8778487586960795,
+        0.8778487586960795
+      ],
+      "excerpt": "                  :example/carin \n                  :example/dan}}) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8114782954460864
+      ],
+      "excerpt": "The results will be exactly the same as using the inline version. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/arachne-framework/aristotle/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Clojure"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Aristotle",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aristotle",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "arachne-framework",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/arachne-framework/aristotle/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To run a query, use the `arachne.aristotle.query/run` function. This function takes a graph, an (optional) binding vector, a query, and (optionally) a map of variable bindings which serve as query inputs.\n\nIf a binding vector is given, results will be returned as a set of tuples, one for each unique binding of the variables in the binding vector.\n\nIf no binding vector is supplied, results will be returned as a sequence of query solutions, with each solution represented as a map of the variables it binds. In this case, solutions may not be unique (unless the query specifically inclues a `:distinct` operation.)\n\nSome examples follow:\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 86,
+      "date": "Mon, 20 Dec 2021 16:37:41 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

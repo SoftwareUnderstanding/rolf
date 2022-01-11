@@ -1,0 +1,347 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2102.00632",
+      "https://arxiv.org/abs/1610.02357",
+      "https://arxiv.org/abs/1704.04861",
+      "https://arxiv.org/abs/1612.08242",
+      "https://arxiv.org/abs/2102.00632},\n  note={\\url{https://arxiv.org/abs/2102.00632}, submitted to Special Issue on Machine Learning in Acoustics, Journal of the Acoustical Society of America (JASA",
+      "https://arxiv.org/abs/2102.00632}, submitted to Special Issue on Machine Learning in Acoustics, Journal of the Acoustical Society of America (JASA"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@article{spnet_hawley_morrison,\n  author={Scott H. Hawley and Andrew C. Morrison},\n  title={ConvNets for Counting: Object Detection of Time Dependent Behavior in Steelpan Drums},\n  month={Jan},\n  year={2021},\n  url={https://arxiv.org/abs/2102.00632},\n  note={\\url{https://arxiv.org/abs/2102.00632}, submitted to Special Issue on Machine Learning in Acoustics, Journal of the Acoustical Society of America (JASA)},\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{spnet_hawley_morrison,\n  author={Scott H. Hawley and Andrew C. Morrison},\n  title={ConvNets for Counting: Object Detection of Time Dependent Behavior in Steelpan Drums},\n  month={Jan},\n  year={2021},\n  url={https://arxiv.org/abs/2102.00632},\n  note={\\url{https://arxiv.org/abs/2102.00632}, submitted to Special Issue on Machine Learning in Acoustics, Journal of the Acoustical Society of America (JASA)},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9677640385174676
+      ],
+      "excerpt": "S.H. Hawley, Oct 2017-Jan 2021. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8893977543919693,
+        0.8944178096468923,
+        0.9287117677573047
+      ],
+      "excerpt": "Embed method 1: (video tag) \n<video controls> \n  <source src=\"https://hedges.belmont.edu/~shawley/steelpan/spnet_steelpan_movie_trimmed.mov\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955813638116643
+      ],
+      "excerpt": "<iframe src=\"https://hedges.belmont.edu/~shawley/steelpan/movie_embed.html\" title=\"SPNet Movie of Drum Strike\" height=\"512\" width=\"384\"></iframe> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9743870566732614
+      ],
+      "excerpt": "Slides from talk at Dec. 2019 Acoustical Society meeting: https://hedges.belmont.edu/~shawley/SPNET_ASA2019.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/drscotthawley/SPNet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-10-13T22:42:56Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-13T02:23:21Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9609212599681259,
+        0.9904268433170876
+      ],
+      "excerpt": "Code accompanying the paper \"ConvNets for Counting: Object Detection of Transient Phenomena in Steelpan Drums\" by S.H. Hawley & A.C. Morrison (2021, submitted to JASA Special Issue on ML in Acoustics).  \nWarning: This is \"research\" code, modified many times over the span of 3+ years to support only one user (me). It is shared publicly here for the purposes of transparency and verification,  but it should not be regarded as a \"package\" or library maintained for general public use.  It still uses an old version of Keras (because updating to Keras 2 introduced errors that proved difficult to track down).  It is designed to run on my two desktop machines which each have >=64 GB of RAM, with one having a NVIDIA Titan X GPU running CUDA 10.2 and the other an RTX 2080Ti and CUDA 11. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9786700513214376,
+        0.9987445690884362,
+        0.9412718593039637
+      ],
+      "excerpt": "Goal: Assist with the Steelpan Vibrations project, using machine learning trained on human-labeled data \n\"Plain English\" version of research Abstract: \"Caribbean steelpan drums are hand-made by artisans who hammer out the bottoms of oil cans, creating a rounded surface, and then etching and further hammering elliptical 'notes' in different regions of the curved drum surface. There have been studies in the past of steady-state oscillations in such drums, but the time-dependent evolution of a single drum strike (i.e., how the waves propagate through the surface and excite sympathetic notes) has not received investigation. Using a laser interference technique called electronic speckle pattern interferometry (ESPI), two researchers recorded some high-speed movies of the evolution of drum strikes. Then, using the citizen-science crowdsourcing website Zooniverse.org, human volunteers were tasked with annotating the images by drawing ellipses around the antinode 'blob shapes' one sees, and to count many interference rings are present in each antinode. The problem with this approach was that it was taking too long: there were tens of thousands of video frames to analyze, and volunteers had only covered a fraction of them within the first year. Furthermore, because each person did their job differently, multiple annotations (of the same image) by different people were needed to get some consistency. I suggested using a machine learning model to learn from what the humans did and then process the remaining frames, and then over the next 3 years I built a system to do that (actually it only took about 3 months, but then I tweaked the code a lot trying to get higher scores, all while working on other higher-priority projects). Since the 'real' dataset was small and highly variable, I created some 'fake' datasets to test how my algorithm was doing. It does very well on the fake data, but it\u2019s hard to score how well it does on the real data because the \u201canswers\u201d provided by humans are inconsistent. Nevertheless, we were able to get some physics results out of it. One unexpected thing we found is that sympathetic vibrations appear to ramp up in the video well before you can hear them in the audio recordings (of the same strikes). We\u2019re not sure why yet, and we hope to follow up with more analysis in a later paper.\" \nAlgorithm: This falls under \"object detection\". Uses a convolutional neural network outputting bounding ellipses and ring counts. Specificially, the CNNs we tried were Xception, MobileNet or <a href=\"\">Inception-ResnetV2</a> but Xception worked the best (can switch them to trade off speed vs. accuracy), and prediction scheme is a modification of YOLO9000 to predict rotated ellipses, and to predict number-of-rings count via regression. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9263087432028247,
+        0.8508610916964205
+      ],
+      "excerpt": "Uses a YOLO-style approach, but fits ellipses instead of boxes, and performs regression instead of classification -- counts the number of rings. \nBuilt in Keras. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9376771200193518
+      ],
+      "excerpt": "In addition, the fake data standardized for use in the paper as Datasets A and C  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9215602969350387
+      ],
+      "excerpt": "is a style transfer of Dataset A using CycleGAN and some real images (to set the style). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8205088081020412,
+        0.9906855846054338
+      ],
+      "excerpt": "run with --help for list of options. \n(This is a reminder to myself, as I'd resume work on this after long gaps of time.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734
+      ],
+      "excerpt": "Embed method 3: (iframe) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301882600669559
+      ],
+      "excerpt": "Yes and no. Files exist, but I'm still working to resolve an intermittant error whereby weights saved at the end of training will occasionally produce garbage upon re-loading into a new session. Track this at https://github.com/drscotthawley/SPNet/issues/2. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Object detection for ESPI images of oscillating steelpan drums",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/drscotthawley/SPNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 11:25:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/drscotthawley/SPNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drscotthawley/SPNet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Create a conda environment, but use pip for package installs\n```\ngit clone git@github.com:drscotthawley/SPNet.git\ncd SPNet\nconda create -y --name spnet python=3.7\nconda activate spnet\npip install -r requirements.txt\n```\n(To remove the environment: `conda env remove --name spnet`)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8226771389320364
+      ],
+      "excerpt": "The command \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9047750316647833,
+        0.9854562310148766
+      ],
+      "excerpt": "The following assumes SPNet/ is in the home directory, and you're on a Unix-like system. \nHawley note to self: run source activate py36 on lecun to get the correct environment \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9780465921882049
+      ],
+      "excerpt": "Now switch to the SPNet/ directory: cd ~/SPNet \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309282689660411
+      ],
+      "excerpt": "u. Now you should be ready to train: ~/SPNet/train_spnet.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8484941759915009
+      ],
+      "excerpt": "  <source src=\"https://hedges.belmont.edu/~shawley/steelpan/spnet_steelpan_movie_trimmed.mov\" \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8031904798437179
+      ],
+      "excerpt": "generates 50,000 fake images, placing them in directories Train, Val and Test. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8861231654700593,
+        0.8192667282747103,
+        0.9086408113133894
+      ],
+      "excerpt": "Obtain single .csv file of (averaged) Zooniverse output (e.g. from achmorrison), and rename it zooniverse_labeled_dataset.csv (TODO: offer command line param for filename) \nFrom the directory where zooniverse_labeled_dataset.csv resides, place all relevant images in a sub-directory zooniverse_steelpan/ \nFrom within same directory as zooniverse_labeled_dataset.csv, run the parse_zooniverse_csv.py utility, e.g. run cd ~/datasets; ~/SPNet/parse_zooniverse_csv.py.   This will place both images and new .csv files in a new directory called  parsed_zooniverze_steelpan/.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9135208277202709
+      ],
+      "excerpt": "\"Set Up\" the Data: Run ./setup_data.py.  This will segment the dataset into Train, Val & Test subsets, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8616975171242034,
+        0.8988201506137888
+      ],
+      "excerpt": "u. Now you should be ready to train: ~/SPNet/train_spnet.py \n./predict_network.py will output a list of .png files in logs/Predicting.  To turn them into an mp4 movie named out.mp4, cd in to the logs/Predicting directory and then run \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8408646813043481
+      ],
+      "excerpt": "ffmpeg -r 1/5 -i steelpan_pred_%05d.png -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/drscotthawley/SPNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Scott Hawley\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SPNet - Object detection for [ESPI](https://en.wikipedia.org/wiki/Electronic_speckle_pattern_interferometry)  images of oscillating steelpan drums",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SPNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drscotthawley",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/drscotthawley/SPNet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 11:25:01 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

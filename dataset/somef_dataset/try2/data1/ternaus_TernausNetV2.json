@@ -1,0 +1,239 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.05746\n.. _`U-Net`: https://arxiv.org/abs/1505.04597\n.. _`Urban 3d`: https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10645/0000/Urban-3D-challenge--building-footprint-detection-using-orthorectified-imagery/10.1117/12.2304682.short?SSO=1\n.. _`Data Science Bowl 2018`: https://www.kaggle.com/c/data-science-bowl-2018/\n.. _`WideResnet 38 that has In-Place Activated BatchNorm`: https://arxiv.org/abs/1712.02616\n.. _`SpaceNet dataset`: https://spacenetchallenge.github.io/\n.. _`weights`: https://drive.google.com/open?id=1k95VGNZG74Vvu-X-MSpbaHjMDvNEepIi\n\n\n.. |network| image:: https://habrastorage.org/webt/jx/ni/ki/jxnikimnmkmkrrqlvcl6memouso.png\n.. |teaser| image:: https://habrastorage.org/webt/ko/b2/tw/kob2twhjzjfnauix7ljted07ga8.png",
+      "https://arxiv.org/abs/1505.04597\n.. _`Urban 3d`: https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10645/0000/Urban-3D-challenge--building-footprint-detection-using-orthorectified-imagery/10.1117/12.2304682.short?SSO=1\n.. _`Data Science Bowl 2018`: https://www.kaggle.com/c/data-science-bowl-2018/\n.. _`WideResnet 38 that has In-Place Activated BatchNorm`: https://arxiv.org/abs/1712.02616\n.. _`SpaceNet dataset`: https://spacenetchallenge.github.io/\n.. _`weights`: https://drive.google.com/open?id=1k95VGNZG74Vvu-X-MSpbaHjMDvNEepIi\n\n\n.. |network| image:: https://habrastorage.org/webt/jx/ni/ki/jxnikimnmkmkrrqlvcl6memouso.png\n.. |teaser| image:: https://habrastorage.org/webt/ko/b2/tw/kob2twhjzjfnauix7ljted07ga8.png",
+      "https://arxiv.org/abs/1712.02616\n.. _`SpaceNet dataset`: https://spacenetchallenge.github.io/\n.. _`weights`: https://drive.google.com/open?id=1k95VGNZG74Vvu-X-MSpbaHjMDvNEepIi\n\n\n.. |network| image:: https://habrastorage.org/webt/jx/ni/ki/jxnikimnmkmkrrqlvcl6memouso.png\n.. |teaser| image:: https://habrastorage.org/webt/ko/b2/tw/kob2twhjzjfnauix7ljted07ga8.png"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this work useful for your publications, please consider citing::\n\n      @InProceedings{Iglovikov_2018_CVPR_Workshops,\n           author = {Iglovikov, Vladimir and Seferbekov, Selim and Buslaev, Alexander and Shvets, Alexey},\n            title = {TernausNetV2: Fully Convolutional Network for Instance Segmentation},\n        booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},\n            month = {June},\n             year = {2018}\n            }\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "Shanghai      0.680               0.687 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ternaus/TernausNetV2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-02T19:24:03Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-18T18:39:56Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9970536089061476,
+        0.851556845392145
+      ],
+      "excerpt": "Automatic building detection in urban areas is an important task that creates new opportunities for large scale urban planning and population monitoring. In a CVPR 2018 Deepglobe Building Extraction Challenge participants were asked to create algorithms that would be able to perform binary instance segmentation of the building footprints from satellite imagery. Our team finished second and in this work we share the description of our approach, network weights and code that is sufficient for inference. \nThe training data for the building detection subchallenge originate from the SpaceNet dataset_. The dataset uses satellite imagery with 30 cm resolution collected \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8760350147180914,
+        0.9006975096789289
+      ],
+      "excerpt": "of the earth surface. Moreover, each region consists of high-resolution RGB, panchromatic, and 8-channel low-resolution \nmulti-spectral images. The satellite data comes from 4 different cities: Vegas, Paris, Shanghai, and Khartoum with different coverage, of (3831, 1148, 4582, 1012) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9825343488869465,
+        0.910899015672627,
+        0.8746206242403318,
+        0.914204745320413,
+        0.9908088776883544
+      ],
+      "excerpt": " 2. The input to the network was extended to work with 11 input channels. Three for RGB and eight for multispectral data. \n  In order to make our network to perform instance segmentation, we utilized the idea that was proposed \n  and successfully executed by `Alexandr Buslaev`_, `Selim Seferbekov`_ and Victor Durnov in their \n  winning solutions of the `Urban 3d`_ and `Data Science Bowl 2018`_ challenges. \nOutput of the network was modified to predict both the binary mask in which we predict building / non building classes on the pixel level and binary mask in which we predict areas of an image where different objects touch or very close to each other. These predicted masks are combined and used as an input to the watershed transform. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9044961768773268
+      ],
+      "excerpt": "Result on the public and private leaderboard with respect to the metric that was used by the organizers of the CVPR 2018 DeepGlobe Building Extraction Challenge_. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TernausNetV2: Fully Convolutional Network for Instance Segmentation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ternaus/TernausNetV2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 111,
+      "date": "Mon, 27 Dec 2021 11:32:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ternaus/TernausNetV2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ternaus/TernausNetV2",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ternaus/TernausNetV2/master/Demo.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ternaus/TernausNetV2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Cuda",
+      "C++"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "url": "https://api.github.com/licenses/bsd-3-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\nBSD 3-Clause License\\n\\nCopyright (c) 2017, mapillary\\nCopyright (c) 2018, Vladimir Iglovikov, Selim Seferbekov, Alexander Buslaev, Alexey Shvets\\n\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\n* Neither the name of the copyright holder nor the names of its\\n  contributors may be used to endorse or promote products derived from\\n  this software without specific prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.'",
+    "technique": "File Exploration"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TernausNetV2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ternaus",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ternaus/TernausNetV2/blob/master/README.rst",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python 3.6\n* PyTorch 0.4\n* numpy 1.14.0\n* opencv-python 3.3.0.10\n\n\nDemo Example\n~~~~~~~~~~~~~~~~~~~~~~\nNetwork `weights`_\n\n\nYou can easily start using our network and weights, following the demonstration example\n  `demo.ipynb`_\n\n..  _`demo.ipynb`: https://github.com/ternaus/TernausNetV2/blob/master/Demo.ipynb\n.. _`Selim Seferbekov`: https://www.linkedin.com/in/selim-seferbekov-474a4497/\n.. _`Alexey Shvets`: https://www.linkedin.com/in/shvetsiya/\n.. _`Vladimir Iglovikov`: https://www.linkedin.com/in/iglovikov/\n.. _`Alexandr Buslaev`: https://www.linkedin.com/in/al-buslaev/\n.. _`CVPR 2018 DeepGlobe Building Extraction Challenge`: https://competitions.codalab.org/competitions/18544\n.. _`TernausNet`: https://arxiv.org/abs/1801.05746\n.. _`U-Net`: https://arxiv.org/abs/1505.04597\n.. _`Urban 3d`: https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10645/0000/Urban-3D-challenge--building-footprint-detection-using-orthorectified-imagery/10.1117/12.2304682.short?SSO=1\n.. _`Data Science Bowl 2018`: https://www.kaggle.com/c/data-science-bowl-2018/\n.. _`WideResnet 38 that has In-Place Activated BatchNorm`: https://arxiv.org/abs/1712.02616\n.. _`SpaceNet dataset`: https://spacenetchallenge.github.io/\n.. _`weights`: https://drive.google.com/open?id=1k95VGNZG74Vvu-X-MSpbaHjMDvNEepIi\n\n\n.. |network| image:: https://habrastorage.org/webt/jx/ni/ki/jxnikimnmkmkrrqlvcl6memouso.png\n.. |teaser| image:: https://habrastorage.org/webt/ko/b2/tw/kob2twhjzjfnauix7ljted07ga8.png\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 528,
+      "date": "Mon, 27 Dec 2021 11:32:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "satellite-imagery",
+      "computer-vision",
+      "image-segmentation",
+      "deep-learning",
+      "python",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "|teaser|\n\nWe present network definition and weights for our second place solution in `CVPR 2018 DeepGlobe Building Extraction Challenge`_.\n\n.. contents::\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

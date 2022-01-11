@@ -1,0 +1,473 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1805.09501",
+      "https://arxiv.org/abs/1805.09501",
+      "https://arxiv.org/abs/1805.09501",
+      "https://arxiv.org/abs/1611.01578",
+      "https://arxiv.org/abs/1708.04552"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] Cubuk et al., 2018. AutoAugment: Learning Augmentation Policies from Data\n([arxiv](https://arxiv.org/abs/1805.09501))\n\n[2] Zoph et al., 2016. Neural Architecture Search with Reinforcement Learning\n([arxiv](https://arxiv.org/abs/1611.01578))\n\n[3] Shahriari et al., 2016. A review of Bayesian Optimization\n([ieee](https://ieeexplore.ieee.org/document/7352306))\n\n[4] Dewancker et al. Bayesian Optimization Primer ([white-paper](https://app.sigopt.com/static/pdf/SigOpt_Bayesian_Optimization_Primer.pdf))\n\n[5] DeVries, Taylor 2017. Improved Regularization of CNN's with Cutout\n([arxiv](https://arxiv.org/abs/1708.04552))\n\nBlogs: \n- A conceptual explanation of Bayesian Optimization ([towardsdatascience](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f))\n- Comparison experiment: Bayesian Opt. vs Grid Search vs Random Search ([mlconf](https://mlconf.com/lets-talk-bayesian-optimization/))\n    \nLibraries:\n- [scikit-optimize](scikit-optimize.github.io/)\n- [mgaug](github.com/aleju/imgaug)\n- [AutoAugment-unofficial](github.com/barisozmen/autoaugment-unofficial)\n- [Automold]() (Self-driving car image-augmentation library)\n\n--------\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    \"opt_initial_points\": 10, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YaCpotato/B4ResearchDeepaugment",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Baris Ozmen, hbaristr@gmail.com\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-19T16:41:27Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-04-30T14:24:45Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8947095791061925,
+        0.8216082909034061
+      ],
+      "excerpt": "DeepAugment discovers augmentation strategies tailored for your images. It uses Bayesian Optimization for optimizing data augmentation hyperparameters. The tool: \n1. reduces error rate of CNN models (shown 60% decrease in error for CIFAR-10 on WRN-28-10 compared to no augmentation) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8374299336083283
+      ],
+      "excerpt": "Resources: blog post, slides \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8914134252180954
+      ],
+      "excerpt": "DeepAugment is designed as a scalable and modular partner to AutoAugment (Cubuk et al., 2018). AutoAugment was one of the most exciting publications in 2018. It was the first method using Reinforcement Learning for this problem. AutoAugmentation, however, has no complete open-sourced implementation (controller module not available) preventing users to run it for their own datasets, and takes 15,000 iterations to learn (according to paper) augmentation policies, which requires massive computational resources. Thus most people could not benefit from it even if its source code would be fully available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9605191087510236,
+        0.8417741668455402
+      ],
+      "excerpt": "1. minimize the computational complexity of optimization while maintaining quality of results \n2. be modular and user-friendly \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196896219978403
+      ],
+      "excerpt": "1. Bayesian Optimization instead of Reinforcement Learning  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "2. Minimized Child Model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707640452013354,
+        0.9829106459690589
+      ],
+      "excerpt": "For achieving the second goal, user interface is designed in a way that it gives user broad configuration possibilities and model selections (e.g. selecting the child model or inputting a self-designed child model). \nDeepAugment makes optimization of data augmentation scalable, and thus enables users to optimize augmentation policies without needing massive computational resources.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9922379041248276,
+        0.9799342193389811
+      ],
+      "excerpt": "To our knowledge, DeepAugment is the first method which utilizes Bayesian Optimization for the problem of data augmentation hyperparameter optimization. \nThree major components of DeepAugment are controller, augmenter, and child model. Overall workflow is that controller samples new augmentation policies, augmenter transforms images by the new policy, and child model is trained from scratch by augmented images. Then, a reward is calculated from child model's training history. This reward is returned back to the controller, and it updates its surrogate model with this reward and associated augmentation policy. Then, controller samples new policies again and same steps repeats. This process cycles until user-determined maximum number of iterations reached. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.996983827996396
+      ],
+      "excerpt": "In hyperparameter optimization, main choices are random search, grid search, bayesian optimization (BO), and reinforcement learning (RL) (in the order of method complexity). Google's AutoAugment uses RL for data augmentation hyperparameter tuning, but it takes 15,000 iterations to learn policies (which means training the child CNN model 15,000 times). Thus, it requires massive computational resources. Bayesian Optimization on the other hand learns good polices in 100-300 iterations, making it +40X faster. Additionally, it is better than grid search and random search in terms of accuracy, cost, and computation time in hyperparameter tuning(ref) (we can think optimization of augmentation policies as a hyperparameter tuning problem where hyperparameters are concerning with augmentations instead of the deep learning architecture). This result is not surprising since despite Grid Search or Random Search BO selects new hyperparameter as informed with previous results for tried hyperparameters. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.953051628883832
+      ],
+      "excerpt": "Aim of Bayesian Optimization (BO) is finding set of parameters which maximize the value of an objective function. It builds a surrogate model for predicting value of objective function for unexplored parameters. Working cycle of BO can be summarized as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8215506158048015
+      ],
+      "excerpt": "4. Update the surrogate model with these parameters and result (value) of objective function \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8046947585781433,
+        0.9286358239252454
+      ],
+      "excerpt": "For more detailed explanation, read this blogpost explaining BO in high-level, or take a glance at this review paper \nA policy describes the augmentation will be applied on a dataset. Each policy consists variables for two augmentation types, their magnitude and the portion of the data to be augmented. An example policy is as following:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8415421183557673
+      ],
+      "excerpt": "There are currently 20 types of augmentation techniques (above, right) that each aug. type variable can take. All techniques are (this list might grow in later versions): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9936430013433252
+      ],
+      "excerpt": "Child model is trained over and over from scratch during the optimization process. Its number of training depends on the number of iterations chosen by the user, which is expected to be around 100-300 for obtaining good results. Child model is therefore the computational bottleneck of the algorithm. With the current design, training time is ~30 seconds for 32x32 images on AWS instance p3.x2large using V100 GPU (112 TensorFLOPS). It has 1,250,858 trainable parameters for 32x32 images. Below is the diagram of child model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9170986553413829
+      ],
+      "excerpt": "Standard Child model is a basic CNN where its diagram and details given above. However, you are not limited with that model. You can use your own keras model by assigning it into config dictionary as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "my_config = {\"model\": my_keras_model_object} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9734153023363395
+      ],
+      "excerpt": "Or use an implemented small model, such as WideResNet-40-2 (while it is bigger than Basic CNN): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "my_config = {\"model\": \"InceptionV3\"} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "my_config = {\"model\": \"MobileNetV2\"} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.972007912685321
+      ],
+      "excerpt": "Reward function is calculated as mean of K highest validation accuracies of the child model which is not smaller than corresponding training accuracy by 0.05. K can be determined by the user by updating opt_last_n_epochs key in config as argument to DeepAugment() class (K is 3 by default). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9459990948601392
+      ],
+      "excerpt": "method: \"bayesian_optimization\" or \"random\" (for random search) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9237794638293052,
+        0.8655907875875026
+      ],
+      "excerpt": "opt_samples: number of samples optimizer will run for each augmentation-policy. Training of the child model is stochastic and validation accuracy results might be slightly different from run to run. The tool trains child model three times by default and takes average, in order to have more robust accuracy results. \nopt_last_n_epochs: number of non-overfitting epochs whose validation accuracy average will be used as reward. For each training, opt_last_n_epochs highest validation accuracies (where its difference to training accuracy is not more than 10%) are averaged and taken as reward. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9646346787914881,
+        0.8029670592322379,
+        0.9211962560641066
+      ],
+      "excerpt": "child_epochs: number of epochs for the child model \nchild_first_train_epochs: if not 0, child model is pre-trained without any augmentation and its resulting weights are load for each training with augmentation. The purpose is training child model 10-20 epochs once and thereby saving 10-20 epochs for each training of optimizer iterations which is +100 times. \nchild_batch_size: batch size for the child model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.8150771532802734
+      ],
+      "excerpt": "    \"model\": \"basiccnn\", #:  \n    \"method\": \"bayesian_optimization\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8930937447760013
+      ],
+      "excerpt": "A three-number system is used, like 1.2.3. Each increment of version is one of the following types: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YaCpotato/B4ResearchDeepaugment/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 11:16:59 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/YaCpotato/B4ResearchDeepaugment/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YaCpotato/B4ResearchDeepaugment",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/YaCpotato/B4ResearchDeepaugment/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/explore-search-space/01-BO-explore-all-transformations.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/01-BO-experiment-2019-02-07_00-21-long-experiment-twice-aug.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/04-BO-experiment-2019-02-08_03-54_1000_iters.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/01-BO-experiment-2019-2019-02-05_03-12-long-experiment.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/01-BO-experiment-2019-2019-02-04_21-34-run-with-reverse-reward.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/01-BO-experiment-2019-2019-02-04_09-44-run-with-reverse-reward.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/04-BO-experiment-2019-02-08_03-54_3000-iterations.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/01-BO-experiment-2019-02-04_01-40-ran-with-basicCNN-three-samples-for-each-iter-overfitting-examples.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/notebooks/result-analyses/03-BO-experiment-2019-02-07_19-22_FULL_RUN.ipynb",
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/deepaugment/test_image_generator.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/YaCpotato/B4ResearchDeepaugment/master/update_docs.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "identifier": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://doi.org/10.5281/zenodo.2949929",
+      "technique": "Regular expression"
+    }
+  ],
+  "installation": [
+    {
+      "confidence": [
+        0.999746712887969
+      ],
+      "excerpt": "$ pip install deepaugment \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8282017183490619
+      ],
+      "excerpt": "Default configurations are as following: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8383284463730042
+      ],
+      "excerpt": "4. Update the surrogate model with these parameters and result (value) of objective function \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456804407309457
+      ],
+      "excerpt": "my_config = {\"model\": \"wrn_40_2\"} #: depth(40) and wideness-factor(2) can be changed. e.g. wrn_20_4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.907556245187934
+      ],
+      "excerpt": "model: child model type. Options: \"basiccnn\", \"inceptionv3\", \"mobilenetv2\", \"wrn_<DEPTH>_<WIDENING-FACTOR>\", or keras.models.Model object \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8398201518569317
+      ],
+      "excerpt": "    \"notebook_path\": f\"{EXPERIMENT_FOLDER_PATH}/notebook.csv\", \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/YaCpotato/B4ResearchDeepaugment/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Makefile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\nThe MIT License (MIT)\\nCopyright (c) 2019, H. Baris Ozmen\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeepAugment",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "B4ResearchDeepaugment",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YaCpotato",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YaCpotato/B4ResearchDeepaugment/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 24 Dec 2021 11:16:59 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```Python\nfrom deepaugment.deepaugment import DeepAugment\n\ndeepaug = DeepAugment(my_images, my_labels)\n\nbest_policies = deepaug.optimize(300)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```Python\ndeepaug = DeepAugment(\"cifar10\")\n\nbest_policies = deepaug.optimize(300)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```Python\nfrom keras.datasets import fashion_mnist\n\n#: my configuration\nmy_config = {\n    \"model\": \"basiccnn\",\n    \"method\": \"bayesian_optimization\",\n    \"train_set_size\": 2000,\n    \"opt_samples\": 3,\n    \"opt_last_n_epochs\": 3,\n    \"opt_initial_points\": 10,\n    \"child_epochs\": 50,\n    \"child_first_train_epochs\": 0,\n    \"child_batch_size\": 64\n}\n\n(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()\n#: X_train.shape -> (N, M, M, 3)\n#: y_train.shape -> (N)\ndeepaug = DeepAugment(iamges=x_train, labels=y_train, config=my_config)\n\nbest_policies = deepaug.optimize(300)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

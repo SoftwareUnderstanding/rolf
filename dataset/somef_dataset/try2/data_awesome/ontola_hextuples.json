@@ -1,0 +1,309 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8357664768244879,
+        0.9249821375431312
+      ],
+      "excerpt": "const object = (value: string, datatype: string, language: string): SomeTerm => { \n  if (language) { \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9367648486290221
+      ],
+      "excerpt": "  } else if (datatype === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#:namedNode') { \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9367648486290221
+      ],
+      "excerpt": "  } else if (datatype === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#:blankNode') { \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "  object(h[2], h[3], h[4]), \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ontola/hextuples",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-13T15:55:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T13:11:17Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9816899876245702,
+        0.9525193980852323,
+        0.993116239277494,
+        0.8489959255784663,
+        0.9181238607231863
+      ],
+      "excerpt": "HexTuples is a simple datamodel for dealing with linked data. \nThis document both describes the model and concepts of HexTuples, as well as the (at this moment only) serialization format: HexTuples-NDJSON. \nA single HexTuple is an atomic piece of data, similar to an RDF Triple (also known as Statements or Quads). \nA HexTuple cotains a small piece of information.  \nHexTuples consist of six fields: subject, predicate, value, datatype, language and graph. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9994514725960584
+      ],
+      "excerpt": "Tim Berners-Lee, the director of W3C, is born in London on the 8th of June, 1955. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968029537584643
+      ],
+      "excerpt": "| Tim     |jobTitle | Director of W3C  | xsd:string | en-US | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9377907335981385,
+        0.9446272363369747,
+        0.993469199847492
+      ],
+      "excerpt": "The best known type of URI is the URL. \nAlthough it is currently best practice to use mostly HTTPS URLs as URIs, HexTuples works with any type of URI. \nThe subject is identifier of the thing the statement is about. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9789058411870811
+      ],
+      "excerpt": "The predicate describes the abstract property of the statement. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8704045164941194
+      ],
+      "excerpt": "The value contains the object of the HexTuple. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.870416897281663,
+        0.9480343724066942
+      ],
+      "excerpt": "It can be any datatype, specified in the datatype of the HexTuple. \nThe datatype contains the object of the HexTuple. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8582032379607101,
+        0.8582032379607101,
+        0.9480343724066942
+      ],
+      "excerpt": "When the Datatype is a NamedNode, use: globalId \nWhen the Datatype is a BlankNode, use: localId \nThe datatype contains the object of the HexTuple. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.985539772658603,
+        0.8513855203229987,
+        0.9375116774754841,
+        0.8788706220576866
+      ],
+      "excerpt": "The HexTuples datamodel closely resembles the RDF Data Model, which is the de-facto standard for linked data. \nRDF statements are often called Triples, because they consist of a subject, predicate and value. \nThe object field is either a single URI (in Named Nodes), or a combination of three fields (in Literal): value, datatype, language. \nThis means that a single Triple can actually consist of five fields: the subject, predicate, value, datatype and the language.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9680804242455816,
+        0.9551122423278259
+      ],
+      "excerpt": "Instead of making a distinction between Literal statements and NamedNode statements (which have two different models), HexTuples uses a single model that describes both. \nHaving a single model for all statements (HexTuples), makes it easier to serialize, query and store data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.873255182808511,
+        0.9427117751868777
+      ],
+      "excerpt": "HexTuples-NDJSON is an NDJSON (Newline Delimited JSON) based HexTuples / RDF serialization format. \nIt is desgined to support streaming parsing and provide great performance in a JS context (i.e. the browser). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8213294486420415,
+        0.8779644440489448,
+        0.8638414052873925
+      ],
+      "excerpt": "The datatype and lang fields are only used when the value represents a Literal value (i.e. not a URI, but a string / date / something else). In RDF, the combination of value, datatype and lang are known as object. \nWhen expressing an Object that is a NamedNode, use this string as the datatype: \"http://www.w3.org/1999/02/22-rdf-syntax-ns#namedNode\" (discussion) \nWhen expressing an Object that is a BlankNode, use this string as the datatype: \"http://www.w3.org/1999/02/22-rdf-syntax-ns#blankNode\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8031793406550641
+      ],
+      "excerpt": "This Typescript code should give you some idea of how to write a parser for HexTuples. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.989669388026231,
+        0.8640306958812828,
+        0.9399123443974801
+      ],
+      "excerpt": "HexTuples is designed by Thom van Kalkeren (CTO of Ontola) because he noticed that parsing / serialization was unnecessarily costly in our full-RDF stack, even when using the relatively performant n-quads format. \nSince HexTuples is serialized in NDJSON, it benefits from the highly optimised JSON parsers in browsers. \nIt uses NDJSON instead of regular JSON because it makes it easier to parse concatenated responses (multiple root objects in one document). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An RDF serialization format designed for performance in the browser",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ontola/hextuples/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 20 Dec 2021 11:30:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ontola/hextuples/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ontola/hextuples",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9717106327039013
+      ],
+      "excerpt": "Version: 0.2.0 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8370595022227315
+      ],
+      "excerpt": "    return namedNode(value); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8370595022227315
+      ],
+      "excerpt": "    return blankNode(value); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8370595022227315
+      ],
+      "excerpt": "return literal(value, namedNode(datatype)); \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ontola/hextuples/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "HexTuples",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hextuples",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ontola",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ontola/hextuples/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 9,
+      "date": "Mon, 20 Dec 2021 11:30:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "English:\n\n_Tim Berners-Lee was born in London, on the 8th of june in 1955._\n\nTurtle / N-Triples:\n\n```n-triples\n<https://www.w3.org/People/Berners-Lee/> <http://schema.org/birthDate> \"1955-06-08\"^^<http://www.w3.org/2001/XMLSchema#:date>.\n<https://www.w3.org/People/Berners-Lee/> <http://schema.org/birthPlace> <http://dbpedia.org/resource/London>.\n```\n\nExpresed in HexTuples:\n\n```ndjson\n[\"https://www.w3.org/People/Berners-Lee/\", \"http://schema.org/birthDate\", \"1955-06-08\", \"http://www.w3.org/2001/XMLSchema#:date\", \"\", \"\"]\n[\"https://www.w3.org/People/Berners-Lee/\", \"http://schema.org/birthPlace\", \"http://dbpedia.org/resource/London\", \"http://www.w3.org/1999/02/22-rdf-syntax-ns#:namedNode\", \"\", \"\"]\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

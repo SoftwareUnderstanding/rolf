@@ -1,0 +1,262 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A lot of this project is inspired by the following research papers and their associated code:\n\n- [MC-GAN](https://github.com/azadis/MC-GAN) - Multi-Content GAN for Few-Shot Font Style Transfer; Samaneh Azadi, Matthew Fisher, Vladimir Kim, Zhaowen Wang, Eli Shechtman, Trevor Darrell, in arXiv, 2017.\n- [GlyphGAN](https://arxiv.org/abs/1905.12502v1) - GlyphGAN: Style-Consistent Font Generation Based on Generative Adversarial Networks; Hideaki Hayashi, Kohtaro Abe, Seiichi Uchida, in arXiv, 2019\n- [DC-GAN](https://arxiv.org/abs/1511.06434) - Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks; Alec Radford, Luke Metz, Soumith Chintala, in arXiv, 2016\n- [WGAN-GP](https://arxiv.org/abs/1704.00028) - Improved Training of Wasserstein GANs; Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, Aaron Courville, in arXiv, 2017\n\n- Some pieces of code, specifically the `Flatten` and `Unflatten` methods were pulled from the [CS231N course](https://cs231n.github.io/) samples.\n\nThis project was made possible by this research and the contributions made by the above authors. Thank you.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1905.12502v1",
+      "https://arxiv.org/abs/1511.06434",
+      "https://arxiv.org/abs/1704.00028"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "  (10): ReLU() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "   (4): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "   (10): Sigmoid() \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/joshpc/StyledFontGAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-23T21:02:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-24T14:58:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9916673849790955,
+        0.9917489310206035,
+        0.9847528533145234,
+        0.905604122356676,
+        0.9207933739358858
+      ],
+      "excerpt": "The original intent of this project was to create a generative adversarial network that, given a single image of a letter, will generate the remaining characters in the alphabet (A-Z.) \nThis is a simple project that I've been using to teach myself all about GANs, and getting familiar with Python. I don't claim to be talented when it comes to machine learning, but I want to understand it's capabilities and the challenges that can arise. \nPlease note that this is a side project, and not academic research. Ultimately, the goal is to apply this to non-latin alphabets where producing fonts are extremely time consuming. \nThe most succcessful model has been trained with the following generator and discriminators, and using an L1 Loss for the Generator, and the loss from WGAN-GP (Wasserstein Distance + Gradiant Penality) for the Discriminator. \nThe thought process behind this network architecture is not well informed. The inuition is that we take an image, extract its features with Conv layers, turn it into some intermediate format within the Linear layers, then use that intermediate format to generate a new image using the ConvTranspose layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8722025749111688
+      ],
+      "excerpt": "This follows DC-GAN. No magic, or added things here. As with the linked papers from above, we do not apply batch normalization which helps with training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8944623893207608,
+        0.9958051698754276
+      ],
+      "excerpt": "This was by no means an academic study nor was it an attempt to push the boundaries of current research, but the results were good. \nThis project used the data set from MC-GAN which uses a variety of different fonts and samples. In some cases, the samples are all uppercase letters, while as others are a mix of uppercase and lowercase letters. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9292945137345211,
+        0.9309524164280645,
+        0.9173757469999513
+      ],
+      "excerpt": "The network succeeded in capturing the style, with the dark shadows, but couldn't produce legible letters. \nThe letters aren't very clear, but despite the strange style, it seems to have respected it. \nThe network failed to produce legible letters, and failed to copy the style. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A GAN experiment that, given an image of a letter, produces an alphabet in the same style.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/joshpc/StyledFontGAN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Tue, 21 Dec 2021 13:13:05 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/joshpc/StyledFontGAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "joshpc/StyledFontGAN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/joshpc/StyledFontGAN/master/Playground.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Install `pytorch`: https://pytorch.org/get-started/locally/\n2. For now, you will also need a tool to view notebooks. I use Jupyter.\n3.\n3. Dependencies: TBD\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8150846482951574
+      ],
+      "excerpt": "  (12): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8210308207839818,
+        0.811854372964597
+      ],
+      "excerpt": "  (14): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True) \n  (15): ReLU() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8453821665518155
+      ],
+      "excerpt": "  (17): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/joshpc/StyledFontGAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Joshua Tessier\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "StyledFontGAN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "StyledFontGAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "joshpc",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/joshpc/StyledFontGAN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Tue, 21 Dec 2021 13:13:05 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

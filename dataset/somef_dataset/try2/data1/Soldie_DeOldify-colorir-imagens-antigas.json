@@ -1,0 +1,229 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1805.08318",
+      "https://arxiv.org/abs/1710.10196",
+      "https://arxiv.org/abs/1706.08500"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Soldie/DeOldify-colorir-imagens-antigas",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-02T23:27:50Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-02T23:29:02Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9790851534554414,
+        0.9095192854759148
+      ],
+      "excerpt": "Simply put, the mission of this project is to colorize and restore old images.  I'll get into the details in a bit, but first let's get to the pictures!  BTW \u2013 most of these source images originally came from the r/TheWayWeWere subreddit, so credit to them for finding such great photos. \nMaria Anderson as the Fairy Fleur de farine and Lyubov Rabtsova as her page in the ballet \u201cSleeping Beauty\u201d at the Imperial Theater, St. Petersburg, Russia, 1890. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9977245508412412,
+        0.911478160601604,
+        0.8167087243980514
+      ],
+      "excerpt": "Interior of Miller and Shoemaker Soda Fountain, 1899 \nParis in the 1880s \nEdinburgh from the sky in the 1920s \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9831192346713913,
+        0.9677351472300024,
+        0.9556045562791071
+      ],
+      "excerpt": "This is a deep learning based model.  More specifically, what I've done is combined the following approaches: \n* Self-Attention Generative Adversarial Network (https://arxiv.org/abs/1805.08318).  Except the generator is a pretrained Unet, and I've just modified it to have the spectral normalization and self-attention.  It's a pretty straightforward translation. I'll tell you what though \u2013 it made all the difference when I switched to this after trying desperately to get a Wasserstein GAN version to work.  I liked the theory of Wasserstein GANs but it just didn't pan out in practice.  But I'm in love with Self-Attention GANs. \n* Training structure inspired by (but not the same as) Progressive Growing of GANs (https://arxiv.org/abs/1710.10196).  The difference here is the number of layers remains constant \u2013 I just changed the size of the input progressively and adjusted learning rates to make sure that the transitions between sizes happened successfully.  It seems to have the same basic end result \u2013 training is faster, more stable, and generalizes better. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9936856621137384,
+        0.9904177327077459,
+        0.9941470719758249
+      ],
+      "excerpt": "* Generator Loss* is two parts:  One is a basic Perceptual Loss (or Feature Loss) based on VGG16 \u2013 this just biases the generator model to replicate the input image.  The second is the loss score from the critic.  For the curious \u2013 Perceptual Loss isn't sufficient by itself to produce good results.  It tends to just encourage a bunch of brown/green/blue \u2013 you know, cheating to the test, basically, which neural networks are really good at doing!  Key thing to realize here is that GANs essentially are learning the loss function for you \u2013 which is really one big step closer to toward the ideal that we're shooting for in machine learning.  And of course you generally get much better results when you get the machine to learn something you were previously hand coding.  That's certainly the case here. \nThe beauty of this model is that it should be generally useful for all sorts of image modification, and it should do it quite well.  What you're seeing above are the results of the colorization model, but that's just one component in a pipeline that I'm looking to develop here with the exact same model.  \nWhat I develop next with this model will be based on trying to solve the problem of making these old images look great, so the next item on the agenda for me is the \"defade\" model.  I've committed initial efforts on that and it's in the early stages of training as I write this.  Basically it's just training the same model to reconstruct images that augmented with ridiculous contrast/brightness adjustments, as a simulation of fading photos and photos taken with old/bad equipment. I've already seen some promissing results on that as well: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.953308434165043,
+        0.8240477781952512
+      ],
+      "excerpt": "The \"GAN Schedules\" you'll see in the notebooks are probably the ugliest looking thing I've put in the code, but they're just my version of implementing progressive GAN training, suited to a Unet generator.  That's all that's going on there really. \nAs far as pretrained weights go:  I'll get them up in the next few days \u2013 I'm working on a new set now that's looking better than ever.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9704189052584327,
+        0.9949379797320754,
+        0.9928562664569774,
+        0.9473239541079543,
+        0.9603287581781779
+      ],
+      "excerpt": "You'll have to play around with the size of the image a bit to get the best result output.  The model clearly has some dependence on aspect ratio/size when generating images. It used to be much worse but the situation improved greatly with lighting/contrast augmentation and introducing progressive training.  I'd like to eliminate this issue entirely and will obsess about it but in the meantime \u2013 don't despair if the image looks over-saturated or has weird glitches at the first go. There's a good chance that it'll look right with a slightly different size.  Generally, over-saturated means go bigger. \nTo expand on the above- Getting the best images really boils down to the art of selection.  Yes, results are cherry picked.  I'm very happy with the quality of the outputs and there's a pretty good amount of consistency, but it's not perfect.  This is still an ongoing project!  I'd consider this tool at this point fit for the \"AI artist\" but not something I'd deploy as a general purpose tool for all consumers.  It's just not there yet. \nTo complicate matters \u2013 this model is a memory hog currently, so on my 1080TI I can only do 500-600px max on the sz parameter for the images.  I'm betting there's plenty of low-hanging fruit to get some wins on this but I just haven't done it yet. \nI added zero padding in the Unet generator for whenever the pretrained resnet winds up passing up a tensor that doesn't match expected dimensions (namely so I could throw any arbitrarily-sized image at it).  This was a super-quick hack and it results in stupid right and bottom borders on the outputs for those arbitarily-sized test images. I'm sure there's a better way, but I  haven't gotten around to addressing it yet.   \nThe model loves blue clothing.  Not quite sure what the answer is yet, but I'll be on the lookout for a solution! \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Soldie/DeOldify-colorir-imagens-antigas/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 09:03:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Soldie/DeOldify-colorir-imagens-antigas/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Soldie/DeOldify-colorir-imagens-antigas",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Soldie/DeOldify-colorir-imagens-antigas/master/FinalVisualization.ipynb",
+      "https://raw.githubusercontent.com/Soldie/DeOldify-colorir-imagens-antigas/master/DeFadeVisualization.ipynb",
+      "https://raw.githubusercontent.com/Soldie/DeOldify-colorir-imagens-antigas/master/ColorizeTraining.ipynb",
+      "https://raw.githubusercontent.com/Soldie/DeOldify-colorir-imagens-antigas/master/DeFadeTraining.ipynb",
+      "https://raw.githubusercontent.com/Soldie/DeOldify-colorir-imagens-antigas/master/ColorizeVisualization.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Soldie/DeOldify-colorir-imagens-antigas/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Jason Antic\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeOldify",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeOldify-colorir-imagens-antigas",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Soldie",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Soldie/DeOldify-colorir-imagens-antigas/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 09:03:29 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "So that's the gist of this project \u2013 I'm looking to make old photos look reeeeaaally good with GANs, and more importantly, make the project *useful*.  And yes, I'm definitely interested in doing video, but first I need to sort out how to get this model under control with memory (it's a beast).  It'd be nice if the models didn't take two to three days to train on a 1080TI as well (typical of GANs, unfortunately). In the meantime though this is going to be my baby and I'll be actively updating and improving the code over the foreseable future.  I'll try to make this as user-friendly as possible, but I'm sure there's going to be hiccups along the way.  \n\nOh and I swear I'll document the code properly...eventually.  Admittedly I'm *one of those* people who believes in \"self documenting code\" (LOL).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is built around the wonderful Fast.AI library.  Unfortunately, it's the -old- version and I have yet to upgrade it to the new version.  (That's definitely on the agenda.)  So prereqs, in summary:\n* ***Old* Fast.AI library**  After being buried in this project for two months I'm a bit lost as to what happened to the old Fast.AI library because the one marked \"old\" doesn't really look like the one I have.  This all changed in the past two months or so.  So if all else fails you should be able to use the one I forked here: https://github.com/jantic/fastai .  Again, getting upgraded to the latest Fast.AI is on the agenda fo sho, and I apologize in advance.\n* **Whatever dependencies Fast.AI has** \u2013 there's already convenient requirements.txt and environment.yml there.\n* **Pytorch 0.4.1** (needs spectral_norm, so  latest stable release is needed).\n* **Jupyter Lab**\n* **Tensorboard** (i.e. install Tensorflow) and **TensorboardX** (https://github.com/lanpa/tensorboardX).  I guess you don't *have* to but man, life is so much better with it.  And I've conveniently provided hooks/callbacks to automatically write all kinds of stuff to tensorboard for you already!  The notebooks have examples of these being instantiated (or commented out since I didn't really need the ones doing histograms of the model weights).  Noteably, progress images will be written to Tensorboard every 200 iterations by default, so you get a constant and convenient look at what the model is doing. \n* **ImageNet** \u2013 It proved to be a great dataset for training.  \n* **BEEFY Graphics card**.  I'd really like to have more memory than the 11 GB in my GeForce 1080TI (11GB).  You'll have a tough time with less.  The Unet and Critic are ridiculously large but honestly I just kept getting better results the bigger I made them.  \n\n**For those wanting to start transforming their own images right away:** To start right away with your own images without training the model yourself (understandable)...well, you'll need me to upload pre-trained weights first.  I'm working on that now.  Once those are available, you'll be able to refer to them in the visualization notebooks. I'd use ColorizationVisualization.ipynb.  Basically you'd replace \n\ncolorizer_path = IMAGENET.parent/('bwc_rc_gen_192.h5') \n\nWith the weight file I upload for the generator (colorizer).\n\nThen you'd just drop whatever images in the /test_images/ folder you want to run this against and you can visualize the results inside the notebook with lines like this:\n\nvis.plot_transformed_image(\"test_images/derp.jpg\", netG, md.val_ds, tfms=x_tfms, sz=500)\n\nI'd keep the size around 500px, give or take, given you're running this on a gpu with plenty of memory (11 GB GeForce 1080Ti, for example).  If you have less than that, you'll have to go smaller or try running it on CPU.  I actually tried the latter but for some reason it was -really- absurdly slow and I didn't take the time to investigate why that was other than to find out that the Pytorch people were recommending building from source to get a big performance boost.  Yeah...I didn't want to bother at that point.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

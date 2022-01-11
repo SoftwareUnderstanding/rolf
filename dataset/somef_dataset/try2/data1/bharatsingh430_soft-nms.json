@@ -1,0 +1,361 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this repository useful in your research, please consider citing:\n\n    @article{\n      Author = {Navaneeth Bodla and Bharat Singh and Rama Chellappa and Larry S. Davis},\n      Title = {Soft-NMS -- Improving Object Detection With One Line of Code},\n      Booktitle = {Proceedings of the IEEE International Conference on Computer Vision},\n      Year = {2017}\n    }\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{\n  Author = {Navaneeth Bodla and Bharat Singh and Rama Chellappa and Larry S. Davis},\n  Title = {Soft-NMS -- Improving Object Detection With One Line of Code},\n  Booktitle = {Proceedings of the IEEE International Conference on Computer Vision},\n  Year = {2017}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "  --net ${NET_FINAL} \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.880054048434319,
+        0.8227947088210703,
+        0.9489084009389641
+      ],
+      "excerpt": "|R-FCN,       NMS   | COCO 2014 train+val -minival | COCO 2015 minival     | 33.9% | \n|R-FCN,  Soft-NMS L | COCO 2014 train+val -minival | COCO 2015 minival     | 34.8% | \n|R-FCN,  Soft-NMS G | COCO 2014 train+val -minival | COCO 2015 minival     | 35.1% | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bharatsingh430/soft-nms",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing\nIssues\nSpecific Caffe design and development issues, bugs, and feature requests are maintained by GitHub Issues.\nPlease do not post usage, installation, or modeling questions, or other requests for help to Issues.\nUse the caffe-users list instead. This helps developers maintain a clear, uncluttered, and efficient view of the state of Caffe.\nWhen reporting a bug, it's most helpful to provide the following information, where applicable:\n\nWhat steps reproduce the bug?\nCan you reproduce the bug using the latest master, compiled with the DEBUG make option?\nWhat hardware and operating system/distribution are you running?\nIf the bug is a crash, provide the backtrace (usually printed by Caffe; always obtainable with gdb).\n\nTry to give your issue a title that is succinct and specific. The devs will rename issues as needed to keep track of them.\nPull Requests\nCaffe welcomes all contributions.\nSee the contributing guide for details.\nBriefly: read commit by commit, a PR should tell a clean, compelling story of one improvement to Caffe. In particular:\n\nA PR should do one clear thing that obviously improves Caffe, and nothing more. Making many smaller PRs is better than making one large PR; review effort is superlinear in the amount of code involved.\nSimilarly, each commit should be a small, atomic change representing one step in development. PRs should be made of many commits where appropriate.\nPlease do rewrite PR history to be clean rather than chronological. Within-PR bugfixes, style cleanups, reversions, etc. should be squashed and should not appear in merged PR history.\nAnything nonobvious from the code should be explained in comments, commit messages, or the PR description, as appropriate.",
+    "technique": "File Exploration"
+  },
+  "contributors": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributors\nCaffe is developed by a core set of BVLC members and the open-source community.\nWe thank all of our contributors!\nFor the detailed history of contributions of a given file, try\ngit blame file\n\nto see line-by-line credits and\ngit log --follow file\n\nto see the change log even across renames and rewrites.\nPlease refer to the acknowledgements on the Caffe site for further details.\nCopyright is held by the original contributor according to the versioning history; see LICENSE.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-04-13T18:14:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-15T18:40:03Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9544672236029387
+      ],
+      "excerpt": "This repository includes the code for Soft-NMS. Soft-NMS is integrated with two object detectors, R-FCN and Faster-RCNN. The Soft-NMS paper can be found here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9624652009445597,
+        0.9551450701612156
+      ],
+      "excerpt": "We are also making our ICCV reviews and our rebuttal public. This should help to clarify some concerns which you may have. \nTo test the models with soft-NMS, clone the project and test your models as in standard object detection pipelines. This repository supports Faster-RCNN and R-FCN where an additional flag can be used for soft-NMS. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8297490400717248
+      ],
+      "excerpt": "In addition, you can specify the sigma parameter for Gaussian weighting and the threshold parameter for linear weighting. Detections below 0.001 are discarded. For integrating soft-NMS in your code, refer to cpu_soft_nms function in lib/nms/cpu_nms.pyx and soft_nms wrapper function in lib/fast_rcnn/nms_wrapper.py. You can also implement your own weighting function in this file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9652473247022342
+      ],
+      "excerpt": "NET_FINAL is the caffe-model to use \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9566389442518721,
+        0.840404692287937,
+        0.9949532692363939
+      ],
+      "excerpt": "TEST.SOFT_NMS in {0,1,2} is flag for different NMS algorithms. 0 is standard NMS, 1 performs soft-NMS with linear weighting and 2 performs soft-NMS with gaussian weighting \nPlease refer to py-R-FCN-multiGPU for details about setting up object detection pipelines. \nThe Soft-NMS repository also contains code for training these detectors on multiple GPUs. The position sensitive ROI Pooling layer is updated so that interpolation of bins is correct, like ROIAlign in Mask RCNN. The COCO detection model for R-FCN can be found here. All other detection models used in the paper are publicly available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Object Detection",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bharatsingh430/soft-nms/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 223,
+      "date": "Thu, 23 Dec 2021 16:28:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bharatsingh430/soft-nms/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bharatsingh430/soft-nms",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/docker/standalone/gpu/Dockerfile",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/docker/standalone/cpu/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/bharatsingh430/soft-nms/tree/master/caffe/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/02-fine-tuning.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/pascal-multilabel-with-datalayer.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/net_surgery.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/detection.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/01-learning-lenet.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/brewing-logreg.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/00-classification.ipynb",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/siamese/mnist_siamese.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/fast_rcnn.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/rfcn_end2end_ohem_multi_gpu.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/faster_rcnn_end2end_multi_gpu.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/faster_rcnn_end2end.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/rfcn_alt_opt_5stage_ohem.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/faster_rcnn_alt_opt.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/experiments/scripts/rfcn_end2end.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/deploy_docs.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/build_docs.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/download_model_from_gist.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/upload_model_to_gist.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/gather_examples.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/install-python-deps.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/test.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/defaults.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/setup-venv.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/configure-make.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/configure.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/build.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/install-deps.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/scripts/travis/configure-cmake.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/imagenet/create_imagenet.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/imagenet/resume_training.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/imagenet/train_caffenet.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/imagenet/make_imagenet_mean.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/cifar10/create_cifar10.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/cifar10/train_quick.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/cifar10/train_full_sigmoid.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/cifar10/train_full_sigmoid_bn.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/cifar10/train_full.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_lenet_adam.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_lenet_consolidated.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_lenet_docker.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_mnist_autoencoder_adagrad.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_lenet_rmsprop.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/create_mnist.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_mnist_autoencoder_nesterov.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_lenet.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_mnist_autoencoder.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/mnist/train_mnist_autoencoder_adadelta.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/siamese/create_mnist_siamese.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/examples/siamese/train_mnist_siamese.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/tools/extra/parse_log.sh",
+      "https://raw.githubusercontent.com/bharatsingh430/soft-nms/master/caffe/tools/extra/launch_resize_and_crop_images.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9069687384322455
+      ],
+      "excerpt": "GPU_ID is the GPU you want to test on \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144645127837754
+      ],
+      "excerpt": "PT_DIR in {pascal_voc, coco} is the dataset directory \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8297572383778075
+      ],
+      "excerpt": "./tools/test_net.py --gpu ${GPU_ID} \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8553548918102916
+      ],
+      "excerpt": "|                   | training data       | test data          | mAP@[0.5:0.95]   |  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bharatsingh430/soft-nms/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "C++",
+      "Python",
+      "Cuda",
+      "CMake",
+      "Shell",
+      "MATLAB",
+      "Makefile",
+      "C",
+      "CSS",
+      "HTML"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'COPYRIGHT\\n\\nAll contributions by the University of California:\\nCopyright (c) 2014-2017 The Regents of the University of California (Regents)\\nAll rights reserved.\\n\\nAll other contributions:\\nCopyright (c) 2014-2017, the respective contributors\\nAll rights reserved.\\n\\nCaffe uses a shared copyright model: each contributor holds copyright over\\ntheir contributions to Caffe. The project versioning records all such\\ncontribution and copyright details. If a contributor wants to further mark\\ntheir specific copyright on a particular contribution, they should indicate\\ntheir copyright solely in the commit message of the change when it is\\ncommitted.\\n\\nLICENSE\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met: \\n\\n1. Redistributions of source code must retain the above copyright notice, this\\n   list of conditions and the following disclaimer. \\n2. Redistributions in binary form must reproduce the above copyright notice,\\n   this list of conditions and the following disclaimer in the documentation\\n   and/or other materials provided with the distribution. \\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n\\nCONTRIBUTION AGREEMENT\\n\\nBy contributing to the BVLC/caffe repository through pull-request, comment,\\nor otherwise, the contributor releases their content to the\\nlicense and copyright terms herein.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Soft-NMS",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "soft-nms",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bharatsingh430",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bharatsingh430/soft-nms/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 739,
+      "date": "Thu, 23 Dec 2021 16:28:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "coco",
+      "pascal-voc",
+      "detector"
+    ],
+    "technique": "GitHub API"
+  }
+}

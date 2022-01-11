@@ -1,0 +1,575 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1803.05170"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- A. Argyriou, M. Gonz\u00e1lez-Fierro, and L. Zhang, \"Microsoft Recommenders: Best Practices for Production-Ready Recommendation Systems\", *WWW 2020: International World Wide Web Conference Taipei*, 2020. Available online: https://dl.acm.org/doi/abs/10.1145/3366424.3382692\n- L. Zhang, T. Wu, X. Xie, A. Argyriou, M. Gonz\u00e1lez-Fierro and J. Lian, \"Building Production-Ready Recommendation System at Scale\", *ACM SIGKDD Conference on Knowledge Discovery and Data Mining 2019 (KDD 2019)*, 2019.\n- S. Graham,  J.K. Min, T. Wu, \"Microsoft recommenders: tools to accelerate developing recommender systems\", *RecSys '19: Proceedings of the 13th ACM Conference on Recommender Systems*, 2019. Available online: https://dl.acm.org/doi/10.1145/3298689.3346967\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9992803748028353
+      ],
+      "excerpt": "Computer vision best practices: Best practices and examples on computer vision. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/microsoft/recommenders/main/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/recommenders",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contribution Guidelines\nContributions are welcomed! Here's a few things to know:\n\nContribution Guidelines\nSteps to Contributing\nCoding Guidelines\nMicrosoft Contributor License Agreement\nCode of Conduct\nDo not point fingers\nProvide code feedback based on evidence\nAsk questions do not give answers\n\n\n\nSteps to Contributing\nTL;DR for contributing: We use the staging branch to land all new features and fixes. To make a contribution, please create a branch from staging, make a modification in the code and create a PR to staging. \nHere are the basic steps to get started with your first contribution. Please reach out with any questions.\n1. Use open issues to discuss the proposed changes. Create an issue describing changes if necessary to collect feedback. Also, please use provided labels to tag issues so everyone can easily sort issues of interest.\n1. Fork the repo so you can make and test local changes.\n1. Create a new branch from staging branch for the issue (please do not create a branch from main). We suggest prefixing the branch with your username and then a descriptive title: (e.g. gramhagen/update_contributing_docs)\n1. Install reco-utils package locally using the right optional dependency for your test and the dev option. (e.g. gpu test: pip install -e .[gpu,dev])\n1. Create a test that replicates the issue.\n1. Make code changes.\n1. Ensure unit tests pass and code style / formatting is consistent (see wiki for more details).\n1. Create a pull request against staging branch.\nOnce the features included in a milestone are completed, we will merge staging into main. See the wiki for more detail about our merge strategy.\nCoding Guidelines\nWe strive to maintain high quality code to make the utilities in the repository easy to understand, use, and extend. We also work hard to maintain a friendly and constructive environment. We've found that having clear expectations on the development process and consistent style helps to ensure everyone can contribute and collaborate effectively.\nPlease review the coding guidelines wiki page to see more details about the expectations for development approach and style.\nApart from the official Code of Conduct developed by Microsoft, in the Recommenders team we adopt the following behaviors, to ensure a great working environment:\nDo not point fingers\nLet\u2019s be constructive.\n<details>\n<summary><em>Click here to see some examples</em></summary>\n\n\"This method is missing docstrings\" instead of \"YOU forgot to put docstrings\".\n\n</details>\n\nProvide code feedback based on evidence\nWhen making code reviews, try to support your ideas based on evidence (papers, library documentation, stackoverflow, etc) rather than your personal preferences. \n<details>\n<summary><em>Click here to see some examples</em></summary>\n\n\"When reviewing this code, I saw that the Python implementation the metrics are based on classes, however, [scikit-learn](https://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics) and [tensorflow](https://www.tensorflow.org/api_docs/python/tf/metrics) use functions. We should follow the standard in the industry.\"\n\n</details>\n\nAsk questions do not give answers\nTry to be empathic. \n<details>\n<summary><em>Click here to see some examples</em></summary>\n\n* Would it make more sense if ...?\n* Have you considered this ... ?\n\n</details>\n\nMicrosoft Contributor License Agreement\nMost contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.\nWhen you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-19T10:06:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T19:34:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository contains examples and best practices for building recommendation systems, provided as Jupyter notebooks. The examples detail our learnings on five key tasks:\n\n- [Prepare Data](examples/01_prepare_data): Preparing and loading data for each recommender algorithm\n- [Model](examples/00_quick_start): Building models using various classical and deep learning recommender algorithms such as Alternating Least Squares ([ALS](https://spark.apache.org/docs/latest/api/python/_modules/pyspark/ml/recommendation.html#ALS)) or eXtreme Deep Factorization Machines ([xDeepFM](https://arxiv.org/abs/1803.05170)).\n- [Evaluate](examples/03_evaluate): Evaluating algorithms with offline metrics\n- [Model Select and Optimize](examples/04_model_select_and_optimize): Tuning and optimizing hyperparameters for recommender models\n- [Operationalize](examples/05_operationalize): Operationalizing models in a production environment on Azure\n\nSeveral utilities are provided in [recommenders](recommenders) to support common tasks such as loading datasets in the format expected by different algorithms, evaluating model outputs, and splitting training/test data. Implementations of several state-of-the-art algorithms are included for self-study and customization in your own applications. See the [recommenders documentation](https://readthedocs.org/projects/microsoft-recommenders/).\n\nFor a more detailed overview of the repository, please see the documents on the [wiki page](https://github.com/microsoft/recommenders/wiki/Documents-and-Presentations).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8372806478102319,
+        0.869316287792314,
+        0.9159026687657174,
+        0.8607082894295401,
+        0.8953272732106865,
+        0.9577858871094057
+      ],
+      "excerpt": "We have a new release Recommenders 0.7.0! \nIn this, we have changed the names of the folders which contain the source code, so that they are more informative. This implies that you will need to change any import statements that reference the recommenders package. Specifically, the folder reco_utils has been renamed to recommenders and its subfolders have been renamed according to issue 1390.   \nThe recommenders package now supports three types of environments: venv, virtualenv and conda with Python versions 3.6 and 3.7. \nWe have also added new evaluation metrics: novelty, serendipity, diversity and coverage (see the evalution notebooks). \nCode coverage reports are now generated for every PR, using Codecov. \nThe table below lists the recommender algorithms currently available in the repository. Notebooks are linked under the Example column as Quick start, showcasing an easy to run example of the algorithm, or as Deep dive, explaining in detail the math and implementation of the algorithm. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9009422615096706,
+        0.9306405671623874
+      ],
+      "excerpt": "| Cornac/Bayesian Personalized Ranking (BPR) | Collaborative Filtering | Matrix factorization algorithm for predicting item ranking with implicit feedback. It works in the CPU environment. | Deep dive | \n| Cornac/Bilateral Variational Autoencoder (BiVAE) | Collaborative Filtering | Generative model for dyadic data (e.g., user-item interactions). It works in the CPU/GPU enviroment. | Deep dive | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8908758822509438
+      ],
+      "excerpt": "| Extreme Deep Factorization Machine (xDeepFM)<sup></sup> | Hybrid | Deep learning based algorithm for implicit and explicit feedback with user/item features. It works in the CPU/GPU environment. | Quick start | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9604691138311845,
+        0.8517185663220661,
+        0.8091361253540083,
+        0.897319685716695,
+        0.8656915365582121
+      ],
+      "excerpt": "| LightGCN | Collaborative Filtering | Deep learning algorithm which simplifies the design of GCN for predicting implicit feedback. It works in the CPU/GPU enviroment. | Deep dive | \n| GeoIMC<sup></sup> | Hybrid | Matrix completion algorithm that has into account user and item features using Riemannian conjugate gradients optimization and following a geometric approach. It works in the CPU enviroment. | Quick start | \n| GRU4Rec | Collaborative Filtering | Sequential-based algorithm that aims to capture both long and short-term user preferences using recurrent neural networks. It works in the CPU/GPU enviroment. | Quick start | \n| Multinomial VAE | Collaborative Filtering | Generative model for predicting user/item interactions. It works in the CPU/GPU enviroment. | Deep dive | \n| Neural Recommendation with Long- and Short-term User Representations (LSTUR)<sup></sup> | Content-Based Filtering | Neural recommendation algorithm for recommending news articles with long- and short-term user interest modeling. It works in the CPU/GPU enviroment. | Quick start | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8323483601632632,
+        0.8126875839248096
+      ],
+      "excerpt": "| Neural Collaborative Filtering (NCF) | Collaborative Filtering | Deep learning algorithm with enhanced performance for user/item implicit feedback. It works in the CPU/GPU enviroment.| Quick start | \n| Neural Recommendation with Personalized Attention (NPA)<sup></sup> | Content-Based Filtering | Neural recommendation algorithm for recommending news articles with personalized attention network. It works in the CPU/GPU enviroment. | Quick start | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8743372015579309,
+        0.8621293140053644,
+        0.8549083535111598,
+        0.8048202566510957
+      ],
+      "excerpt": "| Next Item Recommendation (NextItNet) | Collaborative Filtering | Algorithm based on dilated convolutions and residual network that aims to capture sequential patterns. It considers both user/item interactions and features.  It works in the CPU/GPU enviroment. | Quick start | \n| Restricted Boltzmann Machines (RBM) | Collaborative Filtering | Neural network based algorithm for learning the underlying probability distribution for explicit or implicit user/item feedback. It works in the CPU/GPU enviroment. | Quick start / Deep dive | \n| Riemannian Low-rank Matrix Completion (RLRMC)<sup></sup> | Collaborative Filtering | Matrix factorization algorithm using Riemannian conjugate gradients optimization with small memory consumption to predice user/item interactions. It works in the CPU enviroment. | Quick start | \n| Simple Algorithm for Recommendation (SAR)<sup></sup> | Collaborative Filtering | Similarity-based algorithm for implicit user/item feedback.  It works in the CPU environment. | Quick start / Deep dive | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8261862124478535,
+        0.8304530323526957,
+        0.9409031442280482,
+        0.95536158163874
+      ],
+      "excerpt": "| Standard VAE | Collaborative Filtering | Generative Model for predicting user/item interactions.  It works in the CPU/GPU environment. | Deep dive | \n| Surprise/Singular Value Decomposition (SVD) | Collaborative Filtering | Matrix factorization algorithm for predicting explicit rating feedback in small datasets. It works in the CPU/GPU environment. | Deep dive | \n| Term Frequency - Inverse Document Frequency (TF-IDF) | Content-Based Filtering | Simple similarity-based algorithm for content-based recommendations with text datasets. It works in the CPU environment. | Quick staert | \n| Vowpal Wabbit (VW)<sup></sup> | Content-Based Filtering | Fast online learning algorithms, great for scenarios where user features / context are constantly changing. It uses the CPU for online learning. | Deep dive | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8467956004803961
+      ],
+      "excerpt": "| xLearn/Factorization Machine (FM) & Field-Aware FM (FFM) | Hybrid | Quick and memory efficient algorithm to predict labels with user/item features. It works in the CPU/GPU environment. | Deep dive | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9688329726141284
+      ],
+      "excerpt": "Independent or incubating algorithms and utilities are candidates for the contrib folder. This will house contributions which may not easily fit into the core repository or need time to refactor or mature the code and add necessary tests. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9594304556207774
+      ],
+      "excerpt": "We provide a benchmark notebook to illustrate how different algorithms could be evaluated and compared. In this notebook, the MovieLens dataset is split into training/test sets at a 75/25 ratio using a stratified split. A recommendation model is trained using each of the collaborative filtering algorithms below. We utilize empirical parameter values reported in literature here. For ranking metrics we use k=10 (top 10 recommended items). We run the comparison on a Standard NC6s_v2 Azure DSVM (6 vCPUs, 112 GB memory and 1 P100 GPU). Spark ALS is run in local standalone mode. In this table we show the results on Movielens 100k, running the algorithms for 15 epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9826200370332661,
+        0.9638761412863959,
+        0.984509057140565
+      ],
+      "excerpt": "This project adheres to Microsoft's Open Source Code of Conduct in order to foster a welcoming and inspiring communtity for all. \nThis project welcomes contributions and suggestions. Before contributing, please see our contribution guidelines. \nThese tests are the nightly builds, which compute the smoke and integration tests. main is our principal branch and staging is our development branch. We use pytest for testing python utilities in recommenders and papermill for the notebooks. For more information about the testing pipelines, please see the test documentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8069950487206115
+      ],
+      "excerpt": "Microsoft AI Github: Find other Best Practice projects, and Azure AI design patterns in our central repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Best Practices on Recommendation Systems",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/recommenders/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2057,
+      "date": "Sat, 25 Dec 2021 19:48:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/recommenders/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft/recommenders",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/tools/docker/Dockerfile",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/.devcontainer/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/microsoft/recommenders/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/tests/unit/recommenders/utils/test_notebook_utils.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/template.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/run_notebook_on_azureml.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/01_prepare_data/data_split.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/01_prepare_data/wikidata_knowledge_graph.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/01_prepare_data/mind_utils.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/01_prepare_data/data_transform.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_content_based_filtering/vowpal_wabbit_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_content_based_filtering/mmlspark_lightgbm_criteo.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_content_based_filtering/dkn_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/04_model_select_and_optimize/tuning_spark_als.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/04_model_select_and_optimize/nni_ncf.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/04_model_select_and_optimize/nni_surprise_svd.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/04_model_select_and_optimize/azureml_hyperdrive_surprise_svd.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/04_model_select_and_optimize/azureml_hyperdrive_wide_and_deep.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/03_evaluate/als_movielens_diversity_metrics.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/03_evaluate/evaluation.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/06_benchmarks/movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/cornac_bpr_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/rbm_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/lightgcn_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/multi_vae_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/als_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/sar_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/standard_vae_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/surprise_svd_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_collaborative_filtering/cornac_bivae_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/step1_data_preparation.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/step4_run_dkn_item2item.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/step3_run_dkn.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/step5_run_lightgcn.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/pandas-subgraph-local-samples.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/step2_pretraining-embeddings.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_hybrid/lightfm_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_hybrid/ncf_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/02_model_hybrid/fm_deep_dive.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/05_operationalize/als_movie_o16n.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/05_operationalize/lightgbm_criteo_o16n.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/05_operationalize/aks_locust_load_test.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/sar_movieratings_with_azureml_designer.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/fastai_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/wide_deep_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/als_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/lstur_MIND.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/rbm_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/ncf_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/sequential_recsys_amazondataset.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/lightgbm_tinycriteo.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/xdeepfm_criteo.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/sar_movielens_with_azureml.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/geoimc_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/npa_MIND.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/tfidf_covid.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/sar_movielens.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/dkn_MIND.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/naml_MIND.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/nrms_MIND.ipynb",
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/00_quick_start/rlrmc_movielens.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/recommenders/main/examples/07_tutorials/KDD2020-tutorial/run_transE.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9317359578884514
+      ],
+      "excerpt": "The following tests run on a Linux DSVM daily.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8135741337694626,
+        0.9498617501238236
+      ],
+      "excerpt": "| Linux CPU | main |  | | staging |  | \n| Linux GPU | main |  | | staging |  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9177516257858198,
+        0.9529695669476351,
+        0.9344738928355917
+      ],
+      "excerpt": "| **Windows CPU** | main | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_cpu?branchName=main)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=101&branchName=main) | | staging | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_cpu?branchName=staging)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=101&branchName=staging) | \n| **Windows GPU** | main | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_gpu?branchName=main)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=102&branchName=main) | | staging | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_gpu?branchName=staging)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=102&branchName=staging) | \n| **Windows Spark** | main | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_pyspark?branchName=main)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=103&branchName=main) | | staging | [![Build Status](https://dev.azure.com/best-practices/recommenders/_apis/build/status/windows-tests/dsvm_nightly_win_pyspark?branchName=staging)](https://dev.azure.com/best-practices/recommenders/_build/latest?definitionId=103&branchName=staging) | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/recommenders/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Scala",
+      "Dockerfile",
+      "C++",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'    MIT License\\n\\n    Copyright (c) Microsoft Corporation. All rights reserved.\\n\\n    Permission is hereby granted, free of charge, to any person obtaining a copy\\n    of this software and associated documentation files (the \"Software\"), to deal\\n    in the Software without restriction, including without limitation the rights\\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\n    copies of the Software, and to permit persons to whom the Software is\\n    furnished to do so, subject to the following conditions:\\n\\n    The above copyright notice and this permission notice shall be included in all\\n    copies or substantial portions of the Software.\\n\\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\n    SOFTWARE\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Recommenders",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "recommenders",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/recommenders/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## Backwards incompatible changes\r\n- Renaming of folders #1485, #1478 \r\n- Change of the PyPI package name to `recommenders` #1477 \r\n\r\n## New algorithms or improvements\r\n- Missing import in VAE #1508\r\n\r\n## New utilities or improvements\r\n- `retrying` import #1487 \r\n- Addition of diversity, novelty, coverage and serendipity metrics #1536, #1535, #1522, #1505, #1491, #1470, #1465\r\n\r\n## New notebooks or improvements\r\n- New notebook showcasing diversity, novelty, coverage, and serendipity metrics in Spark #1488, #1470, #1465\r\n\r\n## Other features\r\n- Enablement of LightGBM version 3 #1527 \r\n- Enablement of all Python 3.7 micro versions #1474\r\n- Installation in `virtualenv` and `venv` #1520, #1476 \r\n- Installation from PyPI in docker container #1509 \r\n- Read the Docs builds #1529, #1528 \r\n- Documentation improvements #1515, #1469, #1462 \r\n- CI pipelines on GitHub workflows (WIP) #1517, #1503, #1499, #1494, #1490 \r\n",
+        "dateCreated": "2021-09-23T08:46:49Z",
+        "datePublished": "2021-09-23T18:03:12Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.7.0",
+        "name": "Recommenders 0.7.0",
+        "tag_name": "0.7.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.7.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/50152119",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.7.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New utilities or improvements\r\n- Fix URL in unit tests #1447\r\n- Improve documentation #1446 #1440 #1436 #1428 #1426 #1425 #1415\r\n- Add retry to maybe_downlad function #1427\r\n\r\n## New notebooks or improvements\r\n- Notebook for diversity metrics #1416\r\n- Update evaluation notebook with new diversity metrics #1416\r\n- Fix xlearn notebook #1427\r\n\r\n## Other features\r\n- Generate package for PyPi #1445 #1442 #1441 #1429\r\n- Improve installation process #1455 #1431\r\n- Fix tests #1452 #1427\r\n- Generate pipeline for release #1427",
+        "dateCreated": "2021-06-18T06:48:43Z",
+        "datePublished": "2021-06-18T15:59:34Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.6.0",
+        "name": "Recommenders 0.6.0",
+        "tag_name": "0.6.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.6.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/44868684",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.6.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## Repo structure\r\n* Default branch renamed from master to main #1284 #1278\r\n\r\n## New dataset and competition support\r\n* Microsoft News dataset (MIND) and [Microsoft News Recommendation Challenge](https://www.microsoft.com/en-us/research/academic-program/mind-news-recommendation-challenge/) #1247 #1236\r\n\r\n## New algorithms or improvements\r\n* Optimize GPU usage of news recommendation algorithms #1235\r\n* Optimize surprise utilities #1224\r\n* GeoIMC algorithm #1204\r\n* Standard VAE algorithm #1194\r\n* Multinomial VAE algorithm #1194\r\n\r\n## New utilities or improvements\r\n* Operationalization example for sequential models #1254\r\n* Fix bug with fastai #1288\r\n* Fix bug in affinity matrix #1243\r\n* Fix conflict with MMLSpark version #1230\r\n* Fix negative feedback smapler #1200\r\n\r\n## New notebooks or improvements\r\n* Update AzureML Designer notebooks #1286 #1253\r\n* KDD2020 tutorial: paper recommendation with Microsoft Academic Graph #1208\r\n* Update o16n notebook for real time scoring #1176\r\n* Reduce verbosity on tensorflow notebooks #1276\r\n\r\n## Other features\r\n* Upgrade papermill and scrapbook for testing #1271 #1270 #1282 #1289\r\n* Fix tests #1244 #1242 #1226 #1218\r\n* Fix issue with spark installation #1186\r\n* Update python version #1202\r\n* Notice for java dependency #1209\r\n* Reactivate CICD pipelines #1284",
+        "dateCreated": "2021-04-30T09:21:42Z",
+        "datePublished": "2021-04-30T09:22:21Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.5.0",
+        "name": "Recommenders 0.5.0",
+        "tag_name": "0.5.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.5.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/37355217",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.5.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New algorithms or improvements\r\n- DKN fix https://github.com/microsoft/recommenders/pull/1165 \r\n- GeoIMC https://github.com/microsoft/recommenders/pull/1142\r\n- LSTUR #1137 #1080\r\n- NAML #1137 #1080\r\n- NPA #1137 #1080\r\n- NRMS #1137 #1080\r\n- LighGCN #1130 #1123\r\n- NextItNet #1130 #1126\r\n- Fix SAR #1128 #1023 #1018 #991\r\n- LightFM #1096\r\n- TFIDF recommender #1088\r\n- A2SVD #1010\r\n- GRU4Rec #1010\r\n- Caser #1010\r\n- SLi-Rec #1010 \r\n- SARplus #955\r\n- BPR with cornac library #950 #944 #937\r\n\r\n## New utilities or improvements\r\n- MIND dataset https://github.com/microsoft/recommenders/pull/1153 \r\n- Fix Text iterator https://github.com/microsoft/recommenders/pull/1133\r\n- Fix NNI utils #1131\r\n- Azure Designer dependencies #1115 #1101 #1095 #1077 #1060\r\n- Fix tests #1057 #1004 #954 #935 #932\r\n\r\n## New notebooks or improvements\r\n- DKN notebook with MIND dataset https://github.com/microsoft/recommenders/pull/1165 https://github.com/microsoft/recommenders/pull/1137\r\n- GeoIMC notebook https://github.com/microsoft/recommenders/pull/1142\r\n- LSTUR notebook #1137 #1080\r\n- NAML notebook #1137 #1080\r\n- NPA notebook #1137 #1080\r\n- NRMS notebook #1137 #1080\r\n- LighGCN notebook #1130 #1123\r\n- NextItNet notebook #1130 #1126\r\n- Implementation of Recommenders into Azure Designer #1115 #1101 #1095 #1060 #1036\r\n- NCF hyperparameter tunning notebook #1102 #1092\r\n- LightFM notebook #1096\r\n- TFIDF recommender notebook #1088\r\n- Add timer class into notebooks 1063\r\n- Fix xlearn notebook #1006 #974\r\n- o16n notebook fix #1003 #969\r\n- A2SVD notebook #1010\r\n- GRU4Rec notebook #1010\r\n- Caser notebook #1010\r\n- SLi-Rec notebook #1010 \r\n- BPR with cornac notebook #950 #944 #937\r\n\r\n## Other features\r\n- Fix installation on Databricks https://github.com/microsoft/recommenders/pull/1161 #965\r\n- Fix docker https://github.com/microsoft/recommenders/pull/1146 #1120 #1070 #1058 #1034\r\n- Fix Azure blob version #1119\r\n- Pin TensorFlow #1098\r\n- Code structure refactor #1086\r\n- Business scenarios and glossary #1086\r\n- ADO artifact #1069 \r\n- Avoid pandas>1 #1052\r\n- CICD #1002 #998 #994 #980",
+        "dateCreated": "2021-04-30T09:19:21Z",
+        "datePublished": "2021-04-30T09:20:30Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.4.0",
+        "name": "Recommenders 0.4.0",
+        "tag_name": "0.4.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.4.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/29930710",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New algorithms or improvements\r\n* Improved SAR performance #914 #922\r\n* Utils for wikidata knowledge graph #881 #902\r\n\r\n## New utilities or improvements\r\n* Fixed bug in python evaluator #863\r\n* Updated nni version and utils #856\r\n* Updated sum check #874\r\n* Changed url download util to use requests #813\r\n\r\n## New notebooks or improvements\r\n* Optimized spark notebooks #864\r\n* New notebook on knowledge graph generation with wikidata #881 #902\r\n* Wide-deep hyperdrive notebook AzureML API update #847\r\n\r\n## Other features\r\n* Added Docker support (Docker file) for all of the three (CPU/GPU/Spark) environment\r\n* Added setup.py for pip installation #851\r\n* Added sphinx documentation #859\r\n* Published documentation on readthedocs #912\r\n* Fixed spark testing issues #850\r\n* Added tests with AzureML compute target #848 #846 #839 #823\r\n* Development of Xamarin app for movies recommendation using Recommenders engine https://github.com/microsoft/recommenders_engine_example_layout",
+        "dateCreated": "2021-04-30T09:17:34Z",
+        "datePublished": "2021-04-30T09:18:34Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.3.1",
+        "name": "Recommenders 0.3.1",
+        "tag_name": "0.3.1",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.3.1",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/19989452",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.3.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New platform support\r\n* Windows support with tests #797 #726\r\n\r\n## New algorithms or improvements\r\n* LightGBM #633 #735\r\n* RLRMC #729\r\n* Changed seed for GPU algos for reproducibility #785 #748\r\n* Added benchmark #715\r\n* Fixed bugs in SAR #697 #619 \r\n\r\n## New utilities or improvements\r\n* Python evaluation improvement by memoization #713\r\n* Improved tests #706\r\n* New algos for hyperparameter tuning with NNI #687 \r\n* Criteo dataloader #642 \r\n* Wrapper VW #592 \r\n* Added more data formats #605 \r\n* New metrics #580 \r\n\r\n## New notebooks or improvements\r\n* SAR remote execution through AzureML #728\r\n* SAR remote execution of notebook through AzureML #681 \r\n* LightGBM with small criteo on CPU #633 \r\n* LightGBM o16n on Databricks with MMLSpark #735 #714 #682 #680 \r\n* Hyperparameter tuning with NNI on Surprise SVD #687\r\n* Hyperparameter tuning with Hyperdrive #546 \r\n\r\n## Other features\r\n* Fixed bugs in utilities, tests and notebooks\r\n* New unit, smoke and integration tests for the new algos\r\n",
+        "dateCreated": "2021-04-30T09:14:18Z",
+        "datePublished": "2021-04-30T09:14:58Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.3.0",
+        "name": "Recommenders 0.3.0",
+        "tag_name": "0.3.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.3.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/17630801",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New Algorithms or improvements\r\n* Vowpal Wabbit (VW) https://github.com/Microsoft/Recommenders/pull/452\r\n* xDeepFM https://github.com/Microsoft/Recommenders/pull/453\r\n* DKN https://github.com/Microsoft/Recommenders/pull/453\r\n* NCF https://github.com/Microsoft/Recommenders/pull/392\r\n* RBM https://github.com/Microsoft/Recommenders/pull/390\r\n* FastAI Embedding dot Bias https://github.com/Microsoft/Recommenders/pull/411\r\n* Optimization of SAR\r\n\r\n## New utilities or improvements\r\n* Improved the performance of python splitters https://github.com/Microsoft/Recommenders/pull/517\r\n* Added GPU utilities\r\n* Added utilities for hyperparameter tuning\r\n\r\n## New Notebooks or improvements\r\n* Improved o16n notebook with ALS, Movielens and Databricks https://github.com/Microsoft/Recommenders/pull/475\r\n* Added a deep dive notebook on VW https://github.com/Microsoft/Recommenders/pull/452\r\n* Improved notebook for hyperparameter tuning on Spark https://github.com/Microsoft/Recommenders/pull/444\r\n* New notebook on FastAI Embedding dot Bias algo https://github.com/Microsoft/Recommenders/pull/411\r\n* New notebook of deep dive on NCF https://github.com/Microsoft/Recommenders/pull/392\r\n* New quick start notebook of RBM https://github.com/Microsoft/Recommenders/pull/390\r\n* New deep dive notebook of RBM https://github.com/Microsoft/Recommenders/pull/390\r\n* New quickstart notebook of xDeepFM with synthetic data\r\n* New quickstart notebook of DKN with synthetic data\r\n* New notebook on data transformation https://github.com/Microsoft/Recommenders/pull/384\r\n\r\n\r\n## Other features\r\n* Fixed bugs in utilities, tests and notebooks\r\n* Added an installation script for Databricks https://github.com/Microsoft/Recommenders/pull/457\r\n* Changed installer from a bash to a python script https://github.com/Microsoft/Recommenders/pull/512\r\n* Added a parameter to control pyspark version in the installer https://github.com/Microsoft/Recommenders/pull/461\r\n* Optimized tests to be quicker https://github.com/Microsoft/Recommenders/pull/486\r\n* New unit, smoke and integration tests for the new algos\r\n* Added GPU test pipeline https://github.com/Microsoft/Recommenders/pull/408\r\n* Improved Github metrics tracker https://github.com/Microsoft/Recommenders/pull/400",
+        "dateCreated": "2021-04-30T09:11:37Z",
+        "datePublished": "2021-04-30T09:13:04Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.2.0",
+        "name": "Recommenders 0.2.0",
+        "tag_name": "0.2.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.2.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/15663497",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.2.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "yueguoguo",
+        "body": "## New Algorithms or improvements\r\n* Improved SAR single node for top k recommendations. User can decide if the recommended top k items to be sorted or not.\r\n\r\n## New utilities or improvements\r\n* Added data related utility functions like movielens data download in Python and PySpark.\r\n* Added new data split method (timestamp based split) added.\r\n\r\n## New Notebooks or improvements\r\n* Added an O16N notebook for Spark ALS movie recommender on Azure production services such as Databricks, Cosmos DB, and Kubernetes Services. \r\n* Added SAR deep dive notebook with single-node implementation demonstrated. \r\n* Added Surprise SVD deep dive notebook. \r\n* Added Surprise SVD integration test.\r\n* Added Surprise SVD ranking metrics evaluation.\r\n* Made quick-start notebooks consistent in terms of running settings, i.e., experiment protocols (e.g., data split, evaluation metrics, etc.) and algorithm parameters (e.g., hyper parameters, remove seen items, etc.). \r\n* Added a comparison notebook for easy benchmarking different algorithms. \r\n\r\n## Other features\r\n* Updated SETUP with Azure Databricks.\r\n* Added SETUP troubleshooting for Azure DSVM and Databricks. \r\n* Updated READMEs under each notebook directory to provide comprehensive guidelines.\r\n* Added smoke/integration tests on large movielens dataset (10mil and 20mil). \r\n* Updated the Spark settings of CI/CD machine to eliminate unexpected build failures such as \"no space left issue\". \r\n\r\n",
+        "dateCreated": "2018-12-12T03:21:12Z",
+        "datePublished": "2018-12-12T04:07:03Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.1.1",
+        "name": "Recommenders 0.1.1",
+        "tag_name": "0.1.1",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.1.1",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/14481623",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "miguelgfierro",
+        "body": "## New Algorithms or improvements\r\nDevelopment of SAR algorithm on three implementations:\r\n* [SAR single node](reco_utils/recommender/sar/sar_singlenode.py)\r\n* [SAR PySpark](reco_utils/recommender/sar/sar_pyspark.py)\r\n* [SAR+](reco_utils/recommender/sar/sarplus)\r\n\r\n## New utilities or improvements\r\n* [Dataset splitters](reco_utils/dataset) in Python and PySpark.\r\n* [Rating and ranking metrics](reco_utils/evaluation) in Python and PySpark.\r\n\r\n## New Notebooks or improvements\r\n* [ALS quickstart with Movielens](notebooks/00_quick_start/als_pyspark_movielens.ipynb)\r\n* [SAR single node quickstart with Movielens](notebooks/00_quick_start/sar_python_cpu_movielens.ipynb)\r\n* [SAR PySpark quickstart with Movielens](notebooks/00_quick_start/sar_pyspark_movielens.ipynb)\r\n* [SAR+ quickstart with Movielens](notebooks/00_quick_start/sarplus_movielens.ipynb)\r\n* [Data splitter](notebooks/01_data/data_split.ipynb)\r\n* [ALS deep dive](notebooks/02_modeling/als_deep_dive.ipynb)\r\n* [SAR deep dive](notebooks/02_modeling/sar_deep_dive.ipynb)\r\n* [Evaluation](notebooks/03_evaluate/evaluation.ipynb)\r\n\r\n## Other features\r\n* [Benchmark](README.md#benchmarks) of the current algorithms.\r\n* Unit, smoke and integration tests for Python and PySpark environments. \r\n",
+        "dateCreated": "2018-11-12T12:46:02Z",
+        "datePublished": "2018-11-12T13:05:09Z",
+        "html_url": "https://github.com/microsoft/recommenders/releases/tag/0.1.0",
+        "name": "Recommenders 0.1.0",
+        "tag_name": "0.1.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/recommenders/tarball/0.1.0",
+        "url": "https://api.github.com/repos/microsoft/recommenders/releases/13951567",
+        "zipball_url": "https://api.github.com/repos/microsoft/recommenders/zipball/0.1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11886,
+      "date": "Sat, 25 Dec 2021 19:48:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "recommender",
+      "ranking",
+      "deep-learning",
+      "python",
+      "jupyter-notebook",
+      "recommendation-algorithm",
+      "rating",
+      "operationalization",
+      "kubernetes",
+      "azure",
+      "microsoft",
+      "recommendation-system",
+      "recommendation-engine",
+      "recommendation",
+      "data-science",
+      "tutorial",
+      "artificial-intelligence"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please see the [setup guide](SETUP.md) for more details on setting up your machine locally, on a [data science virtual machine (DSVM)](https://azure.microsoft.com/en-gb/services/virtual-machines/data-science-virtual-machines/) or on [Azure Databricks](SETUP.md#setup-guide-for-azure-databricks).\n\nThe installation of the recommenders package has been tested with \n- Python versions 3.6, 3.7 and [venv](https://docs.python.org/3/library/venv.html), [virtualenv](https://virtualenv.pypa.io/en/latest/index.html#) or [conda](https://docs.conda.io/projects/conda/en/latest/glossary.html?highlight=environment#conda-environment) \n\nand currently does not support version 3.8 and above. It is recommended to install the package and its dependencies inside a clean environment (such as [conda](https://docs.conda.io/projects/conda/en/latest/glossary.html?highlight=environment#conda-environment), [venv](https://docs.python.org/3/library/venv.html) or [virtualenv](https://virtualenv.pypa.io/en/latest/index.html#)).\n\nTo set up on your local machine:\n\nTo install core utilities, CPU-based algorithms, and dependencies:\n\n1. Ensure software required for compilation and Python libraries is installed. On Linux this can be supported by adding:\n```bash\nsudo apt-get install -y build-essential libpython<version>\n``` \nwhere `<version>` should be `3.6` or `3.7` as appropriate.\n\nOn Windows you will need [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).\n  \n2. Create a conda or virtual environment. See the [setup guide](SETUP.md) for more details.\n\n3. Within the created environment, install the package from [PyPI](https://pypi.org):\n\n```bash\npip install --upgrade pip\npip install --upgrade setuptools\npip install recommenders[examples]\n```\n\n4. Register your (conda or virtual) environment with Jupyter:\n\n```bash\npython -m ipykernel install --user --name my_environment_name --display-name \"Python (reco)\"\n```\n\n5. Start the Jupyter notebook server\n\n```bash\njupyter notebook\n```\n\n6. Run the [SAR Python CPU MovieLens](examples/00_quick_start/sar_movielens.ipynb) notebook under the `00_quick_start` folder. Make sure to change the kernel to \"Python (reco)\".\n\nFor additional options to install the package (support for GPU, Spark etc.) see [this guide](recommenders/README.md).\n\n**NOTE** - The [Alternating Least Squares (ALS)](examples/00_quick_start/als_movielens.ipynb) notebooks require a PySpark environment to run. Please follow the steps in the [setup guide](SETUP.md#dependencies-setup) to run these notebooks in a PySpark environment. For the deep learning algorithms, it is recommended to use a GPU machine and to follow the steps in the [setup guide](SETUP.md#dependencies-setup) to set up Nvidia libraries.\n\n**NOTE for DSVM Users** - Please follow the steps in the [Dependencies setup - Set PySpark environment variables on Linux or MacOS](SETUP.md#dependencies-setup) and [Troubleshooting for the DSVM](SETUP.md#troubleshooting-for-the-dsvm) sections if you encounter any issue.\n\n**DOCKER** - Another easy way to try the recommenders repository and get started quickly is to build [docker images](tools/docker/README.md) suitable for different environments. \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

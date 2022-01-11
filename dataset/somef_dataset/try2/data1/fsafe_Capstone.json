@@ -1,0 +1,451 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1901.06359",
+      "https://arxiv.org/abs/1806.09648",
+      "https://arxiv.org/abs/1703.06870"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "class ToOriginalHU(object): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "class Compose(object): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9268240064709804
+      ],
+      "excerpt": "Region Proposal Network (RPN): \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fsafe/Capstone",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-09-14T19:36:43Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-09T01:54:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Image recognition and deep learning technologies using Convolutional Neural Networks (CNN) have demonstrated remarkable progress in the medical image analysis field. Traditionally radiologists with extensive clinical expertise visually asses medical images to detect and classify diseases. The task of lesion detection is particularly challenging because non-lesions and true lesions\ncan appear similar. \n\nFor my capstone project I use a Mask R-CNN <sup>[1](https://arxiv.org/abs/1703.06870)</sup> with a ResNet-50 Feature Pyramid Network backbone to detect lesions in a CT scan. The model outputs a bounding box, instance segmentation mask and confidence score for each detected lesion. Mask R-CNN was built by the Facebook AI research team (FAIR) in April 2017.\n\nThe algorithms are implemented using PyToch and run on an Nvidia Quadro P4000 GPU. \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.983211698525143
+      ],
+      "excerpt": "The dataset used to train the model has a variety of lesion types such as lung nodules, liver tumors and enlarged lymph nodes. This large-scale dataset of CT images, named DeepLesion, is publicly available and has over 32,000 annotated lesions.<sup>2</sup> The data consists of 32,120 axial computed tomography (CT) slices with 1 to 3 lesions in each image. The annotations and meta-data are stored in three excel files: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9135831627430225
+      ],
+      "excerpt": "Each row contains information for one lesion. For a list of meanings for each column in the annotation excel files go to:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869424926018464,
+        0.9824098623642988
+      ],
+      "excerpt": "Here is a description of some of the key fields: \ncolumn 6: Image coordinates (in pixel) of the two RECIST diameters of the lesion. There are 8 coordinates for each annotated lesion and the first 4 coordinates are for the long axis. \"Each RECIST-diameter bookmark consists of two lines: one measuring the longest diameter of the lesion and the second measuring its longest perpendicular diameter in the plane of measurement.\"<sup>3</sup> These coordinates are used to construct a pseudo-mask for each lesion. More details on this later.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9878797097777174,
+        0.9223517409068076
+      ],
+      "excerpt": "An important point to note is that the total size of the images in the dataset is 225GB however out of the 225GB there is only annotation (i.e. labelled) information for images totaling 7.2GB in size. In this implementation training was only done on a portion of the labelled data. \nSeveral pre-processing steps were conducted on the image and labels prior to serving them to the model. These steps were placed in a data pipeline so that the same pipeline could be used during the training, validation and testing phase. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8804994358593446,
+        0.971421037410991,
+        0.8171382368329584
+      ],
+      "excerpt": "different windows however a for this project a single range (-1024,3071 HU) is used that \ncovers the intensity ranges of the lung, soft tissue, and bone. \nResizing: Resize every image slice so that each pixel corresponds to 0.8mm. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8991170582839968
+      ],
+      "excerpt": "Clip black border (commented out in code): Clip black borders in image for computational efficiency and adjust bounding box and segmentatoin mask accordingly. For some unknown reason this transformation is apparently preventing the model's training loss to converge. This merits further investigation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8418587158674986,
+        0.9602660362152429
+      ],
+      "excerpt": "The DeepLesion dataset includes a file containing bookmarks (i.e. bounding boxes and RECIST diameters) for each lesion which are marked by radiologists. However the dataset does not include a segmentation mask for each lesion. Therefore using the method explained in (**) a psudo-mask is constructed by fitting an ellipse around the RECIST diameters.  \nPyTorch has tools to streamline the data preparation process used in many machine learning problems. Below I briefly go through the concepts which are used to make data loading easy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8424259385372058
+      ],
+      "excerpt": "This is an abstract class which represents the dataset. In this project the class DeepLesion is a subclass of the Dataset class. DeepLesion overrides the following methods of the Dataset class: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9320589451811714
+      ],
+      "excerpt": "A sample of the DeepLesion dataset will be a tuple consisting of the CT scan image (torch.tensor) and a dictionary of labels and meta data. The dictionary has the following structure: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8192883239747581
+      ],
+      "excerpt": "labels : List of 1's because 1 represents the label of the lesion class \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.941694607381125
+      ],
+      "excerpt": "DeepLesion's initializer also takes an optional argument 'transform' which is used to apply the preprocessing steps described above \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9901750351984988
+      ],
+      "excerpt": "For each preprocessing/transformation step a separate class is created. These classes will implement a __call__ method and an __init__ method. The __init__ is used to customize the transformation. For example in the ToOriginalHU class, 'offset' is passed to the __init__ method. The __call__ method on the other hand receives the parameters which are potentially transformed. In the  ToOriginalHU class the 'offset' value is subtracted from the image, which is passed as a parameter to the __call__ method. This is what the resulting code looks like: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.932427060390757
+      ],
+      "excerpt": "All such classes are placed together in a list and the resulting list is passed to the Compose class initializer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9350638627038494
+      ],
+      "excerpt": "This class also has a an __init__ method and a __call__ method. The __init__ method initializes the Compose class with a collection of other transformation classes initializers each representing a transformation as described above. The __call__ method simply traverses the collection instantiating each transformation and storing the result of each transformation in the same variables which are passed as parameters to the next transformation. By doing this Compose chains the preprocessing steps together. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8222161905477767
+      ],
+      "excerpt": "        for t in self.transforms: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8498960215685909
+      ],
+      "excerpt": "Now let's look at how these concepts are used in the project: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9716487816250542
+      ],
+      "excerpt": "The above code snippet first defines a data_transformation dictionary which has 'train', 'val' and 'test' as the key values and an instance of the Compose class (with all preprocessing steps) as the value for each key. Similarly the image_dataset is a dictionary with the same keys and the values contain an instance of the DeepLesion class. Note that an instance of the Compose class is passed to the 'transform' parameter (third parameter) to create an instance of the DeepLesion class. The value of the 'transform' parameter is stored in the 'self.transform' attribute of the DeepLesion class instance. This way all the requred transformations which must be done on the dataset are stored in the dataset object. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9902276623904837,
+        0.8743786289914613
+      ],
+      "excerpt": "This is an iterator class which provides features such as batching and shuffling. Another parameter which is used in the DataLoader class is 'collate_fn' which specifies how the samples will be batched. To illustrate how the 'collate_fn' parameter is used in this project let us recall the structure of a sample of the DeepLesion class. Each sample is a tuple: \n'image' : torch.tensor ( this is the CT scan slice stored as a Tensor ) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9700629136045466,
+        0.9740667370267083,
+        0.9445505637904239
+      ],
+      "excerpt": "The above tuple is for one sample. When the DataLoader uses the defaulf batch collate function it will maintain the same structure. In other words the DataLoader iterator will, during each iteration, return a tuple in which the first element is a list of 'image' structures and the second element is a dictionary. This dictionary will have the same keys as 'targets'. Therefore targets['boxes'] will return a list where each element in the list is itself a list of bounding boxes. Similarly targets['masks'] returns a list where each element in the list is itself a list of masks. Howevef the strucure of target which is requiored for the maskrcnn_resnet50_fpn is for 'targets' to be a list (not a dictionary) where each elements of this list is a dictionary with keys 'boxes', 'masks', 'labels'. To make this conversion a custom batch collate function is unsed (BatchCollator). \nThe model employed to detect lesions when given an image of a CT scan is a Mask R-CNN with a ResNet-50-FPN backbone. A Mask R-CNN is used to detect both bounding boxes around objects (Object Detection) as well as mask segmentation (Semantic Segmentation) for each lesion object. This means that for each detected lesion a box surrounding the object is given as well as each pixel of the image is classified as being a background pixel or a lesion pixel. These two tasks combined together are called Object Instance Segmentation. \nHere are the main components of the Mask R-CNN which consists of a feature extracter (backbone) followed by a Region Proposal Network and two network heads (box and mask) that run parallel to each other: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9931358705261214
+      ],
+      "excerpt": "The ResNet50 backbone is a an architecture which acts as a feature extractor which means it takes the input image and outputs a feature map. The early layers detect low level features (edges and corners), and later layers successively detect higher level features (cars, balls, cats). The ResNet-50-FPN backbone is an improvement of this concept by using a Feature Pyramid Network. Essentially the FPN has a bottom-top pathway (which in this case is the ResNet-50) where the image is passed through a series of CNNs with down sampling (by doubling the stride at each stage). At each stage the image's spatial dimension (i.e. image resolution which is not to be confused with feature resolution) decreases however the semantic value (feature resolution) increases. This is then followed by the top-bottom pathway which takes the high level features from the last layer of the bottom-top pathway and passes them down to lower layers (using upsampling by a factor of 2 at each layer). The feaure from the top-bottom pathway at each layer are then fused with the features of the same spatial size from the bottom-up pathway via lateral connections. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.992292329488777
+      ],
+      "excerpt": "The FPN is essentially a feature detector and not an object detector on its own. The features from the FPN are fed into a learned RPN. The RPN learns to propose regions of interest (RoI) from the image feature maps using anchors which are a set of boxes which scale according to the input image. These RoIs are regions which may contain an object. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9987820372071795
+      ],
+      "excerpt": "Fast R-CNN and Faster R-CNN can be considered predecessors of Mask R-CNN. In both Fast/Faster R-CNN RoIPooling is used to extract small feature maps from each RoI window coming out of the RPN (by using max or arverage pooling). It should be noted that quantizing is performed in Fast/Faster R-CNN both going from the input image to the input image feature map where the RoI windows are projected on and also from the projected RoI windows to the small RoI feature maps created by RoIPooling. To understand quantizing take as an example if the input image is 800x800 with an RoI window of 665x665 and that the backbone CNN reduces the image and RoI by a factor of 32. In this case the dimention of the RoI window projected on the input image feature map outputed by the backbone would be floor(665/32)=20. This is called quantizing a floating point number and causes information loss. Quantizing is also done during RoIPooling when going from the projection of the RoI window on the image feature map to the RoI feature map. Quantizing in Fast/Faster R-CNN does not have a major impact as the task at hand is classification. However it has a significant negative effect on predicting pixel masks which is one of the tasks carried out in a Mask R-CNN. To account for negative effects of quantizing, a Mask R-CNN uses an RoIAlign layer which removes the quantization of RoIPool. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9418038030898768,
+        0.9905528151027058
+      ],
+      "excerpt": "Here the RoIAligned proposals are not reshaped as was the case in the Box Head because reshaping loses the spatial structure information necessary to generate masks. Instead the propsals are passed through a series of 3x3 convolutional layers followed by ReLU activations and 2x2 deconvolutions with stride 2 and finally a 1x1 convolution. Fully convolutional indicates that the neural network is composed of convolutional layers without any fully-connected layers. This entire process generates the mask predictions per class. \nA Mask R-CNN is basically a Faster R-CNN with an additional mask prediction branch. Two other differentiating factors are that a Mask R-CNN uses a Feature Pyramid Network and RoIAlign instead of RoIPool. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9818257210323318
+      ],
+      "excerpt": "The MaskRCNN class used in the implementation of this project outputs 5 loss functions. The optimization defined during training uses the sum of these 5 losses. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8037582678511463
+      ],
+      "excerpt": "Box Regression: Smooth L1 loss as defined in Fast R-CNN by Ross Girshick. This is a linear loss unless the absolute element-wise error falls below 1 in which case the loss is squared. It represents the error in predicting the bounding box coordinates. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9475140010790186,
+        0.8612257729023384,
+        0.9751226201053522
+      ],
+      "excerpt": "RPN Box Regression Loss: L1 loss showing how well the proposals coming out of the RPN are. In this case a good proposal would be one in which a lesion in contained in the proposed region predicted by the RPN.   \nObjectness Loss: Binary cross entropy loss. The RPN outputs many proposals however each proposal has an objectness score which represents if the anchor contains a background or foreground object. In this case a lesion is the only foreground object. The Objectness loss represents the error of the objectness score. \nThe model was trained using a Mask R-CNN which was not pretrained and the network parameters are initialized using Kaiming Initialization. However in this project the ResNet50_fpn backbone used in the MaskRCNN is pretained on ImageNet. The model is run over 10 epocs. During training a loss value is output however during evaluation the model metrics are outputed. These metrics are commonly used for lesion detection and are lesion localization fraction (LLF) and non-lesion localization fraction (NLF). LLF is the total number of lesions detected (at a given threshold) divided by the total number of lesions. NLF is the total number of detected non-lesions (i.e. false positives) divided by the total number of images. During each iteration the model is trained on the training set in training mode and is then put on evaluation mode and does inference on the validation set. The best model outputs an LLF of 67.46% and NLF of 4.97. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9673368119301501
+      ],
+      "excerpt": "The following hyperparameters of the Mask R-CNN were also used: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fsafe/Capstone/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Wed, 22 Dec 2021 18:14:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fsafe/Capstone/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fsafe/Capstone",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/fsafe/Capstone/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/fsafe/Capstone/master/prototype.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8536142031558633,
+        0.813413361747514,
+        0.8706420006053902
+      ],
+      "excerpt": "DL_info_train.csv (training set) \nDL_info_val.csv (validation set) \nDL_info_test.csv (test set) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8317858709583854
+      ],
+      "excerpt": "torch.utils.data.Dataset class: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8473931874814408
+      ],
+      "excerpt": "    \"\"\"Subtracting offset from the16-bit pixel intensities to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8184136546953228
+      ],
+      "excerpt": "        self.offset = offset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8652890265653578
+      ],
+      "excerpt": "        image = image.astype(np.float32, copy=False) - self.offset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8131950727605473
+      ],
+      "excerpt": "from data import transforms as T \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "    'train': T.Compose([T.ToOriginalHU(INTENSITY_OFFSET) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664
+      ],
+      "excerpt": "    , 'test': T.Compose([T.ToOriginalHU(INTENSITY_OFFSET) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664
+      ],
+      "excerpt": "                                                                                                  , 'test']} \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/fsafe/Capstone/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "UNIVERSAL LESION DETECTOR FOR CT SCANS WITH PSEUDO MASKS",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Capstone",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fsafe",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/fsafe/Capstone/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Wed, 22 Dec 2021 18:14:30 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

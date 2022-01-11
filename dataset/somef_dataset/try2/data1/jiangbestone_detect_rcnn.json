@@ -1,0 +1,299 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find R-CNN useful in your research, please consider citing:\n\n    @inproceedings{girshick14CVPR,\n        Author = {Girshick, Ross and Donahue, Jeff and Darrell, Trevor and Malik, Jitendra},\n        Title = {Rich feature hierarchies for accurate object detection and semantic segmentation},\n        Booktitle = {Computer Vision and Pattern Recognition},\n        Year = {2014}\n    }\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{girshick14CVPR,\n    Author = {Girshick, Ross and Donahue, Jeff and Darrell, Trevor and Malik, Jitendra},\n    Title = {Rich feature hierarchies for accurate object detection and semantic segmentation},\n    Booktitle = {Computer Vision and Pattern Recognition},\n    Year = {2014}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9977556898099157
+      ],
+      "excerpt": "Created by Ross Girshick, Jeff Donahue, Trevor Darrell and Jitendra Malik at UC Berkeley EECS. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiangbestone/detect_rcnn",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-04T03:22:02Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-04T08:43:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "R-CNN is a state-of-the-art visual object detection system that combines bottom-up region proposals with rich features computed by a convolutional neural network. At the time of its release, R-CNN improved the previous best detection performance on PASCAL VOC 2012 by 30% relative, going from 40.9% to 53.3% mean average precision. Unlike the previous best results, R-CNN achieves this performance without using contextual rescoring or an ensemble of feature types.\n\nR-CNN was initially described in an [arXiv tech report](http://arxiv.org/abs/1311.2524) and will appear in a forthcoming CVPR 2014 paper.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9992011063471555
+      ],
+      "excerpt": "Acknowledgements: a huge thanks to Yangqing Jia for creating Caffe and the BVLC team, with a special shoutout to Evan Shelhamer, for maintaining Caffe and helping to merge the R-CNN fine-tuning code into Caffe. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8723626495032766,
+        0.9627487715650112,
+        0.8775263751302564
+      ],
+      "excerpt": "R-CNN          | 54.2%        | 50.2%        | 49.6% \nR-CNN bbox reg | 58.5%        | 53.7%        | 53.3% \nVOC 2007 per-class results are available in our CVPR14 paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.962658064729328
+      ],
+      "excerpt": "These models are available in the model package (see below) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9627487715650112,
+        0.9878944416383323,
+        0.9788822098747065,
+        0.9695082792668982
+      ],
+      "excerpt": "R-CNN bbox reg | 31.4% \nFor more details see the updated R-CNN tech report (Sections 2.5 and 4, in particular) \nThis model is available in the model package (see below) \nThe code that was used for training is in the ilsvrc branch (still needs some cleanup before merging into master) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8281719454559191
+      ],
+      "excerpt": "You'll need about 200GB of disk space free for the feature cache (which is stored in rcnn/feat_cache by default; symlink rcnn/feat_cache elsewhere if needed). It's best if the feature cache is on a fast, local disk. Before running the pipeline, we first need to install the PASCAL VOC 2007 dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8259782481712146
+      ],
+      "excerpt": "It should be easy to train an R-CNN detector using another detection dataset as long as that dataset has complete bounding box annotations (i.e., all instances of all classes are labeled). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9150981313951487
+      ],
+      "excerpt": "As an example, let's see how you would fine-tune a CNN for detection on PASCAL VOC 2012. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "detect_rcnn",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The quickest way to get started is to download pre-computed R-CNN detectors. Currently we have detectors trained on PASCAL VOC 2007 train+val, 2012 train, and ILSVRC13 train+val. Unfortunately the download is large (1.5GB), so brew some coffee or take a walk while waiting.\n\nFrom the `rcnn` folder, run the model fetch script: `./data/fetch_models.sh`. \n\nThis will populate the `rcnn/data` folder with `caffe_nets` and `rcnn_models`. See `rcnn/data/README.md` for details.\n\nPre-computed selective search boxes can also be downloaded for VOC2007, VOC2012, and ILSVRC13.\nFrom the `rcnn` folder, run the selective search data fetch script: `./data/fetch_selective_search_data.sh`.\n\nThis will populate the `rcnn/data` folder with `selective_selective_data`.\n\n**Caffe compatibility note:** R-CNN has been updated to use the new Caffe proto messages that were rolled out in Caffe v0.999. The model package contains models in the up-to-date proto format. If, for some reason, you need to get the old (Caffe proto v0) models, they can still be downloaded: [VOC models](https://dl.dropboxusercontent.com/s/ttw041hqgw64ymx/r-cnn-release1-data-caffe-proto-v0.tgz) \n [ILSVRC13 model](https://dl.dropboxusercontent.com/s/c6aqns2bvoqi86q/r-cnn-release1-data-ilsvrc2013-caffe-proto-v0.tgz).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiangbestone/detect_rcnn/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 01:15:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jiangbestone/detect_rcnn/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jiangbestone/detect_rcnn",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "0. Download the training, validation, test data and VOCdevkit:\n\n  <pre>\n  wget http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2007/VOCtrainval_06-Nov-2007.tar\n  wget http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2007/VOCtest_06-Nov-2007.tar\n  wget http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2007/VOCdevkit_08-Jun-2007.tar\n  </pre>\n\n0. Extract all of these tars into one directory, it's called `VOCdevkit`. \n\n  <pre>\n  tar xvf VOCtrainval_06-Nov-2007.tar\n  tar xvf VOCtest_06-Nov-2007.tar\n  tar xvf VOCdevkit_08-Jun-2007.tar\n  </pre>\n\n0. It should have this basic structure:\n\n  <pre>\n  VOCdevkit/                           % development kit\n  VOCdevkit/VOCcode/                   % VOC utility code\n  VOCdevkit/VOC2007                    % image sets, annotations, etc.\n  ... and several other directories ...\n  </pre>\n\n0. I use a symlink to hook the R-CNN codebase to the PASCAL VOC dataset:\n\n  <pre>\n  ln -sf /your/path/to/voc2007/VOCdevkit /path/to/rcnn/datasets/VOCdevkit2007\n  </pre>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "0. **Prerequisites** \n  0. MATLAB (tested with 2012b on 64-bit Linux)\n  0. Caffe's [prerequisites](http://caffe.berkeleyvision.org/installation.html#prequequisites)\n0. **Install Caffe** (this is the most complicated part)\n  0. R-CNN has been checked for compatability against Caffe release v0.999. *It has not been updated to work with the current Caffe master.*\n  0. Download [Caffe v0.999](https://github.com/BVLC/caffe/archive/v0.999.tar.gz)\n  0. Follow the [Caffe installation instructions](http://caffe.berkeleyvision.org/installation.html)\n  0. Let's call the place where you installed caffe `$CAFFE_ROOT` (you can run `export CAFFE_ROOT=$(pwd)`)\n  0. **Important:** Make sure to compile the Caffe MATLAB wrapper, which is not built by default: `make matcaffe`\n  1. **Important:** Make sure to run `cd $CAFFE_ROOT/data/ilsvrc12 && ./get_ilsvrc_aux.sh` to download the ImageNet image mean\n0. **Install R-CNN**\n  0. Get the R-CNN source code by cloning the repository: `git clone https://github.com/rbgirshick/rcnn.git`\n  0. Now change into the R-CNN source code directory: `cd rcnn`\n  0. R-CNN expects to find Caffe in `external/caffe`, so create a symlink: `ln -sf $CAFFE_ROOT external/caffe`\n  0. Start MATLAB (make sure you're still in the `rcnn` directory): `matlab`\n  0. You'll be prompted to download the [Selective Search](http://disi.unitn.it/~uijlings/MyHomepage/index.php#page=projects1) code, which we cannot redistribute. Afterwards, you should see the message `R-CNN startup done` followed by the MATLAB prompt `>>`.\n  0. Run the build script: `>> rcnn_build()` (builds [liblinear](http://www.csie.ntu.edu.tw/~cjlin/liblinear/) and [Selective Search](http://www.science.uva.nl/research/publications/2013/UijlingsIJCV2013/)). Don't worry if you see compiler warnings while building liblinear, this is normal on my system.\n  0. Check that Caffe and MATLAB wrapper are set up correctly (this code should run without error): `>> key = caffe('get_init_key');` (expected output is key = -2)\n  0. Download the model package, which includes precompute models (see below).\n\n**Common issues:** You may need to set an `LD_LIBRARY_PATH` before you start MATLAB. If you see a message like \"Invalid MEX-file '/path/to/rcnn/external/caffe/matlab/caffe/caffe.mexa64': libmkl_rt.so: cannot open shared object file: No such file or directory\" then make sure that CUDA and MKL are in your `LD_LIBRARY_PATH`. On my system, I use:\n\n    export LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:/usr/local/cuda/lib64\n  \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8654898800567213
+      ],
+      "excerpt": "Start MATLAB in the rcnn directory \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": ">> rcnn_exp_cache_features('train');   % chunk1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8091401015596288
+      ],
+      "excerpt": "Note: The training and testing procedures save models and results under rcnn/cachedir by default. You can customize this by creating a local config file named rcnn_config_local.m and defining the experiment directory variable EXP_DIR. Look at rcnn_config_local.example.m for an example. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8009270190669271
+      ],
+      "excerpt": "Create the window file for VOC 2012 train: &gt;&gt; rcnn_make_window_file(imdb_train, 'external/caffe/examples/pascal-finetuning'); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8449701992204164,
+        0.8596776982446631
+      ],
+      "excerpt": "Copy the fine-tuning prototxt files: cp finetuning/voc_2012_prototxt/pascal_finetune_* external/caffe/examples/pascal-finetuning/ \nChange directories to external/caffe/examples/pascal-finetuning \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jiangbestone/detect_rcnn/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C",
+      "MATLAB"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 ZFTurbo (Roman Solovyev)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DetectRCNN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "detect_rcnn",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jiangbestone",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiangbestone/detect_rcnn/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Let's assume that you've downloaded the precomputed detectors. Now:\n\n1. Change to where you installed R-CNN: `cd rcnn`. \n2. Start MATLAB `matlab`.\n  * **Important:** if you don't see the message `R-CNN startup done` when MATLAB starts, then you probably didn't start MATLAB in `rcnn` directory.\n3. Run the demo: `>> rcnn_demo`\n3. Enjoy the detected bicycle and person\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 01:15:17 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

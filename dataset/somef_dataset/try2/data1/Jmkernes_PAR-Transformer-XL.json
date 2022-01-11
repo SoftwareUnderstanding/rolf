@@ -1,0 +1,304 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1609.04309"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9989297809327486
+      ],
+      "excerpt": "The Pay Attention when Required Transformer (Mandava, et. al. 2020) is just a regular transformer-XL (Dai et. al. 2019)[https://arxiv.org/pdf/1901.02860.pdf] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9643113664488154,
+        0.9999227186829392
+      ],
+      "excerpt": "[Source: Mandava et. al. 2020] \nThe key component is a Gumbel-Softmax layer [(Jang et al., 2016) and (Maddison et al., 2016). jang link: https://arxiv.org/pdf/1611.01144.pdf]. This layer is a continuous representation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "|         56.5k         |       42.12      |         39.41         | 37m 14s | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jmkernes/PAR-Transformer-XL",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-21T07:44:21Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T09:52:06Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8447876410482679,
+        0.9893615576234656,
+        0.986549605437074,
+        0.8667231662587196
+      ],
+      "excerpt": ", but the ratio of attention and dense layers has been optimized. \nThis optimization is performed by allowing the network to choose which types of layer it prefers in each block of the network. The present implementation is not an exact replica of the author's efforts. \nInstead, we perform a simultaneous optimization procedure on both the model architecture and model parameters. The search is performed using a SuperNet, which is  \na sequential neural network composed of stochastic blocks, as shown in the figure below (taken from the paper. Please don't sue me!) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8761198073240484,
+        0.9470968016318325,
+        0.9581430709568667
+      ],
+      "excerpt": "of a discrete sampling from a Categorical distribution, thereby allowing us to use gradients to learn parameters of a discrete distribution.  \n(Recall a categorical is a distrbution over K states with kth state having probability pi_k, and we must have the normalization condition \\sum_{i=1}^K pi_i = 1) \nAs the model learns, it is free to adjust both the usual model parameters, as well as its architecture search parameters pi, indicating the probability of choosing either \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "2) Dense \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.950572923282832,
+        0.9970388384371337,
+        0.9079983065668499,
+        0.9794547471621282,
+        0.9122247620545159,
+        0.9596252592494319,
+        0.8982339829930557
+      ],
+      "excerpt": "for any given stochastic block. We perform simulated annealing: since the categorical distribution is approximated by a continuous representation, we get some scores like (0.02, 0.98, 0.02) \nfor the probability of say sampling that state 2 is picked. The sharpness of this is set by a parameter \\tau (the temperature), with a categorical distribution the limit tau-->0. \nSimulated annealing means we begin with tau=1 to let the model figure out what it wants, then slowly decrease tau so the distribution approaches a categorical. \nAll of this is implemented on the freely available wiki-text2 dataset. \nExplanation of the main GIF: The main gif is the result of our experiments. It shows the pi distribution for each stochastic block of a 6 block SuperNet, as a function of training iterations. \nThe number indicates the probability of the most likely layer type (darker means more probable). As you can see, the model learns to put attention in the beginning, and dense layers at the end. \nThe dataset used is Wiki-text2. We have provided a copy of this in the data folder, along with some preprocessed data for training. In order to reproduce this from scratch, run the shell script \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863573429754606,
+        0.9368178230230642,
+        0.9646454004104464
+      ],
+      "excerpt": "You can also supply your own dataset instead of the one provided. The underlying tokenizer uses sentencepiece (Kudo): https://github.com/google/sentencepiece, which works at the byte level and can handle any kind of input. Simply change the --input_text flag to your file, and set the desired --vocab_size. \nWhy do we need to specify the batch size? Transformer XL uses memory states to form a recurrent, long range network. After analyzing a particular sequence say [A,B] of the sequence [A,B,C,D], the results of [A,B] are fed into the [C,D] calculation with a stop gradient. Therefore, we must be sure that each datapoint follows chronologically from the previous one. \nThis is achieved by context batching (see data_utils.py function) where we break the entire dataset into batch_size segments, then pull in order one sequence from each batch at a time to form the dataset. Because of this, note that adding more shards to the data could result in a large loss (order of batch_size*seq_len*shards), as each shard will drop the remaining datapoint of size (batch_size*seq_len) to keep the tensor shapes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9747557825062148,
+        0.990297776869178,
+        0.9464836427659175
+      ],
+      "excerpt": "For completeness, we have also provided a script optimal_cuts.py that determines the optimal cutoffs given a return space separated file of unigram probabilities (based on the assumptions of Grave et. al. regarding GPU computation complexity -- see the paper for details).  \nThe algorithm uses dynamic programming, but is quite slow at O(KN^2), for K cutoffs and N vocab words. In principle it's a one time cost to determine the cutoffs, but we are impatient and recommend to just play around with the cutoffs instead. See the script for flag details \nThe default model we use has memory length 16, feed-forward dimension 1024, attention dimension 128, and 6 stochastic blocks, with an adaptive softmax layer and 2 clusters. We trained on a colab GPU for 20 epochs, taking a total of 37 minutes. We use an Adam optimzer with cosine rate decay: an initial warmup of 4000 steps and a maximum learning rate of 1e-4, decaying to zero at the end of training. Our training benchmarks are: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9957910504726163
+      ],
+      "excerpt": "adjusting the parameters as you see fit. The above model is the default configuration. To train in colab, simply open up the notebook \"colab.ipynb\" and follow the instructions. This is most easily done by going to [google.colab.com] and searching this repository in github. The benefit of colab, is it's easier to play around with the model after training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9238709008040772
+      ],
+      "excerpt": "Enjoy! And thank you to the wonderful researchers that inspired this project. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An implementation of the Pay Attention when Required transformer: https://arxiv.org/pdf/2009.04534.pdf",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jmkernes/PAR-Transformer-XL/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 09:12:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Jmkernes/PAR-Transformer-XL/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Jmkernes/PAR-Transformer-XL",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Jmkernes/PAR-Transformer-XL/main/colab.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Jmkernes/PAR-Transformer-XL/main/download_data.sh",
+      "https://raw.githubusercontent.com/Jmkernes/PAR-Transformer-XL/main/base_model.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9043929270298233
+      ],
+      "excerpt": "[source: Jonathan Kernes] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.817839445966529
+      ],
+      "excerpt": "To train, simply run the shell script \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8411054858483956
+      ],
+      "excerpt": "The dataset used is Wiki-text2. We have provided a copy of this in the data folder, along with some preprocessed data for training. In order to reproduce this from scratch, run the shell script \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8846607740151372
+      ],
+      "excerpt": "This will download the wiki-text2 dataset from its source, then proceed to clean, batch, and write the data to a tfrecords file. The shell script calls build_data.py which offers more control over what type of data to generate. The general parameters you will want to tune are: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8032343131414437,
+        0.8367585775987905
+      ],
+      "excerpt": "1) A tensorboard log. The colab notebook takes care of running this for you. In the terminal, first create a 'logs' directory, then run the command tensorboard --logdir logs in a separate tab. This will open a port where you can view live plots of the learning rate, tau annealing, train/valid loss and perplexity. \n2) An output log saved to training_log.log. This will log the model summary, parameters, etc. as well as print out loss updates every 100 steps and save it to the log file. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Jmkernes/PAR-Transformer-XL/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "**P**ay **A**ttention when **R**equired (PAR) Transformer-XL",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PAR-Transformer-XL",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Jmkernes",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Jmkernes/PAR-Transformer-XL/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Usual ML stuff, if you have a conda environment, python 3+, TensorFlow 2+ you should be ok. You will need TensorFlow Text as well to handle the SentencePiece Tokenization\n\nIf you choose to run your own tokenizer (a flag option in data_utils for handling new text data), you will also need to download the SentencePiece package: https://github.com/google/sentencepiece\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Tue, 28 Dec 2021 09:12:42 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

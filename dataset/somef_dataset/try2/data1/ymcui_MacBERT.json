@@ -1,0 +1,386 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The first author would like to thank [Google TensorFlow Research Cloud (TFRC) Program](https://www.tensorflow.org/tfrc).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2004.13922",
+      "https://arxiv.org/abs/2004.13922",
+      "https://arxiv.org/abs/2004.13922",
+      "https://arxiv.org/abs/2004.13922"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find our resource or paper is useful, please consider including the following citation in your paper.\n```\n@inproceedings{cui-etal-2020-revisiting,\n    title = \"Revisiting Pre-Trained Models for {C}hinese Natural Language Processing\",\n    author = \"Cui, Yiming  and\n      Che, Wanxiang  and\n      Liu, Ting  and\n      Qin, Bing  and\n      Wang, Shijin  and\n      Hu, Guoping\",\n    booktitle = \"Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.findings-emnlp.58\",\n    pages = \"657--668\",\n}\n```\n\nOr:\n```\n@journal{cui-etal-2021-pretrain,\n  title={Pre-Training with Whole Word Masking for Chinese BERT},\n  author={Cui, Yiming and Che, Wanxiang and Liu, Ting and Qin, Bing and Yang, Ziqing},\n  journal={IEEE Transactions on Audio, Speech and Language Processing},\n  year={2021},\n  url={https://ieeexplore.ieee.org/document/9599397},\n  doi={10.1109/TASLP.2021.3124365},\n }\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{cui-etal-2020-revisiting,\n    title = \"Revisiting Pre-Trained Models for {C}hinese Natural Language Processing\",\n    author = \"Cui, Yiming  and\n      Che, Wanxiang  and\n      Liu, Ting  and\n      Qin, Bing  and\n      Wang, Shijin  and\n      Hu, Guoping\",\n    booktitle = \"Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.findings-emnlp.58\",\n    pages = \"657--668\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9995057724575434,
+        0.9972352910378922,
+        0.9793806207210615
+      ],
+      "excerpt": "- CMRC 2018 (Cui et al., 2019)\uff1aSpan-Extraction Machine Reading Comprehension (Simplified Chinese) \n- DRCD (Shao et al., 2018)\uff1aSpan-Extraction Machine Reading Comprehension (Traditional Chinese) \n- XNLI (Conneau et al., 2018)\uff1aNatural Langauge Inference \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9985984012924127,
+        0.9976661828707363
+      ],
+      "excerpt": "- LCQMC (Liu et al., 2018)\uff1aSentence Pair Matching \n- BQ Corpus (Chen et al., 2018)\uff1aSentence Pair Matching \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| MacBERT-base | 68.5 (67.3) / 87.9 (87.1) |73.2 (72.4) / 89.5 (89.2)|30.2 (26.4) / 54.0 (52.2)|102M| \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ymcui/MacBERT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-22T04:29:44Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T09:20:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**MacBERT** is an improved BERT with novel **M**LM **a**s **c**orrection pre-training task, which mitigates the discrepancy of pre-training and fine-tuning.\n\nInstead of masking with [MASK] token, which never appears in the \ufb01ne-tuning stage, **we propose to use similar words for the masking purpose**. A similar word is obtained by using [Synonyms toolkit (Wang and Hu, 2017)](https://github.com/chatopera/Synonyms), which is based on word2vec (Mikolov et al., 2013) similarity calculations. If an N-gram is selected to mask, we will \ufb01nd similar words individually. In rare cases, when there is no similar word, we will degrade to use random word replacement.\n\nHere is an example of our pre-training task.\n|  | Example       |\n| -------------- | ----------------- |\n| **Original Sentence**  | we use a language model to predict the probability of the next word. |\n|  **MLM** | we use a language [M] to [M] ##di ##ct the pro [M] ##bility of the next word . |\n| **Whole word masking**   | we use a language [M] to [M] [M] [M] the [M] [M] [M] of the next word . |\n| **N-gram masking** | we use a [M] [M] to [M] [M] [M] the [M] [M] [M] [M] [M] next word . |\n| **MLM as correction** | we use a text system to ca ##lc ##ulate the po ##si ##bility of the next word . |\n\nExcept for the new pre-training task, we also incorporate the following techniques.\n\n- Whole Word Masking (WWM)\n- N-gram masking\n- Sentence-Order Prediction (SOP)\n\n**Note that our MacBERT can be directly replaced with the original BERT as there is no differences in the main neural architecture.**\n\nFor more technical details, please check our paper: [Revisiting Pre-trained Models for Chinese Natural Language Processing](https://arxiv.org/abs/2004.13922)\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9842687170686348
+      ],
+      "excerpt": "[Sep 15, 2020] Our paper \"Revisiting Pre-Trained Models for Chinese Natural Language Processing\" is accepted to Findings of EMNLP as a long paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8823856289460312
+      ],
+      "excerpt": "1) Convert TensorFlow checkpoint into PyTorch/TensorFlow2, using \ud83e\udd17Transformers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9161997971925808,
+        0.9499059358028265
+      ],
+      "excerpt": "Steps: select one of the model in the page above \u2192 click \"list all files in model\" at the end of the model page \u2192 download bin/json files from the pop-up window. \nWith Huggingface-Transformers, the models above could be easily accessed and loaded through the following codes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = BertModel.from_pretrained(\"MODEL_NAME\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8276243480451438
+      ],
+      "excerpt": "The actual model and its MODEL_NAME are listed below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9680726614887792
+      ],
+      "excerpt": "We present the results of MacBERT on the following six tasks (please read our paper for other results). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.838175714572034,
+        0.9705704452972593
+      ],
+      "excerpt": "To ensure the stability of the results, we run 10 times for each experiment and report the maximum and average scores (in brackets). \nCMRC 2018 dataset is released by the Joint Laboratory of HIT and iFLYTEK Research. The model should answer the questions based on the given passage, which is identical to SQuAD. Evaluation metrics: EM / F1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8926572920818365
+      ],
+      "excerpt": "DRCD is also a span-extraction machine reading comprehension dataset, released by Delta Research Center. The text is written in Traditional Chinese. Evaluation metrics: EM / F1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.873822447399608
+      ],
+      "excerpt": "LCQMC is a sentence pair matching dataset, which could be seen as a binary classification task. Evaluation metrics: Accuracy \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.873822447399608
+      ],
+      "excerpt": "BQ Corpus is a sentence pair matching dataset, which could be seen as a binary classification task. Evaluation metrics: Accuracy \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9169725484773331
+      ],
+      "excerpt": "We cannot acommodate EVERY request, and thus please bare in mind that there is no guarantee that your request will be met. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Revisiting Pre-trained Models for Chinese Natural Language Processing (Findings of EMNLP 2020)",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We mainly provide pre-trained MacBERT models in TensorFlow 1.x.\n\n* **`MacBERT-large, Chinese`**: 24-layer, 1024-hidden, 16-heads, 324M parameters   \n* **`MacBERT-base, Chinese`**\uff1a12-layer, 768-hidden, 12-heads, 102M parameters   \n\n| Model                                |                         Google Drive                         |                        iFLYTEK Cloud                         | Size |\n| :----------------------------------- | :----------------------------------------------------------: | :----------------------------------------------------------: | :--: |\n| **`MacBERT-large, Chinese`**    | [TensorFlow](https://drive.google.com/file/d/1lWYxnk1EqTA2Q20_IShxBrCPc5VSDCkT/view?usp=sharing) | [TensorFlow\uff08pw:3Yg3\uff09](http://pan.iflytek.com:80/link/805D743F3826EC4F4EB5C774D34432AE) | 1.2G |\n| **`MacBERT-base, Chinese`**     | [TensorFlow](https://drive.google.com/file/d/1aV69OhYzIwj_hn-kO1RiBa-m8QAusQ5b/view?usp=sharing) | [TensorFlow\uff08pw:E2cP\uff09](http://pan.iflytek.com:80/link/CF2A1F9AEBF859650E8956854A994C1B) | 383M |\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ymcui/MacBERT/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**Question 1: Do you have an English version of MacBERT?**\n\nA1: Sorry, we do not have English version of pre-trained MacBERT. \n\n**Question 2: How to use MacBERT?**\n\nA2: Use it as if you are using original BERT in the fine-tuning stage (just replace the checkpoint and config files). Also, you can perform further pre-training on our checkpoint with MLM/NSP/SOP objectives. \n\n**Question 3: Could you provide pre-training code for MacBERT?**\n\nA3: Sorry, we cannot provide source code at the moment, and maybe we'll release them in the future, but there is no guarantee.\n\n**Question 4: How about releasing the pre-training data?**\n\nA4: We have no right to redistribute these data, which will have potential legal violations.\n\n**Question 5: Will you release pre-trained MacBERT on a larger data?**\n\nA5: Currently, we have no plans on this.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 30,
+      "date": "Tue, 28 Dec 2021 05:27:08 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ymcui/MacBERT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ymcui/MacBERT",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "| Section | Description |\n|-|-|\n| [Introduction](#Introduction) | Introduction to MacBERT |\n| [Download](#Download) | Download links for MacBERT |\n| [Quick Load](#Quick-Load) | Learn how to quickly load our models through [\ud83e\udd17Transformers](https://github.com/huggingface/transformers) |\n| [Results](#Results) | Results on several Chinese NLP datasets |\n| [FAQ](#FAQ) | Frequently Asked Questions |\n| [Citation](#Citation) | Citation |\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9019642544377184
+      ],
+      "excerpt": "If you need these models in PyTorch/TensorFlow2, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9379269274640173
+      ],
+      "excerpt": "2) Download from https://huggingface.co/hfl \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8131816165702295
+      ],
+      "excerpt": "| Model                     |        Development        |           Test            |         Challenge         | #Params | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008987575613644
+      ],
+      "excerpt": "| RoBERTa-wwm-ext           | 67.4 (66.5) / 87.2 (86.5) | 72.6 (71.4) / 89.4 (88.8) | 26.2 (24.6) / 51.0 (49.1) |  102M   | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85832996244988
+      ],
+      "excerpt": "| Model                     |        Development        |           Test            | #Params | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85832996244988
+      ],
+      "excerpt": "| Model                     | Development |    Test     | #Params | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85832996244988
+      ],
+      "excerpt": "| Model                     | Development |    Test     | #Params | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85832996244988
+      ],
+      "excerpt": "| Model                     | Development |    Test     | #Params | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.85832996244988
+      ],
+      "excerpt": "| Model                     | Development |    Test     | #Params | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ymcui/MacBERT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# News",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MacBERT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ymcui",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ymcui/MacBERT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 308,
+      "date": "Tue, 28 Dec 2021 05:27:08 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "nlp",
+      "bert",
+      "language-model",
+      "tensorflow",
+      "macbert",
+      "pytorch",
+      "transformers"
+    ],
+    "technique": "GitHub API"
+  }
+}

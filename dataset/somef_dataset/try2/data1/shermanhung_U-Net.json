@@ -1,0 +1,395 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] O. Ronneberger, P. Fischer, and T. Brox. U-Net: Convolutional Networks for Biomedical Image Segmentation, http://arxiv.org/pdf/1505.04597.pdf\n\n[2] P.Y. Simard, D. Steinkraus, J.C. Platt. Best Practices for Convolutional Neural Networks Applied to Visual Document Analysis, http://cognitivemedium.com/assets/rmnist/Simard.pdf\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9998952245843508,
+        0.9747762585923935
+      ],
+      "excerpt": "Members : <a href=\"https://github.com/PyeongKim\">PyeongEun Kim</a>, <a href=\"https://github.com/juhlee\">JuHyung Lee</a>, <a href=\"https://github.com/mijeongl\"> MiJeong Lee </a> \nSupervisors : <a href=\"https://github.com/utkuozbulak\">Utku Ozbulak</a>, Wesley De Neve \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8274086012687216
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/uniform_10\"> <br />Intensity: 10 </td> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8274086012687216
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/bright_10\"> <br />Intensity: 10</td> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shermanhung/U-Net",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-17T09:26:36Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-17T09:28:12Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project aims to implement biomedical image segmentation with the use of U-Net model. The below image briefly explains the output we want:\n\n<p align=\"center\">\n<img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/segmentation_image.jpg\">\n\n\nThe dataset we used is Transmission Electron Microscopy (ssTEM) data set of the Drosophila first instar larva ventral nerve cord (VNC), which is dowloaded from [ISBI Challenge: Segmentation of of neural structures in EM stacks](http://brainiac2.mit.edu/isbi_challenge/home)\n\nThe dataset contains 30 images (.png) of size 512x512 for each train, train-labels and test.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8036150382947118
+      ],
+      "excerpt": "#: Lists of image path and list of labels \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9447305014894736
+      ],
+      "excerpt": "        Tensor: specific data on index which is converted to Tensor \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8404872279035609
+      ],
+      "excerpt": "      #: Sanity Check for Cropped image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9389183637619892
+      ],
+      "excerpt": "      #: Normalize the mask to 0 and 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8678602976876927
+      ],
+      "excerpt": "        length (int): length of the data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8287049241625708
+      ],
+      "excerpt": "We preprocessed the images for data augmentation. Following preprocessing are : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9659621409353072,
+        0.97795499245628,
+        0.9338743749318795
+      ],
+      "excerpt": "Padding process is compulsory after the cropping process as the image has to fit the input size of the U-Net model.  \nIn terms of the padding method, symmetric padding was done in which the pad is the reflection of the vector mirrored along the edge of the array. We selected the symmetric padding over several other padding options because it reduces the loss the most.  \nTo help with observation, a  'yellow border' is added around the original image: outside the border indicates symmetric padding whereas inside indicates the original image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8539267900479655
+      ],
+      "excerpt": "We have same structure as U-Net Model architecture but we made a small modification to make the model smaller. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9758652382237946,
+        0.844150506794473
+      ],
+      "excerpt": "In attempt of reducing the loss, we did a post-processing on the prediction results. We applied the concept of watershed segmentation in order to point out the certain foreground regions and remove regions in the prediction image which seem to be noises. \nThe numbered images in the figure above indicates the stpes we took in the post-processing. To name those steps in slightly more detail: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8878093346614577
+      ],
+      "excerpt": "* 2. Conversion into binary image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9088893504338128,
+        0.9197062381114863,
+        0.9966474696551649,
+        0.9022399921600915,
+        0.9311024304923745
+      ],
+      "excerpt": "* 4. Determination of the certain background \n* 5. Calculation of the distance \n* 6. Determination of the certain foreground \n* 7. Determination of the unknown region \n* 8. Application of watershed \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.966773044503385
+      ],
+      "excerpt": "Convert the gray-scale image into binary image by processing the image with a threshold value: pixels equal to or lower than 127 will be pushed down to 0 and greater will be pushed up to 255. Such process is compulsory as later transformation processes takes in binary images. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9544547062069867,
+        0.9024369962989542
+      ],
+      "excerpt": "Now that we have an idea of how far the foreground is from the background, we apply a threshold value to decide which part could surely be the foreground. \nThe threshold value is the maximum distance (calculated from the previous step) multiplied by a hyper-parameter that we have to manually tune. The greater the hyper-parameter value, the greater the threshold value, and therefore we will get less area of certain foreground. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9500145569388282,
+        0.8448515871740903
+      ],
+      "excerpt": "We applied connectedComponents() function from the cv2 module on the foreground to label the foreground regions with color to distinguish different foreground objects. We named it as a 'marker'. \nAfter applying watershed() function from cv2 module on the marker, we obtained an array of -1, 1, and many others.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312123427337264
+      ],
+      "excerpt": "To see the result, we created a clean white page of the same size with the input image. then we copied all the values from the watershed result to the white page except 1, which means that we excluded the background. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9664175695704446,
+        0.9985518177700337
+      ],
+      "excerpt": "We chose the best learning rate that fits the optimizer based on how fast the model converges to the lowest error. In other word, the learning rate should make model to reach optimal solution in shortest epoch repeated. However, the intersting fact was that the epochs of lowest loss and highest accuracy were not corresponding. This might be due to the nature of loss function (Loss function is log scale, thus an extreme deviation might occur). For example, if the softmax probability of one pixel is 0.001, then the -log(0.001) would be 1000 which is a huge value that contributes to loss. \nFor consistency, we chose to focus on accuracy as our criterion of correctness of model.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Model trained with SGD can be downloaded via **dropbox**:\nhttps://www.dropbox.com/s/ge9654nhgv1namr/model_epoch_2290.pwf?dl=0\n\n\nModel trained with RMS prop can be downloaded via **dropbox**:\nhttps://www.dropbox.com/s/cdwltzhbs3tiiwb/model_epoch_440.pwf?dl=0\n\n\nModel trained with Adam can be downloaded via **dropbox**:\nhttps://www.dropbox.com/s/tpch6u41jrdgswk/model_epoch_100.pwf?dl=0\n\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shermanhung/U-Net/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 02:08:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/shermanhung/U-Net/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "shermanhung/U-Net",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8707512113125188,
+        0.8707512113125188,
+        0.9178229365256941
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/flip_vert\"> <br />Vertical  </td>  \n            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/flip_hori\">  <br />Horizontal</td> \n            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/flip_both\"> <br />Both</td> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8603200703891526,
+        0.8433330525549136
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/gn_50\"> <br />Standard Deviation: 50</td> \n            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/gn_100\"> <br />Standard Deviation: 100</td> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8603809764917565,
+        0.8419684600004391
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/un_50\"> <br />Intensity: 50</td> \n            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/un_100\"> <br />Intensity: 100</td> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.867537800017559,
+        0.8150528072792769
+      ],
+      "excerpt": "            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/br_50.png\"> <br />Intensity: 20</td> \n            <td width=\"27%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/br_100.png\"> <br />Intensity: 30</td> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150528072792769,
+        0.8150528072792769,
+        0.8150528072792769
+      ],
+      "excerpt": "            <td width=\"33%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/SGD_graph.png\"> </td>  \n            <td width=\"33%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/RMS_graph.png\"> </td> \n            <td width=\"33%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/Adam_graph.png\"> </td> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.824596358726763
+      ],
+      "excerpt": "        option (str): decide which dataset to import \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.872025273647872
+      ],
+      "excerpt": "    #: All file names \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8429416731244296
+      ],
+      "excerpt": "      #: Convert numpy array to tensor \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8429416731244296
+      ],
+      "excerpt": "    #: Convert numpy array to tensor \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/shermanhung/U-Net/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 UGent Korea\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pytorch-unet-segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "U-Net",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "shermanhung",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/shermanhung/U-Net/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Following modules are used in the project:\n\n    * python >= 3.6\n    * numpy >= 1.14.5\n    * torch >= 0.4.0\n    * PIL >= 5.2.0\n    * scipy >= 1.1.0\n    * matplotlib >= 2.2.2\n   \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 02:08:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<p align=\"center\">\n  <img width=\"250\" height=\"250\" src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/validation_img.png\"> <br /> Input Image</td>\n</p>\n\n<table border=0 width=\"99%\" >\n\t<tbody> \n    <tr>\t\t<td width=\"99%\" align=\"center\" colspan=\"5\"><strong>Results comparsion</td>\n\t    </tr>\n\t\t<tr>\n\t\t\t<td width=\"24%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/validation_mask.png\"> </td>\n\t\t\t<td width=\"24%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/validation_RMS.png\"> </td>\n\t\t\t<td width=\"24%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/validation_SGD.png\"></td> \n\t\t\t<td width=\"24%\" align=\"center\"> <img src=\"https://github.com/ugent-korea/pytorch-unet-segmentation/blob/master/readme_images/validation_Adam.png\"> </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td align=\"center\">original image mask</td>\n\t\t\t<td align=\"center\">RMS prop optimizer <br />(Accuracy 92.48 %)</td>\n\t\t\t<td align=\"center\">SGD optimizer <br />(Accuracy 91.52 %)</td>\n\t\t\t<td align=\"center\">Adam optimizer <br />(Accuracy 92.55 %)</td>\n      \t\t</tr>\n\t</tbody>\n</table>       \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

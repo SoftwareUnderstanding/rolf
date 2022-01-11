@@ -1,0 +1,196 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9999968229205386
+      ],
+      "excerpt": "Mastering gomoku using the General Reinforcement Learning Algorithm from DeepMind in the paper published here: https://arxiv.org/pdf/1712.01815.pdf, https://doi.org/10.1038/nature24270. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jonah-chen/alphazero-guerzhoy",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-07T03:17:54Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-08T22:35:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9935031701012228,
+        0.9889782389872162,
+        0.9813487227519242,
+        0.9042521797618276
+      ],
+      "excerpt": "As this is an extention of a class project, the version with the 8x8 board is attempted first. The ResNet from the paper is built with a keras model and trained with the self play data using the same Monte-Carlo tree search algorithm. The board is represented of two 8x8 feature board that one-hot encodes the stones each player has already played.   \nThe only knowledge given to the agent is the condition for a win (5 or more stones in a row) and the basic rules (like one stone can be placed on each turn and you can't remove opponent's stones etc). From that, it was able to learn everything we humans do when playing the game like blocking the opponents \"semi-open\" sequence at 4 long, \"open\" sequence at 3 long as well as more advanced techniques like making \"double-threats\" to win. Although in 2020 this is like \"normal\" I still find it quite incredible that these behavior can be seen by just an optimization algorithm.   \nThe agent has trained over just under 100 batches of self play consisting of 200 games each, (under 20000 games). These training data can be seen from selfplay_data folder as .npy files with s (the state of the board), pie (the desired policy obtained from MCTS), and z (the value i.e. the outcome of the game). These games are played by the \"best agent\" which is updated if it is defeated by more than 55%. These games between different agents are also provided in the games folder and labelled ({black_model_no}v{white_model_no}.npy) and can be browsed using the analysis.py file to be displayed with a GUI interface.   \nYou can play the A.I. by executing the play_alphazero-guerzhoy.py file in a GUI enviroment. Only the latest model is uploaded in the models folder (as github LFS doesn't let me upload them all). <a href=\"https://mega.nz/folder/RpslnQKC#RKD-IWw6RZZHDS3ldM7suA\">Download all models here</a>. You should do this if you want to play the weaker A.I.s (1-11). This is what the GUI looks like when it defeated the simple rule based A.I. we are required to write for the project (that I was playing for with the black stones).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9637490171089549,
+        0.9642249060838617
+      ],
+      "excerpt": "For training, the batch size is set to be 32 (not sure if that is good or bad) and the metrics from training are shown. Note that the jump in the graph is there as I have forgot to rotate the boards during training, causing the first batches of training to be not as effective. \nThe accuracy of the policy prediction is given: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9329980062864349
+      ],
+      "excerpt": "A problem with this model is the value network. It seems the value network always tends to predict very high numbers for the value, like the agent is always close to winning even in very early positions. This can be seen by the biases on the value layer and how they are always positive.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A RL agent using ResNet and MCTS to master the game of Gomoku through self-play inspired by the algorithm of Alpha-zero and AlphaGo. Named after its victim\u2014inspired by the names AlphaGo-Fan and AlphaGo-Lee\u2014but scoped beyond defeating Guerzhoy's simple AI (see gomoku.py) rather its goal is to master the game of Gomoku.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jonah-chen/alphazero-guerzhoy/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 02:06:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jonah-chen/alphazero-guerzhoy/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jonah-chen/alphazero-guerzhoy",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9741477903995875
+      ],
+      "excerpt": "Note: If you want to play against the A.I.s, you need the required dependencies (tensorflow). If you are not on linux, you must recompile the nptrain library by executing python3 build nptrainsetup.py in your terminal and copying the respective file from the build directory. You may also have to change the file paths for all the code that loads files if you are on Windows. (remember to escape the backslashes in the fiile extention) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jonah-chen/alphazero-guerzhoy/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Jonah Chen, Muhammad Ahsan Kaleem\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alphazero-guerzhoy",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alphazero-guerzhoy",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jonah-chen",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jonah-chen/alphazero-guerzhoy/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 02:06:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "gomoku",
+      "reinforcement-learning",
+      "monte-carlo-tree-search"
+    ],
+    "technique": "GitHub API"
+  }
+}

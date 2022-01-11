@@ -1,0 +1,357 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JonathanNorth/60499_Project",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-20T00:07:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-21T04:38:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9967197844857246,
+        0.968936042460499,
+        0.9815909357084478,
+        0.918240222480879
+      ],
+      "excerpt": "The main goal of the project is to develop our programming skills and learn new technologies. Using our newly acquired skills we developed software that processes images and \u201ctags\u201d them. The images and tags are then stored in a database where the information is displayed to the end user for interpretation. This paper will explain the technologies chosen, how they work and why they were chosen. By the end you should understand the overall architecture of the project and how to make additions to it yourself. \nThe high-level architecture is very simple for this project, see figure 1.1. \nThe bottom portion of figure 1.1 shows the user setting up a device, this can be any device that\u2019s connected to a camera and has access to the internet. The device takes a picture and sends that picture using a REST API request to our Web Service hosted in Microsoft\u2019s Azure Cloud Service. After processing the image, it should be added to the database previously mentioned along with it\u2019s tags. \nAfter an image has been processed two objects will be created. The first being the same image created however, the image will have boxes around identified objects within an image, see figure 2.1.  Each object will have a corresponding colour. The second object after processing is the tags. To accompany the image the Web App will also create a JSON file which will provide more information of the \u201cboxes\u201d from the new image, see figure 2.2. For each object identified a JSON object called \u201ctags\u201d will be created with the following properties. \u201cbbox\u201d represents the four points of the \u201cbox\u201d that surround an identified object. \u201clabel\u201d provides the user with what object our image processing thinks it has identified. \u201cScore\u201d gives a value from 0 to 1 which represents the likelihood that the label is correct. 1 being the most likely and 0 being unlikely. Generally, the algorithm won\u2019t identify objects that are far below 0.5. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9407049221915924,
+        0.8221168358380956
+      ],
+      "excerpt": "One of the reasons for using Azure over Amazon\u2019s AWS is that Microsoft has a verbose library of deep learning algorithms which allows us to easily train our programs to recognize objects then process images quickly. The library is called Microsoft Cognitive Toolkit or CNTK (https://www.microsoft.com/en-us/cognitive-toolkit/). There\u2019re several different algorithms provided by the library however, we will be using Faster-RCNN. If you would like to run FasterRCNN on your PC you can do so by following this guide (https://docs.microsoft.com/enus/cognitive-toolkit/Object-Detection-using-Faster-R-CNN). You will need Python 3.5, PIP and Anaconda as your Python Environment. This is a good way to see how the library itself works before we get into implementing it in a Web Application. By using Faster-RCNN we greatly improve the speed at which we can identify objects which is going to allow us to make our software more scalable. If you would like to know more about the algorithm the published paper can be found here (https://arxiv.org/pdf/1506.01497.pdf) \nNow that you know how CNTK and Faster-RCNN work now we can get into the Web \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.877958481050198
+      ],
+      "excerpt": "Azure CLI is Microsoft\u2019s command-line tool for managing Azure resources. We will be using it to deploy and manage our web application \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8888910184696321
+      ],
+      "excerpt": "Now we\u2019re going to set up variable names in our environment as they\u2019ll be used throughout the next couple of steps. Although not required it is highly recommended as this will avoid errors and allow you to copy and paste the commands with no alterations. Run the following commands: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9609564680209468,
+        0.861484631919626
+      ],
+      "excerpt": "Next lets set up a resource group. az group create \u2013location eastus \u2013name %rgname% Resource groups allows us to manage all aspects of a web app as one entity. For more information please see here \nNow create an Azure App Service Plan and an Azure Web App. For more information about these services please see here and here. Run the following commands: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8864041639270159
+      ],
+      "excerpt": "By default, web apps only support Python 2.7 & 3.4 but we require 3.5. Therefore, we need to use an extension in our web application environment. To do so go to the Azure Portal at http://www.portal.azure.com and log in using the credentials during step 1. In the left side bar choose App Services and select the web app that you\u2019ve created this will be the main page to configure and monitor your web app. You\u2019ll see a new column with the first entry being \u201cOverview\u201d. In the search bar above it type the following \u201cextension\u201d and select the option \u201cExtensions\u201d. There should be no extensions installed at this time. Choose Add, then under choose extension select \u201cPython 3.5.4 x64\u201d. Accept terms and conditions then you OK. You should get a message that it\u2019s being installed and may take a few minutes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8946276039650186
+      ],
+      "excerpt": "This is the file that gets called on startup. You can see with the \u201c@app.route\u2026\u201d calls we specify what actions to take with each URL. Depending on the URL either an image or JSON will be returned. If you wish to add another route, simply use the routes as a template. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8325213779225533
+      ],
+      "excerpt": "This is the main driving force behind the image classifier. It uses several functions and several variables from config.py to perform its task. It also uses the helper functions from cntk_helpers.py, plot_helpers.py and scripts from the utils folder. Keep in mind that most are copied from the official CNTK repository on Github. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9048587567859346,
+        0.9407230888533996,
+        0.9613954004566705
+      ],
+      "excerpt": "When the web application receives a request it will first go in the App.py file and call the appropriate method based on the url used (/returntags or /returnimages). The method will then call evaluateImage() found in the file Evaluate.py. This is the method that will call most other methods and be the driving force behind evaluating an image. Once completed the method evaluateImage will output either json or a binary image (depending on the url called). The we come back to App.py which will return the output. \nQ: What is a CNTK Model? \nA: It\u2019s the file that\u2019s used to train our deep learning algorithm (Faster R-CNN). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8160750798434597,
+        0.9715376319431335
+      ],
+      "excerpt": "The first place to improve would be to automatically add the image and tags to a database rather than just returning the information \nAdd a component to the website to allow users to add models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8852894841387329
+      ],
+      "excerpt": "Once the program is executed, the user goes to the homepage. From here, they can either login \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.850374286985039
+      ],
+      "excerpt": "correctly. The data then gets stored in the MSSQL DB under the User_Account_Info_60499 table. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8297671862666527
+      ],
+      "excerpt": "In the portal, the user views a logged-in navigation bar (logged_in_theme.php). The user can \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.856709965130724,
+        0.9713041798401191
+      ],
+      "excerpt": "  The code will select the information stored in the JSONTags_60499 table based on your accountID. \n  It returns JSON data which is parsed and displayed into a table \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9494217527377127
+      ],
+      "excerpt": "for invalid password is below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9186389022795071
+      ],
+      "excerpt": "After a successful registration, there is a message telling the user that the registration was successful. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9285391161346295
+      ],
+      "excerpt": "If the login button is pressed on the index page or the navigation bar, the user is taken to the page below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9692009167548891
+      ],
+      "excerpt": "The portal includes information regarding the details of the image and the actual image. It also displays the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8362915287670789
+      ],
+      "excerpt": "The user can check his/her account information from the My Account link in the navigation bar. This page allows the user \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jiggles546/60499_Project/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 21:57:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JonathanNorth/60499_Project/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JonathanNorth/60499_Project",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8191560131303676
+      ],
+      "excerpt": "Now that you know how CNTK and Faster-RCNN work now we can get into the Web \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9498465920547757,
+        0.9715325960992617
+      ],
+      "excerpt": "Step 2 requires you to set up Python, it\u2019s environment and the dependencies by CNTK on your local Windows machine. Luckily Microsoft provides us with the following tutorial \nNext open Anaconda and run the following command pip install azure-cli \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9441773777314914
+      ],
+      "excerpt": "Now run the following command az login. You will be prompted for your Azure account credentials, however, keep in mind that sometimes it takes a few minutes for the prompt to appear. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9219123145796628,
+        0.9919347807306435,
+        0.8254213384037201
+      ],
+      "excerpt": "By default, web apps only support Python 2.7 & 3.4 but we require 3.5. Therefore, we need to use an extension in our web application environment. To do so go to the Azure Portal at http://www.portal.azure.com and log in using the credentials during step 1. In the left side bar choose App Services and select the web app that you\u2019ve created this will be the main page to configure and monitor your web app. You\u2019ll see a new column with the first entry being \u201cOverview\u201d. In the search bar above it type the following \u201cextension\u201d and select the option \u201cExtensions\u201d. There should be no extensions installed at this time. Choose Add, then under choose extension select \u201cPython 3.5.4 x64\u201d. Accept terms and conditions then you OK. You should get a message that it\u2019s being installed and may take a few minutes. \nNow in your Python Environment run the following command \naz webapp deployment source config-local-git \u2013name %appn% --resource-group %rgname% --query url \u2013output tsv \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.93545949083685,
+        0.8075004293796461,
+        0.900336590908964,
+        0.8847487031802079
+      ],
+      "excerpt": "Run the following commands \nGit init \nGit remote add azure https://xxx@yyyyyyyy.scm.azurewebsites.net/zzzzzz.git \nGit add -A \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9117941562816807,
+        0.9627714230222827,
+        0.8854399587160638
+      ],
+      "excerpt": "Git push azure master \nThere\u2019s a script in the repo (deploy.cmd) that will install all the required dependencies from the requirements.txt file. \nYou\u2019re all done.  In the Azure Portal restart your application. Wait 5 minutes and you should see the following web page. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9575475022608734
+      ],
+      "excerpt": "Double check to make sure that that the \u201cos.environ[\u2018PATH\u2019]\u201d variable is set correctly. Python 2.7 is installed automatically and therefore we need to add the path of the Python version that we added as an extension. The path should be \u201cD:\\home\\python354x64;\u201d** \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9439875047678629
+      ],
+      "excerpt": "A: Follow the instructions on this link. Note that you may need to scroll down a little. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8178423738602872
+      ],
+      "excerpt": "- The form validates input for full name, username, password, confirm password. The screenshot \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8024793659556158
+      ],
+      "excerpt": "logged-in navigation bar. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8107406294544236
+      ],
+      "excerpt": "the coordinates, item name and score. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JonathanNorth/60499_Project/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "PHP",
+      "JavaScript",
+      "Hack"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "60499_Project",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "60499_Project",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JonathanNorth",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JonathanNorth/60499_Project/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 21:57:41 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

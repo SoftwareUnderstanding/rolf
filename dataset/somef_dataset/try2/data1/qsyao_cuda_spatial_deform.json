@@ -1,0 +1,312 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597>",
+      "https://arxiv.org/abs/1606.06650>"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[batchgenerators](https://github.com/MIC-DKFZ/batchgenerators)\n\n[scipy](https://github.com/scipy/scipy)\n\nThe elastic deformation approach is described in\n*   Ronneberger, Fischer, and Brox, \"U-Net: Convolutional Networks for Biomedical\n    Image Segmentation\" (<https://arxiv.org/abs/1505.04597>)\n*   \u00c7i\u00e7ek et al., \"3D U-Net: Learning Dense Volumetric\n    Segmentation from Sparse Annotation\" (<https://arxiv.org/abs/1606.06650>)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use our code, please cite our paper:\n\nChao Huang, Hu Han, Qingsong Yao, Shankuan Zhu, S. Kevin Zhou. , 3D U<sup>2</sup>-Net: A 3D Universal U-Net for Multi-Domain Medical Image Segmentation, MICCAI 2019.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8292259315442538
+      ],
+      "excerpt": ": Choose your Rules of spatial_deform \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qsyao/cuda_spatial_deform",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-26T18:22:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T03:18:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9952981183981352
+      ],
+      "excerpt": "When the size of image is too large, it takes a lot of time(much more than forward and backward computation say in U_Net), especially for 3D image(like CT). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8279522012403729
+      ],
+      "excerpt": "Doing Sptial_Deform by muti-processing consumes of too much CPU resources, to which most GPU servers(like 32 cores with 4 gpus) can not afford. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.921238345074468,
+        0.8930844927008579,
+        0.9292934612644597,
+        0.8679151127253476
+      ],
+      "excerpt": "Support many types of spatial deform: flip, rotate, scale, translate, elastic_deformation. \nSupport many rules of map_coordinates: mirror, constant, reflect, wrap, nearest. \nDoing Spatial_Deform by doing calculations of coordinates, all transformations get combined before they are applied to the image \nImplement map_coordinates by linear interpolation(for image) and the nearest interpolation(for labels). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8622073506011585
+      ],
+      "excerpt": ": Choose your Rules of spatial_deform \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for img in imgs_list: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A fast tool to do image augmentation on GPU(especially elastic_deform), can be helpful to research on Medical Image.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qsyao/cuda_spatial_deform/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 19,
+      "date": "Thu, 23 Dec 2021 23:26:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/qsyao/cuda_spatial_deform/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "qsyao/cuda_spatial_deform",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8499020295930215
+      ],
+      "excerpt": "Doing Spation_Deform on GPU instead of CPU, greatly saving CPU resources. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8477213953299042
+      ],
+      "excerpt": "Users can fetch coordinates from CUDA and do cubic interpolation at CPU by scipy.map_coordinates(order = 3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466,
+        0.904677433377637,
+        0.8474895321345809
+      ],
+      "excerpt": "cd cuda_backend \ncmake -D CUDA_TOOLKIT_ROOT_DIR=/path/to/cuda . \nmake -j8 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8361382664254753
+      ],
+      "excerpt": "    id_gpu: choose the number of GPU \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8130644621182785,
+        0.8801854956928516
+      ],
+      "excerpt": ": Import cuda_spation_deform Handle \nfrom cuda_spatial_deform import Cuda_Spatial_Deform \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8643972853741945
+      ],
+      "excerpt": ": cuda_handle.flip(do_y=True, do_x=True, do_z=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.856108949833514
+      ],
+      "excerpt": ": cuda_handle.rotate(0.75 * np.pi, 0.75 * np.pi, 0.75 * np.pi) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8643002557774578
+      ],
+      "excerpt": "2. Interpolate the input array with coordinates \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8067077943193709
+      ],
+      "excerpt": "output = cuda_handle.augment(array_image, order=1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289669050403863,
+        0.8289669050403863
+      ],
+      "excerpt": "done_list = output[1] \noutput_array = output[0] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8161526447477072
+      ],
+      "excerpt": "    output = cuda_handle.interpolate(img, order=1) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/qsyao/cuda_spatial_deform/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Cuda",
+      "Python",
+      "CMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/qsyao/cuda_spatial_deform/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright (c) 2019, Qingsong Yao. All rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n  Redistributions of source code must retain the above copyright\\n   notice, this list of conditions and the following disclaimer.\\n  Redistributions in binary form must reproduce the above copyright\\n   notice, this list of conditions and the following disclaimer in the\\n   documentation and/or other materials provided with the distribution.\\n  Neither the name of the copyright holders nor the names of its\\n   contributors may be used to endorse or promote products derived from\\n   this software without specific prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\\nPOSSIBILITY OF SUCH DAMAGE.\\n\\nThe views and conclusions contained in the software and documentation are\\nthose of the authors and should not be interpreted as representing official\\npolicies, either expressed or implied.\\n\\nWhen using this code in a scientific project, please cite one or all of the\\nfollowing papers:\\n  C.Huang, H. Hu, Q. Yao,S. Zhu, and S.K.Zhou, \\n   3D U^2-Net: A 3D Universal U-Net for Multi-Domain Medical Image Segmentation, \\n   MICCAI2019'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Cuda_Spatial_Deform",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cuda_spatial_deform",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "qsyao",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/qsyao/cuda_spatial_deform/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 105,
+      "date": "Thu, 23 Dec 2021 23:26:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "cuda",
+      "medical-imaging",
+      "image-augmentation",
+      "computer-vision",
+      "elastic-deform"
+    ],
+    "technique": "GitHub API"
+  }
+}

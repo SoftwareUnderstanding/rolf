@@ -1,0 +1,299 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**Pixel2style2pixel implementation:**   \nhttps://github.com/eladrich/pixel2style2pixel/   \nCopyright (c) 2020   \nLicense (MIT) https://github.com/eladrich/pixel2style2pixel/blob/master/LICENSE   \n\n**StyleGAN2 implementation:**   \nhttps://github.com/rosinality/stylegan2-pytorch  \nCopyright (c) 2019 Kim Seonghyeon  \nLicense (MIT) https://github.com/rosinality/stylegan2-pytorch/blob/master/LICENSE  \n\n**MTCNN, IR-SE50, and ArcFace models and implementations:**  \nhttps://github.com/TreB1eN/InsightFace_Pytorch  \nCopyright (c) 2018 TreB1eN  \nLicense (MIT) https://github.com/TreB1eN/InsightFace_Pytorch/blob/master/LICENSE  \n\n**CurricularFace model and implementation:**   \nhttps://github.com/HuangYG123/CurricularFace  \nCopyright (c) 2020 HuangYG123  \nLicense (MIT) https://github.com/HuangYG123/CurricularFace/blob/master/LICENSE  \n\n**LPIPS implementation:**  \nhttps://github.com/S-aiueo32/lpips-pytorch \nCopyright (c) 2020, Sou Uchida  \nLicense (BSD 2-Clause) https://github.com/S-aiueo32/lpips-pytorch/blob/master/LICENSE  \n\n**Please Note**: The CUDA files under the [StyleGAN2 ops directory](https://github.com/rahuls02/Image-Noise-Reduction/tree/master/models/stylegan2/op) are made available under the [Nvidia Source Code License-NC](https://nvlabs.github.io/stylegan2/license.html)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --test_batch_size=10 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rahuls02/Image-Noise-Reduction",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-28T22:36:20Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-16T09:45:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Augmented Implementation of the [pSp implementation](https://github.com/eladrich/pixel2style2pixel) to train Images on white noise reduction\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8784064601843594
+      ],
+      "excerpt": "In addition, we provide various auxiliary models needed for training your own pSp model from scratch as well as pretrained models needed for computing the ID metrics reported in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8149304801789785,
+        0.8751423388718108,
+        0.8388407567928262,
+        0.887632503231055
+      ],
+      "excerpt": "|FFHQ StyleGAN | StyleGAN model pretrained on FFHQ taken from rosinality with 1024x1024 output resolution. \n|IR-SE50 Model | Pretrained IR-SE50 model taken from TreB1eN for use in our ID loss during pSp training. \n|CurricularFace Backbone  | Pretrained CurricularFace model taken from HuangYG123 for use in ID similarity metric computation. \n|MTCNN  | Weights for MTCNN model taken from TreB1eN for use in ID similarity metric computation. (Unpack the tar.gz to extract the 3 model weights.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.912002370988404
+      ],
+      "excerpt": "is the number of semantic categories.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9531085564623333,
+        0.8006263234279007
+      ],
+      "excerpt": "| &boxv;&nbsp; &boxur;&nbsp; psp.py | Implementation of our pSp framework \n| &boxvr;&nbsp; notebook | Folder with jupyter notebook containing pSp inference playground \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rahuls02/Image-Noise-Reduction/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 17:32:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rahuls02/Image-Noise-Reduction/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rahuls02/Image-Noise-Reduction",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/rahuls02/Image-Noise-Reduction/main/run.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Currently, we provide support for numerous datasets and experiments (encoding, frontalization, etc.).\n    - Refer to `configs/paths_config.py` to define the necessary data paths and model paths for training and evaluation. \n    - Refer to `configs/transforms_config.py` for the transforms defined for each dataset/experiment. \n    - Finally, refer to `configs/data_configs.py` for the source/target data paths for the train and test sets\n      as well as the transforms.\n- If you wish to experiment with your own dataset, you can simply make the necessary adjustments in \n    1. `data_configs.py` to define your data paths.\n    2. `transforms_configs.py` to define your own data transforms.\n    \nAs an example, assume we wish to run encoding using ffhq (`dataset_type=ffhq_encode`). \nWe first go to `configs/paths_config.py` and define:\n``` \ndataset_paths = {\n    'ffhq': '/path/to/ffhq/images256x256'\n    'celeba_test': '/path/to/CelebAMask-HQ/test_img',\n}\n```\nThe transforms for the experiment are defined in the class `EncodeTransforms` in `configs/transforms_config.py`.   \nFinally, in `configs/data_configs.py`, we define:\n``` \nDATASETS = {\n   'ffhq_encode': {\n        'transforms': transforms_config.EncodeTransforms,\n        'train_source_root': dataset_paths['ffhq'],\n        'train_target_root': dataset_paths['ffhq'],\n        'test_source_root': dataset_paths['celeba_test'],\n        'test_target_root': dataset_paths['celeba_test'],\n    },\n}\n``` \nWhen defining our datasets, we will take the values in the above dictionary.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Clone this repo:\n``` \ngit clone https://github.com/rahuls02/Image-Noise-Reduction.git\ncd Image-Noise-Reduction\n```\n- Dependencies:  \nWe recommend running this repository using [Anaconda](https://docs.anaconda.com/anaconda/install/). \nAll dependencies for defining the environment are provided in `environment/psp_env.yaml`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8312833552945635
+      ],
+      "excerpt": "By default, we assume that all auxiliary models are downloaded and saved to the directory pretrained_models. However, you may use your own paths by changing the necessary values in configs/path_configs.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8195283490507721
+      ],
+      "excerpt": "Additionally, if you have tensorboard installed, you can visualize tensorboard logs in opts.exp_dir/logs. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8790923594498573
+      ],
+      "excerpt": "The main training script can be found in scripts/train.py.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8808400718595312
+      ],
+      "excerpt": "python scripts/train.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372399752020275,
+        0.8501751782558576
+      ],
+      "excerpt": "See options/train_options.py for all training-specific flags.  \nSee options/test_options.py for all test-specific flags. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8178323041507995
+      ],
+      "excerpt": "Specifying --label_nc=0 (the default value), will directly use the RGB colors as input. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228
+      ],
+      "excerpt": "For example,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8146715012507655
+      ],
+      "excerpt": "| &boxvr; models | Folder containting all the models and training objects \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9272716345557604
+      ],
+      "excerpt": "| &boxvr;&nbsp; options | Folder with training and test command-line options \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8328916229266603
+      ],
+      "excerpt": "| &boxvr;&nbsp; utils | Folder with various utility functions \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rahuls02/Image-Noise-Reduction/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Elad Richardson, Yuval Alaluf\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "White Noise Reduction Using Style Based Generative Adversarial Networks",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image-Noise-Reduction",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rahuls02",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rahuls02/Image-Noise-Reduction/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Linux or macOS\n- NVIDIA GPU + CUDA CuDNN (CPU may be possible with some modifications, but is not inherently supported)\n- Python 2 or 3\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 17:32:17 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

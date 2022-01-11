@@ -1,0 +1,322 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find this implementation or our [CVPR 2018 paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Pirinen_Deep_Reinforcement_Learning_CVPR_2018_paper.pdf) interesting or helpful, please consider citing:\n\n    @article{pirinen2018deep,\n        Author = {Aleksis Pirinen and Cristian Sminchisescu},\n        Title = {Deep Reinforcement Learning of Region Proposal Networks for Object Detection},\n        Journal = {IEEE Converence on Computer Vision and Pattern Recognition (CVPR)},\n        Year = {2018}\n    }\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{pirinen2018deep,\n    Author = {Aleksis Pirinen and Cristian Sminchisescu},\n    Title = {Deep Reinforcement Learning of Region Proposal Networks for Object Detection},\n    Journal = {IEEE Converence on Computer Vision and Pattern Recognition (CVPR)},\n    Year = {2018}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9293253430480838
+      ],
+      "excerpt": "- drl-RPN trained on VOC 2007+2012 trainval: https://drive.google.com/open?id=1iK8fxp6no9g_-eZ2b2G0FRKV0cfUX53r \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aleksispi/drl-rpn-tf",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-26T11:53:36Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T10:45:30Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8564478458804611,
+        0.9970600059876116,
+        0.9692156657197405,
+        0.9632078297066521
+      ],
+      "excerpt": "Official Tensorflow implementation of drl-RPN by Aleksis Pirinen (email: aleksis.pirinen@ri.se) and Cristian Sminchisescu (webpage). The associated CVPR 2018 paper can be accessed here. A video demonstrating this work can be seen here. \nThe drl-RPN model is implemented on top of the publicly available TensorFlow VGG-16-based Faster R-CNN implementation by Xinlei Chen available here. See also the associated technical report An Implementation of Faster RCNN with Study for Region Sampling, as well as the original Faster R-CNN paper Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. \nThe current code supports VGG16 models. Exactly as for the Faster R-CNN implementation by Xinlei Chen, we report numbers using a single model on a single convolution layer, so no multi-scale, no multi-stage bounding box regression, no skip-connection, no extra input is used. The only data augmentation technique is left-right flipping during training following the original Faster R-CNN.  \nWe first re-ran some of the experiments reported here for Faster R-CNN, but trained the models longer to obtain further performance gains for our baseline models. We got: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9916648256034301
+      ],
+      "excerpt": "The corresponding results when using our drl-RPN detector with exploration penalty 0.05 during inference (models trained over different exploration penalties, as described in Section 5.1.2 in the paper) and posterior class-probability adjustments (Section 4.2 in our paper): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8895222461458746,
+        0.8895222461458746,
+        0.8895222461458746
+      ],
+      "excerpt": "| RPN              | 76.5           | 74.2           | \n| drl-RPN          | 77.5           | 74.9           | \n| drl-RPN (np)     | 77.2           | 74.6           | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9975168208410007
+      ],
+      "excerpt": "  - All settings are shared with that of Xinlei Chen for the things relating to the baseline Faster R-CNN model (RPN). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9669743210255572,
+        0.972275702183636,
+        0.9417161846435442,
+        0.9888164799275889
+      ],
+      "excerpt": "    - Training over different exploration-accuracy trade-offs is now the default model (as opposed to training for a fixed exploration penalty). Hence the default model allows for setting the exploration-accuracy trade-off during testing (c.f. Section 5.1.2 and Figure 6 in the paper). Turns out we only need two different exploration penalties (0.05 and 0.35 was used), but setting any other trade-off parameters during inference is possible. \n    - Separation of rewards (Section 5.1.1 in the paper) does not yield accuracy gains for models trained over different exploration-accuracy trade-offs, so it is not used. See reward_functions.py for details. \n    - The drl-RPN models are now much more fast to train than how it was done in the original paper (c.f. Section 5.2). Specifically, instead of sampling 50 search trajectories per image to estimate the policy gradient, we now run 50 search trajectories on 50 different images. This reduces training time by 5-10 times, yet we get results in the same ball park. \nAll pretrained models (both Faster R-CNN baseline and our drl-RPN models) for the numbers reported above in Detection Performance is available on google drive: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8154437223130241
+      ],
+      "excerpt": "- Faster R-CNN trained on VOC 2007+2012 trainval: https://drive.google.com/open?id=1UEvjBJwJFoGnv1DhrIsqmJWWWli8C9G4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9064750321501206
+      ],
+      "excerpt": "See \"Setup data\" on this page. Essentially download the dataset you are interested (e.g. PASCAL VOC), and add soft links in the data folder in the appropriate way (see https://askubuntu.com/questions/56339/how-to-create-a-soft-or-symbolic-link for generic how-to for setting soft links). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8131420199356554
+      ],
+      "excerpt": "Download the desired pretrained Faster R-CNN model (see Pretrained models above). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9623045682006655
+      ],
+      "excerpt": "./experiments/scripts/train_drl_rpn.sh 0 pascal_voc_0712 1 20000 0 110000 to start training on VOC 2007+2012 trainval on GPU-id 0 for a total of 110k iterations (see code for more details). This will yield a drl-RPN model trained over two exploration penalties, enabling setting the speed-accuracy trade-off at test time. See also experiments/cfgs/drl-rpn-vgg16.yml for some settings. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8236543337619652,
+        0.8205775702735699
+      ],
+      "excerpt": "The main script to launch testing is experiments/scripts/test_drl_rpn.sh. To test your model on the Pascal VOC 2007 test set on GPU-id 0, run ./experiments/scripts/test_drl_rpn.sh 0 pascal_voc_0712 1 1 0 (see code for more details). If you want to change the exploration-accuracy trade-off parameter, see experiments/cfgs/drl-rpn-vgg16.yml. You may also specify whether you want to visualize drl-RPN search trajectories here (visualizations are saved in the top folder). \nHere are solutions to some potential issues: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Official Tensorflow implementation of drl-RPN: Deep Reinforcement Learning of Region Proposal Networks (CVPR 2018 paper)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aleksispi/drl-rpn-tf/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 19,
+      "date": "Sat, 25 Dec 2021 11:43:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aleksispi/drl-rpn-tf/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aleksispi/drl-rpn-tf",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/data/coco/PythonAPI/pycocoDemo.ipynb",
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/data/coco/PythonAPI/pycocoEvalDemo.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/experiments/scripts/convert_vgg16.sh",
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/experiments/scripts/test_drl_rpn.sh",
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/experiments/scripts/train_drl_rpn.sh",
+      "https://raw.githubusercontent.com/aleksispi/drl-rpn-tf/master/data/scripts/fetch_faster_rcnn_models.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Clone the repository\n  ```Shell\n  git clone https://github.com/aleksispi/drl-rpn-tf.git\n  ```\n2. For steps 2-4, see \"Installation\" on [this page](https://github.com/endernewton/tf-faster-rcnn).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8078413870571809
+      ],
+      "excerpt": "  - Train on VOC 2007+2012 trainval + 2007 test (iterations: 100k/180k) and test on VOC 2012 test, 74.2. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.838811182639196
+      ],
+      "excerpt": "  - Train on VOC 2007+2012 trainval + 2007 test (iterations: 90k/110k, 80k/110k for posterior class-probability adjustment module) and test on VOC 2012 test, 74.9. Without posterior class-probability adjustments (np): 74.6. Average exploration (% RoIs forwarded per image on average): 30.6%. Average number of fixations per image: 6.7. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8256852259748868
+      ],
+      "excerpt": "Download the desired pretrained Faster R-CNN model (see Pretrained models above). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012248701992861
+      ],
+      "excerpt": "import pycocotools._mask as _mask \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aleksispi/drl-rpn-tf/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "MATLAB",
+      "Lua",
+      "C++",
+      "Cython",
+      "C",
+      "Shell",
+      "Cuda",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Aleksis Pirinen\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drl-RPN: Deep Reinforcement Learning of Region Proposal Networks for Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drl-rpn-tf",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aleksispi",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aleksispi/drl-rpn-tf/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- A basic Tensorflow installation. The code follows r1.2 format.\n- Python packages you might not have: cython, opencv-python, easydict (similar to py-faster-rcnn). For easydict make sure you have the right version (1.6 was used here).\n- See also \"Prerequisites\" on [this page](https://github.com/endernewton/tf-faster-rcnn).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 70,
+      "date": "Sat, 25 Dec 2021 11:43:38 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

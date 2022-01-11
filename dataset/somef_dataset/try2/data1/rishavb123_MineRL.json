@@ -1,0 +1,218 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2003.06066\n\n[2] Cl\u00e9ment R., & Vincent B. (2019",
+      "https://arxiv.org/abs/1903.04311\n\n[3] Volodymyr M., Koray, K., David, S., Alex, G., Ioannis A., Daan W., & Martin R. (2013",
+      "https://arxiv.org/abs/1312.5602"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] Christian S., Yanick S., & Manfred V. (2020). Sample Efficient Reinforcement Learning through Learning from Demonstrations in Minecraft. arXiv. Retrieved March 1, 2021, from https://arxiv.org/abs/2003.06066\n\n[2] Cl\u00e9ment R., & Vincent B. (2019). Deep Recurrent Q-Learning vs Deep Q-Learning on a simple Partially Observable Markov Decision Process with Minecraft. arXiv. Retrieved March 1, 2021, from https://arxiv.org/abs/1903.04311\n\n[3] Volodymyr M., Koray, K., David, S., Alex, G., Ioannis A., Daan W., & Martin R. (2013). Playing Atari with Deep Reinforcement Learning. arXiv. Retrieved March 1, 2021, from https://arxiv.org/abs/1312.5602\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rishavb123/MineRL",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-26T17:25:18Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-07-03T12:25:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Minecraft is a popular sandbox video game that contains a number of hostile non-player entities known as \u201cmobs\u201d; these entities are meant to attack and kill the player character. Our agent will have to learn strategies to deal with each type of hostile mob with the goal of defeating as many mobs and surviving as long as possible. Additionally, the environment in a Minecraft \u201cworld\u201d can be randomly generated using an algorithm or built by the player. To create a closed environment for our agent to learn and fight against these mobs, we will be using Microsoft\u2019s Project Malmo. Using machine learning in minecraft is the focus of a large competition called MineRL, which provides rigorous guidelines towards achieving an agent that can operate autonomously in minecraft. It is our hope that methods like the ones we are using to train an agent in a simulated environment can be extrapolated to real life applications like robotics in the physical world. Since minecraft as an environment is completely customizable, it makes it ideal for entry level testing of potential real world use cases.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9986536354730307,
+        0.992936198448677,
+        0.8417362220917983,
+        0.9469984188140537,
+        0.919703542096754
+      ],
+      "excerpt": "As robots become more prevalent in society and the workplace, the need for robust algorithms that can learn to control autonomous agents in a wide range of situations becomes paramount. Prior work has shown that deep reinforcement learning models perform reliably in 3D environments, even when rewards are sparse and only visual input is provided to the agent. Here, we use Project Malm\u00f6, an AI research platform based on the popular sandbox video game Minecraft, to train an RL agent to combat in-game entities known as \u201cmobs.\u201d We implement a RL algorithm called a Deep Q Network (DQN), as well as a pretrained residual neural network as a baseline model, and compare the differences in performance. We expect that with minimal hyperparameter tuning, the RL model will learn significantly more than the baseline, and that the agent will succeed in defending itself to some extent. \nSince we are using Deep Q Learning, we did not have to collect any data. The agent\u2019s observations in the environment was our \u201cdata,\u201d on which the neural network trained on. The agents observations in the environment were 640x480, which we rescaled to an 84x84 image. \nStep: A step is every iteration in an episode. Each step, the agent makes an observation, takes an action, and learns from previous memories. \nEpisode: Each run of the game in which the agent plays (until it dies) is called an episode. \nReward: The agent receives a positive reward for being in a good state and taking an optimal action like hitting a zombie. It receives a negative reward for things like getting hit. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9270996696207715,
+        0.9977967516905284,
+        0.8150695546876516,
+        0.9946299205511944,
+        0.9819279455447573,
+        0.8931033125121371
+      ],
+      "excerpt": "DQN: A neural network that we are using to approximate the Q-value of a state action pair. \nTarget Network: It is a copy of the DQN, but is only updated periodically. This is used to increase the stability of the algorithm. \nResNet50: A large image recognition CNN. \nWe used a Convolutional Deep Q Network to take in the image input and output what action(s) to take. One of the ways that Project Malmo allowed our agent to \u201csee\u201d in the Minecraft world was through images, so using a convolutional neural network made logical sense. Similar to most CNNs, we started with the CNN workflow (Convolution, Max Pooling, Activation) and then used some fully connected layers. We also used a replay buffer to allow the agent to have \u201cmemory,\u201d giving the agent a way to utilize past trials. Another implementation detail is that we used a target network that we copied the weights to periodically every (300 steps) so that our DQN converged to a more stable solution. As prior research had shown us, using a recurrent neural network would not give us significant improvements so this is not a path we decided to follow [2]. \nWith those implementation details, we followed the regular Q-learning algorithm, which is as follows: \n1. Get state of the environment \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Applies the Deep Q Learning algorithm using a convolutional neural network to have an agent learn to fight zombies in a closed minecraft environment. This is done using Microsoft's Project Malmo (to create the environment) and tensorflow/keras to structure the network.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rishavb123/MineRL/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The agent will have to last as long as possible while defeating as many distinct hostile entities as possible and navigating the environment. The agent will receive positive rewards for defeating entities/surviving and negative rewards for being defeated and losing health itself. We are utilizing a fairly dense reward structure, with the hope that this will enable the agent to learn good behaviors more reliably. Since we are rewarding the agent for successful hits on mobs and survival, and are negatively rewarding it for taking damage and dying, we can see our reward structure is dense. Additionally, to increase the chance of the agent learning the reward for attacking mobs, we let the agent continually attack, so it has to learn to face the mobs, rather than face them and then attack. Below are listed the present actions and rewards we used to train our preliminary RL model:\n\n* Action Space: Move Forward, Move Backward, Turn Left, Turn Right, Do Nothing\n* Rewards: Death (-100), Damage Taken (-4), Damaging Zombie (15), Per Action Taken (0.05), Zombie Killed (150)\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 16:28:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rishavb123/MineRL/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rishavb123/MineRL",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/rishavb123/MineRL/master/archive/run_server.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8003839596766958
+      ],
+      "excerpt": "1. Get state of the environment \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rishavb123/MineRL/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Batchfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Abstract",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MineRL",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rishavb123",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rishavb123/MineRL/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 16:28:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "bhagat-topic"
+    ],
+    "technique": "GitHub API"
+  }
+}

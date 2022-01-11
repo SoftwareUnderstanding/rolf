@@ -1,0 +1,613 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This code borrows heavily from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel) and \n[encoder4editing](https://github.com/omertov/encoder4editing).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2104.02699\"><img src=\"https://img.shields.io/badge/arXiv-2104.02699-b31b1b.svg\" height=22.5></a>\n<a href=\"https://opensource.org/licenses/MIT\"><img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" height=22.5></a>  \n\n<a href=\"https://www.youtube.com/watch?v=9RzCZZBjlxM\"><img src=\"https://img.shields.io/static/v1?label=Two Minute Papers&message=ReStyle Video&color=red\" height=22.5></a>  \n<a href=\"https://youtu.be/6pGzLECSIWM\"><img src=\"https://img.shields.io/static/v1?label=ICCV 2021 &message=5 Minute Video&color=red\" height=22.5></a>  \n<a href=\"https://replicate.ai/yuval-alaluf/restyle_encoder\"><img src=\"https://img.shields.io/static/v1?label=Replicate&message=Demo and Docker Image&color=darkgreen\" height=22.5></a>\n\nInference Notebook: <a href=\"http://colab.research.google.com/github/yuval-alaluf/restyle-encoder/blob/master/notebooks/inference_playground.ipynb\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" height=20></a>  \nAnimation Notebook: <a href=\"http://colab.research.google.com/github/yuval-alaluf/restyle-encoder/blob/master/notebooks/animations_playground.ipynb\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" height=20></a>  \n\n\n<p align=\"center\">\n<img src=\"docs/teaser.jpg\" width=\"800px\"/>  \n<br>\nDifferent from conventional encoder-based inversion techniques, our residual-based ReStyle scheme incorporates an iterative refinement mechanism to progressively converge to an accurate inversion of real images. For each domain, we show the input image on the left followed by intermediate inversion outputs.\n</p>\n\n## Description   \nOfficial Implementation of our ReStyle paper for both training and evaluation. ReStyle introduces an iterative\nrefinement mechanism which can be applied over different StyleGAN encoders for solving the StyleGAN inversion task.\n\n\n## Getting Started\n### Prerequisites\n- Linux or macOS\n- NVIDIA GPU + CUDA CuDNN (CPU may be possible with some modifications, but is not inherently supported",
+      "https://arxiv.org/abs/2008.00951",
+      "https://arxiv.org/abs/2102.02766",
+      "https://arxiv.org/abs/2102.02766"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use this code for your research, please cite the following works:\n```\n@InProceedings{alaluf2021restyle,\n      author = {Alaluf, Yuval and Patashnik, Or and Cohen-Or, Daniel},\n      title = {ReStyle: A Residual-Based StyleGAN Encoder via Iterative Refinement}, \n      month = {October},\n      booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},  \n      year = {2021}\n}\n```\n```\n@InProceedings{richardson2021encoding,\n      author = {Richardson, Elad and Alaluf, Yuval and Patashnik, Or and Nitzan, Yotam and Azar, Yaniv and Shapiro, Stav and Cohen-Or, Daniel},\n      title = {Encoding in Style: a StyleGAN Encoder for Image-to-Image Translation},\n      booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\n      month = {June},\n      year = {2021}\n}\n@article{tov2021designing,\n      title={Designing an Encoder for StyleGAN Image Manipulation},\n      author={Tov, Omer and Alaluf, Yuval and Nitzan, Yotam and Patashnik, Or and Cohen-Or, Daniel},\n      journal={arXiv preprint arXiv:2102.02766},\n      year={2021}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**StyleGAN2 model and implementation:**  \nhttps://github.com/rosinality/stylegan2-pytorch  \nCopyright (c) 2019 Kim Seonghyeon  \nLicense (MIT) https://github.com/rosinality/stylegan2-pytorch/blob/master/LICENSE  \n\n**IR-SE50 model and implementations:**  \nhttps://github.com/TreB1eN/InsightFace_Pytorch  \nCopyright (c) 2018 TreB1eN  \nLicense (MIT) https://github.com/TreB1eN/InsightFace_Pytorch/blob/master/LICENSE  \n\n**Ranger optimizer implementation:**  \nhttps://github.com/lessw2020/Ranger-Deep-Learning-Optimizer   \nLicense (Apache License 2.0) https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer/blob/master/LICENSE  \n\n**LPIPS model and implementation:**  \nhttps://github.com/S-aiueo32/lpips-pytorch  \nCopyright (c) 2020, Sou Uchida  \nLicense (BSD 2-Clause) https://github.com/S-aiueo32/lpips-pytorch/blob/master/LICENSE  \n\n**pSp model and implementation:**   \nhttps://github.com/eladrich/pixel2style2pixel  \nCopyright (c) 2020 Elad Richardson, Yuval Alaluf  \nLicense (MIT) https://github.com/eladrich/pixel2style2pixel/blob/master/LICENSE\n\n**e4e model and implementation:**   \nhttps://github.com/omertov/encoder4editing\nCopyright (c) 2021 omertov  \nLicense (MIT) https://github.com/omertov/encoder4editing/blob/main/LICENSE\n\n**Please Note**: The CUDA files under the [StyleGAN2 ops directory](https://github.com/eladrich/pixel2style2pixel/tree/master/models/stylegan2/op) are made available under the [Nvidia Source Code License-NC](https://nvlabs.github.io/stylegan2/license.html)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{tov2021designing,\n      title={Designing an Encoder for StyleGAN Image Manipulation},\n      author={Tov, Omer and Alaluf, Yuval and Nitzan, Yotam and Patashnik, Or and Cohen-Or, Daniel},\n      journal={arXiv preprint arXiv:2102.02766},\n      year={2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@InProceedings{richardson2021encoding,\n      author = {Richardson, Elad and Alaluf, Yuval and Patashnik, Or and Nitzan, Yotam and Azar, Yaniv and Shapiro, Stav and Cohen-Or, Daniel},\n      title = {Encoding in Style: a StyleGAN Encoder for Image-to-Image Translation},\n      booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\n      month = {June},\n      year = {2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@InProceedings{alaluf2021restyle,\n      author = {Alaluf, Yuval and Patashnik, Or and Cohen-Or, Daniel},\n      title = {ReStyle: A Residual-Based StyleGAN Encoder via Iterative Refinement}, \n      month = {October},\n      booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},  \n      year = {2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9996875859473207,
+        0.9428847177018095,
+        0.8051471126290727,
+        0.8818279972518871
+      ],
+      "excerpt": "<a href=\"https://arxiv.org/abs/2104.02699\"><img src=\"https://img.shields.io/badge/arXiv-2104.02699-b31b1b.svg\" height=22.5></a> \n<a href=\"https://opensource.org/licenses/MIT\"><img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" height=22.5></a>   \n<a href=\"https://www.youtube.com/watch?v=9RzCZZBjlxM\"><img src=\"https://img.shields.io/static/v1?label=Two Minute Papers&message=ReStyle Video&color=red\" height=22.5></a> \n<a href=\"https://youtu.be/6pGzLECSIWM\"><img src=\"https://img.shields.io/static/v1?label=ICCV 2021 &message=5 Minute Video&color=red\" height=22.5></a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8734742215522853
+      ],
+      "excerpt": "Animation Notebook: <a href=\"http://colab.research.google.com/github/yuval-alaluf/restyle-encoder/blob/master/notebooks/animations_playground.ipynb\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" height=20></a>   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8840467439138965
+      ],
+      "excerpt": "--edit_directions=age,pose,smile \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8422862053358879
+      ],
+      "excerpt": "obtained via InterFaceGAN (age, pose, and smile). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuval-alaluf/restyle-encoder",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-06T15:45:57Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-27T03:02:27Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Official Implementation of our ReStyle paper for both training and evaluation. ReStyle introduces an iterative\nrefinement mechanism which can be applied over different StyleGAN encoders for solving the StyleGAN inversion task.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9988095982816922
+      ],
+      "excerpt": "Recently, the power of unconditional image synthesis has significantly advanced through the use of Generative Adversarial Networks (GANs). The task of inverting an image into its corresponding latent code of the trained GAN is of utmost importance as it allows for the manipulation of real images, leveraging the rich semantics learned by the network. Recognizing the limitations of current inversion approaches, in this work we present a novel inversion scheme that extends current encoder-based inversion methods by introducing an iterative refinement mechanism. Instead of directly predicting the latent code of a given image using a single pass, the encoder is tasked with predicting a residual with respect to the current estimate of the inverted latent code in a self-correcting manner. Our residual-based encoder, named ReStyle, attains improved accuracy compared to current state-of-the-art encoder-based methods with a negligible increase in inference time. We analyze the behavior of ReStyle to gain valuable insights into its iterative nature. We then evaluate the performance of our residual encoder and analyze its robustness compared to optimization-based inversion and state-of-the-art encoders. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9688238817817854
+      ],
+      "excerpt": "Different from conventional encoder-based inversion techniques, our residual-based ReStyle scheme incorporates an iterative refinement mechanism to progressively converge to an accurate inversion of real images. For each domain, we show the input image on the left followed by intermediate inversion outputs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9559451950203466,
+        0.908925214220865
+      ],
+      "excerpt": "In this repository, we provide pretrained ReStyle encoders applied over the  \npSp and e4e encoders  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9600542033889728,
+        0.9054222206352001,
+        0.977790434241149,
+        0.8388407567928262,
+        0.887632503231055,
+        0.9106000727575976
+      ],
+      "excerpt": "|IR-SE50 Model | Pretrained IR-SE50 model taken from TreB1eN for use in our ID loss and encoder backbone on human facial domain. \n|ResNet-34 Model | ResNet-34 model trained on ImageNet taken from torchvision for initializing our encoder backbone. \n|MoCov2 Model | Pretrained ResNet-50 model trained using MOCOv2 for computing MoCo-based loss on non-facial domains. The model is taken from the official implementation. \n|CurricularFace Backbone | Pretrained CurricularFace model taken from HuangYG123 for use in ID similarity metric computation. \n|MTCNN | Weights for MTCNN model taken from TreB1eN for use in ID similarity metric computation. (Unpack the tar.gz to extract the 3 model weights.) \nNote: all StyleGAN models are converted from the official TensorFlow models to PyTorch using the conversion script from rosinality. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8114393248087052
+      ],
+      "excerpt": "We currently support applying ReStyle on the pSp encoder from Richardson et al. [2020]  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9451462369268915,
+        0.9394449182630016,
+        0.9394449182630016,
+        0.9242009346910414,
+        0.9394449182630016,
+        0.9394449182630016
+      ],
+      "excerpt": "For the human facial domain (ffhq_encode), we use an IRSE-50 backbone using the flags: \n--encoder_type=BackboneEncoder for pSp \n--encoder_type=ProgressiveBackboneEncoder for e4e \nFor all other domains, we use a ResNet34 encoder backbone using the flags: \n--encoder_type=ResNetBackboneEncoder for pSp \n--encoder_type=ResNetProgressiveBackboneEncoder for e4e \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9502630422374728,
+        0.8775006407444159
+      ],
+      "excerpt": "For the human facial domain we also use a specialized ID loss which is set using the flag --id_lambda=0.1. \nFor all other domains, please set --id_lambda=0 and --moco_lambda=0.5 to use the MoCo-based similarity loss from Tov et al.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8125530421808493
+      ],
+      "excerpt": "You should also adjust the --output_size and --stylegan_weights flags according to your StyleGAN generator.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9317590282837953
+      ],
+      "excerpt": "To help visualize the results of ReStyle we provide a Jupyter notebook found in notebooks/inference_playground.ipynb.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9537344946060134,
+        0.9664423128224442
+      ],
+      "excerpt": "on images of your choosing. It is recommended to run this in Google Colab. \nWe have also provided a notebook for generating interpolation videos such as those found in the project page. This  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9514961295334108,
+        0.9644545194226838,
+        0.9498376861793139
+      ],
+      "excerpt": "That is, the keys of the dictionary are the image file names and the values are lists of length N containing the output latent of each  \nstep where N is the number of inference steps. Each element in the list is of shape (Kx512) where K is the number \nof style inputs of the generator.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8992729852635543
+      ],
+      "excerpt": "Visualizing the intermediate outputs. Here, the intermediate outputs are saved from left to right with the input image shown on the right-hand side. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.96469396796445
+      ],
+      "excerpt": "to easily see the progression in the reconstruction with each step. To save the step-by-step outputs as a single image,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8458405971348983
+      ],
+      "excerpt": "- Calculating the identity loss for the human facial domain:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.89078715754155
+      ],
+      "excerpt": "Editing results using InterFaceGAN on inversions obtained using ReStyle-e4e. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8980794251038433,
+        0.8687654588882269
+      ],
+      "excerpt": "we save the original image followed by the inversion and the resulting edits. \nWe support running inference using ReStyle-e4e models on the faces domain using edit several directions  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8877201413005861
+      ],
+      "excerpt": "Image toonification results using our proposed encoder bootstrapping technique. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9170659220291331,
+        0.8163699599208962,
+        0.9484685228176998
+      ],
+      "excerpt": "In the paper, we introduce an encoder bootstrapping technique that can be used to solve the image toonification task by  \npairing an FFHQ-based encoder with a Toon-based encoder. \nBelow we provide the models used to generate the results in the paper:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9459529464623593,
+        0.9217086689474899
+      ],
+      "excerpt": "Note that the ReStyle toonify model is trained using only real images with no paired data.  \nMore details regarding the training parameters and settings of the toonify encoder can be found here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8797967603491356,
+        0.8262159581573801
+      ],
+      "excerpt": "Here, we output the per-step outputs side-by-side with the inverted initialization real-image on the left and the original  \ninput image on the right. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.855260423723906
+      ],
+      "excerpt": "| &boxvr;&nbsp; licenses | Folder containing licenses of the open source projects used in this repository \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9598042711718142,
+        0.9598042711718142
+      ],
+      "excerpt": "| &boxv;&nbsp; &boxvr;&nbsp; psp.py | Implementation of pSp encoder extended to work with ReStyle \n| &boxv;&nbsp; &boxur;&nbsp; e4e.py | Implementation of e4e encoder extended to work with ReStyle \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Official Implementation for \"ReStyle: A Residual-Based StyleGAN Encoder via Iterative Refinement\" (ICCV 2021) https://arxiv.org/abs/2104.02699",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuval-alaluf/restyle-encoder/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 111,
+      "date": "Mon, 27 Dec 2021 06:09:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuval-alaluf/restyle-encoder/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuval-alaluf/restyle-encoder",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/yuval-alaluf/restyle-encoder/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/yuval-alaluf/restyle-encoder/main/notebooks/animations_playground.ipynb",
+      "https://raw.githubusercontent.com/yuval-alaluf/restyle-encoder/main/notebooks/inference_playground.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this work, we use rosinality's [StyleGAN2 implementation](https://github.com/rosinality/stylegan2-pytorch). \nIf you wish to use your own generator trained using NVIDIA's implementation there are a few options we recommend:\n1. Using NVIDIA's StyleGAN2 / StyleGAN-ADA TensorFlow implementation.  \n   You can then convert the TensorFlow `.pkl` checkpoints to the supported format using the conversion script found in [rosinality's implementation](https://github.com/rosinality/stylegan2-pytorch#convert-weight-from-official-checkpoints).\n2. Using NVIDIA's StyleGAN-ADA PyTorch implementation.  \n   You can then convert the PyTorch `.pkl` checkpoints to the supported format using the conversion script created by [Justin Pinkney](https://github.com/justinpinkney) found in [dvschultz's fork](https://github.com/dvschultz/stylegan2-ada-pytorch/blob/main/SG2_ADA_PT_to_Rosinality.ipynb).  \n\n\nOnce you have the converted `.pt` files, you should be ready to use them in this repository.  \n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to train ReStyle on your own data, you should perform the following steps: \n1. Update `configs/paths_config.py` with the necessary data paths and model paths for training and inference.\n```\ndataset_paths = {\n    'train_data': '/path/to/train/data'\n    'test_data': '/path/to/test/data',\n}\n```\n2. Configure a new dataset under the `DATASETS` variable defined in `configs/data_configs.py`. There, you should define \nthe source/target data paths for the train and test sets as well as the transforms to be used for training and inference.\n```\nDATASETS = {\n\t'my_data_encode': {\n\t\t'transforms': transforms_config.EncodeTransforms,   #: can define a custom transform, if desired\n\t\t'train_source_root': dataset_paths['train_data'],\n\t\t'train_target_root': dataset_paths['train_data'],\n\t\t'test_source_root': dataset_paths['test_data'],\n\t\t'test_target_root': dataset_paths['test_data'],\n\t}\n}\n```\n3. To train with your newly defined dataset, simply use the flag `--dataset_type my_data_encode`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Dependencies:  \nWe recommend running this repository using [Anaconda](https://docs.anaconda.com/anaconda/install/). \nAll dependencies for defining the environment are provided in `environment/restyle_env.yaml`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8969251374349508
+      ],
+      "excerpt": "Please download the pretrained models from the following links. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9116086174139658,
+        0.8437810858903626
+      ],
+      "excerpt": "Note: all StyleGAN models are converted from the official TensorFlow models to PyTorch using the conversion script from rosinality. \nBy default, we assume that all auxiliary models are downloaded and saved to the directory pretrained_models.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8195283490507721
+      ],
+      "excerpt": "Additionally, if you have tensorboard installed, you can visualize tensorboard logs in opts.exp_dir/logs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.81070014280065
+      ],
+      "excerpt": "notebook can be run using Google Colab here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9806531413050702
+      ],
+      "excerpt": "you can run the following:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8085056717974588
+      ],
+      "excerpt": "If you wish to run inference using these two models and the bootstrapping technique you may run the following:  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9042456532942793
+      ],
+      "excerpt": "<img src=\"docs/teaser.jpg\" width=\"800px\"/>   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.877396332065267
+      ],
+      "excerpt": "See options/train_options.py and options/e4e_train_options.py for all training-specific flags. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8059883726342281
+      ],
+      "excerpt": "The notebook will download the pretrained models and run inference on the images found in notebooks/images or  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8002626258224177
+      ],
+      "excerpt": "- This script will also save all the latents as an .npy file in a dictionary format as follows:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "    \"0.jpg\": [latent_step_1, latent_step_2, ..., latent_step_N], \n    \"1.jpg\": [latent_step_1, latent_step_2, ..., latent_step_N], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042456532942793,
+        0.9042456532942793
+      ],
+      "excerpt": "<img src=\"docs/2441.jpg\" width=\"800px\"/> \n<img src=\"docs/02530.jpg\" width=\"800px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042456532942793,
+        0.9042456532942793,
+        0.9042456532942793
+      ],
+      "excerpt": "<img src=\"docs/ardern.jpg\" width=\"800px\"/> \n<img src=\"docs/macron.jpg\" width=\"800px\"/> \n<img src=\"docs/merkel.jpg\" width=\"800px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042456532942793,
+        0.9042456532942793
+      ],
+      "excerpt": "<img src=\"docs/346.jpg\" width=\"800px\"/> \n<img src=\"docs/2598.jpg\" width=\"800px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8011956898168117
+      ],
+      "excerpt": "| &boxvr;&nbsp; docs | Folder containing images displayed in the README \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8306312782678652
+      ],
+      "excerpt": "| &boxvr; models | Folder containing all the models and training objects \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9272716345557604
+      ],
+      "excerpt": "| &boxvr;&nbsp; options | Folder with training and test command-line options \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8328916229266603
+      ],
+      "excerpt": "| &boxvr;&nbsp; utils | Folder with various utility functions \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuval-alaluf/restyle-encoder/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Cuda",
+      "C++"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Yuval Alaluf\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ReStyle: A Residual-Based StyleGAN Encoder via Iterative Refinement (ICCV 2021)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "restyle-encoder",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuval-alaluf",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuval-alaluf/restyle-encoder/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Linux or macOS\n- NVIDIA GPU + CUDA CuDNN (CPU may be possible with some modifications, but is not inherently supported)\n- Python 3\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 769,
+      "date": "Mon, 27 Dec 2021 06:09:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "generative-adversarial-networks",
+      "stylegan",
+      "stylegan-encoder",
+      "iterative-refinement",
+      "iccv2021"
+    ],
+    "technique": "GitHub API"
+  }
+}

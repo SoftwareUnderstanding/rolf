@@ -1,0 +1,289 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1612.01010\n- __WaveNet Paper__: https://arxiv.org/pdf/1609.03499.pdf?utm_source=Sailthru&utm_medium=email&utm_campaign=Uncubed%20Entry%20%2361%20-%20April%203%2C%202019&utm_term=entry\n- __WaveNet Architecture Adaption__: https://www.analyticsvidhya.com/blog/2020/01/how-to-perform-automatic-music-generation/\n- __Videogame MIDIS__: https://www.vgmusic.com/\n- __Scraping code__: https://github.com/x4nth055/pythoncode-tutorials/tree/master/web-scraping/link-extractor\n- __Magenta repository__:\nhttps://github.com/magenta/magenta\n- __Magenta project homepage__:\nhttps://magenta.tensorflow.org/\n- __Maestro dataset__:\nhttps://magenta.tensorflow.org/datasets/maestro"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- __MidiNET, CNN-GAN__: https://opus.lib.uts.edu.au/bitstream/10453/6862/1/2004001187.pdf\n- __Combining theory between RNN and LSTM__: http://cs229.stanford.edu/proj2016/report/Lou-MusicGenerationUsingNeuralNetworks-report.pdf\n- __Easy to understand example__: https://medium.com/@leesurkis/how-to-generate-techno-music-using-deep-learning-17c06910e1b3\n- __Videogame music with one instrument (lots of music theory)__: https://www.youtube.com/watch?v=UWxfnNXlVy8&feature=youtu.be\n- __DeepMusic__: https://github.com/llSourcell/How_to_generate_music_in_tensorflow_LIVE\n- __DeepBach__: https://arxiv.org/abs/1612.01010\n- __WaveNet Paper__: https://arxiv.org/pdf/1609.03499.pdf?utm_source=Sailthru&utm_medium=email&utm_campaign=Uncubed%20Entry%20%2361%20-%20April%203%2C%202019&utm_term=entry\n- __WaveNet Architecture Adaption__: https://www.analyticsvidhya.com/blog/2020/01/how-to-perform-automatic-music-generation/\n- __Videogame MIDIS__: https://www.vgmusic.com/\n- __Scraping code__: https://github.com/x4nth055/pythoncode-tutorials/tree/master/web-scraping/link-extractor\n- __Magenta repository__:\nhttps://github.com/magenta/magenta\n- __Magenta project homepage__:\nhttps://magenta.tensorflow.org/\n- __Maestro dataset__:\nhttps://magenta.tensorflow.org/datasets/maestro\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "  - Video game sample 1 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-25T18:28:02Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-12T00:34:34Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9264469371976236,
+        0.9607526669878986
+      ],
+      "excerpt": "DSC160 Data Science and the Arts - Final Project - Generative Arts - Spring 2020 \nProject Team Members:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9147794625333889,
+        0.988626318364449
+      ],
+      "excerpt": "Generative music is not a new idea, and has been around as early as 1989. However, the use of neural networks for this creation has not been popularized until recently (Yang et al., 2017). This project plans to use neural networks to generate music from MIDI jazz files. However this presents many challenges, as melody can be generated, but structure is much harder to generate due to variance. We wanted to compose music using neural nets to attempt to generate melody from MIDI files scraped off the internet. \nRight now even the best computer-generated music is not good enough to be considered an actual source of entertainment, and the examples that come close are usually heavily stylized compositions. In the future, however, there is a chance that machine-produced entertainment will rival that of human origins, and we tried to see how close we can get to that point with the current algorithms and levels of technology. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9873782641902186
+      ],
+      "excerpt": "- Our WaveNet Adaptation (There's 3 different versions we tested). We adapted the traditional WaveNet architecture, which uses raw waveform data, and changed it to accept string sequences of integers representing notes. The model uses 1D Dilated Causal Convolutional Layers. The most important aspect about this is the dilation, which covers for the low receptive field of the convolutions by exponentially increasing it inside the hidden layers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9979622636459514
+      ],
+      "excerpt": "GANs. The idea of a GAN is to have a generator model creating data and a discriminator model classifying it as real/fake trying to outsmart each other. This directly speaks to our attempts at making the music human-like, after all, real/fake classification is the means and the goal. GANs have been shown to produce incredible results in image generation, however, traditional GANs struggle with data directionality, which is one of the main features of music generation. Therefore, the descriminator has to rely on sequential neural networks, usually LSTMs for discrimination. We did not get any satisfying results with simpler GAN models, so our theory was that the generator does not get enough attention. An example of a well-built GAN model is MuseGAN, which utilizes three different approaches to note generation, as well as a layer of bar generation. Sadly, we could not train it on our data as the preprocessing was done very specifically for the dataset the creators used. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9825401870909208
+      ],
+      "excerpt": "Performance RNN. Magenta's performance RNN uses a LSTM, Long-Short Term Memory recurrent neural network. The point of which is to retain the memory from previous training steps of the neural network and to use those steps later on in the line, something that some other neural networks lack. The performance RNN models notes in a similar way as a midi file. It represents notes with a starting pitch and ending pitch event, a time shift event, and velocity. These events are used to represent a note and its particular dynamics for modeling. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8786572440630515,
+        0.9885150763014471
+      ],
+      "excerpt": "- Base Model. First iteration of the model, covers processing of midi files, and then runs baseline WaveNet Model originally ran on maestro dataset. \n- WaveNet v2. Second iteration of the model, this time adds in removal of notes occuring less than X times, and also changes hyper parameters of the model in an attempt to fix generative process. Trained on videogame music. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8844383260027922,
+        0.8550048966640066,
+        0.8569824410584933
+      ],
+      "excerpt": "- Version 1 (maestro) Sample. In this version we can melody forming, but at the time this was the first sample that wasn't just the same note over and over again. So to remedy this we wanted to try a new dataset and change the model from its baseline, which is where the next sample comes in. \n-Version 1 (schubert failed sample. From trying out the model trained on a very small data set named schubert, but not much good came from this model, barely any nice melody from the samples. \n- Version 2 (video game) Sample. With this sample we can hear the heavy videogame music influence, as it sounds kind of similar to some Final Fantasy title screen music (about 20 out of 800ish data samples were from final fantasy). This was a definite improvement from the base model, possibly due to the generative process changes from tuning hyperparameters linked from this code notebook. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9723513415755538,
+        0.968507629694893
+      ],
+      "excerpt": "- midi-lstm-gan after 3000 epochs. A constant stream of almost random notes, this model seemed to perform the worst out of all the other ones, the main reason being the music21 midi parser failing to parse the Maestro files correctly. \n- midi-lstm-gan loss per epoch graph. This graph shows the convergence of the discriminator and generator losses at a somewhat high number (x-axis is 100s of epochs), signifying, most likely, underfit data.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9083969026192307,
+        0.9194739111334762,
+        0.9814579621667008,
+        0.9961226551795421,
+        0.9674739003363968,
+        0.990911163539942,
+        0.999404328577917,
+        0.860059181823877,
+        0.860059181823877
+      ],
+      "excerpt": "first run after 300 steps, on a fraction of the dataset. An incoherent stream of notes following the seed stream of notes. Not only was the model trained on only a fraction of the dataset, it was only trained for 300 steps. Like a monkey slamming it's hands on the keyboard. \nsecond run after 3000 steps, on the same dataset. Still incoherent, but the timing and musicality is a little more recognizably musical. The monkey listened to 48 hours worth of Mozart, and now thinks itself an artist. \nthird run using Magenta's pre-trained model. Nothing close to being a real song, but the timing and musicality is close. The note progression needs work, but it is much better. Our monkey has been going to classes for the past 3 months, and this is its first recital. \nAdvancements in the field of generative art have been quite spectacular. With music, the best advancements were made by applying specific models to specific datasets, and, as our experience shows, the models malfunction when presented with music of less structure or different genres. The reason for that, we believe, is that our models ended up underfit. The algorithms tried to extract patterns from many (but not too many) very different samples, and, limited by the memory and power of our PCs, we were definitely not feeding them enough data for any clear patterns to solidify. Of course, one solution would be to give the models even less data, which would cause overfitting. Specifically for this task, overfitting would mean the algorithms would produce very similar music to the chosen set which would make it sound good, however, would it even be new music at that point? Immitating and following rules are tasks that computers excel at anyway, so there is no point in having nice sounding results if they come from overfitting. To avoid both underfitting and overfitting we would have had to feed way more data to the models than we possibly could. \n  Trying different models shed some light on the performance issues and advantages of certain underlying neural nets. The three most popular algorithms in music generation turned out to be LSTMs, GANs, and Encoder-Decoder networks. LSTMs seem to be the most widely used networks as they capture both short and long term dependencies very well, which is important for music as there needs to be consistency not only withing each bar, but also between bars withing phrases, as well as between the phrases themselves. Furthermore, music often relies on set verse-chorus structures, and, hopefully, LSTMs can take care of that as well. GANs and Encoder-Decoders usually play secondary roles in music generation, but are also quite useful and important for more advanced models. \nSo what would an ideal music generative model look like? The ideal model would encompass all possible differences of music, and it is hard to tell what we are currently lacking. On the model side, it would be perfect if we could utilize some type of a \u201cmusic theory of everything\u201d, although the point of applying neural networks to this task is to let the models figure that theory out. \n  Therefore, the problem is on the data side, in the data itself and the way it is processed. The idea is human listeners rely on more than note information for music appreciation, for example we expect different instruments to play different parts, different genres to have different structures, and so on. On top of that, the idea of \u201cenjoyment\u201d is unquantifiable, so there seems to be no real measure of how well a model is doing without a human supervisor, and even then the opinion is subjective. Ideally, we would have compact data that would encompass a lot of information, including (but not limited to): note info (midi covers that pretty nicely), bar info, instrument info, genre info, and maybe even some type of sentiment info. The good news is all of these measurements are achievable to some capacity, and a GAN discriminator could assume the role of an objective human supervisor, so we believe that it would be possible to create a near-perfect dataset and train a near-perfect model that could create catchy human-like music for everyone to enjoy. \nNikolas Racelis Russell: WaveNet model \nIakov Vasilyev: Muse_GAN model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "dsc160-final-dsc160-final-group19 created by GitHub Classroom",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 15:35:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ucsd-dsc-arts/dsc160-final-dsc160-final-group19",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/WaveNetV2_small_videogame.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/WaveNet_midiV2.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/Scraping%20Video%20Game%20Music.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/WaveNet_midiV1.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/.ipynb_checkpoints/Scraping%20Video%20Game%20Music-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/.ipynb_checkpoints/WaveNet_midiV2-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/.ipynb_checkpoints/WaveNet_midiV1-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/master/code/WaveNet/.ipynb_checkpoints/WaveNetV2_small_videogame-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8501007490804139
+      ],
+      "excerpt": "- Models. The two GAN Models are in the GANs.zip folder. The Untitled notebook in the midi-lstm-gan subfolder can be run to train on the Maestro dataset. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8668937975765546
+      ],
+      "excerpt": "Training Data: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003751159116907
+      ],
+      "excerpt": "  - Maestro sample 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003751159116907
+      ],
+      "excerpt": "  - Schubert sample 1 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Project Title",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dsc160-final-dsc160-final-group19",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ucsd-dsc-arts",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ucsd-dsc-arts/dsc160-final-dsc160-final-group19/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "__For WaveNet and GANs__:\n- Tensorflow-gpu (latest version as of 6/11/20)\n- music_21\n- scikit-learn\n- numpy\n\n__For Magenta__(requires many different packages but mainly):\n-tensorflow\nmost dependencies are taken care of after running the environment set up. \n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 15:35:11 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

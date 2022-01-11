@@ -1,0 +1,228 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sdyy6211/plant-segmentation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-21T09:19:18Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-07T02:08:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This model is a semantic image segmentation model, which assigns label to each pixel of an image to partition different objects into segments. The whole model is composed of two parts, namely backbone part and classifier part. The backbone part is resnet101 which has been pre-trained, and the classifier part (DeepLabV3+ head, implemented by https://github.com/jfzhang95/pytorch-deeplab-xception using PyTorch) is fine-tuned based on this specific task. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9932825919739677
+      ],
+      "excerpt": "This model is used to automatically segment each object within crowdsourced images, which are unstructured data that is considered as difficult to be processed automatically. The practical application of the model is to automatically detect and monitor the changes of historical sites from those unstructured image data overtime. In this case, the aim is to detect and monitor the growth of the plant on the wall of Bothwell castle. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8580294433772333,
+        0.9935586229134347
+      ],
+      "excerpt": "| The interface of labelling tool | \nFor details of training, the parameters of the backbone model are frozen, and the deeplab head parameters are trained with epoch number of 100 and learning rate of 0.01 for the first model, and epoch number of 100 and same learning rate for the second model. The optimizer is Adam, and the loss function is cross entropy loss with 8 classes for the first model and 2 classes for the second model. A scheduling stepdown of learning rate is applied to both models, which means the learning rate will reduce to its 1/10 every epoch of 50. This is used for the optimizer to better find the minimum point of the loss function. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.83783177886621,
+        0.9738088117880918
+      ],
+      "excerpt": "| Comparison of label and segmentation results | \nIn order to crop the area of plants, and further refine them using the second model,the coordinates of a bounding box of the segmented objects need to be obtained based on its maximum and minimum vertical and horizontal coordinates. This is achieved by using DBSCAN of sklearn (https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html), which is an unsupervised clustering algorithm that automatically partitions disjoint objects. Therefore, distinguishing objects within a class can be partitioned to be drawn an individual bounding box. Once the coordinates of each object are determined, bounding boxes of each disjoint object can be drawn as shown by the following figure. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8889521641351604
+      ],
+      "excerpt": "After having the bounding box, the plant can be cropped from the whole image, and feed it into the second model to refine the prediction. The refined prediction is shown as follow. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671907647514707,
+        0.9982597174385087
+      ],
+      "excerpt": "| selecting interested local area and refining predictions in the area | \nFinally, in order to better alleviate the disturbance of distortion caused by camera angle in measuring the area of plant, the photogrammetry is applied to obtain an all-around view of the plant. The final product is a 3D photogrammetry model with segmented textures as shown below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9826183166967883
+      ],
+      "excerpt": "| Final product of a 3D photogrammetry model with segmented textures | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sdyy6211/plant-segmentation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 22:39:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sdyy6211/plant-segmentation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sdyy6211/plant-segmentation",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/TwoStageModelTraining.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/OneStageModelTraining.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/PhotogrammeryCombination.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/DataRetrieval.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/PhotogrammeryCombination-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/masking-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/DataRetrieval-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/OneStageModelTraining-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/complete_process-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/sdyy6211/plant-segmentation/20210302/.ipynb_checkpoints/TwoStageModelTraining-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](https://github.com/sdyy6211/Dissertation_Image_segmentation/blob/20210302/gitpic/original_image.jpg)\n|:--:| \n| *An example of training image* |\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sdyy6211/plant-segmentation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Plant segmentation combined with photogrammetry",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "plant-segmentation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sdyy6211",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sdyy6211/plant-segmentation/blob/20210302/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "OpenMVS (https://github.com/cdcseacave/openMVS)\n\nVisualSFM (http://ccwu.me/vsfm/)\n\nDeepLabV3+ (https://github.com/jfzhang95/pytorch-deeplab-xception)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Wed, 22 Dec 2021 22:39:12 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](https://github.com/sdyy6211/Dissertation_Image_segmentation/blob/20210302/gitpic/original_image.jpg)\n|:--:| \n| *An example of training image* |\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![](https://github.com/sdyy6211/Dissertation_Image_segmentation/blob/20210302/gitpic/label.png)\n|:--:| \n| *The label of overall classes for the first model* |\n\n![](https://github.com/sdyy6211/Dissertation_Image_segmentation/blob/20210302/gitpic/segmentated_label.png)\n|:--:| \n| *The label of binary classes for the second model to refine prediction* |\n\nThis process involves downloading masks from the Labelbox. These codes correspond to the file of *segmentation_data_processing.ipynb*\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

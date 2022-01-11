@@ -1,0 +1,212 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1707.06347\n    - OpenAI blog post: https://openai.com/blog/openai-baselines-ppo/\n    - Nikhil's implementation: https://github.com/nikhilbarhate99/PPO-PyTorch"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- DQN: \n    - Paper: https://deepmind.com/research/publications/human-level-control-through-deep-reinforcement-learning\n    - PyTorch tutorial: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html\n    - Toptal blog post: https://www.toptal.com/deep-learning/pytorch-reinforcement-learning-tutorial\n\n- A2C: \n    - Paper: https://arxiv.org/pdf/1602.01783v1.pdf\n    - MorvanZhou's implementation: https://github.com/MorvanZhou/pytorch-A3C\n    - Arthur Juliani's blog post: https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2\n    \n- PPO\n    - Paper: https://arxiv.org/abs/1707.06347\n    - OpenAI blog post: https://openai.com/blog/openai-baselines-ppo/\n    - Nikhil's implementation: https://github.com/nikhilbarhate99/PPO-PyTorch\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lambders/drl-experiments",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-07-26T17:12:59Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-25T23:35:20Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9465427764278549,
+        0.9059574163098089,
+        0.9632903932759815,
+        0.9281052129703075,
+        0.9634798236820405,
+        0.9189886953505402,
+        0.8495789383395795,
+        0.8815602625443768,
+        0.9961648658711256,
+        0.8556145401310619
+      ],
+      "excerpt": "Training a DRL agent to play Flappy Bird. Includes implementations of DQN, A2C, and PPO methods.  \nDemo of RL Agent: \nAn agent in state s \u2208 S takes an action a \u2208 A which moves it into another state s'. The environment gives a reward r \u2208 R as feedback; the mechanism for which an agent chooses an action in a state s is known as its policy \u03c0(a|s). At a given time step t, the agent aims to take an action s.t. it maximizes its future reward R<sub>t</sub> = r<sub>t</sub> + \u03b3r<sub>t+1</sub> + \u03b3<sup>2</sup>r<sub>t+2</sub> + ... + + \u03b3<sup>n-t</sup>r<sub>n</sub> = r<sub>t</sub> + \u03b3R<sub>t+1</sub>. Here, \u03b3 is a discount factor which adjusts for the fact that future predictions tend to be less reliable.  \nThe Q-value is a function which represents the maximum future reward when the agent performs an action a in state s, Q(s<sub>t</sub>,a<sub>t</sub>)= max R<sub>t+1</sub>. The estimation of future reward is given by the Bellman equation Q(s,a) = r + \u03b3 max<sub>a'</sub> Q(s',a'). \nFor large state-action spaces, learning this giant table of Q-values can quickly become computationally infeasible. In deep Q-learning, we use neural networks to approximate q-values Q(s,a; \u03b8) (where \u03b8 are the network parameters). There are some added tricks to stabilize learning: \n- Experience replay: We store episode steps (s, a, r, s') aka \"experiences\" into a replay memory. Minibatches of these experiences are later sampled during training. Not only does experience replay improve data efficiency, it also breaks up strong correlations which would occur if we used consecutive samples, reducing the variance of each update. \n- Epsilon-greedy exploration: With a probability \u03b5 we take a random action, otherwise take the optimal predicted action. \u03b5 is decayed over the number of training episodes. This strategy helps tackle the exporation vs. exploitation dilemma. \nDuring training, we optimize over the MSE loss of the temporal difference error (Q(s,a;\u03b8) - (r(s,a) + \u03b3 max<sub>a</sub> Q(s',a;\u03b8)))<sup>2</sup> \nIn flappy bird, our action space is either \"flap\" or \"do nothing\", our state space is a stack of four consecutive frames, and our reward is driven by keeping alive (+0.1) or passing through a pipe pair (+1). \nI had to stop/resume training a couple times, which is why the training curve isn't completely smooth. This could probably be fixed if you saved off your optimizer in addition to your network weights! As you can see, the length (in frames) of a playing episode increases as flappy learns good strategies. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9966474696551649,
+        0.9806267763439173,
+        0.8995101039000277
+      ],
+      "excerpt": "The A's of A2C: \nAdvantage: We learned about Q-values in the previous section. The state-value V(s) can be thought of the measure of the \"goodness\" of a certain state and can be recovered from the Q-values and the policy: V(s) = \u2211<sub>a\u2208A</sub> Q(s,a)\u03c0(a|s). The difference between the Q-value and V is known as the advantage, which captures how much better and action is compared to others at a given state. Because our network is not computing Q values directly, we can approximate Q with the discounted reward R. A = Q(s,a) - V(s) ~ R - V(s). \nActor-Critic: We have two types of learners, the actor and the critic, which manifest as two separate fully-connected layers on top of a base network. The actor learns the policy \u03c0(a|s;\u03b8), outputting the best action probabilities given its current state. The critic learns the state-value function V(s;w)-- it can therefore evaluate the actor's suggested action and guide the actor's training updates.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Training a DRL agent to play Flappy Bird. An exercise to reimplement DQN, A2C, and PPO DRL methods.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/amanda-lambda/drl-experiments/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 23:53:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lambders/drl-experiments/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lambders/drl-experiments",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8024877608391905
+      ],
+      "excerpt": "Demo of RL Agent: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9242929797066727
+      ],
+      "excerpt": "<img src=\"doc/dqn_eplen.jpg\" alt=\"convolution example\" width=\"720\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lambders/drl-experiments/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hack-flappy-bird-drl",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drl-experiments",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lambders",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lambders/drl-experiments/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```sh\n#: General format of commands\npython main.py --algo=<dqn, a2c, ppo> --mode=<train, eval>\n\n#: So, for example, to train a2c:\npython main.py --algo=a2c --mode=train\n\n#: To play a game using dqn:\npython main.py --algo=dqn --mode=eval --weights_dir=exp1/2000000.pt\n\n#: You canalso  visualize your results via TensorBoard\ntensorboard --logdir <exp_name>\n```\n\nFor more options, run\n\n```sh\npython main.py -h\n\nusage: main.py [-h] [--algo {dqn,a2c,ppo}] [--mode {train,evaluation}]\n               [--exp_name EXP_NAME] [--weights_dir WEIGHTS_DIR]\n               [--n_train_iterations N_TRAIN_ITERATIONS]\n               [--learning_rate LEARNING_RATE]\n               [--len_agent_history LEN_AGENT_HISTORY]\n               [--discount_factor DISCOUNT_FACTOR] [--batch_size BATCH_SIZE]\n               [--initial_exploration INITIAL_EXPLORATION]\n               [--final_exploration FINAL_EXPLORATION]\n               [--final_exploration_frame FINAL_EXPLORATION_FRAME]\n               [--replay_memory_size REPLAY_MEMORY_SIZE]\n               [--n_workers N_WORKERS]\n               [--buffer_update_freq BUFFER_UPDATE_FREQ]\n               [--entropy_coeff ENTROPY_COEFF]\n               [--value_loss_coeff VALUE_LOSS_COEFF]\n               [--max_grad_norm MAX_GRAD_NORM] [--grad_clip GRAD_CLIP]\n               [--log_frequency LOG_FREQUENCY]\n               [--save_frequency SAVE_FREQUENCY] [--n_actions N_ACTIONS]\n               [--frame_size FRAME_SIZE]\n\ndrl-experiment options\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --algo {dqn,a2c,ppo}  run the network in train or evaluation mode\n  --mode {train,evaluation}\n                        run the network in train or evaluation mode\n  --exp_name EXP_NAME   name of experiment, to be used as save_dir\n  --weights_dir WEIGHTS_DIR\n                        name of model to load\n  --n_train_iterations N_TRAIN_ITERATIONS\n                        number of iterations to train network\n  --learning_rate LEARNING_RATE\n                        learning rate\n  --len_agent_history LEN_AGENT_HISTORY\n                        number of stacked frames to send as input to networks\n  --discount_factor DISCOUNT_FACTOR\n                        discount factor used for discounting return\n  --batch_size BATCH_SIZE\n                        batch size\n  --initial_exploration INITIAL_EXPLORATION\n                        epsilon greedy action selection parameter\n  --final_exploration FINAL_EXPLORATION\n                        epsilon greedy action selection parameter\n  --final_exploration_frame FINAL_EXPLORATION_FRAME\n                        epsilon greedy action selection parameter\n  --replay_memory_size REPLAY_MEMORY_SIZE\n                        maximum number of transitions in replay memory\n  --n_workers N_WORKERS\n                        number of actor critic workers\n  --buffer_update_freq BUFFER_UPDATE_FREQ\n                        refresh buffer after every x actions\n  --entropy_coeff ENTROPY_COEFF\n                        entropy regularization weight\n  --value_loss_coeff VALUE_LOSS_COEFF\n                        value loss regularization weight\n  --max_grad_norm MAX_GRAD_NORM\n                        norm bound for clipping gradients\n  --grad_clip GRAD_CLIP\n                        magnitude bound for clipping gradients\n  --log_frequency LOG_FREQUENCY\n                        number of batches between each tensorboard log\n  --save_frequency SAVE_FREQUENCY\n                        number of batches between each model save\n  --n_actions N_ACTIONS\n                        number of game output actions\n  --frame_size FRAME_SIZE\n                        size of game frame in pixels\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 23:53:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-reinforcement-learning",
+      "drl",
+      "dqn",
+      "a3c",
+      "flappy-bird",
+      "ppo"
+    ],
+    "technique": "GitHub API"
+  }
+}

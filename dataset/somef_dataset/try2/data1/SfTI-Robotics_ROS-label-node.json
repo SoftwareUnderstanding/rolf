@@ -1,0 +1,359 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1703.06870",
+      "https://arxiv.org/abs/1703.06870",
+      "https://arxiv.org/abs/1602.00763</br>\nOriginal python implementation of SORT by Alex Bewley: https://github.com/abewley/sort\n\nSORT proposes using a Kalman filter to predict the trajectory of previously identified objects, and then match them with newly identified objects. In this program, when an object is matched with a detection, the real-world position and distance from camera are added as attributes to the KalmanBoxTracker object. When the same object is tracked to the next frame, linear speed, velocity, real-world distance, and time until impact are all added under the same object. Each KalmanBoxTracker is added to the appropriate DetectedObject as the attribute DetectredObject.track. This means all the data can be passed to an API using a single DetectedObject.\n\n**Velocity Vector Arrows**\n\nOptionally, vector arrows can be superimposed on the image. These vector arrows show the direction the object is moving in 3D space. Each arrow is represented through the Arrow3D class, which essentially is the same as the FancyArrowPatch class from matplotlib, with additional 3D support."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9562026397941471
+      ],
+      "excerpt": "Simple Online and Real-time Tracking (SORT) paper: https://arxiv.org/abs/1602.00763</br> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SfTI-Robotics/ROS-label-node",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "../../.github/CONTRIBUTING.md",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-12T00:40:20Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-19T12:41:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8664406944406371,
+        0.8873962559485185,
+        0.9056933992076807,
+        0.9802858650782323
+      ],
+      "excerpt": "| Original Mask R-CNN   | ResNet-101-FPN  | 35.7 | 58.0 | 37.8 | 15.5 | 38.1 | 52.4 | \n| Matterport Mask R-CNN | ReSNet-101-FPN | 38.0 | 55.8 | <b>41.3</b> | 17.9 | <b>45.5</b> | <b>55.9</b> | \n| Detectron2 Mask R-CNN | ReSNet-101-FPN | <b>38.6</b> | <b>60.4</b> | <b>41.3</b> | <b>19.5</b> | 41.3 | 55.3 | \nValidation tests were perfomed on the segmentation masks created on the 2017 COCO validation dataset. The standard COCO validation metrics include average AP over IoU thresholds, AP<sub>50</sub>, AP<sub>75</sub>, and AP<sub>S</sub>, AP<sub>M</sub> and AP<sub>L</sub> (AP at different scales). These results were then compared to COCO validation results from the original paper and a popular Mask R-CNN implementation by Matterport. Clearly, Detectron2's Mask R-CNN outperforms the original Mask R-CNN and Matterport's Mask R-CNN with respect to average precision. It also outperformed state-of-the art COCO segmentation competition winners from the 2015 and 2016 challenge. The reason the competition winners from 2017 and 2018 were not chosen, was to avoid overfitting. Furthermore these models trade a slower inference time for a higher accuracy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9907975199391896,
+        0.9782116820504259,
+        0.9853328434074605
+      ],
+      "excerpt": "Detectron2's Mask R-CNN with a ReSNet-101-FPN backbone was determined to be the optimal model. Upon comparing Detectron2 to MMDetection's models, which won first place in the 2018 segmentation COCO challenge, it is evident that the choice of model is appropriate for high-speed real-time video.  \nWhen comparing Detectron2's Mask R-CNN to MMDetection's Mask R-CNN, Detectron2 outperforms in both mask AP (38.6 vs 35.9) and inference time (0.070 s/im vs 0.105 s/im). MMDetectron does have models that are slightly more accurate than Detectron2's Mask R-CNN implementation, such as the Hybrid Task Cascade model (HTC) however these often result in models that output masks at less than 4 fps. When adding the time to ouput the superimposed images, this would be insufficient for real-time. \nDetectron2's Model Zoo displays the inference time and Mask AP for each model provided. For the Mask R-CNN models, the FPN model with a ResNet101 backbone has the best Mask AP for the short time it takes for inferences. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8290414402017172
+      ],
+      "excerpt": "The cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST line specifies the lower threshold for when the instance segmentation mask is shown to the user. For example, set cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7. If Detectron2 is at least 70% confident the object detected belongs to a class name, the mask is superimposed onto the image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9355608827508441,
+        0.9484286546297099
+      ],
+      "excerpt": "The cfg.INPUT.MIN_SIZE_TEST line specifies the size of the smallest size of the image during testing/inference. If this is set to zero, resizing is disabled. \nAccording to Intel's paper, Best-Known-Methods for Tuning Intel\u00ae RealSense\u2122 D400 Depth Cameras for Best Performance, The depth RMS (root mean square) error increases rapidly when placing objects further away, especially when the distance is greater than 3m. The orange line on the graph below represents the depth RMS error on a D435 with HFOV=90deg, Xres=848, baseline=50mm and for subpixel=0.08. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9387934449368778
+      ],
+      "excerpt": "Testing was performed on this program, where the real distances of objects from the D435 were compared to the distance measured by the stereo sensors on the D435. The true distance was found by measuring the distance between a box (with a flat front) and the parallel plane of the imagers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9116557763965895
+      ],
+      "excerpt": "The D435 recordings were measured on the realsense-viewer program. The stereo resolution was set to 1280 x 720. Rather than the depth RMS error, the absolute depth error was compared to the real distance of the object to the D435. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9127840339732508
+      ],
+      "excerpt": "This graph shows that the absolute error appears to exponentially increases when the distance increases. This means the depth recordings will be most accurate when the object is closer to the camera. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9603330543424115
+      ],
+      "excerpt": "When the object is too close to the camera, the depth values will return 0m. This threshold is known as MinZ. The formula for calculating MinZ is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.890112329508483,
+        0.9204249101493783,
+        0.9837008141801825
+      ],
+      "excerpt": "Therefore with a depth resolution of 848x480, the MinZ is ~16.8cm. If the object is within this distance, no value is returned. \nSimilar to MinZ, MaxZ exists too. For the D435, the MaxZ is approximately 10m. Any object outside this range will also be recorded as 0m. \nSometimes objects can be recorded as 0m even though they are inside the MinZ and MaxZ threshold. This usually occurs when there is too much noise on the depth image. This can occur when the target is not well textured. For more information on how to configure the D435 for specific environments and objects, refer to this paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879145366121396,
+        0.9236440080120041
+      ],
+      "excerpt": "To find the distance of each object, the median depth pixel is used. All pixels associated to the object are abstracted to a histogram with a max distance of 10m (Max range of the D435), and 500 bins. The bins are looped through until the bin which contains the median is found. This means that the depth values will change with intervals of 0.02m. \nFor smaller intervals of 0.01m, change the NUM_BINS constant to 1000, and change  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9871125637572288,
+        0.8256464815306279,
+        0.9903955584185618
+      ],
+      "excerpt": "The purpose of this project is to propose where objects exists in the environment around a robot. In addition to this, it would be ideal to understand the movement of each object.  \nSimple Online and Real-time Tracking (SORT) \nThe velocity, linear speed (between camera and object), and time to impact were all calculated using an altered version of Chris Fotache's implementation of SORT with PyTorch, created by Alex Bewley, Zongyuan Ge, Lionel Ott, Fabio Ramos and Ben Upcroft. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9880190923690005
+      ],
+      "excerpt": "SORT proposes using a Kalman filter to predict the trajectory of previously identified objects, and then match them with newly identified objects. In this program, when an object is matched with a detection, the real-world position and distance from camera are added as attributes to the KalmanBoxTracker object. When the same object is tracked to the next frame, linear speed, velocity, real-world distance, and time until impact are all added under the same object. Each KalmanBoxTracker is added to the appropriate DetectedObject as the attribute DetectredObject.track. This means all the data can be passed to an API using a single DetectedObject. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SfTI-Robotics/ROS-label-node/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 30 Dec 2021 05:39:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SfTI-Robotics/ROS-label-node/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SfTI-Robotics/ROS-label-node",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/docker/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/SfTI-Robotics/ROS-label-node/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/datasets/prepare_for_tests.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/run_inference_tests.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/run_instant_tests.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/linter.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/parse_results.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/packaging/gen_wheel_index.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/packaging/build_all_wheels.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/dev/packaging/build_wheel.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/projects/DensePose/dev/run_inference_tests.sh",
+      "https://raw.githubusercontent.com/SfTI-Robotics/ROS-label-node/master/projects/DensePose/dev/run_instant_tests.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.9001373101481486
+      ],
+      "excerpt": "<img src=\"images/detectron2_model_zoo.png\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8156854779946955,
+        0.8138324883758619
+      ],
+      "excerpt": "Config settings can be altered under the create_predictor function. To see default config settings and descriptions of each setting, refer to detectron2/defaults.py. \nThe cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST line specifies the lower threshold for when the instance segmentation mask is shown to the user. For example, set cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7. If Detectron2 is at least 70% confident the object detected belongs to a class name, the mask is superimposed onto the image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9001373101481486,
+        0.8747053240653992
+      ],
+      "excerpt": "<img src=\"images/d435_rms_error.png\" /> \nDepth Error Testing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9001373101481486
+      ],
+      "excerpt": "<img src=\"images/depth_vs_range.png\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8627643558624205,
+        0.8627643558624205
+      ],
+      "excerpt": "<img src=\"figures/d435_error_table.png\" /> \n<img src=\"figures/d435_error_graph.png\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8452579632908207
+      ],
+      "excerpt": "How is each Depth Value Calculated? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8339556183526199
+      ],
+      "excerpt": "centre_depth = \"{:.2f}m\".format(x / 100) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SfTI-Robotics/ROS-label-node/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Shell",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Apache License\\nVersion 2.0, January 2004\\nhttp://www.apache.org/licenses/\\n\\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n1. Definitions.\\n\\n\"License\" shall mean the terms and conditions for use, reproduction,\\nand distribution as defined by Sections 1 through 9 of this document.\\n\\n\"Licensor\" shall mean the copyright owner or entity authorized by\\nthe copyright owner that is granting the License.\\n\\n\"Legal Entity\" shall mean the union of the acting entity and all\\nother entities that control, are controlled by, or are under common\\ncontrol with that entity. For the purposes of this definition,\\n\"control\" means (i) the power, direct or indirect, to cause the\\ndirection or management of such entity, whether by contract or\\notherwise, or (ii) ownership of fifty percent (50%) or more of the\\noutstanding shares, or (iii) beneficial ownership of such entity.\\n\\n\"You\" (or \"Your\") shall mean an individual or Legal Entity\\nexercising permissions granted by this License.\\n\\n\"Source\" form shall mean the preferred form for making modifications,\\nincluding but not limited to software source code, documentation\\nsource, and configuration files.\\n\\n\"Object\" form shall mean any form resulting from mechanical\\ntransformation or translation of a Source form, including but\\nnot limited to compiled object code, generated documentation,\\nand conversions to other media types.\\n\\n\"Work\" shall mean the work of authorship, whether in Source or\\nObject form, made available under the License, as indicated by a\\ncopyright notice that is included in or attached to the work\\n(an example is provided in the Appendix below).\\n\\n\"Derivative Works\" shall mean any work, whether in Source or Object\\nform, that is based on (or derived from) the Work and for which the\\neditorial revisions, annotations, elaborations, or other modifications\\nrepresent, as a whole, an original work of authorship. For the purposes\\nof this License, Derivative Works shall not include works that remain\\nseparable from, or merely link (or bind by name) to the interfaces of,\\nthe Work and Derivative Works thereof.\\n\\n\"Contribution\" shall mean any work of authorship, including\\nthe original version of the Work and any modifications or additions\\nto that Work or Derivative Works thereof, that is intentionally\\nsubmitted to Licensor for inclusion in the Work by the copyright owner\\nor by an individual or Legal Entity authorized to submit on behalf of\\nthe copyright owner. For the purposes of this definition, \"submitted\"\\nmeans any form of electronic, verbal, or written communication sent\\nto the Licensor or its representatives, including but not limited to\\ncommunication on electronic mailing lists, source code control systems,\\nand issue tracking systems that are managed by, or on behalf of, the\\nLicensor for the purpose of discussing and improving the Work, but\\nexcluding communication that is conspicuously marked or otherwise\\ndesignated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n\"Contributor\" shall mean Licensor and any individual or Legal Entity\\non behalf of whom a Contribution has been received by Licensor and\\nsubsequently incorporated within the Work.\\n\\n2. Grant of Copyright License. Subject to the terms and conditions of\\nthis License, each Contributor hereby grants to You a perpetual,\\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\\ncopyright license to reproduce, prepare Derivative Works of,\\npublicly display, publicly perform, sublicense, and distribute the\\nWork and such Derivative Works in Source or Object form.\\n\\n3. Grant of Patent License. Subject to the terms and conditions of\\nthis License, each Contributor hereby grants to You a perpetual,\\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n(except as stated in this section) patent license to make, have made,\\nuse, offer to sell, sell, import, and otherwise transfer the Work,\\nwhere such license applies only to those patent claims licensable\\nby such Contributor that are necessarily infringed by their\\nContribution(s) alone or by combination of their Contribution(s)\\nwith the Work to which such Contribution(s) was submitted. If You\\ninstitute patent litigation against any entity (including a\\ncross-claim or counterclaim in a lawsuit) alleging that the Work\\nor a Contribution incorporated within the Work constitutes direct\\nor contributory patent infringement, then any patent licenses\\ngranted to You under this License for that Work shall terminate\\nas of the date such litigation is filed.\\n\\n4. Redistribution. You may reproduce and distribute copies of the\\nWork or Derivative Works thereof in any medium, with or without\\nmodifications, and in Source or Object form, provided that You\\nmeet the following conditions:\\n\\n(a) You must give any other recipients of the Work or\\nDerivative Works a copy of this License; and\\n\\n(b) You must cause any modified files to carry prominent notices\\nstating that You changed the files; and\\n\\n(c) You must retain, in the Source form of any Derivative Works\\nthat You distribute, all copyright, patent, trademark, and\\nattribution notices from the Source form of the Work,\\nexcluding those notices that do not pertain to any part of\\nthe Derivative Works; and\\n\\n(d) If the Work includes a \"NOTICE\" text file as part of its\\ndistribution, then any Derivative Works that You distribute must\\ninclude a readable copy of the attribution notices contained\\nwithin such NOTICE file, excluding those notices that do not\\npertain to any part of the Derivative Works, in at least one\\nof the following places: within a NOTICE text file distributed\\nas part of the Derivative Works; within the Source form or\\ndocumentation, if provided along with the Derivative Works; or,\\nwithin a display generated by the Derivative Works, if and\\nwherever such third-party notices normally appear. The contents\\nof the NOTICE file are for informational purposes only and\\ndo not modify the License. You may add Your own attribution\\nnotices within Derivative Works that You distribute, alongside\\nor as an addendum to the NOTICE text from the Work, provided\\nthat such additional attribution notices cannot be construed\\nas modifying the License.\\n\\nYou may add Your own copyright statement to Your modifications and\\nmay provide additional or different license terms and conditions\\nfor use, reproduction, or distribution of Your modifications, or\\nfor any such Derivative Works as a whole, provided Your use,\\nreproduction, and distribution of the Work otherwise complies with\\nthe conditions stated in this License.\\n\\n5. Submission of Contributions. Unless You explicitly state otherwise,\\nany Contribution intentionally submitted for inclusion in the Work\\nby You to the Licensor shall be under the terms and conditions of\\nthis License, without any additional terms or conditions.\\nNotwithstanding the above, nothing herein shall supersede or modify\\nthe terms of any separate license agreement you may have executed\\nwith Licensor regarding such Contributions.\\n\\n6. Trademarks. This License does not grant permission to use the trade\\nnames, trademarks, service marks, or product names of the Licensor,\\nexcept as required for reasonable and customary use in describing the\\norigin of the Work and reproducing the content of the NOTICE file.\\n\\n7. Disclaimer of Warranty. Unless required by applicable law or\\nagreed to in writing, Licensor provides the Work (and each\\nContributor provides its Contributions) on an \"AS IS\" BASIS,\\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\nimplied, including, without limitation, any warranties or conditions\\nof TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\nPARTICULAR PURPOSE. You are solely responsible for determining the\\nappropriateness of using or redistributing the Work and assume any\\nrisks associated with Your exercise of permissions under this License.\\n\\n8. Limitation of Liability. In no event and under no legal theory,\\nwhether in tort (including negligence), contract, or otherwise,\\nunless required by applicable law (such as deliberate and grossly\\nnegligent acts) or agreed to in writing, shall any Contributor be\\nliable to You for damages, including any direct, indirect, special,\\nincidental, or consequential damages of any character arising as a\\nresult of this License or out of the use or inability to use the\\nWork (including but not limited to damages for loss of goodwill,\\nwork stoppage, computer failure or malfunction, or any and all\\nother commercial damages or losses), even if such Contributor\\nhas been advised of the possibility of such damages.\\n\\n9. Accepting Warranty or Additional Liability. While redistributing\\nthe Work or Derivative Works thereof, You may choose to offer,\\nand charge a fee for, acceptance of support, warranty, indemnity,\\nor other liability obligations and/or rights consistent with this\\nLicense. However, in accepting such obligations, You may act only\\non Your own behalf and on Your sole responsibility, not on behalf\\nof any other Contributor, and only if You agree to indemnify,\\ndefend, and hold each Contributor harmless for any liability\\nincurred by, or claims asserted against, such Contributor by reason\\nof your accepting any such warranty or additional liability.\\n\\nEND OF TERMS AND CONDITIONS\\n\\nAPPENDIX: How to apply the Apache License to your work.\\n\\nTo apply the Apache License to your work, attach the following\\nboilerplate notice, with the fields enclosed by brackets \"[]\"\\nreplaced with your own identifying information. (Don\\'t include\\nthe brackets!)  The text should be enclosed in the appropriate\\ncomment syntax for the file format. We also recommend that a\\nfile or class name and description of purpose be included on the\\nsame \"printed page\" as the copyright notice for easier\\nidentification within third-party archives.\\n\\nCopyright 2019 - present, Facebook, Inc\\n\\nLicensed under the Apache License, Version 2.0 (the \"License\");\\nyou may not use this file except in compliance with the License.\\nYou may obtain a copy of the License at\\n\\nhttp://www.apache.org/licenses/LICENSE-2.0\\n\\nUnless required by applicable law or agreed to in writing, software\\ndistributed under the License is distributed on an \"AS IS\" BASIS,\\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\nSee the License for the specific language governing permissions and\\nlimitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Usage",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ROS-label-node",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SfTI-Robotics",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SfTI-Robotics/ROS-label-node/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Thu, 30 Dec 2021 05:39:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**Requirements/Dependencies**\n\n- Linux or macOS\n- Python \u2265 3.6\n- PyTorch \u2265 1.3\n- [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch installation.\n\tYou can install them together at [pytorch.org](https://pytorch.org) to make sure of this.\n  Please ensure that your version of CUDA is also compatible when installing.\n- OpenCV `pip install opencv-python`\n- PyRealSense `pip install pyrealsense2`\n- Pycocotools: `pip install cython; pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'`\n- ROS Kinetic/Melodic\n- [Intel RealSense ROS wrapper](https://github.com/IntelRealSense/realsense-ros)\n- [Catkin](www.ros.org/wiki/catkin#Installing_catkin)\n- gcc & g++ \u2265 4.9\n\n**Installation**\n\nFor the installation of Detectron2 and its dependencies, please refer to the [official Detectron2 GitHub](https://github.com/facebookresearch/detectron2)\n\n**After Installation**\n\n* Copy and paste ros_colour_node.py, sort.py and ros_numpy from this directory into your new Detectron2 directory.\n* [Create a catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) and move your directory in the source folder\n* Ensure ros_colour_node.py is executable. Type `chmod +x ~/catkin_ws/src/ROS-label-node/ros_colour_node.py`\n* To perform instance segmentation straight from a D435 camera attached to a USB port:\n  * Type `roslaunch realsense2_camera rs_d400_and_t265.launch`\n  * In a new terminal window, type `rosrun ROS-label-node ros_colour_node.py`\n  * If there are any complications, make sure the topic this node is subscribed to has the same name. Type `rostopic list` to see current\n    topics published\n* If implementing this node with the OctoMap library:\n  * Type `roslaunch octomap_server octomap_mapping.launch` (Please ensure that the file rs_d400_and_t265.launch file is in the launch folder)\n  * In a new terminal window, type `rosrun ROS-label-node ros_colour_node.py`\n\n* To find the published label mask, in a new terminal type `rostopic echo /label_mask`\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

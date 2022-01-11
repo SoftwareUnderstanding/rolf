@@ -1,0 +1,259 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sontref/CycleGAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-11T01:21:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-15T19:52:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8286940773959555
+      ],
+      "excerpt": "I'm doing this for education and fun. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8708477300999545,
+        0.9679415975356154
+      ],
+      "excerpt": "Also, I didn't want this homework to be another casual .ipynb project, so I decided to split it into modules. \nI've never did this before, deadline is near, but I need to learn this stuff for Final Project \\[T]/, so...  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8293010352098613
+      ],
+      "excerpt": "* nice stuff with parser which I've seen many times before. I'm glad that I've finally made it by myself (particularly). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8924691089812649,
+        0.8907030328383845,
+        0.8133253471604966
+      ],
+      "excerpt": "I have some bad issue here: all my losses just stucked near some points. But I don't see where I've made a mistake. \nModels still learn some stuff, but it's not enough even for horse2zebra transmuting. So I haven't begun my own idea yet. \nAFAIK, my model should be identical to stuff, which were proposed in mentioned paper. Because they described their architecture quite clear=) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8272196539141611
+      ],
+      "excerpt": "Anyway, I have one last chance (by time reasons) to reproduce horse2zebra once more. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9576575038280816,
+        0.8811691511105347,
+        0.8988625149802515
+      ],
+      "excerpt": "Upd.: none of this ideas worked. But! I've rewatched some materials on segmentations and saw, that there is no normalization on output layers for Segnets/Unets. \nAFAIK (thanks, Google) it's common practice to not include it (however, original paper on CycleGAN does), so I've deleted it. \nResults are visibly better now. I don't have time for horse2zebra, so I'm training my... \"Water to Wine\" model:D \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8986651666445351
+      ],
+      "excerpt": "Upd.2: it really works! Not so good, because my dataset is too small, I guess. Also it is clear, that I should have added transformations, but I'll fix this later.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9437834792399926,
+        0.9226829047409492
+      ],
+      "excerpt": "As you can see, it also transforms glass into wineglass. ~~So maybe it's more powerful than God himself.~~ Maybe it's the task where identity loss will work nice. \nAlso all problems caused by lack of transforms are seen here.   \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sontref/CycleGAN/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "There are 2 huge problems:\n1. Model wasn't supposed to transform glass into wineglass:D However, it was expected.\n2. Model completely destroys image backgrounds.\n\nI think both of these problems are caused by dataset. First, it is quite small for such a task. Second, it contains only images of water in glass and wine in glass. And this images pretty similar to each other. Even background: water often depicted with light background and wine often depicted with dark one.  \nI think that here could help adding identity loss.\n\nNot a huge problem, but I can't understand, why deleting InstanceNorm layer from output instantly forced model to work. Please, explain it for me if you read this:D\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 00:44:40 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Sontref/CycleGAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sontref/CycleGAN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Sontref/CycleGAN/master/playground.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "I've taken some util and pipeline stuff from another repo (described later).  \nI've seen some of these techniques before, so I thought it is the right place to taste them.\n\n*Easy way:* download playground.ipynb and follow instructions.\n\n*Hard way:*  \n1. You **must** have train.py in the same dir (for example, *project/*) as model.py and datasets.py.\n2. That *project/* dir **must** also include another dirs: *datasets/*, *saved_models/*, *generated_images*\n3. In *datasets/* you should place your dataset directory *\\*dataset_name\\*/*, which **must** contain:\n    * *\\*dataset_name\\*/testA/*\n    * *\\*dataset_name\\*/testB/*\n    * *\\*dataset_name\\*/trainA/*\n    * *\\*dataset_name\\*/trainB/*\n    * In these directories you should store your images.\n5. In *saved_models/* and *generated_images/* you **must** create directories named again *\\*dataset_name\\*/*, where stuff from training will be saved.\n6. Execute train.py. Arguments:\n    * \"--start_from\", type=int, default=0, help=\"epoch number to start from; 0 for training from scratch\"\n    * \"--num_epochs\", type=int, default=200, help=\"number of epochs\"\n    * \"--dataset_name\", type=str, default=\"horse2zebra\", help=\"name of the dataset\"\n    * \"--batch_size\", type=int, default=10, help=\"number of samples in batch\"\n    * \"--img_height\", type=int, default=256, help=\"image height in pixels\"\n    * \"--img_width\", type=int, default=256, help=\"image width in pixels\"\n    * \"--channels\", type=int, default=3, help=\"number of image channels\"\n    * \"--num_residual\", type=int, default=9, help=\"number of residual blocks\"\n    * \"--lambda_cycle\", type=float, default=10.0, help=\"cycle loss weight\"\n7. Model weights will be stored at *project/saved_models/\\*dataset_name\\*/*;  \n   Generated images will be stored at *project/generated_images/\\*dataset_name\\*/*;\n\n**My dataset can be found here: https://cutt.ly/wul8Xi5**\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8425622338984298
+      ],
+      "excerpt": "This split was inspired by https://github.com/eriklindernoren/PyTorch-GAN/tree/master/implementations/cyclegan \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8013344518419664
+      ],
+      "excerpt": "Also by deadline reasons some util stuff was taken from that repo.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8357271250008335
+      ],
+      "excerpt": "* FakeImageBuffer was also taken from there. However, maybe here credits should go to original CycleGAN repo: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8273713431358163
+      ],
+      "excerpt": "I hope, one shouldn't be The Divine One to have the ability to transform water into wine. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "* Training cycle \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Sontref/CycleGAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CycleGAN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CycleGAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sontref",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Sontref/CycleGAN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 00:44:40 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "I've taken some util and pipeline stuff from another repo (described later).  \nI've seen some of these techniques before, so I thought it is the right place to taste them.\n\n*Easy way:* download playground.ipynb and follow instructions.\n\n*Hard way:*  \n1. You **must** have train.py in the same dir (for example, *project/*) as model.py and datasets.py.\n2. That *project/* dir **must** also include another dirs: *datasets/*, *saved_models/*, *generated_images*\n3. In *datasets/* you should place your dataset directory *\\*dataset_name\\*/*, which **must** contain:\n    * *\\*dataset_name\\*/testA/*\n    * *\\*dataset_name\\*/testB/*\n    * *\\*dataset_name\\*/trainA/*\n    * *\\*dataset_name\\*/trainB/*\n    * In these directories you should store your images.\n5. In *saved_models/* and *generated_images/* you **must** create directories named again *\\*dataset_name\\*/*, where stuff from training will be saved.\n6. Execute train.py. Arguments:\n    * \"--start_from\", type=int, default=0, help=\"epoch number to start from; 0 for training from scratch\"\n    * \"--num_epochs\", type=int, default=200, help=\"number of epochs\"\n    * \"--dataset_name\", type=str, default=\"horse2zebra\", help=\"name of the dataset\"\n    * \"--batch_size\", type=int, default=10, help=\"number of samples in batch\"\n    * \"--img_height\", type=int, default=256, help=\"image height in pixels\"\n    * \"--img_width\", type=int, default=256, help=\"image width in pixels\"\n    * \"--channels\", type=int, default=3, help=\"number of image channels\"\n    * \"--num_residual\", type=int, default=9, help=\"number of residual blocks\"\n    * \"--lambda_cycle\", type=float, default=10.0, help=\"cycle loss weight\"\n7. Model weights will be stored at *project/saved_models/\\*dataset_name\\*/*;  \n   Generated images will be stored at *project/generated_images/\\*dataset_name\\*/*;\n\n**My dataset can be found here: https://cutt.ly/wul8Xi5**\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

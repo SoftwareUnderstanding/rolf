@@ -1,0 +1,284 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1804.04732"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8834756699654108
+      ],
+      "excerpt": "    img = Image.open(fn) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Brainkite/Sketch_Augmented",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-24T05:24:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-13T20:40:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9723353093186393,
+        0.9959022160483909,
+        0.9905015410129648,
+        0.9344574097258301,
+        0.9927825619537378,
+        0.9620720121967585,
+        0.9712423378755569,
+        0.991926173333806,
+        0.8051859315996811,
+        0.8659985529031909,
+        0.9771303727400443,
+        0.8365598558641238,
+        0.9901877780042143,
+        0.8798196499737231,
+        0.9520610261403397
+      ],
+      "excerpt": "Having worked as an architect for the last 6 years, I have witnessed hand drawing and sketching disapear more and more from the architect's toolbox. Even though this tool is still essential for the architect to reflect and find innovative ideas and esthetic principles. \nThe vision driving this project is to make evolve the architect's workflow with the help of Artificial Intelligence and more specificly here the tool of architecture sketching itself. To invent a more organic way of drawing and shaping buildings. \nWith the help of Artificial inteligence methods, the end product will generate realistic views interpreted from the sketch as it's being drawn. Giving instant feedback to the user, he will be able to work with a more objective and informed representation of his idea. \nIn this article we will explain our approach and our research process while explainning some of the artificial intelligence techniques we're using. \nTo be able to map a hand drawn sketch to a realistic image we need the help of artificial neural networks. They have proven in the recent years to be quite efficient in vision and image generation. These neural networks are huge mathematical functions with an enormous amount of adjustable parameters. They are able learn a task by seeing a collection of input and output examples. By \"seeing\" we mean passing each input through the model, comparing the result and the target output with the help a \"loss function\" and correcting the model's parameters. The loss function is here to process the difference there is between the 2 outputs. Finaly, this learning process is regulated by an optimizer algorithm that will allow the neural net to learn quicker and better. \nFor out project we will need a specific kind of neural networks called \"generative adversarial networks\" (GAN), these models have the amazing ability to generate new images in differents ways. \nCurrently 2 major types of GANs seems to be suited for our task: U-net GANs and CycleGan. \nWe will begin to explore the capabilities of those 2 models and how they fit to our project's needs. \nThe U-net architecture was initialy created for biomedical image segmentation (detecting and detouring objects in an image). \nThe general logic behind this architecture is to have a downsampling phase called the \"encoder\" and an upsampling phase called \"decoder\". \nDuring the encoding phase, the image size is progressively reduced as more and more semantic and content is extracted. At the end of the encoding phase we get a \"semantic\" vector that will then be progressively upsamplede. But since this vector has lost all shape information, we progressively mix the generated image with the original image's shape using what we call \"skip connexions\". (You can read more about this architecture in the original paper https://arxiv.org/abs/1505.04597) \nThis kind of architecture was also proven efficient for image enhancement and restauration when paired with a \"feature loss\" function. They can enhance image resolution, clean signal noise or even fill up holes in the image. \nFor a generative model to be able to learn we need a tool to evaluate the accuracy of the generated image. We usualy use a second model called a \"critic\" that will learn to identify the generated image or the true image. But this method has not always proven good result for realistic image generation. Instead we use a pre-trained \"classification\" model that is normaly able to predict what objects are in the image. But instead of using the output of this model(it's a car or a horse), we pick values inside the model's layers that will represent features found in the image (textures, shapes, etc...). So when we pass the generated image and the target image, we want those values to be as close as possible. \nCyclegan model basically can transfer image texture style to another texture style (style transfer). It is called this way because it has the ability to make the convertion in both directions. The most popular example is the photo to painting and reverse application: \nWhile this model is very good at treating textures, it handles poorly shapes and objects. Also CycleGan can be more convenient for the dataset creation because it doesn't need pair-wise input and outputs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8788992617297477,
+        0.9693127161596643
+      ],
+      "excerpt": "The dataset is the collection of input and output example that will be used to train our model. \nFor our first implementation we will use a U-net model. These models need pair-wise examples so we have to build a dataset with pictures of buildings and their corresponding drawing. But it would be too long to produce real hand-drawn copies of enough architecture photos for such a dataset. Our first approach is to create an an image treatment script to transforms photos in something close to a hand-drawn image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828533015586591,
+        0.9700403221760925
+      ],
+      "excerpt": "This sketch effect script has a tendancy to produce image that would correspond to very detailed hand drawings but we will work from that and enhance it later if needed. \nThe dataset is currently composed of 623 curated architecture pictures with their fake-sketch equivalent. This normaly isn't enough to train such a model but thanks to a technique called \"data augmentation\" we will automaticaly generate multiple variants of each image during the training by randomly cropping and flipping horizontally the images. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9604046665882029,
+        0.804110534410738,
+        0.9880339260192633,
+        0.9151235358393556,
+        0.935247322445351
+      ],
+      "excerpt": "- The validation set, composed of examples that won't be used to train the model but to evaluate his performaces and adjust our trainning strategies. \n- The test set, to estimate the model's accuracy and our train strategies. \nGood practice in deep learning teaches to split these sets with 95%, 25% and 25% of the dataset. \nBut good image generation is quite subjective so we will proceed differently and provide as much data as possible to the model so 90% in train set and 10% in valid set. Also Since the model will only train on fake sketch image, we will compose the test set with real hand made sketches and we will evaluate ourself the performance of the results generated. \n(Yes, we wand the model to ultimately be able to produce an interesting representation from the third image) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9694536667639814,
+        0.9913549552826667,
+        0.8394295888389782,
+        0.9971120239786742,
+        0.9707483186997584,
+        0.9029681610174012
+      ],
+      "excerpt": "Bellow are presented the input image shown to the model, the generated image by model and the target image wich is the original image from wich the fake sketch was created. This image beeing in the validation set, it has never been seen by the model, wich is pretty impressive. \nIn these results we realise that the model learned to accurately recognize the volumes and use the appropriate lighting and shadowing. Also it has a surprising ability to generate materials textures and transparencies (or is it?). \nNow we need to evaluate the model's performances on the test set with real life sketches. \nThe generated images are not as good but it's pretty encouraging. The model is still able to identify volumes and infer accurate lighting. Some shaded areas are in the dark while the outer faces are brighter. The model even added reflexion on some faces. On the other hand, vegetation is pretty poor because it's drawn in a very stylized way and the model can't make the connection between that and a real tree. But more importantly,  there is a total lack of materials textures. The model is capable to identify the concrete from the wood cladding, the paved ground from the asphalt and use appropriate colors, but it's unable to produce any texture on them. \nThe conclusion that we could draw from these first results is that our script to generate sketch-like images is still providing too much information to the model. On the first look in a small resolution it doesn't look like it but whenn zoomed, the script is still keeping micro-contrasts in the textures that will not be provided in a real sketch but provide plenty information to the model to re-create accurate textures (on another note this may be an interesting lead to explore new image compression algorithms). \nTo make our model trainning more accurate and closer to real life examples, we need to combine our edge finding sketch effect with a texture filtering algorithm that will smoothen the textures while preserving shapes edges. Then running our initial script on the resulting images will produce cleaner sketch-like images. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "WIP - Project that generates a realistic view from an ongoing architecture sketch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Brainkite/Sketch_Augmented/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 00:01:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Brainkite/Sketch_Augmented/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Brainkite/Sketch_Augmented",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Brainkite/Sketch_Augmented/master/Utils.ipynb",
+      "https://raw.githubusercontent.com/Brainkite/Sketch_Augmented/master/Cyclegan_model.ipynb",
+      "https://raw.githubusercontent.com/Brainkite/Sketch_Augmented/master/FeatLoss_Unet_GAN.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8886461468140023
+      ],
+      "excerpt": "    i.save(inp_dir/fn.name) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8390116577860373
+      ],
+      "excerpt": "The dataset is the collection of input and output example that will be used to train our model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8044146895679722,
+        0.8801854956928516
+      ],
+      "excerpt": "from PIL import Image \nfrom PIL import ImageFilter \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8759680409786482,
+        0.8333044196102803
+      ],
+      "excerpt": "        value = 128 + factor * (c - 128) \n        return max(0, min(255, value)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8390153737833123
+      ],
+      "excerpt": "    i.save(inp_dir/fn.name) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8493236776442958
+      ],
+      "excerpt": "- The training set, used to train the model \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Brainkite/Sketch_Augmented/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sketch_Augmented",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Sketch_Augmented",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Brainkite",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Brainkite/Sketch_Augmented/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Tue, 21 Dec 2021 00:01:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "cyclegan",
+      "architecture",
+      "neural-networks",
+      "hand-drawings",
+      "sketches",
+      "generative-adversarial-network",
+      "style-transfer",
+      "edge-detection"
+    ],
+    "technique": "GitHub API"
+  }
+}

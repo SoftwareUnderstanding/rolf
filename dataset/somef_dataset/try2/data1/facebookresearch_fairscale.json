@@ -1,0 +1,789 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use FairScale in your publication, please cite it by using the following BibTeX entry.\n\n```BibTeX\n@Misc{FairScale2021,\n  author =       {Mandeep Baines and Shruti Bhosale and Vittorio Caggiano and Naman Goyal and Siddharth Goyal and Myle Ott and Benjamin Lefaudeux and Vitaliy Liptchinsky and Mike Rabbat and Sam Sheiffer and Anjali Sridhar and Min Xu},\n  title =        {FairScale:  A general purpose modular PyTorch library for high performance and large scale training},\n  howpublished = {\\url{https://github.com/facebookresearch/fairscale}},\n  year =         {2021}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@Misc{FairScale2021,\n  author =       {Mandeep Baines and Shruti Bhosale and Vittorio Caggiano and Naman Goyal and Siddharth Goyal and Myle Ott and Benjamin Lefaudeux and Vitaliy Liptchinsky and Mike Rabbat and Sam Sheiffer and Anjali Sridhar and Min Xu},\n  title =        {FairScale:  A general purpose modular PyTorch library for high performance and large scale training},\n  howpublished = {\\url{https://github.com/facebookresearch/fairscale}},\n  year =         {2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "        if last_epoch != epoch: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "        if epoch > max_epoch: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/facebookresearch/fairscale/main/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/fairscale",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to FairScale\nWe want to make contributing to this project as easy and transparent as\npossible.\nOur Development Process\nMinor changes and improvements will be released on an ongoing basis. Larger\nchanges (e.g., changesets implementing a new paper) will be released on a\nmore periodic basis.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and create your branch from main.\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code passes static analysis (see below).\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues to track public bugs. Please ensure your description is\nclear and has sufficient instructions to be able to reproduce the issue.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nEnvironment setup\n~$ python3 -m venv venv2\n~$ source venv2/bin/activate\n(venv2) ~$ cd git/fairscale/\n(venv2) ~/git/fairscale $ pip3 install -r requirements-dev.txt\nCoding Style\n\nWe follow the PEP8 style guide.\nIn your editor, install the editorconfig extension\n  which should ensure that you are following the same standards as us.\nPlease read the editorconfig file to understand the exact coding style preferences.\nPlease place Python code related to models in fairscale/nn. Place Python code related to optimizers\n  in fairscale/optim. Place C++ extensions in fairscale/clib.\nPlease put __all__:List[str] = [] in new __init__.py files for consistent importing behavior\n  and less development overhead in maintaining an importing list.\nPlease setup pre-commit before opening up your PR.\n\nPre-Commit (Recommended)\nWe use pre-commit to maintain the coding style. Pre-Commit checks are run via Github Actions on every\ncommit. To install all the relevant libraries and run the pre-commit tests locally, execute the following\ncommands:\npip install -r requirements-dev.txt\npre-commit install\nAfter the above, your git commit command will automatically trigger pre-commit checks.\nRunning static code analysis manually (Deprecated)\nNote that, trailing spaces are not checked by the manual commands below, but they are checked by the\npre-commit hooks we use above.\nblack .\nisort .\nflake8\nmypy --ignore-missing-imports --scripts-are-modules --pretty .\nTesting\nFairScale code is tested on Python 3.9.7, CUDA 11.2 and the following three PyTorch versions:\n- the latest stable version\n- the latest LTS version\n- a recent nightly release\nSee the README for the exact version numbers.\nUnit tests\n```\npytest\nsingle test\npython -m pytest tests/nn/data_parallel/test_oss_ddp.py::test_on_cpu\n```\nCheck test coverage\npython -m pytest --cov-report term --cov=fairscale/nn/data_parallel \\\n   tests/nn/data_parallel/test_oss_ddp.py::test_on_cpu\nCircleCI status\nFrom your PR page, you can expand on the CircleCI results. For GPU test, you should see\nwhat CI has run, like:\n...\n----- generated xml file: /home/circleci/fairscale/test-results/junit.xml ------\n================== 217 passed, 2 xfailed in 218.74s (0:03:38) ==================\nCircleCI received exit code 0\nThe number of passed and failed should give you an idea on whether your local\ntest was the same or not.\nCommit Guidelines\nWe follow the same guidelines as AngularJS. Each commit message consists of a header,\na body and a footer.  The header has a special format that includes a type,\nand a subject:\n```\n[<type>] <subject>\n<BLANK LINE>\n<body>\n<BLANK LINE>\n<footer>\n```\n\nAny line of the commit message cannot be longer 100 characters! This allows the message to be easier\nto read on github as well as in various git tools.\n\n### Type\n\nMust be one of the following:\n\n* **feat**: A new feature\n* **fix**: A bug fix\n* **cleanup**: Changes that do not affect the meaning of the code (white-space, formatting, missing\n  semi-colons, dead code removal etc.)\n* **refactor**: A code change that neither fixes a bug or adds a feature\n* **perf**: A code change that improves performance\n* **test**: Adding missing tests or fixing them\n* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation\ngeneration\n* **docs**: Documentation only changes\n\n## License\n\nBy contributing to fairscale, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "contributor": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We welcome outside contributions! Please see the [CONTRIBUTING](CONTRIBUTING.md) instructions for how you can contribute to FairScale.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-07T19:02:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T14:48:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "FairScale is a PyTorch extension library for high performance and large scale training.\nThis library extends basic PyTorch capabilities while adding new SOTA scaling techniques.\nFairScale makes available the latest distributed training techniques in the form of composable\nmodules and easy to use APIs. These APIs are a fundamental part of a researcher's toolbox as\nthey attempt to scale models with limited resources.\n\nFairScale was designed with the following values in mind:\n\n* **Usability** -  Users should be able to understand and use FairScale APIs with minimum cognitive overload.\n\n* **Modularity** - Users should be able to combine multiple FairScale APIs as part of their training loop seamlessly.\n\n* **Performance** - FairScale APIs provide the best performance in terms of scaling and efficiency.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9496855907155787,
+        0.8160315338170262
+      ],
+      "excerpt": "We have experimental support for offloading params to disk when using the FSDP API for evaluation workloads. \nWe have an experimental layer that fuses multiple layers together to support large vocab size trainings. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.983402858857916,
+        0.8452857162732914
+      ],
+      "excerpt": "We have a new experimental API called the LayerwiseMemoryTracker to help track, visualize and suggest fixes for memory issues occurring during the forward/backward pass of your models. \nIntroducing SlowMoDistributedDataParallel API, a distributed training wrapper that is useful on clusters with slow network interconnects (e.g. Ethernet). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = fairscale.nn.Pipe(model, balance=[2, 2], devices=[0, 1], chunks=8) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707693691410405
+      ],
+      "excerpt": "model = myAwesomeModel().to(rank) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.833147665108929
+      ],
+      "excerpt": "base_optimizer_arguments = {} #: pass any optimizer specific arguments here, or directly below when instantiating OSS \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9083815682222468,
+        0.860059181823877
+      ],
+      "excerpt": "#: Wrap the model into ShardedDDP, which will reduce gradients to the proper ranks \nmodel = ShardedDDP(model, optimizer) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8620007613560474
+      ],
+      "excerpt": "    for batch in dataloader: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "        model.zero_grad() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8457745997819663
+      ],
+      "excerpt": "    #: Supposing that WORLD_SIZE and EPOCHS are somehow defined somewhere \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.829976210039124,
+        0.8221065605918775
+      ],
+      "excerpt": "AdaScale can be used to wrap a SGD optimizer and to be used in DDP (Distributed Data Parallel) \ntraining or non-DDP with gradient accumulation. The benefit is to re-use the same LR \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9666905349001993
+      ],
+      "excerpt": "Primary goal is to allow scaling to bigger batch sizes without losing model accuracy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8029682939652221
+      ],
+      "excerpt": "At a high level, we want ML researchers to: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch extensions for high performance and large scale training.",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://fairscale.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/fairscale/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. If you experience an error indicating a default branch does not exist, it probably due to the latest update, switching the default branch from \"master\" to \"main\"\n```\nerror: pathspec 'non-existing-branch' did not match any file(s) known to git\n```\nPlease run the following commands to update to the main branch.\n```\ngit branch -m master main\ngit fetch origin\ngit branch -u origin/main main\ngit remote set-head origin -a\n```\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 144,
+      "date": "Fri, 24 Dec 2021 22:00:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/facebookresearch/fairscale/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "facebookresearch/fairscale",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/facebookresearch/fairscale/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/facebookresearch/fairscale/main/tests/run_mpi_tests.sh",
+      "https://raw.githubusercontent.com/facebookresearch/fairscale/main/tests/ci_test_list_check.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install FairScale, please see the following [instructions](https://github.com/facebookresearch/fairscale/blob/main/docs/source/installation_instructions.rst).\nYou should be able to install a package with pip or conda, or build directly from source.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.925360242570157
+      ],
+      "excerpt": "FairScale is tested with the following PyTorch versions (with CUDA 11.2): 1.8.1, 1.10.0 and 1.11.0.dev20211101+cu111. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8938755232180357
+      ],
+      "excerpt": ": Note: the train loop should be with DDP or with gradient accumulation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8957589233383032,
+        0.975866128969356
+      ],
+      "excerpt": "  * potentially higher GPU efficiency (fewer steps, less networking overhead, etc.) \nWe use circleci to test FairScale with the following PyTorch versions (with CUDA 11.2): \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import fairscale \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.8796325398080971
+      ],
+      "excerpt": "from fairscale.optim.oss import OSS \nfrom fairscale.nn.data_parallel import ShardedDataParallel as ShardedDDP \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8107737471051991
+      ],
+      "excerpt": "optimizer = OSS(params=model.parameters(), optim=base_optimizer, **base_optimizer_arguments) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "        #: Train \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8458751354831934
+      ],
+      "excerpt": "if name == \"main\": \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "        train, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from fairscale.optim import AdaScale \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8158393134196129
+      ],
+      "excerpt": "        epoch = step // len(dataset) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8181206631957635
+      ],
+      "excerpt": "            done = True \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/facebookresearch/fairscale/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "Shell",
+      "C++",
+      "C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/facebookresearch/fairscale/main/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'From fairscale:\\n\\nCopyright (c) Facebook, Inc. and its affiliates\\n\\n===\\n\\nFrom torchgpipe (fairscale/nn/pipe):\\n\\nCopyright 2019 Kakao Brain\\n\\nAll contributions by Facebook:\\nCopyright (c) Facebook, Inc. and its affiliates\\n\\n===\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n1. Redistributions of source code must retain the above copyright\\n   notice, this list of conditions and the following disclaimer.\\n\\n2. Redistributions in binary form must reproduce the above copyright\\n   notice, this list of conditions and the following disclaimer in the\\n   documentation and/or other materials provided with the distribution.\\n\\n3. Neither the names of Facebook, Deepmind Technologies, NYU, NEC Laboratories America\\n   and IDIAP Research Institute nor the names of its contributors may be\\n   used to endorse or promote products derived from this software without\\n   specific prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\\nPOSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Description",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fairscale",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "facebookresearch",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/facebookresearch/fairscale/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "",
+        "dateCreated": "2021-12-21T20:08:43Z",
+        "datePublished": "2021-12-21T20:08:57Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.4.4",
+        "name": "v0.4.4",
+        "tag_name": "v0.4.4",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.4.4",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/55777223",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.4.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "## What's Changed\r\n* [docs][fix] Update example to use offload_model by @anj-s in https://github.com/facebookresearch/fairscale/pull/806\r\n* Switch default branch from master to main by @tmarkstrum in https://github.com/facebookresearch/fairscale/pull/807\r\n* [FairScale] Remove refs to \"cpu_offload\" in code comments by @rohan-varma in https://github.com/facebookresearch/fairscale/pull/814\r\n* [chore] Remove deprecated THCudaCheck by @anj-s in https://github.com/facebookresearch/fairscale/pull/818\r\n* [feat] layer memory tracking by @QuentinDuval in https://github.com/facebookresearch/fairscale/pull/808\r\n* [chore] Add log for the new experimental memory tracker feature. by @anj-s in https://github.com/facebookresearch/fairscale/pull/819\r\n* [chore] Update the PyTorch version that we run CPU tests with by @anj-s in https://github.com/facebookresearch/fairscale/pull/809\r\n* [chore] Update the PyTorch version that we run benchmarks with. by @anj-s in https://github.com/facebookresearch/fairscale/pull/823\r\n* Extend auto shard capabilities to work around torch.fx edge cases. by @EugenHotaj in https://github.com/facebookresearch/fairscale/pull/817\r\n* [fix] Update golden data for account for the speed regression by @anj-s in https://github.com/facebookresearch/fairscale/pull/825\r\n* [chore] Fix main breakage temporarily by relaxing constraints by @anj-s in https://github.com/facebookresearch/fairscale/pull/828\r\n* Use correct node names for param counting in auto_shard. by @EugenHotaj in https://github.com/facebookresearch/fairscale/pull/830\r\n* [chore] Update requirements file to reflect latest config by @anj-s in https://github.com/facebookresearch/fairscale/pull/832\r\n* [fix]: Fixes an issue with pre_backward hook registering by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/833\r\n* [feature] Skip creating the CPU grad tensor when training  by @anj-s in https://github.com/facebookresearch/fairscale/pull/821\r\n* [test] improve a test's coverage by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/798\r\n* [fix] Decouple `move_params_to_cpu` from the `mixed_precision`. by @anj-s in https://github.com/facebookresearch/fairscale/pull/822\r\n* [fix] fix test on main by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/835\r\n* [feature] Add the low level SSD APIs by @anj-s in https://github.com/facebookresearch/fairscale/pull/829\r\n* [feat] [FSDP]: add experimental support to shared weights by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/836\r\n* update nightly torch and test the flaky test by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/837\r\n* [chore] Fix broken main due to updated github URL requirements by @anj-s in https://github.com/facebookresearch/fairscale/pull/838\r\n* [chore] Update Sphinx version in docs requirements file by @vtantia in https://github.com/facebookresearch/fairscale/pull/841\r\n* [feat] experimental MEVO layer by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/840\r\n* [feat] Gossip/SlowMo by @blefaudeux in https://github.com/facebookresearch/fairscale/pull/378\r\n* [feature]Add support for SSD offload with FSDP for eval workloads by @anj-s in https://github.com/facebookresearch/fairscale/pull/839\r\n* [chore] 0.4.2 release by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/846\r\n* CI config changes by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/847\r\n* Setup pre-commit github action and apply pre-commit to all files by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/849\r\n* Allow sharded grad scaler to cpu offload with FSDP by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/831\r\n* Update changelog, removed meta.yml and requirements cleanup by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/853\r\n* [feature] Add a OffloadConfig object to specify offloading params to disk. by @anj-s in https://github.com/facebookresearch/fairscale/pull/855\r\n* [POC] Testing Manual dispatch by @anupambhatnagar in https://github.com/facebookresearch/fairscale/pull/859\r\n* [fix] [MEVO]: make mevo work with eval and optim_state checkpointing by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/851\r\n* [chore] 0.4.3 release by @min-xu-ai in https://github.com/facebookresearch/fairscale/pull/860\r\n\r\n## New Contributors\r\n* @rohan-varma made their first contribution in https://github.com/facebookresearch/fairscale/pull/814\r\n* @EugenHotaj made their first contribution in https://github.com/facebookresearch/fairscale/pull/817\r\n* @vtantia made their first contribution in https://github.com/facebookresearch/fairscale/pull/841\r\n\r\n**Full Changelog**: https://github.com/facebookresearch/fairscale/compare/v0.4.1...v0.4.3",
+        "dateCreated": "2021-11-18T22:47:45Z",
+        "datePublished": "2021-11-18T22:57:34Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.4.3",
+        "name": "0.4.3 release",
+        "tag_name": "v0.4.3",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.4.3",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/53681120",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.4.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "anupambhatnagar",
+        "body": "",
+        "dateCreated": "2021-11-08T19:34:43Z",
+        "datePublished": "2021-11-08T23:10:46Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.4.2",
+        "name": "FairScale Release v0.4.2",
+        "tag_name": "v0.4.2",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.4.2",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/52961925",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.4.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "tmarkstrum",
+        "body": "Released version 0.4.1 for FairScale.",
+        "dateCreated": "2021-09-20T14:19:38Z",
+        "datePublished": "2021-09-20T14:41:08Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.4.1",
+        "name": "v0.4.1: [chore] 0.4.1 release (#803)",
+        "tag_name": "v0.4.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.4.1",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/49859639",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.4.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-08-01T04:44:42Z",
+        "datePublished": "2021-08-12T17:42:24Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.4.0",
+        "name": "",
+        "tag_name": "v0.4.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.4.0",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/47763531",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-07-27T17:27:17Z",
+        "datePublished": "2021-08-12T17:42:11Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.9",
+        "name": "",
+        "tag_name": "v0.3.9",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.9",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/47763520",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.9"
+      },
+      {
+        "authorType": "User",
+        "author_name": "anj-s",
+        "body": "",
+        "dateCreated": "2021-07-12T19:08:11Z",
+        "datePublished": "2021-07-12T21:22:29Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.8",
+        "name": "",
+        "tag_name": "v0.3.8",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.8",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/46083882",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.8"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-05-18T00:43:06Z",
+        "datePublished": "2021-05-18T02:29:18Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.7",
+        "name": "",
+        "tag_name": "v0.3.7",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.7",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/43098051",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.7"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-04-26T18:02:57Z",
+        "datePublished": "2021-05-18T02:28:39Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.6",
+        "name": "",
+        "tag_name": "v0.3.6",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.6",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/43098025",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-04-19T19:52:32Z",
+        "datePublished": "2021-05-18T02:27:57Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.5",
+        "name": "",
+        "tag_name": "v0.3.5",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.5",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/43098006",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "## [0.3.4] - 2021-04-13\r\n### Added\r\n- FSDP: Add no broadcast optim state option ([#560](https://github.com/facebookresearch/fairscale/pull/560))\r\n\r\n### Fixed\r\n- ShardedDDP: Properly handle .eval() mode ([#587](https://github.com/facebookresearch/fairscale/pull/587))\r\n- ShardedDDP: Handle model being moved back to CPU prior to state consolidation ([#573](https://github.com/facebookresearch/fairscale/pull/573))\r\n- FSDP: much faster state consolidation ([#595](https://github.com/facebookresearch/fairscale/pull/595))\r\n- FSDP: Add gradient pre-divide to prevent overflow with large world sizes ([#565](https://github.com/facebookresearch/fairscale/pull/565))\r\n- Offload: (experimental) Fix activation offloading to CPU ([#588]((https://github.com/facebookresearch/fairscale/pull/588) )",
+        "dateCreated": "2021-04-13T22:20:36Z",
+        "datePublished": "2021-04-13T22:21:27Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.4",
+        "name": "v0.3.4",
+        "tag_name": "v0.3.4",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.4",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/41382864",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-04-02T16:15:11Z",
+        "datePublished": "2021-04-02T16:25:20Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.3",
+        "name": "",
+        "tag_name": "v0.3.3",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.3",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/40877794",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-03-18T18:37:08Z",
+        "datePublished": "2021-04-02T16:24:44Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.2",
+        "name": "",
+        "tag_name": "v0.3.2",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.2",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/40877771",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "min-xu-ai",
+        "body": "",
+        "dateCreated": "2021-03-09T18:42:14Z",
+        "datePublished": "2021-04-02T16:24:25Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.1",
+        "name": "",
+        "tag_name": "v0.3.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.1",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/40877754",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "[0.3.0] - 2021-02-22\r\n## Added\r\n- FullyShardedDataParallel (FSDP) (#413)\r\n- ShardedDDP fp16 grad reduction option (#402)\r\n- Expose experimental algorithms within the pip package (#410)\r\n\r\n## Fixed\r\n- Catch corner case when the model is too small with respect to the world size, and shards are empty (#406)\r\n- Memory leak in checkpoint_wrapper (#412)",
+        "dateCreated": "2021-02-23T06:55:57Z",
+        "datePublished": "2021-02-23T06:57:14Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.3.0",
+        "name": "v0.3.0",
+        "tag_name": "v0.3.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.3.0",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/38467982",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "# Fixed\r\n- ShardedDDP and OSS handle model trainability changes during training (#369)\r\n- ShardedDDP state dict load/save bug (#386)\r\n- ShardedDDP handle train/eval modes (#393)\r\n- AdaScale handling custom scaling factors (#401)\r\n\r\n# Added\r\n- ShardedDDP manual reduce option for checkpointing (#389)",
+        "dateCreated": "2021-02-19T22:07:38Z",
+        "datePublished": "2021-02-19T22:08:46Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.7",
+        "name": "v0.1.7",
+        "tag_name": "v0.1.7",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.7",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/38339229",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.7"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "# Added\r\n- Checkpointing model wrapper (#376)\r\n- Faster OSS, flatbuffers (#371)\r\n- Small speedup in OSS clipgradnorm (#363)\r\n\r\n# Fixed\r\n- Bug in ShardedDDP with 0.1.5 depending the init (KeyError / OSS)\r\n- Much refactoring in Pipe (#357, #358, #360, #362, #370, #373)\r\n- Better pip integration / resident pytorch (#375)",
+        "dateCreated": "2021-02-11T01:30:47Z",
+        "datePublished": "2021-02-11T01:31:23Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.6",
+        "name": "v0.1.6",
+        "tag_name": "v0.1.6",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.6",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/37895659",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "# Added\r\n- Pytorch compatibility for OSS checkpoints (#310)\r\n- Elastic checkpoints for OSS, world size can vary in between save and loads (#310)\r\n- Tensor views for OSS bucketing, reduced CPU use (#300)\r\n- Bucket calls in ShardedDDP, for faster inter node communications (#327)\r\n- FlattenParamWrapper, which flattens module parameters into a single tensor seamlessly (#317)\r\n- AMPnet experimental support (#304)\r\n\r\n# Fixed\r\n- ShardedDDP properly handles device changes via .to() (#353)\r\n- Add a new interface for AdaScale, AdaScaleWrapper, which makes it compatible with OSS (#347)",
+        "dateCreated": "2021-02-03T22:19:38Z",
+        "datePublished": "2021-02-03T22:20:38Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.5",
+        "name": "v0.1.5",
+        "tag_name": "v0.1.5",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.5",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/37322990",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "# Fixed\r\n- Missing cu files in the pip package",
+        "dateCreated": "2021-01-07T18:54:29Z",
+        "datePublished": "2021-01-07T18:59:10Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.4",
+        "name": "v0.1.4",
+        "tag_name": "v0.1.4",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.4",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/36110332",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "Same as 0.1.2, but with the correct numbering in the source code (see __init__.py)",
+        "dateCreated": "2021-01-05T05:53:08Z",
+        "datePublished": "2021-01-05T05:54:34Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.3",
+        "name": "v0.1.3",
+        "tag_name": "v0.1.3",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.3",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/35980816",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "blefaudeux",
+        "body": "# Added\r\n- AdaScale: Added gradient accumulation feature (#202)\r\n- AdaScale: Added support of torch.lr_scheduler (#229)\r\n\r\n# Fixed\r\n- AdaScale: smoothing factor value fixed when using gradient accumulation (#235)\r\n- Pipe: documentation on balancing functions (#243)\r\n- ShardedDDP: handle typical NLP models\r\n- ShardedDDP: better partitioning when finetuning",
+        "dateCreated": "2021-01-02T02:44:12Z",
+        "datePublished": "2021-01-04T20:30:32Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.2",
+        "name": "v0.1.2",
+        "tag_name": "v0.1.2",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.2",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/35967467",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "msbaines",
+        "body": "### Fixed\r\n- make sure pip package includes header files (#221)",
+        "dateCreated": "2020-12-02T04:40:25Z",
+        "datePublished": "2020-12-02T04:51:42Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.1",
+        "name": "v0.1.1",
+        "tag_name": "v0.1.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.1",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/34670431",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "msbaines",
+        "body": "### Added\r\n- ShardedDataParallel with autoreduce (#157)\r\n- cpu support for Pipe (#188)\r\n- ShardedOptim: Distributed Grad Scaler (for torch AMP)  (#182)\r\n- OSS-aware clip grads, bridge sharded states (#167)\r\n- oss: add rank_local_state_dict staticmethod (#174)\r\n- support for PyTorch 1.7.0 (#171)\r\n- Add implementation of AdaScale (#139)\r\n\r\n### Fixed\r\n- pip package install (#196, #200)\r\n",
+        "dateCreated": "2020-12-01T21:52:42Z",
+        "datePublished": "2020-12-01T22:18:31Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.1.0",
+        "name": "v0.1.0",
+        "tag_name": "v0.1.0",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.1.0",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/34659212",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "msbaines",
+        "body": "### Added\r\n- multi-process pipe (#90)\r\n\r\n### Fixed\r\n- OSS+apex fix (#136)\r\n- MegaTron+OSS DDP fix (#121)\r\n",
+        "dateCreated": "2020-10-15T03:36:35Z",
+        "datePublished": "2020-10-27T22:05:54Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.0.3",
+        "name": "v0.0.3",
+        "tag_name": "v0.0.3",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.0.3",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/33135309",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.0.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "msbaines",
+        "body": "### Added\r\n- add ddp that works with oss with reduce() not all_reduce() (#19)\r\n- support for PyTorch v1.6\r\n- add mixed precision Adam (#40)\r\n- Adam optimizer state scaling (#44)\r\n\r\n### Fixed\r\n- properly restore a sharded optim state (#39)\r\n- OSS restore state to proper device (#46)\r\n- optim/oss: support optimizers with additional step kwargs (#53)\r\n- optim/oss: fix state cast (#56)\r\n- fix eval for oss_ddp (#55)\r\n- optim/oss: work correctly with LRScheduler (#58)",
+        "dateCreated": "2020-08-28T21:35:58Z",
+        "datePublished": "2020-10-27T21:59:50Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.0.2",
+        "name": "v0.0.2",
+        "tag_name": "v0.0.2",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.0.2",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/33135101",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.0.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "msbaines",
+        "body": "- Initial release.",
+        "dateCreated": "2020-07-31T22:49:11Z",
+        "datePublished": "2020-07-31T23:08:25Z",
+        "html_url": "https://github.com/facebookresearch/fairscale/releases/tag/v0.0.1",
+        "name": "v0.0.1",
+        "tag_name": "v0.0.1",
+        "tarball_url": "https://api.github.com/repos/facebookresearch/fairscale/tarball/v0.0.1",
+        "url": "https://api.github.com/repos/facebookresearch/fairscale/releases/29184684",
+        "zipball_url": "https://api.github.com/repos/facebookresearch/fairscale/zipball/v0.0.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1547,
+      "date": "Fri, 24 Dec 2021 22:00:47 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The full [documentation](https://fairscale.readthedocs.io/) contains instructions for getting started, deep dives and tutorials about the various FairScale APIs.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Here are a few sample snippets from a subset of FairScale offerings:\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Special thanks go to the supervisor of this project David Woelfle. \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1705.07832",
+      "https://arxiv.org/abs/1810.05546"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giarcieri/Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-16T15:38:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-22T07:29:33Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Model-Based Reinforcement Learning (MBRL) has recently become popular as it is expected to solve RL problems with fewer trials (i.e. higher sample efficiency) than model-free methods. However, it is not clear how much of the recent MBRL progress is due to improved algorithms or due to improved models. Hence, this work compares a set of mathematical methods that are commonly used as models for MBRL. This thesis aims to provide a benchmark to assess the model influence on RL algorithms. The evaluated models will be (deterministic) Neural Networks (NNs), ensembles of (deterministic) NNs, Bayesian Neural Networks (BNNs), and Gaussian Processes (GPs). Two different and innovative BNNs are applied: the [Concrete Dropout](https://arxiv.org/abs/1705.07832) NN and the [Anchored Ensembling](https://arxiv.org/abs/1810.05546). The model performance is assessed on a large suite of different benchmarking environments, namely one [OpenAI Gym](https://github.com/openai/gym) Classic Control problem (Pendulum) and seven [PyBullet-Gym](https://github.com/benelot/pybullet-gym) tasks (MuJoCo implementation). The RL algorithm the model performance is assessed on is Model Predictive Control (MPC) combined with Random Shooting (RS).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9777041959928883
+      ],
+      "excerpt": "This is the master thesis project by Giacomo Arcieri, written at the FZI Research Center for Information Technology (Karlsruhe, Germany). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8217767233592975,
+        0.973670141496861,
+        0.9947329939645081,
+        0.9621841156021302,
+        0.9005258945472793,
+        0.9080290309945511,
+        0.9888542575439483,
+        0.959811385011266
+      ],
+      "excerpt": "deterministicNN.py: it includes  the deterministic NN (NN) and the deterministic ensemble (ens_NNs). \nPNN.py: here the Anchored Ensembling is defined following this example. PNN defines one NN of the Anchored Ensembling. This is needed to define ens_PNNs which is the Anchored Ensembling as well as the model applied  in the evaluation. \nConcreteDropout.py: it defines the Concrete Dropout NN, mainly based on the Yarin Gal's notebook, but also on this other project. First, the ConcreteDropout Layer is defined. Then, the Concrete Dropout NN is designed (BNN). Finally, also an ensemble of Concrete Dropout NNs is defined (ens_BNN), but I did not use it in the model comparison (ens_BNN is extremely slow and BNN is already like an ensemble). \nGP.py: it defines the Gaussian Process model based on gpflow. Two different versions are applied: the GPR and the SVGP (choose by setting the parameter gp_model). Only the GPR performance is reported in the evaluation because the SVGP has not even solved the Pendulum environment. \nThe model performance is evaluated in the following files: \n1) main.py: it is defined the function main which takes all the params that are passed to MB_trainer. Five MB_trainer are initialized, each with a different seed, which are run in parallel. It is also possible to run two models in parallel by setting the param model2 as well.  \n2) MB_trainer.py: it includes the initialization of the env and the model as well as the RL training loop. The function play_one_step computes one step of the loop. The model is trained with the function training_step. At the end of the loop, a pickle file is saved, wich includes all the rewards achieved by the model in all the episodes of the env. \n3) play_one_step.py: it includes all the functions to compute one step (i.e. to choose one action): the epsilon greedy policy for the exploration, the Information Gain exploration, and the exploitation of the model with MPC+RS (function get_action). The rewards as well as the RS trajectories are computed with the cost functions in cost_functions.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9290725930903015
+      ],
+      "excerpt": "5) cost_functions.py: it includes all the cost functions of the envs.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9442492269964898,
+        0.9111211145117581,
+        0.8456524936631988,
+        0.979850145662235,
+        0.9374590731594703
+      ],
+      "excerpt": "plot_rewards.ipynb: it is the notebook where the model performance is plotted. First, the 5 pickles associated with the 5 seeds are combined in only one pickle. Then, the performance is evaluated with various plots.  \ndistribution.ipynb: this notebook inspects the distribution of the seeds in InvertedDoublePendulum (Section 6.9 of the thesis). \nOur results show significant differences among models performance do exist.  \nIt is the Concrete Dropout NN the clear winner of the model comparison. It reported higher sample efficiency, overall performance and robustness across different seeds in Pendulum, InvertedPendulum, InvertedDoublePendulum, ReacherPyBullet, HalfCheetah, and Hopper. In Walker2D and Ant it was no worse than the others either.  \nAuthors should be aware of the differences found and distinguish between improvements due to better algorithms or due to better models when they present novel methods.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Master Thesis project",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giarcieri/assessing-the-influence-of-models-on-the-performance-of-reinforcement-learning-algorithms/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 10:36:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/giarcieri/Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "giarcieri/Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/giarcieri/assessing-the-influence-of-models-on-the-performance-of-reinforcement-learning-algorithms/master/rewards/plot_rewards.ipynb",
+      "https://raw.githubusercontent.com/giarcieri/assessing-the-influence-of-models-on-the-performance-of-reinforcement-learning-algorithms/master/rewards/distribution.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/giarcieri/Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Assessing the Influence of Models on the Performance of Reinforcement Learning Algorithms applied on Continuous Control Tasks",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "giarcieri",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/giarcieri/Assessing-the-Influence-of-Models-on-the-Performance-of-Reinforcement-Learning-Algorithms/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is tested on Python 3.6.\n\nFirst, you can perform a minimal installation of OpenAI Gym with\n\n```bash\ngit clone https://github.com/openai/gym.git\ncd gym\npip install -e .\n```\n\nThen, you can install Pybullet-Gym with \n\n```bash\ngit clone https://github.com/benelot/pybullet-gym.git\ncd pybullet-gym\npip install -e .\n```\n\n*Important*: Do not use ```python setup.py install``` or other Pybullet-Gym installation methods.\n\nFinally, you can install all the dependencies with \n\n```bash\npip install -r requirements.txt\n```\n\n**Important**: There are a couple of changes to make in two Pybullet-Gym envs:\n1) There is currently a mistake in Hopper. This project uses HopperMuJoCoEnv-v0, but this env imports the Roboschool locomotor instead of the MuJoCo locomotor. Open the file\n```\npybullet-gym/pybulletgym/envs/mujoco/envs/locomotion/hopper_env.py\n``` \nand change \n```\nfrom pybulletgym.envs.roboschool.robots.locomotors import Hopper\n``` \nwith \n```\nfrom pybulletgym.envs.mujoco.robots.locomotors.hopper import Hopper\n```\n\n2) Ant has ```obs_dim=111``` but only the first 27 obs are important, the others are only zeros. If it is true that these zeros do not affect performance, it is also true they slow down the training, especially for the Gaussian Process. Therefore, it is better to delete these unimportant obs. Open the file\n```\npybullet-gym/pybulletgym/envs/mujoco/robots/locomotors/ant.py\n``` \nand set ```obs_dim=27``` and comment or delete line 25\n```\nnp.clip(cfrc_ext, -1, 1).flat\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Fri, 24 Dec 2021 10:36:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "model-based-reinforcement-learning",
+      "machine-learning",
+      "reinforcement-learning",
+      "deep-learning",
+      "bayesian-neural-networks",
+      "gaussian-processes"
+    ],
+    "technique": "GitHub API"
+  }
+}

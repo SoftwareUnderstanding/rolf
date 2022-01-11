@@ -1,0 +1,609 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.05241",
+      "https://arxiv.org/abs/1909.03590",
+      "https://arxiv.org/abs/1909.03590"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite the following papers if you are interested in using our code and datasets.\n\n```\n@article{yuan2018onesizenotfit,\n  title={One Size Does Not Fit All: Generating and Evaluating Variable Number of Keyphrases},\n  author={Yuan, Xingdi and Wang, Tong and Meng, Rui and Thaker, Khushboo and He, Daqing and Trischler, Adam},\n  booktitle={Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},\n  url={https://arxiv.org/pdf/1810.05241.pdf},\n  year={2020}\n}\n```\n```\n@article{meng2019ordermatters,\n  title={Does Order Matter? An Empirical Study on Generating Multiple Keyphrases as a Sequence},\n  author={Meng, Rui and Yuan, Xingdi and Wang, Tong and Brusilovsky, Peter and Trischler, Adam and He, Daqing},\n  journal={arXiv preprint arXiv:1909.03590},\n  url={https://arxiv.org/pdf/1909.03590.pdf},\n  year={2019}\n}\n```\n```\n@inproceedings{meng2017kpgen,\n  title={Deep keyphrase generation},\n  author={Meng, Rui and Zhao, Sanqiang and Han, Shuguang and He, Daqing and Brusilovsky, Peter and Chi, Yu},\n  booktitle={Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages={582--592},\n  url={https://arxiv.org/pdf/1704.06879.pdf},\n  year={2017}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{meng2017kpgen,\n  title={Deep keyphrase generation},\n  author={Meng, Rui and Zhao, Sanqiang and Han, Shuguang and He, Daqing and Brusilovsky, Peter and Chi, Yu},\n  booktitle={Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages={582--592},\n  url={https://arxiv.org/pdf/1704.06879.pdf},\n  year={2017}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{meng2019ordermatters,\n  title={Does Order Matter? An Empirical Study on Generating Multiple Keyphrases as a Sequence},\n  author={Meng, Rui and Yuan, Xingdi and Wang, Tong and Brusilovsky, Peter and Trischler, Adam and He, Daqing},\n  journal={arXiv preprint arXiv:1909.03590},\n  url={https://arxiv.org/pdf/1909.03590.pdf},\n  year={2019}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{yuan2018onesizenotfit,\n  title={One Size Does Not Fit All: Generating and Evaluating Variable Number of Keyphrases},\n  author={Yuan, Xingdi and Wang, Tong and Meng, Rui and Thaker, Khushboo and He, Daqing and Trischler, Adam},\n  booktitle={Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},\n  url={https://arxiv.org/pdf/1810.05241.pdf},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/memray/OpenNMT-kpg-release",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributors\nOpenNMT-py is a community developed project and we love developer contributions.\nGuidelines\nBefore sending a PR, please do this checklist first:\n\nPlease run onmt/tests/pull_request_chk.sh and fix any errors. When adding new functionality, also add tests to this script. Included checks:\nflake8 check for coding style;\nunittest;\ncontinuous integration tests listed in .travis.yml.\n\n\nWhen adding/modifying class constructor, please make the arguments as same naming style as its superclass in PyTorch.\nIf your change is based on a paper, please include a clear comment and reference in the code (more on that below). \n\nDocstrings\nAbove all, try to follow the Google docstring format\n(Napoleon example,\nGoogle styleguide).\nThis makes it easy to include your contributions in the Sphinx documentation. And, do feel free\nto autodoc your contributions in the API .rst files in the docs/source folder! If you do, check that\nyour additions look right.\nHow to build the docs locally?\n```bash\ncd docs\ninstall some dependencies if necessary:\nrecommonmark, sphinx_rtd_theme, sphinxcontrib-bibtex\npip install requirements.txt\nmake html\nfirefox build/html/main.html  # or your browser of choice\n```\nSome particular advice:\n- Try to follow Python 3 typing module conventions when documenting types.\n    - Exception: use \"or\" instead of unions for more readability\n    - For external types, use the full \"import name\". Common abbreviations (e.g. np) are acceptable.\n      For torch.Tensor types, the torch. is optional.\n    - Please don't use tics like (`str`) or rst directives like (:obj:`str`). Napoleon handles types\n      very well without additional help, so avoid the clutter.\n- Google docstrings don't support multiple returns.\nFor multiple returns, the following works well with Sphinx and is still very readable.\n  ```python\n  def foo(a, b):\n      \"\"\"This is my docstring.\n  Args:\n      a (object): Something.\n      b (class): Another thing.\n\n  Returns:\n      (object, class):\n\n      * a: Something or rather with a long\n        description that spills over.\n      * b: And another thing.\n  \"\"\"\n\n  return a, b\n\n- When citing a paper, avoid directly linking in the docstring! Add a Bibtex entry to `docs/source/refs.bib`.\nE.g., to cite \"Attention Is All You Need\", visit [arXiv](https://arxiv.org/abs/1706.03762), choose the\n[bibtext](https://dblp.uni-trier.de/rec/bibtex/journals/corr/VaswaniSPUJGKP17) link, search `docs/source/refs.bib`\nusing `CTRL-F` for `DBLP:journals/corr/VaswaniSPUJGKP17`, and if you do not find it then copy-paste the\ncitation into `refs.bib`. Then, in your docstring, use ``:cite:`DBLP:journals/corr/VaswaniSPUJGKP17` ``.\n    - However, a link is better than nothing.\n- Please document tensor shapes. Prefer the format (a, b, c) `. This style is easy to read, allows usingx`` for multplication, and is common\n  (PyTorch uses a few variations on the parentheses format, AllenNLP uses exactly this format, Fairseq uses\n  the parentheses format with single ticks).\n    - Again, a different style is better than no shape documentation.\n- Please avoid unnecessary space characters, try to capitalize, and try to punctuate.\nFor multi-line docstrings, add a blank line after the closing \"\"\".\n  Don't use a blank line before the closing quotes.\n\"\"\" not this \"\"\" \"\"\"This.\"\"\"\npython\n  \"\"\"\n      Not this.\n  \"\"\"\n  python\n  \"\"\"This.\"\"\"\nThis note is the least important. Focus on content first, but remember that consistent docs look good.\n- Be sensible about the first line. Generally, one stand-alone summary line (per the Google guidelines) is good.\n  Sometimes, it's better to cut directly to the args or an extended description. It's always acceptable to have a\n  \"trailing\" citation.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-10-06T20:23:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T12:59:22Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9627778232702641,
+        0.9584857871600703
+      ],
+      "excerpt": "This is a repository providing code and datasets used in One Size Does Not Fit All: Generating and Evaluating Variable Number of Keyphrases and Does Order Matter? An Empirical Study on Generating Multiple Keyphrases as a Sequence. \nAll datasets and selected model checkpoints in the papers can be downloaded here (data.zip and models.zip). Unzip the file data.zip and models.zip and override the original data/ and model/ folder. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8874284012313737
+      ],
+      "excerpt": "We follow the data pre-processing and evaluation protocols in Meng et al. 2017. We pre-process both document texts and ground-truth keyphrases, including word segmentation, lowercasing and replacing all digits with symbol \\<digit>.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9359911622158116,
+        0.9764090447153762,
+        0.9068105490568704,
+        0.9890526583477063
+      ],
+      "excerpt": "We evaluate models' performance on predicting present and absent phrases separately. Specifically, we first tokenize, lowercase and stem (using the Porter Stemmer of NLTK) the text, then we determine the presence of each ground-truth keyphrase by checking whether its words can be found verbatim in the source text. \nTo evaluate present phrase performance, we compute Precision/Recall/F1-score for each document taking only present ground-truth keyphrases as target and ignore the absent ones. We report the macro-averaged scores over documents that have at least one present ground-truth phrases (corresponding to the column #PreDoc in the Table below, and similarly to the case of absent phrase evaluation.  \nwhere #(pred) and #(target) are the number of predicted and ground-truth keyphrases respectively; and #(correct@k) is the number of correct predictions among the first k results. \nWe clarify that, since our study mainly focuses on keyword/keyphrase extraction/generation on short text, we only used the abstract of Semeval and NUS as source text. Therefore statistics like #PreKP may be different from the ones computed with fulltext, which also affect the final F1-scores. For the ease of reproduction, we post the detailed statistics in the following table and processed testsets with present/absent phrases split can be found in the released data (e.g. data/json/kp20k/kp20k_test_meng17token.json).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8113409708258493
+      ],
+      "excerpt": "- Rui Meng (Salesforce Research, previously at University of Pittsburgh) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Keyphrase Generation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/memray/OpenNMT-kpg-release/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 24,
+      "date": "Fri, 24 Dec 2021 10:37:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/memray/OpenNMT-kpg-release/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "memray/OpenNMT-kpg-release",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/memray/OpenNMT-kpg-release/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/PRauc_example.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/scikp_dataset_stats.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/pred_phrase_stats.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/split_magkp.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/phrase_stats.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/transfer_analysis.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/kpeval_annotation.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/inference.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/scikp_dataset_stat.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/empirical_analysis_v2_lite.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/dataset_stat.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/notebook/beam_stats.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/onmt/newssum/torchviz/example.ipynb",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/docs/source/examples/Library.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/kp_convert.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/onmt/tests/rebuild_test_models.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/onmt/tests/test_models.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/onmt/tests/pull_request_chk.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/examples/scripts/prepare_wmt_data.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/examples/scripts/prepare_wikitext-103_data.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/tools/bpe_pipeline.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/batch_kill_by_range.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/batch_kill_by_cluster.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_eval_o2s_fewshot.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_eval_o2s.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2s_gpu_fewshot.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/kpeval_gpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/kpeval_o2o_gpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_eval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/kpeval_cpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2s_gpu_debug.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2s_gpu_fewshot_dev.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2o_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/kppred_v100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2s_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_eval_o2o.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/kpeval_gpu_scavenger_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/run_pred_o2s_gpu_fewshot_scavenger.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-kp20k-lower.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-kp20k-nocopy.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-stackex.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-one2one-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-one2one-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-openkp-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-openkp-rerun.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-kp20k-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-kptimes-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-openkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-one2one-stackex.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-stackex-rerun.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-one2one-stackex.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-one2one-openkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-stackex-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-one2one-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-one2one-openkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-kp20k-nocopy-lower.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-one2one-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-transformer-presabs-openkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_fulldata/kpgen-bart-presabs-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-stackex-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-openkp-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kptimes-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-openkp-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kp20k-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-stackex-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-openkp-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kp20k-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-stackex-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kp20k-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kptimes-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bartwikikp_DAFT_fewshot/kpgen-bartwikikp-DAFT-presabs-kptimes-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_DA/wikida-kptimes_4gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_DA/wikida-stackex_4gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_DA/wikida-openkp_4gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_DA/wikida-kp20k_4gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kp20k-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-openkp-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kptimes-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-openkp-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kp20k-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bartwikikp-presabs-openkp-fewshot10k-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-openkp-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bartwikikp-presabs-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bartwikikp-presabs-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bartwikikp-presabs-stackex.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-openkp-fewshot10k-resume.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kptimes-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-stackex-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-stackex-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kp20k-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-stackex-fewshot1k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bartwikikp-presabs-openkp-fewshot10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_bart_fewshot/kpgen-bart-presabs-kptimes-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-stackex.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-kptimes.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-kp20k-TL.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-openkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_DA/transformer-DA-kp20k-NP.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_fewshot/transformer-stackex-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_fewshot/transformer-kptimes-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_fewshot/transformer-openkp-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_fewshot/transformer-kp20k-DAFT-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/train_tf_fewshot/transformer-kp20k-fewshot100.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/run_pred_o2s_scipaper.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/mag_np.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/mag_transfer_labelling.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/mag_np_sbatch.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-DA-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k-PT_step200k-FT_full_step100k_lr5e5_warmup10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k-PTDA_kp20k_20k-FT_full-step50k-lr1e4-warmup5k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k-PT_step200k-FT_full_step20k-lr1e5-warmup2k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k_DAFT-fulldata-step100k-lr1e5.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k-PTDA_kp20k_20k-FT_full-step20k-lr1e5-warmup2k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-PT-MagTL-lr5e5-step300k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/transformer-kp20k-PT_step200k-DA_step20k-FT_full_step100k_lr5e5_warmup10k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/transfer/mag/train/nohup_train_transformer-kp20k-PTDA_100k-FT_full-step100k-lr5e5.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval_v2_eval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval_v2_pred_cpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval_v2_pred_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_cpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval_v1_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/run_predeval_v2.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_gpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_inspec.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_kp20k_valid2k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_kp20k_topmodel_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_nus.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_krapivin.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_semeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_kp20k_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_kp20k_valid2k_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_duc.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval_v2/kpeval_kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp-rnn-BS128-Layer1-Dim150-Emb100-Dropout0.0-Copytrue-Covtrue-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-transformer-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-transformer-BS4096-Layer4-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-transformer-BS4096-Layer4-Heads8-Dim128-Emb128-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp20k-transformer-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp-transformer-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp20k-rnn-BS128-Layer1-Dim512-Emb128-Dropout0.1-Copytrue-Covtrue-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-transformer-BS4096-Layer2-Heads4-Dim128-Emb128-Dropout0.1-Copytrue-Covtrue-Contextboth.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-rnn-BS128-Layer1-Dim150-Emb100-Dropout0.0-Copyfalse-Covfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp20k-rnn-BS128-Layer1-Dim150-Emb100-Dropout0.0-Copytrue-Covtrue-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/magkp-rnn-BS128-Layer1-Dim150-Emb100-Dropout0.1-Copytrue-Covtrue-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/2nd/kp20k-rnn-BS128-Layer1-Dim512-Emb128-Dropout0.1-Copytrue-Covtrue-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/1st/srun_stackexchange-rnn-1gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/1st/srun_kp-rnn-1gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/train/1st/srun_kp-transformer-1gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_inspec.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_kp20k_valid2k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_nus.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_krapivin.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_stackexchange_valid2k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_semeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_kp20k_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_stackexchange.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_duc.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2one/eval/kpeval_kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/preprocess/kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/preprocess/magkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/kpeval_gpu_template.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/run_pred_o2s_dev.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/one2seq-rnn-presabs-kp20k-OR001-SC001.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/one2seq-rnn-presabs-kp20k-OR05-SC005.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/rnn-presabs-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/one2seq-rnn-presabs-kp20k-OR10-SC005.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/rnn-presabs-kp20k-E2D2.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/one2seq-rnn-presabs-kp20k-OR005-SC05.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/one2seq-rnn-presabs-kp20k-OR005-SC005.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/rnn-presabs-kp20k-E1D2.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/rnn-one2one-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/rnn-presabs-kp20k-E2D1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR00-SC00.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR05-SC05.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR00-SC01.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR05-SC00.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR10-SC10.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR00-SC05.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR01-SC00.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/rnn/done/one2seq-rnn-presabs-kp20k-OR01-SC01.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/transformer-presabs-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR01-SC00.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR00-SC05.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR00-SC01.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-E6D6.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR10-SC10.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-E6D9.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR05-SC05.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/transformer-one2one-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR01-SC01.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR05-SC00.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR001-SC001.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-E9D6.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/diverse/transformer/one2seq-transformer-presabs-kp20k-OR005-SC005.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_pred.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_pred_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/kpeval_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_pred_v2.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_eval_selfterminating.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_eval_exhaustive.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/run_pred_v2_gpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/kpeval_cpu.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-kp20k-BS4096-Layer2-Heads4-Dim128-Emb128-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-kp20k-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-magkp-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/magkp20k-verbatim_append-rnn-BS64-Layer1-Dim150-Emb100-Dropout0.0-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/magkp20k-verbatim_append-rnn-BS64-Layer1-Dim512-Emb128-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/kp20k-verbatim_append-rnn-BS64-Layer1-Dim100-Emb100-Dropout0.0-Copytrue-Reusetrue-Covfalse-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-kp20k-BS4096-Layer4-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-magkp-BS4096-Layer2-Heads4-Dim128-Emb128-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/kp20k-verbatim_append-rnn-BS64-Layer1-Dim512-Emb128-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/kp20k-verbatim_append-rnn-BS64-Layer1-Dim150-Emb100-Dropout0.0-Copytrue-Reusetrue-Covfalse-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/kp20k-verbatim_append-rnn-BS64-Layer1-Dim100-Emb100-Dropout0.0-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-rnn-magkp-BS64-Layer1-Dim512-Emb128-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-rnn-kp20k-BS64-Layer1-Dim150-Emb100-Dropout0.0-Copyfalse-Reusefalse-Covfalse-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-transformer-magkp-BS4096-Layer4-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/magkp20k-verbatim_append-transformer-BS4096-Layer6-Heads8-Dim512-Emb512-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEtrue-Contextboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-rnn-kp20k-BS64-Layer1-Dim150-Emb100-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/2nd/verbatim_append-rnn-magkp-BS64-Layer1-Dim150-Emb100-Dropout0.1-Copytrue-Reusetrue-Covtrue-PEfalse-Contboth-IF1.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-magkp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_Nsmall.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-no_sort_reverse-rnn-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-kp20k%2BMagKP_LN.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-length_reverse-rnn-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-magkp%2Bkp20kFT.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-length_reverse-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2one-transformer-copycovfalse-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-copycovfalse-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_LN.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-kp20k%2BMagKP_Nsmall.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-alphabetical_reverse-rnn-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-copycovfalse-magkp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2one-transformer-magkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-no_sort_reverse-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-alphabetical-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-magkp20k%2Bkp20kFT.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_Nlarge%2Bkp20kFT.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-magkp.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2one-transformer-magkp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-no_sort-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-length-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-random-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2one-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_LN%2Bkp20kFT.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-alphabetical_reverse-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-kp20k%2BMagKP_Nlarge.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_Nsmall%2Bkp20kFT.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_prepend-transformer-kp20k.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/3rd/kpgen-one2seq-verbatim_append-transformer-MagKP_Nlarge.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-verbatim_prepend.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-alphabetical.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-verbatim_append.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-random.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-length.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-no_sort.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-verbatim_append.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-no_sort.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-verbatim_prepend.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-rnn-1gpu-length.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-alphabetical.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/train/1st/srun_kp-transformer-1gpu-random.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_inspec.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_nus.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_krapivin.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_semeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_kp20k_valid500.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam10-maxlen40/kpeval_duc.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_inspec.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_nus.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_krapivin.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_semeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_kp20k_valid500.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam50-maxlen40/kpeval_duc.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_inspec.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_nus.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_krapivin.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_semeval.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_kp20k_valid500.sh",
+      "https://raw.githubusercontent.com/memray/OpenNMT-kpg-release/master/script/empirical_study/srun_one2seq/old/kpeval-beam25-maxlen40/kpeval_duc.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8654917751447784
+      ],
+      "excerpt": "All datasets and selected model checkpoints in the papers can be downloaded here (data.zip and models.zip). Unzip the file data.zip and models.zip and override the original data/ and model/ folder. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8648755917849121
+      ],
+      "excerpt": "source kp_convert.sh #: dump json to src/tgt files (OpenNMT format) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.870405145393329
+      ],
+      "excerpt": "python train.py -config config/train/config-rnn-keyphrase-one2seq-diverse.yml \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.870405145393329
+      ],
+      "excerpt": "python train.py -config config/train/config-rnn-keyphrase-one2one-stackexchange.yml \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8861599471137942
+      ],
+      "excerpt": "| Dataset | #Train | #Valid | #Test | #KP | #PreDoc | #PreKP | #AbsDoc | #AbsKP | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/memray/OpenNMT-kpg-release/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Shell",
+      "Perl",
+      "Emacs Lisp",
+      "Smalltalk",
+      "Ruby",
+      "NewLisp",
+      "JavaScript",
+      "Slash",
+      "SystemVerilog",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017-Present OpenNMT\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Keyphrase Generation (built on OpenNMT-py)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "OpenNMT-kpg-release",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "memray",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/memray/OpenNMT-kpg-release/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\npython kp_gen_eval.py -tasks pred eval report -config config/test/config-test-keyphrase-one2seq.yml -data_dir data/keyphrase/meng17/ -ckpt_dir models/keyphrase/meng17-one2seq-kp20k-topmodels/ -output_dir output/meng17-one2seq-topbeam-selfterminating/meng17-one2many-beam10-maxlen40/ -testsets duc inspec semeval krapivin nus -gpu -1 --verbose --beam_size 10 --batch_size 32 --max_length 40 --onepass --beam_terminate topbeam --eval_topbeam\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 130,
+      "date": "Fri, 24 Dec 2021 10:37:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "keyphrase-generation",
+      "pytorch-implementation",
+      "keyphrase",
+      "keyword"
+    ],
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gjp1203/LIV360SV",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-14T09:07:43Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-08T19:35:35Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8110597288618199
+      ],
+      "excerpt": "We present a workflow for extracting and classifying advertisements located \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8213639505685225,
+        0.9883123315161622,
+        0.955591894613367,
+        0.9810453687830553
+      ],
+      "excerpt": "subsequently classify the extracted advertisements we train a Inception-V3 to differentiate advertisement types using data scraped from Google Images. We introduce the Liverpool 360 Street View (LIV360SV) dataset for evaluating our workflow. The dataset contains 26,645, 360 degree, street-level images collected via cycling with a GoPro Fusion 360 camera. \nWhile there exists an abundance of street-level imagery on platforms such as Google Street View, the recently imposed costs for using Google's API, as well as cases of Google updating terms and conditions to hinder researchers, highlights the need for alternative open sourced solutions.  \nExisting open and crowd sourced street-level images predominately lack the quality of the interactive panoramas found on services such as Google Street View. Images are frequently recorded using dashboard cameras, and as a result have a restricted field of vision. Motivated by these factors we record an open street-level dataset for Liverpool, using a GoPro Fusion 360 camera attached to a member of the team (Mark Green) who cycled along major roads. We follow Mapillary's recommendations for recording street-level images. The camera records front and back images at 0.5 second interval, which we later stitch together using GoPro Fusion Studio. To date our dataset consists of 26,645 street-level images each with GPS location recorded. We illustrate the current coverage of the LIV360SV dataset in below.  \nWe focused on sampling three areas of Liverpool with varying contexts over three different days: (1) City Centre (Jan 14th 2020) - areas characterised by shops and services; (2) North Liverpool (Jan 15th 2020) - areas contain high levels of deprivation; (3) South Liverpool (Jan 18th 2020) - areas include a mixture of affluent populations and diverse ethnic groups. We have uploaded our street level images to Mapillary, which can be viewed here. The images can be downloaded with Mapillary Tools using the following command:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.875485639712305
+      ],
+      "excerpt": "For extracting advertisements from street level images we use the seamless scene segmentation network introduced by Porzi et al. (2019). The network offers advantages of both semantic segmentation -- determining the semantic category that a pixel belongs to -- and instance-specific semantic segmentation -- the individual object that a pixel belongs to, enabling differentiation between neighbouring entities of the same type. The authors achieve state-of-the-art results on three street-view datasets, including Cityscapes, the Indian Driving Dataset and Mapillary Vistas. To install the seamless scene segmentation implementation visit: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9751612060268369
+      ],
+      "excerpt": "Upon identifying the location of an advertisement, we obtain a one hot mask with a filled convex hull using OpenCV's find and draw contours functionalities. The masks allow us to extract individual advertisements from the original input images. With the remaining content having been masked out during the extraction step we subsequently crop the images. However, given that the final step of our workflow is to pass the extracted items to a classifier trained on advertisement images with a frontal view, we use a Spatial Transformation Network (STN) to transform the extracted items, the majority of which were recorded from a non-frontal view.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8528442645978744,
+        0.8908490204927673
+      ],
+      "excerpt": "We classify extracted advertisements using Keras' \nInception-V2 implementation. The network is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8153046943558135
+      ],
+      "excerpt": "Networks (GANs). We propose to embed selected \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9041771010829703
+      ],
+      "excerpt": "training data (albeit `fake data') for model training. To date we can show that \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9313047689541651
+      ],
+      "excerpt": "the advertisement using a STN to transform the image to a target shape. Finally \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.964209582007014,
+        0.8637605683216694
+      ],
+      "excerpt": "We hypothesize that augmenting our collected street view data with these \nsecondary GANs created data will enable the training of an effective model. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gjp1203/LIV360SV/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 21 Dec 2021 01:16:10 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gjp1203/LIV360SV/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gjp1203/LIV360SV",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/gjp1203/LIV360SV/master/simcheck.ipynb",
+      "https://raw.githubusercontent.com/gjp1203/LIV360SV/master/tf_image_loader.ipynb",
+      "https://raw.githubusercontent.com/gjp1203/LIV360SV/master/classifier.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8820234121644812,
+        0.8097344658623415
+      ],
+      "excerpt": "jupyter notebook classifier.ipynb \nWe note that advertisements extracted from street level imagery are \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.84931232939727
+      ],
+      "excerpt": "To date we have identified 10,106 advertisements within these data, manually classified as food (1335), alcohol (217), gambling (149) and other (8405). Download the dataset as a .zip archive from: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8379062146632222
+      ],
+      "excerpt": "python3 -m torch.distributed.launch --nproc_per_node=1 ./scripts/test_panoptic.py --meta ./data/metadata.bin ./data/config.ini ./data/seamseg_r50_vistas.tar ./LIV360SV ./Segmentations --raw \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 preprocess.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8490660813181592
+      ],
+      "excerpt": "images dataset. To train Inception-V3: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gjp1203/LIV360SV/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LIV360SV",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LIV360SV",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gjp1203",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gjp1203/LIV360SV/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [TensorFlow](https://www.tensorflow.org/install)\n* [Jupyter Notebook](https://jupyter.org/)\n* [Pandas](https://pandas.pydata.org/)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 21 Dec 2021 01:16:10 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

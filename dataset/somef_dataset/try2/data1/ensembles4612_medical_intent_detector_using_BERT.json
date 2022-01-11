@@ -1,0 +1,257 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805\n* **Transformers Docs**: https://huggingface.co/transformers/\n* **Transformers Repo**: https://github.com/huggingface/transformers\n* **Packages Used**: tensorflow, torch, numpy, pandas , seaborn, matplotlib, google.colab, sklearn, transformers, time, datetime, random, os\n* **Colab GPU Setup**: Colab -> New Notebook -> Edit -> Notebook Settings -> Hardware accelerator -> (GPU"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9991295298092048
+      ],
+      "excerpt": "BERT Paper: https://arxiv.org/abs/1810.04805 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8656070203791273
+      ],
+      "excerpt": "Transformers Repo: https://github.com/huggingface/transformers \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ensembles4612/medical_intent_detector_using_BERT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-08T01:35:58Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-20T17:00:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9829204678257827,
+        0.9890352450204316
+      ],
+      "excerpt": "I built a multi-class classifier using BERT from Transformers that can identify common medical symptoms based on descriptive text. For example, the model can predict the medical intent is \"Neck pain\" after parsing the text message \"There is a tingling sensation in my neck.\" It can be applied to services such as medical chatbot.  \nAs for the model building process, I built the classifier with transfer learning from pre-trained BERT model, which was already trained on large corpus. For our specific task, the pre-trained BERT model was added an layer on top for classifying descriptive text to 25 intents (categories). When training started, I fine-tuned the entire pre-trained BERT model and the additional untrained classification layer. After 4 epochs of fine-tuning the model on thousands of text messages with a good selection of hyperparameters, I obtained 99.40% accuracy in the test set. See code here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906694372403726,
+        0.9863562797130322,
+        0.8977747687670496
+      ],
+      "excerpt": "The BERT model was proposed in BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding by Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. It\u2019s a bidirectional transformer pretrained using a combination of masked language modeling objective and next sentence prediction on a large corpus comprising the Toronto Book Corpus and Wikipedia. It's provided by Transformers. Transformers provides general-purpose architectures (BERT, GPT-2, RoBERTa, XLM, DistilBert, XLNet\u2026) for Natural Language Understanding (NLU) and Natural Language Generation (NLG) with over 32+ pretrained models in 100+ languages and deep interoperability between TensorFlow 2.0 and PyTorch. \nAdvantages of using BERT: \nQuicker development: BERT model weights were pre-trained on large corpus so it takes much less time to train our fine-tuned model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9836697503290383,
+        0.9737871655469191,
+        0.9191505961123931
+      ],
+      "excerpt": "Better results: the simple fine-tuning procedure (typically adding one fully-connected layer on top of BERT and training for a few epochs) was shown to achieve state of the art results with minimal task-specific adjustments for a wide variety of tasks: classification, language inference, semantic similarity, question answering, etc. \nI used BertForSequenceClassification, a BERT model with an added single linear layer on top for classification. As we feed input data, the entire pre-trained BERT model and the additional untrained classification layer is trained on our specific task. \nModel training: After tuning all the hyperparameters with different values, I decided to use the hyperparameters below and ran 4 epochs for the training data. It took about 34s for each epoch. Training set accuracy increased from 37% (at 1st epoch), 93% (at 2nd epoch), 99% (at 3rd epoch), to 100% (at 4th epoch). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8149266287858328
+      ],
+      "excerpt": "Also, I did the following before training the model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.833388032666162,
+        0.96827233986654
+      ],
+      "excerpt": "model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels = 25) \n* using AdamW optimizer and creating the learning rate scheduler \n* creating a function to calcuate the accuracy of the model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "I built a multi-class classifier using BERT from Transformers that can identify common medical symptoms based on descriptive text. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ensembles4612/medical_intent_detector_using_BERT/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 16:26:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ensembles4612/medical_intent_detector_using_BERT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ensembles4612/medical_intent_detector_using_BERT",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ensembles4612/medical_intent_detector_using_BERT/master/medical_intent_detector_Using_BERT.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* **Saving the model, tokenizer and labels:** I saved the BERT model with 99.40% test set accuracy along with the tokenizer and labels for medical intents used when developing the model.\n* **Creating medical intent detector function and test with new sentence:**\n  * Loaded the saved model, tokenizer and labels \n  * Created a medical_symptom_detector function with the loaded model, tokenizer and labels, which helps predict the medical intent of a medical text message. \n  * tested an unseen example on the detector \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* **Dataset:** The dataset contains 6661 examples. I used 2 columns, \"phrase\" and \"prompt\" for modeling. There are 25 prompts (intents). \n* **Train, validation and test sets split:** I split data to train(70%), validation(10%) and testset (20%) stratified by the variable \"intent\". After stratification, data for each intent will balanced and data for each set will be proportional to 70%, 10% and 20%. That is crucial for training and testing purposes.\n* **Tokenization and input formatting**: I Prepared the input data to the correct format before training as follows:\n  * tokenizing all sentences\n  * padding and truncating all sentences to the same length.\n  * Creating the attention masks which explicitly differentiate real tokens from [PAD] tokens. 0 or 1.\n  * encoding the label \"intent\" to numbers. 25 intents to 25 numbers.\n  * creating DataLoaders for our training, validation and test sets\n  \n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.932451947899597,
+        0.8165589756085406,
+        0.9739551975370966
+      ],
+      "excerpt": "Transformers Repo: https://github.com/huggingface/transformers \nPackages Used: tensorflow, torch, numpy, pandas , seaborn, matplotlib, google.colab, sklearn, transformers, time, datetime, random, os \nColab GPU Setup: Colab -> New Notebook -> Edit -> Notebook Settings -> Hardware accelerator -> (GPU) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8150879003560735
+      ],
+      "excerpt": "Colab GPU Setup: Colab -> New Notebook -> Edit -> Notebook Settings -> Hardware accelerator -> (GPU) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ensembles4612/medical_intent_detector_using_BERT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Project Overview: Medical Intent Detector Using BERT",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "medical_intent_detector_using_BERT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ensembles4612",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ensembles4612/medical_intent_detector_using_BERT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 16:26:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "bert-model",
+      "nlp",
+      "deep-learning",
+      "transformers",
+      "classification",
+      "transfer-learning",
+      "pytorch",
+      "medical-intents",
+      "bert"
+    ],
+    "technique": "GitHub API"
+  }
+}

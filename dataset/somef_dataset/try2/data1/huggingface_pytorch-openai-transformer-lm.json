@@ -1,0 +1,253 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1711.05101"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8583344948452548
+      ],
+      "excerpt": "- fixed weights decay following the work of Loshchilov et al., and \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/pytorch-openai-transformer-lm",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-13T14:02:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T23:38:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9635698400878413,
+        0.9216435231204079
+      ],
+      "excerpt": "This is a PyTorch implementation of the TensorFlow code provided with OpenAI's paper \"Improving Language Understanding by Generative Pre-Training\" by Alec Radford, Karthik Narasimhan, Tim Salimans and Ilya Sutskever. \nThis implementation comprises a script to load in the PyTorch model the weights pre-trained by the authors with the TensorFlow implementation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.948862640584192,
+        0.9646664217739858,
+        0.9194659335554032
+      ],
+      "excerpt": "The names of the modules in the PyTorch model follow the names of the Variable in the TensorFlow implementation. This implementation tries to follow the original code as closely as possible to minimize the discrepancies. \nThis implementation thus also comprises a modified Adam optimization algorithm as used in OpenAI's paper with: \n- fixed weights decay following the work of Loshchilov et al., and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.848003886109334
+      ],
+      "excerpt": "The model can be used as a transformer language model with OpenAI's pre-trained weights as follow: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = TransformerModel(args) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9591035641403125,
+        0.838844122138122,
+        0.947894435798823
+      ],
+      "excerpt": "This model generates Transformer's hidden states. You can use the LMHead class in model_pytorch.py to add a decoder tied with the weights of the encoder and get a full language model. You can also use the ClfHead class in model_pytorch.py to add a classifier on top of the transformer and get a classifier as described in OpenAI's publication. (see an example of both in the __main__ function of train.py) \nTo use the positional encoder of the transformer, you should encode your dataset using the encode_dataset() function of utils.py. Please refer to the beginning of the __main__ function in train.py to see how to properly define the vocabulary and encode your dataset. \nThis model can also be integrated in a classifier as detailed in OpenAI's paper. An example of fine-tuning on the ROCStories Cloze task is included with the training code in train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\ud83d\udc25A PyTorch implementation of OpenAI's finetuned transformer language model with a script to import the weights pre-trained by OpenAI",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/pytorch-openai-transformer-lm/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 264,
+      "date": "Mon, 27 Dec 2021 11:31:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huggingface/pytorch-openai-transformer-lm/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huggingface/pytorch-openai-transformer-lm",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Finetuning the PyTorch model for 3 Epochs on ROCStories takes 10 minutes to run on a single NVidia K-80.\n\nThe single run test accuracy of this PyTorch version is 85.84%, while the authors reports a median accuracy with the TensorFlow code of 85.8% and the paper reports a best single run accuracy of 86.5%.\n\nThe authors implementations uses 8 GPU and can thus accomodate a batch of 64 samples while the present implementation is single GPU and is in consequence limited to 20 instances on a K80 for memory reasons. In our test, increasing the batch size from 8 to 20 samples increased the test accuracy by 2.5 points. A better accuracy may be obtained by using a multi-GPU setting (not tried yet).\n\nThe previous SOTA on the ROCStories dataset is 77.6% (\"Hidden Coherence Model\" of Chaturvedi et al. published in \"Story Comprehension for Predicting What Happens Next\" EMNLP 2017, which is a very nice paper too!)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8560909001079362
+      ],
+      "excerpt": "The ROCStories dataset can be downloaded from the associated website. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278267262953355
+      ],
+      "excerpt": "python -m spacy download en \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from model_pytorch import TransformerModel, load_openai_pretrained_model, DEFAULT_CONFIG \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huggingface/pytorch-openai-transformer-lm/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 OpenAI\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch implementation of OpenAI's Finetuned Transformer Language Model",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pytorch-openai-transformer-lm",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huggingface",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huggingface/pytorch-openai-transformer-lm/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To use the model it-self by importing [model_pytorch.py](model_pytorch.py), you just need:\n- PyTorch (version >=0.4)\n\nTo run the classifier training script in [train.py](train.py) you will need in addition:\n- tqdm\n- sklearn\n- spacy\n- ftfy\n- pandas\n\nYou can download the weights of the OpenAI pre-trained version by cloning [Alec Radford's repo](https://github.com/openai/finetune-transformer-lm) and placing the `model` folder containing the pre-trained weights in the present repo.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1330,
+      "date": "Mon, 27 Dec 2021 11:31:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "neural-networks",
+      "pytorch",
+      "openai",
+      "language-model",
+      "transformer"
+    ],
+    "technique": "GitHub API"
+  }
+}

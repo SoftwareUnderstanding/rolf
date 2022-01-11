@@ -1,0 +1,238 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1509.02971\n\n2. Riedmiller, Martin. \"Neural fitted Q iteration\u2013first experiences with a data efficient neural reinforcement learning method.\" European Conference on Machine Learning. Springer, Berlin, Heidelberg, 2005. http://ml.informatik.uni-freiburg.de/former/_media/publications/rieecml05.pdf\n\n3. Mnih, Volodymyr, et al. \"Human-level control through deep reinforcement learning.\" Nature518.7540 (2015",
+      "https://arxiv.org/abs/1511.05952\n\n6. https://openai.com/blog/reinforcement-learning-with-prediction-based-rewards/\n\n7. https://openai.com/blog/openai-baselines-ppo/\n\n8. https://openai.com/blog/openai-five/\n\n9.  https://pathak22.github.io/noreward-rl"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9975165612895964,
+        0.9946324986447935,
+        0.9359042985618814,
+        0.8507161623452375,
+        0.9999262533574222
+      ],
+      "excerpt": "Lillicrap, Hunt, et al. \"Continuous control with deep reinforcement learning.\" 2015. https://arxiv.org/abs/1509.02971 \nRiedmiller, Martin. \"Neural fitted Q iteration\u2013first experiences with a data efficient neural reinforcement learning method.\" European Conference on Machine Learning. Springer, Berlin, Heidelberg, 2005. http://ml.informatik.uni-freiburg.de/former/_media/publications/rieecml05.pdf \nMnih, Volodymyr, et al. \"Human-level control through deep reinforcement learning.\" Nature518.7540 (2015): 529. http://www.davidqiu.com:8888/research/nature14236.pdf \nMnih,  Kavukcuoglu, et al. \"Playing Atari with Deep Reinforcement Learning.\" https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf \nSchaul, Quan, et al. \"Prioritized Experience Replay.\" ICLR (2016). https://arxiv.org/abs/1511.05952 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-20T18:41:10Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-07T21:55:27Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [requirements.txt](https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/blob/main/requirements.txt) - Includes all the required libraries for the Conda Environment.\n2. [model.py](https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/blob/main/model.py) - Defines the actor and critic networks.\n3. [agent.py](https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/blob/main/agent.py) - Defines the Agent that uses MADDPG to determine the best action to take and maximizes the overall or total reward.\n4. [Tennis.ipynb](https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/blob/main/Tennis.ipynb) - The main file that trains the agents. This file can be run in the Conda environment.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9030810030039746,
+        0.9799572484104426,
+        0.9887586092487681,
+        0.9874232373116522,
+        0.9505274552208993,
+        0.9964337623483575,
+        0.8794156136567237,
+        0.8964870823951442,
+        0.9822547976807547
+      ],
+      "excerpt": "In this project, I trained two agents to play tennis. \nUnity Machine Learning Agents (ML-Agents) is an open-source Unity plugin that enables games and simulations to serve as environments for training intelligent agents. The image below shows the tennis environment for this project. \nIn this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play. \nThe observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. \nThe task is episodic, and in order to solve the environment, the agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). \nDDPG<sup>1</sup> is a different kind of actor-critic method. It could be seen as an approximate DQN instead of an actual actor-critic. This is because the critic in DDPG is used to approximate the maximizer over the Q values of the next state and not as a learned baseline. \nOne of the DQN agent's limitations is that it is not straightforward to use in continuous action spaces. Imagine a DQN network that takes the state and outputs the action-value function. For example, for two actions, say, up and down, Q(S, \"up\") gives you the estimated expected value for selecting the up action in state S, say -2.18. Q(S,  \"down\") gives you the estimated expected value for choosing the down action in state S, say 8.45. To find the max action-value function for this state, you just calculate the maximum of these values. Pretty easy. It's straightforward to do a max operation in this example because this is a discrete action space. Even if you had more actions say a left, a right, a jump, and so on, you still have a discrete action space. Even if it were high dimensional with many, many more actions, it would still be feasible. But how do you get the value of continuous action with this architecture? Say you want the jump action to be continuous, a variable between 1 and 100 centimeters. How do you find the value of jump, say 50 centimeters? This is one of the problems DDPG solves. \nIn DDPG, we use two deep neural networks: the actor and the critic. \nThe actor here is used to approximate the optimal policy deterministically. That means we want to always output the best-believed action for any given state. This is unlike stochastic policies in which we want the policy to learn a probability distribution over the actions. In DDPG, we want the believed the best action every single time we query the actor network. That is a deterministic policy. The actor is learning the argmax Q(S, a), which is the best action. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.885993981108358,
+        0.9934225944424125,
+        0.9844711301425768
+      ],
+      "excerpt": "How to adapt the single-agent auto techniques to the multi-agent case? \nThe simplest approach should be to train all the agents independently without considering the existence of other agents. In this approach, any agent considers all the others to be a part of the environment and learns its own policy. Since all are learning simultaneously, the environment as seen from the prospective of a single agent, changes dynamically. This condition is called non-stationarity of the environment. In most single agent algorithms, it is assumed that the environment is stationary, which leads to certain convergence guarantees. Hence, under non-stationarity conditions, these guarantees no longer hold. \nThe second approach is the multi agent approach. The multi agent approach takes into account the existence of multiple agents. Here, a single policy is lowered for all the agents. It takes as input the present state of the environment and returns the action of each agent in the form of a single joint action vector. The joint action space would increase exponentially with the number of agents. If the environment is partially observable or the agents can only see locally, each agent will have a different observation of the environment state, hence it will be difficult to disambiguate the state of the environment from different local observations. So this approach works well only when each agent knows everything about the environment. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9076716969329078
+      ],
+      "excerpt": "Reinforcement Learning with Prediction-Based Rewards<sup>6</sup> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 17:37:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/iDataist/Tennis-With-Multi-Agent-Reinforcement/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "iDataist/Tennis-With-Multi-Agent-Reinforcement",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/main/Tennis.ipynb",
+      "https://raw.githubusercontent.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/main/.ipynb_checkpoints/Tennis-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.851448158947477
+      ],
+      "excerpt": "|Layer        | Input/Output Sizes | Activation Function      | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.851448158947477
+      ],
+      "excerpt": "|Layer        | Input/Output Sizes | Activation Function      | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8044290599680651
+      ],
+      "excerpt": "- BATCH_SIZE = 128 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/iDataist/Tennis-With-Multi-Agent-Reinforcement/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) Udacity\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Tennis With Multi Agent Reinforcement",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Tennis-With-Multi-Agent-Reinforcement",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "iDataist",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 17:37:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Create the Conda Environment\n\n    a. Install [`miniconda`](http://conda.pydata.org/miniconda.html) on your computer, by selecting the latest Python version for your operating system. If you already have `conda` or `miniconda` installed, you should be able to skip this step and move on to step b.\n\n    **Download** the latest version of `miniconda` that matches your system.\n\n    |        | Linux | Mac | Windows |\n    |--------|-------|-----|---------|\n    | 64-bit | [64-bit (bash installer)][lin64] | [64-bit (bash installer)][mac64] | [64-bit (exe installer)][win64]\n    | 32-bit | [32-bit (bash installer)][lin32] |  | [32-bit (exe installer)][win32]\n\n    [win64]: https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe\n    [win32]: https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86.exe\n    [mac64]: https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh\n    [lin64]: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh\n    [lin32]: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh\n\n    **Install** [miniconda](http://conda.pydata.org/miniconda.html) on your machine. Detailed instructions:\n\n    - **Linux:** http://conda.pydata.org/docs/install/quick.html#linux-miniconda-install\n    - **Mac:** http://conda.pydata.org/docs/install/quick.html#os-x-miniconda-install\n    - **Windows:** http://conda.pydata.org/docs/install/quick.html#windows-miniconda-install\n\n    b. Install git and clone the repository.\n\n    For working with Github from a terminal window, you can download git with the command:\n    ```\n    conda install git\n    ```\n    To clone the repository, run the following command:\n    ```\n    cd PATH_OF_DIRECTORY\n    git clone hhttps://github.com/iDataist/Tennis-With-Multi-Agent-Reinforcement\n    ```\n    c. Create local environment\n\n    - Create (and activate) a new environment, named `maddpg-env` with Python 3.7. If prompted to proceed with the install `(Proceed [y]/n)` type y.\n\n        - __Linux__ or __Mac__:\n        ```\n        conda create -n maddpg-env python=3.7\n        conda activate maddpg-env\n        ```\n        - __Windows__:\n        ```\n        conda create --name maddpg-env python=3.7\n        conda activate maddpg-env\n        ```\n\n        At this point your command line should look something like: `(maddpg-env) <User>:USER_DIR <user>$`. The `(maddpg-env)` indicates that your environment has been activated, and you can proceed with further package installations.\n\n    - Install a few required pip packages, which are specified in the requirements text file. Be sure to run the command from the project root directory since the requirements.txt file is there.\n        ```\n        pip install -r requirements.txt\n        ipython3 kernel install --name maddpg-env --user\n        ```\n    - Open Jupyter Notebook, and open the Continuous_Control.ipynb file. Run all the cells in the jupyter notebook to train the agents.\n        ```\n        jupyter notebook\n        ```\n2. Download the Unity Environment\n\n   a. Download the environment from one of the links below.  You need only select the environment that matches your operating system:\n\n    - Linux: click [here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)\n    - Mac OSX: click [here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)\n    - Windows (32-bit): [here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)\n    - Windows (64-bit): [here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)\n\n    (For Windows users) Check out this [link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.\n\n    (For AWS) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use this [link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the \"headless\" version of the environment. You will not be able to watch the agent without enabling a virtual screen, but you will be able to train the agent. (To watch the agent, you should follow the instructions to enable a virtual screen, and then download the environment for the Linux operating system above.)\n\n    b. Place the file in the folder with the jupyter notebook, and unzip (or decompress) the file.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

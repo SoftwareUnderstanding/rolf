@@ -1,0 +1,323 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The results are obtained from \"Strategic Advancement of Multi-Purpose Ultra-Human Robot and Artificial Intelligence Technologies\uff08SamuRAI\uff09 Project\" and \"Ultra High-Throughput Design and Prototyping Technology for Ultra Advanced Materials Development Project\" commissioned by the New Energy and Industrial Technology Development Organization (NEDO) and a project commissioned by Public/Private R&D Investment Strategic Expansion PrograM (PRISM).\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova, \"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.\" In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), pp. 4171-4186. 2019.\n\n- Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, Veselin Stoyanov, \"Robustly Optimized BERT Pretraining Approach.\" ArXiv. 2019.\n\n- Mohammad Golam Sohrab and Makoto Miwa. \"Deep exhaustive model for nested named entity recognition.\" In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, pp. 2843-2849. 2018.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aistairc/kirt_bert_on_abci",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-08T05:53:08Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-04T05:11:22Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9876583718319326
+      ],
+      "excerpt": "In this version, we group the samples into three chunks with fix length for each chunk (128, 256, 512). Chunk with length of N contains the concatenation of sentences with length <= (N-2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8367082443048862,
+        0.9425715430425876
+      ],
+      "excerpt": "With discontinuous short sentences, we add a separator character between them. The sentences from different documents will have separator as well \nOne sample in chunk N will be built by concatenating method as above, until they reach the length of N-2. The 2 spaces are used for CLS and SEP token \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8306261805027313
+      ],
+      "excerpt": "Generate sub-word tokens from text, using BertTokenizer, and save tokens into _shelf.db binary file.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8766571714153217
+      ],
+      "excerpt": "We train the BERT following the strategy of RoBERTa, with making use of BertForMaskedLM from huggingface's transformers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8595454417458822
+      ],
+      "excerpt": "   --tokens_dir=data/generated/tokens \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9363667248536429
+      ],
+      "excerpt": "   --output_dir=data/generated/abci_bert_base/model/  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9847051321085053,
+        0.9582616829894144,
+        0.860059181823877
+      ],
+      "excerpt": "For assessing the performance of our pre-trained BERT model, we conducted the experiment on the Named Entity Recognition task using the model implemented here. This model is inspired by the paper \"Deep Exhaustive Model for Nested Named Entity Recognition\" with replacing the LSTM layer by BERT.  \nThe table below shows the overall score on the development set of Cancer Genetics 2013 corpus. We will add more results later.  \n|  Model  | Precision | Recall |   F1  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8323599615639369
+      ],
+      "excerpt": "| BERT-on-ABCI |     82.44 |  84.80 | 83.50 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Training BERT on ABCI ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aistairc/kirt_bert_on_abci/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We prepare a sample script for training the BERT on the ABCI: train_job.sh, where the training can be performed using multiple GPUs distributed through multiple ABCI nodes. Customize below parameters up to your usage:\n```bash\n#:$ -l rt_G.large=1: rt_G.large = the ABCI node type (https://abci.ai/en/about_abci/cloud_service.html)\n#:$ -l h_rt=72:00:00: 72 = running time (hours)\nNUM_NODES=2: 2 = number of ABCI nodes\n#:$ -t 1-2: In case of changing the NUM_NODES to X, please change this configuration to '1-X'\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Submit your train job script using submit_train_job.sh. Customize below parameters up to your usage:\n```\nCACHE_DIR=\".cache\"\nqsub -g {group_id} submit_train_job.sh\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Sat, 25 Dec 2021 06:03:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aistairc/kirt_bert_on_abci/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aistairc/kirt_bert_on_abci",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/aistairc/kirt_bert_on_abci/beta/train_job.sh",
+      "https://raw.githubusercontent.com/aistairc/kirt_bert_on_abci/beta/submit_train_job.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We prepare a sample script for training the BERT on the ABCI: train_job.sh, where the training can be performed using multiple GPUs distributed through multiple ABCI nodes. Customize below parameters up to your usage:\n```bash\n#:$ -l rt_G.large=1: rt_G.large = the ABCI node type (https://abci.ai/en/about_abci/cloud_service.html)\n#:$ -l h_rt=72:00:00: 72 = running time (hours)\nNUM_NODES=2: 2 = number of ABCI nodes\n#:$ -t 1-2: In case of changing the NUM_NODES to X, please change this configuration to '1-X'\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The raw text data needs to be separated each sentence per line and each document needs to be separated by one empty line. It should be better to put a white space between the last punctuation and the last word of the sentence.  \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8205941231388895
+      ],
+      "excerpt": "python build_vocab.py -i {path}/single.txt -v {vocab_size} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8316951983178701,
+        0.8010131114030099
+      ],
+      "excerpt": "Step 2: Step 1 will result two files \"spm.model\" and \"spm.vocab\" in the same directory with \"build_vocab.py\" \npython preprocessing.py build-bert-vocab -i spm.vocab \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8310576208329333,
+        0.8142691950866419
+      ],
+      "excerpt": "Generate sub-word tokens from text, using BertTokenizer, and save tokens into _shelf.db binary file.  \npython generate_bert_tokens_grouped_by_length.py --raw_text_dir=data/splitted_raw_text/ --vocab_dir=data/generated/vocab_50k/vocab.txt --output_dir=data/generated/tokens/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python train_on_tokens.py  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aistairc/kirt_bert_on_abci/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [2019] [AIRC-AIST]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ABCI-BERT_BETA",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kirt_bert_on_abci",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aistairc",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aistairc/kirt_bert_on_abci/blob/beta/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 19,
+      "date": "Sat, 25 Dec 2021 06:03:54 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We realize that it's not necessary to put all raw text into one single file because it eliminates the use of multiprocessing. In this version, we recommend the user split their raw text into small files. Our codes will support process these files simultaneously (one process for each file), so we can speed up tokens generating process\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Once we finish generating tokens from multiple small files, we will have the corresponding number of tokens files. We don't have to merge them into one file, just put them all in one folder and train. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this version, we also support training from multiple folders. With the assumption that we may need to train the BERT with samples length of 128 first, and then 256 and 512. Please note that we only support the 2-level directory, it means we have to put all the training data to the second-level subfolders under the root folder, which we defined by parameter --tokens_dir when training. E.g: \n```\n\u251c\u2500\u2500 root_tokens_dir\n\u2502   \u251c\u2500\u2500 tokens_128\n\u2502        \u251c\u2500\u2500 training tokens files ...\n\u2502   \u251c\u2500\u2500 tokens_256\n\u2502        \u251c\u2500\u2500 training tokens files ...\n\u2502   \u251c\u2500\u2500 tokens_512\n|        \u251c\u2500\u2500 training tokens files ...\n```\nWhen training, each tokens subfolder will be trained sequentially with a particular batch-size and number of epochs as well. The list of tokens subfolders needs to be defined by parameter --tokens_dir_list, while the list of batch-sizes and epochs correspond to --batch_size_list and --epochs_list. If we don't define the  --batch_size_list and --epochs_list, all tokens subfolder will be trained with the same batch-size and number of epochs, which are defined by the parameters --training_batch_size and --epochs. An example of configurations is below: \n```\n--tokens_dir_list=tokens_128,tokens_256,tokens_512\n--batch_size_list=32,16,8\n--epochs_list=2,4,6\n```\nWe also support a special mode called various length training. Activate this mode by adding parameter --train_various_length. It's pretty the same with training with multiple folders. The only difference is that we only use one Optimizer/Scheduler during the training process, instead of each Optimizer/Scheduler for each tokens subfolder. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this version, we also support transfer learning from pre-trained BERT models. Please note that, in case of transfer learning, we don't have to build own vocab. We're gonna use the vocab as well as the configuration file of the pre-trained BERT. Configure the parameter --bert_pretrained_model instead of --bert_model\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

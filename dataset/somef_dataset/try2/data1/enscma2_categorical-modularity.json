@@ -1,0 +1,365 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9086892148066392,
+        0.8725171204992882
+      ],
+      "excerpt": "  - Word similarity based on SEMEVAL 2017 word pairs \n  - Bilingual lexicon induction (both English - target language and source language - English) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ENSCMA2/categorical-modularity",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-10T01:51:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-31T00:10:23Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository can be used to take a word embedding model and a list of words labeled with semantic categories, generate embeddings for those words, calculate the general, single-category, and network modularities of the model with respect to the words/categories, and calculate the correlations of those modularities with downstream tasks. Example workflow (for further instructions on how to use each file, refer to subsequent sections in this README as well as the `--help` messages and docstrings in each file described):\n 1. Download and unzip a word embedding model binary. Examples include [these binaries](https://fasttext.cc/docs/en/pretrained-vectors.html) for FastText, [these binaries](https://github.com/facebookresearch/MUSE#download) for MUSE, and [these binaries](https://github.com/jvparidon/subs2vec#downloading-datasets) for subs2vec.\n 2. Obtain a list of words in the language corresponding to the embedding model, formatted in a single-column headerless txt file. See `core/words/dutch.txt` for an example of such a file.\n 3. Obtain a list of category labels corresponding to the word list (i.e. if label n = k in the category list, then word n in the word list belongs to category k), formatted in a single-column headerless csv file. See `core/words/categories_3.csv` for an example of such a file. \n 4. Run one of the `*vector_gen.py` files inside `core` to produce a txt file of vectors corresponding to each word in the word list. For FastText-compatible model binaries such as FastText and subs2vec, use `core/ft_vector_gen.py`. For MUSE-compatible binaries, use `core/muse_vector_gen.py`.\n 5. Run a `*matrices.py` file from `core` to generate an n by n nearest-neighbor matrix for your list of n words. Use `core/ft_matrices.py` for FastText-compatible model binaries and `core/muse_matrices.py` for MUSE-compatible model binaries.\n 6. To calculate the general categorical modularity for your given language/model, run `core/general_modularity.py` using your category labels and the matrix that was generated in your `*matrices.py` run. The results we obtained are in `core/results_general_modularity`, and the labeling scheme is `[level]_[k].csv`, with levels and k values as specified in Sections 4 and 5 of our paper, respectively.\n 7. To calculate unsupervised network modularity, run `core/unsupervised_modularity.py`. The results we obtained are in `core/results_unsupervised_modularity`, labeled `[k].csv`, with k as specified in Section 5 of our paper.\n 8. To calculate single-category modularities, run `single_category/single_category_modularity.py` using your category file and generated matrix file. The results we obtained are in `single_category/data`, labeled the same way the general modularity results are labeled.\n 9. Run the sentiment analysis task:\n   a. Download the English IMDB movie reviews from [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews). \n   b. Turn the csv into a tsv by renaming it in Terminal or in Finder.\n   c. Translate the data into your target language by running `task_movies/movie_data_gen.py`. This will produce a txt file with just the reviews.\n   d. Generate embeddings for each review by passing the aforementioned txt file into one of the `*movie_gen.py` files in `task_movies`. Use `task_movies/ft_movie_gen.py` for FastText-compatible embeddings and `task_movies/muse_movie_gen.py` for MUSE-compatible embeddings.\n   e. Run the analysis task by running `task_movies/movie_task.py`. This will output a txt file with the average accuracy and precision scores over your desired number of trials. Our accuracy and precision results are in `task_movies/results`.\n 10. Run the word similarity task: \n   a. Several example data files are in `task_wordsim/data`. If you would like to freshly translate a data file, use `task_wordsim/wordsim_trans.py`. You can also download data from [here](https://alt.qcri.org/semeval2017/task2/index.php?id=data-and-tools).\n   b. Run one of the `wordsim*data_gen.py` files in `task_wordsim` to generate embeddings for your word pairs.\n   c. Run the similarity task with `task_wordsim/wordsim_task.py`. This will print your average MSE loss over your desired number of trials to the console. Our results are in `task_wordsim/results`.\n 11. Run the bilingual lexicon induction task:\n   a. Obtain data. Several sample files are in `task_bli/data`. The naming convention is `[2-letter source language code]-[2-letter target language code].0-5000.txt` for training data and `[2-letter source language code]-[2-letter target language code].5000-6500.txt` for testing data. If you use custom files, make sure they conform to the formatting specifications listed under the `--help` messages in the `task_bli/translation*data_gen.py` files. Note as well that our runner runs both the to-English and from-English tasks in one go, so make sure to have both sets of files ready.\n   b. Generate word embeddings by running the appropriate `task_bli/translation*data_gen.py` file.\n   c. Run the induction task by running `task_bli/translation_task.py`. This will write a file with both the to-English and from-English average cosine similarities between predicted translations and true translations. Our results are in `task_bli/results`.\n 12. Run steps 1-11 for several languages/models, recording downstream task scores along the way. For each task, compile the performance scores into a single-column csv.\n 13. To calculate the correlation between a set of general or unsupervised modularity scores and a set of downstream performance scores, run `core/correlation.py`. \n 14. To calculate correlations with single-category modularities, run `single_category/single_category_correlation.py`.\n \n ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9865968934117433,
+        0.9497367310545057,
+        0.9153968312666075,
+        0.9499875279435984,
+        0.9737654181784849,
+        0.8877549757846482,
+        0.9627283316894147,
+        0.8437468564507794
+      ],
+      "excerpt": "Categorical modularity is a low-resource intrinsic metric for evaluation of word embeddings. We provide code for the community to: \n- Generate embedding vectors and nearest-neighbor matrices of lists of core words \n- Calculate the following scores for said lists of words: \n  - General categorical modularity with respect to a fixed list of semantic categories \n  - Single-category modularity with respect to a fixed list of semantic categories \n  - Network modularity of emerging categories from the nearest-neighbor graph created by a community detection algorithm \n- Over several language/model pairs, calculate the correlation between any of the above three modularity scores and performance scores on the following downstream tasks: \n  - Sentiment analysis on IMDB movie reviews \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8960603607589651,
+        0.9880989337254988
+      ],
+      "excerpt": "Given a list of words and a .bin or .vec embedding model, you can calculate several modularity metrics using the files in the core directory. Brief descriptions of files and functionalities (further formatting specifications for files and parameters can be found by running the --help command on each file or by consulting the docstring at the top of each code file): \n- core/ft_vector_gen.py: pass in a file containing a list of words and a file containing an embedding model binary and create a file with 300-dimensional embedding vectors of each of the input words. Use for FastText-compatible models (e.g. FastText, subs2vec). The lists of words and categories we used are labeled by language and level in core/words. Usage (with respect to topmost level directory of this repo):  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9421995180097363
+      ],
+      "excerpt": "- core/muse_vector_gen.py: same functionality as core/ft_vectorgen.py, but used for MUSE-compatible models (a different implementation than the FastText library). Additionally asks for a language parameter specification for use in MUSE embedding generation in case a word requires stemming. This language parameter should be specified as the full lowercase name of the language (e.g. english, not en). Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.988871452267341
+      ],
+      "excerpt": "- core/ft_matrices.py: given a list of n words and an embedding model binary, generates a file with an n x n matrix where row i, column j = k represents the fact that word j is the kth-nearest neighbor of word i in the given embedding space. Use this file for FastText-compatible models only. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8552232618924751
+      ],
+      "excerpt": "- core/muse_matrices.py: same functionality as core/ft_matrices.py but for MUSE-compatible model binaries. Usage:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8807156956153006
+      ],
+      "excerpt": "- core/general_modularity.py: calculate general categorical modularity given a list of categories and a matrix as generated by core/ft_matrices.py or core/muse_matrices.py, postprocessed to remove [] characters. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9221166870854791
+      ],
+      "excerpt": "- core/unsupervised_modularity.py: calculate modularity of unsupervised clusters for all categories given a matrix as generated by core/ft_matrices.py or core/muse_matrices.py, postprocessed to remove [] characters. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9810764809230041
+      ],
+      "excerpt": "- core/correlation.py: code that can be used to calculate the Spearman rank correlations of one set of modularity scores(modularity_file) with one set of task performance metrics (downstream_file). See core/data for default files - your inputs should conform to the formatting of these files. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9960893747598465,
+        0.9607287797550472
+      ],
+      "excerpt": "Our paper also explores an extension of categorical modularity to single-category modularity, which we test on each of the 59 categories listed in our paper. The single_category directory contains code that can be used to calculate these single-category modularities and their correlations with downstream task performance. Brief descriptions of files and functionalities: \n- single_category/single_category_modularity.py: given a list of category labels for words and a square matrix of nearest-neighbor relationships among words, calculates single-category modularities for each category and prints results to console. Usage:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298610851170301
+      ],
+      "excerpt": "- single_category/single_category_correlation.py: given a file with modularity scores for a set of categories and a file with performance metrics for a particular tasks, writes an output file with correlations between performance metrics and modularities with respect to each category. See single_category/data/3_2.csv for how the modularity_file should be formatted (we recommend compiling modularities from single_category_modularity.py into a spreadsheet as we did), and see single_categories/movies_accuracy.csv for how the metrics_file should be formatted. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9787904819337432
+      ],
+      "excerpt": "- task_movies/movie_data_gen.py: given a file with data (raw text of movie reviews) and a target language, generates an equivalent dataset translated into the target language. The language name is the full English name of the language (e.g. finnish), while the language code is the 2-letter code (e.g. fi, full listing of codes here). Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8265963334723126
+      ],
+      "excerpt": "- task_movies/ft_movie_gen.py: given a data file with raw movie reviews and a model binary file, produces an output file 300-dimensional embeddings of each review. Use only for FastText-compatible models. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8265963334723126
+      ],
+      "excerpt": "- task_movies/muse_movie_gen.py: given a data file with raw movie reviews and a model binary file, produces an output file 300-dimensional embeddings of each review. Use only for MUSE-compatible models. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9445038141536717
+      ],
+      "excerpt": "- task_movies/movie_task.py: given data in the form of vectors (importantly, assuming the first half are positive and the second half are negative), runs the task of sentiment analysis and outputs mean accuracy and precision over 30 trials. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9655703084153698
+      ],
+      "excerpt": "- task_wordsim/wordsim_ft_data_gen.py: given a list of word pairs and similarity scores, generates a list of 3-dimensional vectors (Euclidean, Manhattan, and cosine distance between the words) as input into the word similarity task. Use for FastText-compatible model binaries only. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Accompanying code for paper on categorical modularity.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/enscma2/categorical-modularity/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 16:04:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ENSCMA2/categorical-modularity/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ENSCMA2/categorical-modularity",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 single_category/single_category_modularity.py --categories_file CATEGORIES_FILE --matrix_file MATRIX_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 single_category/single_category_correlation.py --modularity_file MODULARITY_FILE --metrics_file METRICS_FILE --out_file OUT_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.8868381962314174
+      ],
+      "excerpt": "python3 task_movies/movie_data_gen.py --data_file DATA_FILE --target_language_name TARGE_LANGUAGE_NAME --target_language_code TARGET_LANGUAGE_CODE \n- task_movies/ft_movie_gen.py: given a data file with raw movie reviews and a model binary file, produces an output file 300-dimensional embeddings of each review. Use only for FastText-compatible models. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8868381962314174
+      ],
+      "excerpt": "- task_movies/muse_movie_gen.py: given a data file with raw movie reviews and a model binary file, produces an output file 300-dimensional embeddings of each review. Use only for MUSE-compatible models. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991
+      ],
+      "excerpt": "python3 task_wordsim/wordsim_trans.py --word_file WORD_FILE --source_language --SOURCE_LANGUAGE --target_language TARGET_LANGUAGE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012016983558253
+      ],
+      "excerpt": "- task_wordsim/wordsim_muse_data_gen.py: same functionality as task_wordsim/wordsim_ft_datagen.py but for MUSE-compatible models. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8797238780767174
+      ],
+      "excerpt": "- task_wordsim/wordsim_task.py: runs the word similarity task given the data (3D vectors) file, the label file, and the model name. Outputs mean MSE loss over 30 trials. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8233135926451185
+      ],
+      "excerpt": "- task_bli/translation_ft_data_gen.py: given word pair training/testing files in both directions and model binaries, generates 300-dimensional embeddings of all the words (8 files total - 4-4 train-test split, 4-4 from-to split, 4-4 English-non-English split). Use for FastText-compatible model binaries only. Usage: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.872515011892486
+      ],
+      "excerpt": "- task_bli/translation_muse_data_gen.py: same functionality as task_bli/translation_ft_data_gen.py but for MUSE-compatible model binaries. Usage: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ENSCMA2/categorical-modularity/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Creative Commons Zero v1.0 Universal",
+      "url": "https://api.github.com/licenses/cc0-1.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Creative Commons Legal Code\\n\\nCC0 1.0 Universal\\n\\n    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\\n    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\\n    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\\n    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\\n    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\\n    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\\n    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\\n    HEREUNDER.\\n\\nStatement of Purpose\\n\\nThe laws of most jurisdictions throughout the world automatically confer\\nexclusive Copyright and Related Rights (defined below) upon the creator\\nand subsequent owner(s) (each and all, an \"owner\") of an original work of\\nauthorship and/or a database (each, a \"Work\").\\n\\nCertain owners wish to permanently relinquish those rights to a Work for\\nthe purpose of contributing to a commons of creative, cultural and\\nscientific works (\"Commons\") that the public can reliably and without fear\\nof later claims of infringement build upon, modify, incorporate in other\\nworks, reuse and redistribute as freely as possible in any form whatsoever\\nand for any purposes, including without limitation commercial purposes.\\nThese owners may contribute to the Commons to promote the ideal of a free\\nculture and the further production of creative, cultural and scientific\\nworks, or to gain reputation or greater distribution for their Work in\\npart through the use and efforts of others.\\n\\nFor these and/or other purposes and motivations, and without any\\nexpectation of additional consideration or compensation, the person\\nassociating CC0 with a Work (the \"Affirmer\"), to the extent that he or she\\nis an owner of Copyright and Related Rights in the Work, voluntarily\\nelects to apply CC0 to the Work and publicly distribute the Work under its\\nterms, with knowledge of his or her Copyright and Related Rights in the\\nWork and the meaning and intended legal effect of CC0 on those rights.\\n\\n1. Copyright and Related Rights. A Work made available under CC0 may be\\nprotected by copyright and related or neighboring rights (\"Copyright and\\nRelated Rights\"). Copyright and Related Rights include, but are not\\nlimited to, the following:\\n\\n  i. the right to reproduce, adapt, distribute, perform, display,\\n     communicate, and translate a Work;\\n ii. moral rights retained by the original author(s) and/or performer(s);\\niii. publicity and privacy rights pertaining to a person\\'s image or\\n     likeness depicted in a Work;\\n iv. rights protecting against unfair competition in regards to a Work,\\n     subject to the limitations in paragraph 4(a), below;\\n  v. rights protecting the extraction, dissemination, use and reuse of data\\n     in a Work;\\n vi. database rights (such as those arising under Directive 96/9/EC of the\\n     European Parliament and of the Council of 11 March 1996 on the legal\\n     protection of databases, and under any national implementation\\n     thereof, including any amended or successor version of such\\n     directive); and\\nvii. other similar, equivalent or corresponding rights throughout the\\n     world based on applicable law or treaty, and any national\\n     implementations thereof.\\n\\n2. Waiver. To the greatest extent permitted by, but not in contravention\\nof, applicable law, Affirmer hereby overtly, fully, permanently,\\nirrevocably and unconditionally waives, abandons, and surrenders all of\\nAffirmer\\'s Copyright and Related Rights and associated claims and causes\\nof action, whether now known or unknown (including existing as well as\\nfuture claims and causes of action), in the Work (i) in all territories\\nworldwide, (ii) for the maximum duration provided by applicable law or\\ntreaty (including future time extensions), (iii) in any current or future\\nmedium and for any number of copies, and (iv) for any purpose whatsoever,\\nincluding without limitation commercial, advertising or promotional\\npurposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each\\nmember of the public at large and to the detriment of Affirmer\\'s heirs and\\nsuccessors, fully intending that such Waiver shall not be subject to\\nrevocation, rescission, cancellation, termination, or any other legal or\\nequitable action to disrupt the quiet enjoyment of the Work by the public\\nas contemplated by Affirmer\\'s express Statement of Purpose.\\n\\n3. Public License Fallback. Should any part of the Waiver for any reason\\nbe judged legally invalid or ineffective under applicable law, then the\\nWaiver shall be preserved to the maximum extent permitted taking into\\naccount Affirmer\\'s express Statement of Purpose. In addition, to the\\nextent the Waiver is so judged Affirmer hereby grants to each affected\\nperson a royalty-free, non transferable, non sublicensable, non exclusive,\\nirrevocable and unconditional license to exercise Affirmer\\'s Copyright and\\nRelated Rights in the Work (i) in all territories worldwide, (ii) for the\\nmaximum duration provided by applicable law or treaty (including future\\ntime extensions), (iii) in any current or future medium and for any number\\nof copies, and (iv) for any purpose whatsoever, including without\\nlimitation commercial, advertising or promotional purposes (the\\n\"License\"). The License shall be deemed effective as of the date CC0 was\\napplied by Affirmer to the Work. Should any part of the License for any\\nreason be judged legally invalid or ineffective under applicable law, such\\npartial invalidity or ineffectiveness shall not invalidate the remainder\\nof the License, and in such case Affirmer hereby affirms that he or she\\nwill not (i) exercise any of his or her remaining Copyright and Related\\nRights in the Work or (ii) assert any associated claims and causes of\\naction with respect to the Work, in either case contrary to Affirmer\\'s\\nexpress Statement of Purpose.\\n\\n4. Limitations and Disclaimers.\\n\\n a. No trademark or patent rights held by Affirmer are waived, abandoned,\\n    surrendered, licensed or otherwise affected by this document.\\n b. Affirmer offers the Work as-is and makes no representations or\\n    warranties of any kind concerning the Work, express, implied,\\n    statutory or otherwise, including without limitation warranties of\\n    title, merchantability, fitness for a particular purpose, non\\n    infringement, or the absence of latent or other defects, accuracy, or\\n    the present or absence of errors, whether or not discoverable, all to\\n    the greatest extent permissible under applicable law.\\n c. Affirmer disclaims responsibility for clearing rights of other persons\\n    that may apply to the Work or any use thereof, including without\\n    limitation any person\\'s Copyright and Related Rights in the Work.\\n    Further, Affirmer disclaims responsibility for obtaining any necessary\\n    consents, permissions or other rights required for any use of the\\n    Work.\\n d. Affirmer understands and acknowledges that Creative Commons is not a\\n    party to this document and has no duty or obligation with respect to\\n    this CC0 or use of the Work.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Categorical Modularity: A Tool For Evaluating Word Embeddings",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "categorical-modularity",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ENSCMA2",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ENSCMA2/categorical-modularity/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " - [Python 3.6+](https://www.python.org/downloads/)\n - [scipy](https://www.scipy.org/)\n - [numpy](https://numpy.org/)\n - [nltk](https://www.nltk.org/)\n - [fasttext](https://fasttext.cc/)\n - [google_trans_new](https://pypi.org/project/google-trans-new/)\n - [scikit-learn](https://scikit-learn.org/stable/)\n - [networkx](https://networkx.org/)\n \n ",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Our paper presents moderate to strong correlations of categorical modularity with four downstream tasks. We provide code to reproduce these tasks in the `task_bli`, `task_wordsim`, and `task_movies` directories.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 16:04:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository can be used to take a word embedding model and a list of words labeled with semantic categories, generate embeddings for those words, calculate the general, single-category, and network modularities of the model with respect to the words/categories, and calculate the correlations of those modularities with downstream tasks. Example workflow (for further instructions on how to use each file, refer to subsequent sections in this README as well as the `--help` messages and docstrings in each file described):\n 1. Download and unzip a word embedding model binary. Examples include [these binaries](https://fasttext.cc/docs/en/pretrained-vectors.html) for FastText, [these binaries](https://github.com/facebookresearch/MUSE#download) for MUSE, and [these binaries](https://github.com/jvparidon/subs2vec#downloading-datasets) for subs2vec.\n 2. Obtain a list of words in the language corresponding to the embedding model, formatted in a single-column headerless txt file. See `core/words/dutch.txt` for an example of such a file.\n 3. Obtain a list of category labels corresponding to the word list (i.e. if label n = k in the category list, then word n in the word list belongs to category k), formatted in a single-column headerless csv file. See `core/words/categories_3.csv` for an example of such a file. \n 4. Run one of the `*vector_gen.py` files inside `core` to produce a txt file of vectors corresponding to each word in the word list. For FastText-compatible model binaries such as FastText and subs2vec, use `core/ft_vector_gen.py`. For MUSE-compatible binaries, use `core/muse_vector_gen.py`.\n 5. Run a `*matrices.py` file from `core` to generate an n by n nearest-neighbor matrix for your list of n words. Use `core/ft_matrices.py` for FastText-compatible model binaries and `core/muse_matrices.py` for MUSE-compatible model binaries.\n 6. To calculate the general categorical modularity for your given language/model, run `core/general_modularity.py` using your category labels and the matrix that was generated in your `*matrices.py` run. The results we obtained are in `core/results_general_modularity`, and the labeling scheme is `[level]_[k].csv`, with levels and k values as specified in Sections 4 and 5 of our paper, respectively.\n 7. To calculate unsupervised network modularity, run `core/unsupervised_modularity.py`. The results we obtained are in `core/results_unsupervised_modularity`, labeled `[k].csv`, with k as specified in Section 5 of our paper.\n 8. To calculate single-category modularities, run `single_category/single_category_modularity.py` using your category file and generated matrix file. The results we obtained are in `single_category/data`, labeled the same way the general modularity results are labeled.\n 9. Run the sentiment analysis task:\n   a. Download the English IMDB movie reviews from [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews). \n   b. Turn the csv into a tsv by renaming it in Terminal or in Finder.\n   c. Translate the data into your target language by running `task_movies/movie_data_gen.py`. This will produce a txt file with just the reviews.\n   d. Generate embeddings for each review by passing the aforementioned txt file into one of the `*movie_gen.py` files in `task_movies`. Use `task_movies/ft_movie_gen.py` for FastText-compatible embeddings and `task_movies/muse_movie_gen.py` for MUSE-compatible embeddings.\n   e. Run the analysis task by running `task_movies/movie_task.py`. This will output a txt file with the average accuracy and precision scores over your desired number of trials. Our accuracy and precision results are in `task_movies/results`.\n 10. Run the word similarity task: \n   a. Several example data files are in `task_wordsim/data`. If you would like to freshly translate a data file, use `task_wordsim/wordsim_trans.py`. You can also download data from [here](https://alt.qcri.org/semeval2017/task2/index.php?id=data-and-tools).\n   b. Run one of the `wordsim*data_gen.py` files in `task_wordsim` to generate embeddings for your word pairs.\n   c. Run the similarity task with `task_wordsim/wordsim_task.py`. This will print your average MSE loss over your desired number of trials to the console. Our results are in `task_wordsim/results`.\n 11. Run the bilingual lexicon induction task:\n   a. Obtain data. Several sample files are in `task_bli/data`. The naming convention is `[2-letter source language code]-[2-letter target language code].0-5000.txt` for training data and `[2-letter source language code]-[2-letter target language code].5000-6500.txt` for testing data. If you use custom files, make sure they conform to the formatting specifications listed under the `--help` messages in the `task_bli/translation*data_gen.py` files. Note as well that our runner runs both the to-English and from-English tasks in one go, so make sure to have both sets of files ready.\n   b. Generate word embeddings by running the appropriate `task_bli/translation*data_gen.py` file.\n   c. Run the induction task by running `task_bli/translation_task.py`. This will write a file with both the to-English and from-English average cosine similarities between predicted translations and true translations. Our results are in `task_bli/results`.\n 12. Run steps 1-11 for several languages/models, recording downstream task scores along the way. For each task, compile the performance scores into a single-column csv.\n 13. To calculate the correlation between a set of general or unsupervised modularity scores and a set of downstream performance scores, run `core/correlation.py`. \n 14. To calculate correlations with single-category modularities, run `single_category/single_category_correlation.py`.\n \n ",
+      "technique": "Header extraction"
+    }
+  ]
+}

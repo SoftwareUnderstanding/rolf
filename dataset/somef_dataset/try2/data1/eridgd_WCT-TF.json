@@ -1,0 +1,350 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Many thanks to the authors Yijun Li & collaborators at UC Merced/Adobe/NVIDIA for their work that inspired this fun project. After building the first version of this TF implementation I discovered their [official Torch implementation](https://github.com/Yijunmaverick/UniversalStyleTransfer) that I referred to in tweaking the WCT op to be more stable.\n\nThanks also to Xun Huang for the normalized VGG and [Torch version of CORAL](https://github.com/xunhuang1995/AdaIN-style/blob/master/lib/utils.lua).\n\nWindows is now supported thanks to a [torchfile compatibility fix by @xdaimon](https://github.com/bshillingford/python-torchfile/pull/13).\n\nDocker support was graciously [provided by @bryant1410](https://github.com/eridgd/WCT-TF/pull/7).\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1703.06868",
+      "https://arxiv.org/abs/1612.04337",
+      "https://arxiv.org/abs/1703.06868",
+      "https://arxiv.org/abs/1612.01939"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "[x] Video stylization \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eridgd/WCT-TF",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-09-23T23:44:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T08:08:06Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9759400246073064,
+        0.9776164505186363,
+        0.9328281340426102
+      ],
+      "excerpt": "This is a TensorFlow/Keras implementation of Universal Style Transfer via Feature Transforms by Li et al. The core architecture is an auto-encoder trained to reconstruct from intermediate layers of a pre-trained VGG19 image classification net. Stylization is accomplished by matching the statistics of content/style image features through the Whiten-Color Transform (WCT), which is implemented here in both TensorFlow and NumPy. No style images are used for training, and the WCT allows for 'universal' style transfer for arbitrary content/style image pairs. \nAs in the original paper, reconstruction decoders for layers reluX_1 (X=1,2,3,4,5) are trained separately and then hooked up in a multi-level stylization pipeline in a single graph. To reduce memory usage, a single VGG encoder is loaded up to the deepest relu layer and is shared by all decoders. \nSee here for the official Torch implementation and here for a PyTorch version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.938081447555894
+      ],
+      "excerpt": "There are also a couple of keyboard shortcuts: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9023924693669474
+      ],
+      "excerpt": "a  Toggle AdaIN as transform instead of WCT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503020298527758
+      ],
+      "excerpt": "Style-swap is another style transfer approach from this paper that works by substituting patches in a content encoding with nearest-neighbor patches in a style encoding. As in the official Torch WCT, I have included this as an option for the relu5_1 layer where the feature encodings are small enough for this to be computationally feasible. This option may enhance the stylization effect by transferring local structure from the style image in addition to the overall style. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9293987766506776,
+        0.8639956724260643
+      ],
+      "excerpt": "Note how eyes and noses are transferred to semantically similar locations. Because the visual structure is reconstructed using features found in the style image, regions in the content without style counterparts may have odd replacements (like tongues in the first image).  \nThe style-swap procedure implemented here is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8721079474837906
+      ],
+      "excerpt": "Use the (normalized) style patches as conv2d filters to convolve with each spatial patch region in the content encoding. This is an efficient way to compute cross-correlation between all content/style patch pairs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8310976167710188
+      ],
+      "excerpt": "Apply WCT coloring to the style-swapped encoding to add style. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8918705866827129
+      ],
+      "excerpt": "--ss-patch-size  Patch size for the convolution kernel. This is the size of patches in the feature encoding, not the full size image, so small values like 3 or 5 will typically work well. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9859791444179924,
+        0.8422402908876654,
+        0.9788402776928475,
+        0.964138534616722,
+        0.9699892379623407
+      ],
+      "excerpt": "This repo is based on my implementation of Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization by Huang et al. The AdaIN op is included here as an alternative transform to WCT. It generally requires multiple stylization passes to achieve a comparable effect. \nThe stylization pipeline can be hooked up with decoders in any order. For instance, to reproduce the (sub-optimal) reversed fine-to-coarse pipeline in figure 5(d) from the original paper use the option --relu-targets relu1_1 relu2_1 relu3_1 relu4_1 relu5_1 in webcam.py/stylize.py.  \ncoral.py implements CORellation ALignment to transfer colors from the content image to the style image in order to preserve colors in the stylized output. The default method uses NumPy and there is also a commented out version in PyTorch that is slightly faster. \nWCT involves two tf.svd ops, which as of TF r1.4 has a GPU implementation. However, this appears to be 2-4x slower than the CPU version and so is explicitly executed on /cpu:0 in ops.py. See here for an interesting discussion of the issue. \nThere is an open issue where for some ill-conditioned matrices the CPU version of tf.svd will ungracefully segfault. Adding a small epsilon to the covariance matrices appears to avoid this without visibly affecting the results. If this issue does occur, there is a commented block that uses np.linalg.svd through tf.py_func. This is stable but incurs a 30%+ performance penalty. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8814762750814558
+      ],
+      "excerpt": "[ ] Spatial control/masking \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TensorFlow/Keras implementation of \"Universal Style Transfer via Feature Transforms\" from https://arxiv.org/abs/1705.08086",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eridgd/WCT-TF/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 75,
+      "date": "Wed, 29 Dec 2021 22:00:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/eridgd/WCT-TF/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "eridgd/WCT-TF",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/eridgd/WCT-TF/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/eridgd/WCT-TF/master/models/download_models.sh",
+      "https://raw.githubusercontent.com/eridgd/WCT-TF/master/models/download_vgg.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.871231963086951
+      ],
+      "excerpt": "Download VGG19 model: bash models/download_vgg.sh \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.927306977873765,
+        0.9029435881619872
+      ],
+      "excerpt": "  <img src='samples/gilbert.jpg' width='350px'> \n  <img src='samples/gilbert_stylize.png' width='768px'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8026996287767235
+      ],
+      "excerpt": "w  Write frame to a .png \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.841418032354307,
+        0.8144772183955952
+      ],
+      "excerpt": "Download VGG19 model: bash models/download_vgg.sh \nTrain one decoder per relu target layer. E.g. to train a decoder to reconstruct from relu3_1: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9029435881619872
+      ],
+      "excerpt": "  <img src='samples/sullivan_style_swap.png' width='768px'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228,
+        0.8115933767692699
+      ],
+      "excerpt": "For example: \npython webcam.py --checkpoints models/relu5_1 models/relu4_1 models/relu3_1 models/relu2_1 models/relu1_1 --relu-targets relu5_1 relu4_1 relu3_1 relu2_1 relu1_1 --style-size 512 --alpha 0.8 --style-path /path/to/styleimgs --swap5 --ss-patch-size 3 --ss-stride 1 --ss-alpha .7 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/eridgd/WCT-TF/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Evan Davis\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Universal Style Transfer via Feature Transforms with TensorFlow & Keras",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "WCT-TF",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "eridgd",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eridgd/WCT-TF/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python 3.x\n* tensorflow 1.2.1+\n* keras 2.0.x\n* ~~torchfile~~ Modified torchfile.py is included that is compatible with Windows \n* scikit-image\n\nOptionally:\n\n* OpenCV with contrib modules (for `webcam.py`)\n  * MacOS install http://www.pyimagesearch.com/2016/12/05/macos-install-opencv-3-and-python-3-5/\n  * Linux install http://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/\n* ffmpeg (for video stylization)\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Download VGG19 model: `bash models/download_vgg.sh`\n\n2. Download checkpoints for the five decoders: `bash models/download_models.sh`\n\n3. Obtain style images. Two good sources are the [Wikiart dataset](https://www.kaggle.com/c/painter-by-numbers) and [Describable Textures Dataset](https://www.robots.ox.ac.uk/~vgg/data/dtd/).\n\n4. Run stylization for live video with `webcam.py` or for images with `stylize.py`. Both scripts share the same required arguments. For instance, to run a multi-level stylization pipeline that goes from relu5_1 -> relu4_1 -> relu3_1 -> relu2_1 -> relu1_1:\n\n   `python webcam.py --checkpoints models/relu5_1 models/relu4_1 models/relu3_1 models/relu2_1 models/relu1_1 --relu-targets relu5_1 relu4_1 relu3_1 relu2_1 relu1_1 --style-size 512 --alpha 0.8 --style-path /path/to/styleimgs` \n\nThe args `--checkpoints` and `--relu-targets` specify space-delimited lists of decoder checkpoint folders and corresponding relu layer targets. The order of relu targets determines the stylization pipeline order, where the output of one encoder/decoder becomes the input for the next. Specifying one checkpoint/relu target will perform single-level stylization.\n\nOther args to take note of:\n\n* `--style-path`  Folder of style images or a single style image \n* `--style-size`  Resize small side of style image to this\n* `--crop-size`  If specified center-crop a square of this size from the (resized) style image\n* `--alpha`  [0,1] blending of content features + whiten-color transformed features to control degree of stylization\n* `--passes`  ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* `--source`  Specify camera input ID, default 0\n* `--width` and `--height`  Set the size of camera frames\n* `--video-out`  Write stylized frames to .mp4 out path\n* `--fps`  Frames Per Second for video out\n* `--scale`  Resize content images by this factor before stylizing\n* `--keep-colors`  Apply CORAL transform to preserve colors of content\n* `--device`  Device to perform compute on, default `/gpu:0`\n* `--concat`  Append the style image to the stylized output\n* `--noise`  Generate textures from random noise image instead of webcam\n* `--random`  Load a new random image every ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Download VGG19 model: `bash models/download_vgg.sh`\n\n2. Download checkpoints for the five decoders: `bash models/download_models.sh`\n\n3. Obtain style images and save them in a new folder `images` in the repository. Two good sources are the [Wikiart dataset](https://www.kaggle.com/c/painter-by-numbers) and [Describable Textures Dataset](https://www.robots.ox.ac.uk/~vgg/data/dtd/).\n\n4. Install [nvidia-docker](https://github.com/NVIDIA/nvidia-docker).\n\n5. To run the webcam example:\n\n```shell\nnvidia-docker build -t wct-tf . #: It will take several minutes.\nxhost +local:root\nnvidia-docker run \\\n  -ti \\\n  --rm \\\n  -v $PWD/models:/usr/src/app/models \\\n  -v $PWD/images:/usr/src/app/images \\\n  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \\\n  -e QT_X11_NO_MITSHM=1 \\\n  -e DISPLAY \\\n  --device=/dev/video0:/dev/video0 \\\n  wct-tf\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 309,
+      "date": "Wed, 29 Dec 2021 22:00:48 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

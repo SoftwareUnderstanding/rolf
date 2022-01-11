@@ -1,0 +1,274 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1508.07909 and source code: https://github.com/rsennrich/subword-nmt <br>\n\nThe method involves generating subwords from our corpus in an unsupervised learning and use them to replace words in a text. This allows to represent various alternations of the same word with one subword therefore decrease number of unique words in a corpus while keeping the adequate meaning. \n\nDepending on how many subwords is generated to transform orginal text, the created subwords are more or less atomic. We control number of subwords with hyperparameter _symbols_.  \n\nThe example of results for diffrent number of _symbols_:\n\n**original:** _pewnie macie same pytania nie potraficie wymyslic nowych_    \n<br>\nfor 10000 symbols</t>->  _pewnie macie same pytania nie potrafi@@ cie wymysli@@ c nowych_ \n<br>\nfor 5000 symbols</t>->  _pewnie macie same pytania nie potrafi@@ cie wymysli@@ c now@@ ych_\n<br>\nfor 1000 symbols</t>->  _pewnie macie sa@@ me pyta@@ nia nie po@@ trafi@@ cie wy@@ mysli@@ c now@@ ych_\n<br>\nfor 500 symbols</t>->  _pewnie ma@@ cie sa@@ m@@ e pyta@@ nia nie po@@ tra@@ fi@@ cie wy@@ mys@@ li@@ c now@@ ych_\n\n@@ is used as separator for subwords.<br>\nWe see, that the less subwords we use, the more atomic they have to be to transform given corpus.\nAs we see, the value of hyperparameter is crucial for final result.\n\nHere are more examples for a subword **'wymysli@@'**. It replaces diffrent alternations of the same word.\n\n**o - original** <br>\n**t - transformed**\n\n**o** - > _ej sluchajcie zajebistego **wymyslilam** nnjaki najlepszy argument bonnie pamietnikow wampirow nnbo nnie_ <br>\n**t** - > _ej sluchajcie zajebi@@ stego **wymysli@@** lam nn@@ jaki najlepszy argument bo@@ nnie pamie@@ t@@ nikow wa@@ mpi@@ row nn@@ bo nnie_\n\n**o** - > _komentarz raz slyszac trybuny zastanawiam **wymyslil** mecze pn obejrzal choc_ <br>\n**t** - > _komentarz raz slysz@@ ac trybu@@ ny zastanawiam **wymysli@@** l mecze pn obejrz@@ al choc_\n\n**o** - > _**wymyslicie** wazeliniarze_ <br>\n**t** - > _**wymysli@@** cie wazeli@@ nia@@ rze_\n\n**o** - > _prosty przepis **wymyslili** karakan wyglada mial pelne pieluchomajtki_ <br>\n**t** - > _prosty przepis **wymysli@@** li kara@@ kan wyglada mial pelne pie@@ lu@@ cho@@ maj@@ tki_\n\nTo see the code and details see `02SubwordsAndEmbeddings.ipynb`\n\n### Results\n\nTo measure the impact of preprocessing data with Subword Units. <br> \nI proprocessed text to TfidfVectorizer and used Logistic Regression as reference model. I was comparing orginal dataset to dataset transformed with subwords. I used f1-score as a performance metric.\n\nI received performance on original dataset **f1-score = 0.33** compared to **f1-score = 0.39** on dataset transformed with subword. This accounts for **17% improvement** in favour of subwords units.\n\nBelow Receiver Operating Characteristic (ROC"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9966020978665454
+      ],
+      "excerpt": "If you wish to dive into details, here is the original paper: https://arxiv.org/abs/1508.07909 and source code: https://github.com/rsennrich/subword-nmt <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9349788254008606
+      ],
+      "excerpt": "for 500 symbols</t>->  pewnie ma@@ cie sa@@ m@@ e pyta@@ nia nie po@@ tra@@ fi@@ cie wy@@ mys@@ li@@ c now@@ ych \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "t - > ej sluchajcie zajebi@@ stego wymysli@@ lam nn@@ jaki najlepszy argument bo@@ nnie pamie@@ t@@ nikow wa@@ mpi@@ row nn@@ bo nnie \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9747466821846071
+      ],
+      "excerpt": "t - > prosty przepis wymysli@@ li kara@@ kan wyglada mial pelne pie@@ lu@@ cho@@ maj@@ tki \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ksulima/Unsupervised-method-to-NPL-Polish-language",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-05T18:43:34Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-01T22:02:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is dedicated to unsupervised methods of text data transformation. The representation of text in such transformed form is inherent part of Natural Language Processing (NLP) and allows to consume unstructured data by various deep learning algorithms.\n\nIf NLP is a new term for you and sounds a bit mysterious, Yoav Goldberg in his [book](https://www.amazon.com/Language-Processing-Synthesis-Lectures-Technologies/dp/1627052984) describes it as:\n\n>_Natural language processing (NLP) is a collective term referring to automatic computational processing of human languages. This includes both algorithms that take human-produced text as input, and algorithms that produce natural looking text as outputs._\n\nNLP embraces wide range of tasks e.g. named entity recognition, sentiment analysis, automatic summarization, natural language generation and many more. Each one is a subject for separate project and could be thoroughly studied. \n\n\nTwo tested methods in this project are **Unsupervised Word Segmentation into Subword Units** and **GloVe embeddings trained on our own corpus**.\n\nI intentionally choose Polish language text to be analyzed, what I elaborate below, but be aware that the methods used are applicable to any language and text data.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9852821557190533,
+        0.9182567927655492
+      ],
+      "excerpt": "Dataset comes from PolEval competition. It contains tweets collected from openly available Twitter discussions. Original goal is to distinguish between normal/non-harmful tweets and tweets that contain any kind of harmful information. This includes cyberbullying, hate speech, personal threats, accumulation of vulgarities, profane language and related phenomena.  \nExample of tweets with normal content:<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9182567927655492
+      ],
+      "excerpt": "Example of tweets with harmful content:<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9980847477225374,
+        0.9923180270566807,
+        0.8847404095392981
+      ],
+      "excerpt": "The grammar of the Polish language is characterized by a high degree of inflection, and has relatively free word order. There are no articles, and there is frequent dropping of subject pronouns. Distinctive features include the different treatment of masculine personal nouns in the plural, and the complex grammar of numerals and quantifiers. \nThe morphology of the Polish language is highly complex. Alternations affects nouns, adjectives, verbs, and other parts of speech.  \nTo give you an example let's list all possibilities of some word in two languages:<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9962012146171034,
+        0.9789187274583974,
+        0.9478850264549705,
+        0.9370594427361372,
+        0.9896909286138724
+      ],
+      "excerpt": "Syntax is also not trivial. Polish is a synthetic language, it is possible to move words around in the sentence, which often leads to different interpretations of the meaning. \nPolish verbs have the grammatical category of aspect. Each verb is either imperfective, meaning that it denotes continuous or habitual events, or perfective, meaning that it denotes single completed events. \nAdjectives agree with the noun, they modify in terms of gender, number and case.  \nThere are various types of sentence in Polish that do not have subjects e.g. sentences formed from certain verbs that can appear without a subject, corresponding to an English impersonal \"it\", as in pada\u0142o (\"it was raining/snowing\"). \nOne of the possible solution to deal with complex polish morphology is to transform our corpus to be represented with subwords. The idea originally comes from neural machine translation and helps to resolve the problem of rare words.<br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9830616136634193,
+        0.9937722652062012,
+        0.9316206272709318
+      ],
+      "excerpt": "The method involves generating subwords from our corpus in an unsupervised learning and use them to replace words in a text. This allows to represent various alternations of the same word with one subword therefore decrease number of unique words in a corpus while keeping the adequate meaning.  \nDepending on how many subwords is generated to transform orginal text, the created subwords are more or less atomic. We control number of subwords with hyperparameter symbols.   \nThe example of results for diffrent number of symbols: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9627306253564691,
+        0.9564582017844221,
+        0.9171135428034781,
+        0.9009107064174886
+      ],
+      "excerpt": "@@ is used as separator for subwords.<br> \nWe see, that the less subwords we use, the more atomic they have to be to transform given corpus. \nAs we see, the value of hyperparameter is crucial for final result. \nHere are more examples for a subword 'wymysli@@'. It replaces diffrent alternations of the same word. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9209874315218095,
+        0.974938457724283,
+        0.8619844778518725,
+        0.9391759902534368
+      ],
+      "excerpt": "To see the code and details see 02SubwordsAndEmbeddings.ipynb \nTo measure the impact of preprocessing data with Subword Units. <br>  \nI proprocessed text to TfidfVectorizer and used Logistic Regression as reference model. I was comparing orginal dataset to dataset transformed with subwords. I used f1-score as a performance metric. \nI received performance on original dataset f1-score = 0.33 compared to f1-score = 0.39 on dataset transformed with subword. This accounts for 17% improvement in favour of subwords units. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9874534529988832,
+        0.9735259922012095,
+        0.8898504016119938
+      ],
+      "excerpt": "The next method we use is GloVe. GloVe stands for Global Vectors for Word Representation. It is an unsupervised learning algorithm for obtaining vector representations for words. I'm not going to explain thoroughly the method, as it's well described by authors https://nlp.stanford.edu/projects/glove/  \nWhen you work with english text data, there are well pretrained publicly available embeddings and applying then often brings good results. For text data in polish language,  you rather need to train embeddings on your own corpus, as such a pretrained vector representations for polish words are not yet available. <br> \nThe important thing is also that when you try to resolve some specific problem, or data you use has some specific context, training your own embeddings is better approach. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9855895759624923,
+        0.8226525502478987,
+        0.8301808959552779
+      ],
+      "excerpt": "The GloVe model is trained on the non-zero entries of a global word-word co-occurrence matrix, which tabulates how frequently words co-occur with one another in a given corpus. Populating this matrix requires a single pass through the entire corpus to collect the statistics. For large corpora, this pass can be computationally expensive, but it is a one-time up-front cost. \nCore GloVe embeddings \nThe implementation is presented in 02SubwordsAndEmbeddings.ipynb.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ksulima/Unsupervised-method-to-NPL-Polish-language/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 23:30:08 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ksulima/Unsupervised-method-to-NPL-Polish-language/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ksulima/Unsupervised-method-to-NPL-Polish-language",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ksulima/Unsupervised-method-to-NPL-Polish-language/master/01TextCleaning.ipynb",
+      "https://raw.githubusercontent.com/ksulima/Unsupervised-method-to-NPL-Polish-language/master/04LSTM.ipynb",
+      "https://raw.githubusercontent.com/ksulima/Unsupervised-method-to-NPL-Polish-language/master/02SubwordsAndEmbeddings.ipynb",
+      "https://raw.githubusercontent.com/ksulima/Unsupervised-method-to-NPL-Polish-language/master/03DataSplitAndModelSubwords.ipynb",
+      "https://raw.githubusercontent.com/ksulima/Unsupervised-method-to-NPL-Polish-language/master/03DataSplitAndModelBaseline.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you wish to run code yourself, the easiest way is to use **Google Colab**. It provides ready to use enviroment with free GPU, python, keras and all packages already configured to run this code.\n\nHere's how you can use it:\n\n1. Open [https://colab.research.google.com](https://colab.research.google.com) click **Sign in** in the upper right corner, use your Google credentials to sign in.\n2. Click **GITHUB** tab, paste https://github.com/ksulima/Unsupervised-method-to-NPL-Polish-language and press Enter\n3. Choose the notebook you want to open, e.g. 01TextCleaning.ipynb\n4. Click **File -> Save a copy in Drive...** to save your progress in Google Drive\n5. If you need a GPU, click **Runtime -> Change runtime type** and select **GPU** in Hardware accelerator box\n6. Download dataset from my [google drive](https://drive.google.com/drive/folders/1F41MZVPitnya9xE4goWDpw_wVHqqNxLG) or original source (described in paragraph Dataset) and upload it to your google drive. Files should be in directory according to **01TextCleaning.ipynb.**\n\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ksulima/Unsupervised-method-to-NPL-Polish-language/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Unsupervised methods to NLP Polish language",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Unsupervised-method-to-NPL-Polish-language",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ksulima",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ksulima/Unsupervised-method-to-NPL-Polish-language/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 23:30:08 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

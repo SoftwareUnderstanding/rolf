@@ -1,0 +1,302 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.07698"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [InsightFace mxnet](https://github.com/deepinsight/insightface)\n2. [InsightFace : Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/abs/1801.07698)\n3. [InsightFace_TF](https://raw.githubusercontent.com/auroua/InsightFace_TF)\n4. [Batch Renormalization](https://arxiv.org/pdf/1702.03275.pdf)\n5. [Group Normalization](https://arxiv.org/pdf/1803.08494.pdf)\n6. [Multi GPU Central Storage Strategy](https://www.tensorflow.org/api_docs/python/tf/distribute/experimental/CentralStorageStrategy)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dmonterom/face_recognition_TF2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-06-21T16:49:48Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-24T05:04:02Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9815020352751926,
+        0.9036414014215624,
+        0.9690468427522217
+      ],
+      "excerpt": "The aim of this project is to train a state of art face recognizer using TensorFlow 2.0. The architecture chosen is a modified version of ResNet50 and the loss function used is ArcFace, both originally developed by deepinsight in mxnet. \nThe dataset used for training is the ~~CASIA-Webface~~ MS1M-ArcFace dataset used in insightface, and it is available their dataset zoo. The images are aligned using mtcnn and cropped to 112x112. \nThe results of the training are evaluated with lfw, cfp_ff, cfp_fp and age_db30, using the same metrics as deepinsight. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9053029669948085,
+        0.8590255470394756,
+        0.8267296518540154
+      ],
+      "excerpt": "UPDATE Added Batch Renormalization and Group Normalization for training using smaller batches. \nUPDATE Added regularization loss decay coefficient for reducing the impact of the regularization loss when the inference loss becomes smaller. \nUPDATE Added multi gpu training code. It uses the experimental central storage strategy, which stores all the variables in the CPU and allows increasing the batch size on each GPU (128 for each TESLA P100). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8976127455368083
+      ],
+      "excerpt": "The model can be evaluated using the lfw, cfp_ff, cfp_fp and age_db30 databases. The metrics are the same used in insightface. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8473438442472219
+      ],
+      "excerpt": "| model C | ms1m |batch renormalization|uncontrolled|384|3|model c| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8960257517470183,
+        0.814591613035917,
+        0.9072120850630042
+      ],
+      "excerpt": "~~Further training of the net to improve accuracy.~~ \n~~Add batch renormalization for training using small batches.~~ (link) \n~~Add group normalization for training using small batches.~~ (link) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9420607741344741
+      ],
+      "excerpt": "Add quantization awareness to training. This is not yet possible in TensorFlow 2.0 because it was part of the contrib module, which has been removed in the new version, as commented in this issue. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Training a face Recognizer using ResNet50 + ArcFace in TensorFlow 2.0",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dmonterom/face_recognition_TF2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 9,
+      "date": "Fri, 24 Dec 2021 22:03:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dmonterom/face_recognition_TF2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dmonterom/face_recognition_TF2",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/dmonterom/face_recognition_TF2/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Download the ~~CASIA-Webface~~ MS1M-ArcFace dataset from [insightface model zoo](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo) and unzip it to the dataset folder.\n\nConvert the dataset to the tensorflow format:\n\n```\ncd dataset\nmkdir converted_dataset\npython3 convert_dataset.py\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.898660227486061
+      ],
+      "excerpt": "A Dockerfile is also provided with all prerequisites installed. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.950563948951535
+      ],
+      "excerpt": "python3 train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.8467479477311536
+      ],
+      "excerpt": "python3 train_multigpu.py \nThe training process can be followed loading the generated log file (in output/logs) with tensorboard. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8146987923390707,
+        0.9097618073721859
+      ],
+      "excerpt": "python3 evaluation.py \n| model name    | train db| normalization layer |reg loss|batch size|gpus| total_steps | download | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9097618073721859
+      ],
+      "excerpt": "| model name    | train db| normalization layer |reg loss|batch size|gpus| total_steps | download | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8005944904793234
+      ],
+      "excerpt": "| model B | ms1m |batch renormalization|uncontrolled|16*8|1| 768k |model b| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9097618073721859
+      ],
+      "excerpt": "| model name    | train db| normalization layer |reg loss|batch size|gpus| download | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8243388770059811
+      ],
+      "excerpt": "~~The batch size must be bigger but the gpu is exhausted. -> Now using batch ~~128~~ 96 by updating the gradients after several inferences.~~ -> Now using 2 GPU with batch size 128 on each GPU with the central storage strategy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8715296604059428
+      ],
+      "excerpt": "~~Train the model with a bigger dataset.~~ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dmonterom/face_recognition_TF2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Training a face Recognizer using ResNet50 + ArcFace in TensorFlow 2.0",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "face_recognition_TF2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dmonterom",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dmonterom/face_recognition_TF2/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you are not using the provided Dockerfile, you will need to install the following packages:\n\n```\npip3 install tensorflow-gpu==2.0.0b1 pillow mxnet matplotlib==3.0.3 opencv-python==3.4.1.15 scikit-learn\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 32,
+      "date": "Fri, 24 Dec 2021 22:03:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "facerecognition",
+      "tensorflow",
+      "arcface"
+    ],
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1511.06434 (2015).\n\n(Paper: https://arxiv.org/pdf/1511.06434.pdf)\n\n[3] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. \"Gradient-based learning applied to document recognition.\" Proceedings of the IEEE, 86(11):2278-2324, Nov 1998."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] Goodfellow, Ian, et al. \"Generative adversarial nets.\" Advances in neural information processing systems. 2014.\n\n(Paper: http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)\n\n[2] Radford, Alec, Luke Metz, and Soumith Chintala. \"Unsupervised representation learning with deep convolutional generative adversarial networks.\" arXiv preprint arXiv:1511.06434 (2015).\n\n(Paper: https://arxiv.org/pdf/1511.06434.pdf)\n\n[3] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. \"Gradient-based learning applied to document recognition.\" Proceedings of the IEEE, 86(11):2278-2324, Nov 1998.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-25T18:45:43Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-08T22:37:19Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Sampling from a latent space of images to produce entirely new images is currently one of the most prominent and successful application of creative artificial intelligence. In this context, generative adversarial networks (or GANs for short) (Goodfellow et al., 2014), first introduced in 2014, have exploded in popularity as an alternative to variational autoencoders (VAEs) for learning latent spaces of images. They have been used in real-life applications for text/image/video generation, drug discovery and text-toimage synthesis.\n\nGANs are a kind of generative model that allows us to generate a whole image in parallel, in contrast with recurrent networks where the model generates the image one pixel at a time. Along with several other kinds of generative models, GANs use a differentiable function represented by a neural network as a generator G network. The generator network takes random noise as input, then runs that noise through a differentiable function to transform the noise and reshape it to have recognizable structure. The output of the generator is a realistic image. The choice of the random input noise determines which image will come out of the generator network. Running the generator with many different input noise values produces many different realistic output images.\n\nThe goal is for these images to be as fair samples from the distribution over real data. Of course, the generator net doesn\u2019t start out producing realistic images. It has to be trained. The training process for a generative model is very different from the training process for a supervised learning model. For a supervised learning model, we show the model an image of an object and we tell it, this is the label. For a generative model, there is no output to associate with each image. We just show the model a lot of images and ask it to make more images that come from the same probability distribution.\n\n##\n\n<figure>\n  <img src=\"fig1.png\">\n  <figcaption>Scheme representing the general structure of a GAN, using MNIST images as data. The latent sample is a random vector the generator uses to construct its fake images. As the generator learns through training, it figures out how to map these random vectors to recognizable images that can fool the discriminator. The output of the discriminator is a sigmoid function, where 0 indicates a fake image and 1 indicates a real image.\n  </figcaption>\n</figure>\n\n##\n\nBut how we actually get the model to do that? Most generative models are trained by adjusting the parameters to maximize the probability that the generator net will generate the training data set. Unfortunately for a lot of interesting models, it can be very difficult to compute this probability. Most generative models get around that with some kind of approximation. GANs use an approximation where a second network, called the discriminator D, learns to guide the generator. The discriminator is just a regular neural net classifier. During the training process, the discriminator is shown real images from the training data half the time and fake images from the generator the other half of the time. The discriminator is trained to output the probability that\nthe input is real. So it tries to assign a probability near 1 to real images, and a probability near zero to fake images (see Fig. 1). Meanwhile, the generator tries to do the opposite. It is trained to try to output images that the discriminator will assign probability near one of being real. Over time, the generator is forced to produce more realistic output in order to fool the discriminator. The generator takes random noise values z and maps them to output values x. Wherever the generator maps more values of z, the probability distribution over x, represented by the model, becomes denser. The discriminator outputs high values wherever the density of real data is greater than the density of generated data. The generator changes the samples it produces to move uphill along the function learned by the discriminator (see Algorithm 1). In other words, the generator moves its samples into areas where the model distribution is not yet dense enough. Eventually, the generator\u2019s distribution matches the real distribution, and the discriminator has to output a probability of one half everywhere because every point is equally likely to be generated by the real data set as to be generated by the model. The two densities are equal.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9231437431886224,
+        0.994281338944641,
+        0.9892273280534647,
+        0.9855672253292825
+      ],
+      "excerpt": "TensorFlow implementation of Generative Adversarial Networks (GAN) [1] and Deep Convolutional Generative Adversarial Networks (DCGAN) [2] for MNIST [3] and notMNIST datasets. \nRecently, the search for creative artificial intelligence has turned to generative adversarial network (GAN), which is currently one of the most popular and successful application of deep learning. Motivated by the ability of GANs to sampling from a latent space of images to create entirely new images, here we evaluate and compare the performance of a GAN, where both generator and discriminator are multilayer perceptrons with a deep convolutional generative adversarial network (DCGAN) on the MNIST dataset. \nMotivated by the ability of GANs to sampling from a latent space of images to create entirely new images, here we evaluate and compare the performance of a GAN, where both generator G and discriminator D are multilayer perceptrons (MLP) with a deep convolutional generative adversarial network (DCGAN) (Radford et al., 2015). The experiments are performed on the MNIST dataset (Lecun et al., 1998), consisting of about 60.000 black and white images of handwritten digits, each with size 28 \u00d7 28 pixels. This dataset will be preprocessed according to some useful tricks proven to be useful for training GANs. The detailed descriptions about the model architectures and selected hyperparameters can be found in the colab notebook accompanying this project. \nAlso, we used the notMNIST dataset, which is similar to MNIST, but looks a bit more like real data, that is, the data is much less clean compared to MNIST. There are 10 classes, with letters A-J taken from different fonts. This dataset consists of a small part cleaned by hand, approximately 1872 elements per class, and large uncleaned part, approximately 52909 elements per class. Two parts have approximately 0.5% and 6.5% label error rate. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8032183478638865,
+        0.9860753772072379,
+        0.9860753772072379
+      ],
+      "excerpt": "Learning time \nMNIST GAN - Avg. time for epoch  is 4.564566612243652 sec \nMNIST DCGAN - Avg. time for epoch is 26.319965600967407 sec \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Motivated by the ability of GANs to sampling from a latent space of images to create entirely new images, here we evaluate and compare the performance of a GAN with a DCGAN on the MNIST dataset.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 03:53:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vmartinezalvarez/Image-generation-GAN-vs-DCGAN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/master/Project_NotMNIST_DCGAN_FINAL.ipynb",
+      "https://raw.githubusercontent.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/master/Project_DCGAN.ipynb",
+      "https://raw.githubusercontent.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/master/Project_GAN.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8354394023875485,
+        0.8836704212480256
+      ],
+      "excerpt": "<td><img src = 'MNIST_GAN_images/gan.gif.png'> \n<td><img src = 'MNIST_DCGAN_images/dcgan.gif.png'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256,
+        0.8836704212480256
+      ],
+      "excerpt": "<td><img src = 'MNIST_GAN_images/image_at_epoch_0200.png'> \n<td><img src = 'MNIST_DCGAN_images/image_at_epoch_0100.png'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<td><img src = 'NotMNIST.gif.png'> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Victor Manuel Martinez Alvarez\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image Generation: GAN vs DCGAN on MNIST and notMNIST datasets",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image-generation-GAN-vs-DCGAN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vmartinezalvarez",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vmartinezalvarez/Image-generation-GAN-vs-DCGAN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 03:53:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "gan-dcgan",
+      "mnist"
+    ],
+    "technique": "GitHub API"
+  }
+}

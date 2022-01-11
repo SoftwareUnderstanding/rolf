@@ -1,0 +1,345 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.02002], is a method developed in the object detection task. In object detection, often, there are a large background, which is easy to identify but occupy most of the data. The model saturated easily in very accuracily predicting a background. However, what we really interested is the a few obejct, which is our positive examples. Focal loss was designed to force the model focus on the few positive examples (outputting 1, not 0"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YIZHE12/fashiontags",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* **Yi Zheng** :echeng1212@gmail.com \n\n\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-06-28T15:02:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-07-23T00:35:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9932129638301054
+      ],
+      "excerpt": "This is a consulting project to develop a web application to automatically creating fashion tags for images uploaded. The training data is 1 million labelled fashion images from a CVPR 2018 workshop. I used transfer learning to create embedding data of the fashion images to achieve more than 100 times accerlation in the deep neural network training process. Flask was used to develop the web application. The final product is dockerized and can be pull from docker hub. Eventually, I deploy the docker container on google cloud using kubernetes.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.996542355812584
+      ],
+      "excerpt": "The pretrained CNN model is very large, making the total training process slow eventhough we freeze the weights of the pre-trained model for transfer learning. As the model weight is not being trained, I decided to extract the output of the pretrained CNN model (VGG19) and store it temportatly and use it as embedding data for input for the fully connective network. This way, it is more than hundreads time faster in training.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9617243706315923,
+        0.9909424631250214
+      ],
+      "excerpt": "Traditionally, a multilabel classification problem will use binary cross-entropy as the cost function. However, due to the sparcity of our target data, in other words, most columns in y are 0. The model can just output all zero to get a high accuracy. This makes it very difficult to train.  \nTo solve this problem, instead of focusing on the accurcay, I focus on pushing the F1 score of the model, which is a complimize between recall and precision. Therefore, I customerized a loss function based on the F1 score to train the model.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9873273268410278
+      ],
+      "excerpt": "Another difficulty of this project is that our data is highly imbalanced even after label selection.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9899667529751581
+      ],
+      "excerpt": "Focal loss [https://arxiv.org/abs/1708.02002], is a method developed in the object detection task. In object detection, often, there are a large background, which is easy to identify but occupy most of the data. The model saturated easily in very accuracily predicting a background. However, what we really interested is the a few obejct, which is our positive examples. Focal loss was designed to force the model focus on the few positive examples (outputting 1, not 0). This is similar to our imbalanced class and sparse target data problems. Therefore, I also customerized a focal loss function as our loss function in this project to increase the F1 score. You can see from the graph below, that by using customerized loss function, there is more than 30% boost in F1 score for the minority classes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9214985235497939
+      ],
+      "excerpt": "I have Flask to deploy the deep learning model to a web application. For more information, please visit my github page of Flask and Docker. To download and run the docker, you can run the following commands: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9517712730833876
+      ],
+      "excerpt": "To deploy the containerized web application on google cloud, you should first register a google cloud account, which will give you $300 credit. Open the console, and create an instance with adequate storage. Without creating your own instance, but run the docker container on the default console will get an out of memory error. Then you can run the following code to build the docker on the cloud, note to set the [PROJECT_ID] in your project ID and your zone to your local zone. You should also have kubernetes preinstalled on your instance. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.809375997495547
+      ],
+      "excerpt": "After you are sure that it is running, kill the program by using CTRL+C. Now we can start creating the cluster for the web app by: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8048088601322132
+      ],
+      "excerpt": "Now push it to the Internet: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9364301448239745
+      ],
+      "excerpt": "For more information, see: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8103586965455553
+      ],
+      "excerpt": "Flask - The web framework used \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A real consultant project to develop web app which apply deep convolutional neural network to generate fashion attributes for images uploaded to the web. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To download the data, you should first download the [training.json file](https://www.kaggle.com/c/imaterialist-challenge-fashion-2018), then run the following code to (1) remove broken links from the json files using multiple threads; (2) download the images using the url links from the json file; (3) create label data\n\n```\npython delete_broken_images.py\npython scripts/download_images.py ./data/train.json ./data/train\npython scripts/create_label.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YIZHE12/fashiontags/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 18:13:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/YIZHE12/fashiontags/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YIZHE12/fashiontags",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9735429751063849,
+        0.9260149888235124
+      ],
+      "excerpt": "git clone https://github.com/YIZHE12/keras-flask-deploy-webapp \ncd keras-flask-deploy-webapp \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8228470272534104
+      ],
+      "excerpt": "Give it a few minutes, when it is ready, you should get a response by running: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8782719009666403,
+        0.8891401888405708
+      ],
+      "excerpt": "Run the following command to check if the deployment is ready, when it is ready, you should see Ready 1/1 \nkubectl get pods \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8599588154610761
+      ],
+      "excerpt": "Now you can use http://[external ip] to test your web app on the internet \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9042534665813847
+      ],
+      "excerpt": "<img src='images/Precisionrecall.png' width='300'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9295932733615537
+      ],
+      "excerpt": "<img src='images/label_dist.jpg'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9295932733615537
+      ],
+      "excerpt": "<img src='images/f1_score_v3.jpg'> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8808400718595312
+      ],
+      "excerpt": "python scripts/train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8021772751119439
+      ],
+      "excerpt": "docker run -d -p 5000:5000 echeng1212/keras_flask_app:insightdemo \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8218306140595039
+      ],
+      "excerpt": "gcloud container clusters create hello-cluster --num-nodes=2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8110161284468758
+      ],
+      "excerpt": "gcloud container clusters delete hello-cluster \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/YIZHE12/fashiontags/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FashionTag",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fashiontags",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YIZHE12",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/YIZHE12/fashiontags/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "I used tensorflow and keras for the model development on AWS enviroment tensorflow_p36. To install a similar enviroment, you can run pip to install the following packages. I also installed keras-metrics, a package to use customerized metrics to monitor the training process. For the Flask development, you can use the docker file to setup the enviroment.\n\n```\npip install tensorflow==1.13.1\npip install Keras==2.2.4\npip install Keras-Applications==1.0.7\npip install keras-metrics==1.1.0\npip install Keras-Preprocessing==1.0.9\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code should be execute in the correct sequence. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Sat, 25 Dec 2021 18:13:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To get the data, please go to the 'Data' folder in this repo for further instructions. To train your own model, you will first need to generate embedding data for the images and store the embedding in your data folder. This will acceccrate your deep neural network training process by trading time complexcity with space complexicity. \n\n<img src ='images/nn_new.png' height = 250>\n\nAll scripts should be ran from the project root directory, e.g.:\n\n```\npython scripts/train.py\n```\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

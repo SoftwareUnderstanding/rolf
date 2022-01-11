@@ -1,0 +1,240 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1702.08431",
+      "https://arxiv.org/abs/1802.05957"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "[ ] Improve loss formulation (e.g. relativistic formulation if possible) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kklemon/bgan-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-20T17:58:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-09T16:05:13Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8287688360616321
+      ],
+      "excerpt": "utils/create_quantized_celeba.py is provided as a utility to create a discrete version of CelebA quantized to a given number of colors. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.981444543186897
+      ],
+      "excerpt": "Note, that this has the implication, that the number of colors is limited to a maximum of 256. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9959619300939699
+      ],
+      "excerpt": "In opposition to the original paper, which uses the Pillow library for quantization, the utility uses K-Means to learn the color palette on a subset of the data and undertake the actual quantization. This leads to better results but is computationally more expensive. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9260578110801612,
+        0.9451080569772574,
+        0.828982630880691,
+        0.9365512181632427,
+        0.9591608806662023,
+        0.9832248026059816,
+        0.8788569632741117,
+        0.9273589786111472
+      ],
+      "excerpt": "The original paper provides little information about the exact implementation and training parameters for the conducted experiments (see section 4.2). \nThere appears to be an official implementation (see https://github.com/rdevon/BGAN) in Theano but it does not seem to follow the paper in an exact way. \nFollowing points probably cover the most significant differences to the original implementation: \nThe model architecture loosely follows DCGAN, same as the original implementation but might differ in the choice of number of filters, etc. \nWe recommend using ELU activation function instead of (leaky) ReLU, at least for datasets with higher resolution and number of classes. \nThe mean over the log-likelihoods of the generator output is computed instead of the sum as in the original implementation. Latter leads to a loss and hence gradient magnitudes, which are dependent on the number of classes/channels and resolution which would require - at least in theory - learning rate adjustment, effectively adding another hyperparameter. \nDiscrete data training with GANs is usually much more difficult than the already difficult GAN training for continuous data. \nBoundary Seeking GANs seem to be an improvement in this relation but are still sensitive to the correct hyperparameter and architecture configuration. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9625662008867402,
+        0.9831568690940701,
+        0.9829383575353636,
+        0.8627503999520673,
+        0.9786209352649061
+      ],
+      "excerpt": "Putting the batch norm layer after the non-linearity (conv -> activation -> bn) instead of before, like it's usually recommended and also done in the original DCGAN architecture, seems to drastically improve the performance for some, to me yet unknown reasons. \nBGAN training seems to be even more prone to mode-collapse as the generator is trained with sparse gradients which oftentimes leads to the discriminator learning much faster than the generator. Depending on the actual problem setting and data, this effect can be mitigated by increasing the number of monte-carlo samples (--n-mc-samples), lowering the learning rate for D (--d-lr) or add noise to D's input. Furthermore, spectral normalization also seems to have a positive effect which can be applied with the --spectral-norm flag of the training script. \nDue to the monte-carlo sampling, every generator optimization step requires m discriminator passes, where m is set to 20 by default. While more monte-carlo samples seem to improve the performance, especially for larger number of classes, it has a quadratic impact on the computational requirements. Therefore it is recommended to start experimenting with lower values before going up to larger ones, which may strongly affect the training time. \nWhile a discriminator loss of zero can be seen as a failure state for \"normal\" GANs, in the BGAN setting, this may be a normal observation, especially in the beginning of training from which the generator might recover. As long as a mode collapse does not occur and G seems to improve, training can be continued. \nThe original implementation seems to use ReLU as activation function. We experimented both with ReLU and leaky ReLU with an alpha of 0.2, following many recent GAN implementations and found both performing similarly well. Using ELU in both the generator and discriminator also has proven to be advantageous in some cases and seems to mitigate the problem of generator-discriminator imbalance. We haven't investigated yet, if latter fact can be attributed to a more powerful G or a degenerate D. As generation quality does significantly improve despite better G-D balance, we attribute it to latter case. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch implementation of Boundary Seeking GAN for discrete data",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kklemon/bgan-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 04:36:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kklemon/bgan-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kklemon/bgan-pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8204873129743006
+      ],
+      "excerpt": "Train BGAN on binary MNIST. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8962827725813756
+      ],
+      "excerpt": "It requires the dataset to be already downloaded and extracted. The resulting quantized version will be saved to the provided target directory. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9503189345333785,
+        0.8379257415332483
+      ],
+      "excerpt": "python train.py disc_mnist \nutils/create_quantized_celeba.py is provided as a utility to create a discrete version of CelebA quantized to a given number of colors. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8630167383191749
+      ],
+      "excerpt": "[ ] Add a text generation example \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kklemon/bgan-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch Implementation of Boundary Seeking GAN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bgan-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kklemon",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kklemon/bgan-pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Thu, 23 Dec 2021 04:36:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "deep-learning",
+      "gan",
+      "neural-network"
+    ],
+    "technique": "GitHub API"
+  }
+}

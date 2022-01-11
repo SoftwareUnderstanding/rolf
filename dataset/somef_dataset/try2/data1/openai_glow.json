@@ -1,0 +1,240 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "wget https://openaipublic.azureedge.net/glow-demo/logs/abl-[reverse/shuffle/1x1]-[add/aff].tar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "wget https://openaipublic.azureedge.net/glow-demo/logs/lsun-rnvp-[bdr/crh/twr].tar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "wget https://openaipublic.azureedge.net/glow-demo/logs/lsun-bdr-[96/128].tar \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/glow",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-19T20:03:00Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T11:23:36Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9023090681990376
+      ],
+      "excerpt": "Code for reproducing results in \"Glow: Generative Flow with Invertible 1x1 Convolutions\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Code for reproducing results in \"Glow: Generative Flow with Invertible 1x1 Convolutions\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For small scale experiments, use MNIST/CIFAR-10 (directly downloaded by `train.py` using keras)\n\nFor larger scale experiments, the datasets used are in the Google Cloud locations `https://openaipublic.azureedge.net/glow-demo/data/{dataset_name}-tfr.tar`. The dataset_names are below, we mention the exact preprocessing / downsampling method for a correct comparison of likelihood.\n\nQuantitative results\n- `imagenet-oord` - 20GB. Unconditional ImageNet 32x32 and 64x64, as described in PixelRNN/RealNVP papers (we downloaded [this](http://image-net.org/small/download.php) processed version).\n- `lsun_realnvp` - 140GB. LSUN 96x96. Random 64x64 crops taken at processing time, as described in RealNVP.\n\nQualitative results\n- `celeba` - 4GB. CelebA-HQ 256x256 dataset, as described in Progressive growing of GAN's. For 1024x1024 version (120GB), use `celeba-full-tfr.tar` while downloading.\n- `imagenet` - 20GB. ImageNet 32x32 and 64x64 with class labels. Centre cropped, area downsampled.\n- `lsun` - 700GB. LSUN 256x256. Centre cropped, area downsampled.\n\nTo download and extract celeb for example, run\n```\nwget https://openaipublic.azureedge.net/glow-demo/data/celeba-tfr.tar\ntar -xvf celeb-tfr.tar\n```\nChange `hps.data_dir` in train.py file to point to the above folder (or use the `--data_dir` flag when you run train.py)\n\nFor `lsun`, since download can be quite big, you can instead follow the instructions in `data_loaders/generate_tfr/lsun.py` to generate the tfr file directly from LSUN images. `church_outdoor` will be the smallest category.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/glow/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 486,
+      "date": "Sat, 25 Dec 2021 22:08:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/openai/glow/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "openai/glow",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/openai/glow/master/demo/script.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8955276432066102,
+        0.9417734033662938,
+        0.8689786557579493,
+        0.9503189345333785,
+        0.8744049838403808,
+        0.8415563420818577
+      ],
+      "excerpt": "Run wtih small depth to test \nCUDA_VISIBLE_DEVICES=0 python train.py --depth 1 \nRun default training script with 8 GPUs: \nmpiexec -n 8 python train.py \nmpiexec -n 8 python train.py --problem cifar10 --image_size 32 --n_level 3 --depth 32 --flow_permutation [0/1/2] --flow_coupling [0/1] --seed [0/1/2] --learntop --lr 0.001 \nPretrained models, logs and samples \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8744049838403808,
+        0.9020346768698114,
+        0.9191602655206114,
+        0.8924464402150285,
+        0.8415563420818577
+      ],
+      "excerpt": "mpiexec -n 8 python train.py --problem cifar10 --image_size 32 --n_level 3 --depth 32 --flow_permutation 2 --flow_coupling 1 --seed 0 --learntop --lr 0.001 --n_bits_x 8 \nmpiexec -n 8 python train.py --problem imagenet-oord --image_size 32 --n_level 3 --depth 48 --flow_permutation 2 --flow_coupling 1 --seed 0 --learntop --lr 0.001 --n_bits_x 8 \nmpiexec -n 8 python train.py --problem imagenet-oord --image_size 64 --n_level 4 --depth 48 --flow_permutation 2 --flow_coupling 1 --seed 0 --learntop --lr 0.001 --n_bits_x 8 \nmpiexec -n 8 python train.py --problem lsun_realnvp --category [bedroom/church_outdoor/tower] --image_size 64 --n_level 3 --depth 48 --flow_permutation 2 --flow_coupling 1 --seed 0 --learntop --lr 0.001 --n_bits_x 8 \nPretrained models, logs and samples \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8929369635311637,
+        0.907663469981434
+      ],
+      "excerpt": "mpiexec -n 40 python train.py --problem celeba --image_size 256 --n_level 6 --depth 32 --flow_permutation 2 --flow_coupling 0 --seed 0 --learntop --lr 0.001 --n_bits_x 5 \nmpiexec -n 40 python train.py --problem lsun --category [bedroom/church_outdoor/tower] --image_size [96/128] --n_level 5 --depth 64 --flow_permutation 2 --flow_coupling 0 --seed 0 --learntop --lr 0.001 --n_bits_x 5 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/openai/glow/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 OpenAI\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Glow",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "glow",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "openai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/openai/glow/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " - Tensorflow (tested with v1.8.0)\n - Horovod (tested with v0.13.8) and (Open)MPI\n\nRun\n```\npip install -r requirements.txt\n```\n\nTo setup (Open)MPI, check instructions on Horovod github [page](https://github.com/uber/horovod).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2861,
+      "date": "Sat, 25 Dec 2021 22:08:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "paper"
+    ],
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,687 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1909.09577"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. code-block:: bash\n\n  @article{kuchaiev2019nemo,\n    title={Nemo: a toolkit for building ai applications using neural modules},\n    author={Kuchaiev, Oleksii and Li, Jason and Nguyen, Huyen and Hrinchuk, Oleksii and Leary, Ryan and Ginsburg, Boris and Kriman, Samuel and Beliaev, Stanislav and Lavrukhin, Vitaly and Cook, Jack and others},\n    journal={arXiv preprint arXiv:1909.09577},\n    year={2019}\n  }\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8098901778997378
+      ],
+      "excerpt": "Speech Classification and Speech Command Recognition &lt;https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/speech_classification/intro.html&gt;_: MatchboxNet (Command Recognition) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "Natural Language Processing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "Spectrogram generation: Tacotron2, GlowTTS, FastSpeech2, FastPitch, FastSpeech2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.950671864093268
+      ],
+      "excerpt": "End-to-end speech generation: FastPitch_HifiGan_E2E, FastSpeech2_HifiGan_E2E \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/NeMo",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributions are welcome!\nWe do all of NeMo's development in the open. Contributions from NeMo community are welcome.\nPull Requests (PR) Guidelines\nSend your PRs to the main branch\n1) Make sure your PR does one thing. Have a clear answer to \"What does this PR do?\".\n2) Read General Principles and style guide below\n3) Make sure you sign your commits. E.g. use git commit -s when before your commit\n4) Make sure all unittests finish successfully before sending PR pytest or (if yor dev box does not have GPU) pytest --cpu from NeMo's root folder\n5) Send your PR and request a review\nUnit tests\nQuick tests (locally, while developing)\n```\npytest\nIf you don't have NVIDIA GPU do:\npytest --cpu\nFull tests, including pre-trained model downloads\npytest --with_downloads\n```\nWhom should you ask for review:\n\nFor changes to NeMo's core: @ericharper, @titu1994, @blisc, or @okuchaiev  \nFor changes to NeMo's ASR collection: @titu1994, @redoctopus, @jbalam-nv, or @okuchaiev\nFor changes to NeMo's NLP collection: @MaximumEntropy, @ericharper, @ekmb, @yzhang123, @VahidooX, @vladgets, or @okuchaiev \nFor changes to NeMo's TTS collection: @blisc or @stasbel, or @okuchaiev\n\nNote that some people may self-assign to review your PR - in which case, please wait for them to add a review.\nYour  pull requests must pass all checks and peer-review before they can be merged.\nGeneral principles\n\nUser-oriented: make it easy for end users, even at the cost of writing more code in the background\nRobust: make it hard for users to make mistakes.\nWell-tested: please add simple, fast unittests. Consider adding CI tests for end-to-end functionality.\nReusable: for every piece of code, think about how it can be reused in the future and make it easy to be reused.\nReadable: code should be easier to read.\nLegal: if you copy even one line of code from the Internet, make sure that the code allows the license that NeMo supports. Give credit and link back to the code.\nSensible: code should make sense. If you think a piece of code might be confusing, write comments.\n\nPython style\nWe use black as our style guide. To check whether your code will pass style check (from the NeMo's repo folder) run:\npython setup.py style and if it does not pass run python setup.py style --fix.\n\nInclude docstrings for every class and method exposed to the user.\nUse Python 3 type hints for every class and method exposed to the user.\nAvoid wild import: from X import * unless in X.py, __all__ is defined.\nMinimize the use of **kwargs.\nRaiseError is preferred to assert. Write: if X: raise Error instead of assert X.\nClasses are preferred to standalone methods.\nMethods should be atomic. A method shouldn't be longer than 75 lines, e.g. can be fit into the computer screen without scrolling.\nIf a method has arguments that don't fit into one line, each argument should be in its own line for readability.\nAdd __init__.py for every folder.\nF-strings are prefered to formatted strings.\nLoggers are preferred to print. In NeMo, you can use logger from from nemo.utils import logging\nPrivate functions (functions start with _) shouldn't be called outside its host file.\nIf a comment lasts multiple lines, use ''' instead of #.\n\nCollections\nCollection is a logical grouping of related Neural Modules. It is a grouping of modules that share a domain area or semantics.\nWhen contributing module to a collection, please make sure it belongs to that category. \nIf you would like to start a new one and contribute back to the platform, you are very welcome to do so.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-05T20:16:42Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T04:51:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "NVIDIA NeMo is a conversational AI toolkit built for researchers working on automatic speech recognition (ASR), natural language processing (NLP), and text-to-speech synthesis (TTS).\nThe primary objective of NeMo is to help researchers from industry and academia to reuse prior work (code and pretrained models and make it easier to create new `conversational AI models <https://developer.nvidia.com/conversational-ai#started>`_.\n\n`Pre-trained NeMo models. <https://catalog.ngc.nvidia.com/models?query=nemo&orderBy=weightPopularDESC>`_ \n\n`Introductory video. <https://www.youtube.com/embed/wBgpMf_KQVw>`_\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9394399764870598
+      ],
+      "excerpt": "Supports CTC and Transducer/RNNT losses/decoders \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.84194773673006
+      ],
+      "excerpt": "Speech Data Explorer &lt;https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/tools/speech_data_explorer.html&gt;_: a dash-based tool for interactive exploration of ASR/TTS datasets \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "NeMo: a toolkit for conversational AI",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": ".. |main| image:: https://readthedocs.com/projects/nvidia-nemo/badge/?version=main\n  :alt: Documentation Status\n  :scale: 100%\n  :target: https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/\n\n.. |stable| image:: https://readthedocs.com/projects/nvidia-nemo/badge/?version=stable\n  :alt: Documentation Status\n  :scale: 100%\n  :target:  https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/stable/\n\n+---------+-------------+------------------------------------------------------------------------------------------------------------------------------------------+\n| Version | Status      | Description                                                                                                                              |\n+=========+=============+==========================================================================================================================================+\n| Latest  | |main|      | `Documentation of the latest (i.e. main) branch. <https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/>`_                  |\n+---------+-------------+------------------------------------------------------------------------------------------------------------------------------------------+\n| Stable  | |stable|    | `Documentation of the stable (i.e. most recent release) branch. <https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/stable/>`_ |\n+---------+-------------+------------------------------------------------------------------------------------------------------------------------------------------+\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/NeMo/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 829,
+      "date": "Mon, 27 Dec 2021 03:33:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/NVIDIA/NeMo/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NVIDIA/NeMo",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/Dockerfile",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/text_processing_deployment/Dockerfile",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/asr_webapp/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/NVIDIA/NeMo/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/01_NeMo_Models.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/VoiceSwapSample.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/AudioTranslationSample.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/00_NeMo_Primer.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Data_Preprocessing_and_Cleaning_for_NMT.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/GLUE_Benchmark.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Punctuation_and_Capitalization.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Entity_Linking_Medical.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Joint_Intent_and_Slot_Classification.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Text2Sparql.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Text_Classification_Sentiment_Analysis.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/02_NLP_Tokenizers.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Token_Classification-BioMegatron.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Non_English_Downstream_Tasks_%28NER%29.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Question_Answering_Squad.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/01_Pretrained_Language_Models_for_Downstream_Tasks.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Relation_Extraction-BioMegatron.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Zero_Shot_Intent_Recognition.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/nlp/Token_Classification_Named_Entity_Recognition.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Online_ASR_Microphone_Demo.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Online_Offline_Speech_Commands_Demo.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Voice_Activity_Detection.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Speech_Commands.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Online_Noise_Augmentation.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Intro_to_Transducers.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/ASR_for_telephony_speech.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/ASR_with_Transducers.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Streaming_ASR.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/ASR_CTC_Language_Finetuning.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/ASR_with_Subword_Tokenization.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/ASR_with_NeMo.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Online_Offline_Microphone_VAD_Demo.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/asr/Offline_ASR.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/speaker_tasks/Speaker_Identification_Verification.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/speaker_tasks/Speaker_Diarization_Inference.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/speaker_tasks/ASR_with_SpeakerDiarization.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/text_processing/WFST_Tutorial.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/text_processing/Text_Normalization.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/text_processing/Inverse_Text_Normalization.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tts/TalkNet_Training.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tts/Inference_ModelSelect.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tts/Inference_DurationPitchControl.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tts/FastPitch_Finetuning.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tts/Tacotron2_Training.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tools/CTC_Segmentation_Tutorial.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tools/DefinedCrowd_x_NeMo_ASR_Training_Tutorial.ipynb",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tutorials/tools/label-studio/setup-asr-preannotations.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/reinstall.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/scripts/dataset_processing/get_cmudict.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/scripts/dataset_processing/ljspeech/extract_ljspeech_phonemes_and_durs.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/scripts/freesound_download_resample/download_resample_freesound.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/scripts/asr_language_modeling/ngram_lm/install_beamsearch_decoders.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/nemo_text_processing/setup.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/vi/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/de/test_sparrowhawk_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/de/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/es/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/ru/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/fr/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/en/test_sparrowhawk_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tests/nemo_text_processing/en/test_sparrowhawk_inverse_text_normalization.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/examples/nlp/language_modeling/get_wkt2.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/examples/nlp/information_retrieval/get_msmarco.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/text_processing_deployment/export_grammars.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/text_processing_deployment/docker/launch.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/text_processing_deployment/docker/build.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/asr_webapp/docker_container_run.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/asr_webapp/docker_container_build.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/tools/ctc_segmentation/run_sample.sh",
+      "https://raw.githubusercontent.com/NVIDIA/NeMo/main/docs/update_docs_docker.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Pip\n~~~\nUse this installation mode if you want the latest released version.\n\n.. code-block:: bash\n\n    apt-get update && apt-get install -y libsndfile1 ffmpeg\n    pip install Cython\n    pip install nemo_toolkit['all']\n\nPip from source\n~~~~~~~~~~~~~~~\nUse this installation mode if you want the a version from particular GitHub branch (e.g main).\n\n.. code-block:: bash\n\n    apt-get update && apt-get install -y libsndfile1 ffmpeg\n    pip install Cython\n    python -m pip install git+https://github.com/NVIDIA/NeMo.git@{BRANCH}#egg=nemo_toolkit[all]\n\n\nFrom source\n~~~~~~~~~~~\nUse this installation mode if you are contributing to NeMo.\n\n.. code-block:: bash\n\n    apt-get update && apt-get install -y libsndfile1 ffmpeg\n    git clone https://github.com/NVIDIA/NeMo\n    cd NeMo\n    ./reinstall.sh\n\nRNNT\n~~~~\nNote that RNNT requires numba to be installed from conda.\n\n.. code-block:: bash\n\n  conda remove numba\n  pip uninstall numba\n  conda install -c numba numba\n\nMegatron GPT\n~~~~~~~~~~~~\nMegatron GPT training requires NVIDIA Apex to be installed.\n\n.. code-block:: bash\n\n    git clone https://github.com/NVIDIA/apex\n    cd apex\n    git checkout 05f2d96baf9387c271134e292c811c3d94ed5fd2\n    pip install -v --disable-pip-version-check --no-cache-dir --global-option=\"--cpp_ext\" --global-option=\"--cuda_ext\" ./\n\nDocker containers:\n~~~~~~~~~~~~~~~~~~\nTo build a nemo container with Dockerfile from a branch, please run \n\n.. code-block:: bash\n\n    DOCKER_BUILDKIT=1 docker build -f Dockerfile -t nemo:latest .\n\n\nIf you chose to work with main branch, we recommend using NVIDIA's PyTorch container version 21.11-py3 and then installing from GitHub.\n\n.. code-block:: bash\n\n    docker run --gpus all -it --rm -v <nemo_github_folder>:/NeMo --shm-size=8g \\\n    -p 8888:8888 -p 6006:6006 --ulimit memlock=-1 --ulimit \\\n    stack=67108864 --device=/dev/snd nvcr.io/nvidia/pytorch:21.11-py3\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/NVIDIA/NeMo/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Roff",
+      "Shell",
+      "C++",
+      "HTML",
+      "Dockerfile",
+      "CSS",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "|status| |documentation| |license| |lgtm_grade| |lgtm_alerts| |black|\n\n.. |status| image:: http://www.repostatus.org/badges/latest/active.svg\n  :target: http://www.repostatus.org/#active\n  :alt: Project Status: Active \u2013 The project has reached a stable, usable state and is being actively developed.\n\n.. |documentation| image:: https://readthedocs.com/projects/nvidia-nemo/badge/?version=main\n  :alt: Documentation\n  :target: https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/\n\n.. |license| image:: https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg\n  :target: https://github.com/NVIDIA/NeMo/blob/master/LICENSE\n  :alt: NeMo core license and license for collections in this repo\n\n.. |lgtm_grade| image:: https://img.shields.io/lgtm/grade/python/g/NVIDIA/NeMo.svg?logo=lgtm&logoWidth=18\n  :target: https://lgtm.com/projects/g/NVIDIA/NeMo/context:python\n  :alt: Language grade: Python\n\n.. |lgtm_alerts| image:: https://img.shields.io/lgtm/alerts/g/NVIDIA/NeMo.svg?logo=lgtm&logoWidth=18\n  :target: https://lgtm.com/projects/g/NVIDIA/NeMo/alerts/\n  :alt: Total alerts\n\n.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg\n  :target: https://github.com/psf/black\n  :alt: Code style: black\n\n.. _main-readme:\n\n**NVIDIA NeMo**",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NeMo",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NVIDIA",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/NeMo/blob/main/README.rst",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "blisc",
+        "body": "### Features\r\n- Minor updates to expose speaker id, pitch, and duration on export of FastPitch #3192, #3207\r\n\r\n### Known Issues\r\n- Training of speaker models converge very slowly due to a bug (fixed in main: #3354)\r\n- ASR training does not reach adequate WER due to bug in Numba Spec Augment (fixed in main : #3299). For details refer to https://github.com/NVIDIA/NeMo/issues/3288#issuecomment-1000766337 . For a temporary workaround, disable Numba Spec Augment with https://github.com/NVIDIA/NeMo/blob/main/nemo/collections/asr/modules/audio_preprocessing.py#L471 set to False in the config for SpecAugment in the yaml config. The fix will be part of 1.6.0.",
+        "dateCreated": "2021-12-03T23:57:11Z",
+        "datePublished": "2021-12-04T00:00:07Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.5.1",
+        "name": "NVIDIA Neural Modules 1.5.1",
+        "tag_name": "v1.5.1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.5.1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/54416402",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.5.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "ericharper",
+        "body": "### Features\r\n- Megatron GPT pre-training with tensor model parallelism #2975 \r\n- NMT encoder and decoder with different hidden size #2856 \r\n- Logging timing of train/val/test steps #2936 \r\n- Logging NMT encoder and decoder timing #2956\r\n- Logging timing per sentence length and tokenized text statistics #3004\r\n- Upgrade to PyTorch Lightning 1.5.0, bfloat support #2975\r\n- French Inverse Text Normalization #2921 \r\n- Bucketing of tarred datasets for ASR models #2999\r\n- ASR with diarization #3007\r\n- Adding parallel transcribe for ASR models - suppports multi-gpu/multi-node #3017 \r\n\r\n### Documentation Updates\r\n- RNNT \r\n### Contributors\r\n@ericharper @michalivne @MaximumEntropy @VahidooX @titu1994 @blisc @okuchaiev @tango4j @erastorgueva-nv @fayejf @vadam5 @ekmb @yaoyu-33 @nithinraok @erhoo82 @tbartley94 @PeganovAnton @madhukarkm @yzhang123 \r\n(Please let us know if you have contributed to this release and we have missed you here.)",
+        "dateCreated": "2021-11-19T23:34:39Z",
+        "datePublished": "2021-11-20T01:55:45Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.5.0",
+        "name": "NVIDIA Neural Modules 1.5.0",
+        "tag_name": "v1.5.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.5.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/53760521",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.5.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "ericharper",
+        "body": "### Features\r\n- Improved speaker clustering #2729 \r\n- Upgrade to NVIDIA PyTorch 21.08 container #2799 \r\n- RNNT mAES beam search support #2802\r\n- Transfer learning for new speakers #2684 \r\n- Simplify speaker scripts #2777 \r\n- Perceiver-encoder architecture #2737\r\n- Relative paths in tarred datasets #2776 \r\n- Torch only TTS package #2643\r\n- Inverse text normalization for Spanish #2489 \r\n\r\n### Tutorial Notebooks\r\n- Duration and pitch control for TTS # 2700\r\n\r\n### Bug fixes\r\n- Fixed max delta generation #2727 \r\n- Waveglow export #2671, #2699 \r\n\r\n### Contributors\r\n@tango4j @titu1994 @paarthneekhara @nithinraok @michalivne @erastorgueva-nv @borisfom @blisc \r\n(some contributors may not be listed explicitly)",
+        "dateCreated": "2021-09-30T03:18:08Z",
+        "datePublished": "2021-10-02T00:49:13Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.4.0",
+        "name": "NVIDIA Neural Modules 1.4.0",
+        "tag_name": "v1.4.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.4.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/50667753",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "ericharper",
+        "body": "### Added\r\n- RNNT Exportable to ONNX #2510\r\n- Multi-batch inference support for speaker diarization #2522\r\n- DALI Integration for char/subword ASR #2567 \r\n- VAD Postprocessing #2636\r\n- Perceiver encoder for NMT #2621 \r\n- gRPC NMT server #2656\r\n- German ITN # 2486\r\n- Russian TN and ITN #2519 \r\n- Save/restore connector # 2592\r\n- PTL 1.4+ # 2600\r\n\r\n### Tutorial Notebooks\r\n- Non-English downstream NLP task #2532 \r\n- RNNT Basics #2651\r\n\r\n### Bug Fixes\r\n- NMESE clustering for very small audio files #2566 \r\n \r\n### Contributors\r\n@pasandi20 @ekmb @nithinraok @titu1994 @ryanleary @yzhang123 @ericharper @michalivne @MaximumEntropy @fayejf\r\n(some contributors may not be listed explicitly)",
+        "dateCreated": "2021-08-27T18:17:33Z",
+        "datePublished": "2021-08-27T21:24:41Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.3.0",
+        "name": "NVIDIA Neural Modules 1.3.0",
+        "tag_name": "v1.3.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.3.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/48598224",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "ericharper",
+        "body": "### Added\r\n- Improve performance of speak clustering (#2445)\r\n- Update Conformer for ONNX conversion (#2439)\r\n- Mean and length normalization for better embeddings speaker verification and diarization (#2397)\r\n- FastEmit RNNT Loss Numba for reducing latency (#2374)\r\n- Multiple datasets, right to left models, noisy channel re-ranking, ensembling for NMT (#2379)\r\n- Byte level tokenization (#2365)\r\n- Bottleneck with attention bridge for more efficient NMT training (#2390)\r\n- Tutorial notebook for NMT data cleaning and preprocessing (#2467)\r\n- Streaming Conformer inference script for long audio files (#2373)\r\n- Res2Net Ecapa equivalent implementation for speaker verification and diarization (#2468)\r\n- Update end-to-end tutorial notebook to use CitriNet (#2457)\r\n\r\n### Contributors\r\n@nithinraok @tango4j @jbalam-nv @titu1994 @MaximumEntropy @mchrzanowski @michalivne @jbalam-nv @fayejf @okuchaiev \r\n\r\n(some contributors may not be listed explicitly)\r\n\r\n\r\n### Known Issues\r\n - `import nemo.collections.nlp as nemo_nlp` will result in an error. This will be patched in the upcoming version. Please try to import the individual files as a work-around.",
+        "dateCreated": "2021-07-30T02:13:47Z",
+        "datePublished": "2021-07-30T20:05:41Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.2.0",
+        "name": "NVIDIA Neural Modules 1.2.0",
+        "tag_name": "v1.2.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.2.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/47070833",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.2.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "ericharper",
+        "body": "NeMo 1.1.0 release is our first release in our new monthly release cadence. Monthly releases will focus on adding new features that enable new NeMo Models or improve existing ones.\r\n\r\n### Added\r\n- Pretrained Megatron-LM encoders (including model parallel) for NMT (#2238)\r\n- RNNT Numba loss (#1995)\r\n- Enable multiple models to be restored (#2245)\r\n- Audio based text normalization (#2285)\r\n- Multilingual NMT (#2160)\r\n- FastPitch export (#2355)\r\n- ASR fine-tuning tutorial for other languages (#2346)\r\n\r\n### Bugfixes\r\n- HiFiGan Export (#2279)\r\n- OmegaConf forward compatibilty (#2319)\r\n\r\n### Documentation\r\n- ONNX export documentation (#2330 \r\n\r\n### Contributors\r\n@borisfom @MaximumEntropy @ericharper @aklife97 @titu1994 @ekmb @yzhang123 @blisc \r\n\r\n(some contributors may not be listed explicitly)\r\n\r\n\r\n\r\n",
+        "dateCreated": "2021-07-02T19:40:55Z",
+        "datePublished": "2021-07-02T21:51:32Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.1.0",
+        "name": "NVIDIA Neural Modules 1.1.0",
+        "tag_name": "v1.1.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.1.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/45646525",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.1.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.2\r\n\r\nNeMo 1.0.2 is a minor change over 1.0.0 adding version checks for Hydra dependency.",
+        "dateCreated": "2021-06-11T01:38:39Z",
+        "datePublished": "2021-06-11T01:45:45Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.2",
+        "name": "NVIDIA Neural Modules 1.0.2",
+        "tag_name": "v1.0.2",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.2",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/44451492",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.1\r\n\r\nNeMo 1.0.1 is a minor change over 1.0.0 adding proper version bounds for some external dependencies.\r\n",
+        "dateCreated": "2021-06-09T05:36:06Z",
+        "datePublished": "2021-06-09T05:40:06Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.1",
+        "name": "NVIDIA Neural Modules 1.0.1",
+        "tag_name": "v1.0.1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/44322818",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0\r\n\r\nNeMo 1.0.0 release is a stable version of \"1.0.0 release candidate\". It substantially improves overall quality and documentation. This update adds support for new tasks such as neural machine translation and many new models pretrained in different languages. As a mature tool for ASR and TTS it also adds new features for text normalization and denormalization, dataset creation based on CTC-segmentation and speech data explorer. These updates will benefit researchers in academia and industry by making it easier for them to develop and train new conversational AI models.\r\n\r\nTo install this specific version from pip do:\r\n\r\n```bash\r\napt-get update && apt-get install -y libsndfile1 ffmpeg\r\npip install Cython\r\npip install nemo-toolkit['all']==1.0.0\r\n```",
+        "dateCreated": "2021-06-03T22:42:45Z",
+        "datePublished": "2021-06-03T22:43:38Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0",
+        "name": "NVIDIA Neural Modules 1.0.0",
+        "tag_name": "v1.0.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/44075305",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0rc1\r\n\r\nThis release contains major new models, features and docs improvements. \r\nIt is a \"candidate\" release for 1.0.0.\r\n\r\nTo install from Pip do:\r\n\r\n```bash\r\napt-get update && apt-get install -y libsndfile1 ffmpeg\r\npip install Cython\r\npip install nemo_toolkit['all']==1.0.0rc1\r\n```\r\n\r\nIt adds the following model architectures:\r\n* CitriNet and Conformer-CTC for ASR\r\n* HiFiGan, MelGan, GlowTTS, UniGlow SqueezeWave for TTS\r\n\r\nIn NLP collections, a neural machine translation task (NMT) has been added with Transformer-based models.\r\nThis release includes pre-trained NMT models for these language pairs (in both directions):\r\n* En<->Es\r\n* En<->Ru\r\n* En<->Zh\r\n* En<->De\r\n* En<->Fr\r\n\r\nFor ASR task, we also added QuartzNet models, trained on the following languages from Mozilla's Common Voice dataset: Zh, Ru, Es, Pl, Ca, It, Fr and De.\r\nIn total, this release adds 60 new pre-trained models. \r\n\r\nThis release also adds new NeMo tools for:\r\n* Text normalization\r\n* Dataset Creation Tool Based on CTC-Segmentation\r\n* Speech Data Explorer\r\n\r\n## Known Issues\r\nThis version is not compatible with PyTorch 1.8.*   Please use 1.7.* with it or use our container.\r\n",
+        "dateCreated": "2021-04-07T05:39:44Z",
+        "datePublished": "2021-04-07T05:55:49Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0rc1",
+        "name": "NVIDIA Neural Modules 1.0.0rc1",
+        "tag_name": "v1.0.0rc1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0rc1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/41037181",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0rc1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0b4\r\n\r\nThis release is compatible with Jarvis and TLT public beta.\r\nIt also updates versions of many dependencies and contains minor bug fixes over 1.0.0b3. \r\n",
+        "dateCreated": "2021-02-16T05:21:07Z",
+        "datePublished": "2021-02-16T05:27:47Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0b4",
+        "name": "NVIDIA Neural Modules 1.0.0b4",
+        "tag_name": "v1.0.0b4",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0b4",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/38090220",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0b4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0b3\r\n\r\nThis release contains minor bug fixes over 1.0.0b2. \r\nIt sets compatible version ranges for Hugging Face Transformers and Pytorch Lightning packages.",
+        "dateCreated": "2020-12-11T15:59:21Z",
+        "datePublished": "2020-12-11T21:44:52Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0b3",
+        "name": "NVIDIA Neural Modules 1.0.0b3",
+        "tag_name": "v1.0.0b3",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0b3",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/35175586",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0b3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0b2\r\n\r\nThis release contains stability improvements and bug fixes. It also adds beam search support for CTC based ASR models.\r\n\r\n## Highlights\r\n\r\n* Added  beam search and external LM rescoring support for character-based CTC ASR models.\r\n* Switch to Pytorch Lightning version 1.0.5 or above.\r\n* Switch to Hydra version 1.0.3 or above.\r\n* Increase NVIDIA Pytorch container version to 20.09\r\n\r\n\r\n## Known Issues\r\n\r\nThis version will not work with Hugging Face transformers library version >=4.0.0. Please make sure your transformers library version is transformers>=3.1.0 and <4.0.0.\r\n\r\nToolkit in an early version software.",
+        "dateCreated": "2020-11-17T00:00:50Z",
+        "datePublished": "2020-11-17T00:52:38Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0b2",
+        "name": "NVIDIA Neural Modules 1.0.0b2",
+        "tag_name": "v1.0.0b2",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0b2",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/34031717",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0b2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 1.0.0b1\r\n\r\nThis release is a major re-design compared to previous version. \r\nAll NeMo models and modules are now compatible out-of-the box with Pytorch and Pytorch Lightning.\r\nEvery NeMo model is a LightningModule that comes equipped with all supporting infrastructure for training and reproducibility. Every NeMo model has an example configuration file and a corresponding script that contains all configurations needed for training. NeMo, Pytorch Lightning, and Hydra makes all NeMo models have the same look and feel so that it is easy to do Conversational AI research across multiple domains. New models such as Speaker verification and Megatron are added.\r\n\r\n## Highlights\r\n\r\n* Pytorch Lightning based Core\r\n* Hydra and Omegaconf configuration management\r\n* All model's files tarred together as .nemo files make it easy for users to download models automatically from NGC\r\n* NGC collections now includes a collection of all NeMo assets in one\r\n* New Models & tutorials\r\n  * ASR: SpeakerNet speaker verification model\r\n  * NLP: Bio Megatron state of the art model trained on bio medical tasks\r\n* ASR, NLP and TTS tutorials as interactive notebooks\r\n\r\n## Known Issues\r\n\r\nToolkit in an early version software. Breaking changes compared to previous version.\r\n\r\n## Resolved Issues\r\n\r\nAll models and modules can be used anywhere ``torch.nn.Module`` is expected.\r\n\r\n\r\n",
+        "dateCreated": "2020-10-05T16:55:52Z",
+        "datePublished": "2020-10-05T17:21:53Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v1.0.0b1",
+        "name": "NVIDIA Neural Modules 1.0.0b1",
+        "tag_name": "v1.0.0b1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v1.0.0b1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/32178576",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v1.0.0b1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.11.0\r\n\r\nThis release improves ease of use and adds new features\r\n\r\n## Highlights\r\n* Neural Graphs and NeMo models for ASR\r\n* New models:  \r\n   * Voice activity detection \r\n   * Speaker identification\r\n   * Matchboxnet Speech commands\r\n   * Megatron BERT trained on bio medical data\r\n* Various improvements and bugfixes",
+        "dateCreated": "2020-07-10T00:05:19Z",
+        "datePublished": "2020-07-10T00:15:57Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.11.0",
+        "name": "NVIDIA Neural Modules v0.11.0",
+        "tag_name": "v0.11.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.11.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/28423518",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.11.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.10.1\r\nThis is a bug fix release\r\n\r\n## Highlights:\r\n * Fixes an issue when distributed training would halt if Loss is NaN instead of skipping the batch\r\n * Other minor fixes",
+        "dateCreated": "2020-04-17T04:22:25Z",
+        "datePublished": "2020-04-17T04:53:07Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.10.1",
+        "name": "NVIDIA Neural Modules v0.10.1",
+        "tag_name": "v0.10.1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.10.1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/25597608",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.10.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.10.0\r\nThis release improves overall stability of NeMo, revamps type system and adds new models\r\n\r\n## Highlights:\r\n * Switch to a single package install (\u201cnemo_toolkit\u201d) with on-demand collections\r\n * New, easier-to-use and more flexible neural type system\r\n * Unified neural module import/export to configuration files\r\n * Various bugfixes fixes and improvements\r\n    * Codebase switched to black formatter\r\n * New models:\r\n   * Speech command recognition\r\n   * TRADE dialog state tracking\r\n   * Question answering\r\n   * Roberta and Albert\r\n   * FastSpeech",
+        "dateCreated": "2020-04-03T05:39:12Z",
+        "datePublished": "2020-04-03T06:09:00Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.10.0",
+        "name": "NVIDIA Neural Modules v0.10.0",
+        "tag_name": "v0.10.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.10.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/25159496",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.10.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.9.0\r\nThis release contains new features, new models and quality improvements for NeMo.\r\n\r\n## Highlights:\r\n  * Added \"nemo_tts\" - a Speech Synthesis collection with necessary modules for Tacotron2 and WaveGlow\r\n  * Added Mandarin support into nemo_asr and nemo_nlp\r\n  * Updated ASR and TTS checkpoints including Mandarin ASR\r\n  * Documentation now translated to Mandarin https://nvidia.github.io/NeMo/chinese/intro.html\r\n  * Export functionality for deployment\r\n  * General improvements and bugfixes\r\n",
+        "dateCreated": "2019-12-16T22:47:27Z",
+        "datePublished": "2019-12-16T23:12:19Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.9.0",
+        "name": "NVIDIA Neural Modules v0.9.0",
+        "tag_name": "v0.9.0",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.9.0",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/22272165",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.9.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.8.2\r\nThis is a quality improvement release for NeMo.\r\n\r\n## Highlights:\r\n* Bugfixes\r\n* Support for Pytorch 1.3",
+        "dateCreated": "2019-11-15T00:53:21Z",
+        "datePublished": "2019-11-15T01:45:18Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.8.2",
+        "name": "NVIDIA Neural Modules v0.8.2",
+        "tag_name": "v0.8.2",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.8.2",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/21493769",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.8.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "# Release 0.8.1\r\nThis is a quality improvement release for NeMo.\r\n\r\n## Highlights:\r\n  * Added introductory ASR tutorial explaining how to get started with deep learning for ASR\r\n  * Re-organization of NeMo NLP library\r\n  * More efficient BERT pre-training implementation\r\n  * General improvements and bugfixes\r\n  * Support for CPU-only scenario\r\n\r\n## Special thanks to our external contributors:\r\nDavid Pollack (dhpollack), Harisankar Haridas (harisankarh), Dilshod Tadjibaev (antimora)\r\n",
+        "dateCreated": "2019-11-05T19:28:33Z",
+        "datePublished": "2019-11-05T20:36:25Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/v0.8.1",
+        "name": "NVIDIA Neural Modules v0.8.1",
+        "tag_name": "v0.8.1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/v0.8.1",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/21235695",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/v0.8.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "okuchaiev",
+        "body": "The first public release of NVIDIA Neural Modules: NeMo.\r\n\r\nThis release also includes ``nemo_asr'' and ``nemo_nlp'' collections for Speech Recognition and Natural Language Processing.\r\n\r\nPlease refer to the documentation here: https://nvidia.github.io/NeMo/ ",
+        "dateCreated": "2019-09-19T20:56:52Z",
+        "datePublished": "2019-09-19T21:12:40Z",
+        "html_url": "https://github.com/NVIDIA/NeMo/releases/tag/r0.8",
+        "name": "NVIDIA Neural Modules v0.8",
+        "tag_name": "r0.8",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/NeMo/tarball/r0.8",
+        "url": "https://api.github.com/repos/NVIDIA/NeMo/releases/20122795",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/NeMo/zipball/r0.8"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1) Python 3.6, 3.7 or 3.8\n2) Pytorch 1.10.0 or above\n3) NVIDIA GPU for training\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3706,
+      "date": "Mon, 27 Dec 2021 03:33:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "FAQ can be found on NeMo's `Discussions board <https://github.com/NVIDIA/NeMo/discussions>`_. You are welcome to ask questions or start discussions there.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-learning",
+      "speech-recognition",
+      "nlp",
+      "nlp-machine-learning",
+      "neural-network",
+      "machine-translation",
+      "speech-synthesis",
+      "speech-to-text",
+      "text-to-speech",
+      "nmt"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A great way to start with NeMo is by checking `one of our tutorials <https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/stable/starthere/tutorials.html>`_.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "FAQ can be found on NeMo's `Discussions board <https://github.com/NVIDIA/NeMo/discussions>`_. You are welcome to ask questions or start discussions there.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Many examples can be found under `\"Examples\" <https://github.com/NVIDIA/NeMo/tree/stable/examples>`_ folder.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

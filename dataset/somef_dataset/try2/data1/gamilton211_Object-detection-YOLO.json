@@ -1,0 +1,489 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.02640",
+      "https://arxiv.org/abs/1612.08242",
+      "https://arxiv.org/abs/1506.02640",
+      "https://arxiv.org/abs/1612.08242"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9736753985852481
+      ],
+      "excerpt": "We will learn about object detection using the very powerful YOLO model. Many of the ideas in this notebook are described in the two YOLO papers: Redmon et al., 2016 (https://arxiv.org/abs/1506.02640) and Redmon and Farhadi, 2016 (https://arxiv.org/abs/1612.08242).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9327882686852367
+      ],
+      "excerpt": "- Use object detection on a car detection dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9427722896697682
+      ],
+      "excerpt": "- Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi - You Only Look Once: Unified, Real-Time Object Detection (2015) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gamilton211/Object-detection-YOLO",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-23T13:36:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-23T15:23:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8579127549639671
+      ],
+      "excerpt": "We will learn to: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9468340020087262
+      ],
+      "excerpt": "- The input is a batch of images of shape (m, 608, 608, 3) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8654876510153394
+      ],
+      "excerpt": "We will use 5 anchor boxes. So we can think of the YOLO architecture as the following: IMAGE (m, 608, 608, 3) -> DEEP CNN -> ENCODING (m, 19, 19, 5, 85). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8856792956662058,
+        0.9370170171233058
+      ],
+      "excerpt": "Since we are using 5 anchor boxes, each of the 19 x19 cells thus encodes information about 5 boxes. Anchor boxes are defined only by their width and height. \nFor simplicity, we will flatten the last two last dimensions of the shape (19, 19, 5, 85) encoding. So the output of the Deep CNN is (19, 19, 425). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9173414677889161,
+        0.8326347032195731
+      ],
+      "excerpt": "Here's one way to visualize what YOLO is predicting on an image: \n- For each of the 19x19 grid cells, find the maximum of the probability scores (taking a max across both the 5 anchor boxes and across different classes).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8253326672094371,
+        0.9719148643123814,
+        0.8793025771087044
+      ],
+      "excerpt": "<p align=\"center\"><strong><u>Figure 5</u>: Each of the 19x19 grid cells colored according to which class has the largest predicted probability in that cell.</strong></p> \nNote that this visualization isn't a core part of the YOLO algorithm itself for making predictions; it's just a nice way of visualizing an intermediate result of the algorithm.  \nAnother way to visualize YOLO's output is to plot the bounding boxes that it outputs. Doing that results in a visualization like this:   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9681011662605707,
+        0.9167912181299787
+      ],
+      "excerpt": "In the figure above, we plotted only boxes that the model had assigned a high probability to, but this is still too many boxes. You'd like to filter the algorithm's output down to a much smaller number of detected objects. To do so, we'll use non-max suppression. Specifically, we'll carry out these steps:  \n- Get rid of boxes with a low score (meaning, the box is not very confident about detecting a class) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9573231526999311
+      ],
+      "excerpt": "We are going to apply a first filter by thresholding. We would like to get rid of any box for which the class \"score\" is less than a chosen threshold.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9516663107969849,
+        0.8323663907281317,
+        0.932844267550573,
+        0.952480432973766
+      ],
+      "excerpt": "- box_confidence: tensor of shape (19 X 19, 5, 1) containing p<sub>c</sub> (confidence probability that there's some object) for each of the 5 boxes predicted in each of the 19x19 cells. \n- boxes: tensor of shape (19 X 19, 5, 4) containing (b<sub>x</sub>, b<sub>y</sub>, b<sub>h</sub>, b<sub>w</sub>) for each of the 5 boxes per cell. \n- box_class_probs: tensor of shape (19 X 19, 5, 80) containing the detection probabilities (c<sub>1</sub>, c<sub>2</sub>, ... c<sub>80</sub>) for each of the 80 classes for each of the 5 boxes per cell. \nEven after filtering by thresholding over the classes scores, we still end up a lot of overlapping boxes. A second filter for selecting the right boxes is called non-maximum suppression (NMS).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8382488351046105
+      ],
+      "excerpt": "<p align=\"center\"><strong>Figure 7: In this example, the model has predicted 3 cars, but it's actually 3 predictions of the same car. Running non-max suppression (NMS) will select only the most accurate (highest probabiliy) one of the 3 boxes.</strong></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8621455384746641
+      ],
+      "excerpt": "<p align=\"center\"><strong>Figure 8: Definition of \"Intersection over Union\".</strong></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8959787923592542,
+        0.8801189641067418,
+        0.8031011972573486,
+        0.9634508859373675,
+        0.9437647144834649
+      ],
+      "excerpt": "2. Compute its overlap with all other boxes, and remove boxes that overlap it more than iou_threshold. \n3. Go back to step 1 and iterate until there's no more boxes with a lower score than the current selected box. \nThis will remove all boxes that have a large overlap with the selected boxes. Only the \"best\" boxes remain. \nIt's time to implement a function taking the output of the deep CNN (the 19x19x5x85 dimensional encoding) and filtering through all the boxes using the functions you've just implemented.  \nyolo_eval() - takes the output of the YOLO encoding and filters the boxes using score threshold and NMS. There's just one last implementational detail we have to know. There're a few ways of representing boxes, such as via their corners or via their midpoint and height/width. YOLO converts between a few such formats at different times, using the following functions (which we have provided):  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "Summary for YOLO: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8053575894116508,
+        0.9641024904016912
+      ],
+      "excerpt": "    - 425 = 5 x 85 because each cell contains predictions for 5 boxes, corresponding to 5 anchor boxes, as seen in lecture.  \n    - 85 = 5 + 80 where 5 is because (p<sub>c</sub>, b<sub>x</sub>, b<sub>y</sub>, b<sub>h</sub>, b<sub>w</sub>, c) has 5 numbers, and and 80 is the number of classes we'd like to detect \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.831382468324795,
+        0.9235670362619879,
+        0.9958157954126984
+      ],
+      "excerpt": "In this part, we are going to use a pretrained model and test it on the car detection dataset. \nRecall that we are trying to detect 80 classes, and are using 5 anchor boxes. We have gathered the information about the 80 classes and 5 boxes in two files \"coco_classes.txt\" and \"yolo_anchors.txt\". \nTraining a YOLO model takes a very long time and requires a fairly large dataset of labelled bounding boxes for a large range of target classes. We are going to load an existing pretrained Keras YOLO model stored in \"y1.h5\". (These weights come from the official YOLO website, and were converted using a function written by Allan Zelener. References are at the end of this notebook. Technically, these are the parameters from the \"YOLOv2\" model, but we will more simply refer to it as \"YOLO\" in this notebook.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9674317945097036
+      ],
+      "excerpt": "- YOLO is a state-of-the-art object detection model that is fast and accurate \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8968421718758561
+      ],
+      "excerpt": "    - Score thresholding on the probability of detecting a class to keep only accurate (high probability) boxes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.862796644227284
+      ],
+      "excerpt": "- Because training a YOLO model from randomly initialized weights is non-trivial and requires a large dataset as well as lot of computation, we used previously trained model parameters in this exercise. If you wish, you can also try fine-tuning the YOLO model with your own dataset, though this would be a fairly non-trivial exercise.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9667789225176738
+      ],
+      "excerpt": "The ideas presented in this notebook came primarily from the two YOLO papers. The implementation here also took significant inspiration and used many components from Allan Zelener's github repository. The pretrained weights used in this exercise came from the official YOLO website.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gamilton211/Object-detection-YOLO/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You are working on a self-driving car. As a critical component of this project, you'd like to first build a car detection system. To collect data, you've mounted a camera to the hood (meaning the front) of the car, which takes pictures of the road ahead every few seconds while you drive around. \n <p align=\"center\"><img src=\"nb_images/1.gif\" style=\"width:750px;height:200px;\"></p>\n\n<p align=\"center\"><strong> Pictures taken from a car-mounted camera while driving around Silicon Valley. <br> We would like to especially thank <a href=\"https://www.drive.ai/\">drive.ai</a> for providing this dataset! Drive.ai is a company building the brains of self-driving vehicles.</strong></p>\n\n <p align=\"center\"> <img src=\"nb_images/driveai.png\" style=\"width:100px;height:100;\"> </p>\n\nYou've gathered all these images into a folder and have labelled them by drawing bounding boxes around every car you found. Here's an example of what your bounding boxes look like.\n\n<img src=\"nb_images/box_label.png\" style=\"width:500px;height:250;\">\n<p align=\"center\"><strong><u>Figure 1</u>: Definition of a box</strong><p>\n\nIf you have 80 classes that you want YOLO to recognize, you can represent the class label **c** either as an integer from 1 to 80, or as an 80-dimensional vector (with 80 numbers) one component of which is 1 and the rest of which are 0. \n\nIn this exercise, we will learn how YOLO works, then apply it to car detection. Because the YOLO model is very computationally expensive to train, we will load pre-trained weights for you to use. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 03:42:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gamilton211/Object-detection-YOLO/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gamilton211/Object-detection-YOLO",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/Autonomous_driving_application_Car_detection_v3a.ipynb",
+      "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/ObjectDetection-YoloV2.ipynb",
+      "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/.ipynb_checkpoints/ObjectDetection-YoloV2-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/.ipynb_checkpoints/Autonomous%2Bdriving%2Bapplication%2B-%2BCar%2Bdetection%2B-%2Bv3-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/.ipynb_checkpoints/Untitled-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8610314881915188
+      ],
+      "excerpt": "<img src=\"nb_images/architecture.png\" style=\"width:700px;height:400;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941910184428716
+      ],
+      "excerpt": "<img src=\"nb_images/flatten.png\" style=\"width:700px;height:400;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941910184428716
+      ],
+      "excerpt": "<img src=\"nb_images/probability_extraction.png\" style=\"width:700px;height:400;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8812391599148273
+      ],
+      "excerpt": "<img src=\"nb_images/proba_map.png\" style=\"width:300px;height:300;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8899156007973423
+      ],
+      "excerpt": "<img src=\"nb_images/anchor_map.png\" style=\"width:200px;height:200;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8617238643152603
+      ],
+      "excerpt": "<img src=\"nb_images/non-max-suppression.png\" style=\"width:500px;height:400;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941910184428716
+      ],
+      "excerpt": "<img src=\"nb_images/iou.png\" style=\"width:500px;height:400;\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079100768284847
+      ],
+      "excerpt": "    - Each cell in a 19x19 grid over the input image gives 425 numbers.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8128195485866104
+      ],
+      "excerpt": "Here are few examples,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/test5.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/test5.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/test2.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/test2.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/dog.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/dog.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/check5.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/check5.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/test4.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/test4.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9196069997617795
+      ],
+      "excerpt": "<img src=\"images/firedog.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100353836140868
+      ],
+      "excerpt": "<img src=\"out/firedog.jpg\" style=\"width:500;height:500px;\"> <br> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gamilton211/Object-detection-YOLO/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/gamilton211/Object-detection-YOLO/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'COPYRIGHT\\n\\nAll contributions by deeplearning.ai (Kian Katanforoosh, Younes Bensouda Mourri, Andrew Ng):\\nCopyright (c) 2017, deeplearning.ai (Kian Katanforoosh, Younes Bensouda Mourri, Andrew Ng).\\nAll rights reserved.\\n\\nThis work incorporates contributions due to Allan Zelener released under an MIT License, reproduced below:\\n\\n----------------------------------------------------\\nAll contributions by Allan Zelener:\\nCopyright (c) 2017, Allan Zelener.\\nAll rights reserved.\\n\\nAll other contributions:\\nCopyright (c) 2017, the respective contributors.\\nAll rights reserved.\\n\\nEach contributor holds copyright over their respective contributions.\\nThe project versioning (Git) records all such contribution source information.\\n\\nLICENSE\\n\\nThe MIT License (MIT)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n----------------------------------------------------\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Object-detection-YOLO",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gamilton211",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gamilton211/Object-detection-YOLO/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 03:42:13 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

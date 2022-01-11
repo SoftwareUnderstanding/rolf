@@ -1,0 +1,231 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.02025.\n\nUber AI paper: https://arxiv.org/pdf/1807.03247.pdf.\n\nPyTorch tutorial: https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html.\n\nPytorch implementation of CoordConv: https://github.com/walsvid/CoordConv.\n\n\n## Description\n\nSpatial transformer networks are a generalization of differentiable attention to any spatial transformation. Spatial transformer networks (STN for short"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "DeepMind paper: https://arxiv.org/abs/1506.02025.\n\nUber AI paper: https://arxiv.org/pdf/1807.03247.pdf.\n\nPyTorch tutorial: https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html.\n\nPytorch implementation of CoordConv: https://github.com/walsvid/CoordConv.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vicsesi/PyTorch-STN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-07T09:25:25Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-12T08:38:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Spatial transformer networks are a generalization of differentiable attention to any spatial transformation. Spatial transformer networks (STN for short) allow a neural network to learn how to perform spatial transformations on the input image in order to enhance the geometric invariance of the model. For example, it can crop a region of interest, scale and correct the orientation of an image. It can be a useful mechanism because CNNs are not invariant to rotation and scale and more general affine transformations. \n\nGoals of the project:\n\n1. Investigate if using CoordConv layers instead of standard Conv will help to improve the performance.\n2. Compare the performance of the new model in evaluation metric and motivate the choice of metrics.\n3. Explore new ideas that might achieve better performance than conventional STNs.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9652373201179264
+      ],
+      "excerpt": "The proposed CoordConv layer is a simple extension to the standard convolutional layer. Convolutional layers are used in a lot of applications because they often work well, perhaps due to some combination of three factors:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8232448272949209
+      ],
+      "excerpt": "- they learn a function that is translation invariant.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9340478542301596
+      ],
+      "excerpt": "Uber AI paper suggest that including CoordConv layers can boost the performance. In order to verify this hypothesis, we will compare the performance using Conv and CoordConv layers and training the models during 50 epochs. We will evaluate the accuracy for each number in MNIST dataset, and the average loss and the accuracy for the whole test set. Following tables shows the results: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9023669626696688
+      ],
+      "excerpt": "As we can see on the previous tables, the performances using Conv and CoordConv layers are pretty similar. We will compute the confusion matrix in order to summarize the predictions broken down by each number. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9629595024380976,
+        0.923285730616719,
+        0.9693347905476756
+      ],
+      "excerpt": "For this image classification problem, using the CoordConv layer doesn't improve the performance in classification task. Although the previous tables shows that the accuracy is slightly worse in predictions with CoordConv layer during 50 training epochs, we've also evaluated the performance with less number of training epochs.  \nAll of the experiments shown that the accuracy does not improve considerably using CoordConv layers. In image classification we don't expect see much improvement, because Conv layers are actually designed to be spatially invariant. \nWe will try to boost the performance, using Leaky ReLU activation function instead of ReLU in the spatial transformer network. We will include CoordConv layers as well. The derivative of Leaky ReLU is not a 0 in the negative part, and this activation function have a little slope to allow the gradients to flow on. Let's verify if this condition could be a benefit to improve the performance. We will evaluate the performance following the same methodology than the previous experiments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Spatial Transformer Networks in PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vicsesi/PyTorch-STN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 03:35:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vicsesi/PyTorch-STN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vicsesi/PyTorch-STN",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/vicsesi/PyTorch-STN/main/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- [Docker](https://docs.docker.com/get-docker)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/vicsesi/PyTorch-STN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Spatial Transformer Networks in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PyTorch-STN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vicsesi",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/vicsesi/PyTorch-STN/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 03:35:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "python3",
+      "computer-vision",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Set up the environment:\n```sh\ndocker build -t pytorch-stn . \n```\n\nTrain and test the STN with different layers:\n```sh\ndocker run -v \"$(pwd):/app\" pytorch-stn --layer='conv' --epochs=50\n```\n```sh\ndocker run -v \"$(pwd):/app\" pytorch-stn --layer='coordconv' --epochs=50\n```\n\nOutput images: \n- `imgs/stn.png`: visualize the batch of input images and the corresponding transformed batch using STN\n- `imgs/cm.png`: confusion matrix where number of predictions are summarized with count values.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

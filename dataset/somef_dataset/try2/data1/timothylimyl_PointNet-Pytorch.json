@@ -1,0 +1,230 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1706.02413"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/timothylimyl/PointNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-01T05:00:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-09T09:35:14Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9976945189134755,
+        0.9872034336581111
+      ],
+      "excerpt": "The purpose of the repository is to gain an understanding of PointNet and try it out for myself for the purpose of my Final Year Project (FYP). My FYP will look into 3D Object Detection Algorithms and PointNet is the basis feature extractor for many 3D Object Detection Algorithms which is why PointNet is of interest to me. The code repository was taken from Fei Xia. I have investigated the details of the algorithms and reported it here (and in my FYP). \nPoint clouds are unordered set of points which prevents usage of CNN object detection algorithm as CNN assumes inputs to be in an ordered data structure. Thus, point cloud is usually transformed into an ordered representation to provide the benefit of applying convolutions. There are different ways to represent LiDAR point cloud before feeding it into the network for training if we want to use 2D Convolution operations or 2D Object Detection network such as putting it in the form of range images %LaserNet \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9852909060923998,
+        0.8219486472252987,
+        0.9609795306877393
+      ],
+      "excerpt": "In 2017, a seminal paper PointNet was released showing that it is possible to take raw point cloud data directly to do classification and segmentation while ensuring permutation invariant \\citep{qi2016pointnet}. Before PointNet, point cloud data must be transformed into other ordered representation such as voxels which had disadvantage of corrupting the data and being computationally expensive. It is worth investigating into PointNet as numerous 3D object detection and segmentation algorithms uses PointNet as the fundamental building blocks to the network. The official implementation of PointNet can be found HERE. \nPointNet is a uni\ufb01ed architecture that directly takes point clouds as input and outputs either class labels or per point segment/part labels of the input. The PointNet architecture as seen in the Figure below.  \nThe first component is a point cloud encoder that learns to encode sparse point cloud data into a dense feature vector. The PointNet encoder model is composed of three main modules : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928740677096158,
+        0.9820535732568388,
+        0.9945989365087327,
+        0.9243250719605676
+      ],
+      "excerpt": "The shared MLP layer is implemented using a series of 1D convolution, batch normalization, and ReLU operations. The 1D convolution operation is configured such that the weights are shared across the input point cloud to gather information regarding the interaction between points. It is useless to passed the weight of a single point isolated from other points as there are no useful information provided. The shared MLP layers can then learn local information of the point cloud and provide a local feature vector. Effectively the network learns a set of optimization functions/criteria that select interesting or informative points of the point cloud and encode the reason for their selection. The \ufb01nal MLP layers of the network aggregate these learnt optimal values into the global descriptor for the entire shape and feed it into the max pooling layer. We will be able to extract out the global information of the point cloud from local feature vectors and provide a global feature vector from the output of the max pooling layer. \nThe max pooling layer is very important because it is a symmetric function which ensures that the network achieves permutation invariance given that point cloud inputs are unordered. A symmetric function is a function that outputs the same values regardless of the order of the inputs given to it. It is worth noting that we are free to choose other symmetric functions instead of max pooling.   \nA data-dependent spatial transformer network attempts to canonicalize (standardise) the data before the PointNet processes them can be added to improve the results of the network. This is done by the input transform and feature transform model in the PointNet architecture. The transform model learns to predict a transformation matrix using a mini-network (T-Net) and directly apply this transformation to align the inputs to a canonical space. The T-Net resembles the big network and is composed by basic modules of shared MLP ,max pooling and fully connected layers as seen in Figure below.  \nThe T-Net Network regresses to find the transformation matrix that provides invariance to orientation changes such as rotation and translation by setting up the loss function according to the property of an orthogonal matrix where <img src=\"https://render.githubusercontent.com/render/math?math=A^T = A^{-1}, AA^T = I\">. Thus, the loss function is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9856353994904551,
+        0.8490037945672047
+      ],
+      "excerpt": "We can observed that the loss function is set up to minimise the loss so that the A matrix gets closer to that of an orthogonal matrix, where A is the 3x3 matrix of the input transform or 64x64 of the feature transform that is applied to every point cloud input through matrix multiplication. \nThe <img src= \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9916330370628225
+      ],
+      "excerpt": "alt=\"||.||_{F}\"> is the Frobenius norm. The Frobenius norm decomposes the matrix into a singular value by reshaping the matrix in a single column vector and taking the square root of the inner product of the column vector (Euclidean norm), the equation for Frobenius norm is given by: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9356938627816693,
+        0.9809895659719291,
+        0.997166337472006,
+        0.9271932661758746
+      ],
+      "excerpt": "The second component of PointNet after the encoder is the classifier that predicts the categorical class scores for all points or it can also be used for segmentation by concatenating the local feature and global feature vector together. Any multi-class loss function such as negative log likelihood can be used. \nThere a few desirable properties of PointNet which provided it with superior results. It processes the raw points directly preventing information loss from operations like voxelization or projection. It also scales linearly with the number of input points. The total number of parameters needed by PointNet is way lower than 3D Convolutions. For example, MVCNN (3D Convolution method) uses 60 Million parameters while PointNet only need 3.5 Million parameters. \nThe issue with set up of the PointNet architecture is that it does not capture local structures of the points as PointNet only learns the spatial encoding of each individual point and aggregates all the point features to a global feature vector. PointNet lacks the ability to capture local context at different scales. It is very useful if the network can learn from local context like a Convolutional Neural Network (CNN) instead of just encoding each point individually. Learning from local context at different scales helps abstract different local patterns which allows for better generalizability. For example, the first few layers of the CNN extract simple representation such as corners,edges and spots and layers after it builds on top of these local context to form more complex representations. The author of PointNet proposed PointNet++ to fix this issue. PointNet++ partitions the point clouds into different sets and apply PointNet to learn local features. The architecture of PointNet++ can be seen in Figure below. \nPointNet++ architecture builds a hierarchical grouping of points and progressively extract features off larger groupings along the hierarchy. Each level of hierarchy provides with different abstraction through Set Abstraction as seen in Figure \\ref{fig:pointnet++}. Set abstraction is made of three layers: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Learning and reporting about PointNet (PyTorch Implementation)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/timothylimyl/PointNet-Pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 15:16:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/timothylimyl/PointNet-Pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "timothylimyl/PointNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/timothylimyl/PointNet-Pytorch/master/scripts/download.sh",
+      "https://raw.githubusercontent.com/timothylimyl/PointNet-Pytorch/master/scripts/build.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8647354795712904
+      ],
+      "excerpt": "<img src= \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8562949093721135
+      ],
+      "excerpt": "The <img src= \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/timothylimyl/PointNet-Pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Fei Xia\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Purpose",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PointNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "timothylimyl",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/timothylimyl/PointNet-Pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 15:16:30 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

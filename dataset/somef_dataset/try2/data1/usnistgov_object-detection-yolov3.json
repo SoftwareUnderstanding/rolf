@@ -1,0 +1,357 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.02640](https://arxiv.org/abs/1506.02640",
+      "https://arxiv.org/abs/1506.02640",
+      "https://arxiv.org/abs/1612.08242](https://arxiv.org/abs/1612.08242",
+      "https://arxiv.org/abs/1612.08242",
+      "https://arxiv.org/abs/1804.02767](https://arxiv.org/abs/1804.02767",
+      "https://arxiv.org/abs/1804.02767"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9944484218006108
+      ],
+      "excerpt": "- Yolo: https://arxiv.org/abs/1506.02640 \n- Yolo 9000: https://arxiv.org/abs/1612.08242 \n- Yolov3: https://arxiv.org/abs/1804.02767 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9554441738822752,
+        0.9819107666668762
+      ],
+      "excerpt": "- https://aihpc.ipages.nist.gov/pages/ \n- https://gitlab.nist.gov/gitlab/aihpc/pages/wikis/home \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/usnistgov/object-detection-yolov3",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-04T16:24:42Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-06T17:55:17Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9886168122364347,
+        0.8838354824877431
+      ],
+      "excerpt": "This codebase is designed to work with Python3 and Tensorflow 2.x \nThere is example input data included in the repo under the data folder \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955840416664728,
+        0.9536441138363216
+      ],
+      "excerpt": "This training code uses lmdb databases to store the image and mask data to enable parallel memory-mapped file reader to keep the GPUs fed.  \nThe input folder of images and masks needs to be split into train and test. Train to update the model parameters, and test to estimate the generalization accuracy of the resulting model. By default 80% of the data is used for training, 20% for test. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8952104988397119
+      ],
+      "excerpt": "Script which converts two folders of images and masks into a pair of lmdb \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639319651305816
+      ],
+      "excerpt": "With the lmdb build there are two methods for training a model.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8617350733929425,
+        0.9183694671991841
+      ],
+      "excerpt": "Whether you launch the training locally or on Enki, the training script will query the system and determine how many GPUs are available. It will then build the network for training using data-parallelism. So when you define your batch size, it will actually be multiplied by the number of GPUs you are using to train the network. So a batch size of 8 training on 4 gpus, results in an actual batch size of 32. Each GPU computes its own forward pass on its own data, computes the gradient, and then all N gradients are averaged.  \nThe full help for the training script is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9184650248926527
+      ],
+      "excerpt": "test_every_n_steps: typically, you run test/validation every epoch. However, I am often building models with very small amounts of data (e.g. 500 images). With an actual batch size of 32, that allows me 15 gradient updates per epoch. The model does not change that fast, so I impose a fixed global step count between test so that I don't spend all of my GPU time running the test data. A good value for this is typically 1000. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9537254010326064
+      ],
+      "excerpt": "One of the defining features of this codebase is the parallel (python multiprocess) image reading from lightning memory mapped databases.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8803833443963367,
+        0.9596506358555309,
+        0.9691816872609298,
+        0.9945212280430878
+      ],
+      "excerpt": "- applies the augmentation transformation to the image \n- add the augmented image to the batch that reader is building \n- once a batch is constructed, the imagereader adds it to the output queue shared among all of the imagereaders \nThe training script setups of python generators which just get a reference to the output batch queue data and pass it into tensorflow. One of the largest bottlenecks in deep learning is keeping the GPUs fed. By performing the image reading and data augmentation asynchronously all the main python training thread has to do is get a reference to the next batch (which is waiting in memory) and pass it to tensorflow to be copied to the GPUs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9233283637261012
+      ],
+      "excerpt": "You will know whether the image readers are keeping up with the GPUs. When the imagereader output queue is getting empty a warning is printed to the log: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9095989214785583
+      ],
+      "excerpt": "| jitter (x, y)  | Percent of Image Size  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216071058889584
+      ],
+      "excerpt": "| blur  | Uniform Selection of Kernel Size | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8358985203126529,
+        0.9502012260702014
+      ],
+      "excerpt": "These augmentation transformations are generally configured based on domain expertise and stay fixed per dataset. \nCurrently the only method for modifying them is to open the imagereader.py file and edit the augmentation parameters contained within the code block within the imagereader __init__: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8698949587553885,
+        0.8387836596614869
+      ],
+      "excerpt": "self._jitter_augmentation_severity = 0.1  #: x% of a FOV \nself._noise_augmentation_severity = 0.02  #: vary noise by x% of the dynamic range present in the image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Tensorflow 2.x Yolo-v3 Object Detection codebase",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/usnistgov/object-detection-yolov3/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 20:31:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/usnistgov/object-detection-yolov3/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "usnistgov/object-detection-yolov3",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/train.sh",
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/build_lmdb.sh",
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/inference.sh",
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/sbatch_train.sh",
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/setup_python_environment.sh",
+      "https://raw.githubusercontent.com/usnistgov/object-detection-yolov3/master/setup_enki_environment.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8382036121572355
+      ],
+      "excerpt": "the include shell script launch_train_sbatch.sh is setup to all training on the Enki Cluster. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8980582709505841
+      ],
+      "excerpt": "                        lmdb database to use for (Required) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8043492247211779
+      ],
+      "excerpt": "                        lmdb database to use for testing (Required) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8579411795380598
+      ],
+      "excerpt": "The input folder of images and masks needs to be split into train and test. Train to update the model parameters, and test to estimate the generalization accuracy of the resulting model. By default 80% of the data is used for training, 20% for test. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091,
+        0.8587476985249702
+      ],
+      "excerpt": "python build_lmdb.py -h \nusage: build_lmdb [-h] --image_folder IMAGE_FOLDER --csv_folder CSV_FOLDER \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8576356149034564
+      ],
+      "excerpt": "                        format (extension) of the input images. E.g {tif, jpg, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8345706617915335,
+        0.8065586644176252
+      ],
+      "excerpt": "If you want to train the model on local hardware, avoid using launch_train_sbatch.sh, use python and directly launch train.py. \nWhether you launch the training locally or on Enki, the training script will query the system and determine how many GPUs are available. It will then build the network for training using data-parallelism. So when you define your batch size, it will actually be multiplied by the number of GPUs you are using to train the network. So a batch size of 8 training on 4 gpus, results in an actual batch size of 32. Each GPU computes its own forward pass on its own data, computes the gradient, and then all N gradients are averaged.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503189345333785,
+        0.8223276235493272
+      ],
+      "excerpt": "python train.py -h \nusage: train_yolo [-h] [--batch_size BATCH_SIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.843422915301725
+      ],
+      "excerpt": "                        training batch size \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8366840868128748
+      ],
+      "excerpt": "                        whether to use data augmentation [0 = false, 1 = true] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/usnistgov/object-detection-yolov3/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "object-detection-yolov3",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "usnistgov",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/usnistgov/object-detection-yolov3/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sat, 25 Dec 2021 20:31:17 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

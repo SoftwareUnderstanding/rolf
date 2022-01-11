@@ -1,0 +1,915 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1609.02849v2, 2 April 2017\n    -  Durret, \u201cBranching Process Models of Cancer\u201d, Mathematical Biosciences Institute Lecture Series 1.1 Stochastics in Biological Systems\n    -  Willimas, et al., \u201cIdentification of neutral evolution accross cancer type\u201d, Nature Genetics, 2016.\n    -  Williams, et al., \u201cQuantification of subclonal selection in cancer from bulk sequencing data \u201d, Nature Genetics, 2019.\n\n------------------------------------------------------------------------\n\n**Lecture:** *Tumour subclonal deconvolution*\n\n-   (Theory) Subclonal deconvolution (https://www.dropbox.com/s/l7efzgiv6o8jy3p/5.MOBSTER.pdf?dl=0):\n\n    -   Tail modelling versus subclones\n    -   Read counts analysis\n    -   Multi-sample deconvolution\n\n-   (Practice) Deconvolution in practice\n\n    -   MOBSTER runs with WGS data\n\n-   Readings (https://www.dropbox.com/s/ijn3edftzys8bcy/readings.zip?dl=0)\n\n    -   Same as previous lecture\n    -   Roth, Andrew, et al.\u00a0\u201cPyClone: statistical inference of clonal\n        population structure in cancer.\u201d Nature methods 11.4 (2014):\n        396-398.\n    -  Caravagna, et al., \"Subclonal reconstruction of tumors by using machine learning and population genetics\", Nature Genetics 52, 2020.\n\n------------------------------------------------------------------------\n\n**Lecture (D Ramazzotti):** *Mutational signatures in human cancers*\n\n- Theory: (https://www.dropbox.com/s/t60cjdipp93cueq/6.%20Signatures.pdf?dl=0) \n   - Concepts behind mutational signatures \n   - De novo inference of mutational signatures \n   - Solving with non-negative matrix factorization (NMF) \n   - Mutational signature extraction from pan-cancer data \n\n- Practice (install required packages before the lecture): \n   - Examples and best practice on real data \n   - Analysis of breast cancer data \n\nReadings: \n\n   - (Concepts on mutational signatures) Alexandrov, Ludmil B., et al. \"Signatures of mutational processes in human cancer.\" Nature 500.7463 (2013): 415-421.\n   - (Concepts on mutational signatures) Alexandrov, Ludmil B., et al. \"The repertoire of mutational signatures in human cancer.\" Nature 578.7793 (2020): 94-101.\n   - (Tool - SigProfiler) Alexandrov, Ludmil B., et al. \"Deciphering signatures of mutational processes operative in human cancer.\" Cell reports 3.1 (2013): 246-259.\n   - (Tool - SparseSignatures) Lal, A., et al. \"De Novo Mutational Signature Discovery in Tumor Genomes using SparseSignatures.\" (2020).\n   - (Statistics - Non-negative matrix factorization) Brunet, Jean-Philippe, et al. \"Metagenes and molecular pattern discovery using matrix factorization.\" Proceedings of the national academy of sciences 101.12 (2004): 4164-4169.\n   - (Statistics - Non-negative matrix factorization) Owen, Art B., and Patrick O. Perry. \"Bi-cross-validation of the SVD and the nonnegative matrix factorization.\" The annals of applied statistics 3.2 (2009): 564-594.\n\n------------------------------------------------------------------------\n\n# Part 3 - Single-cell sequencing\n\n------------------------------------------------------------------------\n\n------------------------------------------------------------------------\n\n**Lecture (R Bergamin, S Milite):** *Basics of Single-cell RNA analysis*\n\n-   Theory (https://www.dropbox.com/s/eq3b4omjpc25m3k/sc_tutorial.pdf?dl=0):\n    \n    - Introduction to 10x single cell RNA sequencing\n    - Problems and opportunities\n\n-   Practice:\n\n    - Data format explanation\n    - Data QC \n    - Batch Effects removal \n    - Dimensionality Reduction\n    \n\tSalvatore:\n    - Clustering and cell type assignments\n    - Signature enrichment\n    - Differential expression (DE)\n\n-  Readings:\n    - Luecken, Malte D., and Fabian J. Theis. \u201cCurrent best practices in single\u2010cell RNA\u2010seq analysis: a tutorial.\u201d Molecular systems biology 15.6 (2019): e8746.\n    - https://satijalab.org/seurat/articles/get_started.html\n    - https://ucdavis-bioinformatics-training.github.io/2019-single-cell-RNA-sequencing-Workshop-UCD_UCSF/\n\n\n------------------------------------------------------------------------\n\nLecture\n\n**Lecture (A Graudenzi, F Angaroni and D Maspero):** *Longitudinal evolution from single cell*\n\n-   Theory: Inference of phylogenies from single cell data (https://www.dropbox.com/s/isn7qgz1l661gax/Single-cell-phylo.pptx?dl=0)\n\n    - Perfect phylogenies from categorical data: the Gusfield algorithm,\n    - Translating the perfect phylogeny problem as non-negative factorization (NMF)\n    - Technical noise (sequencing errors) and biological variability: the need for probabilistic models of clonal evolution.\n    - The likelihood function and the probabilistic graphical model of SCITE\n    - Estimation of the error rate\n    - Structure learning via MCMCd\n    - Extension: longitudinal models (LACE)\n    - Extension: modeling mutation losses (SIFIT)\n    - Extension: including population dynamics (SICLONEFIT)\n\n-   Practice (Data to download https://www.dropbox.com/s/sy8gadzjex8luhk/Melanoma.zip?dl=0):\n    - Application of LACE to real data (https://github.com/BIMIB-DISCo/LACE-UTILITIES)\n   \n-   Readings\n    - [Gusfield] \u201cEfficient algorithms for inferring evolutionary trees\u201d D. Gusifield 1991\n    - [SCITE] \u201dTree inference for single-cell data\u201d Janh et al. 2016\n    - [LACE] \u201cLongitudinal cancer evolution from single cell\u201d D. Ramazzotti et al. 2020\n    - [SIFIT] \u201dSiFit: inferring tumor trees from single-cell sequencing data under finite-sites models\u201d H. Zafar et al. 2017\n    - [SICLONEFIT] \u201dSiCloneFit: Bayesian inference of population structure, genotype,and phylogeny of tumor clones from single-cell genome sequencing data\u201d H. Zafaret al. 2019\n\n------------------------------------------------------------------------\n\n**Lecture (S Milite):** *Count-based models for single-cell data*\n\n- Theory (https://www.dropbox.com/s/6p8le8wesf2o6np/scRNA_seq_lesson.pdf?dl=0):\n   - Generative modelling as an alternative to pipelines\n   - Poisson and Negative binomial distributions\n   - Count based modelling, RNA-seq vs scRNA-seq\n   - Count models for normalisation (scTransform)\n   - Scaling NB models with variational autoencoders (scVI)\n   - CONGAS (genotype CNV from scRNA-seq)\n   - Elements of Gradient based variational inference\n   - Discrete Latent Variable modelling\n\n- Practice:\n   - Example run of CONGAS on breast cancer 10x dataset\n\n- Readings:\n   - Hafemeister, Christoph, and Rahul Satija. \u2018Normalization and Variance Stabilization of Single-Cell RNA-Seq Data Using Regularized Negative Binomial Regression\u2019. Genome Biology 20, no. 1 (23 December 2019): 296. https://doi.org/10.1186/s13059-019-1874-1.\n   - Jang, Eric, Shixiang Gu, and Ben Poole. \u2018Categorical Reparameterization with Gumbel-Softmax\u2019. ArXiv:1611.01144 [Cs, Stat], 5 August 2017. http://arxiv.org/abs/1611.01144.\n   - Kingma, Diederik P., and Max Welling. \u2018Auto-Encoding Variational Bayes\u2019. ArXiv:1312.6114 [Cs, Stat], 1 May 2014. http://arxiv.org/abs/1312.6114.\n   - Lopez, Romain, Jeffrey Regier, Michael B. Cole, Michael I. Jordan, and Nir Yosef. \u2018Deep Generative Modeling for Single-Cell Transcriptomics\u2019. Nature Methods 15, no. 12 (December 2018): 1053\u201358. https://doi.org/10.1038/s41592-018-0229-2.\n   - Milite, Salvatore, Riccardo Bergamin, and Giulio Caravagna. \u2018Genotyping Copy Number Alterations from Single-Cell RNA Sequencing\u2019. BioRxiv, 1 January 2021, 2021.02.02.429335. https://doi.org/10.1101/2021.02.02.429335.\n   - Sarkar, Abhishek, and Matthew Stephens. \u2018Separating Measurement and Expression Models Clarifies Confusion in Single Cell RNA-Seq Analysis\u2019. BioRxiv, 1 January 2020, 2020.04.07.030007. https://doi.org/10.1101/2020.04.07.030007.\n   - Schulman, John, Nicolas Heess, Theophane Weber, and Pieter Abbeel. \u2018Gradient Estimation Using Stochastic Computation Graphs\u2019. ArXiv:1506.05254 [Cs], 5 January 2016. http://arxiv.org/abs/1506.05254.\n   - Svensson, Valentine. \u2018Droplet ScRNA-Seq Is Not Zero-Inflated\u2019. Nature Biotechnology 38, no. 2  (February 2020): 147\u201350. https://doi.org/10.1038/s41587-019-0379-5.\n   - \n------------------------------------------------------------------------\n\n------------------------------------------------------------------------\n\n# Part 4 - Population-level inference\n\n------------------------------------------------------------------------\n\n**Lecture:** *Evolutionary based stratifications*\n\n-   (Theory) Detecting repeated evolution from multi-region bulk\n    sequencing\n\n    -   Clone-trees and tree expansion\n    -   Expectation Maximisation for latent model discovery\n    -   Evolutionary distance and cluster\n\n-   (Practice) Inference in practice\n\n    -   Colorectal adenomas with REVOLVER\n    -   TRACERx Lung Adencarcinomas with REVOLVER\n\n-   Readings\n\n    -   Caravagna, Giulio, et al.\u00a0\u201cDetecting repeated cancer evolution\n        from multi-region tumor sequencing data.\u201d Nature methods 15.9\n        (2018): 707-714.\n\n**Lecture:** *Population-level models*\n\n-   (Theory) Bayesian Networks models\n\n    -   Conjunctive Bayesian Networks\n    -   Suppes\u2019 probabilistic causation\n\n-   (Practice) Inference in practice\n\n    -   Analysis of CODREAD with PICNIC\n    -   Analysis of other cbio data\n\n-   Readings\n\n    -   Beerenwinkel, Niko, Nicholas Eriksson, and Bernd Sturmfels.\n        \u201cConjunctive bayesian networks.\u201d Bernoulli (2007): 893-909.\n    -   Gerstung, Moritz, et al.\u00a0\u201cQuantifying cancer progression with\n        conjunctive Bayesian networks.\u201d Bioinformatics 25.21 (2009):\n        2809-2815.\n    -   Caravagna, Giulio, et al.\u00a0\u201cAlgorithmic methods to infer the\n        evolutionary trajectories in cancer progression.\u201d Proceedings of\n        the National Academy of Sciences 113.28 (2016): E4025-E4034.\n    -   Ramazzotti, Daniele, et al.\u00a0\u201cCAPRI: efficient inference of\n        cancer progression models from cross-sectional data.\u201d\n        Bioinformatics 31.18 (2015): 3016-3026.\n    -   Loohuis, Loes Olde, et al.\u00a0\u201cInferring tree causal models of\n        cancer progression with probability raising.\u201d PloS one 9.10\n        (2014): e108358."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    Laboratory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8450045395698996
+      ],
+      "excerpt": "Dr Riccardo Bergamin, University of Trieste \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8450045395698996,
+        0.8450045395698996,
+        0.9432427977930056
+      ],
+      "excerpt": "Dr Salvatore Milite, University of Trieste \nDr Daniele Ramazzotti, University of Milan-Bicocca. \n| Lecturer         | Title                                         | When  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8972607252494296
+      ],
+      "excerpt": "| Bergamin, Milite | Basics of Single-cell RNA analysis          | 30/4 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9017692261577382
+      ],
+      "excerpt": "Research at the CDSLab (www.caravagnalab.org). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "(Theory) Mutation calling: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319538024882915
+      ],
+      "excerpt": "(tool) Roth, Andrew, et al.\u00a0\u201cJointSNVMix: a probabilistic model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9963031414375647,
+        0.8895732872732385
+      ],
+      "excerpt": "(tool) Kim, Sangtae, et al.\u00a0\u201cStrelka2: fast and accurate calling \n    of germline and somatic variants.\u201d Nature methods 15.8 (2018): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9815609038751585
+      ],
+      "excerpt": "(tool) Benjamin, David, et al.\u00a0\u201cCalling somatic snvs and indels \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9637894967013698
+      ],
+      "excerpt": "(tool) Rimmer, Andy, et al.\u00a0\u201cIntegrating mapping-, assembly-and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8711248079754514
+      ],
+      "excerpt": "(Theory) Aneuploidy and Copy Number calling: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9102715399223362
+      ],
+      "excerpt": "(tool) Favero, Francesco, et al.\u00a0\u201cSequenza: allele-specific copy \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9799008346201934
+      ],
+      "excerpt": "(tool) Van Loo, Peter, et al.\u00a0\u201cAllele-specific copy number \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9948983037779863
+      ],
+      "excerpt": "(tool) Ross, Edith M., et al.\u00a0\u201cAllele-specific multi-sample copy \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9041866939470417
+      ],
+      "excerpt": "(tool) Olshen, Adam B., et al.\u00a0\u201cCircular binary segmentation for \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.87278290506005
+      ],
+      "excerpt": "(In vivo measurements) Bolhaqueiro, Ana CF, et al.\u00a0\u201cOngoing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9375414872463178
+      ],
+      "excerpt": "    colorectal cancer organoids.\u201d\u00a0Nature Genetics\u00a051.5 (2019): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8729393277090676
+      ],
+      "excerpt": "    https://bioconductor.org/packages/release/bioc/vignettes/DNAcopy/inst/doc/DNAcopy.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9113367930347488
+      ],
+      "excerpt": "(Theory) Validating mutations, copy number and tumour purity (https://www.dropbox.com/s/6gnwvzs8vpjkg77/3.CNAqc_lecture.pdf?dl=0): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8153821062667099
+      ],
+      "excerpt": "Project codes: https://docs.icgc.org/submission/projects/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8491520732036005,
+        0.9156566588472104,
+        0.9916658209309508,
+        0.9186665153711271
+      ],
+      "excerpt": "Cmero, Marek, et al.\u00a0\u201cInferring structural variant cancer cell \n    fraction.\u201d Nature Communications 11.1 (2020): 1-15. \nYuan, Ke, et al.\u00a0\u201cCcube: a fast and robust method for estimating \n    cancer cell fractions.\u201d bioRxiv (2018): 484402. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8715509475085587
+      ],
+      "excerpt": "    (https://t-heide.github.io/TEMULATOR/), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9105368110547479
+      ],
+      "excerpt": "    (https://github.com/sottorivalab/CHESS.cpp) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9948911444473992,
+        0.9987683936596028
+      ],
+      "excerpt": "Turajlic, et al., \"Resolving genetic heterogeneity in cancer\", Nature Reviews Genetic Volume Issue 2019 \nBeerenwinkel, et al., \u201cCancer Evolution: Mathematical Models and Computational Inference\u201d, DOI:10.1093/sysbio/syu081,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9849966120963352
+      ],
+      "excerpt": "Weber and Frey, \u201cMaster equations and the theory of stochastic path integrals\u201d, arXiv:1609.02849v2, 2 April 2017 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9932387949239863
+      ],
+      "excerpt": "Willimas, et al., \u201cIdentification of neutral evolution accross cancer type\u201d, Nature Genetics, 2016. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8854398367006624
+      ],
+      "excerpt": "(Theory) Subclonal deconvolution (https://www.dropbox.com/s/l7efzgiv6o8jy3p/5.MOBSTER.pdf?dl=0): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "Multi-sample deconvolution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8842858533388339,
+        0.8172193362995005
+      ],
+      "excerpt": "Roth, Andrew, et al.\u00a0\u201cPyClone: statistical inference of clonal \n    population structure in cancer.\u201d Nature methods 11.4 (2014): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9595907438795173
+      ],
+      "excerpt": "Caravagna, et al., \"Subclonal reconstruction of tumors by using machine learning and population genetics\", Nature Genetics 52, 2020. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8854398367006624
+      ],
+      "excerpt": "Theory: (https://www.dropbox.com/s/t60cjdipp93cueq/6.%20Signatures.pdf?dl=0)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865587086410546
+      ],
+      "excerpt": "(Concepts on mutational signatures) Alexandrov, Ludmil B., et al. \"Signatures of mutational processes in human cancer.\" Nature 500.7463 (2013): 415-421. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8983846828918994,
+        0.960119356820444,
+        0.9914112682533077
+      ],
+      "excerpt": "(Tool - SigProfiler) Alexandrov, Ludmil B., et al. \"Deciphering signatures of mutational processes operative in human cancer.\" Cell reports 3.1 (2013): 246-259. \n(Tool - SparseSignatures) Lal, A., et al. \"De Novo Mutational Signature Discovery in Tumor Genomes using SparseSignatures.\" (2020). \n(Statistics - Non-negative matrix factorization) Brunet, Jean-Philippe, et al. \"Metagenes and molecular pattern discovery using matrix factorization.\" Proceedings of the national academy of sciences 101.12 (2004): 4164-4169. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8854398367006624
+      ],
+      "excerpt": "Theory (https://www.dropbox.com/s/eq3b4omjpc25m3k/sc_tutorial.pdf?dl=0): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "- Differential expression (DE) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9493147873442409
+      ],
+      "excerpt": "Luecken, Malte D., and Fabian J. Theis. \u201cCurrent best practices in single\u2010cell RNA\u2010seq analysis: a tutorial.\u201d Molecular systems biology 15.6 (2019): e8746. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8475699952234814,
+        0.9047583947337813
+      ],
+      "excerpt": "[SCITE] \u201dTree inference for single-cell data\u201d Janh et al. 2016 \n[LACE] \u201cLongitudinal cancer evolution from single cell\u201d D. Ramazzotti et al. 2020 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8854398367006624
+      ],
+      "excerpt": "Theory (https://www.dropbox.com/s/6p8le8wesf2o6np/scRNA_seq_lesson.pdf?dl=0): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9996595066348292,
+        0.9999260614598838,
+        0.9998412078049129,
+        0.9999985502993375,
+        0.9994522446159296,
+        0.9977885066357037,
+        0.9999849142120265,
+        0.9963882949552755
+      ],
+      "excerpt": "Hafemeister, Christoph, and Rahul Satija. \u2018Normalization and Variance Stabilization of Single-Cell RNA-Seq Data Using Regularized Negative Binomial Regression\u2019. Genome Biology 20, no. 1 (23 December 2019): 296. https://doi.org/10.1186/s13059-019-1874-1. \nJang, Eric, Shixiang Gu, and Ben Poole. \u2018Categorical Reparameterization with Gumbel-Softmax\u2019. ArXiv:1611.01144 [Cs, Stat], 5 August 2017. http://arxiv.org/abs/1611.01144. \nKingma, Diederik P., and Max Welling. \u2018Auto-Encoding Variational Bayes\u2019. ArXiv:1312.6114 [Cs, Stat], 1 May 2014. http://arxiv.org/abs/1312.6114. \nLopez, Romain, Jeffrey Regier, Michael B. Cole, Michael I. Jordan, and Nir Yosef. \u2018Deep Generative Modeling for Single-Cell Transcriptomics\u2019. Nature Methods 15, no. 12 (December 2018): 1053\u201358. https://doi.org/10.1038/s41592-018-0229-2. \nMilite, Salvatore, Riccardo Bergamin, and Giulio Caravagna. \u2018Genotyping Copy Number Alterations from Single-Cell RNA Sequencing\u2019. BioRxiv, 1 January 2021, 2021.02.02.429335. https://doi.org/10.1101/2021.02.02.429335. \nSarkar, Abhishek, and Matthew Stephens. \u2018Separating Measurement and Expression Models Clarifies Confusion in Single Cell RNA-Seq Analysis\u2019. BioRxiv, 1 January 2020, 2020.04.07.030007. https://doi.org/10.1101/2020.04.07.030007. \nSchulman, John, Nicolas Heess, Theophane Weber, and Pieter Abbeel. \u2018Gradient Estimation Using Stochastic Computation Graphs\u2019. ArXiv:1506.05254 [Cs], 5 January 2016. http://arxiv.org/abs/1506.05254. \nSvensson, Valentine. \u2018Droplet ScRNA-Seq Is Not Zero-Inflated\u2019. Nature Biotechnology 38, no. 2  (February 2020): 147\u201350. https://doi.org/10.1038/s41587-019-0379-5. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9763154040476395
+      ],
+      "excerpt": "(Theory) Detecting repeated evolution from multi-region bulk \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9302785107180478
+      ],
+      "excerpt": "Caravagna, Giulio, et al.\u00a0\u201cDetecting repeated cancer evolution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9186665153711271
+      ],
+      "excerpt": "    (2018): 707-714. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8842858533388339
+      ],
+      "excerpt": "Ramazzotti, Daniele, et al.\u00a0\u201cCAPRI: efficient inference of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "    Bioinformatics 31.18 (2015): 3016-3026. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/caravagn/GDA",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-26T18:45:56Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-10T11:15:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9968029537584643
+      ],
+      "excerpt": "Dr Riccardo Bergamin, University of Trieste \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968029537584643,
+        0.9968029537584643
+      ],
+      "excerpt": "Dr Salvatore Milite, University of Trieste \nDr Daniele Ramazzotti, University of Milan-Bicocca. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9128819900052046
+      ],
+      "excerpt": "| Bergamin, Milite | Basics of Single-cell RNA analysis          | 30/4 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9684404860339999,
+        0.8145191933020692
+      ],
+      "excerpt": "| Milite           | Count-based models for single-cell data     | 5/5 | \n| Caravagna        | Evolutionary based stratifications          | 12/5|  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8910841097508475
+      ],
+      "excerpt": "High-level design of GATK \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8951596198301162
+      ],
+      "excerpt": "    for accurate detection of somatic mutations in normal/tumour \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9660666356360353
+      ],
+      "excerpt": "    haplotype-based approaches for calling variants in clinical \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "ASCAT model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8428784181738033
+      ],
+      "excerpt": "(Practice) Example runs with different tools: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8945626451219248
+      ],
+      "excerpt": "Sequenza (inspection of alternative solutions) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456016471381181
+      ],
+      "excerpt": "    of Oncology\u00a026.1 (2015): 64-70. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9699561813951515
+      ],
+      "excerpt": "    analysis of tumors.\u201d\u00a0PNAS\u00a0107.39 (2010): 16910-1691 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8699239448142883
+      ],
+      "excerpt": "    the analysis of array\u2010based DNA copy number data.\u201d Biostatistics \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9220053866471705
+      ],
+      "excerpt": "    chromosomal instability and karyotype evolution in human \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8641633082186405
+      ],
+      "excerpt": "(coding) DNAcopy: A Package for Analyzing DNA Copy Data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8571593454580411
+      ],
+      "excerpt": "(Practice) Quality-control of Whole Genome Sequencing data: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8256327271211714,
+        0.9567588029116127
+      ],
+      "excerpt": "Project codes: https://docs.icgc.org/submission/projects/ \nPocessing samples with CNAqc \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9689981775377638
+      ],
+      "excerpt": "    in the era of high-resolution whole genome sequencing.\u201d bioRxiv \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8741203774492479
+      ],
+      "excerpt": "Lecture (R Bergamin): Population genetics models of growth \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.9968029537584643
+      ],
+      "excerpt": "Luria-Delbruck Model \nTheory of 1/f tail \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774642934555046
+      ],
+      "excerpt": "Simulations of a Branching process and VAF spectrum \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8380993236627934
+      ],
+      "excerpt": "Kessler and Levine, \u201cLarge Population solution of the stochastic Luria-Delbruck evolution model \u201d, PNAS Volume 110 issue 29 2013 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9213572678865274
+      ],
+      "excerpt": "MOBSTER runs with WGS data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8167605564295836
+      ],
+      "excerpt": "Roth, Andrew, et al.\u00a0\u201cPyClone: statistical inference of clonal \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9388491623706312,
+        0.8377575826418253
+      ],
+      "excerpt": "Caravagna, et al., \"Subclonal reconstruction of tumors by using machine learning and population genetics\", Nature Genetics 52, 2020. \nLecture (D Ramazzotti): Mutational signatures in human cancers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9064244183001273,
+        0.8226090608095825
+      ],
+      "excerpt": "De novo inference of mutational signatures  \nSolving with non-negative matrix factorization (NMF)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9865917472919155
+      ],
+      "excerpt": "Analysis of breast cancer data  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8941246087259636,
+        0.9297753989762869,
+        0.897922975358866
+      ],
+      "excerpt": "(Concepts on mutational signatures) Alexandrov, Ludmil B., et al. \"Signatures of mutational processes in human cancer.\" Nature 500.7463 (2013): 415-421. \n(Concepts on mutational signatures) Alexandrov, Ludmil B., et al. \"The repertoire of mutational signatures in human cancer.\" Nature 578.7793 (2020): 94-101. \n(Tool - SigProfiler) Alexandrov, Ludmil B., et al. \"Deciphering signatures of mutational processes operative in human cancer.\" Cell reports 3.1 (2013): 246-259. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.89302487420326,
+        0.9644322937706968,
+        0.9586536342520533
+      ],
+      "excerpt": "(Statistics - Non-negative matrix factorization) Brunet, Jean-Philippe, et al. \"Metagenes and molecular pattern discovery using matrix factorization.\" Proceedings of the national academy of sciences 101.12 (2004): 4164-4169. \n(Statistics - Non-negative matrix factorization) Owen, Art B., and Patrick O. Perry. \"Bi-cross-validation of the SVD and the nonnegative matrix factorization.\" The annals of applied statistics 3.2 (2009): 564-594. \nLecture (R Bergamin, S Milite): Basics of Single-cell RNA analysis \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9634379058736512
+      ],
+      "excerpt": "Introduction to 10x single cell RNA sequencing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data QC  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8134779152938846,
+        0.805694398341994
+      ],
+      "excerpt": "Theory: Inference of phylogenies from single cell data (https://www.dropbox.com/s/isn7qgz1l661gax/Single-cell-phylo.pptx?dl=0) \nPerfect phylogenies from categorical data: the Gusfield algorithm, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979025728771904,
+        0.939305176657115
+      ],
+      "excerpt": "Technical noise (sequencing errors) and biological variability: the need for probabilistic models of clonal evolution. \nThe likelihood function and the probabilistic graphical model of SCITE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8486902300572766
+      ],
+      "excerpt": "Application of LACE to real data (https://github.com/BIMIB-DISCo/LACE-UTILITIES) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.814121480089778
+      ],
+      "excerpt": "[SCITE] \u201dTree inference for single-cell data\u201d Janh et al. 2016 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9452935329082424,
+        0.9684404860339999
+      ],
+      "excerpt": "[SICLONEFIT] \u201dSiCloneFit: Bayesian inference of population structure, genotype,and phylogeny of tumor clones from single-cell genome sequencing data\u201d H. Zafaret al. 2019 \nLecture (S Milite): Count-based models for single-cell data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8656422201344574
+      ],
+      "excerpt": "Generative modelling as an alternative to pipelines \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.864011690723582,
+        0.8655924571703956,
+        0.9057050093521489
+      ],
+      "excerpt": "Count based modelling, RNA-seq vs scRNA-seq \nCount models for normalisation (scTransform) \nScaling NB models with variational autoencoders (scVI) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9173601953315914
+      ],
+      "excerpt": "Elements of Gradient based variational inference \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8145191933020692
+      ],
+      "excerpt": "Lecture: Evolutionary based stratifications \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.959961309707981
+      ],
+      "excerpt": "Expectation Maximisation for latent model discovery \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9567588029116127,
+        0.9567588029116127
+      ],
+      "excerpt": "Colorectal adenomas with REVOLVER \nTRACERx Lung Adencarcinomas with REVOLVER \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914681221987542,
+        0.9813204562230258
+      ],
+      "excerpt": "Analysis of CODREAD with PICNIC \nAnalysis of other cbio data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865
+      ],
+      "excerpt": "Beerenwinkel, Niko, Nicholas Eriksson, and Bernd Sturmfels. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260878764098095,
+        0.8128728168956975,
+        0.837718369404653
+      ],
+      "excerpt": "    evolutionary trajectories in cancer progression.\u201d Proceedings of \n    the National Academy of Sciences 113.28 (2016): E4025-E4034. \nRamazzotti, Daniele, et al.\u00a0\u201cCAPRI: efficient inference of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8180909537361807
+      ],
+      "excerpt": "Loohuis, Loes Olde, et al.\u00a0\u201cInferring tree causal models of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Genome Data Analytics (DSSC 2021)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/caravagn/GDA/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 04:31:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/caravagn/GDA/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "caravagn/GDA",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/caravagn/GDA/main/2.Copy%20Number/ASCAT/ascat-master/gcProcessing/GCfileCreation.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8383010186978131
+      ],
+      "excerpt": "Readings (https://www.dropbox.com/s/bx2kam7tlf7tl5x/readings.zip?dl=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8167135839953757
+      ],
+      "excerpt": "Lecture: Measuring aneuploidy from bulk sequencing (https://www.dropbox.com/s/nberoeiisgmwknl/2.CNA_lecture.pdf?dl=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8383010186978131
+      ],
+      "excerpt": "Readings (https://www.dropbox.com/s/ohz5f7e51dwpg71/readings.zip?dl=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9237939856205165
+      ],
+      "excerpt": "    https://bioconductor.org/packages/release/bioc/vignettes/DNAcopy/inst/doc/DNAcopy.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8383010186978131
+      ],
+      "excerpt": "Readings (https://www.dropbox.com/s/ydl8zl0rhd46lx3/references_branching_process.zip?dl=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8383010186978131
+      ],
+      "excerpt": "Readings (https://www.dropbox.com/s/ijn3edftzys8bcy/readings.zip?dl=0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9826841875265785
+      ],
+      "excerpt": "Practice (install required packages before the lecture):  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8387972294390448
+      ],
+      "excerpt": "Extension: longitudinal models (LACE) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8617571088451565
+      ],
+      "excerpt": "(coding)Total copy-number segmentation using CBS. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8390953821382611
+      ],
+      "excerpt": "Some Examples: Moran Model, Wright-Fisher Model, Coalescence \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8423167782433294
+      ],
+      "excerpt": "Example tumours from CHESS \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8411524206449531
+      ],
+      "excerpt": "Data format explanation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8554908366205667
+      ],
+      "excerpt": "Example run of CONGAS on breast cancer 10x dataset \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/caravagn/GDA/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "HTML",
+      "R",
+      "Perl",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Genomic Data Analytics (GDA)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GDA",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "caravagn",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/caravagn/GDA/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Thu, 23 Dec 2021 04:31:09 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

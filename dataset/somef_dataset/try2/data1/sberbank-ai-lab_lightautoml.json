@@ -1,0 +1,528 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2109.01528, 2021.\n\n# Installation\n## Installation via pip from PyPI\nTo install LAMA framework on your machine:\n```bash\n\n# Installation base functionality:\n\npip install -U lightautoml\n\n# Available partial installation\n# Use extra dependecies = ['nlp', 'cv', 'report']\n# Or may use 'all' for installation full functionality, example:\n\npip install -U lightautoml[nlp]\n\n```\n\nAdditionaly, run following commands for generating report in pdf format:\n\n```bash\n# MacOS\nbrew install cairo pango gdk-pixbuf libffi\n\n# Debian / Ubuntu\nsudo apt-get install build-essential libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info\n\n# Fedora\nsudo yum install redhat-rpm-config libffi-devel cairo pango gdk-pixbuf2\n\n# Windows\n# follow this tutorial https://weasyprint.readthedocs.io/en/stable/install.html#windows\n```\n\n\n## Installation from source code\n\nFirst of all you need to install [git](https://git-scm.com/downloads) and [poetry](https://python-poetry.org/docs/#installation).\n\n```bash\n\n# Load LAMA source code\ngit clone https://github.com/sberbank-ai-lab/LightAutoML.git\n\ncd LightAutoML/\n\n# !!!Choose only one item!!!\n\n# 1. Global installation: Don't create virtual environment\npoetry config virtualenvs.create false --local\n\n# 2. Recommended: Create virtual environment inside your project directory\npoetry config virtualenvs.in-project true\n\n# For more information read poetry docs\n\n# Install LAMA\npoetry lock\npoetry install\n\n```\n\n# Resources\n\n* Documentation of LightAutoML documentation is available [here](https://lightautoml.readthedocs.io/), you can also [generate](https://github.com/sberbank-ai-lab/LightAutoML/blob/master/.github/CONTRIBUTING.md#building-documentation) it.\n\n\n* Kaggle kernel examples of LightAutoML usage:\n    - [Tabular Playground Series April 2021 competition solution](https://www.kaggle.com/alexryzhkov/n3-tps-april-21-lightautoml-starter)\n    - [Titanic competition solution (80% accuracy)](https://www.kaggle.com/alexryzhkov/lightautoml-titanic-love)\n    - [Titanic **12-code-lines** competition solution (78% accuracy)](https://www.kaggle.com/alexryzhkov/lightautoml-extreme-short-titanic-solution)\n    - [House prices competition solution](https://www.kaggle.com/alexryzhkov/lightautoml-houseprices-love)\n    - [Natural Language Processing with Disaster Tweets solution](https://www.kaggle.com/alexryzhkov/lightautoml-starter-nlp)\n    - [Tabular Playground Series March 2021 competition solution](https://www.kaggle.com/alexryzhkov/lightautoml-starter-for-tabulardatamarch)\n    - [Tabular Playground Series February 2021 competition solution](https://www.kaggle.com/alexryzhkov/lightautoml-tabulardata-love)\n    - [Interpretable WhiteBox solution](https://www.kaggle.com/simakov/lama-whitebox-preset-example)\n    - [Custom ML pipeline elements inside existing ones](https://www.kaggle.com/simakov/lama-custom-automl-pipeline-example)\n\n* To find out how to work with LightAutoML, we have several tutorials and examples [here](examples/). Some of them you can run in Google Colab:\n\n    - `Tutorial_1_basics.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_1_basics.ipynb) - get started with LightAutoML on tabular data.\n    - `Tutorial_2_WhiteBox_AutoWoE.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_2_WhiteBox_AutoWoE.ipynb) - creating interpretable models.\n    - `Tutorial_3_sql_data_source.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_3_sql_data_source.ipynb) - shows how to use LightAutoML presets (both standalone and time utilized variants) for solving ML tasks on tabular data from SQL data base instead of CSV.\n    - `Tutorial_4_NLP_Interpretation.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_4_NLP_Interpretation.ipynb) - example of using TabularNLPAutoML preset, LimeTextExplainer.\n    - `Tutorial_5_uplift.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_5_uplift.ipynb) - shows how to use LightAutoML for a uplift-modeling task.\n    - `Tutorial_6_custom_pipeline.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_6_custom_pipeline.ipynb) - shows how to create your own pipeline from specified blocks: pipelines for feature generation and feature selection, ML algorithms, hyperparameter optimization etc.\n    - `Tutorial_7_ICE_and_PDP_interpretation.ipynb` [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sberbank-ai-lab/LightAutoML/blob/master/examples/tutorials/Tutorial_7_ICE_and_PDP_interpretation.ipynb) - shows how to obtain local and global interpretation of model results using ICE and PDP approaches.\n\n**Important 1**: for production you have no need to use profiler (which increase work time and memory consomption), so please do not turn it on - it is in off state by default\n\n**Important 2**: to take a look at this report after the run, please comment last line of demo with report deletion command.\n\n* LightAutoML crash courses:\n    - (Russian) [AutoML course for OpenDataScience community](https://ods.ai/tracks/automl-course-part1)\n\n* Video guides\n    - (Russian) [LightAutoML webinar for Sberloga community](https://www.youtube.com/watch?v=ci8uqgWFJGg) ([Alexander Ryzhkov](https://kaggle.com/alexryzhkov), [Dmitry Simakov](https://kaggle.com/simakov))\n    - (Russian) [LightAutoML hands-on tutorial in Kaggle Kernels](https://www.youtube.com/watch?v=TYu1UG-E9e8) ([Alexander Ryzhkov](https://kaggle.com/alexryzhkov))\n    - (English) [Automated Machine Learning with LightAutoML: theory and practice](https://www.youtube.com/watch?v=4pbO673B9Oo) ([Alexander Ryzhkov](https://kaggle.com/alexryzhkov))\n    - (English) [LightAutoML framework general overview, benchmarks and advantages for business](https://vimeo.com/485383651) ([Alexander Ryzhkov](https://kaggle.com/alexryzhkov))\n    - (English) [LightAutoML practical guide - ML pipeline presets overview](https://vimeo.com/487166940) ([Dmitry Simakov](https://kaggle.com/simakov))\n\n* Articles about LightAutoML\n    - (English) [LightAutoML vs Titanic: 80% accuracy in several lines of code (Medium)](https://alexmryzhkov.medium.com/lightautoml-preset-usage-tutorial-2cce7da6f936)\n    - (English) [Hands-On Python Guide to LightAutoML \u2013 An Automatic ML Model Creation Framework (Analytic Indian Mag)](https://analyticsindiamag.com/hands-on-python-guide-to-lama-an-automatic-ml-model-creation-framework/?fbclid=IwAR0f0cVgQWaLI60m1IHMD6VZfmKce0ZXxw-O8VRTdRALsKtty8a-ouJex7g)\n\n\n# Contributing to LightAutoML\nIf you are interested in contributing to LightAutoML, please read the [Contributing Guide](.github/CONTRIBUTING.md) to get started.\n\n\n# Questions / Issues / Suggestions\nSeek prompt advice at [Slack community](https://lightautoml-slack.herokuapp.com) or [Telegram group](https://t.me/lightautoml).\n\nOpen bug reports and feature requests on GitHub [issues](https://github.com/sberbank-ai-lab/LightAutoML/issues).\n\n\n# Licence\nThis project is licensed under the Apache Licence, Version 2.0. See [LICENSE](https://github.com/dev-rinchin/LightAutoML/blob/master/LICENSE) file for more details."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Anton Vakhrushev, Alexander Ryzhkov, Dmitry Simakov, Rinchin Damdinov, Maxim Savchenko, Alexander Tuzhilin [\"LightAutoML: AutoML Solution for a Large Financial Services Ecosystem\"](https://arxiv.org/pdf/2109.01528.pdf). arXiv:2109.01528, 2021.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "params_tuner1 = OptunaTuner(n_trials=20, timeout=30) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8334316807263773
+      ],
+      "excerpt": "Titanic 12-code-lines competition solution (78% accuracy) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "Video guides \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9655172333211433
+      ],
+      "excerpt": "(English) Automated Machine Learning with LightAutoML: theory and practice (Alexander Ryzhkov) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sberbank-ai-lab/LightAutoML",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Table of contents\n\nContributing to LightAutoML\nCodebase Structure\nDeveloping LightAutoML\nWriting Documentation\nStyle Guide\n\nContributing to LightAutoML\nThank you for your interest in contributing to LightAutoML! Before you begin writing code,\nit is important that you share your intention to contribute with the developers team.\n\nFirst, please look for discussions on this topic in issues\nbefore implementing anything inside the project.\nPick an issue and comment that you would like to work on it.\nIf there is no discussion on this topic, create one.\n  Please, include as much information as you can,\n  any accompanying data (your tests, expected behavior, articles),\n  and maybe your proposed solution.\nIf you need more details, please ask we will provide them ASAP.\n\nOnce you implement and test your feature or bug-fix, please submit\na Pull Request to https://github.com/sberbank-ai-lab/LightAutoML.\nWhen adding functionality, please add examples that will fully explain it.\nExamples can be added in several ways:\n- Inside the documentation\n- Jupyter notebooks\n- Your own tests\nCodebase structure\n\ndocs - For documenting we use Sphinx.\n  It provides easy to use auto-documenting via docstrings.\n\nTutorials - Notebooks with tutorials.\n\n\nlightautoml - The code of LightAutoML library.\n\naddons - Extensions of core functionality.\nautoml - The main module, which includes the AutoML class,\n  blenders and ready-made presets.\ndataset - The internal interface for working with data.\nimage - The internal interface for working with image data.\nml_algo - Modules with machine learning algorithms\n  and hyperparameters tuning tools.\npipelines - Pipelines for different tasks (feature processing & selection).\nreader - Utils for training and analysing data.\nreport - Report generators and templates.\ntasks - Define the task to solve its loss, metric.\ntext - The internal interface for working with text data.\ntransformers - Feature transformations.\nutils - Common util tools (Timer, Profiler, Logging).\nvalidation - Validation module.\n\n\n\nDeveloping LightAutoML\nInstallation\nIf you are installing from the source, you will need Python 3.6.12 or later.\nWe recommend you install an Anaconda\nto work with environments.\n\n\nInstall poetry using the poetry installation guide.\n\n\nClone the project to your own local machine:\nbash\ngit clone git@github.com:sberbank-ai-lab/LightAutoML.git\ncd LightAutoML\n\n\nInstall LightAutoML:\nbash\npoetry install\n\n\nAfter that, there is virtual environment, where you can test and implement your own code.\nSo, you don't need to rebuild the full project every time.\nEach change in the code will be reflected in the library inside the environment.\nStyle Guide\nWe follow the standard python PEP8 conventions for style.\nAutomated code checking\nIn order to automate checking of the code quality, we use\npre-commit. For more details, see the documentation,\nhere we will give a quick-start guide:\n1. Install and configure:\nconsole\npoetry run pre-commit install\n2. Now, when you run $ git commit, there will be a pre-commit check.\n   This is going to search for issues in your code: spelling, formatting, etc.\n   In some cases, it will automatically fix the code, in other cases, it will\n   print a warning. If it automatically fixed the code, you'll need to add the\n   changes to the index ($ git add FILE.py) and run $ git commit again. If\n   it didn't automatically fix the code, but still failed, it will have printed\n   a message as to why the commit failed. Read the message, fix the issues,\n   then recommit.\n3. The pre-commit checks are done to avoid pushing and then failing. But, you\n   can skip them by running $ git commit --no-verify, but note that the C.I.\n   still does the check so you won't be able to merge until the issues are\n   resolved.\nIf you experience any issues with pre-commit, please ask for support on the\nusual help channels.\nTesting\nBefore making a pull request (despite changing only the documentation or writing new code), please check your code on tests:\nbash\npoetry run pytest tests\nTo run tests with different Python versions, run tox\nbash\npoetry run tox\nAlso if you develop new functionality, please add your own tests.\nDocumentation\nBefore writing the documentation, you should collect it to make sure that the code\nyou wrote doesn't break the rest of the documentation. The library might work,\nbut the documentation might not be. It is built on the Read the Docs service,\nwhich uses its own virtual environment, which contains only part\nof the LightAutoML library dependencies. This is done to make\nthe documentation more lightweight.\nBy default, functions, that have no description will be mock from overall documentation.\nBuilding Documentation:\nTo build the documentation:\n\n\nClone repository to your device.\ngit clone https://github.com/sberbank-ai-lab/LightAutoML\ncd LightAutoML\n\n\nMake environment and install requirements.\nbash\npoetry install\n\n\nRemove existing html files:\nbash\ncd docs\npoetry run make clean html\ncd ..\n\n\nGenerate HTML documentation files. The generated files will be in docs/_build/html.\nbash\npoetry run python check_docs.py\n\n\nWriting Documentation\nThere are some rules, that docstrings should fit.\n\n\nLightAutoML uses Google-style docstring formatting.\n   The length of the line inside docstring should be limited\n   to 80 characters to fit into Jupyter documentation popups.\n\n\nEvery non-one-line docstring should have a paragraph at its end, regardless of where it will be used:\n   in the documentation for a class, module, function, class\n   method, etc. One-liners or descriptions,\n   that have no special directives (Args, Warning, Note, etc.) may have no paragraph at its end.\n\n\nOnce you added some module to LightAutoML,\n   you should add some info about it at the beginning of the module.\n   Example of this you can find in docs/mock_docs.py.\n   Also, if you use submodules, please add description to __init__.py\n   (it is usefull for Sphinx's autosummary).\n\n\nPlease use references to other submodules. You can do it by Sphinx directives.\n   For more information: https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html\n\nThere is an example for documenting standalone functions.\n\n```python3\nfrom typing import List, Union\nimport numpy as np\nimport torch\ndef typical_function(a: int, b: Union['np.ndarray', None] = None) -> List[int]:\n    \"\"\"Short function description, terminated by dot.\nSome details. The parameter after arrow is return value type.\n\nUse 2 newlines to make a new paragraph,\nlike in `LaTeX by Knuth &lt;https://en.wikipedia.org/wiki/LaTeX&gt;`_.\n\nArgs:\n    a: Parameter description, starting with a capital\n      latter and terminated by a period.\n    b: Textual parameter description.\n\n.. note::\n    Some additional notes, with special block.\n\n    If you want to itemize something (it is inside note):\n\n        - First option.\n        - Second option.\n          Just link to function :func:`torch.cuda.current_device`.\n        - Third option.\n          Also third option.\n        - It will be good if you don't use it in args.\n\nWarning:\n    Some warning. Every block should be separated\n    with other block with paragraph.\n\nWarning:\n    One more warning. Also notes and warnings\n    can be upper in the long description of function.\n\nExample:\n\n    &gt;&gt;&gt; print('MEME'.lower())\n    meme\n    &gt;&gt;&gt; b = typical_function(1, np.ndarray([1, 2, 3]))\n\nReturns:\n    Info about return value.\n\nRaises:\n    Exception: Exception description.\n\n\"\"\"\n\nreturn [a, 2, 3]\n\n```\n\n\nDocstring for generator function.\n`python3\ndef generator_func(n: int):\n    \"\"\"Generator have aYieldssection instead ofReturns``.\nArgs:\n    n: Number of interations.\nYields:\n    The next number in the range of 0 to n-1.\nExample:\n    Example description.\n&gt;&gt;&gt; print([i for i in generator_func(4)])\n[0, 1, 2, 3]\n\n\"\"\"\nx = 0\nwhile x < n:\n    yield x\n    x += 1\n7. Documenting classes.python3\nfrom typing import List, Union\nimport numpy as np\nimport torch\n\n\nclass ExampleClass:\n    \"\"\"The summary line for a class that fits only one line.\nLong description.\n\nIf the class has public attributes, they may be documented here\nin an ``Attributes`` section, like in ``Args`` section of function.\n\nProperties created with the ``@property`` decorator should be documented\nin the property's getter method. Use arrow to set the return type.\n\nOn the stage before __init__ we don't know anything about `Attributes`,\nso please, add description about it's types.\n\nAttributes:\n    attr1 (str): Description of `attr1`.\n    attr2 (:obj:`int`, optional): Description of `attr2`.\n\n\"\"\"\n\ndef __init__(self, param1: int, param2: 'np.ndarray', *args, **kwargs):\n    \"\"\"Example of docstring of the __init__ method.\n\n    Note:\n        You can also add notes as ``Note`` section.\n        Do not include the `self` parameter in the ``Args`` section.\n\n    Args:\n        param1: Description of `param1`.\n        param2: Description of `param2`.\n        *args: Description of positional arguments.\n        **kwargs: Description of key-word arguments.\n\n    \"\"\"\n    self.attr1 = param1\n    self.attr2 = param2\n    if len(args) &gt; 0:\n        self.attr2 = args[0]\n    self.attr3 = kwargs # will not be documented.\n    self.figure = 4 * self.attr1\n\n@property\ndef readonly_property(self) -&gt; str:\n    \"\"\"Properties should be documented in\n    their getter method.\n\n    \"\"\"\n    return 'lol'\n\n@property\ndef readwrite_property(self) -&gt; List[str]:\n    \"\"\"Properties with both a getter and setter\n    should only be documented in their getter method.\n\n    If the setter method contains notable behavior, it should be\n    mentioned here.\n    \"\"\"\n    return [str(self.figure)]\n\n@readwrite_property.setter\ndef readwrite_property(self, value: int):\n    self.figure = value\n\ndef some_method(self, param1: int, param2: float = np.pi) -&gt; List[int]:\n    \"\"\"Just like a functions.\n\n    Long description.\n\n    Warning:\n        This method do something. May be undefined-behaviour.\n\n    Args:\n        param1: Some description of param1.\n        param2: Some description of param2. Default value\n           will be contained in signature of function.\n\n    Returns:\n        Array with `1`, `2`, `3`.\n\n    \"\"\"\n    self.attr1 = param1\n    self.attr2 += param2\n\n    return [1, 2, 3]\n\n\ndef __special__(self):\n    \"\"\"By default we aren`t include dundered members.\n\n    Also there may be no docstring.\n    \"\"\"\n    pass\n\ndef _private(self):\n    \"\"\"By default we aren't include private members.\n\n    Also there may be no docstring.\n    \"\"\"\n    pass\n\n@staticmethod\ndef static_method(param1: int):\n    \"\"\"Description of static method.\n\n    Note:\n        As like common method of class don`t use `self`.\n\n    Args:\n        param1: Description of `param1`.\n\n    \"\"\"\n    print(param1)\n\n```\n\nIf you have a parameter that can take a finite number of values,\n   if possible, describe each of them in the Note section.\n\n```python3\nimport random\nclass A:\n    \"\"\"\n    Some description.\nSome long description.\n\nAttributes:\n    attr1 (:obj:`int`): Description of `attr1`.\n    attr2 (:obj:`int`): Description of `attr2`.\n\n\"\"\"\ndef __init__(self, weight_initialization: str = 'none'):\n    \"\"\"\n\n    Args:\n        weight_initialization: Initialization type.\n\n    Note:\n        There are several initialization types:\n\n            - '`zeros`': fill ``attr1``\n              and ``attr2`` with zeros.\n            - '`ones`': fill ``attr1``\n              and ``attr2`` with ones.\n            - '`none`': fill ``attr1``\n              and ``attr2`` with random int in `\\[0, 100\\]`.\n\n    Raises:\n        ValueError: If the entered initialization type is not supported.\n\n    \"\"\"\n    if weight_initialization not in ['zeros', 'ones', 'none']:\n        raise ValueError(\n            f'{weight_initialization} - Unsupported weight initialization.')\n\n    if weight_initialization == 'zeros':\n        attr1 = 0\n        attr2 = 0\n    elif weight_initialization == 'ones':\n        attr1 = 1\n        attr2 = 1\n    else:\n        attr1 = random.randint(0, 100)\n        attr2 = random.randint(0, 100)\n\n```\nAdding new submodules\nIf you add your own directory to LightAutoML, you should add a corresponding module as new .rst\nfile to the docs/.  And also mention it in docs/index.rst.\nIf you add your own module, class or function, then you will need\nto add it description to the corresponding .rst in docs.\nAdding Tutorials\nWe use nbsphinx extension for tutorials.\nExamples, you can find in docs/notebooks.\nPlease, put your tutorial in this folder\nand after add it in docs/Tutorials.rst.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-13T13:23:58Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-29T14:37:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[![Slack](https://lightautoml-slack.herokuapp.com/badge.svg)](https://lightautoml-slack.herokuapp.com)\n[![Telegram](https://img.shields.io/badge/chat-on%20Telegram-2ba2d9.svg)](https://t.me/lightautoml)\n![PyPI - Downloads](https://img.shields.io/pypi/dm/lightautoml?color=green&label=PyPI%20downloads&logo=pypi&logoColor=orange&style=plastic)\n![Read the Docs](https://img.shields.io/readthedocs/lightautoml?style=plastic)\n![Tests](https://github.com/sberbank-ai-lab/LightAutoML/actions/workflows/CI.yml/badge.svg)\n\nLightAutoML (LAMA) - project from Sberbank AI Lab AutoML group is the framework for automatic classification and regression model creation.\n\nCurrent available tasks to solve:\n- binary classification\n- multiclass classification\n- regression\n\nCurrently we work with datasets, where **each row is an object with its specific features and target**. Multitable datasets and sequences are now under contruction :)\n\n**Note**: for automatic creation of interpretable models we use [`AutoWoE`](https://github.com/sberbank-ai-lab/AutoMLWhitebox) library made by our group as well.\n\n**Authors**: [Alexander Ryzhkov](https://kaggle.com/alexryzhkov), [Anton Vakhrushev](https://kaggle.com/btbpanda), [Dmitry Simakov](https://kaggle.com/simakov), Vasilii Bunakov, Rinchin Damdinov, Pavel Shvets, Alexander Kirilin.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8066148786593491
+      ],
+      "excerpt": "Let's solve the popular Kaggle Titanic competition below. There are two main ways to solve machine learning problems using LightAutoML: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "    'Survived': (test_pred.data[:, 0] > 0.5)*1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9198212802090173
+      ],
+      "excerpt": ": define that machine learning problem is binary classification \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = BoostLGBM( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "pipeline_lvl2 = MLPipeline([model], pre_selection=None, features_pipeline=pipe1, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "    'Survived': (test_pred.data[:, 0] > 0.5)*1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9163506249506447,
+        0.8036820191106001
+      ],
+      "excerpt": "LighAutoML framework has a lot of ready-to-use parts and extensive customization options, to learn more check out the resources section. \nDocumentation of LightAutoML documentation is available here, you can also generate it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8696855371645819
+      ],
+      "excerpt": "Natural Language Processing with Disaster Tweets solution \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.816430263731449,
+        0.9128676311747935
+      ],
+      "excerpt": "To find out how to work with LightAutoML, we have several tutorials and examples here. Some of them you can run in Google Colab: \nTutorial_1_basics.ipynb  - get started with LightAutoML on tabular data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8090231769675511
+      ],
+      "excerpt": "Tutorial_3_sql_data_source.ipynb  - shows how to use LightAutoML presets (both standalone and time utilized variants) for solving ML tasks on tabular data from SQL data base instead of CSV. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9558263858862951,
+        0.9416408443455241
+      ],
+      "excerpt": "Tutorial_7_ICE_and_PDP_interpretation.ipynb  - shows how to obtain local and global interpretation of model results using ICE and PDP approaches. \nImportant 1: for production you have no need to use profiler (which increase work time and memory consomption), so please do not turn it on - it is in off state by default \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9100999010553248,
+        0.8417098297660812,
+        0.8050247621758796
+      ],
+      "excerpt": "(Russian) LightAutoML hands-on tutorial in Kaggle Kernels (Alexander Ryzhkov) \n(English) Automated Machine Learning with LightAutoML: theory and practice (Alexander Ryzhkov) \n(English) LightAutoML framework general overview, benchmarks and advantages for business (Alexander Ryzhkov) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8615039821424667,
+        0.8580197091521314
+      ],
+      "excerpt": "(English) LightAutoML vs Titanic: 80% accuracy in several lines of code (Medium) \n(English) Hands-On Python Guide to LightAutoML \u2013 An Automatic ML Model Creation Framework (Analytic Indian Mag) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "LAMA - automatic model creation framework",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://lightautoml.readthedocs.io/",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://weasyprint.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sberbank-ai-lab/lightautoml/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 78,
+      "date": "Wed, 29 Dec 2021 20:13:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sberbank-ai-lab/LightAutoML",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/sberbank-ai-lab/lightautoml/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_4_NLP_Interpretation.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_1_basics.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_2_WhiteBox_AutoWoE.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_3_sql_data_source.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_6_custom_pipeline.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_7_ICE_and_PDP_interpretation.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/examples/tutorials/Tutorial_5_uplift.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/docs/tutorials/tutor_3.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/docs/tutorials/tutor_2.ipynb",
+      "https://raw.githubusercontent.com/sberbank-ai-lab/lightautoml/master/docs/tutorials/tutor_1.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First of all you need to install [git](https://git-scm.com/downloads) and [poetry](https://python-poetry.org/docs/#installation).\n\n```bash\n\n#: Load LAMA source code\ngit clone https://github.com/sberbank-ai-lab/LightAutoML.git\n\ncd LightAutoML/\n\n#: !!!Choose only one item!!!\n\n#: 1. Global installation: Don't create virtual environment\npoetry config virtualenvs.create false --local\n\n#: 2. Recommended: Create virtual environment inside your project directory\npoetry config virtualenvs.in-project true\n\n#: For more information read poetry docs\n\n#: Install LAMA\npoetry lock\npoetry install\n\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install LAMA framework on your machine:\n```bash\n\n#: Installation base functionality:\n\npip install -U lightautoml\n\n#: Available partial installation\n#: Use extra dependecies = ['nlp', 'cv', 'report']\n#: Or may use 'all' for installation full functionality, example:\n\npip install -U lightautoml[nlp]\n\n```\n\nAdditionaly, run following commands for generating report in pdf format:\n\n```bash\n#: MacOS\nbrew install cairo pango gdk-pixbuf libffi\n\n#: Debian / Ubuntu\nsudo apt-get install build-essential libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info\n\n#: Fedora\nsudo yum install redhat-rpm-config libffi-devel cairo pango gdk-pixbuf2\n\n#: Windows\n#: follow this tutorial https://weasyprint.readthedocs.io/en/stable/install.html#:windows\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8657646479278744
+      ],
+      "excerpt": "        name = 'binary', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823593515350497
+      ],
+      "excerpt": "Build your own custom pipeline: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9096104964140866
+      ],
+      "excerpt": ": build AutoML pipeline \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from lightautoml.automl.presets.tabular_presets import TabularAutoML \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.897111697308765,
+        0.8984718199271898
+      ],
+      "excerpt": "df_train = pd.read_csv('../input/titanic/train.csv') \ndf_test = pd.read_csv('../input/titanic/test.csv') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8213380337316241
+      ],
+      "excerpt": "test_pred = automl.predict(df_test) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260293383555951
+      ],
+      "excerpt": "}).to_csv('submit.csv', index = False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from lightautoml.automl.presets.tabular_presets import TabularAutoML \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.897111697308765,
+        0.8984718199271898
+      ],
+      "excerpt": "df_train = pd.read_csv('../input/titanic/train.csv') \ndf_test = pd.read_csv('../input/titanic/test.csv') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    freeze_defaults=True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8213380337316241
+      ],
+      "excerpt": "test_pred = automl.predict(df_test) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260293383555951
+      ],
+      "excerpt": "}).to_csv('submit.csv', index = False) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9074252841625389
+      ],
+      "excerpt": "Kaggle kernel examples of LightAutoML usage: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "HTML"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\nCopyright 2020 (\\xd1\\x81) Ryzhkov Alexander, Vakhrushev Anton, Savchenko Maksim,\\n\\t\\t\\t\\t   Beknazarov Nazar, Penkin Grigorii, Damdinov Rinchin\\n\\nLicensed under the Apache License, Version 2.0 (the \"License\");\\nyou may not use this file except in compliance with the License.\\nYou may obtain a copy of the License at\\n\\n    http://www.apache.org/licenses/LICENSE-2.0\\n\\nUnless required by applicable law or agreed to in writing, software\\ndistributed under the License is distributed on an \"AS IS\" BASIS,\\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\nSee the License for the specific language governing permissions and\\nlimitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LightAutoML - automatic model creation framework",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LightAutoML",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sberbank-ai-lab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/sberbank-ai-lab/LightAutoML/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "dev-rinchin",
+        "body": "",
+        "dateCreated": "2021-10-15T15:51:24Z",
+        "datePublished": "2021-10-15T16:13:57Z",
+        "html_url": "https://github.com/sberbank-ai-lab/LightAutoML/releases/tag/v0.3.0",
+        "name": "LightAutoML (LAMA) v0.3.0",
+        "tag_name": "v0.3.0",
+        "tarball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/tarball/v0.3.0",
+        "url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/releases/51443680",
+        "zipball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/zipball/v0.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "alexmryzhkov",
+        "body": "Stable release with tutorials, tests and logging",
+        "dateCreated": "2020-12-03T02:18:31Z",
+        "datePublished": "2020-12-03T02:25:43Z",
+        "html_url": "https://github.com/sberbank-ai-lab/LightAutoML/releases/tag/v0.2.1",
+        "name": "LightAutoML (LAMA) v0.2.1",
+        "tag_name": "v0.2.1",
+        "tarball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/tarball/v0.2.1",
+        "url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/releases/34729381",
+        "zipball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/zipball/v0.2.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "alexmryzhkov",
+        "body": "First release of the library including:\r\n\r\n- Specific modules for data reading, feature typing, feature engineering, feature selection, models training etc.\r\n- TabularAutoML preset, which can be used for solving binary (`Task('binary')`), regression (`Task('reg')`) and multiclass (`Task('multiclass')`) tasks\r\n- TabularUtilizedAutoML for timeout utilization (usually for benchmarks or people who have specific amount of time to use)\r\n- Updated tutorials which fit new version and shows how to use added functionality\r\n- Nested cross-validation for used algorithms: it can be turned on/off/auto from automl config and customized using specific arguments (for example you can set up to use 10 nested folds and calculate only 3 of them )\r\n- Bug fixes",
+        "dateCreated": "2020-11-11T22:47:00Z",
+        "datePublished": "2020-11-11T22:57:09Z",
+        "html_url": "https://github.com/sberbank-ai-lab/LightAutoML/releases/tag/v0.2.0",
+        "name": "LightAutoML (LAMA) v0.2.0",
+        "tag_name": "v0.2.0",
+        "tarball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/tarball/v0.2.0",
+        "url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/releases/33828948",
+        "zipball_url": "https://api.github.com/repos/sberbank-ai-lab/LightAutoML/zipball/v0.2.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 659,
+      "date": "Wed, 29 Dec 2021 20:13:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "automl",
+      "classification",
+      "regression",
+      "multiclass",
+      "pytorch",
+      "nlp",
+      "model-selection",
+      "parameter-tuning",
+      "automated-machine-learning",
+      "lama",
+      "pipeline",
+      "data-science",
+      "feature-engineering",
+      "ensembling",
+      "stacking",
+      "kaggle",
+      "gradient-boosting",
+      "linear-model",
+      "blackbox",
+      "whitebox"
+    ],
+    "technique": "GitHub API"
+  }
+}

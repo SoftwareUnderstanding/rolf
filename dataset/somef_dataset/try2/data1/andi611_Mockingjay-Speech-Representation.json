@@ -1,0 +1,404 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1910.12638",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1904.03240"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@article{Liu_2020,\n   title={Mockingjay: Unsupervised Speech Representation Learning with Deep Bidirectional Transformer Encoders},\n   ISBN={9781509066315},\n   url={http://dx.doi.org/10.1109/ICASSP40776.2020.9054458},\n   DOI={10.1109/icassp40776.2020.9054458},\n   journal={ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},\n   publisher={IEEE},\n   author={Liu, Andy T. and Yang, Shu-wen and Chi, Po-Han and Hsu, Po-chun and Lee, Hung-yi},\n   year={2020},\n   month={May}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/), McAuliffe et. al.\n2. [CMU MultimodalSDK](https://github.com/A2Zadeh/CMU-MultimodalSDK/blob/master/README.md), Amir Zadeh.\n3. [PyTorch Transformers](https://github.com/huggingface/pytorch-transformers), Hugging Face.\n4. [Autoregressive Predictive Coding](https://arxiv.org/abs/1904.03240), Yu-An Chung.\n5. [End-to-end ASR Pytorch](https://github.com/Alexander-H-Liu/End-to-end-ASR-Pytorch), Alexander-H-Liu.\n6. [Tacotron Preprocessing](https://github.com/r9y9/tacotron_pytorch), Ryuichi Yamamoto (r9y9)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{Liu_2020,\n   title={Mockingjay: Unsupervised Speech Representation Learning with Deep Bidirectional Transformer Encoders},\n   ISBN={9781509066315},\n   url={http://dx.doi.org/10.1109/ICASSP40776.2020.9054458},\n   DOI={10.1109/icassp40776.2020.9054458},\n   journal={ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},\n   publisher={IEEE},\n   author={Liu, Andy T. and Yang, Shu-wen and Chi, Po-Han and Hsu, Po-chun and Lee, Hung-yi},\n   year={2020},\n   month={May}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8530268843043954,
+        0.9988151030300939
+      ],
+      "excerpt": "<img src=\"https://github.com/andi611/Mockingjay-Speech-Representation/blob/master/paper/training.png\"> \nFeel free to use or modify them, any bug report or improvement suggestion will be appreciated. If you have any questions, please contact f07942089@ntu.edu.tw. If you find this project helpful for your research, please do consider to cite this paper, thanks! \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andi611/Mockingjay-Speech-Representation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-08T15:55:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-02T14:37:25Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.930541322834864,
+        0.9972252825537737,
+        0.9941561935428488
+      ],
+      "excerpt": "This repo is a legacy version of when the Mockingjay paper is first released. \nFor our improved and maintaining implementation of Mockingjay, please visit the The S3PRL project. \nThis is an open source project for Mockingjay, an unsupervised algorithm for learning speech representations introduced and described in the paper \"Mockingjay: Unsupervised Speech Representation Learning with Deep Bidirectional Transformer Encoders\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9425306347347977
+      ],
+      "excerpt": "Their usage are explained bellow and furthur in Step 3 of the Instruction Section. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9174895304124775
+      ],
+      "excerpt": ": A batch of spectrograms: (batch_size, seq_len, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9657680238813304,
+        0.9740966245468238,
+        0.8870959177227482,
+        0.8500139397466807,
+        0.9324991837959918,
+        0.9731059284008183,
+        0.9083462525830109,
+        0.9368536216416002,
+        0.9758031924102122,
+        0.8859883482737712,
+        0.8153296384228867,
+        0.9576767049875705,
+        0.8882395360307668,
+        0.9950072723932404
+      ],
+      "excerpt": "``specis the input spectrogram of the mockingjay model where: \n-specneeds to be a PyTorch tensor with shape of(seq_len, mel_dim)or(batch_size, seq_len, mel_dim). \n-mel_dimis the spectrogram feature dimension which by default ismel_dim == 160`, see utility/audio.py for more preprocessing details. \nreps is a PyTorch tensor of various possible shapes where: \n- batch_size is the inference batch size. \n- num_hiddem_layers is the transformer encoder depth of the mockingjay model. \n- seq_len is the maximum sequence length in the batch. \n- downsample_rate is the dimensionality of the transformer encoder layers. \n- hidden_size is the number of stacked consecutive features vectors to reduce the length of input sequences. \nThe output shape of reps is determined by the two arguments: \n- all_layers is a boolean which controls whether to output all the Encoder layers, if False returns the hidden of the last Encoder layer. \n- tile is a boolean which controls whether to tile representations to match the input seq_len of spec. \nAs you can see, reps is essentially the Transformer Encoder hidden representations in the mockingjay model. You can think of Mockingjay as a speech version of BERT if you are familiar with it. \nThere are many ways to incorporate reps into your downtream task. One of the easiest way is to take only the outputs of the last Encoder layer (i.e., all_layers=False) as the input features to your downstream model, feel free to explore other mechanisms. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8869956890190843
+      ],
+      "excerpt": ": features extracted from MelBase model have dimention 768 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8428027877137424
+      ],
+      "excerpt": "example_inputs = torch.zeros(3, 800, 160) #: A batch of spectrograms: (batch_size, seq_len, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9676026341602408
+      ],
+      "excerpt": "See the instructions on the Preprocess wiki page for preprocessing instructions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9843591443568259
+      ],
+      "excerpt": "See the Experiment section for reproducing downstream task results mentioned in our paper, and see the Highlight section for incorporating the extracted representations with your own downstream task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Official Implementation of Mockingjay in Pytorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andi611/Mockingjay-Speech-Representation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Fri, 24 Dec 2021 18:05:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andi611/Mockingjay-Speech-Representation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andi611/Mockingjay-Speech-Representation",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All the parameters related to training/decoding will be stored in a yaml file. Hyperparameter tuning and massive experiment and can be managed easily this way. See [config files](config/) for the exact format and examples.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9901616052996127,
+        0.8690046023337964
+      ],
+      "excerpt": "Before you start, make sure all the packages required listed above are installed correctly \nSee the instructions on the Preprocess wiki page for preprocessing instructions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363536082150723
+      ],
+      "excerpt": "Note that the arguments--ckpdir=XXX --ckpt=XXX``` needs to be set correctly for the above command to run properly. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from runner_mockingjay import get_mockingjay_model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524
+      ],
+      "excerpt": ": reps.shape: (batch_size, num_hiddem_layers, seq_len, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524
+      ],
+      "excerpt": ": reps.shape: (batch_size, num_hiddem_layers, seq_len // downsample_rate, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524
+      ],
+      "excerpt": ": reps.shape: (batch_size, seq_len, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.80897680582524
+      ],
+      "excerpt": ": reps.shape: (batch_size, seq_len // downsample_rate, hidden_size) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.8934477375241742,
+        0.8327678938541677
+      ],
+      "excerpt": "from runner_mockingjay import get_mockingjay_model \nfrom downstream.model import example_classifier \nfrom downstream.solver import get_mockingjay_optimizer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8201107568571712
+      ],
+      "excerpt": "optimizer = get_mockingjay_optimizer(params=params, lr=4e-3, warmup_proportion=0.7, training_steps=50000) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8119940569407503
+      ],
+      "excerpt": "PATH_TO_SAVE_YOUR_MODEL = 'example.ckpt' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.950563948951535,
+        0.8810484308137334
+      ],
+      "excerpt": "python3 runner_mockingjay.py --train \nAll settings will be parsed from the config file automatically to start training, the log file can be accessed through TensorBoard. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8743160122701759
+      ],
+      "excerpt": "To load with default path, models should be placed under the directory path: --ckpdir=./result_mockingjay/ and name the model file manually with --ckpt=. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9610948196003122
+      ],
+      "excerpt": "python3 runner_mockingjay.py --plot \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9610948196003122
+      ],
+      "excerpt": "python3 runner_mockingjay.py --plot --with_head \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8217363989643283
+      ],
+      "excerpt": "python3 -m tensorboard.main --logdir=log/log_mockingjay/mockingjay_libri_sd1337/ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/andi611/Mockingjay-Speech-Representation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Andy T. Liu\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "\ud83e\udd9c Mockingjay",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Mockingjay-Speech-Representation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "andi611",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/andi611/Mockingjay-Speech-Representation/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3\n- Pytorch 1.3.0 or above\n- Computing power (high-end GPU) and memory space (both RAM/GPU's RAM) is **extremely important** if you'd like to train your own model.\n- Required packages and their use are listed below, and also in [requirements.txt](requirements.txt):\n```\neditdistance     #: error rate calculation\njoblib           #: parallel feature extraction & decoding\nlibrosa          #: feature extraction (for feature extraction only)\npydub            #: audio segmentation (for MOSEI dataset preprocessing only)\npandas           #: data management\ntensorboardX     #: logger & monitor\ntorch            #: model & learning\ntqdm             #: verbosity\nyaml             #: config parser\nmatplotlib       #: visualization\nipdb             #: optional debugger\nnumpy            #: array computation\nscipy            #: for feature extraction\n```\nThe above packages can be installed by the command:\n```bash\npip install -r requirements.txt\n```\nBelow we list packages that need special attention, and we recommand you to install them manually:\n```\napex             #: non-essential, faster optimization (only needed if enabled in config)\nsentencepiece    #: sub-word unit encoding (for feature extraction only, see https://github.com/google/sentencepiece#:build-and-install-sentencepiece for install instruction)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 17,
+      "date": "Fri, 24 Dec 2021 18:05:42 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "speech",
+      "speech-representation",
+      "mockingjay",
+      "representation-learning",
+      "feature-extraction",
+      "phoneme-prediction",
+      "phone-classification",
+      "sentiment-classification",
+      "speaker-recognition",
+      "speaker-classification",
+      "pytorch",
+      "pytorch-implementation",
+      "apc"
+    ],
+    "technique": "GitHub API"
+  }
+}

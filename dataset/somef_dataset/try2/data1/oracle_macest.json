@@ -1,0 +1,506 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2109.01531",
+      "https://arxiv.org/abs/\n\n* \"[MACEst: The reliable and trustworthy Model Agnostic Confidence \nEstimator](https://arxiv.org/abs/2109.01531). Rhys Green, Matthew Rowe, and Alberto Polleri. 2021.\"\n\n\n## License\nCopyright (c) 2021, Oracle and/or its affiliates. All rights reserved.\n\nThis library is licensed under Universal Permissive License (UPL) 1.0 as shown at \nhttps://oss.oracle.com/licenses/upl\n\nSee [LICENSE.txt](./LICENSE.txt) for more details."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "                                                                          random_state=10) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "X_pp_train, X_conf_train, y_pp_train, y_conf_train = train_test_split(X, y, test_size=0.66, random_state=10) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/oracle/macest",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing\nWe welcome your contributions! There are multiple ways to contribute.\nIssues\nFor bugs or enhancement requests, please file a GitHub issue unless it's security related. \nWhen filing a bug remember that the better written the bug is, the more likely it is to be fixed. \nIf you think you've found a security vulnerability, do not raise a GitHub issue and follow the \ninstructions on our Security Policy. \nContributing Code\nWe welcome your code contributions. \nTo get started, you will need to sign the Oracle Contributor \nAgreement (OCA).\nFor pull requests to be accepted, the bottom of your commit message must have the following line \nusing the name and e-mail address you used for the OCA.\nSigned-off-by: Your Name &lt;you@example.org&gt;\nThis can be automatically added to pull requests by committing with:\ngit commit --signoff\nOnly pull requests from committers that can be verified as having signed the OCA can be accepted.\nPull request process\n\nFork this repository.\nCreate a branch in your fork to implement the changes. We recommend using the issue number as \npart of your branch name, e.g. 1234-fixes.\nEnsure that any documentation is updated with the changes.\nAdd a test for the new behaviour (or that exercises the bug if a bug fix).\nSubmit the pull request. Do not leave the pull request text blank. \nExplain exactly what your changes are meant to do and provide simple steps on how to validate your \nchanges. \nEnsure that you reference the issue you created as well. \nThe PR name will be the name of the squashed commit to main.\nWe will assign the pull request to be reviewed before it is merged.\n\nCode of Conduct\nFollow the Golden Rule. \nMore specific guidelines are in the Contributor Covenant Code of Conduct",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-09T21:33:53Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-18T09:42:40Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9009856380212428,
+        0.932490263970371
+      ],
+      "excerpt": "MACEst is a confidence estimator that can be used alongside any model (regression or  \nclassification) which uses previously seen data (i.e. any supervised learning model) to produce a  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8108601235897627,
+        0.8351454538730498
+      ],
+      "excerpt": "In the regression case, MACEst produces a confidence interval about the point prediction, e.g.  \n\"the point prediction is 10 and I am 90% confident that the prediction lies between 8 and 12.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8391250254970538
+      ],
+      "excerpt": "prediction is class 0 and I am 90% sure that the prediction is correct. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8724356659882037,
+        0.9946852312916955,
+        0.8564602408781222,
+        0.9591501403464453
+      ],
+      "excerpt": "average be correct 90% of the time.  \nIt is also aware of the model limitations i.e. when a model is being asked to predict a point which  \nit does not have the necessary knowledge (data) to predict confidently.  \nIn these cases MACEst is able to incorporate the (epistemic) uncertainty due to this and return a  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9883331104028699,
+        0.8989356197416809,
+        0.9848314030506409,
+        0.9076113032210641
+      ],
+      "excerpt": "1. How accurate is the model when predicting previously seen points that are similar to x?  \nLess confident if the model is less accurate in the region close to x. \n2. How similar is x to the points that we have seen previously?  \nLess confident if x is not similar to the data used to train the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8043514214439176
+      ],
+      "excerpt": "It draws from ideas present in trust scores, conformal learning, Gaussian processes, and Bayesian  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9589632368846442,
+        0.9505569039042006
+      ],
+      "excerpt": "The general idea is that confidence is a local quantity.  \nEven when the model is accurate globally, there are likely still some predictions about which it  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9696395958249123,
+        0.9511835398535105,
+        0.9382605377228571,
+        0.9082452604459579
+      ],
+      "excerpt": "To model this local confidence for a given prediction on a point x, we define the local  \nneighbourhood by finding the k nearest neighbours to x.  \nWe then attempt to directly model the two causes of uncertainty, these are: \n1. Aleatoric Uncertainty: Even with lots of (possibly infinite) data there will be some  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9656337210034617
+      ],
+      "excerpt": "Our local approximation to this will be to define a local accuracy estimate. i.e. for the k nearest  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8046589723506423,
+        0.8321542931429676
+      ],
+      "excerpt": "2. Epistemic Uncertainty: The model can only know relationships learnt from the training data.  \nIf the model has not seen any data point similar to x then it does not have as much knowledge about  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9129712036769553
+      ],
+      "excerpt": "MACEst estimates this by calculating how similar x is to the k nearest (most similar) points  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8261987297785558,
+        0.8943017125285088
+      ],
+      "excerpt": "We define a simple parametric function of these two quantities and calibrate this function so that  \nour confidence estimates approximate the empirical accuracy, i.e. 90% confident -> 90% correct on  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9442046334029702,
+        0.9629433546124403,
+        0.872497467625042,
+        0.8566126638901652
+      ],
+      "excerpt": "By directly modelling these two effects, MACEst estimates are able to encapsulate the local  \nvariance accurately whilst also being aware of when the model is being asked to predict a point  \nthat is very different to what it has been trained on.  \nThis will make it robust to problems such as overconfident extrapolations and out of sample  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = RandomForestClassifier(random_state=0, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model.fit(csr_matrix(X_pp_train), y_pp_train) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734,
+        0.9254751311447194
+      ],
+      "excerpt": "                                              init_args=dict(method=\"hnsw\", \n                                                             space=\"cosinesimil_sparse\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "macest_model = clmod.ModelWithConfidence(model, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9247949078829855,
+        0.9471145118627402
+      ],
+      "excerpt": "See the CONTRIBUTING.md file for information about contributing to MACEst. \nFor more information about the underlying methodology behind MACEst, then please refer to our  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9701037701337296
+      ],
+      "excerpt": "\"MACEst: The reliable and trustworthy Model Agnostic Confidence  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Model Agnostic Confidence Estimator (MACEST) - A Python library for calibrating Machine Learning models' confidence scores",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/oracle/macest/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Tue, 21 Dec 2021 23:02:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/oracle/macest/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "oracle/macest",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/oracle/macest/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/regression/bike_regression_uncertainty.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/regression/basic_regression_example.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/basic_multi_classification.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/sota_comparison_mnist.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/macest_with_sparse_data.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/basic_classification.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/spirals_uncertainty.ipynb",
+      "https://raw.githubusercontent.com/oracle/macest/main/notebooks/classification/co_ordinate_importance.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8343533027534961
+      ],
+      "excerpt": "that it has previously seen. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "``` python \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "``` python \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8335411195648097,
+        0.8801854956928516,
+        0.8757982359298006,
+        0.8801854956928516
+      ],
+      "excerpt": "import numpy as np \n   from macest.classification import models as cl_mod \n   from sklearn.ensemble import RandomForestClassifier \n   from sklearn import datasets \n   from sklearn.model_selection import train_test_split \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8076230321034525,
+        0.8801854956928516,
+        0.8801854956928516,
+        0.8997243352845468,
+        0.8826917448272372,
+        0.9112927358002096
+      ],
+      "excerpt": "   import numpy as np \n   from macest.regression import models as reg_mod \n   from sklearn.linear_model import LinearRegression \n   from sklearn.model_selection import train_test_split \nX = np.linspace(0,1,103) \n   y = np.zeros(103) \n   y = 2Xnp.sin(2 X)*2 + np.random.normal(0 , 1 , len(X)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8172386938108801
+      ],
+      "excerpt": "preds = point_pred_model.predict(X_conf_train[:,None]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.933629618742046
+      ],
+      "excerpt": "   y_conf_train_var = np.var(train_error) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8500918837456705,
+        0.8985024222723914,
+        0.9037430417346027,
+        0.8801854956928516,
+        0.8801854956928516,
+        0.8335411195648097,
+        0.9133368656218674
+      ],
+      "excerpt": "import scipy \nfrom scipy.sparse import csr_matrix  \nfrom scipy.sparse import random as sp_rand \nfrom sklearn.model_selection import train_test_split \nfrom sklearn.ensemble import RandomForestClassifier \nfrom macest.classification import models as clmod \nimport nmslib  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8737288687529231
+      ],
+      "excerpt": "y = np.random.randint(0, 2, n_rows) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.811854372964597
+      ],
+      "excerpt": "param_bounds = clmod.SearchBounds(alpha_bounds=(0, 500), k_bounds=(5, 15)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/oracle/macest/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MACEst (Model Agnostic Confidence Estimator)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "macest",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "oracle",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/oracle/macest/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "mrowebot",
+        "body": "This release includes:\r\n- Functionality for calibrating classification and regression models\r\n- Notebooks to demonstrate calibration functionality and usage\r\n- Unit tests for the calibration code",
+        "dateCreated": "2021-08-17T08:25:28Z",
+        "datePublished": "2021-08-17T08:31:14Z",
+        "html_url": "https://github.com/oracle/macest/releases/tag/1.0.0",
+        "name": "",
+        "tag_name": "1.0.0",
+        "tarball_url": "https://api.github.com/repos/oracle/macest/tarball/1.0.0",
+        "url": "https://api.github.com/repos/oracle/macest/releases/47958681",
+        "zipball_url": "https://api.github.com/repos/oracle/macest/zipball/1.0.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To import and use MACEst we recommend Python version >= `3.6.8`. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 85,
+      "date": "Tue, 21 Dec 2021 23:02:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "confidence-estimation",
+      "python",
+      "data-science"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Machine learning has become an integral part of many of the tools that are used every day. \nThere has been a huge amount of progress on improving the global accuracy of machine learning \nmodels but calculating how likely a single prediction is to be correct has seen considerably less \nprogress.\n\nMost algorithms will still produce a prediction, even if this is in a part of the feature space the \nalgorithm has no information about. \nThis could be because the feature vector is unlike anything seen during training, or because the \nfeature vector falls in a part of the feature space where there is a large amount of uncertainty \nsuch as if the border between two classes overlaps.\nIn cases like this the prediction may well be meaningless. \nIn most models, it is impossible to distinguish this sort of meaningless prediction from a sensible \nprediction. \nMACEst addresses this situation by providing an additional confidence estimate.\n\nIn some areas such as Finance, Infrastructure, or Healthcare, making a single bad prediction can \nhave major consequences.\nIt is important in these situations that a model is able to understand how likely any prediction it \nmakes is to be correct before acting upon it. \nIt is often even more important in these situations that any model *knows what it doesn't know* so \nthat it will not blindly make bad predictions.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If a model has been trained to classify images of cats and dogs, and we want to predict an image of \na poodle, we find the k most poodle-like cats and the k most poodle-like dogs. \nWe then calculate how accurate the model was on these sets of images, and how similar the poodle is \nto each of these k cats and k dogs. We combine these two to produce a confidence estimate for each \nclass.\n\nAs the poodle-like cats will likely be strange cats, they will be harder to classify and the \naccuracy will be lower for these than the poodle-like dogs this combined with the fact that image \nwill be considerably more similar to poodle-like dogs the confidence of the dog prediction will be \nhigh.\n\nIf we now try to classify an image of a horse, we find that the new image is very **dissimilar** to \nboth cats and dogs, so the similarity term dominates and the model will return an approximately \nuniform distribution, this can be interpreted as MACEst saying \"I don't know what this is because \nI've never seen an image of a horse!\".\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To install MACEst run the following cmd:\n```shell script\npip install macest\n```\n\nOr add `macest` to your project's `requirements.txt` file as a dependency. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Below shows examples of using MACEst for classification and regression.\nFor more examples, and advanced usage, please see the example [notebooks](./notebooks).\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

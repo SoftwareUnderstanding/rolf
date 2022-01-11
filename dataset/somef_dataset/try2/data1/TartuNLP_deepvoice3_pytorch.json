@@ -1,0 +1,304 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Part of code was adapted from the following projects:\n\n- https://github.com/keithito/tacotron\n- https://github.com/facebookresearch/fairseq-py\n\nBanner and logo created by [@jraulhernandezi](https://github.com/jraulhernandezi) ([#76](https://github.com/r9y9/deepvoice3_pytorch/issues/76))\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1710.07654",
+      "https://arxiv.org/abs/1710.08969",
+      "https://arxiv.org/abs/1710.07654](https://arxiv.org/abs/1710.07654): Deep Voice 3: Scaling Text-to-Speech with Convolutional Sequence Learning.\n2. [https://arxiv.org/abs/1710.08969](https://arxiv.org/abs/1710.08969): Efficiently Trainable Text-to-Speech System Based on Deep Convolutional Networks with Guided Attention.\n\n## Deep Voice 3 adaptation for Estonian\n\nThis is a modified version of [Ryuichi Yamamoto's implementation](https://github.com/r9y9/deepvoice3_pytorch) of Deep Voice 3 to support Estonian text-to-speech. A Flask API implementation of this code is available [here](https://koodivaramu.eesti.ee/tartunlp/text-to-speech ) and the TTS can be tested with our [web demo](https://www.neurokone.ee).\n \nThe code contains a submodule for [Estonian TTS preprocessing](https://github.com/TartuNLP/tts_preprocess_et), therefore cloning with the `--recurse-submodules` flag is recommended.\n\n## Pretrained models\nPretrained public model files are available in the [releases section](https://github.com/TartuNLP/deepvoice3_pytorch/releases). It is recommended using the same version of code, as other versions may not be compatible.\n\n## Requirements:\n\n- Python >= 3.5\n- CUDA >= 8.0\n- PyTorch >= v1.0.0\n- [nnmnkwii](https://github.com/r9y9/nnmnkwii) >= v0.0.11\n- [MeCab](http://taku910.github.io/mecab/) (Japanese only)\n- EstNLTK (>= 1.6.0) (Estonian only)\n\n## Installation\n\nPlease install packages listed above first, and then\n\n```\ngit clone https://github.com/TartuNLP/deepvoice3_pytorch --recurse-submodules && cd deepvoice3_pytorch\npip install -e \".[bin]\"\n```\n\n## Preset parameters\n\nThere are many hyper parameters to be turned depends on what model and data you are working on. For typical datasets and models, parameters that known to work good (**preset**) are provided in the repository. See `presets` directory for details. Notice that\n\n1. `preprocess.py`\n2. `train.py`\n3. `synthesis.py`\n\naccepts `--preset=<json>` optional parameter, which specifies where to load preset parameters. If you are going to use preset parameters, then you must use same `--preset=<json>` throughout preprocessing, training and evaluation. The default preset file for Estonian experiments is `presets/eesti_konekorpus.json`.\n\n## Training\n \nTo train a multispeaker Estonian TTS model:\n\n```\npython preprocess.py eesti_konekorpus $data .data/eesti_konekorpus --speakers Mari,Kalev,Albert,Vesta,K\u00fclli,Meelis --preset=presets/eesti_konekorpus.json\npython train.py --preset=presets/eesti_konekorpus.json --data-root=./data/eesti_konekorpus --checkpoint-dir=checkpoints/$modelname --log-event-path=log/$modelname\n```\n\nModel checkpoints (.pth) and alignments (.png) are saved in `./checkpoints` directory per 10000 steps by default.\n\nLogs are dumped in `./log` directory by default. You can monitor logs by tensorboard:\n\n```\ntensorboard --logdir=log\n```\n\n### 5. Synthesize from a checkpoint\n\nGiven a list of text, `synthesis.py` synthesize audio signals from trained model. Usage is:\n\n```\npython synthesis.py ${checkpoint_path",
+      "https://arxiv.org/abs/1710.08969](https://arxiv.org/abs/1710.08969): Efficiently Trainable Text-to-Speech System Based on Deep Convolutional Networks with Guided Attention.\n\n## Deep Voice 3 adaptation for Estonian\n\nThis is a modified version of [Ryuichi Yamamoto's implementation](https://github.com/r9y9/deepvoice3_pytorch) of Deep Voice 3 to support Estonian text-to-speech. A Flask API implementation of this code is available [here](https://koodivaramu.eesti.ee/tartunlp/text-to-speech ) and the TTS can be tested with our [web demo](https://www.neurokone.ee).\n \nThe code contains a submodule for [Estonian TTS preprocessing](https://github.com/TartuNLP/tts_preprocess_et), therefore cloning with the `--recurse-submodules` flag is recommended.\n\n## Pretrained models\nPretrained public model files are available in the [releases section](https://github.com/TartuNLP/deepvoice3_pytorch/releases). It is recommended using the same version of code, as other versions may not be compatible.\n\n## Requirements:\n\n- Python >= 3.5\n- CUDA >= 8.0\n- PyTorch >= v1.0.0\n- [nnmnkwii](https://github.com/r9y9/nnmnkwii) >= v0.0.11\n- [MeCab](http://taku910.github.io/mecab/) (Japanese only)\n- EstNLTK (>= 1.6.0) (Estonian only)\n\n## Installation\n\nPlease install packages listed above first, and then\n\n```\ngit clone https://github.com/TartuNLP/deepvoice3_pytorch --recurse-submodules && cd deepvoice3_pytorch\npip install -e \".[bin]\"\n```\n\n## Preset parameters\n\nThere are many hyper parameters to be turned depends on what model and data you are working on. For typical datasets and models, parameters that known to work good (**preset**) are provided in the repository. See `presets` directory for details. Notice that\n\n1. `preprocess.py`\n2. `train.py`\n3. `synthesis.py`\n\naccepts `--preset=<json>` optional parameter, which specifies where to load preset parameters. If you are going to use preset parameters, then you must use same `--preset=<json>` throughout preprocessing, training and evaluation. The default preset file for Estonian experiments is `presets/eesti_konekorpus.json`.\n\n## Training\n \nTo train a multispeaker Estonian TTS model:\n\n```\npython preprocess.py eesti_konekorpus $data .data/eesti_konekorpus --speakers Mari,Kalev,Albert,Vesta,K\u00fclli,Meelis --preset=presets/eesti_konekorpus.json\npython train.py --preset=presets/eesti_konekorpus.json --data-root=./data/eesti_konekorpus --checkpoint-dir=checkpoints/$modelname --log-event-path=log/$modelname\n```\n\nModel checkpoints (.pth) and alignments (.png) are saved in `./checkpoints` directory per 10000 steps by default.\n\nLogs are dumped in `./log` directory by default. You can monitor logs by tensorboard:\n\n```\ntensorboard --logdir=log\n```\n\n### 5. Synthesize from a checkpoint\n\nGiven a list of text, `synthesis.py` synthesize audio signals from trained model. Usage is:\n\n```\npython synthesis.py ${checkpoint_path"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TartuNLP/deepvoice3_pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-24T13:12:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-09T19:53:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9443482964742551,
+        0.8093809126974536,
+        0.8357162263411534,
+        0.9976190105618098,
+        0.9897164456252661,
+        0.9522267468730984,
+        0.9835086414076637
+      ],
+      "excerpt": "PyTorch implementation of convolutional networks-based text-to-speech synthesis models: \narXiv:1710.07654: Deep Voice 3: Scaling Text-to-Speech with Convolutional Sequence Learning. \narXiv:1710.08969: Efficiently Trainable Text-to-Speech System Based on Deep Convolutional Networks with Guided Attention. \nThis is a modified version of Ryuichi Yamamoto's implementation of Deep Voice 3 to support Estonian text-to-speech. A Flask API implementation of this code is available here and the TTS can be tested with our web demo. \nThe code contains a submodule for Estonian TTS preprocessing, therefore cloning with the --recurse-submodules flag is recommended. \nPretrained public model files are available in the releases section. It is recommended using the same version of code, as other versions may not be compatible. \nThere are many hyper parameters to be turned depends on what model and data you are working on. For typical datasets and models, parameters that known to work good (preset) are provided in the repository. See presets directory for details. Notice that \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8769498867570773
+      ],
+      "excerpt": "--speaker-id=&lt;N&gt;: It specifies what speaker of data is used for training. This should only be specified if you are using multi-speaker dataset. As for VCTK, speaker id is automatically assigned incrementally (0, 1, ..., 107) according to the speaker_info.txt in the dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8269143569341659
+      ],
+      "excerpt": "This may happen depending on backends you have for matplotlib. Try changing backend for matplotlib and see if it works as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Deep Voice 3 adaptation for Estonian text-to-speech.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TartuNLP/deepvoice3_pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 04:11:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TartuNLP/deepvoice3_pytorch",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/TartuNLP/deepvoice3_pytorch/master/release.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please install packages listed above first, and then\n\n```\ngit clone https://github.com/TartuNLP/deepvoice3_pytorch --recurse-submodules && cd deepvoice3_pytorch\npip install -e \".[bin]\"\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8066128589755514
+      ],
+      "excerpt": "Logs are dumped in ./log directory by default. You can monitor logs by tensorboard: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8576591754281959,
+        0.9372828227895622,
+        0.9227338522606264
+      ],
+      "excerpt": "To train a multispeaker Estonian TTS model: \npython preprocess.py eesti_konekorpus $data .data/eesti_konekorpus --speakers Mari,Kalev,Albert,Vesta,K\u00fclli,Meelis --preset=presets/eesti_konekorpus.json \npython train.py --preset=presets/eesti_konekorpus.json --data-root=./data/eesti_konekorpus --checkpoint-dir=checkpoints/$modelname --log-event-path=log/$modelname \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9113449520803272,
+        0.8957613363931036,
+        0.899718235915587
+      ],
+      "excerpt": "Given a list of text, synthesis.py synthesize audio signals from trained model. Usage is: \npython synthesis.py ${checkpoint_path} ${text_list.txt} ${output_dir} --preset=presets/eesti_konekorpus.json \nThe text list file should contain one sentence per line. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9210949072497312
+      ],
+      "excerpt": "python train.py --data-root=./data/vctk --checkpoint-dir=checkpoints_vctk_adaptation \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503189345333785
+      ],
+      "excerpt": "MPLBACKEND=Qt5Agg python train.py ${args...} \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The deepvoice3_pytorch package is licensed under the MIT \"Expat\" License:\\n\\n> Copyright (c) 2020: University of Tartu.\\n>\\n> Copyright (c) 2017: Ryuichi Yamamoto.\\n>\\n> Permission is hereby granted, free of charge, to any person obtaining\\n> a copy of this software and associated documentation files (the\\n> \"Software\"), to deal in the Software without restriction, including\\n> without limitation the rights to use, copy, modify, merge, publish,\\n> distribute, sublicense, and/or sell copies of the Software, and to\\n> permit persons to whom the Software is furnished to do so, subject to\\n> the following conditions:\\n>\\n> The above copyright notice and this permission notice shall be\\n> included in all copies or substantial portions of the Software.\\n>\\n> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\\n> EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\\n> MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\\n> IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\\n> CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\\n> TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\\n> SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\n\\n> # Part of code was adapted from https://github.com/facebookresearch/fairseq-py\\n> # Copyright (c) 2017-present, Facebook, Inc.\\n> # Thier licenses apply.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deepvoice3_pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "deepvoice3_pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TartuNLP",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/TartuNLP/deepvoice3_pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "liisaratsep",
+        "body": "Updated Estonian TTS models for the same speakers with [even better corpora preprocessing](https://github.com/AndreasTeder/EST_lang_corpora_preprocessing) to improve speech quality in the beginning and end of sentences. For best quality, we recommend using the `autosegment.pth` model file.\r\n\r\nPreset file: presets/eesti_konekorpus.json\r\n\r\nPS: It is recommended using the same version of Deep Voice 3 code with the attached model, as other versions may not be compatible.",
+        "dateCreated": "2021-05-03T07:53:51Z",
+        "datePublished": "2021-05-26T09:33:15Z",
+        "html_url": "https://github.com/TartuNLP/deepvoice3_pytorch/releases/tag/kratt-v1.2",
+        "name": "Version 1.2",
+        "tag_name": "kratt-v1.2",
+        "tarball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/tarball/kratt-v1.2",
+        "url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/releases/43583815",
+        "zipball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/zipball/kratt-v1.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "liisaratsep",
+        "body": "Updated Estonian TTS model with:\r\n- Improved data preprocessing to improve speech quality in the beginning and end of sentences.\r\n- Reduced vocabulary size\r\n\r\nPreset file: `presets/eesti_konekorpus.json`\r\n\r\nPS: It is recommended using the same version of Deep Voice 3 code with the attached model, as other versions may not be compatible.",
+        "dateCreated": "2021-01-31T18:37:54Z",
+        "datePublished": "2021-02-01T07:45:49Z",
+        "html_url": "https://github.com/TartuNLP/deepvoice3_pytorch/releases/tag/kratt-v1.1",
+        "name": "Version 1.1",
+        "tag_name": "kratt-v1.1",
+        "tarball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/tarball/kratt-v1.1",
+        "url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/releases/37161740",
+        "zipball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/zipball/kratt-v1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "liisaratsep",
+        "body": "This release contains a public model and can be used with our [TTS API](https://koodivaramu.eesti.ee/tartunlp/text-to-speech). The model has been trained on an Estonian [news corpus](https://doi.org/10.15155/9-00-0000-0000-0000-001ABL) and two [literature corpora](https://www.eki.ee/litsents/). Six speakers are supported:\r\n\r\n0. Mari (news)\r\n1. Kalev (news)\r\n2. Albert (news)\r\n3. Vesta (news)\r\n4. K\u00fclli (literature)\r\n5. Meelis (literature)\r\n\r\nPS: It is recommended using the same version of Deep Voice 3 code with the attached model, as other versions may not be compatible.",
+        "dateCreated": "2020-09-30T07:45:13Z",
+        "datePublished": "2020-09-30T07:55:02Z",
+        "html_url": "https://github.com/TartuNLP/deepvoice3_pytorch/releases/tag/kratt-v1.0",
+        "name": "Version 1.0",
+        "tag_name": "kratt-v1.0",
+        "tarball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/tarball/kratt-v1.0",
+        "url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/releases/31977009",
+        "zipball_url": "https://api.github.com/repos/TartuNLP/deepvoice3_pytorch/zipball/kratt-v1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python >= 3.5\n- CUDA >= 8.0\n- PyTorch >= v1.0.0\n- [nnmnkwii](https://github.com/r9y9/nnmnkwii) >= v0.0.11\n- [MeCab](http://taku910.github.io/mecab/) (Japanese only)\n- EstNLTK (>= 1.6.0) (Estonian only)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 04:11:46 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

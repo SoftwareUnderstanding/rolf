@@ -1,0 +1,270 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "U-Net https://arxiv.org/pdf/1505.04597.pdf\n\nU-Net++ https://arxiv.org/pdf/1912.05074.pdf\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertsokol/pneumothorax-detection-unet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-02T11:13:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T13:40:57Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8478262491415333,
+        0.9640137685636514
+      ],
+      "excerpt": " - Customizable U-Net++ depth, from 1 up to 4 levels of encoding + decoding \n - Performance finder class for finding and plotting precision-recall curves of classifier model, as well as mean dice calculator to evaluate overall performance of model as per SIIM-ACR contest \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.84190979240616
+      ],
+      "excerpt": "Use this to pretrain a segmentation model on ImageNet/other data before training. Can give a modest boost in dice score. For classifier models, TF already offers pretrained image classifiers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9760537656282653,
+        0.8641030272155212
+      ],
+      "excerpt": " - resize_to = length and width that the image will be resized to; this is therefore also the input size to the model \n - train_prop = %age of the data in image folder to use for training; remainder will be used for validation  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8198890177671628,
+        0.8636215441509754
+      ],
+      "excerpt": " - you can adjust the augmentation parameters by passing in different values for the arguments in the ClassifierGenerator constructor \n - you can choose a different backbone by adjusting the 'bb' parameter of the create_classification_model function: 'DenseNet121', 'DenseNet169', 'DenseNet201' are supported already but more can easily be added in the models.py file \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9442770689001009
+      ],
+      "excerpt": "  - note beta_pixel_weighting: this is the average percentage of label = 1 pixels in an image in the training set, used for the weighted pixel binary cross-entropy loss function.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8623291959130317
+      ],
+      "excerpt": "Images are fed to the classification model. If the output is higher than classifier_threshold, they are also fed to the segmentation model. Note that as the classifier model uses RGB and the segmentation model uses Grayscale, the image is converted during the process. The prediction file uses the train_prop value to select only validation set images for displaying predictions. If you had a test set, you could re-configure this.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9747450873892083,
+        0.8479041104471858
+      ],
+      "excerpt": "On the left is the ground truth label, and if there is a ground truth segmentation map, it is displayed in red on the image. \nOn the right is the predicted label, the confidence in the prediction (classifier output * 100) and the predicted segmentation map if appropriate. Brighter areas represent higher confidence by the segmentation model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914587517748019
+      ],
+      "excerpt": "The output of the classifier model is a float between 0 and 1. The classifier threshold can be changed to affect the precision and recall of the model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9285585625867254
+      ],
+      "excerpt": "This follows the Kaggle contest linked above, and calculates the mean dice score of the classifier and segmentation pipeline at a single classifier threshold.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Pnuemothorax classification and segmentation pipeline using DenseNet-169 and U-Net++",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertsokol/pneumothorax-detection-unet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 12:19:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/albertsokol/pneumothorax-detection-unet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "albertsokol/pneumothorax-detection-unet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8310849440161334
+      ],
+      "excerpt": " - mode can be 'lrf' or 'train'. See below for more info on learning rate finder. Using 'train' mode will automatically save the best model to save_path \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.9336801098518991,
+        0.9336801098518991
+      ],
+      "excerpt": " - pretrain_unet.py \n - train_classifier.py \n - train_seg.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589658548129034
+      ],
+      "excerpt": "Train the classifier model.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8292349365691133
+      ],
+      "excerpt": " - Required label format: .csv file with two headers: 'ImageId' and 'Class'. ImageId should be the name of the image without the .dcm extension. Class should be 0 for negative samples, and 1 for positive samples. See train_classifier_example.csv for an example.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8054416504689613
+      ],
+      "excerpt": " - Edit the config.ini file to set batch_size, resize_to, and train_prop \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8069780682370513
+      ],
+      "excerpt": " - Required label format: .csv file with two headers: 'ImageId' and 'EncodedPixels'. ImageId should be the name of the image without the .dcm extension. EncodedPixels should be the RLE-format encoded ground truth segmentation map. If there is no pneumothorax in the image, ie a negative sample, the value for EncodedPixels should be -1. See train_seg_example.csv for an example.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8032470771799334
+      ],
+      "excerpt": "For example, if set to 0.8, only X-rays which generate an output of >0.8 will be passed to the segmentation model. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/albertsokol/pneumothorax-detection-unet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Pneumothorax detection with U-Net/U-Net++ in Tensorflow 2.x",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pneumothorax-detection-unet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "albertsokol",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/albertsokol/pneumothorax-detection-unet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Thu, 23 Dec 2021 12:19:43 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[![Demo of model](https://github.com/albertsokol/pneumothorax-detection-unet/blob/master/readme%20images/yout.png)](https://www.youtube.com/watch?v=DwWl1vok5wY \"My UNet++ implementation : pneumothorax classification & segmentation\")\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

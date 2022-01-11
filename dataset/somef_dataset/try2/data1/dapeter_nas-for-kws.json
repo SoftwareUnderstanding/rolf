@@ -1,0 +1,268 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2012.10138",
+      "https://arxiv.org/abs/1804.03209",
+      "https://arxiv.org/abs/1812.00332",
+      "https://arxiv.org/abs/1804.03209"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{peter2020resourceefficient,\n      title={Resource-efficient DNNs for Keyword Spotting using Neural Architecture Search and Quantization}, \n      author={David Peter and Wolfgang Roth and Franz Pernkopf},\n      year={2020},\n      eprint={2012.10138},\n      archivePrefix={arXiv},\n      primaryClass={eess.AS}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8075482068483318
+      ],
+      "excerpt": "dataset. For further information on ProxylessNAS please refer to the following resources: [git] [arXiv] [Poster] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9752040727872697
+      ],
+      "excerpt": "Han Cai and Ligeng Zhu and Song Han - Original code authors \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dapeter/nas-for-kws",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-15T09:33:40Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-24T17:20:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9828711447644211
+      ],
+      "excerpt": "This project uses ProxylessNAS to search for resource efficient CNNs for Keyword Spotting on the Google Speech Commands \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133155029836392
+      ],
+      "excerpt": "The Google Speech Commands is downloaded and extracted using \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465624888122522
+      ],
+      "excerpt": "Weight quantization as a post-processing step by rounding parameters of a trained network is performed using \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8340967358362293
+      ],
+      "excerpt": "Quantization aware training using the STE is performed by first changing \"num_bits\" of all layers in the \"net.config\" to the desired bit-width and then running \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8417859627097418
+      ],
+      "excerpt": "<p><small>Template folder structure based on the <a target=\"_blank\" href=\"https://drivendata.github.io/cookiecutter-data-science/\">cookiecutter data science project template</a>. #cookiecutterdatascience</small><br> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dapeter/nas-for-kws/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 21:59:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dapeter/nas-for-kws/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dapeter/nas-for-kws",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.978633579392065,
+        0.9632347459754548,
+        0.9779906815418535,
+        0.9694588723180735,
+        0.8614137705930324
+      ],
+      "excerpt": "To setup the environment create a virtual environment from the included environment.yml \nconda env create -f environment.yml \nActivate the environment \nconda activate nas-for-kws \nSet the python path \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8247040610444987,
+        0.9246227682586091
+      ],
+      "excerpt": "cd /path/to/this/project/src/data/ \npython get_speech_commands.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8961464546600832,
+        0.9288701013823147
+      ],
+      "excerpt": "python arch_search.py --path \"output_path/\" --dataset \"speech_commands\" --init_lr 0.2 --train_batch_size 100 --test_batch_size 100 --target_hardware \"flops\" --flops_ref_value 20e6 --n_worker 4 --arch_lr 4e-3 --grad_reg_loss_alpha 1 --grad_reg_loss_beta BETA --weight_bits 8 --width_mult OMEGA --n_mfcc 10 \npython run_exp.py --path \"output_path/learned_net\" --train \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8904927189089052,
+        0.8221559474619163,
+        0.9288701013823147
+      ],
+      "excerpt": "python run_exp.py --path \"output_path/learned_net\" --quantize \nQuantization aware training using the STE is performed by first changing \"num_bits\" of all layers in the \"net.config\" to the desired bit-width and then running \npython run_exp.py --path \"output_path/learned_net\" --train \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8798915965658347,
+        0.9288701013823147
+      ],
+      "excerpt": "python arch_search.py --path \"output_path/\" --dataset \"speech_commands\" --init_lr 0.2 --train_batch_size 100 --test_batch_size 100 --target_hardware \"flops\" --flops_ref_value 20e6 --n_worker 4 --arch_lr 4e-3 --grad_reg_loss_alpha 1 --grad_reg_loss_beta BETA --weight_bits 8 --width_mult 1 --n_mfcc N_MFCC \npython run_exp.py --path \"output_path/learned_net\" --train \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dapeter/nas-for-kws/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Resource-efficient DNNs for Keyword Spotting using Neural Architecture Search and Quantization [[arXiv]](https://arxiv.org/abs/2012.10138)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "nas-for-kws",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dapeter",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dapeter/nas-for-kws/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You need [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for installing python. Install miniconda via\n\n    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh\n    chmod +x Miniconda-latest-Linux-x86_64.sh\n    ./Miniconda-latest-Linux-x86_64.sh\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A trained model is obtained by (1) performing NAS to obtain a good model, and then (2) training the model until convergence.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Fri, 24 Dec 2021 21:59:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "These instructions should get you a copy of the project up and running on\nyour local machine for testing purposes.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

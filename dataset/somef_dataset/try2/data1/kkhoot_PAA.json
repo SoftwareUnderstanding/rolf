@@ -1,0 +1,287 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2007.08103"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@inproceedings{paa-eccv2020,\n  title={Probabilistic Anchor Assignment with IoU Prediction for Object Detection},\n  author={Kim, Kang and Lee, Hee Seok},\n  booktitle = {ECCV},\n  year={2020}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{paa-eccv2020,\n  title={Probabilistic Anchor Assignment with IoU Prediction for Object Detection},\n  author={Kim, Kang and Lee, Hee Seok},\n  booktitle = {ECCV},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8439342605057581
+      ],
+      "excerpt": "By Kang Kim and Hee Seok Lee. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "Faster_R_50_FPN_1x | 37.989 | 58.810 | 41.314 | 22.361 | 41.522 | 49.584 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/kkhoot/PAA/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkhoot/PAA",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to Mask-RCNN Benchmark\nWe want to make contributing to this project as easy and transparent as\npossible.\nOur Development Process\nMinor changes and improvements will be released on an ongoing basis. Larger changes (e.g., changesets implementing a new paper) will be released on a more periodic basis.\nPull Requests\nWe actively welcome your pull requests.\n\nFork the repo and create your branch from master.\nIf you've added code that should be tested, add tests.\nIf you've changed APIs, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nIssues\nWe use GitHub issues to track public bugs. Please ensure your description is\nclear and has sufficient instructions to be able to reproduce the issue.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nCoding Style\n\n4 spaces for indentation rather than tabs\n80 character line length\nPEP8 formatting following Black\n\nLicense\nBy contributing to Mask-RCNN Benchmark, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-04T12:09:31Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T03:48:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In object detection, determining which anchors to assign as positive or negative samples, known as __anchor assignment__, has been revealed as a core procedure that can significantly affect a model's performance. In this paper we propose a novel anchor assignment strategy that adaptively separates anchors into positive and negative samples for a ground truth bounding box according to the model's learning status such that it is able to reason about the separation in a probabilistic manner. To do so we first calculate the scores of anchors conditioned on the model and fit a probability distribution to these scores. The model is then trained with anchors separated into positive and negative samples according to their probabilities. Moreover, we investigate the gap between the training and testing objectives and propose to predict the Intersection-over-Unions of detected boxes as a measure of localization quality to reduce the discrepancy.\n<div align=\"center\">\n  <img src=\"eccv2020_fig1.jpg\" width=\"1000\"/>\n</div>\n<div align=\"center\">\n  <img src=\"box_vis_cat.jpg\" width=\"500\"/>\n</div>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8192505441185383,
+        0.9850483324888469,
+        0.8235021002084464,
+        0.9832542200787826
+      ],
+      "excerpt": "By Kang Kim and Hee Seok Lee. \nThis is a PyTorch implementation of the paper Probabilistic Anchor Assignment with IoU Prediction for Object Detection (paper link), based on ATSS and maskrcnn-benchmark. \nNow the code supports PyTorch 1.6. \nPAA is available at mmdetection. Many thanks to @jshilong for the great work! \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9261160496393736
+      ],
+      "excerpt": "We provide the performance of the following trained models. All models are trained with the configuration same as ATSS. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8308355721681991,
+        0.9757996510272179,
+        0.9648354411280834
+      ],
+      "excerpt": "[1] 1x , 1.5x and 2x mean the model is trained for 90K, 135K and 180K iterations, respectively. \\ \n[2] All results are obtained with a single model. \\ \n[3] dcnv2 denotes deformable convolutional networks v2. Note that for ResNet based models, we apply deformable convolutions from stage c3 to c5 in backbones. For ResNeXt based models only stage c4 and c5 use deformable convolutions. All dcnv2 models use deformable convolutions in the last layer of detector towers. \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9893685569111317,
+        0.860059181823877
+      ],
+      "excerpt": "We also provide experimental results that apply PAA to Region Proposal Network of Faster R-CNN. Code is available at PAA_Faster-RCNN. \nModel | AP (minival) | AP50 | AP75 | APs | APm | APl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A PyTorch implementation of the paper `Probabilistic Anchor Assignment with IoU Prediction for Object Detection` ECCV 2020 (https://arxiv.org/abs/2007.08103)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkhoot/PAA/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 25,
+      "date": "Mon, 27 Dec 2021 20:28:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kkhoot/PAA/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kkhoot/PAA",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kkhoot/PAA/master/docker/Dockerfile",
+      "https://raw.githubusercontent.com/kkhoot/PAA/master/docker/docker-jupyter/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please check [INSTALL.md](INSTALL.md) for installation instructions.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.849001232526513
+      ],
+      "excerpt": "Now the code supports PyTorch 1.6. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8368441649934927
+      ],
+      "excerpt": "    --config-file configs/paa/paa_R_50_FPN_1x.yaml \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664
+      ],
+      "excerpt": "    TEST.IMS_PER_BATCH 4 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8368441649934927
+      ],
+      "excerpt": "    --config-file configs/paa/paa_R_50_FPN_1x.yaml \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kkhoot/PAA/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/kkhoot/PAA/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'PAA for non-commercial purposes\\n\\nCopyright (c) 2020 the authors\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Probabilistic Anchor Assignment with IoU Prediction for Object Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PAA",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kkhoot",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kkhoot/PAA/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 221,
+      "date": "Mon, 27 Dec 2021 20:28:58 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

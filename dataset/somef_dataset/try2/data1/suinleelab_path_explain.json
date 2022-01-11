@@ -1,0 +1,536 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1703.01365",
+      "https://arxiv.org/abs/1906.10670",
+      "https://arxiv.org/abs/1910.01108"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{janizek2020explaining,\n  author  = {Joseph D. Janizek and Pascal Sturmfels and Su-In Lee},\n  title   = {Explaining Explanations: Axiomatic Feature Interactions for Deep Networks},\n  journal = {Journal of Machine Learning Research},\n  year    = {2021},\n  volume  = {22},\n  number  = {104},\n  pages   = {1-54},\n  url     = {http://jmlr.org/papers/v22/20-1223.html}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "             plot_top_k=10) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8084136082448939
+      ],
+      "excerpt": ":#:#: embedding and prediction \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suinleelab/path_explain",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-10T23:21:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-18T19:36:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8676272623318961,
+        0.9890894472582091,
+        0.8834113660518339,
+        0.8038719135879858,
+        0.9591149672864979,
+        0.9854903442574384
+      ],
+      "excerpt": "A repository for explaining feature importances and feature interactions in deep neural networks using path attribution methods. \nThis repository contains tools to interpret and explain machine learning models using Integrated Gradients and Expected Gradients. In addition, it contains code to explain interactions in deep networks using Integrated Hessians and Expected Hessians - methods that we introduced in our most recent paper: \"Explaining Explanations: Axiomatic Feature Interactions for Deep Networks\". If you use our work to explain your networks, please cite this paper. \nThis repository contains two important directories: the path_explain directory, which contains the packages used to interpret and explain machine learning models, and the examples directory, which contains many examples using the path_explain module to explain different models on different data types. \nThis package was written to support TensorFlow 2.0 (in eager execution mode) with Python 3. We have no current plans to support earlier versions of TensorFlow or Python. \nAlthough we don't yet have formal API documentation, the underlying code does a pretty good job at explaining the API. See the code for generating attributions and interactions to better understand what the arguments to these functions mean. \nOur repository can easily be adapted to explain attributions and interactions learned on tabular data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.860059181823877
+      ],
+      "excerpt": "model = ... \nmodel.fit(x_train, y_train, ...) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "explainer = PathExplainerTF(model) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891785691729262
+      ],
+      "excerpt": "             color_by='is male', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9882017933464059,
+        0.9705181895165785
+      ],
+      "excerpt": "The model used to generate the above interactions is a two layer neural network trained on the UCI Heart Disease Dataset. Interactions learned by this model were featured in our paper. To learn more about this particular model and the experimental setup, see the notebook used to train and explain the model. \nAs discussed in our paper, we can use Integrated Hessians to get interactions in language models. We explain a transformer from the HuggingFace Transformers Repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9809728173261884
+      ],
+      "excerpt": ": This is a custom explainer to explain huggingface models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.974676568847927
+      ],
+      "excerpt": ":#:#: Some custom code to fine-tune the model on a sentiment analysis task... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "valid_dataset = glue_convert_examples_to_features(data['validation'], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9871193919281889,
+        0.9559741877516632
+      ],
+      "excerpt": ":#:#: we won't include the whole fine-tuning code. See the HuggingFace repository for more. \n:#:#: Here we define functions that represent two pieces of the model: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    batch_embedding = model.distilbert.embeddings(batch_ids) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8124490158947064,
+        0.8309106489239436
+      ],
+      "excerpt": "    #: makes the coding easier however, and the output is fairly similar, \n    #: so it suffices for this tutorial. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    head_mask = [None] * model.distilbert.num_hidden_layers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.860059181823877
+      ],
+      "excerpt": "pooled_output = model.pre_classifier(pooled_output) \nlogits = model.classifier(pooled_output) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8928267935034556
+      ],
+      "excerpt": ":#:#: We need some data to explain \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.949858305488406
+      ],
+      "excerpt": ":#:#: We are finally ready to explain our model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8999235328299281
+      ],
+      "excerpt": ":#:#: For interactions, the hessian is rather large so we use a very small batch size \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8839120754211239
+      ],
+      "excerpt": "And then we show the full interaction matrix. Here we've zeroed out the diagonals so you can better see the off-diagonal terms. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A repository for explaining feature attributions and feature interactions in deep neural networks.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suinleelab/path_explain/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 23,
+      "date": "Mon, 27 Dec 2021 07:41:21 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/suinleelab/path_explain/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "suinleelab/path_explain",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/example_usage.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/test_shapley_sampling.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/test_shapley_bruteforce.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/test_cd.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/test_grad.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/test_nid.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_overfit.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_sim_data.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_ih_interaction_model.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_train_network.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_perf_simulated.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/tests/test_slice_subnetwork.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/sanity_check_embedding_sum_hessian.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/division_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/multiplicative_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/no_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/decision_boundary/decision_boundary_classification.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/simulations/decision_boundary/decision_boundary.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/vision/mnist/visualize_pca.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/vision/mnist/visualize.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/higgs/display_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/higgs/inspect_data.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/higgs/plot_residuals.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/nhanes/class_stratified_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/nhanes/nhanes_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/diabetes-torch/path_explain_torch_diabetes.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/heart_disease/attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/pulsar/find_peak_examples.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/pulsar/attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/tabular/diabetes/path_explain_diabetes.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/check_completeness_embeddings.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/sst2/distilbert_slicing.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/sst2/display_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/sst2/distilbert_components.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/sst2/display_custom_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/stsb/interpret_stsb.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/sentiment_analysis/display_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/sentiment_analysis/data_test.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/sentiment_analysis/custom_sentences.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/imdb_movie_reviews/display_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/imdb_movie_reviews/display_cnn.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/imdb_movie_reviews/custom_sentences.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/time_series/heartbeats/display_attributions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/time_series/heartbeats/plot_trends.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/time_series/heartbeats/find_gradients.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/nlp/retrain_bert.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/nhanes/marginal_nhanes.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/nhanes/NHANES%20MLP.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/heart_disease/heart_disease.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/alzheimers/read_data_test.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/alzheimers/plot_shap_values.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/image/notebooks/visualize_color_mnist.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/image/notebooks/visualize_mnist.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/image/notebooks/test_mnist.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/theory/Mobius%20and%20comobius%20interaction%20values.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/theory/compute_sum_coefficients.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/theory/brute_force_subtraction.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/independent_multiplicative_additive.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/dependent_multiplicative_additive_no_main.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/independent_multiplicative_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/test_marginal_linear.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/test_class_index.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/dependent_no_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/independent_no_interactions.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/independent_multiplicative_additive_no_main.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/simple_simulations/test_multidim.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/exoplanets/train.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_diff_custom_softplus.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_compile.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_autograd.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_auto_diff.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_sampling_alpha.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_compare_shap.ipynb",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/unit_tests/test_compile_interactions.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/run_time_imagenet.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/run_random_draw.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/benchmarking/remove_and_retrain/run.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/vision/mnist/run_all.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/natural_language/transformers/run_all.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/alzheimers/run.sh",
+      "https://raw.githubusercontent.com/suinleelab/path_explain/master/examples/sampling/image/run_mnist.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The easiest way to install this package is by using pip:\n```\npip install path-explain\n```\nAlternatively, you can clone this repository to re-run and explore the examples provided.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8048215714095521,
+        0.8801854956928516
+      ],
+      "excerpt": ": other import statements... \nfrom path_explain import PathExplainerTF, scatter_plot, summary_plot \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079704324688302
+      ],
+      "excerpt": "                                      batch_size=100, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "                                      use_expectation=True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079704324688302
+      ],
+      "excerpt": "                                      batch_size=100, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "                                      use_expectation=True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "             scale_y_ind=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from transformers import DistilBertTokenizer, TFDistilBertForSequenceClassification, \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from path_explain import EmbeddingExplainerTF, text_plot, matrix_interaction_plot, bar_interaction_plot \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8961879256355921,
+        0.894036606553709
+      ],
+      "excerpt": "data, info = tensorflow_datasets.load('glue/sst-2', with_info=True) \ntrain_dataset = glue_convert_examples_to_features(data['train'], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8313226308867471
+      ],
+      "excerpt": "    attention_mask = tf.cast(attention_mask, dtype=tf.float32) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8746887095941814
+      ],
+      "excerpt": "transformer_output = model.distilbert.transformer([batch_embedding, attention_mask, head_mask], training=False)[0] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9237351707001846
+      ],
+      "excerpt": "baseline_ids = np.zeros((1, 128), dtype=np.int64) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "          include_legend=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "          include_legend=True) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/suinleelab/path_explain/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Lee Lab @ UW Allen School\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Path Explain",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "path_explain",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "suinleelab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/suinleelab/path_explain/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 131,
+      "date": "Mon, 27 Dec 2021 07:41:21 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "machine-learning",
+      "interpretable-deep-learning",
+      "explainable-ai",
+      "tensorflow",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For a simple, quick example to get started using this repository, see the `example_usage.ipynb` notebook in the top-level directory of this repository. It gives an overview of the functionality provided by this repository. For more advanced examples, keep reading on.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

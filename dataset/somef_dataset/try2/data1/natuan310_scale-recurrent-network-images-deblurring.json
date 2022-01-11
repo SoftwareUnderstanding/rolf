@@ -1,0 +1,305 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1802.01770\nhttps://jleinonen.github.io/2019/11/07/gan-elements-2.html\nhttps://towardsdatascience.com/understanding-rnn-and-lstm-f7cdf6dfc14e\nhttps://en.wikipedia.org/wiki/Residual_neural_network\nhttps://en.wikipedia.org/wiki/Long_short-term_memory\nhttps://en.wikipedia.org/wiki/Recurrent_neural_network\nhttps://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio\nhttps://en.wikipedia.org/wiki/Structural_similarity"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8207940084462922
+      ],
+      "excerpt": "<img src=\"https://wikimedia.org/api/rest_v1/media/math/render/svg/3a34719b4f391dba26b3e8e4460b7595d62eece4\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207940084462922
+      ],
+      "excerpt": "<img src=\"https://wikimedia.org/api/rest_v1/media/math/render/svg/fc22801ed1232ff1231c4156b589de5c32063a8a\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207940084462922
+      ],
+      "excerpt": "<img src=\"https://wikimedia.org/api/rest_v1/media/math/render/svg/63349f3ee17e396915f6c25221ae488c3bb54b66\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/natuan310/scale-recurrent-network-images-deblurring",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-06-14T03:05:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-16T06:48:57Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Nowadays, we have so many high resolution camera, from camera to smartphone, every devices can take photos or videos at high resolution. But sometime we miss a great moments because of blurring or we want to get a photo from video but all the frames is blury.\n\nThis project is to build an web-application use Scale-Recurrent Network for deblur that blurred images to restore the value that we want to get from that images.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9423573864476951,
+        0.9178725396481555
+      ],
+      "excerpt": "The overall architecture of the proposed network, which we call SRN-DeblurNet. It takes as input a sequence of blurry images downsampled from the input image at different scales, and produces a set of corresponding sharp images. The sharp one at the full resolution is the final output. \nWe adopt a novel recurrent structure across multiple scales in the coarse-to-fine strategy. We form the generation of a sharp latent image at each scale as a sub-problem of the image deblurring task, which takes a blurred image and an initial deblurring result (upsampled from previous scale) as  input, and estimates the sharp image at this scale as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9364013359283407,
+        0.9654444993586959,
+        0.9381759894638821
+      ],
+      "excerpt": "where i is the scale index, with i = 1 representing the finest scale. $B^{i}$ and $I^{i}$ are the blurry and estimated latent images at the i-th scale, respectively. $Net_{SR}$ is our proposed scalerecurrent network with training parameters denoted as $\u03b8_{SR}$. \nSince the network is recurrent, hidden state features hi flow across scales. The hidden state captures image structures and kernel information from the previous coarser scales. $(\u00b7)^{\u2191}$ is the operator to adapt features or images from the (i + 1)-th to i-th scale. \nEq. (1) gives a detailed definition of the network. In practice, there is enormous flexibility in network design. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9854721146455507
+      ],
+      "excerpt": "Third, the network at each scale needs to be properly designed for optimal effectiveness to recover the sharp image. Our method is detailed in the following. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.991932187915978,
+        0.9884734325196003
+      ],
+      "excerpt": "Encoder-decoder network refers to the symmetric CNN structures that first progressively transform input data into feature maps with smaller spatial sizes and more channels (in encoder), and then transform them back to the shape of the input (in decoder). Skip-connections between corresponding feature maps are widely used to combine different levels of information. They can also benefit gradient propagation and accelerate convergence. Typically, the encoder contains several stages of convolution layers with strides, and the decoder module is implemented using a series of deconvolution layers or resizing. Additional convolution layers are inserted after each level to further increase depth. \nThe encoder-decoder structure has been proven to be effective in many vision tasks. However, directly using the encoder-decoder network is not the best choice for our task with the following considerations. First, for the task of deblurring, the receptive field needs to be large to handle severe motion, resulting in stacking more levels for encoder/decoder modules. However, this strategy is not recommended in practice since it increases the number of parameters quickly with the large number of intermediate feature channels. Besides, the spatial size of middle feature map would be too small to keep spatial information for reconstruction. Second, adding more convolution layers at each level of encoder/decoder modules would make the network slow to converge (with flat convolution at each level). Finally, our proposed structure requires recurrent modules with hidden states inside. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9874196541242847,
+        0.9734835962754054,
+        0.9466040241256294,
+        0.9475007173363581
+      ],
+      "excerpt": "We make several modifications to adapt encoder-decoder networks into our framework. First, we improve encoder/decoder modules by introducing residual learning blocks. Based on results of [25] and our experiments, we choose to use ResBlocks instead of the original one in ResNet [15] (without batch normalization). As illustrated in Fig. 3, our proposed Encoder ResBlocks (EBlocks) contains one convolution layer followed by several ResBlocks. The stride for convolution layer is 2. It doubles the number of kernels of previous layer and downsamples the feature maps to half size. Each of the following ResBlocks contains 2 convolution layers. Besides, all convolution layers have the same number of kernels. Decoder ResBlock (DBlocks) is symmetric to EBlock. \nIt contains several ResBlocks followed by one deconvolution layer. The deconvolution layer is used to double the spatial size of feature maps and halve channels. \nSecond, our scale-recurrent structure requires recurrent modules inside networks. Similar to the strategy of [35], we insert convolution layers in the bottleneck layer for hidden state to connect consecutive scales. Finally, we use large convolution kernels of size 5\u00d75 for every convolution layer. \nThe modified network is expressed as \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9782212118178837,
+        0.9952973681059285
+      ],
+      "excerpt": "where $Net_{E}$ and $Net_{D}$ are encoder and decoder CNNs with parameters $\u03b8_{E}$ and $\u03b8_{D}$. 3 stages of EBlocks and DBlocks are used in $Net_{E}$ and $Net_{D}$, respectively. $\u03b8_{LSTM}$ is the set of parameters in ConvLSTM. Hidden state $h^{i}$ may contain useful information about intermediate result and blur patterns, which is passed to the next scale and benefits the fine-scale problem. \nThe details of model parameters are specified here. Our SRN contains 3 scales. The (i + 1)-th scale is of half size of the i-th scale. For the encoder/decoder ResBlock network, there are 1 InBlock, 2 EBlocks, followed by 1 Convolutional LSTM block, 2 DBlocks and 1 OutBlock, as shown in Fig. 3. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9752635340975039,
+        0.808391257974413
+      ],
+      "excerpt": "For EBlocks, the numbers of kernels are 64 and 128, respectively. For DBlocks, they are 128 and 64. The stride size for the convolution layer in EBlocks and deconvolution layers is 2, while all others are 1. Rectified Linear Units (ReLU) are used as the activation function for all layers, and all kernel sizes are set to 5. \nWe use Euclidean loss for each scale, between network output and the ground truth (downsampled to the same size using bilinear interpolation) as \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9886940622667738,
+        0.9919786104723881,
+        0.9941370082434007
+      ],
+      "excerpt": "where $I^{i}$ and $I^{i}{\u2217}$ are our network output and ground truth respectively in the $i^{-th}$ scale. $\u03ba{i}$ are the weights for each scale. We empirically set $\u03ba_{i}$ = 1.0. $N_{i}$ is the number of elements in $I^{i}$ to normalize. We have also tried total variation and adversarial loss. But we notice that L2-norm is good enough to generate sharp and clear results. \nFor model training, we use Adam solver with $\u03b2_{1}$ = 0.9, $\u03b2_{2}$ = 0.999 and \u000f = $10^{\u22128}$. The learning rate is exponentially decayed from initial value of 0.0001 to $1e^{\u22126}$ at 2000 epochs using power 0.3. According to our experiments, 2,000 epochs are enough for convergence, which takes about 72 hours. In each iteration, we sample a batch of 16 blurry images and randomly crop 256 \u00d7 256-pixel patches as training input. Ground truth sharp patches are generated accordingly. All trainable variables are initialized using Xavier method. The parameters described above are fixed for all experiments. \nFor experiments that involve recurrent modules, we apply gradient clip only to weights of ConvLSTM module (clipped by global norm 3) to stabilize training. Since our network is fully convolutional, images of arbitrary size can be fed in it as input, as long as GPU memory allows. For a testing image of size 720 \u00d7 1280, running time of our proposed method is around 1.87 seconds. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.848774852194941
+      ],
+      "excerpt": "PSNR is most easily defined via the mean squared error (MSE). Given a noise-free m\u00d7n monochrome image I and its noisy approximation K, MSE is defined as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9477519276001138
+      ],
+      "excerpt": "The PSNR (in dB) is defined as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.956259232840734
+      ],
+      "excerpt": "Here, MAXI is the maximum possible pixel value of the image. When the pixels are represented using 8 bits per sample, this is 255. More generally, when samples are represented using linear PCM with B bits per sample, MAXI is 2B\u22121. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9822967671012875,
+        0.9875499535927742,
+        0.9936125151072999,
+        0.9181187696853469
+      ],
+      "excerpt": "The structural similarity (SSIM) index is a method for predicting the perceived quality of digital television and cinematic pictures, as well as other kinds of digital images and videos. The basic model was developed in the Laboratory for Image and Video Engineering (LIVE) at The University of Texas at Austin and further developed jointly with the Laboratory for Computational Vision (LCV) at New York University. Further variants of the model have been developed in the Image and Visual Computing Laboratory at University of Waterloo and have been commercially marketed. \nSSIM is used for measuring the similarity between two images. The SSIM index is a full reference metric; in other words, the measurement or prediction of image quality is based on an initial uncompressed or distortion-free image as reference. SSIM is designed to improve on traditional methods such as peak signal-to-noise ratio (PSNR) and mean squared error (MSE). \nThe difference with respect to other techniques mentioned previously such as MSE or PSNR is that these approaches estimate absolute errors; on the other hand, SSIM is a perception-based model that considers image degradation as perceived change in structural information, while also incorporating important perceptual phenomena, including both luminance masking and contrast masking terms. Structural information is the idea that the pixels have strong inter-dependencies especially when they are spatially close. These dependencies carry important information about the structure of the objects in the visual scene. Luminance masking is a phenomenon whereby image distortions (in this context) tend to be less visible in bright regions, while contrast masking is a phenomenon whereby distortions become less visible where there is significant activity or \"texture\" in the image. \nThe SSIM index is calculated on various windows of an image. The measure between two windows x and y of common size N\u00d7N is: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8364764983330071,
+        0.8979411005071259,
+        0.9450573325026418
+      ],
+      "excerpt": "[X] 3. Design the model base on research. \n[X] 4. Preprocess data. \n[X] 5. Traning and validating model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "CoderSchool Machine Learning Engineer Final Project",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/natuan310/scale-recurrent-network-images-deblurring/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 23 Dec 2021 13:34:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/natuan310/scale-recurrent-network-images-deblurring/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "natuan310/scale-recurrent-network-images-deblurring",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/natuan310/scale-recurrent-network-images-deblurring/master/srn_checkpoints/download_model.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.982323124683062
+      ],
+      "excerpt": "You can download a light version (9GB) or the complete version (35GB). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8334908037083046
+      ],
+      "excerpt": "[x] 1. Get dataset. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/natuan310/scale-recurrent-network-images-deblurring/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "CSS",
+      "Python",
+      "HTML",
+      "JavaScript",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Image Deblurring by Scale - Recurrent Network",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "scale-recurrent-network-images-deblurring",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "natuan310",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/natuan310/scale-recurrent-network-images-deblurring/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Thu, 23 Dec 2021 13:34:20 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

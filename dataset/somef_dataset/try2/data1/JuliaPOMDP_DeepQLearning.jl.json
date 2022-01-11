@@ -1,0 +1,494 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9944484218006108,
+        0.9944484218006108,
+        0.8880628878564301
+      ],
+      "excerpt": "- Prioritized replay https://arxiv.org/pdf/1511.05952.pdf \n- Dueling https://arxiv.org/pdf/1511.06581.pdf \n- Double Q http://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/download/12389/11847 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JuliaPOMDP/DeepQLearning.jl",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-01-27T02:23:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-10T12:11:33Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9709612124957884,
+        0.8001847393156302,
+        0.8809297826413732
+      ],
+      "excerpt": "This package provides an implementation of the Deep Q learning algorithm for solving MDPs. For more information see https://arxiv.org/pdf/1312.5602.pdf. \nIt uses POMDPs.jl and Flux.jl \nIt supports the following innovations: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9427283489211986
+      ],
+      "excerpt": "An exploration policy can be provided in the form of a function that must return an action. The function provided will be called as follows: f(policy, env, obs, global_step, rng) where policy is the NN policy being trained, env the environment, obs the observation at which to take the action, global_step the interaction step of the solver, and rng a random number generator. This package provides by default an epsilon greedy policy with linear decrease of epsilon with global_step.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9300810601793843,
+        0.8569263212330377,
+        0.8558562725937312,
+        0.9500285540665386,
+        0.8370639467366747,
+        0.9131297670164497,
+        0.9524907357161058
+      ],
+      "excerpt": "The qnetwork options of the solver should accept any Chain object. It is expected that they will be multi-layer perceptrons or convolutional layers followed by dense layer. If the network is ending with dense layers, the dueling option will split all the dense layers at the end of the network.  \nIf the observation is a multi-dimensional array (e.g. an image), one can use the flattenbatch function to flatten all the dimensions of the image. It is useful to connect convolutional layers and dense layers for example. flattenbatch will flatten all the dimensions but the batch size.  \nThe input size of the network is problem dependent and must be specified when you create the q network. \nThis package exports the type AbstractNNPolicy which represents neural network based policy. In addition to the functions from POMDPs.jl, AbstractNNPolicy objects supports the following:  \n    - getnetwork(policy): returns the value network of the policy  \n    - resetstate!(policy): reset the hidden states of a policy (does nothing if it is not an RNN) \nSee Flux.jl documentation for saving and loading models. The DeepQLearning solver saves the weights of the Q-network as a bson file in solver.logdir/\"qnetwork.bson\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9293095499732339
+      ],
+      "excerpt": "Fields of the Q Learning solver: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9445536567707775
+      ],
+      "excerpt": "- target_update_freq::Int64 frequency at which the target network is updated default = 500 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9258858661815881,
+        0.8801521055898069,
+        0.9060291718834413,
+        0.8317575922163731,
+        0.8401650995443469,
+        0.9476425707164439
+      ],
+      "excerpt": "- train_freq::Int64 frequency at which the active network is updated default  = 4 \n- log_freq::Int64 frequency at which to logg info default = 100 \n- eval_freq::Int64 frequency at which to eval the network default = 100 \n- num_ep_eval::Int64 number of episodes to evaluate the policy default = 100 \n- eps_fraction::Float64 fraction of the training set used to explore default = 0.5 \n- eps_end::Float64 value of epsilon at the end of the exploration phase default = 0.01 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9008999366055155
+      ],
+      "excerpt": "- buffer_size::Int64 size of the experience replay buffer default = 1000 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8212609361644521
+      ],
+      "excerpt": "- save_freq::Int64 save the model every save_freq steps, default = 1000 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9297667940359268
+      ],
+      "excerpt": "- exploration_policy::Any = linear_epsilon_greedy(max_steps, eps_fraction, eps_end) exploration strategy (default is epsilon greedy with linear decay) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8969369912727027
+      ],
+      "excerpt": "- logdir::String = \"\" folder in which to save the model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of the Deep Q-learning algorithm to solve MDPs",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Sat, 25 Dec 2021 02:07:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JuliaPOMDP/DeepQLearning.jl",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```Julia\nusing Pkg\n#: Pkg.Registry.add(\"https://github.com/JuliaPOMDP/Registry) #: for julia 1.1+\n\n#: for julia 1.0 add the registry throught the POMDP package\n#: Pkg.add(\"POMDPs\")\n#: using POMDPs\n#: POMDPs.add_registry() \nPkg.add(\"DeepQLearning\")\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8217119749880385
+      ],
+      "excerpt": "It supports the following innovations: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8469319158804691
+      ],
+      "excerpt": "- max_steps::Int64 total number of training step default = 1000 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8453252170862624
+      ],
+      "excerpt": "- batch_size::Int64 batch size sampled from the replay buffer default = 32 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8026279847132911,
+        0.8308310554973082
+      ],
+      "excerpt": "- buffer_size::Int64 size of the experience replay buffer default = 1000 \n- max_episode_length::Int64 maximum length of a training episode default = 100 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Julia"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The DeepQLearning.jl package is licensed under the MIT \"Expat\" License:\\n\\n> Copyright (c) 2017: MaximeBouton.\\n>\\n> Permission is hereby granted, free of charge, to any person obtaining a copy\\n> of this software and associated documentation files (the \"Software\"), to deal\\n> in the Software without restriction, including without limitation the rights\\n> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\n> copies of the Software, and to permit persons to whom the Software is\\n> furnished to do so, subject to the following conditions:\\n>\\n> The above copyright notice and this permission notice shall be included in all\\n> copies or substantial portions of the Software.\\n>\\n> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\n> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\n> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\n> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\n> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\n> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\n> SOFTWARE.\\n>\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeepQLearning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeepQLearning.jl",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JuliaPOMDP",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JuliaPOMDP/DeepQLearning.jl/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## DeepQLearning v0.6.4\n\n[Diff since v0.6.3](https://github.com/JuliaPOMDP/DeepQLearning.jl/compare/v0.6.3...v0.6.4)\n\n\n**Closed issues:**\n- Question: How would you make a decay schedule for prioritized replay alpha/beta?  (#60)\n\n**Merged pull requests:**\n- MassInstallAction: Install the CI workflow on this repository (#61) (@zsunberg)\n- MassInstallAction: Install the CompatHelper workflow on this repository (#62) (@zsunberg)\n- fix over-parameterization of DQExperience (#64) (@zsunberg)",
+        "dateCreated": "2021-09-30T21:34:35Z",
+        "datePublished": "2021-09-30T21:34:35Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.6.4",
+        "name": "v0.6.4",
+        "tag_name": "v0.6.4",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.6.4",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/50585029",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.6.4"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## DeepQLearning v0.6.3\n\n[Diff since v0.6.2](https://github.com/JuliaPOMDP/DeepQLearning.jl/compare/v0.6.2...v0.6.3)\n\n\n**Closed issues:**\n- Error: Can't differentiate loopinfo expression (#58)\n\n**Merged pull requests:**\n- CompatHelper: bump compat for \"Flux\" to \"0.12\" (#57) (@github-actions[bot])\n- update workflows (#59) (@MaximeBouton)",
+        "dateCreated": "2021-07-08T13:40:29Z",
+        "datePublished": "2021-07-08T13:40:29Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.6.3",
+        "name": "v0.6.3",
+        "tag_name": "v0.6.3",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.6.3",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/45906641",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.6.3"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## DeepQLearning v0.6.2\n\n[Diff since v0.6.1](https://github.com/JuliaPOMDP/DeepQLearning.jl/compare/v0.6.1...v0.6.2)\n\n\n\n**Merged pull requests:**\n- CompatHelper: bump compat for \"BSON\" to \"0.3\" (#56) (@github-actions[bot])",
+        "dateCreated": "2021-02-19T04:11:06Z",
+        "datePublished": "2021-02-19T04:11:06Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.6.2",
+        "name": "v0.6.2",
+        "tag_name": "v0.6.2",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.6.2",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/38268667",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.6.2"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## DeepQLearning v0.6.1\n\n[Diff since v0.6.0](https://github.com/JuliaPOMDP/DeepQLearning.jl/compare/v0.6.0...v0.6.1)\n\n\n\n**Merged pull requests:**\n- CompatHelper: bump compat for \"CommonRLInterface\" to \"0.3\" (#54) (@github-actions[bot])",
+        "dateCreated": "2021-02-06T04:10:42Z",
+        "datePublished": "2021-02-06T04:10:43Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.6.1",
+        "name": "v0.6.1",
+        "tag_name": "v0.6.1",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.6.1",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/37441110",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.6.1"
+      },
+      {
+        "authorType": "Bot",
+        "author_name": "github-actions[bot]",
+        "body": "## DeepQLearning v0.6.0\n\n[Diff since v0.4.6](https://github.com/JuliaPOMDP/DeepQLearning.jl/compare/v0.4.6...v0.6.0)\n\n\n**Closed issues:**\n- DQExperience should support AbstractArrays (#31)\n\n**Merged pull requests:**\n- Support AbstractArray in DQExperience (#33) (@MaximeBouton)\n- CompatHelper: add new compat entry for \"POMDPModelTools\" at version \"0.2\" (#35) (@github-actions[bot])\n- CompatHelper: add new compat entry for \"BSON\" at version \"0.2\" (#36) (@github-actions[bot])\n- CompatHelper: add new compat entry for \"EllipsisNotation\" at version \"0.4\" (#37) (@github-actions[bot])\n- CompatHelper: add new compat entry for \"TensorBoardLogger\" at version \"0.1\" (#38) (@github-actions[bot])\n- CompatHelper: bump compat for \"POMDPPolicies\" to \"0.3\" (#39) (@github-actions[bot])\n- CompatHelper: add new compat entry for \"StatsBase\" at version \"0.32\" (#40) (@github-actions[bot])\n- CompatHelper: add new compat entry for \"Parameters\" at version \"0.12\" (#41) (@github-actions[bot])\n- CompatHelper: bump compat for \"StatsBase\" to \"0.33\" (#42) (@github-actions[bot])\n- CompatHelper: bump compat for \"POMDPModelTools\" to \"0.3\" (#44) (@github-actions[bot])\n- CompatHelper: bump compat for \"Flux\" to \"0.11\" (#45) (@github-actions[bot])\n- pomdps 0.9 compat (#47) (@MaximeBouton)\n- CompatHelper: add new compat entry for \"POMDPLinter\" at version \"0.1\" (#48) (@github-actions[bot])\n- CompatHelper: bump compat for \"POMDPPolicies\" to \"0.4\" (#49) (@github-actions[bot])\n- CompatHelper: bump compat for \"EllipsisNotation\" to \"1.0\" (#50) (@github-actions[bot])\n- Switched from RLInterface to CommonRLInterface (#53) (@zsunberg)",
+        "dateCreated": "2021-02-03T06:10:55Z",
+        "datePublished": "2021-02-03T06:10:56Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.6.0",
+        "name": "v0.6.0",
+        "tag_name": "v0.6.0",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.6.0",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/37277181",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.6.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2020-03-19T04:09:11Z",
+        "datePublished": "2020-03-19T04:16:46Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.4.6",
+        "name": "",
+        "tag_name": "v0.4.6",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.4.6",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/24658883",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.4.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-12-03T01:59:41Z",
+        "datePublished": "2019-12-03T02:07:00Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.6",
+        "name": "Compat with Flux",
+        "tag_name": "v0.3.6",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.6",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/21915192",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-10-25T20:27:01Z",
+        "datePublished": "2019-10-25T20:31:00Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.5",
+        "name": "Move gpu support to a branch",
+        "tag_name": "v0.3.5",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.5",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/20990690",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-09-23T19:13:12Z",
+        "datePublished": "2019-09-23T19:16:47Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.4",
+        "name": "POMDPs v0.7.3 Compatibility",
+        "tag_name": "v0.3.4",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.4",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/20190525",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-08-09T23:42:43Z",
+        "datePublished": "2019-08-09T23:51:38Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.3",
+        "name": "Patch for compatibility with RLInterface v0.3.2",
+        "tag_name": "v0.3.3",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.3",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/19204439",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "- Bug fix: make sure to use float32 everywhere.\r\n- Experimental gpu support through CuArrays",
+        "dateCreated": "2019-08-02T13:48:15Z",
+        "datePublished": "2019-08-02T14:02:45Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.2",
+        "name": "Float32 and GPU support",
+        "tag_name": "v0.3.2",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.2",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/19042322",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-07-03T11:11:15Z",
+        "datePublished": "2019-07-03T11:11:47Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.1",
+        "name": "Tensorboard logger + Flux v0.8+",
+        "tag_name": "v0.3.1",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.1",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/18384284",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2019-02-02T01:38:07Z",
+        "datePublished": "2019-02-02T01:38:44Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.3.0",
+        "name": "Support Flux v0.7+",
+        "tag_name": "v0.3.0",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.3.0",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/15328361",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.3.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "MaximeBouton",
+        "body": "",
+        "dateCreated": "2018-10-30T05:53:59Z",
+        "datePublished": "2018-10-30T17:56:01Z",
+        "html_url": "https://github.com/JuliaPOMDP/DeepQLearning.jl/releases/tag/v0.1.0",
+        "name": "TensorFlow.jl version",
+        "tag_name": "v0.1.0",
+        "tarball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/tarball/v0.1.0",
+        "url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/releases/13738551",
+        "zipball_url": "https://api.github.com/repos/JuliaPOMDP/DeepQLearning.jl/zipball/v0.1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 44,
+      "date": "Sat, 25 Dec 2021 02:07:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "`DeepQLearning.jl` should support running the calculations on GPUs through the package [CuArrays.jl](https://github.com/JuliaGPU/CuArrays.jl).\nYou must checkout the branch `gpu-support`. Note that it has not been tested thoroughly.\nTo run the solver on GPU you must first load `CuArrays` and then proceed as usual.\n\n```julia\nusing CuArrays\nusing DeepQLearning\nusing POMDPs\nusing Flux\nusing POMDPModels\n\nmdp = SimpleGridWorld();\n\n#: the model weights will be send to the gpu in the call to solve\nmodel = Chain(Dense(2, 32), Dense(32, length(actions(mdp))))\n\nsolver = DeepQLearningSolver(qnetwork = model, max_steps=10000, \n                             learning_rate=0.005,log_freq=500,\n                             recurrence=false,double_q=true, dueling=true, prioritized_replay=true)\npolicy = solve(solver, mdp)\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-reinforcement-learning",
+      "pomdps",
+      "reinforcement-learning",
+      "machine-learning"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```Julia\nusing DeepQLearning\nusing POMDPs\nusing Flux\nusing POMDPModels\nusing POMDPSimulators\nusing POMDPPolicies\n\n#: load MDP model from POMDPModels or define your own!\nmdp = SimpleGridWorld();\n\n#: Define the Q network (see Flux.jl documentation)\n#: the gridworld state is represented by a 2 dimensional vector.\nmodel = Chain(Dense(2, 32), Dense(32, length(actions(mdp))))\n\nexploration = EpsGreedyPolicy(mdp, LinearDecaySchedule(start=1.0, stop=0.01, steps=10000/2))\n\nsolver = DeepQLearningSolver(qnetwork = model, max_steps=10000, \n                             exploration_policy = exploration,\n                             learning_rate=0.005,log_freq=500,\n                             recurrence=false,double_q=true, dueling=true, prioritized_replay=true)\npolicy = solve(solver, mdp)\n\nsim = RolloutSimulator(max_steps=30)\nr_tot = simulate(sim, mdp, policy)\nprintln(\"Total discounted reward for 1 simulation: $r_tot\")\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

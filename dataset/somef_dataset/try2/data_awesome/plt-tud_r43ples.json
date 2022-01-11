@@ -1,0 +1,479 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8079828599265882
+      ],
+      "excerpt": "Jena ARQ for processing SPARQL results \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/plt-tud/r43ples",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2014-02-20T10:09:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-25T13:07:49Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.956092663989848,
+        0.9374988722412883,
+        0.9866817596107024,
+        0.9578749635133144,
+        0.8305199170212088,
+        0.8184431047226374,
+        0.8401878406531775,
+        0.995005686277959
+      ],
+      "excerpt": "R43ples (Revision for triples) is an open source Revision Management Tool for the Semantic Web. \nIt provides different revisions of named graphs via a SPARQL interface. All information about revisions, changes, commits, branches and tags are stored in additional named graphs beside the original graph in an attached external triple store. \nThis project provides an enhanced SPARQL endpoint for revision management of named graphs. \nR43ples uses an internal Jena TDB is attached to an existing SPARQL endpoint of a triplestore and acts as another endpoint both for normal SPARQL queries \nas well as for revision-enhanced SPARQL queries, named R43ples queries. \nThe R43ples endpoint allows to specify revisions which should be queried for each named graph used inside a SPARQL query. \nThe whole revision information is stored in additional graphs in the attached Jena TDB. \nThe website of R43ples contains further project information including Javadocs of the develop branch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9625400207910615
+      ],
+      "excerpt": "Maven is used for compiling \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8229865046571491
+      ],
+      "excerpt": "There is a configuration file named resources/r43ples.conf. The most important ones are the following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8899589072633756,
+        0.9343348869346114,
+        0.8924053953054821,
+        0.8013846815045338,
+        0.9296681239108019,
+        0.8651984444108848,
+        0.9176647692033346
+      ],
+      "excerpt": "revision.graph - named graph which is used by R43ples to store revision graph information \nevolution.graph - named graph which is used by R43ples to store all information regarding evolutions \nsdg.graph - named graph for storing the SDG \nsdg.graph.defaultContent - default content of SDG which should be stored within named graph (sdg.graph) \nsdg.graph.defaultSDG -  Structural Definition Group within the named graph (sdg.graph) which should be associated with new graphs under revision control (mmo:hasDefaultSDG) \nrules.graph - named graph for storing the high level change aggregation and co-evolution rules \nrules.graph.defaultContent - default content of rules \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8883282850099374,
+        0.8662392634557988
+      ],
+      "excerpt": "The logging configuration is stored in resources/log4j.properties \nSPARQL endpoint is available at: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9089422311039971
+      ],
+      "excerpt": "The endpoint directly accepts SPARQL queries with HTTP GET or HTTP POST parameters for query and format: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9667946765983674
+      ],
+      "excerpt": "There are some additional keywords which extends SPARQL and can be used to control the revisions of graphs: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9412007357643207
+      ],
+      "excerpt": "MESSAGE \"merge example for a common merge with conflict resolution in WITH part\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8110419326130829
+      ],
+      "excerpt": "MESSAGE \"merge example for manual specification of merged revision content\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174684422079116
+      ],
+      "excerpt": "Pick a revision into a branch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9786466194462616,
+        0.9601943274234677,
+        0.9221109463740195
+      ],
+      "excerpt": "There is a new option for R43ples which improves the performance. The necessary revision is not temporarily generated anymore. \nThe SPARQL query is rewritten in such a way that the branch and the change sets are directly joined inside the query. This includes the order of the change sets. \nIt is currently under development and further research. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9460276851858117
+      ],
+      "excerpt": "It currently supports: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8965269399096402
+      ],
+      "excerpt": "R43ples redirects the queries performed on the debug endpoint directly to the attached triplstore. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8829466598537405,
+        0.911478160601604,
+        0.9793063458449516,
+        0.9642005601322345,
+        0.873920770151275,
+        0.9019747233225438,
+        0.8984792445529832,
+        0.8846604117686223,
+        0.8593510634103294
+      ],
+      "excerpt": "are stored in the attached triplestore. R43ples acts only as a proxy which evaluates additional revision information \nin the SPARQL queries. \nAll information about the revision history of all named graphs is stored in the named graph http://eatld.et.tu-dresden.de/r43ples-revisions (as long as not configured otherwise in the configuration file). \nHere, the Revision Management Ontology (RMO) is used to model revisions, branches and tags. Furthermore commits are stored which connect each revision, tag and branch with its prior revision. \nThe RMO is derived from the PROV ontology: \nAn exemplary revision graph is shown here: \nEach response header contains information about the revision information of the graphs specified in the requests in the r43ples-revisiongraph HTTP header field. This information follows the RMO and is transferred as Turtle serialization. \nClients can also pass this information in R43ples update queries to the R43ples server via the r43ples-revisiongraph HTTP header attribute. \nThe server will check if the client is aware of the most recent version of the involved revised graphs. If this is not the case, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8880465804408494,
+        0.8348876310686753,
+        0.8795724276672556
+      ],
+      "excerpt": "Jersey for RestFul web services in Java \nGrizzly as web server \nJena ARQ for processing SPARQL results \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Revision Management for the Semantic Web",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/plt-tud/r43ples/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Mon, 20 Dec 2021 19:08:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/plt-tud/r43ples/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "plt-tud/r43ples",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/.coverity.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/.update-gh-pages.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/startR43ples.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/measurePerformance.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/LDQ2014/deployTestData.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/LDQ2014/preparePerformanceTest.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/Dbpedia/deployTestData.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/Dbpedia/measurePerformance.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/Dbpedia/download-dbpedia-data.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/Wien/data/deployTestData.sh",
+      "https://raw.githubusercontent.com/plt-tud/r43ples/develop/src/benchmark/scenario/Wien/data/generateTestData.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8844363043698469
+      ],
+      "excerpt": "Packages (JAR with dependencies for the webservice) can be be built with: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8249928196459051
+      ],
+      "excerpt": "the update query will be rejected. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8021772751119439
+      ],
+      "excerpt": "docker run -p 9998:9998 plttud/r43ples \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8778487586960795
+      ],
+      "excerpt": "MESSAGE \"Coevolution example\" \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/plt-tud/r43ples/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "JavaScript",
+      "Java",
+      "CSS",
+      "XSLT",
+      "HTML",
+      "Python",
+      "Shell",
+      "R",
+      "Batchfile",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/plt-tud/r43ples/develop/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b' Copyright 2014 TU Dresden, Professur f\\xc3\\xbcr Prozessleittechnik\\n\\n Licensed under the EUPL, Version 1.1 or \\xe2\\x80\\x93 as soon they\\nwill be approved by the European Commission - subsequent\\nversions of the EUPL (the \"Licence\");\\n You may not use this work except in compliance with the\\nLicence.\\n You may obtain a copy of the Licence at:\\n\\n http://ec.europa.eu/idabc/eupl 5\\n\\n Unless required by applicable law or agreed to in\\nwriting, software distributed under the Licence is\\ndistributed on an \"AS IS\" basis,\\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either\\nexpress or implied.\\n* See the Licence for the specific language governing\\npermissions and limitations under the Licence.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "R43ples",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "r43ples",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "plt-tud",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/plt-tud/r43ples/blob/develop/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "stephanhensel",
+        "body": "* Restructured internal class model\r\n* Advanced merge functionalities\r\n* Aggregation of atomic changes to high level changes\r\n* Co-Evolution\r\n* Bugfixes",
+        "dateCreated": "2019-02-15T10:06:00Z",
+        "datePublished": "2019-02-15T10:26:56Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v1.0.0",
+        "name": "Version 1.0.0",
+        "tag_name": "v1.0.0",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v1.0.0",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/15580203",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v1.0.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "markusgraube",
+        "body": "- JOIN option \n- Multiple Endpoints \n- enhanced configuration file \n- bugfixes\n",
+        "dateCreated": "2015-06-14T12:50:52Z",
+        "datePublished": "2015-06-14T18:45:37Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.7",
+        "name": "Version 0.8.7",
+        "tag_name": "v0.8.7",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.7",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/1414014",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.7"
+      },
+      {
+        "authorType": "User",
+        "author_name": "markusgraube",
+        "body": "- standalone version based on Jena TDB \n- SPARQL Join feature \n- New layout\n",
+        "dateCreated": "2015-02-12T21:48:19Z",
+        "datePublished": "2015-02-12T21:50:25Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.6-1",
+        "name": "Version 0.8.6",
+        "tag_name": "v0.8.6-1",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.6-1",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/947349",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.6-1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "stephanhensel",
+        "body": "Support of MERGE queries added\nCollaboration with R43ples Merging Client (v1.0.0) is possible see also: https://github.com/plt-tud/r43ples-merging-client/releases/tag/v1.0.0\n",
+        "dateCreated": "2014-11-09T18:37:05Z",
+        "datePublished": "2014-11-09T18:44:07Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.5",
+        "name": "v0.8.5 - conflict management",
+        "tag_name": "v0.8.5",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.5",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/690035",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "markusgraube",
+        "dateCreated": "2014-10-04T18:11:23Z",
+        "datePublished": "2014-10-04T18:16:44Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.4",
+        "tag_name": "v0.8.4",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.4",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/603625",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "markusgraube",
+        "dateCreated": "2014-10-04T11:58:33Z",
+        "datePublished": "2014-10-04T12:01:11Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.3",
+        "tag_name": "v0.8.3",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.3",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/603301",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "markusgraube",
+        "body": "First release\n",
+        "dateCreated": "2014-10-01T12:08:23Z",
+        "datePublished": "2014-10-01T20:24:31Z",
+        "html_url": "https://github.com/plt-tud/r43ples/releases/tag/v0.8.2",
+        "name": "Version 0.8.2",
+        "tag_name": "v0.8.2",
+        "tarball_url": "https://api.github.com/repos/plt-tud/r43ples/tarball/v0.8.2",
+        "url": "https://api.github.com/repos/plt-tud/r43ples/releases/597097",
+        "zipball_url": "https://api.github.com/repos/plt-tud/r43ples/zipball/v0.8.2"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* JDK 1.8\n* Maven\n\n\tsudo apt-get install maven default-jdk\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "R43ples runs with standalone web server\n\n``` bash\njava -jar target/r43ples.jar\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 17,
+      "date": "Mon, 20 Dec 2021 19:08:11 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "semantic-web",
+      "sparql-query",
+      "linked-data",
+      "revision-management",
+      "revision-information",
+      "ontology",
+      "sparql",
+      "named-graphs"
+    ],
+    "technique": "GitHub API"
+  }
+}

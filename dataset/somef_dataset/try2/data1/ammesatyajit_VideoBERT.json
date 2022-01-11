@@ -1,0 +1,509 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ammesatyajit/VideoBERT",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-30T19:28:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-15T07:51:21Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.969418725009227,
+        0.9850527462208852
+      ],
+      "excerpt": "This repo reproduces the results of VideoBERT (https://arxiv.org/pdf/1904.01766.pdf). Inspiration was taken from https://github.com/MDSKUL/MasterProject, but this repo tackles video prediction rather than captioning and masked language modeling. On a side note, since this model is extremely small, the results that are displayed here are extremely basic. Feel free to increase the model size per your computational resources and change the inference file to include temperature if necessary (As of now I have not implemented temperature). Here are all the steps taken: \nThe I3D model is used to extract the features for every 1.5 seconds of video while saving the median image of the 1.5 seconds of video as well. I3D model used: https://tfhub.dev/deepmind/i3d-kinetics-600/1. Note that CUDA should be used to decrease the runtime. Here is the usage for the code to run: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9885145871174829,
+        0.9377326073648229
+      ],
+      "excerpt": "To find the centroids for the feature vectors, minibatch k-means is used hierarchically to save time and memory. After this, the nearest feature vector for each centroid is found, and the corresponding image is chosen to represent tht centroid. To use the hierarchical minibatch k-means independently for another project, consider using the python package hkmeans-minibatch, which is also used in this VideoBERT project (https://github.com/ammesatyajit/hierarchical-minibatch-kmeans). \nHere is the usage for the kmeans code: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8930901044020226,
+        0.8764179197684866
+      ],
+      "excerpt": "  -p FEATURES_PREFIX, --features-prefix FEATURES_PREFIX \n                        prefix that is common between the desired files to read \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8418213525956562
+      ],
+      "excerpt": "                        batch_size to use for the minibatch kmeans \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8425142898028977
+      ],
+      "excerpt": "After doing kmeans, the image representing each centroid needs to be found to display the video during inference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8984928306715354
+      ],
+      "excerpt": "  -f ROOT_FEATURES, --root-features ROOT_FEATURES \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853851140182288
+      ],
+      "excerpt": "                        json file to save the centroid to image dictionary in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8914199309448834
+      ],
+      "excerpt": "Using the centroids, videos are tokenized and text captions are punctuated. Using the timestamps for each caption, video ids are extracted and paired with the text captions in the training data file. Captions can be found here: https://www.rocq.inria.fr/cluster-willow/amiech/howto100m/.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8984928306715354
+      ],
+      "excerpt": "  -f ROOT_FEATURES, --root-features ROOT_FEATURES \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8783941238357921
+      ],
+      "excerpt": "                        json file to save the labelled data to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8793008214647445
+      ],
+      "excerpt": "After that the following file can be run to both punctuate text and group the text with the corresponding video. This uses the Punctuator module, which requires a .pcl model file to punctuate the data.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "  -p PUNCTUATOR_MODEL, --punctuator-model PUNCTUATOR_MODEL \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "  -l LABELLED_DATA, --labelled-data LABELLED_DATA \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8984928306715354
+      ],
+      "excerpt": "  -f ROOT_FEATURES, --root-features ROOT_FEATURES \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9581596285668847
+      ],
+      "excerpt": "The training data from before is used to train a next token prediction transformer. The saved model and tokenizer is used for inference in the next step. here is the usage of the train.py file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356508403207776
+      ],
+      "excerpt": "                        The json file for evaluating the model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836568926544215
+      ],
+      "excerpt": "                        Optional input sequence length after tokenization.The training dataset will be truncated in block of this size for training.Default to the model max input length for single sentence inputs (take into account \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8304650028812846
+      ],
+      "excerpt": "                        Number of updates steps to accumulate before performing a backward/update pass. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "                        Epsilon for Adam optimizer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "  --seed SEED           random seed for initialization \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9703752058352012
+      ],
+      "excerpt": "Model is used for predicting video sequences and results can be seen visually. Note that since the model does uses vector quantized images as tokens, it only understands the actions and approximate background of the scene, not the exact person or dish. Here are some samples: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9760199018481345
+      ],
+      "excerpt": "Here is the usage for the inference file. Feel free to modify it to suit any specific needs: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9260045263578978,
+        0.9394449182630016
+      ],
+      "excerpt": "                        The index of the eval set for evaluating the model \n  --seed SEED           random seed for initialization \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Using VideoBERT to tackle video prediction",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Using the HowTo100M dataset https://www.di.ens.fr/willow/research/howto100m/, filter out the cooking videos and download them for feature extraction. The dataset is also used for extracting images for each feature vector. The ids for the videos are contained in the ids.txt file. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ammesatyajit/VideoBERT/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Sun, 26 Dec 2021 02:08:10 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ammesatyajit/VideoBERT/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ammesatyajit/VideoBERT",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8492965625796943
+      ],
+      "excerpt": "  -i IMGS_SAVE_PATH, --imgs-save-path IMGS_SAVE_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057675898656085
+      ],
+      "excerpt": "  -c CAPTIONS_PATH, --captions-path CAPTIONS_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8492965625796943
+      ],
+      "excerpt": "  -s SAVE_PATH, --save-path SAVE_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8805239105616965
+      ],
+      "excerpt": "                        Optional pretrained config name or path if not the same as model_name_or_path. If both are None, initialize a new config. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.9456292920265406
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/I3D/batch_extract.py -h \nusage: batch_extract.py [-h] -f FILE_LIST_PATH -r ROOT_VIDEO_PATH -s FEATURES_SAVE_PATH -i IMGS_SAVE_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8419855385026808
+      ],
+      "excerpt": "                        path to file containing video file names \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336801098518991,
+        0.9320945255685004
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/I3D/minibatch_hkmeans.py -h  \nusage: minibatch_hkmeans.py [-h] -r ROOT_FEATURE_PATH -p FEATURES_PREFIX [-b BATCH_SIZE] -s SAVE_DIR -c CENTROID_DIR \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403770569177873,
+        0.9156331340484475
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/data/centroid_to_img.py -h  \nusage: centroid_to_img.py [-h] -f ROOT_FEATURES -i ROOT_IMGS -c CENTROID_FILE -s SAVE_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8621882743635256
+      ],
+      "excerpt": "  -c CENTROID_FILE, --centroid-file CENTROID_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8203638163825631
+      ],
+      "excerpt": "                        json file to save the centroid to image dictionary in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403770569177873,
+        0.9156331340484475
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/data/label_data.py -h    \nusage: label_data.py [-h] -f ROOT_FEATURES -c CENTROID_FILE -s SAVE_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8621882743635256
+      ],
+      "excerpt": "  -c CENTROID_FILE, --centroid-file CENTROID_FILE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8782715976370112
+      ],
+      "excerpt": "                        json file to save the labelled data to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9403770569177873,
+        0.9456292920265406
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/data/punctuate_text.py -h  \nusage: punctuate_text.py [-h] -c CAPTIONS_PATH -p PUNCTUATOR_MODEL -l LABELLED_DATA -f ROOT_FEATURES -s SAVE_PATH \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906766512678445
+      ],
+      "excerpt": "                        path to labelled data json file \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.914985285760201
+      ],
+      "excerpt": "                        json file to save training data to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8645152181008696,
+        0.8599814946120565
+      ],
+      "excerpt": "If desired, an evaluation data file can be created by splitting the training data file. \nThe training data from before is used to train a next token prediction transformer. The saved model and tokenizer is used for inference in the next step. here is the usage of the train.py file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9300313757396335,
+        0.9632270575298659
+      ],
+      "excerpt": "$ python3 VideoBERT/VideoBERT/train/train.py -h \nusage: train.py [-h] --output_dir OUTPUT_DIR [--should_continue] [--model_name_or_path MODEL_NAME_OR_PATH] [--train_data_path TRAIN_DATA_PATH] [--eval_data_path EVAL_DATA_PATH] [--config_name CONFIG_NAME] [--block_size BLOCK_SIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.827622669748937
+      ],
+      "excerpt": "                        The model checkpoint for weights initialization. Leave None if you want to train a model from scratch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8963547587929915
+      ],
+      "excerpt": "                        The json file for training the model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8548999980769748
+      ],
+      "excerpt": "                        The json file for evaluating the model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8588213561410861
+      ],
+      "excerpt": "                        Batch size per GPU/CPU for training. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8133420130272143
+      ],
+      "excerpt": "                        Total number of training epochs to perform. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8649279420263507
+      ],
+      "excerpt": "usage: inference.py [-h] [--model_name_or_path MODEL_NAME_OR_PATH] --output_dir OUTPUT_DIR [--example_id EXAMPLE_ID] [--seed SEED] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.827622669748937
+      ],
+      "excerpt": "                        The model checkpoint for weights initialization. Leave None if you want to train a model from scratch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8061687402992337
+      ],
+      "excerpt": "                        The output directory where the checkpoint is. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ammesatyajit/VideoBERT/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VideoBERT",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "VideoBERT",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ammesatyajit",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ammesatyajit/VideoBERT/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 47,
+      "date": "Sun, 26 Dec 2021 02:08:10 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "bert",
+      "videobert",
+      "python3",
+      "pytorch"
+    ],
+    "technique": "GitHub API"
+  }
+}

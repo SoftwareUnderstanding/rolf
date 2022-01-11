@@ -1,0 +1,357 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1806.09055",
+      "https://arxiv.org/abs/1806.09055",
+      "https://arxiv.org/abs/1806.09055_.\n\n<p align=\"center\">\n  <img src=\"img/darts.png\" alt=\"darts\" width=\"48%\">\n</p>\nThe algorithm is based on continuous relaxation and gradient descent in the architecture space. It is able to efficiently design high-performance convolutional architectures for image classification (on CIFAR-10 and ImageNet) and recurrent architectures for language modeling (on Penn Treebank and WikiText-2). Only a single GPU is required.\n\n## Requirements\n```\nPython >= 3.5.5, PyTorch == 0.3.1, torchvision == 0.2.0\n```\nNOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.\n\n## Datasets\nInstructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).\n\n## Pretrained models\nThe easist way to get started is to evaluate our pretrained DARTS models.\n\n**CIFAR-10** ([cifar10_model.pt](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing))\n```\ncd cnn && python test.py --auxiliary --model_path cifar10_model.pt\n```\n* Expected result: 2.63% test error rate with 3.3M model params.\n\n**PTB** ([ptb_model.pt](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing))\n```\ncd rnn && python test.py --model_path ptb_model.pt\n```\n* Expected result: 55.68 test perplexity with 23M model params.\n\n**ImageNet** ([imagenet_model.pt](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))\n```\ncd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt\n```\n* Expected result: 26.7% top-1 error and 8.7% top-5 error with 4.7M model params.\n\n## Architecture search (using small proxy models)\nTo carry out architecture search using 2nd-order approximation, run\n```\ncd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10\ncd rnn && python train_search.py --unrolled     # for recurrent cells on PTB\n```\nNote the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained genotype/architecture from scratch using full-sized models, as described in the next section.\n\nAlso be aware that different runs would end up with different local minimum. To get the best result, it is crucial to repeat the search process with different seeds and select the best cell(s) based on validation performance (obtained by training the derived cell from scratch for a small number of epochs). Please refer to fig. 3 and sect. 3.2 in our arXiv paper.\n\n<p align=\"center\">\n<img src=\"img/progress_convolutional_normal.gif\" alt=\"progress_convolutional_normal\" width=\"29%\">\n<img src=\"img/progress_convolutional_reduce.gif\" alt=\"progress_convolutional_reduce\" width=\"35%\">\n<img src=\"img/progress_recurrent.gif\" alt=\"progress_recurrent\" width=\"33%\">\n</p>\n<p align=\"center\">\nFigure: Snapshots of the most likely normal conv, reduction conv, and recurrent cells over time.\n</p>\n\n## Architecture evaluation (using full-sized models)\nTo evaluate our best cells by training from scratch, run\n```\ncd cnn && python train.py --auxiliary --cutout            # CIFAR-10\ncd rnn && python train.py                                 # PTB\ncd rnn && python train.py --data ../data/wikitext-2 \\     # WT2\n            --dropouth 0.15 --emsize 700 --nhidlast 700 --nhid 700 --wdecay 5e-7\ncd cnn && python train_imagenet.py --auxiliary            # ImageNet\n```\nCustomized architectures are supported through the `--arch` flag once specified in `genotypes.py`.\n\nThe CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test error of 10 independent runs to fall in the range of 2.76 +/- 0.09% with high probability.\n\n<p align=\"center\">\n<img src=\"img/cifar10.png\" alt=\"cifar10\" width=\"36%\">\n<img src=\"img/imagenet.png\" alt=\"ptb\" width=\"29%\">\n<img src=\"img/ptb.png\" alt=\"ptb\" width=\"30%\">\n</p>\n<p align=\"center\">\nFigure: Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB.\n</p>\n\n## Visualization\nPackage [graphviz](https://graphviz.readthedocs.io/en/stable/index.html) is required to visualize the learned cells\n```\npython visualize.py DARTS\n```\nwhere `DARTS` can be replaced by any customized architectures in `genotypes.py`.\n\n## Citation\nIf you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1806.09055):\n```\n@article{liu2018darts,\n  title={DARTS: Differentiable Architecture Search",
+      "https://arxiv.org/abs/1806.09055"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1806.09055):\n```\n@article{liu2018darts,\n  title={DARTS: Differentiable Architecture Search},\n  author={Liu, Hanxiao and Simonyan, Karen and Yang, Yiming},\n  journal={arXiv preprint arXiv:1806.09055},\n  year={2018}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{liu2018darts,\n  title={DARTS: Differentiable Architecture Search},\n  author={Liu, Hanxiao and Simonyan, Karen and Yang, Yiming},\n  journal={arXiv preprint arXiv:1806.09055},\n  year={2018}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9698483046903941
+      ],
+      "excerpt": "Hanxiao Liu, Karen Simonyan, Yiming Yang.\\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "CIFAR-10 (cifar10_model.pt) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9460858479337568
+      ],
+      "excerpt": "Figure: Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dragen1860/DARTS-PyTorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-20T12:17:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-12T20:17:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9797014703929993
+      ],
+      "excerpt": "Currently Only the part of CNN exps.  have been adopted yet. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8502192141997068
+      ],
+      "excerpt": "This repo. is absolutely based on official impl. from https://github.com/quark0/darts with trivial modificatio to make it run on pytorch 0.4+ version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9959804888011162
+      ],
+      "excerpt": "The algorithm is based on continuous relaxation and gradient descent in the architecture space. It is able to efficiently design high-performance convolutional architectures for image classification (on CIFAR-10 and ImageNet) and recurrent architectures for language modeling (on Penn Treebank and WikiText-2). Only a single GPU is required. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9926834460820432
+      ],
+      "excerpt": "The easist way to get started is to evaluate our pretrained DARTS models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928598601185848
+      ],
+      "excerpt": "Also be aware that different runs would end up with different local minimum. To get the best result, it is crucial to repeat the search process with different seeds and select the best cell(s) based on validation performance (obtained by training the derived cell from scratch for a small number of epochs). Please refer to fig. 3 and sect. 3.2 in our arXiv paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9032964151891566
+      ],
+      "excerpt": "Figure: Snapshots of the most likely normal conv, reduction conv, and recurrent cells over time. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.95523702964727
+      ],
+      "excerpt": "The CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. It would be misleading to report the result of only a single run. By training our best cell from scratch, one should expect the average test error of 10 independent runs to fall in the range of 2.76 +/- 0.09% with high probability. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9540585216673075
+      ],
+      "excerpt": "Package graphviz is required to visualize the learned cells \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch 1.0 supported for CNN exp.",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://graphviz.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dragen1860/DARTS-PyTorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Wed, 22 Dec 2021 03:04:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dragen1860/DARTS-PyTorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dragen1860/DARTS-PyTorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "```python  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9755700782456999
+      ],
+      "excerpt": "This repo. is absolutely based on official impl. from https://github.com/quark0/darts with trivial modificatio to make it run on pytorch 0.4+ version. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8517751433523532
+      ],
+      "excerpt": "Instructions for acquiring PTB and WT2 can be found here. While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9206330047228537
+      ],
+      "excerpt": "cd rnn &amp;&amp; python train.py                                 #: PTB \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9475627889164163
+      ],
+      "excerpt": "python test.py --auxiliary --model_path cifar10_model.pt #: test \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8481942365069672
+      ],
+      "excerpt": "  <img src=\"img/darts.png\" alt=\"darts\" width=\"48%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.889502401098124,
+        0.8788469352535327
+      ],
+      "excerpt": "cd cnn &amp;&amp; python test.py --auxiliary --model_path cifar10_model.pt \n* Expected result: 2.63% test error rate with 3.3M model params. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9340590389211395,
+        0.8490905684134381
+      ],
+      "excerpt": "cd rnn &amp;&amp; python test.py --model_path ptb_model.pt \n* Expected result: 55.68 test perplexity with 23M model params. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8317686102873679
+      ],
+      "excerpt": "cd cnn &amp;&amp; python test_imagenet.py --auxiliary --model_path imagenet_model.pt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8235938340968304
+      ],
+      "excerpt": "cd cnn &amp;&amp; python train_search.py --unrolled     #: for conv cells on CIFAR-10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8360046587347217,
+        0.8214911278508645,
+        0.8231427514499966
+      ],
+      "excerpt": "<img src=\"img/progress_convolutional_normal.gif\" alt=\"progress_convolutional_normal\" width=\"29%\"> \n<img src=\"img/progress_convolutional_reduce.gif\" alt=\"progress_convolutional_reduce\" width=\"35%\"> \n<img src=\"img/progress_recurrent.gif\" alt=\"progress_recurrent\" width=\"33%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.869983016951356,
+        0.9218697361483836,
+        0.9344777709854277,
+        0.808541099999576
+      ],
+      "excerpt": "cd cnn &amp;&amp; python train.py --auxiliary --cutout            #: CIFAR-10 \ncd rnn &amp;&amp; python train.py                                 #: PTB \ncd rnn &amp;&amp; python train.py --data ../data/wikitext-2 \\     #: WT2 \n            --dropouth 0.15 --emsize 700 --nhidlast 700 --nhid 700 --wdecay 5e-7 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8632938228105147,
+        0.861575763747738,
+        0.8598279182338112
+      ],
+      "excerpt": "<img src=\"img/cifar10.png\" alt=\"cifar10\" width=\"36%\"> \n<img src=\"img/imagenet.png\" alt=\"ptb\" width=\"29%\"> \n<img src=\"img/ptb.png\" alt=\"ptb\" width=\"30%\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/dragen1860/DARTS-PyTorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# PyTorch 1.0 supported",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DARTS-PyTorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dragen1860",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/dragen1860/DARTS-PyTorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nPython >= 3.5.5, PyTorch == 0.3.1, torchvision == 0.2.0\n```\nNOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 76,
+      "date": "Wed, 22 Dec 2021 03:04:03 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

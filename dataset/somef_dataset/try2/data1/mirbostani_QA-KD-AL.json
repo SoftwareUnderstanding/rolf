@@ -1,0 +1,351 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1804.09541v1",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/ 1804.09541v1](https://arxiv.org/abs/1804.09541v1)]\n    - The model implementation is based on [BangLiu/QANet-PyTorch](https://github.com/BangLiu/QANet-PyTorch) and [andy840314/QANet-pytorch-](https://github.com/andy840314/QANet-pytorch-).\n- BERT (Teacher)\n    - BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [[https://arxiv.org/abs/ 1810.04805](https://arxiv.org/abs/1810.04805)]\n    - [HuggingFace Transformers](https://github.com/huggingface/transformers) is used for the model implementation.\n\n## Datasets\n\nUse `download.sh` to download and extract the required datasets automatically.\n\n- [GloVe](https://nlp.stanford.edu/projects/glove/)\n    - [glove.840B.300d.zip](https://nlp.stanford.edu/data/glove.840B.300d.zip)\n    - [glove.840B.300d-char.txt](https://raw.githubusercontent.com/minimaxir/char-embeddings/master/glove.840B.300d-char.txt)\n- [SQuAD v1.1](rajpurkar.github.io/SQuAD-explorer)\n    - [train-v1.1.json](https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json)\n    - [dev-v1.1.json](https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json)\n- [Adversarial SQuAD](https://worksheets.codalab.org/worksheets/0xc86d3ebe69a3427d91f9aaa63f7d1e7d/)\n    - [sample1k-HCVerifyAll](https://worksheets.codalab.org/rest/bundles/0xb765680b60c64d088f5daccac08b3905/contents/blob/) (AddSent)\n    - [sample1k-HCVerifySample](https://worksheets.codalab.org/rest/bundles/0x3ac9349d16ba4e7bb9b5920e3b1af393/contents/blob/) (AddOneSent)\n\n## Train the Student Model Using Knowledge Distillation\n\nAny BERT-based model selected from [these models](https://huggingface.co/models) can be used as a teacher.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd true \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --teacher \"bert\" \\\n    --teacher_model_or_path \"bert-large-uncased-whole-word-masking-finetuned-squad\" \\\n    --teacher_tokenizer_or_path \"bert-large-uncased-whole-word-masking-finetuned-squad\" \\\n    --teacher_batch_size 32 \\\n    --temperature 10 \\\n    --alpha 0.7 \\\n    --interpolation \"linear\"\n```\n\n## Train the Student Model Using Active Learning\n\nThe active learning datasets based on the least confidence strategy are provided in `./data/active`.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd false \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --train_file ./data/active/train_active_lc5_40.json\n```\n\n## Train the Student Model Using Knowledge Distillation and Active Learning \n\nBefore combining knowledge distillation and active learning to train the student model, you have to finetune the teacher model (e.g., BERT-Large) with one of the active learning datasets provided in the `./data/active` directory.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd false \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --teacher \"bert\" \\\n    --teacher_batch_size 32 \\\n    --teacher_model_or_path ./processed/bert-finetuned-active-lc5-40 \\\n    --teacher_tokenizer_or_path ./processed/bert-finetuned-active-lc5-40 \\\n    --temperature 10 \\\n    --alpha 0.7 \\\n    --interpolation \"linear\" \\\n    --train_file ./data/active/train_active_lc5_40.json\n```\n\n## Evaluate the Student Model\n\nAfter a successful evaluation, the results will be saved in the `./processed/evaluation` directory by default.\n\n```shell\n$ python main.py \\\n    --evaluate true \\\n    --use_cuda true \\\n    --student \"qanet\" \\\n    --dev_file ./data/squad/dev-v1.1.json \\\n    --processed_data_dir ./processed/data \\\n    --resume ./processed/checkpoints/model_best.pth.tar\n``",
+      "https://arxiv.org/abs/ 1810.04805](https://arxiv.org/abs/1810.04805)]\n    - [HuggingFace Transformers](https://github.com/huggingface/transformers) is used for the model implementation.\n\n## Datasets\n\nUse `download.sh` to download and extract the required datasets automatically.\n\n- [GloVe](https://nlp.stanford.edu/projects/glove/)\n    - [glove.840B.300d.zip](https://nlp.stanford.edu/data/glove.840B.300d.zip)\n    - [glove.840B.300d-char.txt](https://raw.githubusercontent.com/minimaxir/char-embeddings/master/glove.840B.300d-char.txt)\n- [SQuAD v1.1](rajpurkar.github.io/SQuAD-explorer)\n    - [train-v1.1.json](https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json)\n    - [dev-v1.1.json](https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json)\n- [Adversarial SQuAD](https://worksheets.codalab.org/worksheets/0xc86d3ebe69a3427d91f9aaa63f7d1e7d/)\n    - [sample1k-HCVerifyAll](https://worksheets.codalab.org/rest/bundles/0xb765680b60c64d088f5daccac08b3905/contents/blob/) (AddSent)\n    - [sample1k-HCVerifySample](https://worksheets.codalab.org/rest/bundles/0x3ac9349d16ba4e7bb9b5920e3b1af393/contents/blob/) (AddOneSent)\n\n## Train the Student Model Using Knowledge Distillation\n\nAny BERT-based model selected from [these models](https://huggingface.co/models) can be used as a teacher.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd true \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --teacher \"bert\" \\\n    --teacher_model_or_path \"bert-large-uncased-whole-word-masking-finetuned-squad\" \\\n    --teacher_tokenizer_or_path \"bert-large-uncased-whole-word-masking-finetuned-squad\" \\\n    --teacher_batch_size 32 \\\n    --temperature 10 \\\n    --alpha 0.7 \\\n    --interpolation \"linear\"\n```\n\n## Train the Student Model Using Active Learning\n\nThe active learning datasets based on the least confidence strategy are provided in `./data/active`.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd false \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --train_file ./data/active/train_active_lc5_40.json\n```\n\n## Train the Student Model Using Knowledge Distillation and Active Learning \n\nBefore combining knowledge distillation and active learning to train the student model, you have to finetune the teacher model (e.g., BERT-Large) with one of the active learning datasets provided in the `./data/active` directory.\n\n```shell\n$ python main.py \\\n    --train true \\\n    --epochs 30 \\\n    --use_cuda true \\\n    --use_kd false \\\n    --student \"qanet\" \\\n    --batch_size 14 \\\n    --teacher \"bert\" \\\n    --teacher_batch_size 32 \\\n    --teacher_model_or_path ./processed/bert-finetuned-active-lc5-40 \\\n    --teacher_tokenizer_or_path ./processed/bert-finetuned-active-lc5-40 \\\n    --temperature 10 \\\n    --alpha 0.7 \\\n    --interpolation \"linear\" \\\n    --train_file ./data/active/train_active_lc5_40.json\n```\n\n## Evaluate the Student Model\n\nAfter a successful evaluation, the results will be saved in the `./processed/evaluation` directory by default.\n\n```shell\n$ python main.py \\\n    --evaluate true \\\n    --use_cuda true \\\n    --student \"qanet\" \\\n    --dev_file ./data/squad/dev-v1.1.json \\\n    --processed_data_dir ./processed/data \\\n    --resume ./processed/checkpoints/model_best.pth.tar\n``"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9424636805702031
+      ],
+      "excerpt": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [arXiv: 1810.04805] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    --epochs 30 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --temperature 10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    --epochs 30 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "    --epochs 30 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    --temperature 10 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mirbostani/QA-KD-AL",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-05T07:23:40Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-05T08:56:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9884217182724012
+      ],
+      "excerpt": "The model implementation is based on BangLiu/QANet-PyTorch and andy840314/QANet-pytorch-. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8348181930540448,
+        0.9858494492982697
+      ],
+      "excerpt": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [arXiv: 1810.04805] \nHuggingFace Transformers is used for the model implementation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8288335312207408
+      ],
+      "excerpt": "Any BERT-based model selected from these models can be used as a teacher. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8018439078206775
+      ],
+      "excerpt": "The active learning datasets based on the least confidence strategy are provided in ./data/active. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8383388835278736
+      ],
+      "excerpt": "Before combining knowledge distillation and active learning to train the student model, you have to finetune the teacher model (e.g., BERT-Large) with one of the active learning datasets provided in the ./data/active directory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Improving Question Answering Performance Using Knowledge Distillation and Active Learning",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mirbostani/QA-KD-AL/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 09:57:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mirbostani/QA-KD-AL/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mirbostani/QA-KD-AL",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mirbostani/QA-KD-AL/main/download.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.90875675958017
+      ],
+      "excerpt": "Use download.sh to download and extract the required datasets automatically. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9333384803827206,
+        0.9190315961926722
+      ],
+      "excerpt": "$ python main.py \\ \n    --train true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "    --use_cuda true \\ \n    --use_kd true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9333384803827206,
+        0.9190315961926722
+      ],
+      "excerpt": "$ python main.py \\ \n    --train true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    --use_cuda true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8285288431355256
+      ],
+      "excerpt": "    --train_file ./data/active/train_active_lc5_40.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9333384803827206,
+        0.9190315961926722
+      ],
+      "excerpt": "$ python main.py \\ \n    --train true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    --use_cuda true \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8285288431355256
+      ],
+      "excerpt": "    --train_file ./data/active/train_active_lc5_40.json \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9333384803827206,
+        0.8180725797900732,
+        0.8594142235991984
+      ],
+      "excerpt": "$ python main.py \\ \n    --evaluate true \\ \n    --use_cuda true \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mirbostani/QA-KD-AL/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Morteza Mirbostani\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "QA-KD-AL",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "QA-KD-AL",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mirbostani",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mirbostani/QA-KD-AL/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 3.8.3\n- PyTorch 1.6.0\n- Spacy 2.3.2\n- NumPy 1.19.5\n- Transformers 4.6.1\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 09:57:07 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "question-answering",
+      "knowledge-distillation",
+      "active-learning",
+      "pytorch",
+      "transformers",
+      "bert",
+      "qanet",
+      "interpolation",
+      "nlp",
+      "natural-language-processing",
+      "transformer"
+    ],
+    "technique": "GitHub API"
+  }
+}

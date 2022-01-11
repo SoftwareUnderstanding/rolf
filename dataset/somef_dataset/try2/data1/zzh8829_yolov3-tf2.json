@@ -1,0 +1,450 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It is pretty much impossible to implement this from the yolov3 paper alone. I had to reference the official (very hard to understand) and many un-official (many minor errors) repos to piece together the complete picture.\n\n- https://github.com/pjreddie/darknet\n    - official yolov3 implementation\n- https://github.com/AlexeyAB\n    - explinations of parameters\n- https://github.com/qqwweee/keras-yolo3\n    - models\n    - loss functions\n- https://github.com/YunYang1994/tensorflow-yolov3\n    - data transformations\n    - loss functions\n- https://github.com/ayooshkathuria/pytorch-yolo-v3\n    - models\n- https://github.com/broadinstitute/keras-resnet\n    - batch normalization fix\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\nconvert.py:\n  --output: path to output\n    (default: './checkpoints/yolov3.tf')\n  --[no]tiny: yolov3 or yolov3-tiny\n    (default: 'false')\n  --weights: path to weights file\n    (default: './data/yolov3.weights')\n  --num_classes: number of classes in the model\n    (default: '80')\n    (an integer)\n\ndetect.py:\n  --classes: path to classes file\n    (default: './data/coco.names')\n  --image: path to input image\n    (default: './data/girl.png')\n  --output: path to output image\n    (default: './output.jpg')\n  --[no]tiny: yolov3 or yolov3-tiny\n    (default: 'false')\n  --weights: path to weights file\n    (default: './checkpoints/yolov3.tf')\n  --num_classes: number of classes in the model\n    (default: '80')\n    (an integer)\n\ndetect_video.py:\n  --classes: path to classes file\n    (default: './data/coco.names')\n  --video: path to input video (use 0 for cam)\n    (default: './data/video.mp4')\n  --output: path to output video (remember to set right codec for given format. e.g. XVID for .avi)\n    (default: None)\n  --output_format: codec used in VideoWriter when saving video to file\n    (default: 'XVID)\n  --[no]tiny: yolov3 or yolov3-tiny\n    (default: 'false')\n  --weights: path to weights file\n    (default: './checkpoints/yolov3.tf')\n  --num_classes: number of classes in the model\n    (default: '80')\n    (an integer)\n\ntrain.py:\n  --batch_size: batch size\n    (default: '8')\n    (an integer)\n  --classes: path to classes file\n    (default: './data/coco.names')\n  --dataset: path to dataset\n    (default: '')\n  --epochs: number of epochs\n    (default: '2')\n    (an integer)\n  --learning_rate: learning rate\n    (default: '0.001')\n    (a number)\n  --mode: <fit|eager_fit|eager_tf>: fit: model.fit, eager_fit: model.fit(run_eagerly=True), eager_tf: custom GradientTape\n    (default: 'fit')\n  --num_classes: number of classes in the model\n    (default: '80')\n    (an integer)\n  --size: image size\n    (default: '416')\n    (an integer)\n  --[no]tiny: yolov3 or yolov3-tiny\n    (default: 'false')\n  --transfer: <none|darknet|no_output|frozen|fine_tune>: none: Training from scratch, darknet: Transfer darknet, no_output: Transfer all but output, frozen: Transfer and freeze all,\n    fine_tune: Transfer all and freeze darknet only\n    (default: 'none')\n  --val_dataset: path to validation dataset\n    (default: '')\n  --weights: path to weights file\n    (default: './checkpoints/yolov3.tf')\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "| Detection   | 416x416 |\n|-------------|---------|\n| YoloV3 predict_on_batch     | 29-32ms    | \n| YoloV3 predict_on_batch + TensorRT     | 22-28ms    | \n\n\nDarknet version of YoloV3 at 416x416 takes 29ms on Titan X.\nConsidering Titan X has about double the benchmark of Tesla M60,\nPerformance-wise this implementation is pretty comparable.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.86883661210754
+      ],
+      "excerpt": "Training definitely won't work if the rendered label doesn't look correct \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/zzh8829/yolov3-tf2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-03T17:57:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T08:49:01Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9739073127654501
+      ],
+      "excerpt": "This repo provides a clean implementation of YoloV3 in TensorFlow 2.0 using all the best practices. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8559759224128349,
+        0.8228923258803557,
+        0.8590912002023058,
+        0.9081981308070645,
+        0.9453603138554083
+      ],
+      "excerpt": "Not very easy to use without some intermediate understanding of TensorFlow graphs. \nIt is annoying when you accidentally use incompatible features like tensor.shape[0] \nor some sort of python control flow that works fine in eager mode, but \ntotally breaks down when you try to compile the model to graph. \nWhen calling model(x) directly, we are executing the graph in eager mode. For \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8321284404680848,
+        0.9547751534821775,
+        0.8452851854016319
+      ],
+      "excerpt": "faster since there is no compilation needed. Otherwise, model.predict or \nusing exported SavedModel graph is much faster (by 2x). For non real-time usage, \nmodel.predict_on_batch is even faster as tested by @AnaRhisT94) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8903527872025198
+      ],
+      "excerpt": "including GradientTape, keras.fit, eager or not yeilds similar performance. But graph \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9676570703489392
+      ],
+      "excerpt": "@tf.function is very cool. It's like an in-between version of eager and graph. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853762565241583
+      ],
+      "excerpt": "on every call. I am not sure whats the best way other than using globals. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8881827163626753
+      ],
+      "excerpt": "to hear abseil going open source. It includes many decades of best practices \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8632941201381474,
+        0.9394353339185034,
+        0.9267031019071044,
+        0.9685796852804787
+      ],
+      "excerpt": "nothing bad to say about it, strongly recommend absl.py to everybody. \nvery hard with pure functional API because the layer ordering is different in \ntf.keras and darknet. The clean solution here is creating sub-models in keras. \nKeras is not able to save nested model in h5 format properly, TF Checkpoint is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9654740539495758,
+        0.9337860182799275,
+        0.9375028135330585,
+        0.9213988705569637
+      ],
+      "excerpt": "It doesn't work very well for transfer learning. There are many articles and \ngithub issues all over the internet. I used a simple hack to make it work nicer \non transfer learning with small batches. \nI know it's very confusion but the output is tuple of shape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768502795157711
+      ],
+      "excerpt": "where N is the number of labels in batch and the last dimension \"6\" represents \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9603473710808553
+      ],
+      "excerpt": "Double check the format of your input data. Data input labelled by vott and labelImg is different. so make sure the input box is the right, and check carefully the format is x1/width,y1/height,x2/width,y2/height and NOT x1,y1,x2,y2, or x,y,w,h \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "YoloV3 Implemented in Tensorflow 2.0",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/zzh8829/yolov3-tf2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 863,
+      "date": "Wed, 22 Dec 2021 19:37:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/zzh8829/yolov3-tf2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "zzh8829/yolov3-tf2",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/zzh8829/yolov3-tf2/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/zzh8829/yolov3-tf2/master/colab_gpu.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9748709027320682
+      ],
+      "excerpt": "[x] GPU accelerated \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9554921319052185,
+        0.9707490475352308,
+        0.9442109236860835,
+        0.9831354321190563,
+        0.9953813707383078
+      ],
+      "excerpt": "conda env create -f conda-cpu.yml \nconda activate yolov3-tf2-cpu \n: Tensorflow GPU \nconda env create -f conda-gpu.yml \nconda activate yolov3-tf2-gpu \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9979947896609701
+      ],
+      "excerpt": "pip install -r requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9784931319831507,
+        0.8095048494801488
+      ],
+      "excerpt": "sudo apt install nvidia-driver-430 \n: Windows/Other \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8767475349398219
+      ],
+      "excerpt": "See the documentation here https://github.com/zzh8829/yolov3-tf2/blob/master/docs/training_voc.md \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.833114516308531
+      ],
+      "excerpt": "``` bash \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8802984190199818
+      ],
+      "excerpt": "You can compile all the keras fitting functionalities with gradient tape using the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8190369293359334
+      ],
+      "excerpt": "if for some reason you would like to have more boxes you can use the --yolo_max_boxes flag. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8713471811600243
+      ],
+      "excerpt": "[x] Eager mode training with tf.GradientTape \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8982295599371022
+      ],
+      "excerpt": "python convert.py --weights ./data/yolov3.weights --output ./checkpoints/yolov3.tf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9321260708972419
+      ],
+      "excerpt": "python detect.py --image ./data/meme.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.834966218047033
+      ],
+      "excerpt": "python detect.py --weights ./checkpoints/yolov3-tiny.tf --tiny --image ./data/street.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8840236657713042
+      ],
+      "excerpt": "python detect_video.py --video path_to_file.mp4 --output ./output.avi \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309601237807152
+      ],
+      "excerpt": "I have created a complete tutorial on how to train from scratch using the VOC2012 Dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9227094361322837
+      ],
+      "excerpt": "Example commend line arguments for training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9418836788446805,
+        0.9339825214430626,
+        0.93089846588408,
+        0.9068761639298013
+      ],
+      "excerpt": "python train.py --batch_size 8 --dataset ~/Data/voc2012.tfrecord --val_dataset ~/Data/voc2012_val.tfrecord --epochs 100 --mode eager_tf --transfer fine_tune \npython train.py --batch_size 8 --dataset ~/Data/voc2012.tfrecord --val_dataset ~/Data/voc2012_val.tfrecord --epochs 100 --mode fit --transfer none \npython train.py --batch_size 8 --dataset ~/Data/voc2012.tfrecord --val_dataset ~/Data/voc2012_val.tfrecord --epochs 100 --mode fit --transfer no_output \npython train.py --batch_size 8 --dataset ~/Data/voc2012.tfrecord --val_dataset ~/Data/voc2012_val.tfrecord --epochs 10 --mode eager_fit --transfer fine_tune --weights ./checkpoints/yolov3-tiny.tf --tiny \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9393031009800269
+      ],
+      "excerpt": "python export_tfserving.py --output serving/yolov3/1/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8710459805209407
+      ],
+      "excerpt": "Numbers are obtained with rough calculations from detect_video.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.829298676236852
+      ],
+      "excerpt": "model.predict, tf actually compiles the graph on the first run and then \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8802410479462837,
+        0.8916207482446165
+      ],
+      "excerpt": "python tools/visualize_dataset.py --classes=./data/voc2012.names \nIt will output one random image from your dataset with label to output.jpg \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/zzh8829/yolov3-tf2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Zihao Zhang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YoloV3 Implemented in TensorFlow 2.0",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yolov3-tf2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "zzh8829",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/zzh8829/yolov3-tf2/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2328,
+      "date": "Wed, 22 Dec 2021 19:37:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "tensorflow",
+      "tf2",
+      "yolo",
+      "yolov3",
+      "object-detection",
+      "deep-learning",
+      "machine-learning",
+      "neural-network",
+      "tensorflow-tutorials",
+      "tensorflow-examples"
+    ],
+    "technique": "GitHub API"
+  }
+}

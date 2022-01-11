@@ -1,0 +1,231 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{ke2021bcnet,\n    author = {Ke, Lei and Tai, Yu-Wing and Tang, Chi-Keung},\n    title = {Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers},\n    booktitle = {CVPR},\n    year = {2021}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lkeab/BCNet",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributing to detectron2\nWe want to make contributing to this project as easy and transparent as\npossible.\nIssues\nWe use GitHub issues to track public bugs and questions.\nPlease make sure to follow one of the\nissue templates\nwhen reporting any issues.\nFacebook has a bounty program for the safe\ndisclosure of security bugs. In those cases, please go through the process\noutlined on that page and do not file a public issue.\nPull Requests\nWe actively welcome your pull requests.\nHowever, if you're adding any significant features, please\nmake sure to have a corresponding issue to discuss your motivation and proposals,\nbefore sending a PR. We do not always accept new features, and we take the following\nfactors into consideration:\n\nWhether the same feature can be achieved without modifying detectron2.\nDetectron2 is designed so that you can implement many extensions from the outside, e.g.\nthose in projects.\nIf some part is not as extensible, you can also bring up the issue to make it more extensible.\nWhether the feature is potentially useful to a large audience, or only to a small portion of users.\nWhether the proposed solution has a good design / interface.\nWhether the proposed solution adds extra mental/practical overhead to users who don't\n   need such feature.\nWhether the proposed solution breaks existing APIs.\n\nWhen sending a PR, please do:\n\nFork the repo and create your branch from master.\nIf you've added code that should be tested, add tests.\nIf APIs are changed, update the documentation.\nEnsure the test suite passes.\nMake sure your code lints with ./dev/linter.sh.\nIf a PR contains multiple orthogonal changes, split it to several PRs.\nIf you haven't already, complete the Contributor License Agreement (\"CLA\").\n\nContributor License Agreement (\"CLA\")\nIn order to accept your pull request, we need you to submit a CLA. You only need\nto do this once to work on any of Facebook's open source projects.\nComplete your CLA here: https://code.facebook.com/cla\nLicense\nBy contributing to detectron2, you agree that your contributions will be licensed\nunder the LICENSE file in the root directory of this source tree.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-07T13:57:03Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T23:26:48Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers [CVPR 2021]",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lkeab/BCNet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 43,
+      "date": "Mon, 27 Dec 2021 00:34:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lkeab/BCNet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lkeab/BCNet",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/lkeab/BCNet/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/lkeab/BCNet/main/test.sh",
+      "https://raw.githubusercontent.com/lkeab/BCNet/main/visualize.sh",
+      "https://raw.githubusercontent.com/lkeab/BCNet/main/all.sh",
+      "https://raw.githubusercontent.com/lkeab/BCNet/main/process.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\nconda create -n bcnet python=3.7 -y\nsource activate bcnet\n \nconda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=10.1 -c pytorch\n \n#: FCOS and coco api and visualization dependencies\npip install ninja yacs cython matplotlib tqdm\npip install opencv-python==4.4.0.40\n#: Boundary dependency\npip install scikit-image\n \nexport INSTALL_DIR=$PWD\n \n#: install pycocotools. Please make sure you have installed cython.\ncd $INSTALL_DIR\ngit clone https://github.com/cocodataset/cocoapi.git\ncd cocoapi/PythonAPI\npython setup.py build_ext install\n \n#: install BCNet\ncd $INSTALL_DIR\ngit clone https://github.com/lkeab/BCNet.git\ncd BCNet/\npython3 setup.py build develop\n \nunset INSTALL_DIR\n```\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Prepare for [coco2017](http://cocodataset.org/#home) dataset following [this instruction](https://github.com/facebookresearch/detectron2/tree/master/datasets). And use our [converted mask annotations](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lkeab_connect_ust_hk/EW2ZVyev7e5Pr1fVfF2nn18BRod82j_jW5Z4ywYd1evq8Q?e=qj0Bbm) to replace original annotation file for bilayer decoupling training.\n\n```\n  mkdir -p datasets/coco\n  ln -s /path_to_coco_dataset/annotations datasets/coco/annotations\n  ln -s /path_to_coco_dataset/train2017 datasets/coco/train2017\n  ln -s /path_to_coco_dataset/test2017 datasets/coco/test2017\n  ln -s /path_to_coco_dataset/val2017 datasets/coco/val2017\n```\n\nMulti-GPU Training and evaluation on Validation set\n---------------\n```\nbash all.sh\n```\nOr\n```\nCUDA_VISIBLE_DEVICES=0,1 python3 tools/train_net.py --num-gpus 2 \\\n\t--config-file configs/fcos/fcos_imprv_R_50_FPN.yaml 2>&1 | tee log/train_log.txt\n```\n\nPretrained Models\n---------------\nFCOS-version download: [link](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lkeab_connect_ust_hk/EfiDFLLEawFJpruwuOl3h3ABBjAKysTf0qJQU80iaKbqYg?e=igzC51)\n```\n  mkdir pretrained_models\n  #:And put the downloaded pretrained models in this directory.\n```\n\nTesting on Test-dev\n---------------\n```\nexport PYTHONPATH=$PYTHONPATH:`pwd`\nCUDA_VISIBLE_DEVICES=0,1 python3 tools/train_net.py --num-gpus 2 \\\n\t--config-file configs/fcos/fcos_imprv_R_101_FPN.yaml \\\n\t--eval-only MODEL.WEIGHTS ./pretrained_models/xxx.pth 2>&1 | tee log/test_log.txt\n```\n\nVisualization\n---------------\n```\nbash visualize.sh\n```\n\nReference script for producing bilayer mask annotation:\n---------------\n```\nbash process.sh\n```\n\nThe COCO-OCC split:\n---------------\nThe COCO-OCC split download: [link](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lkeab_connect_ust_hk/Eee8WYEY4plIko4X5ej4ahYBB28FEHfxxolxtEkhF8QbRg?e=5d000r), which is detailed described in paper.\n\nCitation\n---------------\nIf you find BCNet useful in your research or refer to the provided baseline results, please star :star: this repository and consider citing :pencil::\n```\n@inproceedings{ke2021bcnet,\n    author = {Ke, Lei and Tai, Yu-Wing and Tang, Chi-Keung},\n    title = {Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers},\n    booktitle = {CVPR},\n    year = {2021}\n}   \n```\nRelated Links\n---------------\n[Youtube Video](https://www.youtube.com/watch?v=iHlGJppJGiQ) | [Poster](http://www.kelei.site/poster/BCNet_CVPR21.pdf)|\n[Zhihu Reading](https://zhuanlan.zhihu.com/p/378269087)\n\nRelated NeurIPS 2021 Work on multiple object tracking & segmentation: [PCAN](https://github.com/SysCV/pcan)\n\nRelated ECCV 2020 Work on partially supervised instance segmentation: [CPMask](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123530375.pdf)\n\n\nLicense\n---------------\nBCNet is released under the MIT license. See [LICENSE](LICENSE) for additional details.\nThanks to the Third Party Libs\n[detectron2](https://github.com/facebookresearch/detectron2).   \n\nQuestions\n---------------\nLeave github issues or please contact 'lkeab@cse.ust.hk'\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lkeab/BCNet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 lkeab\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers [BCNet, CVPR 2021]",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BCNet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lkeab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lkeab/BCNet/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 335,
+      "date": "Mon, 27 Dec 2021 00:34:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "instance-segmentation",
+      "occlusion-handling",
+      "bcnet",
+      "cvpr2021",
+      "cvpr",
+      "detection",
+      "segmentation",
+      "object-detection",
+      "occlusion",
+      "non-local",
+      "detectron2",
+      "fastrcnn",
+      "fcos",
+      "boundary-detection",
+      "gcn",
+      "bilayer-network",
+      "amodal-instance-segmentation"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/deep-occlusion-aware-instance-segmentation/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=deep-occlusion-aware-instance-segmentation)\n[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/deep-occlusion-aware-instance-segmentation/instance-segmentation-on-kins)](https://paperswithcode.com/sota/instance-segmentation-on-kins?p=deep-occlusion-aware-instance-segmentation)\n\nThis is the official pytorch implementation of [BCNet](https://openaccess.thecvf.com/content/CVPR2021/papers/Ke_Deep_Occlusion-Aware_Instance_Segmentation_With_Overlapping_BiLayers_CVPR_2021_paper.pdf) built on the open-source detectron2.\n\n> [**Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers**](https://openaccess.thecvf.com/content/CVPR2021/papers/Ke_Deep_Occlusion-Aware_Instance_Segmentation_With_Overlapping_BiLayers_CVPR_2021_paper.pdf)           \n> Lei Ke, Yu-Wing Tai, Chi-Keung Tang  \n> CVPR 2021\n\nHighlights\n-----------------\n- **BCNet:** Two/one-stage (detect-then-segment) instance segmentation with state-of-the-art performance.\n- **Novelty:** A new mask head design, explicit occlusion modeling with **bilayer decouple (object boundary and mask)** for the occluder and occludee in the same RoI.\n- **Efficacy:** Large improvements both the FCOS (anchor-free) and Faster R-CNN (anchor-based) detectors.\n- **Simple:** Small additional computation burden and easy to use.\n\nVisualization of Occluded Objects\n-----------------\n<table>\n    <tr>\n        <td><center><img src=\"figures/fig_vis2_new.png\" height=\"260\">\n            \nQualitative instance segmentation results of our BCNet, using ResNet-101-FPN and Faster R-CNN detector. The bottom row visualizes squared heatmap of **object contour and mask predictions** by the two GCN layers for the occluder and occludee in **the same ROI region** specified by the red bounding box, which also makes the final segmentation result of BCNet more explainable than previous methods. The heatmap visualization of GCN-1 in fourth column example shows that **BCNet handles multiple occluders with in the same RoI by grouping them together**. See our paper for more visual examples and comparisons.\n          </center></td>\n</tr>\n</table>\n<table>\n    <tr>\n          <td><center><img src=\"figures/fig_vis1_new.png\" height=\"260\">\n              \nQualitative instance segmentation results of our BCNet, using ResNet-101-FPN and FCOS detector.\n          </center></td>\n</tr>\n</table>\n\nResults on COCO test-dev\n------------\n(Check Table 8 of the paper for full results, all methods are trained on COCO train2017)\n\nDetector(Two-stage) | Backbone  | Method | mAP(mask) |\n|--------|----------|--------|-----------|\nFaster R-CNN| Res-R50-FPN | Mask R-CNN (ICCV'17) | 34.2 |\nFaster R-CNN| Res-R50-FPN | PANet (CVPR'18) | 36.6 |\nFaster R-CNN| Res-R50-FPN | MS R-CNN (CVPR'19) | 35.6 |\nFaster R-CNN| Res-R50-FPN | PointRend (1x CVPR'20) | 36.3 |\n**Faster R-CNN**| **Res-R50-FPN** | **BCNet (CVPR'21)** | [**38.4**](scores/stdout_r50_frcnn.txt) | \nFaster R-CNN| Res-R101-FPN | Mask R-CNN (ICCV'17) | 36.1 | \nFaster R-CNN| Res-R101-FPN | MS R-CNN (CVPR'19) | 38.3 |\nFaster R-CNN| Res-R101-FPN | BMask R-CNN (ECCV'20) | 37.7 | \n**Box-free** | Res-R101-FPN | SOLOv2 (NeurIPS'20) | 39.7 | \n**Faster R-CNN**|**Res-R101-FPN** | **BCNet (CVPR'21)** | [**39.8**](scores/stdout_frcnn.txt)|\n\nDetector(One-stage) | Backbone | Method | mAP(mask) |\n|--------|----------|--------|-----------|\nFCOS| Res-R101-FPN | BlendMask (CVPR'20) | 38.4 | \nFCOS| Res-R101-FPN | CenterMask (CVPR'20) | 38.3 | \nFCOS| Res-R101-FPN | SipMask (ECCV'20) | 37.8 |\nFCOS| Res-R101-FPN | CondInst (ECCV'20) | 39.1 |\n**FCOS**| Res-R101-FPN | **BCNet (CVPR'21)**| [**39.6**](scores/stdout_fcos.txt), [Pretrained Model](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lkeab_connect_ust_hk/EfiDFLLEawFJpruwuOl3h3ABBjAKysTf0qJQU80iaKbqYg?e=igzC51), [Submission File](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lkeab_connect_ust_hk/EVgMSMFwOmVDjAIB3LFusAMBTyTY-N_6qWbAWEBq_PK9xQ?e=5Lrmv7)|\nFCOS|Res-X101 FPN| BCNet (CVPR'21) | [41.2](scores/stdout_fcos_x101.txt) |\n\nIntroduction\n-----------------\nSegmenting highly-overlapping objects is challenging, because typically no distinction is made between real object contours and occlusion boundaries. Unlike previous two-stage instance segmentation methods, **BCNet** models image formation as composition of two overlapping image layers, where the top GCN layer detects the occluding objects (occluder) and the bottom GCN layer infers partially occluded instance (occludee). **The explicit modeling of occlusion relationship with bilayer structure naturally decouples the boundaries of both the occluding and occluded instances, and considers the interaction between them during mask regression.** We validate the efficacy of bilayer decoupling on both one-stage and two-stage object detectors with different backbones and network layer choices. The network of BCNet is as follows:\n<center>\n<table>\n    <tr>\n          <td><center><img src=\"figures/framework_new.png\" height=\"430\"></center></td>\n    </tr>\n</table>\nA brief comparison of mask head architectures, see our paper for full details.\n<table>\t\n    <tr>\n          <td><center><img src=\"figures/netcompare.png\" height=\"270\"></center></td>\n    </tr>\n</table>\n</center>\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

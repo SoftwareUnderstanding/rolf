@@ -1,0 +1,293 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nWe thank Tingfung Lau for the initial implementation of the FlyingChairs pipeline.\r\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{zhao2020maskflownet,\n  author = {Zhao, Shengyu and Sheng, Yilun and Dong, Yue and Chang, Eric I-Chao and Xu, Yan},\n  title = {MaskFlownet: Asymmetric Feature Matching with Learnable Occlusion Mask},\n  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\n  year = {2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8799231919733166,
+        0.9490753289412834
+      ],
+      "excerpt": "By Shengyu Zhao, Yilun Sheng, Yue Dong, Eric I-Chao Chang, Yan Xu. \n[arXiv] [ResearchGate] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "KITTI 2012 & KITTI 2015 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/microsoft/MaskFlownet/master/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/MaskFlownet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-03-24T09:08:39Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T01:33:10Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\n![mask_visualization](./images/mask_visualization.gif)\r\n\r\nFeature warping is a core technique in optical flow estimation; however, the ambiguity caused by occluded areas during warping is a major problem that remains unsolved. We propose an asymmetric occlusion-aware feature matching module, which can learn a rough occlusion mask that filters useless (occluded) areas immediately after feature warping without any explicit supervision. The proposed module can be easily integrated into end-to-end network architectures and enjoys performance gains while introducing negligible computational cost. The learned occlusion mask can be further fed into a subsequent network cascade with dual feature pyramids with which we achieve state-of-the-art performance. For more details, please refer to our [paper](https://arxiv.org/pdf/2003.10955.pdf).\r\n\r\nThis repository includes:\r\n\r\n- Training and inferring scripts using Python and MXNet; and\r\n- Pretrained models of *MaskFlownet-S* and *MaskFlownet*.\r\n\r\nCode has been tested with Python 3.6 and MXNet 1.5.\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8998165941568891
+      ],
+      "excerpt": "We follow the common training schedule for optical flow using the following datasets: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8158777131385861,
+        0.8022673237092122
+      ],
+      "excerpt": "where CONFIG specifies the network and training configuration; DATASET_CONFIG specifies the dataset configuration (default to chairs.yaml); GPU_DEVICES specifies the GPU IDs to use (default to cpu only), split by commas with multi-GPU support. Please make sure that the number of GPUs evenly divides the BATCH_SIZE, which depends on DATASET_CONFIG (BATCH_SIZE are 8 or 4 in the given configurations, so 4, 2, or 1 GPU(s) will be fine); CHECKPOINT specifies the previous checkpoint to start with; use --clear_steps to clear the step history and start from step 0; use --debug to enter the DEBUG mode, where only a small fragment of the data is read. To test whether your environment has been set up properly, run: python main.py MaskFlownet.yaml -g 0 --debug. \nHere, we present the procedure to train a complete MaskFlownet model for validation on the Sintel dataset. About 20% sequences (ambush_2, ambush_6, bamboo_2, cave_4, market_6, temple_2) are split as Sintel val, while the remaining are left as Sintel train (see Sintel_train_val_maskflownet.txt). CHECKPOINT in each command line should correspond to the name of the checkpoint generated in the previous step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9410257794399759,
+        0.8425666159508098
+      ],
+      "excerpt": "Pretrained models for step 2, 3, and 6 in the above procedure are given (see ./weights/). \nThe following script is for inferring: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[CVPR 2020, Oral] MaskFlownet: Asymmetric Feature Matching with Learnable Occlusion Mask",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/MaskFlownet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 64,
+      "date": "Thu, 30 Dec 2021 04:47:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/MaskFlownet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft/MaskFlownet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8764495631119049
+      ],
+      "excerpt": "where CONFIG specifies the network and training configuration; DATASET_CONFIG specifies the dataset configuration (default to chairs.yaml); GPU_DEVICES specifies the GPU IDs to use (default to cpu only), split by commas with multi-GPU support. Please make sure that the number of GPUs evenly divides the BATCH_SIZE, which depends on DATASET_CONFIG (BATCH_SIZE are 8 or 4 in the given configurations, so 4, 2, or 1 GPU(s) will be fine); CHECKPOINT specifies the previous checkpoint to start with; use --clear_steps to clear the step history and start from step 0; use --debug to enter the DEBUG mode, where only a small fragment of the data is read. To test whether your environment has been set up properly, run: python main.py MaskFlownet.yaml -g 0 --debug. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8121969715860832
+      ],
+      "excerpt": "where CONFIG specifies the network configuration (MaskFlownet_S.yaml or MaskFlownet.yaml); GPU_DEVICES specifies the GPU IDs to use, split by commas with multi-GPU support; CHECKPOINT specifies the checkpoint to do inference on; use --valid to do validation; use --predict to do prediction; INFERENCE_RESIZE specifies the resize used to do inference. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8200708380385707
+      ],
+      "excerpt": "Please modify the paths specified in main.py (for FlyingChairs), reader/things3d.py (for FlyingThings3D), reader/sintel.py (for Sintel), reader/kitti.py (for KITTI 2012 & KITTI 2015), and reader/hd1k.py (for HD1K) according to where you store the corresponding datasets. Please be aware that the FlyingThings3D dataset (subset) is still very large, so you might want to load only a relatively small proportion of it (see main.py). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9116228892276419
+      ],
+      "excerpt": "python main.py CONFIG [-dataset_cfg DATASET_CONFIG] [-g GPU_DEVICES] [-c CHECKPOINT, --clear_steps] [--debug] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8483036014510932
+      ],
+      "excerpt": "Here, we present the procedure to train a complete MaskFlownet model for validation on the Sintel dataset. About 20% sequences (ambush_2, ambush_6, bamboo_2, cave_4, market_6, temple_2) are split as Sintel val, while the remaining are left as Sintel train (see Sintel_train_val_maskflownet.txt). CHECKPOINT in each command line should correspond to the name of the checkpoint generated in the previous step. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9194925074758499,
+        0.9312197482620991,
+        0.9381400789170182,
+        0.905754465337979,
+        0.909321112080175,
+        0.9381400789170182
+      ],
+      "excerpt": "| 1 | MaskFlownet-S | Flying Chairs    | Sintel train + val | python main.py MaskFlownet_S.yaml -g 0,1,2,3 | \n| 2 | MaskFlownet-S | Flying Things3D  | Sintel train + val | python main.py MaskFlownet_S_ft.yaml --dataset_cfg things3d.yaml -g 0,1,2,3 -c [CHECKPOINT] --clear_steps | \n| 3 | MaskFlownet-S | Sintel train + KITTI 2015 + HD1K | Sintel val | python main.py MaskFlownet_S_sintel.yaml --dataset_cfg sintel_kitti2015_hd1k.yaml -g 0,1,2,3 -c [CHECKPOINT] --clear_steps | \n| 4 | MaskFlownet   | Flying Chairs    | Sintel val | python main.py MaskFlownet.yaml -g 0,1,2,3 -c [CHECKPOINT] --clear_steps | \n| 5 | MaskFlownet   | Flying Things3D  | Sintel val | python main.py MaskFlownet_ft.yaml --dataset_cfg things3d.yaml -g 0,1,2,3 -c [CHECKPOINT] --clear_steps | \n| 6 | MaskFlownet   | Sintel train + KITTI 2015 + HD1K | Sintel val | python main.py MaskFlownet_sintel.yaml --dataset_cfg sintel_kitti2015_hd1k.yaml -g 0,1,2,3 -c [CHECKPOINT] --clear_steps | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9255087696181558
+      ],
+      "excerpt": "python main.py CONFIG [-g GPU_DEVICES] [-c CHECKPOINT] [--valid or --predict] [--resize INFERENCE_RESIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228,
+        0.9225719253874203,
+        0.927755331518883
+      ],
+      "excerpt": "For example, \nto do validation for MaskFlownet-S on checkpoint fffMar16, run python main.py MaskFlownet_S.yaml -g 0 -c fffMar16 --valid (the output will be under ./logs/val/). \nto do prediction for MaskFlownet on checkpoint 000Mar17, run python main.py MaskFlownet.yaml -g 0 -c 000Mar17 --predict (the output will be under ./flows/). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/MaskFlownet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'    MIT License\\r\\n\\r\\n    Copyright (c) Microsoft Corporation.\\r\\n\\r\\n    Permission is hereby granted, free of charge, to any person obtaining a copy\\r\\n    of this software and associated documentation files (the \"Software\"), to deal\\r\\n    in the Software without restriction, including without limitation the rights\\r\\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\r\\n    copies of the Software, and to permit persons to whom the Software is\\r\\n    furnished to do so, subject to the following conditions:\\r\\n\\r\\n    The above copyright notice and this permission notice shall be included in all\\r\\n    copies or substantial portions of the Software.\\r\\n\\r\\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\r\\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\r\\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\r\\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\r\\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\r\\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\r\\n    SOFTWARE\\r\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MaskFlownet: Asymmetric Feature Matching with Learnable Occlusion Mask, CVPR 2020 (Oral)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MaskFlownet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/MaskFlownet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 311,
+      "date": "Thu, 30 Dec 2021 04:47:46 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "optical-flow",
+      "occlusion",
+      "cvpr2020",
+      "sintel",
+      "kitti",
+      "feature-matching",
+      "feature-warping"
+    ],
+    "technique": "GitHub API"
+  }
+}

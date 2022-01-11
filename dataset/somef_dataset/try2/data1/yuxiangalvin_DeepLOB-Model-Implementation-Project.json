@@ -1,0 +1,541 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9492418987610088
+      ],
+      "excerpt": "I conducted experiment on two different datasets: FI-2010 & JNJ (Johnson & Johnson) 2020 January limit orderbook dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "conv_layer3 = Conv2D(conv_filter_num, (1,10))(conv_layer2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.971679416046096
+      ],
+      "excerpt": "| Author\u2019s Report |78.91%| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9239316879895362,
+        0.8586180613973461,
+        0.950478123126187
+      ],
+      "excerpt": "|Author\u2019s Report on LSE dataset |20 |70.17% |  | \n|Author\u2019s Report on LSE dataset | 50 | 63.93% |  | \n|Author\u2019s Report on LSE dataset | 100|61.52%| | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuxiangalvin/DeepLOB-Model-Implementation-Project",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  \n  * Yuxiang(Alvin) Chen   yuxiangchen2021 at u.northwestern.edu\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-07T22:02:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-13T03:04:20Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "As stated above, the data is separated into a training set and a validation set. Since all parameters are provided by the paper clearly, there is no model tuning process that depend on validation results. The validation set is used as the function of the testing set. The code below will print out the training process. Graphs of loss and accuracy through training and other Keras supported metrics could be accessed fro mthe history variable.\n\n```python\nDeepLOB_model = initiate_DeepLOB_model(lookback_timestep, feature_num, conv_filter_num, inception_num, LSTM_num, leaky_relu_alpha,\n                          loss, optimizer, metrics)\n\n#: definte the training stop criteria (no new max validation accuracy in 20 consecutive epochs)\nes = EarlyStopping(monitor='val_accuracy', mode='max', patience = stop_epoch_num, verbose=1)\nhistory = DeepLOB_model.fit(X_train, y_train, epochs=num_epoch, batch_size=batch_size, verbose=2, validation_data=(X_test, y_test), callbacks = [es])\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9811492103242749,
+        0.9941225483678324
+      ],
+      "excerpt": "Welcome to my project page! It's time to dive DEEP :) \nThis is a replicate project to develop the model raised up in the paper DeepLOB - Deep Convolutional Neural Networks.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9468526974571049,
+        0.9967371031063772,
+        0.8972856514978504,
+        0.9570440385258524,
+        0.9984657721231728,
+        0.9853974274927553,
+        0.96839465224617,
+        0.8080506513562874,
+        0.8735612136145615,
+        0.9756744558753657,
+        0.9040598726288892,
+        0.9644580188650662,
+        0.8734563260740161
+      ],
+      "excerpt": "Here is my GitHub Repository. \nThis repo contains some codes and outputs of my implementation of DeepLOB model. \nHere is my Project Presentation Video \nDeep Learning's application in Finance has always been one of the most complicated research area for Deep Learning. While reading various papers that focus on Deep Learning methods on Quantitative Finance applications, this paper about DeepLOB - Deep Convolutional Neural Networks catches my attention. \nNowadays, most companies in Quantitative Finance field uses limit orderbook data to conduct all kinds of analysis. It provides much more information than traditional one point data. High frequency limit orderbook data is essential for companies which conduct high frequency trading and the importance has been growing at an extremely fast speed. As an individal who is very passionate about machine learning's applications in finance data of Level II or above, I would like to fully understand the DeepLOB model and the authors' intensions behind each design component. At the same time, I would like to further enhance my deep learning application skills. Thus, I conducted this replicate project. \nThe model takes in the limit orderbook data of one specific stock as input and conduct a 3-class prediction for the stock's mid-price movement. The three classes are 'Down', 'Hold' and 'Up'. There has been previous researches which focus on limit orderbook data. However, most of them applied static feature extract method that mainly based on domain expertise and conventions. These static methods include Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA), etc.  \nThe DeepLOB model intead applies a dynamic feature ectraction approach through applying Deep Learning architecture (CNN + Inception Module). It also uses an additional LSTM to capture additional dependence that is not captured by the CNN + Inception Module. \nThe DeepLOB model takes limit orderbook data as inputs, specifically, at each time point, it takes in a limit orderbook snippet - the lowest 10 ask levels and the highest 10 bid levels. Each level has one price data and one size data. Thus, at each time point, there are 40 numbers. Below is am example of how the orderbook looks like at one time point (10 levels are shown here in this example) \nThe authors of the model use a lookback period of 100 timesteps at each time step. Thus at each time step, the input matrix has a dimension of 100 x 40. \nThus the input size of the model is N x 100 x 40 x 1 (N is the number of timesteps used as input) \nThe paper authors used two different datasets: FI-2010 and London Stock Exchange (LSE) limit orderbook data. \nFI-2010 is a public benchmark dataset of HFT LOB data and extracted time series data for five stocks from the Nasdaq Nordic stock market for a time period of 10 consecutive days.  \nThe timestep distance between two data points are in average < 1 second.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9259166573529528
+      ],
+      "excerpt": "The timestep distance between two data points are samller and in average 0.192 seocnd \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8716979774201775,
+        0.9895751509071177,
+        0.972840215833097,
+        0.9970452004847123,
+        0.9804370184212264
+      ],
+      "excerpt": "Here I will use the original pictures used in the original paper with my annotations to present the model structure. \nThe model starts with 1 CNN block with 3 sub parts. \nThere are three points that worths noticing in the CNN block design. \nThe design of 1x2 filter and 1x2 stride at the beginning the 1st sub part is used to capture one important nature of the input data. One of the dimentions of the input data is 40 (price and size at 20 levels of order book). Since the data is ordered as price, size alternatively. This design keeps the first element of the horizontal filter only looking at prices and the second element of the filter only looking at sizes. This design takes the nature of the data into account and thus makes the 16 different feature maps generated from 16 different filters more representative. \nThe design of 4x1 filter in the 2nd layer of 1st subpart capture local interactions amongst data over four time steps. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9938218317777053,
+        0.9841554421619793,
+        0.9378592888329088,
+        0.9144043892536443,
+        0.8935062165204065
+      ],
+      "excerpt": "Following the CNN block is an Inception Module. The Inception Module is more powerful than a common CNN block becasue it allows to use multiple types of filter size, instead of being restricted to a single filter size. The specific structure of the Inception Module is shown below in the figure. \nAs the structure figure shows, this specific Inception Module contains three parallel processes. This allows the module to capture dynamic behaviors over multiple timescales. An 1 x 1 Conv layer is used in every path. This idea is form the Network-in-Network approach proposed in a 2014 paper. Instead of applying a simple convolution to the data, the Network-in-Network method uses a small neural network to capture the non-linear properties of the data. \nA LSTM layer with 64 LSTM unities is used after the CNN + Inception Module part in order to capture additioanl time dependencies. \nA fully connected layer is used to map the 64 outputs from LSTM units to size 3 (one hot encoding of the 3 categories) \nAll the following codes could be found in 'DeepLOB keras FI-2010.ipynb' and 'DeepLOB keras JNJ.ipynb' in codes folder. The two files differ only in data preprocessing process and the experiment process. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8308965711089314,
+        0.8675053989000291
+      ],
+      "excerpt": "Benchmark dataset of HFT LOB data \nExtracted time series data for five stocks from the Nasdaq Nordic stock market (not very liquid asset) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503306507863866
+      ],
+      "excerpt": "The dataset is included in the github repo.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "def extract_x_y_data(data, timestamp_per_sample): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8276730471589628
+      ],
+      "excerpt": ": use a subset of the data for experiment \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8636001059002094
+      ],
+      "excerpt": "About 160000-200000 data points per trading day \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8098691219414986,
+        0.9228529780255931
+      ],
+      "excerpt": "This dataset is restricted to class use so it's not included in github repo. Here I will present my complete code example of data pre-processing (normalization, labelling & dimension adjustion) \nThe paper authors conducted their second experiment on London Stock Exchange (LSE) LOB dataset. The JNJ dataset and LSE dataset share similar characteristics in their frequency, stock liquidity, etc. Thus I followed the same method for nomalization as that used by authors for LSE dataset. I used the previous 5 days data to normalize the current day' data. This is applied to every day (excluding the first 5 days in the dataset) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8142423037246547
+      ],
+      "excerpt": ": get all trading days in the date range \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for trading_day in dates: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "    for look_back_date in look_back_dates_list: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9884056277879605,
+        0.9568698636644603
+      ],
+      "excerpt": "mid price is calculated as the weighted mid price using limit order size at the best ask and bid level instead of the simple mid point. This is a mroe accuracte way to calculate theoretical mid price used by quantitative finance companies and researchers. \nThe category label is labelled through looking at change percentage from current timestep mid-price to future k timestep average mid-price instead of past k to future k. This adjustion makes sure the model could not see part of the change percentage information from input X. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9373935769459776
+      ],
+      "excerpt": "    #:k is the number of future timesteps used to generate the label y \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8315926292884698
+      ],
+      "excerpt": ": generate X and y with k = 8 & alpha = 7e-6 (alpha decided through finding the threshold value that approximately separates data into 3 balanced label categories for the specific k value) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "model_output = Dense(3, activation='softmax')(LSTM_output) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8834643742169082,
+        0.8169815468012596
+      ],
+      "excerpt": "Here is the comparison between authors' reported validation accuracy of their experiment with FI-2010 dataset. \n| Model| Accuracy| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9554566510085089,
+        0.9418412040066642
+      ],
+      "excerpt": "The potential reason of this difference could be that I am using only part of the FI-2010 dataset for my experiment so the training data number is not as big as the one the authors used. \nTo further assess the performance of my model, I also conducted the experiment on the JNJ stock LOB dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8169815468012596
+      ],
+      "excerpt": "|Model |k | Accuracy |Epochs taken| \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8127616867406604,
+        0.9242550120862808,
+        0.9484993732327667
+      ],
+      "excerpt": "|Replicate on JNJ orderbook data |8 |70.28% | 184 | \n|Replicate on JNJ orderbook data |26 |80.50% |113 | \n|Replicate on JNJ orderbook data |80 |77.52%  |32 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.960571474554488
+      ],
+      "excerpt": "I also notice that as k increases in my experiment, final valdiation accuracy has a rough increasing trend (until certain k value) and the number of epochs taken for training goes down as k increases. However, the valdiation accruacy trend along k is opposite in authors' report. This is an observation that is worth more thinking and research. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9241777191365764,
+        0.9156165930338991,
+        0.9823439803084492,
+        0.866150249779432
+      ],
+      "excerpt": "The model does need sufficient amount of data for training to avoid overfitting problem. \nAs the k parameter increases, according to my experiment, the number of epochs needed for the training to finish decreases. \nThe model performs well still with adjustment on how midprice is calculated and how lables are generated. \nThe model has a stable great performance on high frequency dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This repo contains some codes and outputs of my implementation of DeepLOB model.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuxiangalvin/DeepLOB-Model-Implementation-Project/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Thu, 23 Dec 2021 01:07:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuxiangalvin/DeepLOB-Model-Implementation-Project/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuxiangalvin/DeepLOB-Model-Implementation-Project",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/yuxiangalvin/DeepLOB-Model-Implementation-Project/main/src/codes/DeepLOB%20keras%20FI-2010.ipynb",
+      "https://raw.githubusercontent.com/yuxiangalvin/DeepLOB-Model-Implementation-Project/main/src/codes/DeepLOB%20keras%20JNJ.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "```python        \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8493008348868387
+      ],
+      "excerpt": "The DeepLOB model takes limit orderbook data as inputs, specifically, at each time point, it takes in a limit orderbook snippet - the lowest 10 ask levels and the highest 10 bid levels. Each level has one price data and one size data. Thus, at each time point, there are 40 numbers. Below is am example of how the orderbook looks like at one time point (10 levels are shown here in this example) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134,
+        0.8801854956928516,
+        0.9416522774131079,
+        0.9040368155137037,
+        0.8801854956928516
+      ],
+      "excerpt": "import numpy as np \nfrom sklearn.model_selection import train_test_split \nfrom keras.utils import np_utils \nfrom keras.models import Model \nfrom keras.optimizers import Adam \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9012248701992861
+      ],
+      "excerpt": "from keras.callbacks import EarlyStopping \nimport pandas_market_calendars as mcal \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968,
+        0.8730882518372601
+      ],
+      "excerpt": "leaky_relu_alpha = 0.01 \n:Training params \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968
+      ],
+      "excerpt": "learning_rate = 0.01 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9389031781205087,
+        0.9389031781205087
+      ],
+      "excerpt": "    data_x = np.array(data[:40, :].T) \n    data_y = np.array(data[-5:, :].T) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8826917448272372
+      ],
+      "excerpt": "x = np.zeros([(N-timestamp_per_sample+1), timestamp_per_sample, P_x]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8599319689742918
+      ],
+      "excerpt": "dates = list(nyse.schedule(start_date='2020-01-01', end_date='2020-01-09').index) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8265151675632634
+      ],
+      "excerpt": ": read & store daily LOB data in a dictionary \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9279468454831389
+      ],
+      "excerpt": "        daily_data_dict[date] = np.array(pd.read_csv('./data/JNJ_orderbook/JNJ_' + date + '_34200000_57600000_orderbook_10.csv',header = None)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8997243352845468,
+        0.8208783012378312
+      ],
+      "excerpt": "            prev_5_day_orderbook_np = np.vstack((prev_5_day_orderbook_np, daily_data_dict[look_back_date])) \n    price_mean = prev_5_day_orderbook_np[:,range(0,prev_5_day_orderbook_np.shape[1],2)].mean() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8208783012378312
+      ],
+      "excerpt": "    size_mean = prev_5_day_orderbook_np[:,range(1,prev_5_day_orderbook_np.shape[1],2)].mean() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836167598781974,
+        0.8836167598781974
+      ],
+      "excerpt": "    normalization_mean_dict[date] = np.repeat([[price_mean,size_mean]], 20, axis=0).flatten() \n    normalization_stddev_dict[date] = np.repeat([[price_std,size_std]], 20, axis=0).flatten() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.852180644461012
+      ],
+      "excerpt": "    return np.convolve(x, np.ones(k), 'valid') / k \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8542449354072877,
+        0.9312650322969277
+      ],
+      "excerpt": "            data_x = np.vstack((data_x, daily_norm_data_dict[date][:-k,:])) \n    print(data_x.shape) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8542449354072877
+      ],
+      "excerpt": "        data_y = np.vstack((data_y, daily_label_dict[date])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8826917448272372
+      ],
+      "excerpt": "x = np.zeros([(N-timestamp_per_sample+1), timestamp_per_sample, P_x]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8466240148082106
+      ],
+      "excerpt": ": separate into train & validation data (4:1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8144338362021298
+      ],
+      "excerpt": "input_tensor = Input(shape=(lookback_timestep, feature_num, 1)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yuxiangalvin/DeepLOB-Model-Implementation-Project/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# DeepLOB-Model-Implementation-Project",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeepLOB-Model-Implementation-Project",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yuxiangalvin",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yuxiangalvin/DeepLOB-Model-Implementation-Project/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Thu, 23 Dec 2021 01:07:49 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

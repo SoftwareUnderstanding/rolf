@@ -1,0 +1,798 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.02640\n* 9000/v2 - https://arxiv.org/abs/1612.08242\n* v3 - https://arxiv.org/abs/1804.02767\n* v4 (new!",
+      "https://arxiv.org/abs/1612.08242\n* v3 - https://arxiv.org/abs/1804.02767\n* v4 (new!",
+      "https://arxiv.org/abs/1804.02767\n* v4 (new!"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [Azure Machine Learning documentation](https://docs.microsoft.com/en-us/azure/machine-learning/)\n* [Building Powerful Image Classfication Models Using very Little Data](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html) \n---\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* All YOLO v3 code based on https://github.com/qqwweee/keras-yolo3 project.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9862984635298383
+      ],
+      "excerpt": "Keras YOLOv3 implementation for object detection https://github.com/qqwweee/keras-yolo3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869405348645832,
+        0.9944484218006108,
+        0.9944484218006108,
+        0.9742177718389462
+      ],
+      "excerpt": "Original - https://arxiv.org/abs/1506.02640 \n9000/v2 - https://arxiv.org/abs/1612.08242 \nv3 - https://arxiv.org/abs/1804.02767 \nv4 (new!) - https://arxiv.org/pdf/2004.10934.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8283268420643993
+      ],
+      "excerpt": "export STORAGE_ACCOUNT_KEY=&lt;Storage account key&gt; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9918787253900675
+      ],
+      "excerpt": "ffmpeg -f avfoundation -framerate 30 -i \"0\" -r 30  video.mpg \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/michhar/azureml-keras-yolov3-custom",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-16T17:40:00Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-09T11:32:35Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9929568300015191,
+        0.9912209355890795
+      ],
+      "excerpt": "Keras is a deep learning framework that operates as a binding to lower level frameworks such as TensorFlow and CNTK.  Azure Machine Learning, an ML platform integrated with Microsft Azure for data prep, experimentation and model deployment, is exposed through a Python SDK (used here) and extension to the Azure CLI.  Together a custom Keras model for object detection is trained using the code and instruction in theis repo.  The ML practitioner must bring their own custom data to this process - hence any object detector can be trained by following the process below. \nThis work is based on: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8939846266292275,
+        0.8871503501437651
+      ],
+      "excerpt": "A fork for custom data https://github.com/michhar/keras-yolo3-custom (this repo is the Azure ML implementation). \nYOLO stands for \"you only look once\" and is an efficient algorithm for object detection.  The following image is showing the results from a trained car detector. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372396012058242
+      ],
+      "excerpt": "Important papers on YOLO: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8384900153989889
+      ],
+      "excerpt": "There are \"tiny\" versions of the architecture, often considered for embedded/constrained devices. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.838732747456907
+      ],
+      "excerpt": "This implementation of YOLOv3 (Tensorflow backend) was inspired by allanzelener/YAD2K. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9707693691410405
+      ],
+      "excerpt": "Register base model to Azure ML Workspace \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.921024030793046
+      ],
+      "excerpt": "Label data with VoTT and export to Storage \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9152172834016774,
+        0.8197224153462316
+      ],
+      "excerpt": "Note:  The training script automatically calculates the optimal sizes for the anchor boxes and updates a config file for YOLOv3.  It also uses the config file to convert a pretrained Darknet model to Keras format for the custom number of classes so the user does not need to perform these manual steps. \nLog in to Azure with the Azure CLI using your Azure credentials on the command line (this will also involve an interactive browser experience) - az login (additionally, you may need to switch in to the appropriate subscription with az account set --subscription &lt;subscription id&gt;) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9620654505317096
+      ],
+      "excerpt": "A Service Principal is the recommeded way for an unattended script or production system to authenticate with Azure ML for accessing a Workspace. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9568494018755004,
+        0.9337532593852115
+      ],
+      "excerpt": "Then, place the model in the base folder of the cloned repository. \nRun the following script to register the YOLO model to the Azure ML Workspace in the cloud (it uploads it in the background as well).  --model-size should be either full or tiny. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9873245989640668
+      ],
+      "excerpt": "Define local environment variables as follows so that the upload script sends data to the right Azure Storage Account and container (this is going to be one single folder with all of the raw images to label - it will serve as input to the labeling process with VoTT in the next step). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8886034359529978
+      ],
+      "excerpt": "env | more \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9336811952501939,
+        0.9352696757749651
+      ],
+      "excerpt": "Note:  the default access level is \"Private (no anonymous access)\" and can be changed with the SDK, as well as, in the Azure Portal by navigating to the container within the Storage account and selecting \"Change access level\". \nVoTT is the labeling tool that will be used locally to label data that is stored in the cloud and will write the labels directly back to a cloud store using a SAS token for REST authentication.  The tool imports from and exports directly to Azure Blob Storage containers specified while using the tool with no need to download data for labeling.  The raw images to label should exist already in a private Blob Storage container (the data from the previous step above).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9475291129007876
+      ],
+      "excerpt": "The Source Connection and Target Connection (associated with two different containers) from and to Blob Storage will use a SAS token for authentication.  Create the \"SAS\" or shared access signature in the Azure Portal in the Storage Account under the \"Shared access signature\" blade and set the permissions for \"Service\", \"Container\" and \"Object\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9259693508983916
+      ],
+      "excerpt": "Create it to expire whenever it makes sense for your scenario. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8961415454744996,
+        0.9117621780714944
+      ],
+      "excerpt": "IMPORTANT:  A word of caution in using VoTT v2.1.0 - if adding more raw data to the input Storage container/connection to label some more images, make sure to keep the same output container/connection for the labels, otherwise the old labels may not transfer over.  Also, ensure not to delete any files in the output storage container as it would interfere with current labeling (labels may disappear).   \nThere will be one &lt;random guid&gt;-asset.json file per image in the base of the Blob Storage container (target connection) containing the saved labels for VoTT.  Do not delete any of these files, otherwise when opening the project again, the labels will have been removed in the UI, as well, and can not be recovered. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8672305817340279
+      ],
+      "excerpt": "Your output in the cloud will have one folder with three subfolders in the new Storage container (the connection name used with VoTT).  Check the Azure Portal that this is the case.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9353687019382413
+      ],
+      "excerpt": "IMPORTANT:  It is good to check the \"access level\" in the Azure Portal of the exported images and labels, the Blob Storage container used in the connection - ensure it has \"Private\" access level if you do not wish the data to be Public.  To change, navigate to the container and select \"Change access level\". \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9819870758024202
+      ],
+      "excerpt": "Finally, to get back to the \"Cloud Project\" in VoTT, simply open VoTT 2, select \"Open Cloud Project\" and select the \"target\" connection or output connection and the .vott file (this is stored in Blob Storage container). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8298133652481346
+      ],
+      "excerpt": "Steps are as follows.  Ensure you are logged in to the Azure CLI with your Azure credentials and have selected the correct subscription.  At any time for help with script, use:  python &lt;scriptname&gt;.py --help. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8940499675249403
+      ],
+      "excerpt": "Record the location of the local webservice (you will add on /score to make the scoring url.) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9184111008400906
+      ],
+      "excerpt": "Note:  for production deployments in the cloud, it is recommeded to use Azure Kubernetes Service for managed scale. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9190916746889896
+      ],
+      "excerpt": "Test the cloud deployment in the same way as the local deployment, but use the cloud scoring URI as the SCORING_URI, and since we set auth_enabled=True in the deployment configuration.  We will also need a local environment variable WEBSERVICE_KEY.  Get the scoring URI and key in the Azure Portal under the Azure ML Workspace and Deployments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8112924699019791
+      ],
+      "excerpt": "For use in the ONNX runtime () we can convert from Keras to ONNX format with a script deploy/convert_keras2onnx.py.  As before, use --help to get the argument list. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8802680646307255
+      ],
+      "excerpt": "This example converts a custom 2-class, tiny YOLO v3 model to ONNX format (change --num-clusters to 9 for full-sized YOLO v3 model). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.90325487874545
+      ],
+      "excerpt": "Next, we can test the inferencing process with the ONNX runtime (ensure conversion worked correctly) and benchmark seconds per inference event as in the example below, where --image is your own image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863592171550792
+      ],
+      "excerpt": "Congratulations for successfully training and deploying your YOLO v3 model with Azure and Azure ML!  You should pat yourself on the back for a job well done. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8879674477197824
+      ],
+      "excerpt": "There's an issue with your Datastore.  Check the Datastore in the Portal under your Azure ML Workspace to make sure it's pointing to the correct Blob Storage account and container.  Then, check the Blob Storage container to ensure it has the --data-dir that you specified when running the driver script (e.g. Traffic-PascalVOC-export) at the base level of the container.  You may need to define environment variables for driver script to locate these resources.  See, Use driver Python script to train a model in the cloud and \"important\" note. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8908543573093408
+      ],
+      "excerpt": "The folder structure for the labeled data in Azure Storage is not correct.  The folder structure should be as follows (note VoTT adds a prefix sometimes to the xml and jpg files like \"data%2F\"). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714384751419108
+      ],
+      "excerpt": "If there is a ResourceExhaustedError with a message such as follows in the 70_driver_log.txt, then this means the GPU on the compute target ran out of GPU memory for the CUDA code/tensors. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.94938579784081
+      ],
+      "excerpt": "    \"message\": \"User program failed with ResourceExhaustedError: OOM when allocating tensor with shape[8,38,38,512] and type float on /job:localhost/replica:0/task:0/device:GPU:0 by allocator GPU_0_bfc\\n\\t [[{{node conv2d_66/convolution}}]]\\nHint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.\\n\\n\\t [[{{node loss/add_74}}]]\\nHint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.\\n\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9600436347946365
+      ],
+      "excerpt": "Where -r is framerate and -i is the camera input (0 is builtin camera on Mac OS). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8981505110475856,
+        0.8229794430205244
+      ],
+      "excerpt": "The inference result is not totally the same as Darknet but the difference is small. \nThe speed is slower than Darknet. Replacing PIL with OpenCV may help a little. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Keras implementation of YOLO v3 for object detection with training and deployment in Azure ML.",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Navigate to the Azure ML Workspace in the Azure Portal and go to the Experiment -> Run -> Outputs tab and download:\n\n- Model (`trained_weights_final.h5`)\n- `custom_anchors.txt`\n\nPlace these two files in the `project` folder so our inference script in the next step can find them.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/michhar/azureml-keras-yolov3-custom/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Tue, 28 Dec 2021 00:51:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/michhar/azureml-keras-yolov3-custom/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "michhar/azureml-keras-yolov3-custom",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/michhar/azureml-keras-yolov3-custom/master/docker/keras/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Create a <a href=\"https://docs.python.org/3/library/venv.html\" target=\"_blank\">Python virtual environment</a> or <a href=\"https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html\" target=\"_blank\">Anaconda environment</a> for this project (highly recommended).\n\nUse the Python package manager to install the Azure ML SDK.  Ensure using the intended `pip` (sometimes it's `pip3`).  It is **strongly recommended** to use a virtual environment or conda environment for this project as very specific versions of packages are used and it makes debugging a local setup easier.\n\n```unix\npip install azureml-sdk==1.5.0\n```\n\nYou will also need the Python Azure Blob Storage package installed locally or wherever you run the raw data uploading Python script.\n\n> Note:  take note the version number, here (you may have to uninstall `azure-storage-blob` if an older version is already installed).\n\n```unix\npip install azure-storage-blob==12.3.1\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The user's host machine (or VM if using one) for development (Windows, macOS, Linux) is refered to as the \"local\" or \"dev\" machine.  The machine or compute that trains the Azure ML models is refered to as the \"target compute\".  There is also the idea of the deployment machine.  For Azure ML this can be a local machine, Azure VM, Azure Container Instance, Azure Kubernetes Cluster, etc. (many more deployment target options).\n\nIn this repo, we have the local and the target machine setups.  The different setups are shown in the diagram below.  There are environment variables and Python packages that differ on each setup.  For example, Azure Storage related environment variables are set on the local or user dev machine and used through the command prompt or terminal.\n\n<img src=\"assets/AzureMLKerasSetup.jpg\" width=\"75%\">\n\n> IMPORTANT:  If on Windows please use a the terminal window or command prompt rather than PowerShell window for all the the subsequent commands.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9829980651324434
+      ],
+      "excerpt": "Install prerequisite libraries \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9399901264303918
+      ],
+      "excerpt": "IMPORTANT: if you already have a Service Principal that you wish to use, you will still need to associate it with your Azure ML Workspace with the instructions in the link above. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9452557664312771,
+        0.9094720603393038
+      ],
+      "excerpt": "Run this setenvs.cmd on the command line in Windows and use the same terminal to run subsequent scripts.  Alternatively, each \"set\" command can be run on the command line separately - just make sure to use the same terminal window later on. \nCreate a .setenvs file (or use any name) with the following (do not include the &lt;&gt; characters; on unix the STORAGE_CONNECTION_STRING does need the quotation marks due to special characters). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9734584687802506,
+        0.9409594645326245
+      ],
+      "excerpt": "Set these environment variables in the terminal window with the command:  source .setenvs.  Make sure to use the same terminal window later on for running subsequent scripts. \nCheck that the environment variables were set correctly in Unix environments with the following command. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853616646903151
+      ],
+      "excerpt": "Use VoTT 2 (<a href=\"https://github.com/microsoft/VoTT/releases\" target=\"_blank\">link to download</a>) labeling tool to create and label bounding boxes and export.  The Readme on the project page has good instructions, but the following should help clarify a few points. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8939413465086472
+      ],
+      "excerpt": "For VoTT connection use the \"SAS token\" from the Azure Portal (it should start with a ?). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9519716546092613
+      ],
+      "excerpt": "You will need to register it from your local environment to the Azure ML workspace.  Use the following script as in (e.g.): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8391994944758466
+      ],
+      "excerpt": "Note:  it is a good idea to test a deployment locally first so we will do that, now. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.902984253344545
+      ],
+      "excerpt": "Solve this by uninstalling and re-installing the Blob Storage Python package to a more recent version (you may be on a <a href=\"https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python-legacy\" target=\"_blank\">legacy version</a>). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9656841126721011
+      ],
+      "excerpt": "pip install azure-storage-blob==12.3.1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9119910088890406
+      ],
+      "excerpt": "Recording video on Mac OS for testing example.  From the command line with ffmpeg program (need to install first): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9257420410581989
+      ],
+      "excerpt": "Default anchors can be used. If you use your own anchors, probably some changes are needed - the training script now calculates these automatically for you. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8856315364366378
+      ],
+      "excerpt": "<img src=\"assets/detection_res.jpg\" width=\"75%\" alignment=\"center\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8047381933899174,
+        0.8432653320951161
+      ],
+      "excerpt": "Use driver Python script to train a model in the cloud \nDownload final model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003982722990284
+      ],
+      "excerpt": "Convert from Keras to ONNX format \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.858962907156412
+      ],
+      "excerpt": "python register_local_model_base.py --model-size tiny \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9020468853724039
+      ],
+      "excerpt": "python upload_to_blob.py --dir data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669
+      ],
+      "excerpt": "<img src=\"assets/sas_permissions.png\" width=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669
+      ],
+      "excerpt": "<img src=\"assets/vott_blob_conn.png\" width=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669
+      ],
+      "excerpt": "<img src=\"assets/vott_export.png\" width=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669,
+        0.8313936393693158
+      ],
+      "excerpt": "<img src=\"assets/check_storage_portal.png\" width=\"50%\"> \nThe structure should look similiar to the following, but with your name for the project (there will be many other files present, something-asset.json files, in the output Storage container along with this folder). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.842445327498495
+      ],
+      "excerpt": "The annotations and images in this Storage container will then be used in the training script (mounted by Azure ML as a Data Store). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669
+      ],
+      "excerpt": "<img src=\"assets/container_access_level.png\" width=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8505227267431846
+      ],
+      "excerpt": "Example:  python yolo_video.py --model-path trained_weights_final.h5 --anchors-path custom_anchors.txt --classes-path custom_classes.txt --conf 0.5 --image \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8772964930400468
+      ],
+      "excerpt": "Example:  python yolo_video.py --model-path trained_weights_final.h5 --anchors-path custom_anchors.txt --classes-path custom_classes.txt --conf 0.5 --input 0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.801728625347977
+      ],
+      "excerpt": "Example:  python yolo_video.py --model-path trained_weights_final.h5 --anchors-path custom_anchors.txt --classes-path custom_classes.txt --conf 0.5 --input &lt;path to video&gt;/some_street_traffic.mov --output some_street_traffic_with_bboxes.mov \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.823293250275749
+      ],
+      "excerpt": "Example:  python register_local_model_custom.py --model-local ep045-loss12.620.h5  --model-workspace carsv1-2class-tiny-yolov3.h5 --description \"Tuned tiny YOLO v3 Keras model for car-truck 2-class object detection trained on Bing search images.  From carsv1 experiment, Run 1.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8762724797502581,
+        0.8350299775810782
+      ],
+      "excerpt": "Place a class labels file called custom_classes.txt in to the deploy folder (this has the class names one per line and order matters, here). \nChange line 20 of score.py in the deploy folder to use the Workspace name of model and correct version number. (e.g. model_root = Model.get_model_path('carsv1-2class-tiny-yolov3.h5', version=1)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.862132666712524
+      ],
+      "excerpt": "Example:  python deploy_to_local.py --model-workspace carsv1-2class-tiny-yolov3.h5 --service-name cars-service-local \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9489416191266441
+      ],
+      "excerpt": "Example:  python test_service.py --image car_test1.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8171243069799534
+      ],
+      "excerpt": "Example:  python deploy_to_aci.py --service-name cars-service-aci --model-workspace carsv1-2class-tiny-yolov3.h5 --description \"Cars ACI service - tiny Keras YOLO v3 model\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9489416191266441
+      ],
+      "excerpt": "Example:  python test_service.py --image car_test1.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8499727657917383
+      ],
+      "excerpt": "Example:  python convert_keras2onnx.py --model-local carsv1-2class-tiny-yolov3.h5 --classes-path custom_classes.txt --anchors-path custom_anchors.txt --name carsv1-2class-tiny-yolov3.onnx --num-clusters 6 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8710706355218824
+      ],
+      "excerpt": "Example:  python onnx_inference.py --model-local carsv1-2class-tiny-yolov3.h5 --anchors-path custom_anchorst.txt --classes-path custom_classes.txt --conf 0.5 --image cars_and_trucks.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9373863298877825
+      ],
+      "excerpt": "    from azure.storage.blob import BlobServiceClient \nImportError: cannot import name 'BlobServiceClient' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9071138436396101
+      ],
+      "excerpt": "Driver script issue:  utils.py\", line 81, in kmeans    assert False - this could mean: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8142835995138061
+      ],
+      "excerpt": "    \\Main \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639986685036579,
+        0.8639986685036579,
+        0.8639986685036579
+      ],
+      "excerpt": "    data_image01.jpg \n    data_image02.jpg \n    data_image03.jpg \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865553769129669
+      ],
+      "excerpt": "<img src=\"assets/annotations_folder.png\" width=\"50%\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8754709996720397
+      ],
+      "excerpt": "Solve this by decreasing the batch size when running the driver script, azureml_driver.py.  This would be setting the batch size argument --bs to a smaller value (2 instead of 4 for instance). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/michhar/azureml-keras-yolov3-custom/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Micheleen Harris\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "A Keras Implementation of YOLO v3 for Custom Model Training with Azure Machine Learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "azureml-keras-yolov3-custom",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "michhar",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/michhar/azureml-keras-yolov3-custom/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. <a href=\"https://azure.microsoft.com/en-us/account/\" target=\"_blank\">Azure Subscription (free trial link in upper, right corner)</a>\n2. <a href=\"https://docs.anaconda.com/anaconda/install/\" target=\"_blank\">Python 3.6+ installed with pip</a>\n3. <a href=\"https://github.com/microsoft/VoTT\" target=\"_blank\">Visual Object Tagging Tool</a>\n4. <a href=\"https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest\" target=\"_blank\">Azure CLI</a>\n5. Command prompt or terminal\n---\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Create a <a href=\"https://docs.python.org/3/library/venv.html\" target=\"_blank\">Python virtual environment</a> or <a href=\"https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html\" target=\"_blank\">Anaconda environment</a> for this project (highly recommended).\n\nUse the Python package manager to install the Azure ML SDK.  Ensure using the intended `pip` (sometimes it's `pip3`).  It is **strongly recommended** to use a virtual environment or conda environment for this project as very specific versions of packages are used and it makes debugging a local setup easier.\n\n```unix\npip install azureml-sdk==1.5.0\n```\n\nYou will also need the Python Azure Blob Storage package installed locally or wherever you run the raw data uploading Python script.\n\n> Note:  take note the version number, here (you may have to uninstall `azure-storage-blob` if an older version is already installed).\n\n```unix\npip install azure-storage-blob==12.3.1\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 12,
+      "date": "Tue, 28 Dec 2021 00:51:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "yolov3",
+      "azure-machine-learning",
+      "keras"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to use non-interactive authentication on the compute target, create `myenvs.txt` with the Service Principal information and place it in the `project` folder.  Remember, the `project` folder and its content are uploaded to the Azure ML compute target of your choosing and this is where these variables are utilized.  Create this file (it must be called `myenvs.txt`) with the following filled in with your information (do not include the `<>` characters).  This information should have been obtained from the Service Principal creation step in the [Provision required resources in Azure](#provision-required-resources-in-azure) section.\n\n```unix\nAML_TENANT_ID=<Tenant ID>\nAML_PRINCIPAL_ID=<Client ID>\nAML_PRINCIPAL_PASS=<Client Password>\nSUBSCRIPTION_ID=<Subscription ID>\nWORKSPACE_NAME=<Azure ML Workspace Name>\n```\n\nDefine the class names in a file called `custom_classes.txt` and place it in the `project` folder, each class on a separate line, as in the following 2 class file example.\n\n```\nobject\nno_object\n```\n\nThe training script, `project/train_azureml.py` does the following.\n\n1. Calculates achor box sizes\n2. Creates the proper config file (proper filter, anchor and class numbers)\n3. Converts the YOLO v3 Darknet weights to Keras weights\n4. Trains the YOLO model\n  - Tracking the loss with Azure ML workspace (can be monitored from the Portal)\n5. Saves the models to the `outputs` folder (the folder that persists after training in the Workspace)\n\n> Technical note on anchor boxes:  filters=(classes + 5)x3 in the 3 [convolutional] before each [yolo] (<a href=\"https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects\" target=\"_blank\">source</a>).\n\nThe driver script, `azureml_driver.py`, wrapping the training process, does the following.\n\n1. Creates or reinitializes the target compute\n2. Registers the Data Store (using the labeled data container and credentials found in local machine's environment variables) to Azure ML Workspace\n3. Defines the TensorFlow Estimator with some of the command line arguments to point to the training script\n4. Submits a Run under the Experiment name given in the command line arguments that runs the training script\n5. Registers the intermediate and final model to the Azure ML Workspace for later use (e.g. in deployments)\n\nEnsure the Azure Storage environment variables are still set in the current terminal.  See [Upload images or video to Storage](#upload-images-or-video-to-storage) section to set these again if needed.\n\nTo train the model with Azure ML run the driver, as in the following example (all arguments are required).\n\n```unix\npython azureml_driver.py --experiment-name carsv1 --gpu-num 1 --class-path custom_classes.txt --data-dir Traffic-PascalVOC-export --num-clusters 6 --ds-name trafficstore --bs 4 --lr 0.001\n```\n\nFor help on using this script (as with the other scripts), run with `-h`.\n\n```unix\npython azureml_driver.py -h\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

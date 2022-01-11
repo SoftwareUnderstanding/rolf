@@ -1,0 +1,353 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.12187  \n[2] Chandna, P., Miron, M., Janer, J., and Emilia G\u00f3mez. Monoaural Audio Source Separation Using Deep Convolutional Neural Networks. 2017. http://mtg.upf.edu/node/3680  \n[3] Rafii, Z., Liutkus, A., Fabian-Robert, S., Mimilakis, S.I., and Rachel Bittner. The MUSDB18 Corpus for music separation. 2017. https://sigsep.github.io/datasets/musdb.html  \n[4] Leslie N. Smith. Cyclic Learning Rates. 2015. https://arxiv.org/abs/1506.01186  \n[5] Leslie N. Smith. A disciplined approach to neural network hyper-parameters: Part 1 -- learning rate, batch size, momentum, and weight decay. 2018. https://arxiv.org/abs/1803.09820  \n[6] Loshchilov, I. and Frank Hutter. Decoupled Weight Decay Regularization. 2017. https://arxiv.org/abs/1711.05101",
+      "https://arxiv.org/abs/1506.01186  \n[5] Leslie N. Smith. A disciplined approach to neural network hyper-parameters: Part 1 -- learning rate, batch size, momentum, and weight decay. 2018. https://arxiv.org/abs/1803.09820  \n[6] Loshchilov, I. and Frank Hutter. Decoupled Weight Decay Regularization. 2017. https://arxiv.org/abs/1711.05101",
+      "https://arxiv.org/abs/1803.09820  \n[6] Loshchilov, I. and Frank Hutter. Decoupled Weight Decay Regularization. 2017. https://arxiv.org/abs/1711.05101",
+      "https://arxiv.org/abs/1711.05101"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] Lluis, F., Pons, J., and Xavier Serra. End-to-end music source separation: is it possible in the waveform domain? 2018. https://arxiv.org/abs/1810.12187  \n[2] Chandna, P., Miron, M., Janer, J., and Emilia G\u00f3mez. Monoaural Audio Source Separation Using Deep Convolutional Neural Networks. 2017. http://mtg.upf.edu/node/3680  \n[3] Rafii, Z., Liutkus, A., Fabian-Robert, S., Mimilakis, S.I., and Rachel Bittner. The MUSDB18 Corpus for music separation. 2017. https://sigsep.github.io/datasets/musdb.html  \n[4] Leslie N. Smith. Cyclic Learning Rates. 2015. https://arxiv.org/abs/1506.01186  \n[5] Leslie N. Smith. A disciplined approach to neural network hyper-parameters: Part 1 -- learning rate, batch size, momentum, and weight decay. 2018. https://arxiv.org/abs/1803.09820  \n[6] Loshchilov, I. and Frank Hutter. Decoupled Weight Decay Regularization. 2017. https://arxiv.org/abs/1711.05101\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "| Wave-U-Net | 9.21s | 1.02s | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9686679014285212
+      ],
+      "excerpt": "| Wave-U-Net | 4.60 | 14.30 | 5.54 | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/GPUPhobia/vocal-mask",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-02T20:41:06Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-23T19:32:41Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9961081444775451,
+        0.9886588261301049,
+        0.9956200233763507
+      ],
+      "excerpt": "We initially considered a WaveNet based approach [1], but since the models were large and potentially difficult to train, we decided it would be best to work with images by converting the input audio to spectrograms via Short Time Fourier Transforms (STFT). DeepConvSep is a state-of-the-art spectrogram-based model that uses an encoder-decoder strategy applied to the input spectrogram using a combination of vertical and horizontal convolutions in order to capture timbre and temporal attributes. It generates a soft mask of the same shape as the input spectrogram which can be applied to the input magnitude spectrogram to generate the isolated spectrograms, then the audio recovered via inverse STFT [2]. However, we found the separation by these methods to be lacking, and looked to make improvements on it. Audio sample comparisons between Wave-U-Net, DeepConvSep, and our model (Vocal-Mask) can be found in the Results section. \nOur first attempt used Mel-scale Spectrograms, which apply a transformation matrix to the STFT to group and weight frequency bins according to the Mel scale. This evens out the spectrogram magnitudes across the frequency range. Without this, the lower freqencies tend to have much higher magnitudes than the higher frequencies, especially in recorded music. However, it is hard to recover the audio from a Mel-scale spectrogram, so this was abandoned in favor of using the same method as DeepConvSep. However, additional steps were taken in preprocessing.  \nThe input stereo signal was converted to mono by averaging the left and right channels. We applied Mel perceptual weighting to the input spectrograms to even out the magnitudes across the frequency range. Then a power factor of 2 was applied to the spectrogram to further enhance the signal-to-noise ratio. After the mask is generated by the model, the mask is applied to the unweighted spectrogram and the audio recovered via inverse STFT. Using the full STFT preserves the phasing information of the original audio and is necessary for producing high quality target waveform estimations. However, the phasing information does not get passed into the model, which is one advancement that the Wave-U-Net model made use of by operating in the waveform domain. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9984194345380375
+      ],
+      "excerpt": "For the vocal spectrogram, only the center column of the image is kept. This is converted to a binary mask and used as the target label with size (513,). We wanted to increase the receptive to target field ratio as this seemed to work well for Wave-U-Net. The mixture spectrograms pass through the convolutional neural network, which ends with a 513-way fully-connected layer with a sigmoid to constrain the output to the 0-1 range.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8387746567884444
+      ],
+      "excerpt": "| Wave-U-Net | 9.21s | 1.02s | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.992703407489386
+      ],
+      "excerpt": "The receptive field is the length of the input waveform that the model processes at a time, while the target field is the length of the output generated by the model. Different window sizes of the receptive field for the input spectrogram were tested. Intuitively, larger windows give the network more context for making the prediction. We found that larger window sizes did indeed produce smaller losses, but at a diminishing rate. Larger window sizes also increased GPU memory consumption, so we decided to stay consistent with the window size used by DeepConvSep (25 stft frames ~ 290ms).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9842603063643808,
+        0.8842937267041954
+      ],
+      "excerpt": "At inference time, the input waveforms are sliced into overlapping 290ms windows with an 11.6ms stride. Each window is converted to Mel-weighted spectrogram and passed through the network to generate the binary mask. The masks are then concatenated and applied to the pre-Mel-weighted spectrogram (which preserves magnitude and phasing information) to produce the isolated vocal-only spectrogram. The audio is then recovered via inverse STFT. \nWe used the MUSDB18 for this project. The dataset must be decoded using the SigSep Stems Decoder. The preprocess.py script downsamples the input audio to hparams.sample_rate and converts the downsampled audio to spectrogram.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9430166312272554
+      ],
+      "excerpt": "The window size and striding for the slices are controlled by hparams.stft_frames and hparams.stft_stride, respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8210122970580588
+      ],
+      "excerpt": "This will generate a vocal wav file in the generated directory. Below are the parameters in hparams.py that control how the mask is applied during inference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9706850321937184
+      ],
+      "excerpt": "The model was trained using the AdamW optimizer [6] with beta1 0.9, beta2 0.99, weight decay 0.3, and a batch size of 256. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8682758248664003
+      ],
+      "excerpt": "Below are example soft masks generated by the model and the corresponding masked-mixture spectrograms.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.985547040025302
+      ],
+      "excerpt": "Below are quantitative evaluations of the signal and separation quality based on BSS Eval metrics. Shown are the median SDR (Source-to-Distortion Ratio), SIR (Source-to-Inteferences Ratio), and SAR (Source-to-Artifacts Ratio) values when applying the model to the MusDB18 test set. Higher values indicate better separation and signal quality. For the Vocal-Mask model, two methods were evaluated for applying the mask. The first method was with a hard binary mask with 0.5 as the cutoff threshold for vocal content. The second method was using a soft mask with a noise gate at 0.1 such that all values below 0.1 were considered silent.   \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/GPUPhobia/vocal-mask/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Given a piece of music as input, we want to separate the vocals from the accompanying instrumentation. There are many use cases for this - in music production, a producer may want to extract the vocals from a sample for creative purposes, or a VOIP (voice over IP) application may use it to enhance audio clarity. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 28 Dec 2021 02:00:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/GPUPhobia/vocal-mask/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GPUPhobia/vocal-mask",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9004139653701325
+      ],
+      "excerpt": "The window size can be modified with hparams.stft_frames. Larger window sizes will require more GPU memory. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8999813819370864
+      ],
+      "excerpt": "    <img src=\"assets/model_approach.png\" width=\"80%\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.931114988998388
+      ],
+      "excerpt": "    <img src=\"assets/window_sizes_train.png\" width=\"45%\"/> <img src=\"assets/window_sizes_valid.png\" width=\"45%\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/model_inference.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8037472141245473,
+        0.8692948506344137,
+        0.8095637054372632
+      ],
+      "excerpt": "python train.py &lt;data dir&gt; --checkpoint=&lt;path to checkpoint file (*.pth)&gt; \nThe first argument should be the same as the output directory of preprocess. \nA pretrained model for hparams.model_type = 'resnet18' can be downloaded here: resnet18_step000007686.pth. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8777715797791054
+      ],
+      "excerpt": "- hparams.mask_at_eval - If True, the model output will be converted to a binary mask. If False, it will be left as a softmask with values in the range (0,1). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "    <img src=\"assets/lr_find.png\" width=\"60%\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/training_loss.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.931114988998388
+      ],
+      "excerpt": "    <img src=\"assets/mask1.png\" width=\"45%\"/> <img src=\"assets/mask2.png\" width=\"45%\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/specs1.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/specs2.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/specs3.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/specs4.png\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "    <img src=\"assets/specs5.png\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/GPUPhobia/vocal-mask/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vocal Mask CNN",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "vocal-mask",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GPUPhobia",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/GPUPhobia/vocal-mask/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Tue, 28 Dec 2021 02:00:20 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Audio examples were taken from [here](http://jordipons.me/apps/end-to-end-music-source-separation/) for comparison purposes.\n\n| Mixture | Wave-U-Net | DeepConvSep | Vocal-Mask | Ground Truth |\n|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|\n| [Sample 1](https://drive.google.com/open?id=1ZO4g_1R3W1fVodf9RouIdywGIIAVJpvs) | [Sample 1](https://drive.google.com/open?id=1A1w2CKLJCrEX34VPRG1Yun5Hppgias1S) | [Sample 1](https://drive.google.com/open?id=18VOe6ADNbFN7KibjctGmKPwJ5UXleg7Y) | [Sample 1](https://drive.google.com/open?id=1Wtl2Wxt3xqrt_aKyuMwDVc8FhscQTEvs) | [Sample 1](https://drive.google.com/open?id=1EBcu9BbGcXvAwgBHlkbRTmH-j97XLNGy) |\n| [Sample 2](https://drive.google.com/open?id=1alGKLhc0J8yc_8P4GpBgns0DRtJMcFP4) | [Sample 2](https://drive.google.com/open?id=1y2LiTnpf4khqqVQWEs_llHrwR9j8BWAy) | [Sample 2](https://drive.google.com/open?id=1ZSH0R6s5K3kAO3VW_5cR79xu8mxNpdtW) | [Sample 2](https://drive.google.com/open?id=1py4KC6EG6K63Xm3bPg0mFp59vbDJ75hM) | [Sample 2](https://drive.google.com/open?id=1Vh3mKoC1fddg-6142pggoBreCCla7dCg) |\n| [Sample 3](https://drive.google.com/open?id=1GHGi8i-eRXNEnk88-iLxyOYa0uz8KDlM) | [Sample 3](https://drive.google.com/open?id=1tf1l4yJh8GG_o3pejD5TZm3s8Dw4IrZP) | [Sample 3](https://drive.google.com/open?id=1ND9H6Det-yWDjjhwEzZjjgflBQWyeN2W) | [Sample 3](https://drive.google.com/open?id=1FoB7JwIWHsQS9K3dFjM3DdcRCS2AnSas) | [Sample 3](https://drive.google.com/open?id=1FiJIm1o3Iz6R52W8oDd2nMTH2INyPzDy) |\n| [Sample 4](https://drive.google.com/open?id=1l8wmEc_6yd32VPUYDYOUFZINqtK-Eif4) | [Sample 4](https://drive.google.com/open?id=1BZJDfQWgqJs_s-QWoU0DM4Ma1JZKPBYL) | [Sample 4](https://drive.google.com/open?id=1etJQe4R3lo47nV4GhgXOyBlsUGVLcw0c) | [Sample 4](https://drive.google.com/open?id=1VLeJeTYozQCGRNgQwAU_XJJLvLwG7-U_) | [Sample 4](https://drive.google.com/open?id=1sok6Pd3MweEw0LDJ8TWG8CxprxPr6pia) |\n| [Sample 5](https://drive.google.com/open?id=1wHpW9AxXDg-BZMyxc4XndCHDgkZ5zaL7) | [Sample 5](https://drive.google.com/open?id=1ENCfiPg--AAF3cDRgN9_ebRR4v-W_QYF) | [Sample 5](https://drive.google.com/open?id=19bQGqkKEbHjYrQ-_VB0TqaSORVmu1xGu) | [Sample 5](https://drive.google.com/open?id=1nyQ-GnhT1oBx7p72vveSxoXBqe3UQQ4S) | [Sample 5](https://drive.google.com/open?id=1Nr1oCb2NE0qZepbkBpJ6oR_6fDxbGvqW) |\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

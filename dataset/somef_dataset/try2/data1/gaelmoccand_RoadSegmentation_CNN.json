@@ -1,0 +1,403 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] V. Badrinarayanan, A. Kendall, and R. Cipolla, \u201cSegnet: A\ndeep convolutional encoder-decoder architecture for image\nsegmentation,\u201d CoRR, vol. abs/1511.00561, 2015. [Online].\nAvailable: http://arxiv.org/abs/1511.00561\n\n[2] V. Badrinarayanan, A. Handa, and R. Cipolla, \u201cSegNet: A\nDeep Convolutional Encoder-Decoder Architecture for Robust\nSemantic Pixel-Wise Labelling,\u201d ArXiv e-prints, May 2015.\n\n[3] L. Araujosantos, \u201cLearn Segmentation,\u201d https://github.com/\nleonardoaraujosantos/LearnSegmentation, 2017.\n\n\n \n [Report can be found here in pdf](projectRoadSegmentation/bazinga-submission.pdf)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9438599265973527
+      ],
+      "excerpt": "descriptor used in many computer vision tasks for object \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8569970408175652
+      ],
+      "excerpt": "The logistic regression yields pretty disappointing results. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gaelmoccand/RoadSegmentation_CNN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-29T06:38:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-12T16:01:12Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this work we have shown how to augment an images\ntraining using rotations. Furthermore, we have presented\nthe convolutional neural network SegNet which yields a\nfairly good prediction for road segmentation on satellite images. However, one must pay attention to overfitting very\ncarefully.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " The goal of this work is to segment roads on satellite images (Figure 1) by using machine learning techniques.\nIn other words, we want to assign a label (road or background) to each pixel of the image. Before selecting\nthe best algorithm, an effort is made on how to augment\na small image data set and how to get the most relevant\nfeatures out of it. Then we present 2 different classes\nof algorithm. The first one is a linear logistic regression\nwhereas the second one, called SegNet [1] uses a more\ncomplicated scheme based on a convolutional neural\nnetwork (CNN).\n\n![Fig1. Exampel of satellite image ](projectRoadSegmentation/report/pics/satImage.png)\n\nFig1. Exampel of satellite image \n\nA set of N = 100 training images of size 400 \u00d7 400\npixels is provided. The set contains different aerial\npictures of urban areas. Together with this training set, the\nFigure 2.\nGround truth of satellite image example.\ncorresponding ground truth grayscale images (Figure 2) are\nalso available. Note that the ground truth images need to\nbe converted into label images. Concretely, each pixel y i\ncan only take one of the two possible values corresponding\nto the classes: road label (y i = 1) or background label\n(y i = 0). In order to binarize the ground truth images, a\nthreshold of 25% is set. This means that every pixel with\nan intensity lower than 75% of the maximum possible value\nis set to 0 and the rest is set to 1. With 8 bits images, the\nmaximum value is 255 which sets the threshold to 191.\nThis pixel threshold has a direct impact on the width of the\nroad label in the computed label image.\n \n ![Fig2. Ground truth of satellite image example ](projectRoadSegmentation/report/pics/satImage_gt.png)\n \n Fig2. Ground truth of satellite image example \n \n The problem that arises with such a small training set\n(100 images only) is overfitting. Moreover in order to train\nany convolutional neural network properly it is necessary\nto augment the dataset. Analysing the training set, it is\nobvious that it contains mainly pictures with strictly vertical\nand horizontal roads. For that reason, creating new images\nby rotating the original ones allows to increase the size of\nthe dataset and generates data which will be useful to better\ntrain the algorithm. Specifically, we rotate each image by\nangles going from 5 to 355 degrees every 5 degrees (i.e. 5,\n10, 15,..., 355). That way we generate a set of images with\nroads in every directions. In summary, for each image of\nthe original training set, 70 images are generated using therotations, resulting in a new training set of 7100 images.\nThis augmented training set is then suitable for the training\nof the CNN.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8488715427325456,
+        0.9666653318706814,
+        0.844158674995711,
+        0.8644478903212995
+      ],
+      "excerpt": "Road Segmentation.Image Segmentation using CNN tensorflow with SegNet \nAbstract In  this  work  we  present  two  methods  to  segmentroads  on  satellite  images.  We  first  show  how  we  can  augmentan  image  dataset  when  the  one  at  disposal  is  too  small  toproperly train a machine learning algorithm. Then we quicklydemonstrate what features can be exploited and how to handlethem in order to make the best prediction with a linear logisticregression. Finally, we present a method based on a deep fullyconvolutional  neural  network  architecture  for  semantic  pixel-wise  segmentation  called  SegNet. \nIn order to gain computational efficiency, square patches \ncan be used instead of working with every pixels (see Figure \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9665745823015545
+      ],
+      "excerpt": "a single pixel but is rather made of blocks of pixels. The \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9093570721634521
+      ],
+      "excerpt": "We\u2019ve found that taking patches of size 8 \u00d7 8 gives decent \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8434454892440746,
+        0.9946788355547882,
+        0.9691396857953873
+      ],
+      "excerpt": "the variance in the 3 channels (RGB) are computed. On top \nof these 6 features, we add the computation of the histogram \nof oriented gradients (HOG) in 8 directions. The HOG is a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9111695647995228
+      ],
+      "excerpt": "detection purpose. It also consists of splitting the image in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.842217407267991,
+        0.821222221222729
+      ],
+      "excerpt": "of 14 features per patch. Since we have 50 \u00d7 50 = 2500 \npatches, it makes a total of 35000 features per image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8597993428977629,
+        0.8633300653242231,
+        0.8702060904249689,
+        0.8808608587209459
+      ],
+      "excerpt": "The feature matrix is pretty sparse like shown on Figure \n4. The histogram shows a large peak of zeros followed by a \ndecay. This decay-like shape suggests us to manipulate the \nfeatures in order to get a distribution following a normal \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9658478094858762,
+        0.9560548495780894,
+        0.9747150811648112,
+        0.9929036973774081
+      ],
+      "excerpt": "of the features and can be observed on Figure 5. These \nfeatures are fed to a simple linear logistic regression using \nFig4. Histogram of the features computed on one of the satellite image \nFig5. Histogram of the square root of the features computed on the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.91828899979209,
+        0.8754449697455522
+      ],
+      "excerpt": "tecture consists of a sequence of non-linear processing layers \n(encoders) and a corresponding set of decoders followed by \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8747028494291201
+      ],
+      "excerpt": "or more convolutional layers with batch normalisation and a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8209238707270335,
+        0.8699540447258028,
+        0.9445936896642749,
+        0.8954274012771326,
+        0.883886054521512
+      ],
+      "excerpt": "a Spatial Multinomial Cross-Entropy that runs on each pixel \nof the output tensor, compared to the label image. \nThe SegNet implementation in tensorflow is taken from \nthe github reference code of Leonardo Araujo [3]. Two \nversions of SegNet are available: \u201dconnected\u201d and \u201dgate \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8503452224156117
+      ],
+      "excerpt": "convolver and the output convolver of the corresponding \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9334095594894166
+      ],
+      "excerpt": "In order to apply a cross-validation, the training set is randomly split into 2 parts. 80% is used for training (5680 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768670324841042,
+        0.9966549936220198,
+        0.8998889496773826,
+        0.9717527622831764
+      ],
+      "excerpt": "rate is set to 0.001 with a decay every 10000 steps. Note \nalso that the size of the image is reduced to 224 \u00d7 224 \npixels in order to speed up the training of the neural network. \nTo compare the methods, we compute the percentage of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9640837692402808,
+        0.9167351846270444,
+        0.9594683629401096,
+        0.9129133105734144
+      ],
+      "excerpt": "achievement. This is probably due to the fact that the mean, \nvariance and HOG are not sufficient to differentiate the roads \nfrom the rest of the objects. \nRegarding SegNet, the results are way more encouraging. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8362943449164192,
+        0.8872548175687953,
+        0.8292024103612197
+      ],
+      "excerpt": "Fig7. Complex example of satellite image. There are roads in many \ndirections and trees on the road \nFig8. Prediction of the complex example using SegNet \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.810592157273197,
+        0.9845014751777462,
+        0.9569195280946453,
+        0.9552894019158248
+      ],
+      "excerpt": "the fact that using patches has a main drawback. With this \nmethod we loose the continuity of the image and thus the \ninformation of the neighbor pixels at the boundaries of the \npatches. For instance, since a road is continuous, there is a \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9524603759235244
+      ],
+      "excerpt": "than if they are part of the background. With more time, it \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9198219087596231
+      ],
+      "excerpt": "use much more features and possibly get information on the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9736636699947955,
+        0.8234357054664944,
+        0.9293682588212924
+      ],
+      "excerpt": "is a tedious job. For this reason we decided to use a deep \nlearning method instead. \nIn the case of SegNet, we were expecting higher scores but \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9197939904596285
+      ],
+      "excerpt": "much. It would be also good to try to tune Segnet to have better results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Road Segmentation.Image Segmentation using CNN Tensorflow with SegNet",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gaelmoccand/RoadSegmentation_CNN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 04:08:59 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gaelmoccand/RoadSegmentation_CNN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gaelmoccand/RoadSegmentation_CNN",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/InspectLMDB.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/Create_MLDB_File.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/Tensorflow_Segmentation.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/.ipynb_checkpoints/Tensorflow_Segmentation-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/.ipynb_checkpoints/Create_MLDB_File-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/notebooks/.ipynb_checkpoints/InspectLMDB-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/predictions_submission.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/run_tf_example.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/test_pascal.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/generate_extra_data.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/test_tensorflow.ipynb",
+      "https://raw.githubusercontent.com/gaelmoccand/RoadSegmentation_CNN/master/projectRoadSegmentation/scripts/segment_aerial_images.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.802108675485347
+      ],
+      "excerpt": "the fact that using patches has a main drawback. With this \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8000259296900314
+      ],
+      "excerpt": "result in a reasonable time. Within each patch, the mean and \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gaelmoccand/RoadSegmentation_CNN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "TeX",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Road Segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RoadSegmentation_CNN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gaelmoccand",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gaelmoccand/RoadSegmentation_CNN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 04:08:59 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "cnn-for-visual-recognition",
+      "cnn",
+      "tensorflow",
+      "computer-vision",
+      "segmentation",
+      "deep-learning",
+      "segnet",
+      "road-segmentation",
+      "convolutional-neural-network",
+      "f",
+      "tensorflow-experiments"
+    ],
+    "technique": "GitHub API"
+  }
+}

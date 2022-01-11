@@ -1,0 +1,374 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This work was funded by Canadian Cancer Society and Canadian Institutes of Health Research (CIHR). It was also enabled in part by support provided by Compute Canada (www.computecanada.ca).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1312.6114",
+      "https://arxiv.org/abs/1911.05722",
+      "https://arxiv.org/abs/2108.07183",
+      "https://arxiv.org/abs/2102.03897"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you find our work useful in your research or if you use parts of this code please consider citing our paper:\n```\n@article{srinidhi2021self,\n  title={Self-supervised driven consistency training for annotation efficient histopathology image analysis},\n  author={Srinidhi, Chetan L and Kim, Seung Wook and Chen, Fu-Der and Martel, Anne L},\n  journal={arXiv preprint arXiv:2102.03897},\n  year={2021}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{srinidhi2021self,\n  title={Self-supervised driven consistency training for annotation efficient histopathology image analysis},\n  author={Srinidhi, Chetan L and Kim, Seung Wook and Chen, Fu-Der and Martel, Anne L},\n  journal={arXiv preprint arXiv:2102.03897},\n  year={2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9999566860475575,
+        0.8252473410283919
+      ],
+      "excerpt": "Official repository for Self-Supervised driven Consistency Training for Annotation Efficient Histopathology Image Analysis. Published in Medical Image Analysis (MedIA), October, 2021. [Journal Link] [arXiv preprint] \n<a href=\"https://github.com/srinidhiPY/SSL_CR_Histo/tree/histo/Pretrained_models\"><img src=\"https://img.shields.io/badge/PRETRAINED-MODELS-\\<GREEN>.svg\"/></a> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9729469087358297
+      ],
+      "excerpt": "Colorectal cancer tissue classification (Kather et al. 2019): to download the dataset, check this link :<br/>https://zenodo.org/record/1214456#.YCbVXy3b1hE \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9926673354491424
+      ],
+      "excerpt": "We also improved our self-supervised pretrained representations to Out-of-Distrbiution data via hardness-aware dynamic curriculum learning (HaDCL) approach. Published in ICCV 2021, CDpath Workshop (Oral). [Conference proceedings] [arXiv preprint] [Code] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/srinidhiPY/SSL_CR_Histo",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-02-04T20:14:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-26T19:08:52Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9293171645329594,
+        0.844307815880654,
+        0.984361025109307
+      ],
+      "excerpt": "We propose a self-supervised driven consistency training paradigm for histopathology image analysis that learns to leverage both task-agnostic and task-specific unlabeled data based on two strategies: \nA self-supervised pretext task that harnesses the underlying multi-resolution contextual cues in histology whole-slide images (WSIs) to learn a powerful supervisory signal for unsupervised representation learning. \nA new teacher-student semi-supervised consistency paradigm that learns to effectively transfer the pretrained representations to downstream tasks based on prediction consistency with the task-specific unlabeled data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9462368617745582
+      ],
+      "excerpt": "We compare against the state-of-the-art self-supervised pretraining methods based on generative and contrastive learning techniques: Variational Autoencoder (VAE) and Momentum Contrast (MoCo), respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8947427771665449
+      ],
+      "excerpt": "The model training consists of three stages: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9401656216556062,
+        0.9192526238382857
+      ],
+      "excerpt": "The choice of resolution levels for the RSP task can also be set in dataset.py#L277 while pretraining on any other datasets. \nThe argument --train_image_pth is the only required argument and should be set to the directory containing your training WSIs. There are many more arguments that can be set, and these are all explained in the corresponding files. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9423732142163382,
+        0.8291432829097324
+      ],
+      "excerpt": "* We also provided the pretrained models for BreastPathQ and Camelyon16, found in the \"Pretrained_models\" folder. These models can also be used for feature transferability (domain adaptation) between datasets with different tissue types/organs. \nFrom the file \"eval_BreastPathQ_SSL.py / eval_Camelyon_SSL.py / eval_Kather_SSL.py\", you can fine-tune the network (i.e., task-specific supervised fine-tuning) on the downstream task with limited label data (10%, 25%, 50%). Refer to, paper for more details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.97243389098369,
+        0.8348859440109481,
+        0.8014280018722667
+      ],
+      "excerpt": "Note: we didn't perform self-supervised pretraining on the Kather dataset (colorectal) due to the unavailability of WSI's. Instead, we performed domain adaptation by pretraining on Camelyon16 and fine-tuning on the Kather dataset. Refer to, paper for more details. \nFrom the file \"eval_BreastPathQ_SSL_CR.py / eval_Camelyon_SSL_CR.py / eval_Kather_SSL_CR.py\", you can fine-tune the student network by keeping the teacher network frozen via task-specific consistency training on the downstream task with limited label data (10%, 25%, 50%). Refer to, paper for more details. \nArguments: --model_path_finetune - path to load SSL fine-tuned model (i.e., self-supervised pretraining followed by supervised fine-tuned model from Step 2) to intialize \"Teacher and student network\" for consistency training; There are other arguments that can be set in the corresponding files. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Official code for \"Self-Supervised driven Consistency Training for Annotation Efficient Histopathology Image Analysis\" Published in Medical Image Analysis (MedIA) Journal, Oct, 2021.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/srinidhiPY/SSL_CR_Histo/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 11,
+      "date": "Wed, 29 Dec 2021 02:48:52 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/srinidhiPY/SSL_CR_Histo/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "srinidhiPY/SSL_CR_Histo",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/srinidhiPY/SSL_CR_Histo/histo/models/optimiser/RAdam/nmt/eval.sh",
+      "https://raw.githubusercontent.com/srinidhiPY/SSL_CR_Histo/histo/models/optimiser/RAdam/cifar_imagenet/fourstep.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8267792778281148
+      ],
+      "excerpt": "<a href=\"https://github.com/srinidhiPY/SSL_CR_Histo/tree/histo/Pretrained_models\"><img src=\"https://img.shields.io/badge/PRETRAINED-MODELS-\\<GREEN>.svg\"/></a> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8890818307099057,
+        0.8890818307099057
+      ],
+      "excerpt": "<img src=\"Fig2_RSP.png\" width=\"600px\"/> \n<img src=\"Fig1_Main.png\" width=\"600px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890818307099057
+      ],
+      "excerpt": "<img src=\"BPQ.png\" width=\"800px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8383526965339714,
+        0.8890818307099057
+      ],
+      "excerpt": "Predicted tumor probability on Camelyon16 test set for 10% labeled data \n<img src=\"Cam16.png\" width=\"800px\"/> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.804267059168124,
+        0.804267059168124
+      ],
+      "excerpt": "python pretrain_BreastPathQ.py    // Pretraining on BreastPathQ    \npython pretrain_Camelyon16.py    // Pretraining on Camelyon16 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057746565068937
+      ],
+      "excerpt": "From the file \"eval_BreastPathQ_SSL.py / eval_Camelyon_SSL.py / eval_Kather_SSL.py\", you can fine-tune the network (i.e., task-specific supervised fine-tuning) on the downstream task with limited label data (10%, 25%, 50%). Refer to, paper for more details. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9071935197586464,
+        0.9071935197586464,
+        0.9181765383712177
+      ],
+      "excerpt": "python eval_BreastPathQ_SSL_CR.py  // Consistency training on BreastPathQ    \npython eval_Camelyon_SSL_CR.py    // Consistency training on Camelyon16 \npython eval_Kather_SSL_CR.py    // Consistency training on Kather dataset (Colorectal) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9024985784710386,
+        0.8174540907975313,
+        0.9024985784710386,
+        0.8770447070864479
+      ],
+      "excerpt": "From the file \"eval_BreastPathQ_SSL.py / eval_Kather_SSL.py \", you can test the model by changing the flag in argument: '--mode' to 'evaluation'. \nConsistency training \nFrom the file \"eval_BreastPathQ_SSL_CR.py / eval_Kather_SSL_CR.py\", you can test the model by changing the flag in argument: '--mode' to 'evaluation'. \nThe prediction on Camelyon16 test set can be performed using \"test_Camelyon16.py\" file. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/srinidhiPY/SSL_CR_Histo/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Wei Yang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Self-Supervised Driven Consistency Training for Annotation Efficient Histopathology Image Analysis",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SSL_CR_Histo",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "srinidhiPY",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/srinidhiPY/SSL_CR_Histo/blob/histo/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "srinidhiPY",
+        "body": "Code for our paper \"https://arxiv.org/pdf/2102.03897.pdf\"",
+        "dateCreated": "2021-02-13T19:20:51Z",
+        "datePublished": "2021-02-13T19:26:49Z",
+        "html_url": "https://github.com/srinidhiPY/SSL_CR_Histo/releases/tag/v1.0",
+        "name": "First_Release",
+        "tag_name": "v1.0",
+        "tarball_url": "https://api.github.com/repos/srinidhiPY/SSL_CR_Histo/tarball/v1.0",
+        "url": "https://api.github.com/repos/srinidhiPY/SSL_CR_Histo/releases/38016651",
+        "zipball_url": "https://api.github.com/repos/srinidhiPY/SSL_CR_Histo/zipball/v1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Core implementation:\n* Python 3.7+\n* Pytorch 1.7+\n* Openslide-python 1.1+\n* Albumentations 1.8+\n* Scikit-image 0.15+\n* Scikit-learn 0.22+\n* Matplotlib 3.2+\n* Scipy, Numpy (any version)\n\nAdditional packages can be installed via: [`requirements.txt`](https://github.com/srinidhiPY/SSL_CR_Histo/blob/histo/requirements.txt)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 26,
+      "date": "Wed, 29 Dec 2021 02:48:52 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "self-supervised-learning",
+      "digital-pathology",
+      "camelyon16",
+      "breastpathq",
+      "teacher-student-training",
+      "annotation-efficient",
+      "semi-supervised-learning",
+      "deep-learning",
+      "histopathology"
+    ],
+    "technique": "GitHub API"
+  }
+}

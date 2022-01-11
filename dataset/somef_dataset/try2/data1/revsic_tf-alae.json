@@ -1,0 +1,236 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2004.04467",
+      "https://arxiv.org/abs/2004.04467](https://arxiv.org/abs/2004.04467)]\n- Full code is based on original repository [[GIT](https://github.com/podgorskiy/ALAE)].\n\n## Usage\n\nTo train the mnist model\n```bash\n# to train mnist-alae\npython mnist_mlp.py train\n\n# to train style-alae\npython mnist_style.py train\n```\n\nTo open tensorboard summary\n```\ntensorboard --logdir summary\n```\n\nCurrently, lsunbed-StyleALAE is experimental.\n\n```bash\n# to train lsunbed\npython lsunbed_style.py train\n```\n\nTo use released checkpoints, download files from [release](https://github.com/revsic/tf-alae/releases) and unzip it.\n\nFollowing is example of [MNIST-MLP](https://github.com/revsic/tf-alae/releases/tag/MnistMlp).\n```py\nimport json\nfrom mnist_mlp import MnistAlae\n\nwith open('settings.json') as f:\n    settings = json.load(f)\n\nalae = MnistAlae(settings)\nalae.load_weights('./mnist_mlp/mnist_mlp')\n```\n\n## Jupyter notebook\n\n- [mnist_expr.ipynb](./experiments/mnist_expr.ipynb): MNIST interpolation with Mlp-ALAE\n- [mnist_style.ipynb](./experiments/mnist_style.ipynb): MNIST interpolation with Style-ALAE\n\n## Learning Curve\n\nMlp-ALAE + MNIST\n\n![mnist mlp learning curve](rsrc/mnist_mlp.jpg)\n\nStyle-ALAE + MNIST\n\n![mnist style learning curve](rsrc/mnist_style.png)\n\n- In the original paper, they claim that latent reconstruction has better perceptual quality than image one so that they do not use image reconstruction loss in the original repository.\n- But for more easy training, this repository use image reconstruction loss as pretraining at half of the epochs in each resolution level.\n\n## Sample\n\nMNIST-MLP 0 ~ 4 polymorph\n\n![mnist-mlp polymorph](rsrc/mnist_polymorph.png)\n\nMNIST-Style 0 ~ 4 polymorph\n\n![mnist-style polymorph](rsrc/mnist_style_polymorph.png)"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9521604751129622
+      ],
+      "excerpt": "Original paper, Adversarial Latent Autoencoder [arXiv:2004.04467] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-alae",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-03T08:14:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-01T12:53:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8143652157098374
+      ],
+      "excerpt": "(Unofficial) Tensorflow implementation of Adversarial Latent Autoencoder (ALAE, Pidhorskyi et al., 2020) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9749844854141808
+      ],
+      "excerpt": "Full code is based on original repository [GIT]. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8886632091664144,
+        0.9729211476984876
+      ],
+      "excerpt": "In the original paper, they claim that latent reconstruction has better perceptual quality than image one so that they do not use image reconstruction loss in the original repository. \nBut for more easy training, this repository use image reconstruction loss as pretraining at half of the epochs in each resolution level. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "(Unofficial) Tensorflow implementation of Adversarial Latent Autoencoder (ALAE, Pidhorskyi et al., 2020)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-alae/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Thu, 23 Dec 2021 12:15:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/revsic/tf-alae/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "revsic/tf-alae",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/revsic/tf-alae/master/experiments/mnist_expr.ipynb",
+      "https://raw.githubusercontent.com/revsic/tf-alae/master/experiments/mnist_style.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/revsic/tf-alae/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 YoungJoong Kim\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tf-alae",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "tf-alae",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "revsic",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/revsic/tf-alae/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "revsic",
+        "body": "- branch: master\r\n- commit: 80c0b7abbe45534b4e1f4478156b91dd751c4f7c\r\n- tag: MnistStyle\r\n\r\n```python\r\nimport json\r\nfrom mnist_style import StyleMNIST\r\n\r\nwith open('settings.json') as f:\r\n    settings = json.load(f)\r\n\r\nalae = StyleMNIST(settings)\r\nckpt = tf.train.latest_checkpoint('./mnist_style')\r\nalae.load_ckpt(ckpt)\r\n```",
+        "dateCreated": "2020-08-17T16:41:51Z",
+        "datePublished": "2020-08-17T16:50:16Z",
+        "html_url": "https://github.com/revsic/tf-alae/releases/tag/MnistStyle",
+        "name": "MNIST + Style-ALAE",
+        "tag_name": "MnistStyle",
+        "tarball_url": "https://api.github.com/repos/revsic/tf-alae/tarball/MnistStyle",
+        "url": "https://api.github.com/repos/revsic/tf-alae/releases/29779781",
+        "zipball_url": "https://api.github.com/repos/revsic/tf-alae/zipball/MnistStyle"
+      },
+      {
+        "authorType": "User",
+        "author_name": "revsic",
+        "body": "- branch: master\r\n- commit: 1ee5f283aaa04729c2fa69d01c30a76867ee00dd\r\n- tag: MnistMlp\r\n\r\n```py\r\nimport json\r\nfrom mnist_mlp import MnistAlae\r\n\r\nwith open('settings.json') as f:\r\n    settings = json.load(f)\r\n\r\nalae = MnistAlae(settings)\r\nalae.load_weights('./mnist_mlp/mnist_mlp')\r\n```",
+        "dateCreated": "2020-08-05T15:55:39Z",
+        "datePublished": "2020-08-05T16:00:26Z",
+        "html_url": "https://github.com/revsic/tf-alae/releases/tag/MnistMlp",
+        "name": "MNIST + Mlp-ALAE",
+        "tag_name": "MnistMlp",
+        "tarball_url": "https://api.github.com/repos/revsic/tf-alae/tarball/MnistMlp",
+        "url": "https://api.github.com/repos/revsic/tf-alae/releases/29370687",
+        "zipball_url": "https://api.github.com/repos/revsic/tf-alae/zipball/MnistMlp"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Thu, 23 Dec 2021 12:15:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To train the mnist model\n```bash\n#: to train mnist-alae\npython mnist_mlp.py train\n\n#: to train style-alae\npython mnist_style.py train\n```\n\nTo open tensorboard summary\n```\ntensorboard --logdir summary\n```\n\nCurrently, lsunbed-StyleALAE is experimental.\n\n```bash\n#: to train lsunbed\npython lsunbed_style.py train\n```\n\nTo use released checkpoints, download files from [release](https://github.com/revsic/tf-alae/releases) and unzip it.\n\nFollowing is example of [MNIST-MLP](https://github.com/revsic/tf-alae/releases/tag/MnistMlp).\n```py\nimport json\nfrom mnist_mlp import MnistAlae\n\nwith open('settings.json') as f:\n    settings = json.load(f)\n\nalae = MnistAlae(settings)\nalae.load_weights('./mnist_mlp/mnist_mlp')\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

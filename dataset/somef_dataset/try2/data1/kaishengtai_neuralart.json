@@ -1,0 +1,203 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The weights for the Inception network used in this implementation were ported to Torch from the publicly-available [Caffe](https://github.com/BVLC/caffe/tree/master/models/bvlc_googlenet) distribution.\n\nThanks to the [Bethge Group](http://bethgelab.org/deepneuralart/) for providing the weights to the normalized VGG network used here.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "citation": [
+    {
+      "confidence": [
+        0.9957287939307813
+      ],
+      "excerpt": "'A Neural Algorithm of Artistic Style' by Leon Gatys, Alexander Ecker, and Matthias Bethge (http://arxiv.org/abs/1508.06576). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaishengtai/neuralart",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2015-08-31T02:25:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-19T04:53:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9929530898368112
+      ],
+      "excerpt": "This is a Torch7 implementation of the method described in the paper  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An implementation of the paper 'A Neural Algorithm of Artistic Style'.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaishengtai/neuralart/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 365,
+      "date": "Thu, 23 Dec 2021 00:44:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kaishengtai/neuralart/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kaishengtai/neuralart",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kaishengtai/neuralart/master/download_models.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9572173144576019
+      ],
+      "excerpt": "If all else fails (or if you don't have a CUDA-compatible GPU), you can optimize on CPU: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kaishengtai/neuralart/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Lua",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Implementation of 'A Neural Algorithm of Artistic Style'",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "neuralart",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kaishengtai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kaishengtai/neuralart/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- [Torch7](https://github.com/torch/torch7)\n- [imagine-nn](https://github.com/szagoruyko/imagine-nn) (for Inception network)\n- CUDA 6.5+ (unless running on CPU -- see below)\n\nimagine-nn (and any other Torch packages you're missing) can be installed via Luarocks:\n\n```\nluarocks install inn\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2409,
+      "date": "Thu, 23 Dec 2021 00:44:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First, download the models by running the download script:\n\n```\nbash download_models.sh\n```\n\nThis downloads the model weights for the VGG and Inception networks.\n\nBasic usage:\n\n```\nqlua main.lua --style <style.jpg> --content <content.jpg> --style_factor <factor>\n```\n\nwhere `style.jpg` is the image that provides the style of the final generated image, and `content.jpg` is the image that provides the content. `style_factor` is a constant that controls the degree to which the generated image emphasizes style over content. By default it is set to 2E9.\n\nThis generates an image using the VGG-19 network by Karen Simonyan and Andrew Zisserman (http://www.robots.ox.ac.uk/~vgg/research/very_deep/).\n\nOther options:\n\n- `model`: {inception, vgg}. Convnet model to use. Inception refers to Google's [Inception architecture](http://arxiv.org/abs/1409.4842). Default is VGG.\n- `num_iters`: Number of optimization steps. Default is 500.\n- `size`: Long edge dimension of the generated image. Set to 0 to use the size of the content image. Default is 500.\n- `display_interval`: Number of iterations between image displays. Set to 0 to suppress image display. Default is 20.\n- `smoothness`: Constant that controls the smoothness of the generated image (total variation norm regularization strength). Useful when using Inception model (set to ~5E-3). Default is 0.\n- `init`: {image, random}. Initialization mode for the optimized image. `image` initializes with the content image; `random` initializes with random Gaussian noise. Default is `image`.\n- `backend`: {cunn, cudnn}. Neural network CUDA backend. `cudnn` requires the [Torch bindings](https://github.com/soumith/cudnn.torch/tree/R3) for CuDNN R3.\n- `optimizer`: {sgd, lbfgs}. Optimization algorithm. `lbfgs` is slower per iteration and consumes more memory, but may yield better results. Default is `lbfgs`.\n- `cpu`: Optimize on CPU instead of GPU (only VGG model supported).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The Eiffel Tower in the style of Edvard Munch's *The Scream*:\n\n![](examples/eiffel_scream_short.gif)\n\n[(Longer animation)](http://gfycat.com/WebbedValuableGreyhounddog)\n\nPicasso-fied Obama:\n\n![](examples/picasso_obama_short.gif)\n\n[(Longer animation)](http://gfycat.com/WeakPettyDevilfish)\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

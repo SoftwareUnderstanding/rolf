@@ -1,0 +1,1283 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2006.10503\">SE3-Transformers</a> for Equivariant Self-Attention, in Pytorch. May be needed for replicating Alphafold2 results and other drug discovery applications.\n\n[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg",
+      "https://arxiv.org/abs/1707.04585\">reversible networks</a>. This allows me to add a little more depth before hitting the usual memory roadblocks. Equivariance preservation is demonstrated in the tests.\n\n```python\nimport torch\nfrom se3_transformer_pytorch import SE3Transformer\n\nmodel = SE3Transformer(\n    num_tokens = 20,\n    dim = 32,\n    dim_head = 32,\n    heads = 4,\n    depth = 12,             # 12 layers\n    input_degrees = 1,\n    num_degrees = 3,\n    output_degrees = 1,\n    reduce_dim_out = True,\n    reversible = True       # set reversible to True\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bibtex\n@misc{fuchs2020se3transformers,\n    title   = {SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks}, \n    author  = {Fabian B. Fuchs and Daniel E. Worrall and Volker Fischer and Max Welling},\n    year    = {2020},\n    eprint  = {2006.10503},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{satorras2021en,\n    title   = {E(n) Equivariant Graph Neural Networks},\n    author  = {Victor Garcia Satorras and Emiel Hoogeboom and Max Welling},\n    year    = {2021},\n    eprint  = {2102.09844},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{gomez2017reversible,\n    title     = {The Reversible Residual Network: Backpropagation Without Storing Activations},\n    author    = {Aidan N. Gomez and Mengye Ren and Raquel Urtasun and Roger B. Grosse},\n    year      = {2017},\n    eprint    = {1707.04585},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{shazeer2019fast,\n    title   = {Fast Transformer Decoding: One Write-Head is All You Need},\n    author  = {Noam Shazeer},\n    year    = {2019},\n    eprint  = {1911.02150},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.NE}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This library is largely a port of <a href=\"https://github.com/FabianFuchsML/se3-transformer-public\">Fabian's official repository</a>, but without the DGL library.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{shazeer2019fast,\n    title   = {Fast Transformer Decoding: One Write-Head is All You Need},\n    author  = {Noam Shazeer},\n    year    = {2019},\n    eprint  = {1911.02150},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.NE}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{gomez2017reversible,\n    title     = {The Reversible Residual Network: Backpropagation Without Storing Activations},\n    author    = {Aidan N. Gomez and Mengye Ren and Raquel Urtasun and Roger B. Grosse},\n    year      = {2017},\n    eprint    = {1707.04585},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{satorras2021en,\n    title   = {E(n) Equivariant Graph Neural Networks},\n    author  = {Victor Garcia Satorras and Emiel Hoogeboom and Max Welling},\n    year    = {2021},\n    eprint  = {2102.09844},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{fuchs2020se3transformers,\n    title   = {SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks}, \n    author  = {Fabian B. Fuchs and Daniel E. Worrall and Volker Fischer and Max Welling},\n    year    = {2020},\n    eprint  = {2006.10503},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "bonds = torch.randint(0, 4, (2, 32, 32)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": ") #: (1, 32, 32, 34) - {2 * (2 * 8 + 1)} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "bonds = torch.randint(0, 4, (2, 32, 32)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "bonds = torch.randint(0, 4, (1, 32, 32)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207940084462922
+      ],
+      "excerpt": "global_feats = nn.Linear(64, 32)(feats.mean(dim = 1, keepdim = True)) #: (1, 1, 32) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "    valid_radius = 10, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lucidrains/se3-transformer-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-09T14:38:49Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-24T09:48:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8016678539689683
+      ],
+      "excerpt": "Implementation of <a href=\"https://arxiv.org/abs/2006.10503\">SE3-Transformers</a> for Equivariant Self-Attention, in Pytorch. May be needed for replicating Alphafold2 results and other drug discovery applications. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9027934706469706
+      ],
+      "excerpt": "To offer edge information to SE3 Transformers (say bond types between atoms), you just have to pass in two more keyword arguments on initialization. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8939717722500362
+      ],
+      "excerpt": "If you would like to pass in continuous values for your edges, you can choose to not set the num_edge_tokens, encode your discrete bond types, and then concat it to the fourier features of these continuous values \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9462633177498362
+      ],
+      "excerpt": "    adj_dim = 4             #: embed 1st and 2nd degree neighbors (as well as null neighbors) with edge embeddings of this dimension \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9442925666708233
+      ],
+      "excerpt": "To have fine control over the dimensionality of each type, you can use the hidden_fiber_dict and out_fiber_dict keywords to pass in a dictionary with the degree to dimension values as the key / values. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9507354248074863
+      ],
+      "excerpt": "This feature allows you to pass in vectors that can be viewed as global nodes that are seen by all other nodes. The idea would be to pool your graph into a few feature vectors, which will be projected to key / values across all the attention layers in the network. All nodes will have full access to global node information, regardless of nearest neighbors or adjacency calculation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.880436404550761
+      ],
+      "excerpt": "    global_feats_dim = 32 #: this must be set to the dimension of the global features, in this example, 32 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8598907663843203
+      ],
+      "excerpt": ": by pooling features and projecting \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8969373003285205
+      ],
+      "excerpt": "[ ] allow global nodes to attend to all other nodes, to give the network a global conduit for information. (Similar to BigBird, ETC, Longformer etc) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.862036036465057
+      ],
+      "excerpt": "There is a relatively unknown technique for transformers where one can share one key / value head across all the heads of the queries. In my experience in NLP, this usually leads to worse performance, but if you are really in need to tradeoff memory for more depth or higher number of degrees, this may be a good option. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9490387833323582
+      ],
+      "excerpt": "This is an experimental version of EGNN that works for higher types, and greater dimensionality than just 1 (for the coordinates). The class name is still SE3Transformer since it reuses some preexisting logic, so just ignore that for now until I clean it up later. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8885024765717241
+      ],
+      "excerpt": "    num_degrees = 4,       #: number of higher order types - will use basis on a TCN to project to these dimensions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8959011710376322
+      ],
+      "excerpt": "    reduce_dim_out = True  #: will project the dimension of the higher types to 1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.913651769344302
+      ],
+      "excerpt": "If you would like to specify individual dimensions for each of the higher types, just pass in hidden_fiber_dict where the dictionary is in the format {\\<degree>:\\<dim>} instead of num_degrees \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8578395382671309
+      ],
+      "excerpt": "Firstly, I have added <a href=\"https://arxiv.org/abs/1707.04585\">reversible networks</a>. This allows me to add a little more depth before hitting the usual memory roadblocks. Equivariance preservation is demonstrated in the tests. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = SE3Transformer( \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088979888759892
+      ],
+      "excerpt": "By default, the basis vectors are cached. However, if there is ever the need to clear the cache, you simply have to set the environmental flag CLEAR_CACHE to some value on initiating the script \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of SE3-Transformers for Equivariant Self-Attention, in Pytorch. This specific repository is geared towards integration with eventual Alphafold2 replication.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lucidrains/se3-transformer-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Sun, 26 Dec 2021 02:02:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lucidrains/se3-transformer-pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n$ pip install se3-transformer-pytorch\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9316885055740453
+      ],
+      "excerpt": "<b>If you had been using any version of SE3 Transformers prior to version 0.6.0, please update. A huge bug has been uncovered by <a href=\"https://github.com/MattMcPartlon\">@MattMcPartlon</a>, if you were not using the adjacency sparse neighbors settings and relying on nearest neighbors functionality </b> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8119526191570207
+      ],
+      "excerpt": "You can also have the network automatically derive for you the Nth-degree neighbors with one extra keyword num_adj_degrees. If you would like the system to differentiate between the degree of the neighbors as edge information, further pass in a non-zero adj_dim. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9144865480153214
+      ],
+      "excerpt": "You can use SE3 Transformers autoregressively with just one extra flag \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8923865985943978
+      ],
+      "excerpt": "Or you can try deleting the cache directory, which should exist at \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.879271074549782
+      ],
+      "excerpt": "You can also designate your own directory where you want the caches to be stored, in the case that the default directory may have permission issues \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8140054219159956
+      ],
+      "excerpt": " Example of equivariance \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 2, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    reduce_dim_out = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516,
+        0.9416522774131079
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \nfrom se3_transformer_pytorch.utils import fourier_encode \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444,
+        0.8594142235991984
+      ],
+      "excerpt": "    depth = 1, \n    attend_self = True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    include_self = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 1, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8459710772563639
+      ],
+      "excerpt": "out = model(feats, coors, mask, adj_mat = adj_mat) #: (1, 128, 512) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch.se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444,
+        0.8594142235991984
+      ],
+      "excerpt": "    depth = 1, \n    attend_self = True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    attend_sparse_neighbors = True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask, adj_mat = adj_mat, return_type = 1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 2, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch.se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    attend_self = True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 1, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask, return_type = 0, global_feats = global_feats) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 6, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.821964837177328
+      ],
+      "excerpt": "    causal = True          #: set this to True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask) #: (1, 1024, 512) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 1, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.821964837177328
+      ],
+      "excerpt": "    linear_proj_keys = True #: set this to True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask, return_type = 0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 8, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask, return_type = 0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8639258741734444
+      ],
+      "excerpt": "    depth = 8, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.821964837177328
+      ],
+      "excerpt": "    tie_key_values = True #: set this to True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.800774282069824
+      ],
+      "excerpt": "out = model(feats, coors, mask, return_type = 0) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8435581483544605
+      ],
+      "excerpt": "    depth = 4,             #: depth of EGNN \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8639258741734444
+      ],
+      "excerpt": "    use_egnn = True, \n    depth = 4, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    reduce_dim_out = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from se3_transformer_pytorch import SE3Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.850154152823545
+      ],
+      "excerpt": "    reduce_dim_out = True, \n    reversible = True       #: set reversible to True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9503189345333785
+      ],
+      "excerpt": "$ CLEAR_CACHE=1 python train.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8954138756757118
+      ],
+      "excerpt": "CACHE_PATH=./path/to/my/cache python train.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 Phil Wang\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# SE3 Transformer - Pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "se3-transformer-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lucidrains",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/lucidrains/se3-transformer-pytorch/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-09-18T23:50:45Z",
+        "datePublished": "2021-09-18T23:51:02Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.13",
+        "name": "0.8.13",
+        "tag_name": "0.8.13",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.13",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/49803440",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.13"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-09-18T22:45:13Z",
+        "datePublished": "2021-09-18T22:45:33Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.12",
+        "name": "0.8.12",
+        "tag_name": "0.8.12",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.12",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/49802789",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.12"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-09-18T16:03:32Z",
+        "datePublished": "2021-09-18T16:03:45Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.11",
+        "name": "0.8.11",
+        "tag_name": "0.8.11",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.11",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/49797088",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.11"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-10T21:05:43Z",
+        "datePublished": "2021-06-10T21:05:57Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.10",
+        "name": "0.8.10",
+        "tag_name": "0.8.10",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.10",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44442828",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.10"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-10T20:20:56Z",
+        "datePublished": "2021-06-10T20:21:12Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.9",
+        "name": "0.8.9",
+        "tag_name": "0.8.9",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.9",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44440515",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.9"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-10T15:50:19Z",
+        "datePublished": "2021-06-10T15:50:30Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.8",
+        "name": "0.8.8",
+        "tag_name": "0.8.8",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.8",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44425191",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.8"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-08T18:30:31Z",
+        "datePublished": "2021-06-08T18:30:41Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.7",
+        "name": "0.8.7",
+        "tag_name": "0.8.7",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.7",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44299629",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.7"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-07T04:13:08Z",
+        "datePublished": "2021-06-07T04:13:22Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.6",
+        "name": "0.8.6",
+        "tag_name": "0.8.6",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.6",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44180327",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T23:44:13Z",
+        "datePublished": "2021-06-06T23:44:44Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.4",
+        "name": "0.8.4",
+        "tag_name": "0.8.4",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.4",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44175567",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T23:24:15Z",
+        "datePublished": "2021-06-06T23:24:29Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.3",
+        "name": "0.8.3",
+        "tag_name": "0.8.3",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.3",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44175328",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T23:07:44Z",
+        "datePublished": "2021-06-06T23:07:58Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.2",
+        "name": "0.8.2",
+        "tag_name": "0.8.2",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.2",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44175033",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T22:44:22Z",
+        "datePublished": "2021-06-06T22:44:31Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.1",
+        "name": "0.8.1",
+        "tag_name": "0.8.1",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.1",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44174570",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T22:06:36Z",
+        "datePublished": "2021-06-06T22:07:03Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.8.0",
+        "name": "0.8.0",
+        "tag_name": "0.8.0",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.8.0",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44174033",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.8.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T17:54:55Z",
+        "datePublished": "2021-06-06T17:55:14Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.7.3",
+        "name": "0.7.3",
+        "tag_name": "0.7.3",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.7.3",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44169968",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.7.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T04:08:42Z",
+        "datePublished": "2021-06-06T04:09:11Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.7.2",
+        "name": "0.7.2",
+        "tag_name": "0.7.2",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.7.2",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44158844",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.7.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-06T02:03:33Z",
+        "datePublished": "2021-06-06T02:03:50Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.7.1",
+        "name": "0.7.1",
+        "tag_name": "0.7.1",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.7.1",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44157841",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.7.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-06-04T19:25:54Z",
+        "datePublished": "2021-06-04T19:26:18Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.7.0",
+        "name": "0.7.0",
+        "tag_name": "0.7.0",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.7.0",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/44128329",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.7.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-31T00:42:29Z",
+        "datePublished": "2021-05-31T00:42:41Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.6.1",
+        "name": "0.6.1",
+        "tag_name": "0.6.1",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.6.1",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/43828935",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.6.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-30T17:08:43Z",
+        "datePublished": "2021-05-30T17:08:58Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.6.0",
+        "name": "0.6.0",
+        "tag_name": "0.6.0",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.6.0",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/43822942",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.6.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-16T01:11:04Z",
+        "datePublished": "2021-05-16T01:11:24Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.7",
+        "name": "0.5.7",
+        "tag_name": "0.5.7",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.7",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/43007598",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.7"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-14T20:34:45Z",
+        "datePublished": "2021-05-14T20:35:02Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.6",
+        "name": "0.5.6",
+        "tag_name": "0.5.6",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.6",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42980767",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.6"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-14T19:34:52Z",
+        "datePublished": "2021-05-14T19:35:10Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.5",
+        "name": "0.5.5",
+        "tag_name": "0.5.5",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.5",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42978260",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-14T15:04:12Z",
+        "datePublished": "2021-05-14T15:04:30Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.4",
+        "name": "0.5.4",
+        "tag_name": "0.5.4",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.4",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42964990",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-13T22:38:06Z",
+        "datePublished": "2021-05-13T22:38:20Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.3",
+        "name": "0.5.3",
+        "tag_name": "0.5.3",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.3",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42929908",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-13T16:25:38Z",
+        "datePublished": "2021-05-13T16:27:09Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.2",
+        "name": "0.5.2",
+        "tag_name": "0.5.2",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.2",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42912842",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-12T21:03:47Z",
+        "datePublished": "2021-05-12T21:04:11Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.1",
+        "name": "0.5.1",
+        "tag_name": "0.5.1",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.1",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42869675",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-12T18:20:45Z",
+        "datePublished": "2021-05-12T18:21:03Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.5.0",
+        "name": "0.5.0",
+        "tag_name": "0.5.0",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.5.0",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42861361",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.5.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-12T03:43:29Z",
+        "datePublished": "2021-05-12T03:43:42Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.4.0",
+        "name": "0.4.0",
+        "tag_name": "0.4.0",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.4.0",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42812694",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.4.0"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-03T21:12:32Z",
+        "datePublished": "2021-05-03T21:13:16Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.3.15",
+        "name": "0.3.15",
+        "tag_name": "0.3.15",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.3.15",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42382656",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.3.15"
+      },
+      {
+        "authorType": "User",
+        "author_name": "lucidrains",
+        "body": "",
+        "dateCreated": "2021-05-01T18:03:25Z",
+        "datePublished": "2021-05-01T18:03:55Z",
+        "html_url": "https://github.com/lucidrains/se3-transformer-pytorch/releases/tag/0.3.14",
+        "name": "0.3.14 - also, \ud835\udf0b",
+        "tag_name": "0.3.14",
+        "tarball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/tarball/0.3.14",
+        "url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/releases/42313853",
+        "zipball_url": "https://api.github.com/repos/lucidrains/se3-transformer-pytorch/zipball/0.3.14"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 161,
+      "date": "Sun, 26 Dec 2021 02:02:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "artificial-intelligence",
+      "deep-learning",
+      "attention-mechanism",
+      "transformer",
+      "equivariance",
+      "se3"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\nimport torch\nfrom se3_transformer_pytorch import SE3Transformer\n\nmodel = SE3Transformer(\n    dim = 512,\n    heads = 8,\n    depth = 6,\n    dim_head = 64,\n    num_degrees = 4,\n    valid_radius = 10\n)\n\nfeats = torch.randn(1, 1024, 512)\ncoors = torch.randn(1, 1024, 3)\nmask  = torch.ones(1, 1024).bool()\n\nout = model(feats, coors, mask) #: (1, 1024, 512)\n```\n\nPotential example usage in Alphafold2, as outlined <a href=\"https://fabianfuchsml.github.io/alphafold2/\">here</a>\n\n```python\nimport torch\nfrom se3_transformer_pytorch import SE3Transformer\n\nmodel = SE3Transformer(\n    dim = 64,\n    depth = 2,\n    input_degrees = 1,\n    num_degrees = 2,\n    output_degrees = 2,\n    reduce_dim_out = True,\n    differentiable_coors = True\n)\n\natom_feats = torch.randn(2, 32, 64)\ncoors = torch.randn(2, 32, 3)\nmask  = torch.ones(2, 32).bool()\n\nrefined_coors = coors + model(atom_feats, coors, mask, return_type = 1) #: (2, 32, 3)\n```\n\nYou can also let the base transformer class take care of embedding the type 0 features being passed in. Assuming they are atoms\n\n```python\nimport torch\nfrom se3_transformer_pytorch import SE3Transformer\n\nmodel = SE3Transformer(\n    num_tokens = 28,       #: 28 unique atoms\n    dim = 64,\n    depth = 2,\n    input_degrees = 1,\n    num_degrees = 2,\n    output_degrees = 2,\n    reduce_dim_out = True\n)\n\natoms = torch.randint(0, 28, (2, 32))\ncoors = torch.randn(2, 32, 3)\nmask  = torch.ones(2, 32).bool()\n\nrefined_coors = coors + model(atoms, coors, mask, return_type = 1) #: (2, 32, 3)\n```\n\nIf you think the net could further benefit from positional encoding, you can featurize your positions in space and pass it in as follows.\n\n```python\nimport torch\nfrom se3_transformer_pytorch import SE3Transformer\n\nmodel = SE3Transformer(\n    dim = 64,\n    depth = 2,\n    input_degrees = 2,\n    num_degrees = 2,\n    output_degrees = 2,\n    reduce_dim_out = True  #: reduce out the final dimension\n)\n\natom_feats  = torch.randn(2, 32, 64, 1) #: b x n x d x type0\ncoors_feats = torch.randn(2, 32, 64, 3) #: b x n x d x type1\n\n#: atom features are type 0, predicted coordinates are type 1\nfeatures = {'0': atom_feats, '1': coors_feats}\ncoors = torch.randn(2, 32, 3)\nmask  = torch.ones(2, 32).bool()\n\nrefined_coors = coors + model(features, coors, mask, return_type = 1) #: (2, 32, 3) - equivariant to input type 1 features and coordinates\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "First install `sidechainnet`\n\n```bash\n$ pip install sidechainnet\n```\n\nThen run the protein backbone denoising task\n\n```bash\n$ python denoise.py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

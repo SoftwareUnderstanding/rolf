@@ -1,0 +1,421 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{cao-etal-2021-pause,\n    title = \"{PAUSE}: Positive and Annealed Unlabeled Sentence Embedding\",\n    author = \"Cao, Lele  and\n      Larsson, Emil  and\n      von Ehrenheim, Vilhelm  and\n      Cavalcanti Rocha, Dhiana Deva  and\n      Martin, Anna  and\n      Horn, Sonja\",\n    booktitle = \"Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing\",\n    month = nov,\n    year = \"2021\",\n    address = \"Online and Punta Cana, Dominican Republic\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.emnlp-main.791\",\n    pages = \"10096--10107\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "  --train_epochs=10 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "  --pos_sample_prec=30 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488,
+        0.9030859728368266
+      ],
+      "excerpt": "| PAUSE-NLI-base-30%  |  20210329-133137 | \n| PAUSE-NLI-base-10%  |  20210329-180000 | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/EQTPartners/pause",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-02T12:58:09Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-23T07:55:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9034953397521559,
+        0.9960491219577762
+      ],
+      "excerpt": "This repo contains source code to reproduce the baseline results in the paper: PAUSE: Positive and Annealed Unlabeled Sentence Embedding. \nSentence embedding refers to a set of effective and versatile techniques for converting raw text into numerical vector representations that can be used in a wide range of natural language processing (NLP) applications. The majority of these techniques are either supervised or unsupervised. Compared to the unsupervised methods, the supervised ones make less assumptions about optimization objectives and usually achieve better results. However, the training requires a large amount of labeled sentence pairs, which is not available in many industrial scenarios. To that end, we propose a generic and end-to-end approach -- PAUSE (Positive and Annealed Unlabeled Sentence Embedding), capable of learning high-quality sentence embeddings from a partially labeled dataset, which effectively learns sentence embeddings from PU datasets by jointly optimizing the supervised and PU loss. The main highlights of PAUSE include: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9742444481634625,
+        0.9708867916937752,
+        0.8163770732711579,
+        0.9890148157186006,
+        0.9580182674497818
+      ],
+      "excerpt": "- it is extended to scenarios with an arbitrary number of classes; \n- polynomial annealing of the PU loss is proposed to stabilize the training; \n- our experiments (reproduction steps are illustrated below) show that PAUSE constantly outperforms baseline methods. \nThis repository contains Tensorflow implementation of PAUSE to reproduce the experimental results. Upon using this repo for your work, please cite: \nModels are trained on a combination of the SNLI and Multi-Genre NLI datasets, which contain one million sentence pairs annotated with three labels: entailment, contradiction and neutral. The trained model is tested on the STS 2012-2016, STS benchmark, and SICK-Relatedness (SICK-R) datasets, which have labels between 0 and 5 indicating the semantic relatedness of sentence pairs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088475081181175
+      ],
+      "excerpt": "  --model=small \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "  --model=base \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9399061137881549
+      ],
+      "excerpt": "  --model MODEL         The tfhub link for the base embedding model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8475269536027753,
+        0.8824106894113206
+      ],
+      "excerpt": "                        The max number of tokens in the input \n  --prior PRIOR         Expected ratio of positive samples \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8449255524711501
+      ],
+      "excerpt": "After the model is trained, you will be prompted to where the model is saved, e.g. ./artifacts/model/20210517-131724, where the directory name (20210517-131724) is the model ID. To test the model with that ID, run \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8358170464247565
+      ],
+      "excerpt": "You can continue to finetune a pertained model on supervised STSb. For example, assume we have trained a PAUSE model based on small BERT (say located at ./artifacts/model/20210517-131725), if we want to finetune the model on STSb for 2 epochs, we can run \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088475081181175
+      ],
+      "excerpt": "  --model=small \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.971706185177945,
+        0.8725179720676749
+      ],
+      "excerpt": "  --pretrained_weights=./artifacts/model/20210517-131725 \nNote that it is important to match the model size (--model) with the pretrained model size (--pretrained_weights). \nAfter the model is finetuned, you will be prompted to where the model is saved, e.g. ./artifacts/model/20210517-131726, where the directory name (20210517-131726) is the model ID. To test the model with that ID, run \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259,
+        0.860059181823877,
+        0.8884973012134729
+      ],
+      "excerpt": "  --data_path=./data \\ \n  --model=20210328-212801 \nwhere the --model parameter specifies the ID of the model you want to evaluate. By default, the model should exist in folder ./artifacts/model/embed. If you want to evaluate a trained model in our public GCS (gs://motherbrain-pause/model/...), please run (e.g. PAUSE-NLI-base-50%): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "  --data_path=./data \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.8371566397020352,
+        0.8534402249604769
+      ],
+      "excerpt": "  --model=20210329-065047 \nWe provide the following models for demonstration purposes: \n|        Model        |      Model ID    | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "\ud83c\udf4a PAUSE (Positive and Annealed Unlabeled Sentence Embedding), accepted by EMNLP'2021 \ud83c\udf34",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eqtpartners/pause/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 28 Dec 2021 00:32:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/EQTPartners/pause/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EQTPartners/pause",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8074898964429056
+      ],
+      "excerpt": "- good sentence embeddings can be learned from datasets with only a few positive labels; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8164457623646099,
+        0.8080002376980483,
+        0.9906248903846466
+      ],
+      "excerpt": "To evaluate the PAUSE embeddings using SentEval (preferably using GPU), you need to download the data first: \ncd ./data/downstream \ncd ../.. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8148715862125916
+      ],
+      "excerpt": "Example 1: train PAUSE-small using 5% labels for 10 epochs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python train_nli.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8115463908252798
+      ],
+      "excerpt": "Example 2: train PAUSE-base using 30% labels for 20 epochs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python train_nli.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8971823465573899,
+        0.872053789303776
+      ],
+      "excerpt": "python train_nli.py --help \nwhich will print the usage as follows. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9235286844008953
+      ],
+      "excerpt": "usage: train_nli.py [-h] [--model MODEL] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828178135007982
+      ],
+      "excerpt": "                        The max number of training epoch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8073856440491339
+      ],
+      "excerpt": "                        training; should be one of 1, 10, 30, 50, 70 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9231517136500653,
+        0.8545191210587494
+      ],
+      "excerpt": "python test_sts.py --model=20210517-131724 \nThe test result on STS datasets will be printed on console and also saved in file ./artifacts/test/sts_20210517-131724.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python ft_stsb.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9231517136500653,
+        0.800761674860987
+      ],
+      "excerpt": "python ft_stsb_test.py --model=20210517-131726 \nTo evaluate the PAUSE embeddings using SentEval (preferably using GPU), you need to download the data first: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9054550148486966
+      ],
+      "excerpt": "Then, run the sent_eval.py script: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python sent_eval.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python sent_eval.py \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/EQTPartners/pause/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell",
+      "sed"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License (MIT)\\n\\nCopyright (C) 2021 eqtgroup.com Ltd\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in\\nall copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\\nTHE SOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PAUSE: Positive and Annealed Unlabeled Sentence Embedding",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pause",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EQTPartners",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/EQTPartners/pause/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install virtual environment first to avoid breaking your native environment. \nIf you use [Anaconda](https://www.anaconda.com/distribution/), do\n```\nconda update conda\nconda create --name py37-pause python=3.7\nconda activate py37-pause\n```\n\nThen install the dependent libraries:\n```\npip install -r requirements.txt\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 18,
+      "date": "Tue, 28 Dec 2021 00:32:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "nlp",
+      "sentence-embeddings",
+      "positive-unlabeled-learning",
+      "document-embedding",
+      "classification-algorithm",
+      "similarity-search"
+    ],
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2008.11201",
+      "https://arxiv.org/abs/[2008.11201](https://arxiv.org/abs/2008.11201)] \n\nImplementation of the Siamese U-Net model with the pre-trained ResNet34 architecture as an encoder for the Change Detection task on Remote Sensing dataset with support for Deep Active Learning.\n\n<p align=\"center\">\n<img src=\"https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/_illustration.jpg\" width=\"560\">\n</p>\n\n## Colab demo with a pre-trained model: <a href=\"https://colab.research.google.com/github/previtus/ChangeDetectionProject/blob/master/demo/_ChangeDetection_prediction_example.ipynb\" title=\"Open In Colab\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\"></a>\n\nCheck out the basic change detection demo at: <a href=\"https://github.com/previtus/ChangeDetectionProject/blob/master/demo/_ChangeDetection_prediction_example.ipynb\">ChangeDetection_prediction_example.ipynb</a>\n\n_Note: This demo shows only the basic model inference and not the Active Learning approach (which requires more computational resources and a dataset at your disposal)._\n\n## Setup:\n\nStart with installing the prerequisite python libraries. We worked with the following versions: \n\n```\ntensorflow              1.12.0\nKeras                   2.2.4\nKeras-Applications      1.0.7\nKeras-Preprocessing     1.0.5\nnumpy                   1.16.0\nopencv-python-headless  4.0.0.21\nscikit-image            0.14.2\nscikit-learn            0.20.2\nalbumentations         0.2.0\nimage-classifiers      0.2.0\nimageio                2.5.0\nimageio-ffmpeg         0.2.0\nseaborn                0.9.0\nsegmentation-models    0.2.0\ntqdm                   4.29.1\n```\n\nDownload the dataset and place it into a folder specified in Settings.py (_note: the original used dataset is from the Swiss company Swisstopo and as such is not publicly available_).\n\nTo **train a model on the task of change detection** see the \"main.py\" and run it with the required arguments (such as encoder type, number of epochs or the batch size).\n\nRun this to see the help:\n```\npython3 main.py --help\n```\n\nTo **use the deep active learning** algorithms see \"ActiveLearningLoop.py\".\n\nRun this to see the help:\n```\npython3 ActiveLearningLoop.py --help\n```\n\nThese are the example calls for the three tested methods:\n\n```\npython3 ActiveLearningLoop.py -name Run1_Ensemble_N5 -AL_method Ensemble -AL_Ensemble_numofmodels 5 -train_augmentation True\npython3 ActiveLearningLoop.py -name Run2_MCBN_M5 -AL_method MonteCarloBatchNormalization -AL_MCBN_numofruns 5 -train_augmentation True\npython3 ActiveLearningLoop.py -name Run0_Random -AL_method Random -train_augmentation True\n\n# Note we can also use:\n# -AL_AcquisitionFunction (choose from \"Variance\", \"Entropy\")\n\n# Further experimentation:\n# Adding N - this one would add 32 samples for 40 iterations => 1280 samples in the final iteration\npython3 ActiveLearningLoop.py -name Run3_Ensemble_N5_Add32 -AL_method Ensemble -AL_Ensemble_numofmodels 5 -AL_iterations 40 -AL_iterationsample_size 32 -train_augmentation True\n```\n\n\n### Siamese U-Net model\n\nCode for the model directly at: https://github.com/previtus/ChangeDetectionProject/blob/master/Model2_builder.py"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/previtus/ChangeDetectionProject",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-02-14T16:08:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T18:24:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9718542339760999
+      ],
+      "excerpt": "Implementation of the Siamese U-Net model with the pre-trained ResNet34 architecture as an encoder for the Change Detection task on Remote Sensing dataset with support for Deep Active Learning. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Change Detection project - the more experimental build version. Trying out Active Learning in with deep CNNs for Change detection on remote sensing data.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/previtus/ChangeDetectionProject/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 13,
+      "date": "Fri, 24 Dec 2021 07:57:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/previtus/ChangeDetectionProject/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "previtus/ChangeDetectionProject",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/demo/_ChangeDetection_prediction_example.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/___al_run.sh",
+      "https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/run_crossval_resnet101_10folds.sh",
+      "https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/___eval_run.sh",
+      "https://raw.githubusercontent.com/previtus/ChangeDetectionProject/master/run_al_exp1.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Start with installing the prerequisite python libraries. We worked with the following versions: \n\n```\ntensorflow              1.12.0\nKeras                   2.2.4\nKeras-Applications      1.0.7\nKeras-Preprocessing     1.0.5\nnumpy                   1.16.0\nopencv-python-headless  4.0.0.21\nscikit-image            0.14.2\nscikit-learn            0.20.2\nalbumentations         0.2.0\nimage-classifiers      0.2.0\nimageio                2.5.0\nimageio-ffmpeg         0.2.0\nseaborn                0.9.0\nsegmentation-models    0.2.0\ntqdm                   4.29.1\n```\n\nDownload the dataset and place it into a folder specified in Settings.py (_note: the original used dataset is from the Swiss company Swisstopo and as such is not publicly available_).\n\nTo **train a model on the task of change detection** see the \"main.py\" and run it with the required arguments (such as encoder type, number of epochs or the batch size).\n\nRun this to see the help:\n```\npython3 main.py --help\n```\n\nTo **use the deep active learning** algorithms see \"ActiveLearningLoop.py\".\n\nRun this to see the help:\n```\npython3 ActiveLearningLoop.py --help\n```\n\nThese are the example calls for the three tested methods:\n\n```\npython3 ActiveLearningLoop.py -name Run1_Ensemble_N5 -AL_method Ensemble -AL_Ensemble_numofmodels 5 -train_augmentation True\npython3 ActiveLearningLoop.py -name Run2_MCBN_M5 -AL_method MonteCarloBatchNormalization -AL_MCBN_numofruns 5 -train_augmentation True\npython3 ActiveLearningLoop.py -name Run0_Random -AL_method Random -train_augmentation True\n\n#: Note we can also use:\n#: -AL_AcquisitionFunction (choose from \"Variance\", \"Entropy\")\n\n#: Further experimentation:\n#: Adding N - this one would add 32 samples for 40 iterations => 1280 samples in the final iteration\npython3 ActiveLearningLoop.py -name Run3_Ensemble_N5_Add32 -AL_method Ensemble -AL_Ensemble_numofmodels 5 -AL_iterations 40 -AL_iterationsample_size 32 -train_augmentation True\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/previtus/ChangeDetectionProject/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deep Active Learning in Remote Sensing for data efficient Change Detection [arXiv:[2008.11201](https://arxiv.org/abs/2008.11201)]",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ChangeDetectionProject",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "previtus",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/previtus/ChangeDetectionProject/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Fri, 24 Dec 2021 07:57:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-active-learning",
+      "active-learning",
+      "change-detection",
+      "siamese-neural-network",
+      "siamese-unet",
+      "remote-sensing",
+      "monte-carlo-batch-normalization",
+      "mcbn"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Check out the basic change detection demo at: <a href=\"https://github.com/previtus/ChangeDetectionProject/blob/master/demo/_ChangeDetection_prediction_example.ipynb\">ChangeDetection_prediction_example.ipynb</a>\n\n_Note: This demo shows only the basic model inference and not the Active Learning approach (which requires more computational resources and a dataset at your disposal)._\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

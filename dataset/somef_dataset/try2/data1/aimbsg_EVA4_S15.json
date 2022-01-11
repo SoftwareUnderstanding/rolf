@@ -1,0 +1,239 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1812.11941\n\nhttps://arxiv.org/abs/1608.06993\n\nhttps://towardsdatascience.com/depth-estimation-on-camera-images-using-densenets-ac454caa893\n",
+      "https://arxiv.org/abs/1608.06993\n\nhttps://towardsdatascience.com/depth-estimation-on-camera-images-using-densenets-ac454caa893\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "https://arxiv.org/abs/1812.11941\n\nhttps://arxiv.org/abs/1608.06993\n\nhttps://towardsdatascience.com/depth-estimation-on-camera-images-using-densenets-ac454caa893\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aimbsg/EVA4_S15",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-06T04:01:20Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-24T03:48:47Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.912201111721919,
+        0.9968029537584643
+      ],
+      "excerpt": "Given an image with foreground objects and background image, predict the depth map as well as a mask for the foreground object \nTable of contents : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8561669939498031,
+        0.8979411005071259
+      ],
+      "excerpt": "2) Applications of depth estimation \n3) Data preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8742890908937553,
+        0.8222265174652371,
+        0.9672581701560127
+      ],
+      "excerpt": "Create data loader to load the dataset (preferably in batches considering the size of the dataset)   \nUse augmentation strategy (resize and normalize using the mean and standard deviation of the dataset) \nCreate a model which takes fg_bg and bg (stacked over one another as array) as input. This type of stacking does not the change the size of the input while it increases only the number of channels \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8656837483537166
+      ],
+      "excerpt": "Compare train vs validation accuracy. Save the model and change the learning rate and re-run the model for more number of epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955831738453136
+      ],
+      "excerpt": "As I rely on office laptop for assignment I do not have privilege to use local installation of python and have to use Colab, which I read is the best to solve for large dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Given an image with foreground objects and background image, predict the depth map as well as a mask for the foreground object",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aimbsg/EVA4_S15/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Human brain has the remarkable ability to infer depth when viewing a two-dimensional scene (even in a photograph). But accurate depth mapping is a challenge in computer vision which computer vision enthusiasts are trying to solve. The problem I am trying to solve here is to do a monocular depth estimation and object segmentation using custom prepared dataset.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 20:43:04 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aimbsg/EVA4_S15/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aimbsg/EVA4_S15",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/aimbsg/EVA4_S15/master/EVA4_S15_Custom_Dataset_Depth_Prediction.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Drive link to dataset : https://drive.google.com/open?id=1Hr1OuftLZ0reDac1yJ2wAspwE9gnUQEi\n\nbg : Forest, park, seashore and road. Total images = 100; Channels = RGB; Size = 905KB; Resolution = 224X224\n\nfg : Men, Women, Children and combination of men-women, women-children and men-children. Total images = 100; Channels = RGB; Size = 576KB; Resolution = 160X160. Gimp is used to remove the background in foreground images(made transparent). Understood difference between white bg and transparent bg.\n\nfg_bg : Randomly placed each fg 40 times(with flips) over each bg. Total images = [100X100X(20X2)] 400K. Channels = RGB; Size = 2.2GB; Resolution = 224X224\n\nfg_bg_mask : fg is converted from RGB to black and overlaid on top of black background. This is done along with step 3 (in the same for loop). Total images = 400K. Size = 1.6GB; Resolution = 224X224\n\nfg_bg_depth : Tweaks with respect to image input folder and save have been made from the shared Dense Depth code. Image loading is done on CPU while prediction is done on GPU. Need to load the data as well in GPU for fast processing. 2000 images takes 15 minutes hence working on optimizations. Could have done this in the same for loop along with steps 3 and 4.\n\n<img src = \"Data_Samples_Depth_Model.png\">\n\nLink to codes :\n\nOverlap and mask : https://github.com/aimbsg/EVA4_S14/blob/master/EVA4_S14_Overlap_And_Mask.ipynb\n\nDense depth model : https://github.com/aimbsg/EVA4_S14/blob/master/EVA4_S14_Dense_depth_model.ipynb\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8663458375735589
+      ],
+      "excerpt": "Link to code : https://github.com/aimbsg/EVA4_S15/blob/master/EVA4_S15_Custom_Dataset_Depth_Prediction.ipynb \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8262157230141619
+      ],
+      "excerpt": "3) Data preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8102780086823556
+      ],
+      "excerpt": "6) Result \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aimbsg/EVA4_S15/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EVA4_S15",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EVA4_S15",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aimbsg",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aimbsg/EVA4_S15/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 20:43:04 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

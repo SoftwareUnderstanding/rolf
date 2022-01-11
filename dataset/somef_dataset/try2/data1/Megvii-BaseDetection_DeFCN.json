@@ -1,0 +1,235 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repo is developed based on cvpods. Please check [cvpods](https://github.com/Megvii-BaseDetection/cvpods) for more details and features.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2012.03544",
+      "https://arxiv.org/abs/2012.03544"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use this work in your research or wish to refer to the baseline results published here, please use the following BibTeX entries:\n```\n@article{wang2020end,\n  title   =  {End-to-End Object Detection with Fully Convolutional Network},\n  author  =  {Wang, Jianfeng and Song, Lin and Li, Zeming and Sun, Hongbin and Sun, Jian and Zheng, Nanning},\n  journal =  {arXiv preprint arXiv:2012.03544},\n  year    =  {2020}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{wang2020end,\n  title   =  {End-to-End Object Detection with Fully Convolutional Network},\n  author  =  {Wang, Jianfeng and Song, Lin and Li, Zeming and Sun, Hongbin and Sun, Jian and Zheng, Nanning},\n  journal =  {arXiv preprint arXiv:2012.03544},\n  year    =  {2020}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Megvii-BaseDetection/DeFCN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-07T08:08:33Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T12:02:27Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9757112407309051,
+        0.9111014045670208
+      ],
+      "excerpt": "This project provides an implementation for \"End-to-End Object Detection with Fully Convolutional Network\" on PyTorch. \nExperiments in the paper were conducted on the internal framework, thus we reimplement them on cvpods and report details as below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "End-to-End Object Detection with Fully Convolutional Network",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Megvii-BaseDetection/DeFCN/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 34,
+      "date": "Mon, 27 Dec 2021 20:32:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Megvii-BaseDetection/DeFCN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Megvii-BaseDetection/DeFCN",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "| model | assignment | with NMS | lr sched. | mAP | mAR | note |\n|:------|:----------:|:--------:|:---------:|:---:|:---:|:----:|\n| [POTO](./playground/detection/coco/poto.res50.fpn.coco.800size.6x_ms) | one-to-one | No | 6x + ms | 40.0 | 61.9 | |\n| [POTO](./playground/detection/coco/poto.res50.fpn.coco.800size.9x_ms) | one-to-one | No | 9x + ms | 40.2 | 62.3 | |\n| [POTO](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms.argmax) | one-to-one | No | 3x + ms | 39.2 | 61.1 | replace Hungarian algorithm by `argmax` |\n| [POTO + 3DMF](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms.3dmf_wo_gn) | one-to-one | No | 3x + ms | 40.9 | 62.0 | remove GN in 3DMF |\n| [POTO + 3DMF + Aux](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms.3dmf_wo_gn.aux) | mixture\\* | No | 3x + ms | 41.5 | 61.5 | remove GN in 3DMF |\n\n\\* We adopt a one-to-one assignment in POTO and a one-to-many assignment in the auxiliary loss, respectively.\n\n- For `one-to-one` assignment, more training iters lead to higher performance.\n- The `argmax` (also known as top-1) operation is indeed the approximate solution of bipartite matching in dense prediction methods.\n- It seems harmless to remove GN in 3DMF, which also leads to higher inference speed.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "| model | assignment | with NMS | lr sched. | AP50 | mMR | recall | download |\n|:------|:----------:|:--------:|:---------:|:----:|:---:|:------:|:--------:|\n| [FCOS](./playground/detection/crowdhuman/fcos.res50.fpn.crowdhuman.800size.30k) | one-to-many | Yes | 30k iters | 86.1 | 54.9 | 94.2 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZDPyk8zwotOjzMzZXeZevABOjIyt_lcV2rUJWXmCpNgzQ?e=21mkyL) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/ET6G2ot5vTJLgXhENPkypysBRIyr_bcO_ZL6OAZ-EfXEJg?e=TTdtUQ) |\n| [ATSS](./playground/detection/crowdhuman/atss.res50.fpn.crowdhuman.800size.30k) | one-to-many | Yes | 30k iters | 87.2 | 49.7 | 94.0 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EV-vStDncgJPhTzs5EhBNl8BNkTm2JSkKmpJCXbkiYEU6Q?e=0avzwA) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EYe5cT7PhzdOoFxZUjy_nQQBtRqeyceMkIhOfCrSF9RH9A?e=ruRkNi) |\n| [POTO](./playground/detection/crowdhuman/poto.res50.fpn.crowdhuman.800size.30k) | one-to-one | No | 30k iters | 88.5 | 52.2 | 96.3 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZ_c5aS2Ky9AuGFhTDXkwPwBk6-q2ZLb9ivVgqX7SHf0vw?e=eQexvu) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EXj_cYe6D-1EmtsT6oCbCDoBjGDFy00R6LLtj8DBWyppuQ?e=7HrKqs) |\n| [POTO + 3DMF](./playground/detection/crowdhuman/poto.res50.fpn.crowdhuman.800size.30k.3dmf) | one-to-one | No | 30k iters | 88.8 | 51.0 | 96.6 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EXBg0_zevohPijFLGXJopAcBqo6EBdwttrZfZDyyOfb-Xg?e=bcRpef) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EXBuggGAXLREp7s8BGthJ1sBLfj244hnHkE0ewlSBDNc8w?e=6jheh5) |\n| [POTO + 3DMF + Aux](./playground/detection/crowdhuman/poto.res50.fpn.crowdhuman.800size.30k.3dmf.aux) | mixture\\* | No | 30k iters | 89.1 | 48.9 | 96.5 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EUTUwS403eZCi32gOv1NKWsBunZYWzstvp9r1XbIq7OSEw?e=aAjfnf) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EY7mBmChZHhLp7H1SqAzPc4BCfEjCK0-zz3lDQke3znxGg?e=m1eea2) |\n\n\\* We adopt a one-to-one assignment in POTO and a one-to-many assignment in the auxiliary loss, respectively.\n\n- It's normal to observe ~0.3AP noise in POTO, and ~1.0mMR noise in all methods.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "| model | assignment | with NMS | lr sched. | mAP | mAR | download |\n|:------|:----------:|:--------:|:---------:|:---:|:---:|:--------:|\n| [FCOS](./playground/detection/coco/fcos.res50.fpn.coco.800size.3x_ms) | one-to-many | Yes | 3x + ms | 41.4 | 59.1 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZqKwaeqJVVGnZ40JdSMWuMBE9UiI9RTeiiTqQZIpb74_A?e=9yKhaD) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/Ee8is-872ihCi7wdaoGlJsYBImnU3KghkB8G2FxeDfLtzA?e=Gbzcle) |\n| [FCOS baseline](./playground/detection/coco/fcos.res50.fpn.coco.800size.3x_ms.wo_ctrness) | one-to-many | Yes | 3x + ms | 40.9 | 58.4 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZgRNxwNi2BCoTGTWEPJpXUBZfTzjXHJ9QNkyt5mbOzvbw?e=OUItCW) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/ERkRyqXjGtVAp6vjEhg8hQABHxO_083fLd32K9dY3KqYKQ?e=WrNbCj) |\n| [Anchor](./playground/detection/coco/anchor.res50.fpn.coco.800size.3x_ms) | one-to-one | No | 3x + ms | 37.1 | 60.5 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZfdTFoDS11HrIKaiLNJHXwBDEnoCKmUWB19yzUc5b_S3w?e=nCYmC0) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EXv5m1QVygpPss-ooQJfuV0BdTZF7zcUc00lAjG8vOlqYw?e=KliIJt) |\n| [Center](./playground/detection/coco/center.res50.fpn.coco.800size.3x_ms) | one-to-one | No | 3x + ms | 35.2 | 61.0 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/Ee44xccaO2VMh81dNy4qSpYBjcvzYOC9QKoJTNGeOXyv9w?e=UxxIFI) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EVazPkcL7hZCqZOzTf9eePwBBL-gWvPEUvpdFB5rl9rE7Q?e=KfUs4v) |\n| [Foreground Loss](./playground/detection/coco/loss.res50.fpn.coco.800size.3x_ms) | one-to-one | No | 3x + ms | 38.7 | 62.2 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EdgBB6Oo_VlGtBrlNz3LnoIBdP5LDbgpGOowinIPboWOUw?e=7l4f6I) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EdEuZ0A1N1FHogFx4ty53IQBYDjBdgG5UIrhoWJyvFBhCg?e=XgcwP7) |\n| [POTO](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms) | one-to-one | No | 3x + ms | 39.2 | 61.7 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EZX8SOLYaaxJo7XKNNZLn2cB9jN3NVCcuIcnU5d6K63NgQ?e=PhGxcv) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EUUkcuelrv1ElRAKw8WUgmgBGbBL8KmbIxnyINuf1w9Rrg?e=450Iy8) |\n| [POTO + 3DMF](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms.3dmf) | one-to-one | No | 3x + ms | 40.6 | 61.6 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EUZSG4S8NEhPuAIyEWoWcQABfkuSNKFxjQ2lUe5qHWm1Hw?e=cmZT05) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EdpWv-1qoKFIsLmpXt35ZMwBiU2eUV5q24oqbIXRp7ulsg?e=TdH3Bl) |\n| [POTO + 3DMF + Aux](./playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms.3dmf.aux) | mixture\\* | No | 3x + ms | 41.4 | 61.5 | [weight](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/ER5BQQA5--ZKtzA6Ta5wBYMBGnqS1MtpFp21kPf973jccw?e=v9XZma) \\| [log](https://megvii-my.sharepoint.cn/:u:/g/personal/wangjianfeng_megvii_com/EUYDEZIQXK5CtABKoq-du5UB-71q4EsNStYaTLPDuoY6bw?e=LmzXMd) |\n\n\\* We adopt a one-to-one assignment in POTO and a one-to-many assignment in the auxiliary loss, respectively.\n\n- `2x + ms` schedule is adopted in the paper, but we adopt `3x + ms` schedule here to achieve higher performance.\n- It's normal to observe ~0.3AP noise in POTO.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Megvii-BaseDetection/DeFCN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "End-to-End Object Detection with Fully Convolutional Network",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DeFCN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Megvii-BaseDetection",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Megvii-BaseDetection/DeFCN/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* [cvpods](https://github.com/Megvii-BaseDetection/cvpods)\n* scipy >= 1.5.4\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 428,
+      "date": "Mon, 27 Dec 2021 20:32:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "computer-vision",
+      "object-detection"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* install cvpods locally (requires cuda to compile)\n```shell\n\npython3 -m pip install 'git+https://github.com/Megvii-BaseDetection/cvpods.git'\n#: (add --user if you don't have permission)\n\n#: Or, to install it from a local clone:\ngit clone https://github.com/Megvii-BaseDetection/cvpods.git\npython3 -m pip install -e cvpods\n\n#: Or,\npip install -r requirements.txt\npython3 setup.py build develop\n```\n\n* prepare datasets\n```shell\ncd /path/to/cvpods\ncd datasets\nln -s /path/to/your/coco/dataset coco\n```\n\n* Train & Test\n```shell\ngit clone https://github.com/Megvii-BaseDetection/DeFCN.git\ncd DeFCN/playground/detection/coco/poto.res50.fpn.coco.800size.3x_ms  #: for example\n\n#: Train\npods_train --num-gpus 8\n\n#: Test\npods_test --num-gpus 8 \\\n    MODEL.WEIGHTS /path/to/your/save_dir/ckpt.pth #: optional\n    OUTPUT_DIR /path/to/your/save_dir #: optional\n\n#: Multi node training\n#:#: sudo apt install net-tools ifconfig\npods_train --num-gpus 8 --num-machines N --machine-rank 0/1/.../N-1 --dist-url \"tcp://MASTER_IP:port\"\n\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

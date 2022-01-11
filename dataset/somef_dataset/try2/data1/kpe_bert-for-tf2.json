@@ -1,0 +1,514 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1810.04805\n.. _`pre-trained google model`: https://github.com/google-research/bert\n.. _`tests/test_bert_activations.py`: https://github.com/kpe/bert-for-tf2/blob/master/tests/test_compare_activations.py\n.. _`TensorFlow 2.0`: https://www.tensorflow.org/versions/r2.0/api_docs/python/tf\n.. _`TensorFlow 1.14`: https://www.tensorflow.org/versions/r1.14/api_docs/python/tf\n\n.. _`google-research/adapter-bert`: https://github.com/google-research/adapter-bert/\n.. _`adapter-BERT`: https://arxiv.org/abs/1902.00751\n.. _`ALBERT`: https://arxiv.org/abs/1909.11942\n.. _`brightmart/albert_zh ALBERT for Chinese`: https://github.com/brightmart/albert_zh\n.. _`brightmart/albert_zh`: https://github.com/brightmart/albert_zh\n.. _`google ALBERT weights`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/albert(old",
+      "https://arxiv.org/abs/1902.00751\n.. _`ALBERT`: https://arxiv.org/abs/1909.11942\n.. _`brightmart/albert_zh ALBERT for Chinese`: https://github.com/brightmart/albert_zh\n.. _`brightmart/albert_zh`: https://github.com/brightmart/albert_zh\n.. _`google ALBERT weights`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/albert(old",
+      "https://arxiv.org/abs/1909.11942\n.. _`brightmart/albert_zh ALBERT for Chinese`: https://github.com/brightmart/albert_zh\n.. _`brightmart/albert_zh`: https://github.com/brightmart/albert_zh\n.. _`google ALBERT weights`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/albert(old",
+      "https://arxiv.org/abs/1902.00751 (adapter-BERT)\n\n    shared_layer             = False,        # True for ALBERT (https://arxiv.org/abs/1909.11942)\n    embedding_size           = None,         # None for BERT, wordpiece embedding size for ALBERT\n\n    name                     = \"bert\"        # any other Keras layer params\n  ))\n\nor by using the ``bert_config.json`` from a `pre-trained google model`_:\n\n.. code:: python\n\n  import bert\n\n  model_dir = \".models/uncased_L-12_H-768_A-12\"\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n\nnow you can use the BERT layer in your Keras model like this:\n\n.. code:: python\n\n  from tensorflow import keras\n\n  max_seq_len = 128\n  l_input_ids      = keras.layers.Input(shape=(max_seq_len,), dtype='int32')\n  l_token_type_ids = keras.layers.Input(shape=(max_seq_len,), dtype='int32')\n\n  # using the default token_type/segment id 0\n  output = l_bert(l_input_ids)                              # output: [batch_size, max_seq_len, hidden_size]\n  model = keras.Model(inputs=l_input_ids, outputs=output)\n  model.build(input_shape=(None, max_seq_len))\n\n  # provide a custom token_type/segment id as a layer input\n  output = l_bert([l_input_ids, l_token_type_ids])          # [batch_size, max_seq_len, hidden_size]\n  model = keras.Model(inputs=[l_input_ids, l_token_type_ids], outputs=output)\n  model.build(input_shape=[(None, max_seq_len), (None, max_seq_len)])\n\nif you choose to use `adapter-BERT`_ by setting the `adapter_size` parameter,\nyou would also like to freeze all the original BERT layers by calling:\n\n.. code:: python\n\n  l_bert.apply_adapter_freeze()\n\nand once the model has been build or compiled, the original pre-trained weights\ncan be loaded in the BERT layer:\n\n.. code:: python\n\n  import bert\n\n  bert_ckpt_file   = os.path.join(model_dir, \"bert_model.ckpt\")\n  bert.load_stock_weights(l_bert, bert_ckpt_file)\n\n**N.B.** see `tests/test_bert_activations.py`_ for a complete example.\n\nFAQ\n---\n0. In all the examlpes bellow, **please note** the line:\n\n.. code:: python\n\n  # use in a Keras Model here, and call model.build()\n\nfor a quick test, you can replace it with something like:\n\n.. code:: python\n\n  model = keras.models.Sequential([\n    keras.layers.InputLayer(input_shape=(128,)),\n    l_bert,\n    keras.layers.Lambda(lambda x: x[:, 0, :]),\n    keras.layers.Dense(2)\n  ])\n  model.build(input_shape=(None, 128))\n\n\n1. How to use BERT with the `google-research/bert`_ pre-trained weights?\n\n.. code:: python\n\n  model_name = \"uncased_L-12_H-768_A-12\"\n  model_dir = bert.fetch_google_bert_model(model_name, \".models\")\n  model_ckpt = os.path.join(model_dir, \"bert_model.ckpt\")\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_bert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n2. How to use ALBERT with the `google-research/ALBERT`_ pre-trained weights (fetching from TFHub)?\n\nsee `tests/nonci/test_load_pretrained_weights.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_load_pretrained_weights.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base\"\n  model_dir    = bert.fetch_tfhub_albert_model(model_name, \".models\")\n  model_params = bert.albert_params(model_name)\n  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, albert_dir)      # should be called after model.build()\n\n3. How to use ALBERT with the `google-research/ALBERT`_ pre-trained weights (non TFHub)?\n\nsee `tests/nonci/test_load_pretrained_weights.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_load_pretrained_weights.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base_v2\"\n  model_dir    = bert.fetch_google_albert_model(model_name, \".models\")\n  model_ckpt   = os.path.join(albert_dir, \"model.ckpt-best\")\n\n  model_params = bert.albert_params(model_dir)\n  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n4. How to use ALBERT with the `brightmart/albert_zh`_ pre-trained weights?\n\nsee `tests/nonci/test_albert.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_albert.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base\"\n  model_dir = bert.fetch_brightmart_albert_model(model_name, \".models\")\n  model_ckpt = os.path.join(model_dir, \"albert_model.ckpt\")\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n5. How to tokenize the input for the `google-research/bert`_ models?\n\n.. code:: python\n\n  do_lower_case = not (model_name.find(\"cased\") == 0 or model_name.find(\"multi_cased\") == 0)\n  bert.bert_tokenization.validate_case_matches_checkpoint(do_lower_case, model_ckpt)\n  vocab_file = os.path.join(model_dir, \"vocab.txt\")\n  tokenizer = bert.bert_tokenization.FullTokenizer(vocab_file, do_lower_case)\n  tokens = tokenizer.tokenize(\"Hello, BERT-World!\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\n6. How to tokenize the input for `brightmart/albert_zh`?\n\n.. code:: python\n\n  import params_flow pf\n\n  # fetch the vocab file\n  albert_zh_vocab_url = \"https://raw.githubusercontent.com/brightmart/albert_zh/master/albert_config/vocab.txt\"\n  vocab_file = pf.utils.fetch_url(albert_zh_vocab_url, model_dir)\n\n  tokenizer = bert.albert_tokenization.FullTokenizer(vocab_file)\n  tokens = tokenizer.tokenize(\"\u4f60\u597d\u4e16\u754c\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\n7. How to tokenize the input for the `google-research/ALBERT`_ models?\n\n.. code:: python\n\n  import sentencepiece as spm\n\n  spm_model = os.path.join(model_dir, \"assets\", \"30k-clean.model\")\n  sp = spm.SentencePieceProcessor()\n  sp.load(spm_model)\n  do_lower_case = True\n\n  processed_text = bert.albert_tokenization.preprocess_text(\"Hello, World!\", lower=do_lower_case)\n  token_ids = bert.albert_tokenization.encode_ids(sp, processed_text)\n\n8. How to tokenize the input for the Chinese `google-research/ALBERT`_ models?\n\n.. code:: python\n\n  import bert\n\n  vocab_file = os.path.join(model_dir, \"vocab.txt\")\n  tokenizer = bert.albert_tokenization.FullTokenizer(vocab_file=vocab_file)\n  tokens = tokenizer.tokenize(u\"\u4f60\u597d\u4e16\u754c\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\nResources\n---------\n\n- `BERT`_ - BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n- `adapter-BERT`_ - adapter-BERT: Parameter-Efficient Transfer Learning for NLP\n- `ALBERT`_ - ALBERT: A Lite BERT for Self-Supervised Learning of Language Representations\n- `google-research/bert`_ - the original `BERT`_ implementation\n- `google-research/ALBERT`_ - the original `ALBERT`_ implementation by Google\n- `google-research/albert(old)`_ - the old location of the original `ALBERT`_ implementation by Google\n- `brightmart/albert_zh`_ - pre-trained `ALBERT`_ weights for Chinese\n- `kpe/params-flow`_ - A Keras coding style for reducing `Keras`_ boilerplate code in custom layers by utilizing `kpe/py-params`_\n\n.. _`kpe/params-flow`: https://github.com/kpe/params-flow\n.. _`kpe/py-params`: https://github.com/kpe/py-params\n.. _`bert-for-tf2`: https://github.com/kpe/bert-for-tf2\n\n.. _`Keras`: https://keras.io\n.. _`pre-trained weights`: https://github.com/google-research/bert#pre-trained-models\n.. _`google-research/bert`: https://github.com/google-research/bert\n.. _`google-research/bert/modeling.py`: https://github.com/google-research/bert/blob/master/modeling.py\n.. _`BERT`: https://arxiv.org/abs/1810.04805\n.. _`pre-trained google model`: https://github.com/google-research/bert\n.. _`tests/test_bert_activations.py`: https://github.com/kpe/bert-for-tf2/blob/master/tests/test_compare_activations.py\n.. _`TensorFlow 2.0`: https://www.tensorflow.org/versions/r2.0/api_docs/python/tf\n.. _`TensorFlow 1.14`: https://www.tensorflow.org/versions/r1.14/api_docs/python/tf\n\n.. _`google-research/adapter-bert`: https://github.com/google-research/adapter-bert/\n.. _`adapter-BERT`: https://arxiv.org/abs/1902.00751\n.. _`ALBERT`: https://arxiv.org/abs/1909.11942\n.. _`brightmart/albert_zh ALBERT for Chinese`: https://github.com/brightmart/albert_zh\n.. _`brightmart/albert_zh`: https://github.com/brightmart/albert_zh\n.. _`google ALBERT weights`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/albert(old)`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/ALBERT`: https://github.com/google-research/ALBERT\n.. _`TFHub/albert`: https://tfhub.dev/google/albert_base/2\n\n.. |Build Status| image:: https://travis-ci.com/kpe/bert-for-tf2.svg?branch=master\n   :target: https://travis-ci.com/kpe/bert-for-tf2\n.. |Coverage Status| image:: https://coveralls.io/repos/kpe/bert-for-tf2/badge.svg?branch=master\n   :target: https://coveralls.io/r/kpe/bert-for-tf2?branch=master\n.. |Version Status| image:: https://badge.fury.io/py/bert-for-tf2.svg\n   :target: https://badge.fury.io/py/bert-for-tf2\n.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/bert-for-tf2.svg\n.. |Downloads| image:: https://img.shields.io/pypi/dm/bert-for-tf2.svg\n.. |Twitter| image:: https://img.shields.io/twitter/follow/siddhadev?logo=twitter&label=&style=\n   :target: https://twitter.com/intent/user?screen_name=siddhadev",
+      "https://arxiv.org/abs/1909.11942)\n    embedding_size           = None,         # None for BERT, wordpiece embedding size for ALBERT\n\n    name                     = \"bert\"        # any other Keras layer params\n  ))\n\nor by using the ``bert_config.json`` from a `pre-trained google model`_:\n\n.. code:: python\n\n  import bert\n\n  model_dir = \".models/uncased_L-12_H-768_A-12\"\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n\nnow you can use the BERT layer in your Keras model like this:\n\n.. code:: python\n\n  from tensorflow import keras\n\n  max_seq_len = 128\n  l_input_ids      = keras.layers.Input(shape=(max_seq_len,), dtype='int32')\n  l_token_type_ids = keras.layers.Input(shape=(max_seq_len,), dtype='int32')\n\n  # using the default token_type/segment id 0\n  output = l_bert(l_input_ids)                              # output: [batch_size, max_seq_len, hidden_size]\n  model = keras.Model(inputs=l_input_ids, outputs=output)\n  model.build(input_shape=(None, max_seq_len))\n\n  # provide a custom token_type/segment id as a layer input\n  output = l_bert([l_input_ids, l_token_type_ids])          # [batch_size, max_seq_len, hidden_size]\n  model = keras.Model(inputs=[l_input_ids, l_token_type_ids], outputs=output)\n  model.build(input_shape=[(None, max_seq_len), (None, max_seq_len)])\n\nif you choose to use `adapter-BERT`_ by setting the `adapter_size` parameter,\nyou would also like to freeze all the original BERT layers by calling:\n\n.. code:: python\n\n  l_bert.apply_adapter_freeze()\n\nand once the model has been build or compiled, the original pre-trained weights\ncan be loaded in the BERT layer:\n\n.. code:: python\n\n  import bert\n\n  bert_ckpt_file   = os.path.join(model_dir, \"bert_model.ckpt\")\n  bert.load_stock_weights(l_bert, bert_ckpt_file)\n\n**N.B.** see `tests/test_bert_activations.py`_ for a complete example.\n\nFAQ\n---\n0. In all the examlpes bellow, **please note** the line:\n\n.. code:: python\n\n  # use in a Keras Model here, and call model.build()\n\nfor a quick test, you can replace it with something like:\n\n.. code:: python\n\n  model = keras.models.Sequential([\n    keras.layers.InputLayer(input_shape=(128,)),\n    l_bert,\n    keras.layers.Lambda(lambda x: x[:, 0, :]),\n    keras.layers.Dense(2)\n  ])\n  model.build(input_shape=(None, 128))\n\n\n1. How to use BERT with the `google-research/bert`_ pre-trained weights?\n\n.. code:: python\n\n  model_name = \"uncased_L-12_H-768_A-12\"\n  model_dir = bert.fetch_google_bert_model(model_name, \".models\")\n  model_ckpt = os.path.join(model_dir, \"bert_model.ckpt\")\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_bert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n2. How to use ALBERT with the `google-research/ALBERT`_ pre-trained weights (fetching from TFHub)?\n\nsee `tests/nonci/test_load_pretrained_weights.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_load_pretrained_weights.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base\"\n  model_dir    = bert.fetch_tfhub_albert_model(model_name, \".models\")\n  model_params = bert.albert_params(model_name)\n  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, albert_dir)      # should be called after model.build()\n\n3. How to use ALBERT with the `google-research/ALBERT`_ pre-trained weights (non TFHub)?\n\nsee `tests/nonci/test_load_pretrained_weights.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_load_pretrained_weights.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base_v2\"\n  model_dir    = bert.fetch_google_albert_model(model_name, \".models\")\n  model_ckpt   = os.path.join(albert_dir, \"model.ckpt-best\")\n\n  model_params = bert.albert_params(model_dir)\n  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n4. How to use ALBERT with the `brightmart/albert_zh`_ pre-trained weights?\n\nsee `tests/nonci/test_albert.py <https://github.com/kpe/bert-for-tf2/blob/master/tests/nonci/test_albert.py>`_:\n\n.. code:: python\n\n  model_name = \"albert_base\"\n  model_dir = bert.fetch_brightmart_albert_model(model_name, \".models\")\n  model_ckpt = os.path.join(model_dir, \"albert_model.ckpt\")\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n  # use in a Keras Model here, and call model.build()\n\n  bert.load_albert_weights(l_bert, model_ckpt)      # should be called after model.build()\n\n5. How to tokenize the input for the `google-research/bert`_ models?\n\n.. code:: python\n\n  do_lower_case = not (model_name.find(\"cased\") == 0 or model_name.find(\"multi_cased\") == 0)\n  bert.bert_tokenization.validate_case_matches_checkpoint(do_lower_case, model_ckpt)\n  vocab_file = os.path.join(model_dir, \"vocab.txt\")\n  tokenizer = bert.bert_tokenization.FullTokenizer(vocab_file, do_lower_case)\n  tokens = tokenizer.tokenize(\"Hello, BERT-World!\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\n6. How to tokenize the input for `brightmart/albert_zh`?\n\n.. code:: python\n\n  import params_flow pf\n\n  # fetch the vocab file\n  albert_zh_vocab_url = \"https://raw.githubusercontent.com/brightmart/albert_zh/master/albert_config/vocab.txt\"\n  vocab_file = pf.utils.fetch_url(albert_zh_vocab_url, model_dir)\n\n  tokenizer = bert.albert_tokenization.FullTokenizer(vocab_file)\n  tokens = tokenizer.tokenize(\"\u4f60\u597d\u4e16\u754c\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\n7. How to tokenize the input for the `google-research/ALBERT`_ models?\n\n.. code:: python\n\n  import sentencepiece as spm\n\n  spm_model = os.path.join(model_dir, \"assets\", \"30k-clean.model\")\n  sp = spm.SentencePieceProcessor()\n  sp.load(spm_model)\n  do_lower_case = True\n\n  processed_text = bert.albert_tokenization.preprocess_text(\"Hello, World!\", lower=do_lower_case)\n  token_ids = bert.albert_tokenization.encode_ids(sp, processed_text)\n\n8. How to tokenize the input for the Chinese `google-research/ALBERT`_ models?\n\n.. code:: python\n\n  import bert\n\n  vocab_file = os.path.join(model_dir, \"vocab.txt\")\n  tokenizer = bert.albert_tokenization.FullTokenizer(vocab_file=vocab_file)\n  tokens = tokenizer.tokenize(u\"\u4f60\u597d\u4e16\u754c\")\n  token_ids = tokenizer.convert_tokens_to_ids(tokens)\n\nResources\n---------\n\n- `BERT`_ - BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n- `adapter-BERT`_ - adapter-BERT: Parameter-Efficient Transfer Learning for NLP\n- `ALBERT`_ - ALBERT: A Lite BERT for Self-Supervised Learning of Language Representations\n- `google-research/bert`_ - the original `BERT`_ implementation\n- `google-research/ALBERT`_ - the original `ALBERT`_ implementation by Google\n- `google-research/albert(old)`_ - the old location of the original `ALBERT`_ implementation by Google\n- `brightmart/albert_zh`_ - pre-trained `ALBERT`_ weights for Chinese\n- `kpe/params-flow`_ - A Keras coding style for reducing `Keras`_ boilerplate code in custom layers by utilizing `kpe/py-params`_\n\n.. _`kpe/params-flow`: https://github.com/kpe/params-flow\n.. _`kpe/py-params`: https://github.com/kpe/py-params\n.. _`bert-for-tf2`: https://github.com/kpe/bert-for-tf2\n\n.. _`Keras`: https://keras.io\n.. _`pre-trained weights`: https://github.com/google-research/bert#pre-trained-models\n.. _`google-research/bert`: https://github.com/google-research/bert\n.. _`google-research/bert/modeling.py`: https://github.com/google-research/bert/blob/master/modeling.py\n.. _`BERT`: https://arxiv.org/abs/1810.04805\n.. _`pre-trained google model`: https://github.com/google-research/bert\n.. _`tests/test_bert_activations.py`: https://github.com/kpe/bert-for-tf2/blob/master/tests/test_compare_activations.py\n.. _`TensorFlow 2.0`: https://www.tensorflow.org/versions/r2.0/api_docs/python/tf\n.. _`TensorFlow 1.14`: https://www.tensorflow.org/versions/r1.14/api_docs/python/tf\n\n.. _`google-research/adapter-bert`: https://github.com/google-research/adapter-bert/\n.. _`adapter-BERT`: https://arxiv.org/abs/1902.00751\n.. _`ALBERT`: https://arxiv.org/abs/1909.11942\n.. _`brightmart/albert_zh ALBERT for Chinese`: https://github.com/brightmart/albert_zh\n.. _`brightmart/albert_zh`: https://github.com/brightmart/albert_zh\n.. _`google ALBERT weights`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/albert(old)`: https://github.com/google-research/google-research/tree/master/albert\n.. _`google-research/ALBERT`: https://github.com/google-research/ALBERT\n.. _`TFHub/albert`: https://tfhub.dev/google/albert_base/2\n\n.. |Build Status| image:: https://travis-ci.com/kpe/bert-for-tf2.svg?branch=master\n   :target: https://travis-ci.com/kpe/bert-for-tf2\n.. |Coverage Status| image:: https://coveralls.io/repos/kpe/bert-for-tf2/badge.svg?branch=master\n   :target: https://coveralls.io/r/kpe/bert-for-tf2?branch=master\n.. |Version Status| image:: https://badge.fury.io/py/bert-for-tf2.svg\n   :target: https://badge.fury.io/py/bert-for-tf2\n.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/bert-for-tf2.svg\n.. |Downloads| image:: https://img.shields.io/pypi/dm/bert-for-tf2.svg\n.. |Twitter| image:: https://img.shields.io/twitter/follow/siddhadev?logo=twitter&label=&style=\n   :target: https://twitter.com/intent/user?screen_name=siddhadev"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "num_layers               = 12, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.86718837060696
+      ],
+      "excerpt": ".. kpe/params-flow: https://github.com/kpe/params-flow \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8880929169745804
+      ],
+      "excerpt": ".. _bert-for-tf2: https://github.com/kpe/bert-for-tf2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9710538597149929
+      ],
+      "excerpt": ".. google-research/bert: https://github.com/google-research/bert \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9977994744046882
+      ],
+      "excerpt": ".. BERT: https://arxiv.org/abs/1810.04805 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9710538597149929,
+        0.9944484218006108,
+        0.9977994744046882,
+        0.8998723702972375,
+        0.9105368110547479
+      ],
+      "excerpt": ".. google-research/adapter-bert: https://github.com/google-research/adapter-bert/ \n.. adapter-BERT: https://arxiv.org/abs/1902.00751 \n.. ALBERT: https://arxiv.org/abs/1909.11942 \n.. brightmart/albert_zh ALBERT for Chinese: https://github.com/brightmart/albert_zh \n.. brightmart/albert_zh: https://github.com/brightmart/albert_zh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9625400995593648,
+        0.9710538597149929
+      ],
+      "excerpt": ".. google-research/albert(old): https://github.com/google-research/google-research/tree/master/albert \n.. google-research/ALBERT: https://github.com/google-research/ALBERT \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8437025776904489
+      ],
+      "excerpt": ".. |Twitter| image:: https://img.shields.io/twitter/follow/siddhadev?logo=twitter&label=&style= \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kpe/bert-for-tf2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-22T07:51:33Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-16T12:23:08Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9395701895521832
+      ],
+      "excerpt": "How to tokenize the input for the google-research/bert_ models? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9531247055391088
+      ],
+      "excerpt": "How to tokenize the input for brightmart/albert_zh? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9395701895521832
+      ],
+      "excerpt": "How to tokenize the input for the google-research/ALBERT_ models? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9395701895521832
+      ],
+      "excerpt": "How to tokenize the input for the Chinese google-research/ALBERT_ models? \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312887985999561,
+        0.8475023154703256,
+        0.970070578555827
+      ],
+      "excerpt": "BERT_ - BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding \nadapter-BERT_ - adapter-BERT: Parameter-Efficient Transfer Learning for NLP \nALBERT_ - ALBERT: A Lite BERT for Self-Supervised Learning of Language Representations \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8428298006540453,
+        0.9235799380553814
+      ],
+      "excerpt": "google-research/ALBERT - the original ALBERT implementation by Google \ngoogle-research/albert(old) - the old location of the original ALBERT implementation by Google \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Keras TensorFlow 2.0 implementation of BERT, ALBERT and adapter-BERT.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kpe/bert-for-tf2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 175,
+      "date": "Fri, 24 Dec 2021 00:55:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kpe/bert-for-tf2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kpe/bert-for-tf2",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kpe/bert-for-tf2/master/examples/tpu_movie_reviews.ipynb",
+      "https://raw.githubusercontent.com/kpe/bert-for-tf2/master/examples/gpu_movie_reviews.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kpe/bert-for-tf2/master/check-before-commit.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "name                     = \"bert\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8377805150881655
+      ],
+      "excerpt": ".. _bert-for-tf2: https://github.com/kpe/bert-for-tf2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8785300646788997,
+        0.8918974083095406
+      ],
+      "excerpt": ".. brightmart/albert_zh ALBERT for Chinese: https://github.com/brightmart/albert_zh \n.. brightmart/albert_zh: https://github.com/brightmart/albert_zh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8991734671444017
+      ],
+      "excerpt": ".. |Python Versions| image:: https://img.shields.io/pypi/pyversions/bert-for-tf2.svg \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "use_token_type           = True, \nuse_position_embeddings  = True, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "name                     = \"bert\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import bert \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8855298618768842
+      ],
+      "excerpt": "from tensorflow import keras \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8202607727313851,
+        0.8202607727313851,
+        0.8289669050403863
+      ],
+      "excerpt": "  l_input_ids      = keras.layers.Input(shape=(max_seq_len,), dtype='int32') \n  l_token_type_ids = keras.layers.Input(shape=(max_seq_len,), dtype='int32') \noutput = l_bert(l_input_ids) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8289669050403863
+      ],
+      "excerpt": "output = l_bert([l_input_ids, l_token_type_ids]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import bert \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8120896232045557
+      ],
+      "excerpt": "N.B. see tests/test_bert_activations.py_ for a complete example. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(model_params, name=\"albert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import params_flow pf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8924976426181745
+      ],
+      "excerpt": "  vocab_file = pf.utils.fetch_url(albert_zh_vocab_url, model_dir) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9012248701992861
+      ],
+      "excerpt": "import sentencepiece as spm \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "  do_lower_case = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import bert \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kpe/bert-for-tf2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 kpe\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "BERT for TensorFlow v2",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bert-for-tf2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kpe",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kpe/bert-for-tf2/blob/master/README.rst",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 744,
+      "date": "Fri, 24 Dec 2021 00:55:35 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "bert",
+      "keras",
+      "tensorflow",
+      "transformer"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "for a quick test, you can replace it with something like:\n\n.. code:: python\n\n  model = keras.models.Sequential([\n    keras.layers.InputLayer(input_shape=(128,)),\n    l_bert,\n    keras.layers.Lambda(lambda x: x[:, 0, :]),\n    keras.layers.Dense(2)\n  ])\n  model.build(input_shape=(None, 128))\n\n\n1. How to use BERT with the `google-research/bert`_ pre-trained weights?\n\n.. code:: python\n\n  model_name = \"uncased_L-12_H-768_A-12\"\n  model_dir = bert.fetch_google_bert_model(model_name, \".models\")\n  model_ckpt = os.path.join(model_dir, \"bert_model.ckpt\")\n\n  bert_params = bert.params_from_pretrained_ckpt(model_dir)\n  l_bert = bert.BertModelLayer.from_params(bert_params, name=\"bert\")\n\n  ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  bert.load_bert_weights(l_bert, model_ckpt)      ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  bert.load_albert_weights(l_bert, albert_dir)      ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  bert.load_albert_weights(l_bert, model_ckpt)      ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  bert.load_albert_weights(l_bert, model_ckpt)      ",
+      "technique": "Header extraction"
+    }
+  ]
+}

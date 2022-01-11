@@ -1,0 +1,298 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- DenseNet [https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803](https://towardsdatascience.com/review-densenet-image-classification-b6631a8ef803)\n\n- Stanford ML Group (CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays) [https://stanfordmlgroup.github.io/projects/chexnet/](https://stanfordmlgroup.github.io/projects/chexnet/)\n\n- CheXNet Paper [https://arxiv.org/pdf/1711.05225.pdf](https://arxiv.org/pdf/1711.05225.pdf)\n\n- NIH Chest X-ray Dataset [https://www.kaggle.com/nih-chest-xrays/data](https://www.kaggle.com/nih-chest-xrays/data)\n\n- ImageNet Dataset [http://image-net.org](http://image-net.org)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8267347530355861
+      ],
+      "excerpt": "image = Image.open(image_path).convert('RGB') \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thibaultwillmann/CheXNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-09-17T09:15:31Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-21T13:14:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Pneumonia is a disease in which the air sacs in one or both lungs get infected and inflame. The air sacs may fill with fluid or pus (purulent material), causing cough with phlegm or pus, fever, chills, and difficulty breathing. Diseases such as Pneumonia are responsible for over 1 million hospitalizations and 50,000 deaths a year in the US alone. Currently radiologists use Chest X-Rays to detect diseases such as Pneumonia. Other diseases detected in this manner include Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pleural Thickening, Cardiomegaly, Nodule, Hernia and Mass. Once detected, the patient can be treated. However if the disease is not detected at an early stage, the consequences can be severe. \n\nLuckily algorithms can be trained to detect diseases and assist medical personel. In fact algorithms can be trained to detect diseases such as Pneumonia with greater accuracy than any human radiologist from chest X-Rays. Therfore, through decreasing human error in detection, countless lives can be saved!\n\nFurther an estimated two thirds of the global population lacks access to radiology diagnostics. These diagnostics include as mentioned above detection of diseases. With the automation of radiology experts, healthcare delivery can be improved and access to medical imaging expertise can be increased in many parts of the world. Therefore, through automating radiology experts, many parts of the world will gain radiology diagnostics and countless lives can be saved!\n\nWe set out to build an algorithm that could take as input a chest X-ray image and return probabilities for a collection of diseases detectable through chest X-rays (Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pleural Thickening, Cardiomegaly, Nodule, Hernia, Mass) and the probability of no disease being present. \n\n![Image of chest X-Ray and heatmap](https://github.com/thibaultwillmann/CheXNet-Pytorch/blob/master/chest_x_ray_example.png)\n\nImage of a chest X-Ray left and heatmap highlighting areas with high probalility of a disease being present right\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9312872739793124,
+        0.9572772223124363,
+        0.9870595421144284,
+        0.9414295038492723,
+        0.9899119447830141,
+        0.9361621507205407,
+        0.949750274791076
+      ],
+      "excerpt": "Submitted as a final project report for Deep Learning IDC, 2019 \nThe Stanford ML Group researched and came up with a Deep Learning Network to detect Pneumonia from chest X-Rays images. \nThe group detailed their findings in the paper CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays and features an offical website.  \nThe network receives a chest X-Rays image and output the probability of Pneumonia being present together with a chest X-Ray heatmap highlighting areas with high probalility of Pneumonia being present. \nOur task is to build an algorithm that for a given chest X-Ray image returns probabilities for different diseases (Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pleural Thickening, Cardiomegaly, Nodule, Hernia, Mass) being present and the probability of no disease being present. We use a convolutional neural network to solve this task. CNNs are Deep Learning algorithms which can take in an input image, assign importance (learnable weights and biases) to various aspects/objects in the image and be able to differentiate one from the other. \nTherefore CNNs will idealy recognize small features in the first layers and larger features in the later layers. Using the learned features, the CNN will be able to distinguish between the different diseases. \nWe are using Pytorch, which is an open source machine learning library used mainly for Deep Learning tasks such as Computer Vision and Natural Language Processing. Pytorch was developed by Facebooks Artificial Intelligence Research Group under Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9887474375195987
+      ],
+      "excerpt": "We use a DenseNet, because they improve flow of information and gradients through the network. Thus they make the optimization of very deep networks easy to control. For intuition sake, we take advantage of each layer obtaining additional inputs from all preceding layers and passing on its own feature-maps to all subsequent layers. Therefore each layer is receiving a \u201ccollective knowledge\u201d from all preceding layers. The weights of the network are initialized with weights from a model pretrained on ImageNet. We use the pytorch implementation of the DenseNet CNN available under the torchvision library. We add a final fully connected layer with 15 neuron outputs. Finally we apply a sigmoid nonlinearity function on each neuron.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8581126733124049,
+        0.9443417550862175,
+        0.9642999895026269
+      ],
+      "excerpt": "Each output will indicate the probability of a certain disease (Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pleural Thickening, Cardiomegaly, Nodule, Hernia, Mass) or probability of no disease being present in the input image. \nThe network expects an image of dimension channel x height x width, we are using 3 x 244 x 244. The output is passed as a FloatTensor with 15 entries. \nAs the data to train and test the network we use the public and free data set NIH Chest X-ray Dataset on Kaggle. The National Insitute of Health (NIH) chest X-Ray dataset is comprised of 112,120 X-Ray images with disease labels from 30,805 unique patients. To create these labels, Natural Language Processing to text-mine disease classifications from the associated radiological reports was used. The labels are expected to be >90% accurate and suitable for weakly-supervised learning.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8065456603047704,
+        0.8890399457992358,
+        0.8937367799797358
+      ],
+      "excerpt": "The images are of size 1024 x 1024. \nProblems to note about the data:  \n- The image labels are NLP extracted so there could be some erroneous labels but the NLP labeling accuracy is estimated to be >90%.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9856707966094304
+      ],
+      "excerpt": "We encode each class label as a FloatTensor of length 15 for the model. Each disease in the disease_list of a single instance is weighted with 1: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for disease in diseases_list: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.992887873746074
+      ],
+      "excerpt": "We apply some preprocessing on each greyscale image. The image is converted to RGB and resized to 256x256. Then ten crops of size 224 x 224 are generated consisting of the four corners and the center plus the horizontal flipped version of these. These are transformed to a tensor and normalized. Finally the image has a dimension of 10 x 3 x 224 x 224 containing obviously ten crops. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8231983239464151
+      ],
+      "excerpt": "  transforms.Lambda(lambda crops: torch.stack([normalize(crop) for crop in crops])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9712739652079133,
+        0.8856692292622826
+      ],
+      "excerpt": "The weights of the network are initialized with weights from a model pretrained on ImageNet (Deng et al., 2009). The network is trained end-to-end using Adam. \nWe train the model using mini- batches of size 5, use an initial learning rate of 0.001, binary cross entropy loss function and stochastic gradient descent optimizer. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9729309813950787
+      ],
+      "excerpt": "ChexNet outputs a vector t of binary labels indicating the absence or presence of each of the following 14 pathology classes: Atelec- tasis, Cardiomegaly, Consolidation, Edema, Effusion, Emphysema, Fibrosis, Hernia, Infiltration, Mass, Nod-ule, Pleural Thickening, Pneumonia, and Pneumotho- rax. We replace the final fully connected layer in CheXNet with a fully connected layer producing a 15-dimensional output, after which we apply an elementwise sigmoid nonlinearity. The final output is the predicted probability of the presence of each pathology class.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.974428346804337,
+        0.9574390929609411,
+        0.9777580404711536
+      ],
+      "excerpt": "Pneumonia is a major cause of patients dying in hospitals today. To prevent death, a early detection and treatment of pneumonia is critical. Chest X-rays are the most common examination tool used in practice with 2 billion made a year. \nHowever, two thirds of the global population lacks access to radiology diagnostics. In Addition, even when the equipment is available, experts who can interpret X-rays are often missing. \nTherefore we developed an algorithm which detects diseases such as pneumonia from front chest X-ray images. Since we only had access to the very limited computing power of Colab, we were limited to 5% of the chest X-ray images and only few epochs. However if more computing power was at our disposal we could achieve a level of accuracy exceeding practicing radiologists. In conclusion this algorithm can and should save lives in many parts of the world by assisting medical staff which lacks skilled radiologists or assist radiologists directly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Solving CheXNet using a DenseNet121 in Pytorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thibaultwillmann/CheXNet-Pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Sat, 25 Dec 2021 20:24:33 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/thibaultwillmann/CheXNet-Pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thibaultwillmann/CheXNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/thibaultwillmann/CheXNet-Pytorch/master/CheXnet.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8858135018917955
+      ],
+      "excerpt": "    self.model = torchvision.models.densenet121(pretrained=True) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8099912638771475
+      ],
+      "excerpt": "We randomly sampled 5% of these images and created a smaller dataset. The random sample contains 5606 X-Ray images and class labels. The X-Ray images are stored in data/images/ and the class labels in data/sample_labels.csv. Each row in data/sample_labels.csv has the format  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8880026729506096
+      ],
+      "excerpt": "trainloader = torch.utils.data.DataLoader(train_set, batch_size=5, shuffle=True, num_workers=5) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.853492186136904
+      ],
+      "excerpt": "total = 0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8447905906860363
+      ],
+      "excerpt": "    n_batches, n_crops, channels, height, width = images.size() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8005189378779587,
+        0.9155045023016912
+      ],
+      "excerpt": "    total += labels.size(0) \nprint('Accuracy on test set: %.3f' % (100 * correct / total)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/thibaultwillmann/CheXNet-Pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Radiologist-Level Disease Detection on Chest X-Rays with Deep Learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "CheXNet-Pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thibaultwillmann",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thibaultwillmann/CheXNet-Pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Sat, 25 Dec 2021 20:24:33 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

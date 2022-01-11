@@ -1,0 +1,243 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1807.03039",
+      "https://arxiv.org/abs/1810.09136"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@inproceedings{kingma2018glow,\n  title={Glow: Generative flow with invertible 1x1 convolutions},\n  author={Kingma, Durk P and Dhariwal, Prafulla},\n  booktitle={Advances in Neural Information Processing Systems},\n  pages={10215--10224},\n  year={2018}\n}\n\n@inproceedings{nalisnick2018do,\n    title={Do Deep Generative Models Know What They Don't Know? },\n    author={Eric Nalisnick and Akihiro Matsukawa and Yee Whye Teh and Dilan Gorur and Balaji Lakshminarayanan},\n    booktitle={International Conference on Learning Representations},\n    year={2019},\n    url={https://openreview.net/forum?id=H1xwNhCcYm},\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{nalisnick2018do,\n    title={Do Deep Generative Models Know What They Don't Know? },\n    author={Eric Nalisnick and Akihiro Matsukawa and Yee Whye Teh and Dilan Gorur and Balaji Lakshminarayanan},\n    booktitle={International Conference on Learning Representations},\n    year={2019},\n    url={https://openreview.net/forum?id=H1xwNhCcYm},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{kingma2018glow,\n  title={Glow: Generative flow with invertible 1x1 convolutions},\n  author={Kingma, Durk P and Dhariwal, Prafulla},\n  booktitle={Advances in Neural Information Processing Systems},\n  pages={10215--10224},\n  year={2018}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/y0ast/Glow-PyTorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-30T12:49:44Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T19:46:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9791200004619094,
+        0.8298294006223165,
+        0.8536256134891962
+      ],
+      "excerpt": "This repository implements the Glow model using PyTorch on the CIFAR-10 and SVHN dataset. We use the trained Glow to reproduce some of the results of the paper \"Do Deep Generative Models Know What They Don't Know?\": \nTo create histogram: \nSee notebook. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9872389974495082,
+        0.9881114584939754
+      ],
+      "excerpt": "Note this pretrained model was created using the affine coupling layer, so it does not work well for generative sampling (see qualitative vs quantitative models in the Glow paper). The pretrained model achieves 3.39 bpd, while the original paper gets 3.35. The difference between our pretrained model and the paper is that we use batch size 64 (single GPU) and the paper uses 512 (8 GPU). \nThis code uses some layers and groundwork from glow-pytorch, but is more modular, extendable, faster, easier to read and supports training on CIFAR-10 and SVHN. There are fewer dependencies and a consistent interface for new datasets. Thanks to Milad for comments and help with debugging. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9001630110381018
+      ],
+      "excerpt": "The second notebook allows you to visualise samples from the model (This works best with a model trained using the additive coupling layer). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Simple, extendable, easy to understand Glow implementation in PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/y0ast/Glow-PyTorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 46,
+      "date": "Sat, 25 Dec 2021 18:35:16 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/y0ast/Glow-PyTorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "y0ast/Glow-PyTorch",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/y0ast/Glow-PyTorch/master/Do_deep_generative_models_know_what_they_dont_know.ipynb",
+      "https://raw.githubusercontent.com/y0ast/Glow-PyTorch/master/Sample_from_Glow.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code has minimal dependencies. You need python 3.6+ and up to date versions of:\n\n```\npytorch (tested on 1.1.0)\ntorchvision\npytorch-ignite\ntqdm\n```\n\nTo install in a local conda:\n\n```\nconda install pytorch torchvision pytorch-ignite tqdm -c pytorch\n```\n\n**To train your own model:**\n\n```\npython train.py --download\n```\n\nWill download the CIFAR10 dataset for you, and start training. The defaults are tested on a `1080Ti`, Glow is a memory hungry model and it might be necessary to tune down the model size for your specific GPU. The output files will be send to `output/`.\n\nEverything is configurable through command line arguments, see\n\n```\npython train.py --help\n```\n\nfor what is possible.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8156530030722863
+      ],
+      "excerpt": "Pretrained model (on CIFAR-10): download (unzip before use). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "Multiclass conditional training \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/y0ast/Glow-PyTorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/y0ast/Glow-PyTorch/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2019 Joost van Amersfoort\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n\\nMIT License\\n\\nCopyright (c) 2019 Yuki-Chai\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Glow",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Glow-PyTorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "y0ast",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/y0ast/Glow-PyTorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code has minimal dependencies. You need python 3.6+ and up to date versions of:\n\n```\npytorch (tested on 1.1.0)\ntorchvision\npytorch-ignite\ntqdm\n```\n\nTo install in a local conda:\n\n```\nconda install pytorch torchvision pytorch-ignite tqdm -c pytorch\n```\n\n**To train your own model:**\n\n```\npython train.py --download\n```\n\nWill download the CIFAR10 dataset for you, and start training. The defaults are tested on a `1080Ti`, Glow is a memory hungry model and it might be necessary to tune down the model size for your specific GPU. The output files will be send to `output/`.\n\nEverything is configurable through command line arguments, see\n\n```\npython train.py --help\n```\n\nfor what is possible.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 285,
+      "date": "Sat, 25 Dec 2021 18:35:16 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

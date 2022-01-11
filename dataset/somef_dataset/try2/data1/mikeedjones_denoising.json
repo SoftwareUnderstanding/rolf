@@ -1,0 +1,184 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1711.05101"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikeedjones/denoising",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-31T13:56:31Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-05-21T15:57:35Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8696630652116045
+      ],
+      "excerpt": "The idea is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9656107610063409,
+        0.9253404264571349,
+        0.8517208086725181,
+        0.8179837857758062
+      ],
+      "excerpt": "    * The tagger is a Flask server which uses the jinja2 templater to convert the tagger.j2 HTML template into the webpages you're presented with. \n    * The template makes use of a third party script to provide area selection, and then adds a small amount of my own script (the stuff in the script tag) to keep track of the selected areas and watch out for enter/backspace keypresses.  \n    * When you hit enter, the script in the template gathers up the selections and sends them back to the server. The server saves them in a sqlite3 database. \n  * Fit a Gaussian to each tagged spot and combine the fits to create a perfect, noise-free version of each image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9742623216894909,
+        0.9715062212586804,
+        0.9055016912570943,
+        0.8568592534266287
+      ],
+      "excerpt": "    * The best textbook for this stuff is Deep Learning, particularly the bits on convolutional neural networks. For something lighter-weight and more directly useful, read the PyTorch tutorials or just Google for 'MNIST tutorial', which will likely use a very similar methodology. \n    * The neural network is implemented in PyTorch, and is loosely based off the MNIST example. The MNIST problem is an ancient single-digit handwriting recognition task. \n    * The NN takes a 17-pixel (2*8 + 1) 'receptive field' around each pixel in the source image and tries to predict the value of the central pixel in the perfect image. Most of the code in nn.py is to turn the input bumpmaps and images into (receptive field, perfect pixel value) pairs that the NN can ingest. \n    * The NN is trained by a form of quasi-Newton stochastic gradient descent called ADAM. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "denoising ML code for publication",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikeedjones/denoising/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 02:47:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mikeedjones/denoising/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mikeedjones/denoising",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "  * `wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh`\n  * `chmod u+x https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh`\n  * `conda install scipy numpy cvxpy matplotlib ipython flask tqdm scikit-image --yes`\n  * `conda install cvxpy -c conda-forge --yes`\n  * `conda install pytorch -c pytorch`\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mikeedjones/denoising/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Install",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "denoising",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mikeedjones",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mikeedjones/denoising/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 29 Dec 2021 02:47:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you've got a set of cache files already, you should be able to start a Python console, `from denoising import *`, and then run `example()`.\n\nOtherwise, to run the whole pipeline end-to-end you need to \n  * Run the tagger and tag a bunch of images. There's instructions on how to run the tagger at the top of its file. \n  * Call `nn.train(\"quadrant\")` to train a neural network based on your tags. This'll take half an hour or so.\n  * Call `peaklist(\"quadrant\")` to generate the peaklist. This'll take an hour the first time as all the perfect images are generated and cached. \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

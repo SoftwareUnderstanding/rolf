@@ -1,0 +1,261 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597 \n<img src=\"https://cdn-images-1.medium.com/max/1600/1*q3vqSaSTgYzpbk1KIBmWsw.png\" width=\"400\" height=\"300\">\n\nWith the U-net we are able to build a strong segmentation model, and thus this became the basis of the network architecture.\n\n* ResNet50 as encoder model of the segmentation model\nResNet50, or Residual Net, is one of the state-of-the-art model architectures that I have decided to use for this project. The ResNet is founded on the idea of skip connections to reduce the performance impairment caused by vanishing/exploding gradient that occurs within plain deep network. More can be known about ResNet from https://arxiv.org/abs/1512.03385. Furthermore, in order to increase the performance of the model in catching features Squeeze and Excitation modules, or SCSE modules were added to each convolution block. (https://arxiv.org/pdf/1709.01507.pdf",
+      "https://arxiv.org/abs/1512.03385. Furthermore, in order to increase the performance of the model in catching features Squeeze and Excitation modules, or SCSE modules were added to each convolution block. (https://arxiv.org/pdf/1709.01507.pdf"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHLee0513/Salt_detection_challenge",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-10-27T05:10:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-13T23:45:29Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\"Several areas of Earth with large accumulations of oil and gas also have huge deposits of salt below the surface.\nBut unfortunately, knowing where large salt deposits are precisely is very difficult. Professional seismic imaging still requires expert human interpretation of salt bodies. This leads to very subjective, highly variable renderings. More alarmingly, it leads to potentially dangerous situations for oil and gas company drillers.\" - from competition description.\n\nIn this competition TGS provided images collected using seismic reflection of the ground in various locations. Thus in the data we are given training data as the images and their appropriate masks highlighting the salt deposit within that image as labels. The goal of the competition is to build a model that best performs this image segmentation task.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9611094326433389,
+        0.9213759417645977
+      ],
+      "excerpt": "This is a documentation summarizing my approach to the image Segmentation project based on Kaggle's TGS salt identification challenge. \nI have taken interest in computer vision due to my recent involvement with the robotics club, and this competition was timely there for me to learn and practice image segmentation task. Thus this was a learning experience for me, not necessarily for winning. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9927934979933539
+      ],
+      "excerpt": "The main data of this competition is based on seimic data, example shown above. They are much like ultrasound imaging of the ground. Using waves we can generate images of the subsurface like that above for our segmentation problem. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9508852345379922,
+        0.9224460169403933,
+        0.9949767644501418
+      ],
+      "excerpt": "With the U-net we are able to build a strong segmentation model, and thus this became the basis of the network architecture. \nResNet50 as encoder model of the segmentation model \nResNet50, or Residual Net, is one of the state-of-the-art model architectures that I have decided to use for this project. The ResNet is founded on the idea of skip connections to reduce the performance impairment caused by vanishing/exploding gradient that occurs within plain deep network. More can be known about ResNet from https://arxiv.org/abs/1512.03385. Furthermore, in order to increase the performance of the model in catching features Squeeze and Excitation modules, or SCSE modules were added to each convolution block. (https://arxiv.org/pdf/1709.01507.pdf) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9819071912974975
+      ],
+      "excerpt": "Augmentation is a process where the effective dataset used to train the network is increased by synthetically modifying the train dataset. For instance, horizontal flipping of images essentially double the dataset without necessarily changing the nature of data. Augmentation such as padding, random crop and scale, and flipping have been experimented during this project. In the end I have ended up with no padding but image scaling from original size 101x101 to 128x128 and horizontal flipping. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9657829998926248,
+        0.9463704645702701,
+        0.9853732123122724
+      ],
+      "excerpt": "Test Time Augmentation is a process where test dataset is augmented to generate multiple predictions, and the final prediction takes average of all predictions made. This increases the chance of the model better capturing the labels from test data. With TTA my Leaderboard (LB) score increased. \nStratified K-Fold ensembling to develop a better-generalizing model \nK-Fold ensembling is a technique multiple version of the model is trained using 'different' dataset and cross validation set. A visualization of a 5-fold validation is as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.980748200577202
+      ],
+      "excerpt": "Stratified refers to splitting dataset into fold such that each dataset has equal proprotions of different data. In this project this meant each fold had equally distributed images of varying salt coverage over the image e.g. 5 equal portions of iamges with 50% salt coverage,etc. Implementing Stratified K-Fold increased by LB score as well.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9261733186106849,
+        0.8724912475136578
+      ],
+      "excerpt": "A well-suited optimizer alongside the appropriate loss function certainly improved the model's performance significantly in this project. My final approach ended up with Adam optimizer with a loss function combining binary cross entropy and dice loss. I did not have enough time to further experiment with lovasz loss, unfortunately. \nFinal model - ResNet50 encoder with squeeze and excitation modules with U-Net architecture \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9710087041128412
+      ],
+      "excerpt": "Cosine annealing with model checkpoints \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Image Segmentation project based on Kaggle's TGS salt detection competition.",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Competiton description\n* Motivation\n* Data\n* Final Model\n* Squeeze and Excitation - SE_modules.md\n* ResNet - ResNet.md (TODO)\n* Unet - UNET.md (TODO)\n* Transfer Learning - TLearning.md (TODO)\n* Final code - .ipynb\n* Augmentation & Ensembling method - misc.md (TODO)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHLee0513/Salt_detection_challenge/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 11:16:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JHLee0513/Salt_detection_challenge/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JHLee0513/Salt_detection_challenge",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/JHLee0513/Salt_detection_challenge/master/TGS_kfold_segmentation_Resnet50.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8261480710521458
+      ],
+      "excerpt": "<img src=\"https://math.berkeley.edu/~sethian/2006/Applications/Seismic/smooth_elf_post_img.jpg\" width=\"400\" height=\"300\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8541042469527059
+      ],
+      "excerpt": "Test Time Augmentation (TTA) to predict stronger predictions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8165303922828959
+      ],
+      "excerpt": "<img src=\"https://i.stack.imgur.com/1fXzJ.png\" width=\"400\" height=\"300\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/JHLee0513/Salt_detection_challenge/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 JoonHo Lee\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Salt_detection_challenge",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Salt_detection_challenge",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "JHLee0513",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/JHLee0513/Salt_detection_challenge/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 11:16:13 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2006.10738\n\nOther contributions:\nfollow the links in the descriptions.\n\n[Nvidia Source Code License-NC]: <https://nvlabs.github.io/stylegan2/license.html>\n[StyleGAN2]: <https://github.com/NVlabs/stylegan2>\n[StyleGAN2-ada]: <https://github.com/NVlabs/stylegan2-ada>\n[PyTorch-based StyleGAN2-ada]: <https://github.com/NVlabs/stylegan2-ada-pytorch>\n[such repo]: <https://github.com/eps696/stylegan2ada>\n[Peter Baylies]: <https://github.com/pbaylies/stylegan2>\n[Aydao]: <https://github.com/aydao/stylegan2-surgery>\n[Justin Pinkney]: <https://github.com/justinpinkney/stylegan2/blob/master/blend_models.py>\n[skyflynil]: <https://github.com/skyflynil/stylegan2>\n[Data-Efficient GANs]: <https://github.com/mit-han-lab/data-efficient-gans>\n[Differential Augmentation]: <https://github.com/mit-han-lab/data-efficient-gans>\n[Freeze the Discriminator]: <https://arxiv.org/abs/2002.10964>\n[FFMPEG]: <https://ffmpeg.org/download.html>\n[Colab notebook]: <https://colab.research.google.com/github/eps696/stylegan2/blob/master/StyleGAN2_colab.ipynb",
+      "https://arxiv.org/abs/2002.10964>\n[FFMPEG]: <https://ffmpeg.org/download.html>\n[Colab notebook]: <https://colab.research.google.com/github/eps696/stylegan2/blob/master/StyleGAN2_colab.ipynb"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "StyleGAN2: \nCopyright \u00a9 2019, NVIDIA Corporation. All rights reserved.\nMade available under the [Nvidia Source Code License-NC]\nOriginal paper: http://arxiv.org/abs/1912.04958\n\nDifferentiable Augmentation for Data-Efficient GAN Training: https://arxiv.org/abs/2006.10738\n\nOther contributions:\nfollow the links in the descriptions.\n\n[Nvidia Source Code License-NC]: <https://nvlabs.github.io/stylegan2/license.html>\n[StyleGAN2]: <https://github.com/NVlabs/stylegan2>\n[StyleGAN2-ada]: <https://github.com/NVlabs/stylegan2-ada>\n[PyTorch-based StyleGAN2-ada]: <https://github.com/NVlabs/stylegan2-ada-pytorch>\n[such repo]: <https://github.com/eps696/stylegan2ada>\n[Peter Baylies]: <https://github.com/pbaylies/stylegan2>\n[Aydao]: <https://github.com/aydao/stylegan2-surgery>\n[Justin Pinkney]: <https://github.com/justinpinkney/stylegan2/blob/master/blend_models.py>\n[skyflynil]: <https://github.com/skyflynil/stylegan2>\n[Data-Efficient GANs]: <https://github.com/mit-han-lab/data-efficient-gans>\n[Differential Augmentation]: <https://github.com/mit-han-lab/data-efficient-gans>\n[Freeze the Discriminator]: <https://arxiv.org/abs/2002.10964>\n[FFMPEG]: <https://ffmpeg.org/download.html>\n[Colab notebook]: <https://colab.research.google.com/github/eps696/stylegan2/blob/master/StyleGAN2_colab.ipynb>",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eps696/stylegan2",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-14T17:58:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T14:51:09Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8691677460406871,
+        0.9081373796430589
+      ],
+      "excerpt": "This version of famous [StyleGAN2] is intended mostly for fellow artists, who rarely look at scientific metrics, but rather need a working creative tool. At least, this is what I use daily myself.  \nTested on Tensorflow 1.14, requires pyturbojpeg for JPG support. Sequence-to-video conversions require [FFMPEG]. For more explicit details refer to the original implementations.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8974615801094773,
+        0.9923705993102572,
+        0.8054142124116173,
+        0.8343924093963121
+      ],
+      "excerpt": "1) ADA version on Tensorflow has shown smoother and faster convergence on the rich enough datasets, but sometimes resulted in lower output variety (comparing to Diff Augmentation approach). It has also failed in my tests on few-shot datasets (50~100 images), while Diff Aug succeeded there. So meanwhile i personally prefer this repo with Diff Augmentation training. \n2) Nvidia has also published [PyTorch-based StyleGAN2-ada], which is claimed to be up to 30% faster, works with flat folder datasets, and should be easier to tweak/debug than TF-based one. On my tests/datasets it was systematically failing to learn the variety of macro features though, so I never used it as production tool. Anyway, here is [such repo], adapted to the features below (custom generation, non-square RGBA data, etc.). \ninference (image generation) in arbitrary resolution (finally with proper padding on both TF and Torch) \nmulti-latent inference with split-frame or masked blending \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8697837896511668
+      ],
+      "excerpt": "freezing lower D layers for better finetuning on similar data (from [Freeze the Discriminator]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8140725965239981,
+        0.8094530956600485
+      ],
+      "excerpt": "* cropping square models to non-square aspect ratio (experimental) \nalso, from [Peter Baylies] and [skyflynil] :: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8666600766684375
+      ],
+      "excerpt": "| &boxvr;&nbsp; data | datasets for training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9037147607553474
+      ],
+      "excerpt": "Please note: we save both compact models (containing only Gs network for inference) as &lt;dataset&gt;-...pkl (e.g. mydata-512-0360.pkl), and full models (containing G/D/Gs networks for further training) as snapshot-...pkl. The naming is for convenience only, it does not affect the operations anymore (as the arguments are stored inside the models). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8431040765392359
+      ],
+      "excerpt": "Training duration is defined by --kimg X argument (amount of thousands of samples processed). Reasonable value for training from scratch is 5000, while for finetuning in --d_aug mode 1000 may be sufficient. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9107999810936599
+      ],
+      "excerpt": "Generate custom animation between random latent points (in z space): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.841057997107798
+      ],
+      "excerpt": "This will produce animated composition of 3 independent frames, blended together horizontally (like the image in the repo header). Argument --splitfine X controls boundary fineness (0 = smoothest).  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9530722618331448
+      ],
+      "excerpt": "Project external images onto StyleGAN2 model dlatent points (in w space): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9107999810936599
+      ],
+      "excerpt": "Generate smooth animation between saved dlatent points (in w space): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9207954614136827
+      ],
+      "excerpt": "Generate animation from saved point and feature directions (say, aging/smiling/etc for faces model) in dlatent w space: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9685749047866564
+      ],
+      "excerpt": "Strip G/D networks from a full model, leaving only Gs for inference: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9251291344734078
+      ],
+      "excerpt": "Resulting file is saved with -Gs suffix. It's recommended to add -r option to reconstruct the network, saving necessary arguments with it. Useful for foreign downloaded models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.887505513614784,
+        0.9307871518050288,
+        0.8197517244975335
+      ],
+      "excerpt": "This will produce new model with 512px resolution, populating weights on the layers up to 256px from the source snapshot (the rest will be initialized randomly). It also can decrease resolution (say, make 512 from 1024). Note that this effectively changes number of layers in the model.  \nThis option works with complete (G/D/Gs) models only, since it's purposed for transfer-learning (resulting model will contain either partially random weights, or wrong ToRGB params).  \nCrop or pad layers of a trained model to adjust its aspect ratio: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828352383841825,
+        0.8431270438341103
+      ],
+      "excerpt": "This produces working non-square model. In case of basic aspect conversion (like 4x4 => 5x3), complete models (G/D/Gs) will be trainable for further finetuning. \nThese functions are experimental, with some voluntary logic, so use with care. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8423808347009443
+      ],
+      "excerpt": "For inference (generation) this method works properly only for models from one \"family\", i.e. uptrained (finetuned) from the same original model.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "StyleGAN2 for practice",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eps696/stylegan2/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 20,
+      "date": "Mon, 27 Dec 2021 05:54:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/eps696/stylegan2/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "eps696/stylegan2",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/eps696/stylegan2/master/StyleGAN2_colab.ipynb",
+      "https://raw.githubusercontent.com/eps696/stylegan2/master/StyleGAN2.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9435954827064494,
+        0.85078603475297
+      ],
+      "excerpt": "* Windows batch-files, described below (if you're on Windows with powerful GPU) \n* local Jupyter notebook (for non-Windows platforms) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890565607690204
+      ],
+      "excerpt": "All above (adding/cropping/padding layers + alpha channel) can be done in one shot: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8672795243743714
+      ],
+      "excerpt": "<p align='center'><img src='_out/palekh-512-1536x512-3x1.jpg' /></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8204981474330962
+      ],
+      "excerpt": "| &boxvr;&nbsp; _in | input data for generation (check examples there) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8419801505375397,
+        0.8267638021736881,
+        0.8266276555272521
+      ],
+      "excerpt": "| &boxvr;&nbsp; data | datasets for training \n| &boxv;&nbsp; &boxvr;&nbsp; source | [example] folder with raw images \n| &boxv;&nbsp; &boxvr;&nbsp; mydata | [example] folder with prepared images \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9008335956509239,
+        0.8863641458075485,
+        0.8811281347203025
+      ],
+      "excerpt": "| &boxur;&nbsp; train | training folders \n| &ensp;&ensp; &boxvr;&nbsp;  ffhq-512.pkl | [example] pre-trained model file (full G/D/Gs) \n| &ensp;&ensp; &boxvr;&nbsp;  000-mydata-512-.. | [example] auto-created training folder \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8215096517024809
+      ],
+      "excerpt": "Put your images in data as subfolder. Ensure they all have the same color channels (monochrome, RGB or RGBA). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8549367338835046
+      ],
+      "excerpt": "This will create file mydata-512x512.tfr in data directory (if your dataset resolution is 512x512). Images without alpha channel will be stored directly as JPG (dramatically reducing file size). For conditional model split the data by subfolders (mydata/1, mydata/2, ..) and add --labels option. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137,
+        0.8792691089196341
+      ],
+      "excerpt": "train.bat mydata --kimg 5000 \nThis will run training process, according to the settings in src/train.py (check and explore those!!). If there's no TFRecords file from the previous step, it will be created at this point. Results (models and samples) are saved under train directory, similar to original Nvidia approach. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.819470202606875
+      ],
+      "excerpt": "Resume training on mydata dataset from the last saved model at train/000-mydata-512-f directory: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8374167489595038,
+        0.8955115706883476
+      ],
+      "excerpt": "Instead of simple frame splitting, one can load external mask(s) from b/w image file (or folder with file sequence): \ngen.bat ffhq-1024 1024-1024 100-20 --latmask _in/mask.jpg \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/eps696/stylegan2/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Cuda",
+      "Batchfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other"
+    },
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "StyleGAN2 for practice",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "stylegan2",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "eps696",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/eps696/stylegan2/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 155,
+      "date": "Mon, 27 Dec 2021 05:54:37 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

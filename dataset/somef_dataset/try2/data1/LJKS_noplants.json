@@ -1,0 +1,262 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LJKS/noplants",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-02-24T16:04:21Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-09T22:25:32Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8721821196204745
+      ],
+      "excerpt": "The Data Pipeline does not has to be executed on its own but is used by the Netw when Training. It takes pictures from a specified Directory and applies varies sorts of data augmentation specified by \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9149659167888312
+      ],
+      "excerpt": "We use flipping and zooming on both and changing brightness only on the input data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8476386269153662
+      ],
+      "excerpt": "DATA_TRAIN_STEM_LBL = 'stem_lbl_cropped_container' #: please be aware in the container needs to be another folder with the actual data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8476386269153662
+      ],
+      "excerpt": "DATA_TRAIN_SEG_LBL = 'seg_lbl_cropped_container' #: please be aware in the container needs to be another folder with the actual data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9118131551838484
+      ],
+      "excerpt": "The aggregator handles tracking the loss and saving plots. We use a running average of the loss to smoothen the plots. Nothing needs to be adjusted here \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9520687225401545
+      ],
+      "excerpt": "DATA_TEST = 'stem_data_cropped_container/stem_data_cropped' #: size of pictures doesnt matter, original data usable as well \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LJKS/noplants/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 11:56:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LJKS/noplants/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LJKS/noplants",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to make most of the data availabe we set up a script preparing the data for our network implementation.\nThe prepare_targets.py takes high resolution pitures and their high resolution labes, crobs them into small subimages and transform the targets so that the three colour channels of resulting RGB image give the probability for belonging to a certan class (good plant, weed, ground).\n\nWe train our network on segmentation as well as stem prediction. Thus, two kinds of targets have to be created, the segmentation and the root targets.\n\nThus, the script hast to be excecuted two times, once for the stem and once for the segmentation data. To run the script please adjust the following parameter in the hyperparameters.py:\n```python\n#: Data Preparation\nORIGIN_LBL_DIRECTORY = 'stem_lbl_human' #: folder with rare data\nORIGIN_DATA_DIRECTORY = 'stem_data'  #: folder with labeled data\nSUBPICS = 200\nCROP_SIZE = (256, 256, 3)\n#: please create following directory\nSAVE_LBL = 'stem_lbl_cropped_container/stem_lbl_cropped/'\nSAVE_DATA = 'stem_data_cropped_container/stem_data_cropped/'\n```\nAfter creating the saving paths as specified run the sript as follows for stem targets:\n```console\n(killingplants) usr@dev:~/noplants$ python prepare_targets.py\n```\nWhen creating segmentation targets, adjust the hyperparameters so that they fit your segmentation data and pleacse include the argument 'segmentation' in the shell command:\n```console\n(killingplants) usr@dev:~/noplants$ python prepare_targets.py segmentation\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In ourder to use our code certain dependencies must be met. We propose setting up a conda environment.\nPleas install Miniconda on Linux according to the following link: https://conda.io/projects/conda/en/latest/user-guide/install/linux.html\n\nAll the needed dependencies are listed in the environment.yml file and a respective environment can be created with it.\nIn order to do so, please first clone the git environment and then open a terminal and go to the respective directory. Then type:\n\n```console\n(base) username@dev:~/noplants$ conda env create -f environment.yml #: creates the sepecified environment\n(base) username@dev:~/noplants$ conda actvate killingplants #: now code can be executed\n(killingplants) username@dev:~/noplants$ conda deactivate #: deactivates environment\n(base) username@dev:~/noplans$\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8998186400570237
+      ],
+      "excerpt": "Since we use the ImageDataGenerator() by keras, make sure that you specifiy the input path correctly: you have to build a contaner containing another dircetory with the actual images (See Prepare targets). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8578955238707614
+      ],
+      "excerpt": "MODEL_SAVE_DIR = #: directory where you want to save your models to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9215641912134687
+      ],
+      "excerpt": "On The Big Machine we recommend the following setup: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8837680365796365
+      ],
+      "excerpt": "``` python \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9128402087951133,
+        0.827555063878811
+      ],
+      "excerpt": "Then run the test.py script. Include gpu if you are running cuda.console \n(killingplants) usr@dev:~/noplants$ python test.py [gpu] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8278856939014518
+      ],
+      "excerpt": "To run the training adjust the following parameters in the hyperparameters.py script: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": ": Training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8796726183058595
+      ],
+      "excerpt": "(killingplants) usr@dev:~/noplants$ python proto.py [gpu] [batch_size] [value for batch_size] [clock] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.879661980080994
+      ],
+      "excerpt": "(killingplants) usr@dev:~/noplants$ python proto.py gpu batch_size 24 #: higher batch size will exhaust the gpu memory \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8000006695163075
+      ],
+      "excerpt": "DATA_TEST = 'stem_data_cropped_container/stem_data_cropped' #: size of pictures doesnt matter, original data usable as well \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8519976518374174,
+        0.8977571845623853
+      ],
+      "excerpt": "Then run the test.py script. Include gpu if you are running cuda.console \n(killingplants) usr@dev:~/noplants$ python test.py [gpu] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LJKS/noplants/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "noplants - an ANN based weed-recognition software",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "noplants",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LJKS",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LJKS/noplants/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 11:56:41 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1612.08242",
+      "https://arxiv.org/abs/1612.08242\n5. 3D Object Representations for Fine-Grained Categorization\n       Jonathan Krause, Michael Stark, Jia Deng, Li Fei-Fei\n       4th IEEE Workshop on 3D Representation and Recognition, at ICCV 2013 (3dRR-13"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. https://www.kaggle.com/jutrera/stanford-car-dataset-by-classes-folder/kernels\n2. https://www.kaggle.com/deepbear/pytorch-car-classifier-90-accuracy\n3. https://pytorch.org/docs/stable/torchvision/models.html\n4. https://arxiv.org/abs/1612.08242\n5. 3D Object Representations for Fine-Grained Categorization\n       Jonathan Krause, Michael Stark, Jia Deng, Li Fei-Fei\n       4th IEEE Workshop on 3D Representation and Recognition, at ICCV 2013 (3dRR-13). Sydney, Australia. Dec. 8, 2013. (https://ai.stanford.edu/~jkrause/cars/car_dataset.html)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9218387569487573
+      ],
+      "excerpt": "| ResNet34 (baseline) |     224    |    1    |   87.10   | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| MobileNetV2         |     224    |    1    |   87.30   | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "| -                   |      -     |    2    |   91.10   | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kamwoh/Car-Model-Classification",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-06-13T02:58:05Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-09T17:23:33Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Nowadays in computer vision, deep learning approach is performing superior result and even better than human. I decided to use deep learning approach to solve computer vision challenge in Grab AI For Sea. There is already some [published kernels in Kaggle](https://www.kaggle.com/jutrera/stanford-car-dataset-by-classes-folder/kernels) which I have referred to [their approach](https://www.kaggle.com/deepbear/pytorch-car-classifier-90-accuracy) as my starting point. I have made some changes on training scheme and network architecture. My approach of training scheme is better than baseline from the Kaggle kernel by 0.27% while performing another two tasks. Using state-of-the-art achitecture, performance is improved by 1.66%. I have also shown that not only we need to focus on performance, but also focus on size and computational power, I switched to lower resolution and state-of-the-art deep architecture for mobile, I managed to create a model that is efficient in terms of performance and computational power. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9829309776936778,
+        0.8409525964980683,
+        0.984476846983428
+      ],
+      "excerpt": "As the best of my knowledge, there is no published solution on Multi-task learning on Cars dataset. Using this scheme, it has been proven test accuracy on Car Model is improved by at least 0.1% and the same model is able to perform classification on both Car Make and Car Type with a very high accuracy at the same time. \nBy switching architecture to MobileNetV2, test accuracy is deteriotated by around 1%, however, with 10x smaller in model size. \nBy weight pruning on MobileNetV2 model up to 40%, test accuracy is kept at 88%. Refers to table below for more info. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.803388363707066
+      ],
+      "excerpt": "This is inspired from YOLO9000, which they were using WordNet concept for Object Detection over 9000 classes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8581787979829522,
+        0.859750994255156,
+        0.9878317116905777,
+        0.8811109162672697,
+        0.9643763548369492,
+        0.8499881542149709
+      ],
+      "excerpt": "From the figure above, using output of base model and connect with two fully connected layers, one for Car Type (fc_type) and one for Car Make (fc_make), then both of them are served as extra information to compute fc_model. \nThe motivation is because I hope that Car Type and Car Make can act as a prior information to help improving in recognizing Car Model. As a result, it has been proven this solution can help improving score by at least 0.1%. Even though it is a minor improvement, the model can classify Car Type and Car Make at the same time.  \nTheorectically, without using this scheme, we can extract Car Make and Car Type from fc_model, however, it is troublesome, and it is more to \"programming\" instead of Deep Learning. \nHowever, using this scheme, performance increased could be due to number of parameters increased to compute fc_model, therefore, I made a better version, which has shown in the figure below. \nNumber of parameters to compute fc_model remained, while error propagated from fc_make and fc_type flowed into fc_model, and hence extra gradient information to update weights. As a result, performance is improved. This is also similar to Inception V1 (GoogLeNet), which they performed intermediate softmax branches at the middle. \nThe Cars dataset is from Stanford Cars dataset contains 16,185 images of 196 classes of cars. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9961478811360381,
+        0.9816187609097258
+      ],
+      "excerpt": "The table above shown test accuracy of different architecture and image size on Version 1 and 2 for Car Model. Using MTL training scheme on ResNet34 with image size of 400, performance is improved by 0.27% from 92.14% to 92.41% which has been proven that prior information of Car Make and Car Type are useful for final prediction of Car Model, not only on baseline but performance on other architecture and image size also have shown improvement by at least 0.1% except for MobileNetV2 with image size of 400. By using state-of-the-art deep architecture ResNeXt50, the performance is even improved by 1.66% and 1.62% on Version 2 and 3 tasks respectively and it is the best performance among all settings. \nIn terms of compression by using MobileNetV2, the performance on both Version 1 and 2 are only deteriorated by around 1% while 10x smaller size than ResNet34 and ResNeXt50. However, using lower resolution of image size of 224, the performance on both Version 1 and 2 are dropped to 87.30% and 88.01% respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8712255542473598,
+        0.9797206244151975
+      ],
+      "excerpt": "The table above shown test accuracy of different architecture and image size on Version 2 and 3 for Car Make and Car Type. \nClassification of Car Make and Car Type using ResNeXt50 V2 with image size of 400, it has the best performance with 97.71% and 97.72% respectively. While on V3 with lesser number of parameters has slightly lower performance which is 97.51% and 97.48% on Car Make and Car Type respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8225287525221724
+      ],
+      "excerpt": "| -          | 2       | Car Model |    91.52    | 91.28 | 90.91 | 89.48 | 84.22 | 66.35 |  1.54 | 0.55 |  0.50 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9669347418870403
+      ],
+      "excerpt": "The table above shown test accuracy after weight pruning on MobileNetV2 using different prune rate. MobileNetV2 can withstand up to 40% of weight pruning while maintaining performance of Car Model classification task for Version 1 and 2 at 88.46% and 89.48% respectively \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8605522481577929,
+        0.939316817527596
+      ],
+      "excerpt": "datasets.py is responsible for loading dataset and data loader for training and testing. Modifying it if necessary. \nThe model creation is located in models/ as structured as below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Car Model classification using Stanford Cars Dataset for Grab AI For Sea challenge on computer vision (https://www.aiforsea.com/computer-vision)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kamwoh/Car-Model-Classification/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Thu, 23 Dec 2021 08:42:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kamwoh/Car-Model-Classification/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kamwoh/Car-Model-Classification",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8474895321345809
+      ],
+      "excerpt": "Car Make:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8106820903567863
+      ],
+      "excerpt": "| -          | -       |  Car Make |    92.39    | 92.33 | 91.97 | 90.56 | 88.12 | 72.99 | 20.73 | 7.75 |  7.75 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8940607067794014,
+        0.8940607067794014,
+        0.8940607067794014
+      ],
+      "excerpt": "python train.py --version 2 --arch resnet34 --imgsize 400 --epochs 60 \npython train.py --version 2 --arch resnext50 --imgsize 400 --epochs 60 \npython train.py --version 2 --arch mobilenetv2 --imgsize 224 --epochs 60 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.833507803247009
+      ],
+      "excerpt": "For each class, first word in the class name represents Car Make and last word represents Car Type, there are total 49 classes of Car Make and 18 classes of Car Type. Refers to datasets.py for more info. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8613957477024062
+      ],
+      "excerpt": "| ResNeXt50           |            23.45            |            23.60            | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968
+      ],
+      "excerpt": "| -                   |      -     |    2    |   88.01   | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8441726432350531
+      ],
+      "excerpt": "| -          | 2       | Car Model |    87.89    | 87.80 | 87.49 | 86.01 | 83.56 | 67.37 |  9.46 | 0.50 |  0.49 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8441718271060457
+      ],
+      "excerpt": "| 400        | 1       | Car Model |    91.92    | 91.47 | 90.86 | 88.46 | 80.21 | 30.29 |  1.21 | 0.50 |  0.50 | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8521291544753797,
+        0.8533458233661313,
+        0.8333020794488786,
+        0.8344955754242381
+      ],
+      "excerpt": "Train dataset need to place in data/cars_train.  \nTest dataset need to place in data/cars_test.  \nTrain annotation need to place in data/devkit/cars_train_annos.mat \nTest annotation  need to place in data/devkit/cars_test_annos_withlabels.mat \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8911182877795119,
+        0.8911182877795119,
+        0.8800547442465781,
+        0.8993118162693332
+      ],
+      "excerpt": "python train.py --version 2 --arch resnet34 --imgsize 400 --epochs 60 \npython train.py --version 2 --arch resnext50 --imgsize 400 --epochs 60 \npython train.py --version 2 --arch mobilenetv2 --imgsize 224 --epochs 60 \npython train.py --version 2 --arch resnext50 --imgsize 224 --epochs 30 --finetune --path logs/resnext50_400_60_v2/1/best.pth --lr 0.001 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9256943731902022,
+        0.8799415056897817,
+        0.8845068813822188
+      ],
+      "excerpt": "python test.py --config logs/resnext50_400_40_v2/1/config.json --imgsize 400 \npython prune.py --config logs/resnext50_400_60_v2/1/config.json --prune-rate 0.1 \npython prune.py --config logs/resnext50_400_60_v2/1/config.json --prune-all \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kamwoh/Car-Model-Classification/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Grab AI For Sea Computer Vision challenge - Cars Dataset",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Car-Model-Classification",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kamwoh",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kamwoh/Car-Model-Classification/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. python==3.6.5\n2. torch==1.1.0\n3. torchvision==0.3.0\n4. numpy\n5. pandas\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 34,
+      "date": "Thu, 23 Dec 2021 08:42:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npython train.py --help\npython test.py --help\npython prune.py --help\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deeplearning",
+      "pytorch",
+      "cars",
+      "computervision"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Only ResNeXt50 V2 and V3 are uploaded in this repository. \n\nTest accuracy ResNeXt50 V2: Car Model (94.07%), Car Make (97.71%), Car Type (97.72%).\n\nTest accuracy ResNeXt50 V3: Car Model (94.03%), Car Make (97.51%), Car Type (97.48%)\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

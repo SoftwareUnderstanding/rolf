@@ -1,0 +1,322 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1709.05424"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/titu1994/neural-image-assessment",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-01-02T07:12:38Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-19T14:29:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9562953324453328
+      ],
+      "excerpt": "Implementation of NIMA: Neural Image Assessment in Keras + Tensorflow with weights for MobileNet model trained on AVA dataset. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8394708262435696,
+        0.8633070870883037,
+        0.8372396012058242,
+        0.8335600630185364,
+        0.8526850764361125,
+        0.913701730803602
+      ],
+      "excerpt": "- NASNet Mobile (0.067 EMD on valset thanks to @tfriedel !, 0.0848 EMD with just pre-training) \n- Inception ResNet v2 (~ 0.07 EMD on valset, thanks to @tfriedel !) \n- MobileNet (0.0804 EMD on valset) \nThere are evaluate_*.py scripts which can be used to evaluate an image using a specific model. The weights for the specific model must be downloaded from the Releases Tab and placed in the weights directory. \nSupports either passing a directory using -dir or a set of full paths of specific images using -img (seperate multiple image paths using spaces between them) \nSupports passing an argument -resize \"true/false\" to resize each image to (224x224) or not before passing for NIMA scoring.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9021251637294266,
+        0.8853082070757341,
+        0.8962712143318522
+      ],
+      "excerpt": "-img    : Pass one or more relative/full paths of images to score them. Can support all image types supported by PIL. \n-resize : Pass \"true\" or \"false\" as values. Resize an image prior to scoring it. Not supported on NASNet models. \nThe AVA dataset is required for training these models. I used 250,000 images to train and the last 5000 images to evaluate (this is not the same format as in the paper). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8206178782504403,
+        0.8759487773459483
+      ],
+      "excerpt": "Then, there are two ways of training these models. \nIn direct training, you have to ensure that the model can be loaded, trained, evaluated and then saved all on a single GPU. If this cannot be done (because the model is too large), refer to the Pretraining section. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9195587895296118,
+        0.9925726783466113,
+        0.8450099558052491,
+        0.946512608400349
+      ],
+      "excerpt": "If the model is too large to train directly, training can still be done in a roundabout way (as long as you are able to do inference with a batch of images with the model). \nNote : One obvious drawback of such a method is that it wont have the performance of the full model without further finetuning.  \nThis is a 3 step process: \n1)  Extract features from the model: Use the extract_*_features.py script to extract the features from the large model. In this step, you can change the batch_size to be small enough to not overload your GPU memory, and save all the features to 2 TFRecord objects. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of NIMA: Neural Image Assessment in Keras",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/titu1994/neural-image-assessment/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 202,
+      "date": "Wed, 22 Dec 2021 18:06:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/titu1994/neural-image-assessment/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "titu1994/neural-image-assessment",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8296613199370366
+      ],
+      "excerpt": "-dir    : Pass the relative/full path of a directory containing a set of images. Only png, jpg and jpeg images will be scored. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8817060624229873
+      ],
+      "excerpt": "First, ensure that the dataset is clean - no currupted JPG files etc by using the check_dataset.py script in the utils folder. If such currupted images exist, it will drastically slow down training since the Tensorflow Dataset buffers will constantly flush and reload on each occurance of a currupted image. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8195870207303273
+      ],
+      "excerpt": "Use the train_*.py scripts for direct training. Note, if you want to train other models, copy-paste a train script and only edit the base_model creation part, everythin else should likely be the same. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/titu1994/neural-image-assessment/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Somshubra Majumdar\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NIMA: Neural Image Assessment",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "neural-image-assessment",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "titu1994",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/titu1994/neural-image-assessment/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "titu1994",
+        "body": "Courtesy of @tfriedel, weights for Inception ResNet v2 which were fine-tuned on the AVA dataset.\r\n\r\nFinal score on val set ~ 0.07 (reported by @tfriedel)",
+        "dateCreated": "2018-01-07T12:36:42Z",
+        "datePublished": "2018-01-10T04:21:59Z",
+        "html_url": "https://github.com/titu1994/neural-image-assessment/releases/tag/v0.5",
+        "name": "Inception ResNet V2 Weights",
+        "tag_name": "v0.5",
+        "tarball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/tarball/v0.5",
+        "url": "https://api.github.com/repos/titu1994/neural-image-assessment/releases/9173293",
+        "zipball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/zipball/v0.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "titu1994",
+        "body": "Weights from NASNet Mobile model which have just been pre-trained on the AVA dataset.\r\n\r\n**Note** : There are two files. \r\n- `nasnet_weights.h5` is trained fully, and scores 0.067.\r\n- `nasnet_weights_0_0848.h5` is for the pre-trained version, with scores of 0.0848.\r\n\r\nNotable limitations : \r\n- Requires images to be 224x224 size **only** during evaluation, unlike MobileNet which can take any image size.",
+        "dateCreated": "2018-01-07T06:02:36Z",
+        "datePublished": "2018-01-07T06:10:35Z",
+        "html_url": "https://github.com/titu1994/neural-image-assessment/releases/tag/v0.4",
+        "name": "NASNet Mobile Weights",
+        "tag_name": "v0.4",
+        "tarball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/tarball/v0.4",
+        "url": "https://api.github.com/repos/titu1994/neural-image-assessment/releases/9135480",
+        "zipball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/zipball/v0.4"
+      },
+      {
+        "authorType": "User",
+        "author_name": "titu1994",
+        "body": "Weights finetuned from the model from v0.2, using the proper loss from #3 ",
+        "dateCreated": "2018-01-06T04:48:37Z",
+        "datePublished": "2018-01-06T04:52:39Z",
+        "html_url": "https://github.com/titu1994/neural-image-assessment/releases/tag/v0.3",
+        "name": "MobileNet Weights",
+        "tag_name": "v0.3",
+        "tarball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/tarball/v0.3",
+        "url": "https://api.github.com/repos/titu1994/neural-image-assessment/releases/9130742",
+        "zipball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/zipball/v0.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "titu1994",
+        "body": "Weights trained on fix from https://github.com/titu1994/neural-image-assessment/issues/2",
+        "dateCreated": "2018-01-05T11:14:02Z",
+        "datePublished": "2018-01-05T11:18:43Z",
+        "html_url": "https://github.com/titu1994/neural-image-assessment/releases/tag/v0.2",
+        "name": "MobileNet Weights",
+        "tag_name": "v0.2",
+        "tarball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/tarball/v0.2",
+        "url": "https://api.github.com/repos/titu1994/neural-image-assessment/releases/9120206",
+        "zipball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/zipball/v0.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "titu1994",
+        "body": "Weights for MobileNet 224, trained for 15 epochs on the AVA dataset. \r\n\r\n**Note** : Model was trained incorrectly using wrong loss. Use from tag v0.2 or tag v0.2.1 above for correct scores, which is trained on correct loss.",
+        "dateCreated": "2018-01-02T07:31:09Z",
+        "datePublished": "2018-01-02T15:16:20Z",
+        "html_url": "https://github.com/titu1994/neural-image-assessment/releases/tag/v0.1",
+        "name": "MobileNet Weights",
+        "tag_name": "v0.1",
+        "tarball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/tarball/v0.1",
+        "url": "https://api.github.com/repos/titu1994/neural-image-assessment/releases/9080488",
+        "zipball_url": "https://api.github.com/repos/titu1994/neural-image-assessment/zipball/v0.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Keras\n- Tensorflow (CPU to evaluate, GPU to train)\n- Numpy\n- Path.py\n- PIL\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 661,
+      "date": "Wed, 22 Dec 2021 18:06:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "keras",
+      "tensorflow",
+      "ava-dataset",
+      "neural-image-assessment"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<img src=\"https://github.com/titu1994/neural-image-assessment/blob/master/images/NIMA.jpg?raw=true\" height=100% width=100%>\n\n<img src=\"https://github.com/titu1994/neural-image-assessment/blob/master/images/NIMA2.jpg?raw=true\" height=100% width=100%>\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

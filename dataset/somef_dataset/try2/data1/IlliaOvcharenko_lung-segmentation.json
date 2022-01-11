@@ -1,0 +1,246 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- https://arxiv.org/pdf/1505.04597.pdf - U-Net: Convolutional Networks for Biomedical Image Segmentation\n- https://arxiv.org/pdf/1811.12638.pdf - Towards Robust Lung Segmentation in Chest Radiographs with Deep Learning\n- https://arxiv.org/pdf/1801.05746.pdf - TernausNet: U-Net with VGG11 Encoder Pre-Trained on ImageNet for Image Segmentation\n- https://arxiv.org/pdf/1708.00710.pdf - Accurate Lung Segmentation via Network-WiseTraining of Convolutional Networks\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/IlliaOvcharenko/lung-segmentation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-06-01T11:19:11Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-15T16:23:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "![data-example](images/data-example.png)\n\nDataset consists of collected from public available chest X-Ray (CXR) images.\nOverall amount of images is 800 meanwhile labeled only 704 of them.\nWhole dataset was randomly divided into train (0.8 of total) validation (0.1 splited from train) and test parts. Splits were saved into ```splits.pk```.\n\nThe main task is to implement pixel-wise segmentation on the available data to detect lung area.\nDownload link on the dataset https://drive.google.com/file/d/1ffbbyoPf-I3Y0iGbBahXpWqYdGd7xxQQ/view.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9091581034460184
+      ],
+      "excerpt": "The most obvious solution for semantic segmentation problems is UNet - fully convolutional network with an encoder-decoder path. High-resolution features from the contracting path are combined with the upsampled output in order to predict more precise output based on this information, which is the main idea of this architecture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8624780734928478,
+        0.9150307735666752
+      ],
+      "excerpt": "Optimization criterion - Adam with 0.0005 learning rate. \nSome kinds of data augmentation were used: horizontal and vertical shift, minor zoom and padding. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9109249418318777,
+        0.9233704496680673,
+        0.8895612725341515,
+        0.8152489360745536
+      ],
+      "excerpt": "Vanilla unet configuration doesn't have batch normalization. Nowadays it is used almost every time, so it was added to improve network convergence too. \nSuch network configuration outperforms other variations of unet without batch norm and pretrained weights on validation dataset so it was chosen for final evaluation \nNetworks were trained on a batch of 4 images during more than 50 epochs on average. \nAfter 40 epoch network stops to improve validation score and network began to overfit. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714596972846307,
+        0.9435624661356222,
+        0.9339542392209607
+      ],
+      "excerpt": "For evaluation of model output was Jaccard and Dice metrics, well known for such kind of computer vision tasks. \nJaccard also is known as Intersection over Union, while Dice is the same with F1 measure. They are both showing almost the same things - overlap between ground truth and calculated mask.  \nThe main disadvantage is that they consider only the number of true positives, false positives and false negatives and ignore predicted location. So, more reasonable is to use average contour distance and average surface distance. These metrics are not implemented yet, more information about them you could find in \"Accurate Lung Segmentation via Network-WiseTraining of Convolutional Networks\" preprint, check out references list. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8605823986364838,
+        0.8935097068917438
+      ],
+      "excerpt": "Some you obtained results could see on the figure below. \nThere are some future steps on the way to improve the current solution: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Lung segmentation for chest X-Ray images",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/IlliaOvcharenko/lung-segmentation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 15,
+      "date": "Sat, 25 Dec 2021 17:26:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/IlliaOvcharenko/lung-segmentation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IlliaOvcharenko/lung-segmentation",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/IlliaOvcharenko/lung-segmentation/master/main.ipynb",
+      "https://raw.githubusercontent.com/IlliaOvcharenko/lung-segmentation/master/sandbox.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8300827864541149
+      ],
+      "excerpt": "epoch: 30/200, time: 156.41338729858398, train loss: 0.047798131544717216,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8434105421957317
+      ],
+      "excerpt": "test loss: 0.0634, test jaccard: 0.9110, test dice: 0.9520 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8434105421957317
+      ],
+      "excerpt": "test loss: 0.0530, test jaccard: 0.9268, test dice: 0.9611 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/IlliaOvcharenko/lung-segmentation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Illia Ovcharenko\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "\ud83e\udd89 Lung segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "lung-segmentation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IlliaOvcharenko",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/IlliaOvcharenko/lung-segmentation/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 44,
+      "date": "Sat, 25 Dec 2021 17:26:36 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-learning",
+      "unet",
+      "image-segmentation",
+      "lung-segmentation",
+      "xray"
+    ],
+    "technique": "GitHub API"
+  }
+}

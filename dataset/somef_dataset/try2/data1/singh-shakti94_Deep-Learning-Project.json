@@ -1,0 +1,329 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Background on Satellite imaging https://www.kaggle.com/c/statoil-iceberg-classifier-challenge#Background\n- Inspiration of Data Augmentation is taken from https://machinelearningmastery.com/image-augmentation-deep-learning-keras/ but we implemented it using numpy methods unlike keras implementation mentioned in the above link.\n\n- Readings on why and How to finetune pretrained networks \n  - https://flyyufelix.github.io/2016/10/03/fine-tuning-in-keras-part1.html\n  - https://flyyufelix.github.io/2016/10/08/fine-tuning-in-keras-part2.htm\n- Further reading on finetuning :\n  - https://machinelearningmastery.com/use-pre-trained-vgg-model-classify-objects-photographs\n  - http://cv-tricks.com/keras/fine-tuning-tensorflow/\n- VGG paper https://arxiv.org/pdf/1409.1556v6.pdf\n- paper on Salinecy maps https://arxiv.org/pdf/1610.02391v1.pdf\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "Synthetic-aperture Radar (SAR) Wiwkipedia link \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8780102629037448
+      ],
+      "excerpt": "* input : 10 x 10 x 128 (reshaped to ? X 1024) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8780102629037448
+      ],
+      "excerpt": "* input : 10 x 10 x 256 (reshaped to ? X 512) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/singh-shakti94/Deep-Learning-Project",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-28T16:52:03Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-01T12:26:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The aim of this project is to buid a classifier that can identify if a remotely sensed target is a Ship or a drifting Iceberg. This is an attempt to solve the problem stated in one of the competitions at Kaggle.com ([here](https://www.kaggle.com/c/statoil-iceberg-classifier-challenge)).\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9036660236448407
+      ],
+      "excerpt": "The dataset for this project is borrowed from its Kaggle competition page (link to dataset here) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8536909011331385,
+        0.8472800173006428
+      ],
+      "excerpt": "* id: id of the image \n* band_2, band_2: flattened image data. each band list consist of 5627 elements corresponding to 75x75 pixel values. (true meaning of these values still need to be understood [satellite imagery]). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8175239404319722,
+        0.9872438932665534,
+        0.8622580522189256,
+        0.848856889528027,
+        0.8324393920698034
+      ],
+      "excerpt": "* is_iceberg: this field exists only in train.json which if set to 1 indicates that the image is an iceberg, and 0 if its is a ship. \nIn order to work for this project, Some milestones have been agreed upon to mark the progress of the project. \n- July 13th 2018 By this date we will be able to complete the background needed for this project and will be able to come up with a simple CNN network in python tensorflow. \n- July 25th 2018 By this date we will be able to finalize the simple CNN classifier that we will create, by finalize I mean applying some techniques to increase the accuracy. Moreover, we will be able to come up with a pre-trained classifier (possibly VGG network) trained on the training set for this problem. \n- August 2nd 2018 The finilaization of both the processes (Simple Classifier and pre-trained network) will be done and we will be ready to present our work. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9139716397008458,
+        0.8200469886201042
+      ],
+      "excerpt": "Deep Learning for Target Classification from SAR Imagery link to paper \njuly 13th 2018 A simple convolution neural network is has been created. We are using 3 convolution layers and a fully connected layer to get predictions. the details for network are listed below : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8205133634915469
+      ],
+      "excerpt": "  Please refer file CNN.py for the code. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9721972226204812,
+        0.8978839330348137
+      ],
+      "excerpt": "  * An attempt to apply dropout is being done (more work on it comming soon) \n* july 14th 2018 A simple 3D convolution neural network is been created. We are using 1 convolution layers and a fully connected layer to get predictions. the details for input and output for network are listed below : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891688363677641,
+        0.946125903410875,
+        0.9817415312360238,
+        0.9028236804691694
+      ],
+      "excerpt": "* july 19th 2018 Further detailed exploration of the dataset is done by visualizing random samples from the dataset for each class (file : data_exploration.ipynb). What we found out is that band_2 of most of the images given is comparatively noisy and apparently is not helping enough. We tried to create another cahnnel by combining the given two channels(sum or average of band_1 and band_2) and found out that even if we sum the two given bands, we get a channel that is less less noisy and can be used as a third channel in our convolution model. Although there wasn't any significant difference between the two combinations (sum and average), I personally found the summed version more helpful(we'll see how will that work out in the model). \n  * The model that won the original competition isn't available publically, but other baseline models having fairly high accuracy are available publically. Most of them are implemented in keras (actually we didn't find any implemented in TensorFlow), so we are trying to get it to run as soon as possible. \n  * Work is also in progress for our version of convolution network in TensorFlow. We will be modifying our 2d convolution implementation to work with three channels (band_1, band_2, band_1+band_2) and training stats will be shared here soon. \n  * One more thing that I am working on is to add more images to the trainig dataset. I have gone through several data augmentation techniques that we can apply to availabel images in order to generate new images. these techniques include : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9154611783034233
+      ],
+      "excerpt": " * zoomed crop of an image (since the objects are centered in all the images). may be take a 50x50 or 60x60 center crop of some images \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9984883507727473,
+        0.9832831256842187
+      ],
+      "excerpt": "july 20th 2018 In order to increase our samples we tried data augmentation on our training images. We tried flipping it horizontally, vertically, rotating it 90 degrees and shifting the image and created more data in order to increase size of our training dataset. The code for data augmentation is given in DataAugmentation.py file. We have also forked one keras submission of CNN for the same project and tried running it in order to compare the performance of our model with it.  \njuly 25th 2018 The tensorflow CNN implementation that we were working on is finally giving us some acceptable accuracy that we can look upon to. The configutation of the model is shared below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9526535909358128,
+        0.9567687263050095,
+        0.8781852768776254,
+        0.972731286609043
+      ],
+      "excerpt": "  * The above mentioned model was run for 3 epochs with a batch size of 2 and the log loss for has come down to ~2.0. The labelled trainig dataset having ~1600 images was divided inti test and train datasets (keeping 90% for training and 10% for testing). we were able to achieve ~75% accuracy on this model. Keeping in mind that no data augmentation technique is applied to this point, this accuracy seems fair. \n  * Although we managed to get this accuracy, the loss was going up and down throughout the trainig process (may be a case of oscillations), we are currently looking into it and will be updating insights soon. \n  * work is in progress for applying regularization (L2) on this model and trainng on augmented dataset will be carried on soon and the results will be reported soon. \n* An extensive exploration of the images in the dataset is being done in data_exploartion.ipynb notebook. through visualizing some random samples of both classes, we were trying to find out that if the two classes are visually separable. we found out that although some images are vuisually seperable, we cannot generalize anything. Moreover, the band_2 is very noisy in a lot of cases, we came up with a third channel (band_1 + band_2) that has proved to be very effective in eliminating the noise.(visualized in the notebook) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9292369321566015,
+        0.996030777875759,
+        0.9564480115207314,
+        0.9378566560835805,
+        0.9866017530152428,
+        0.8775198554376106,
+        0.9316785535937299
+      ],
+      "excerpt": "* For next week, I will be working on VGG model and making changes to out CNN implementation, while Nikhil will be working on Feature extraction and Baseline model on Keras. \nDetails on pertrained VGG network : Since last week (week of 4th August), we were working on training a pre-trained VGG16 network, which we have accomplished successfully. The pretained model that is uded is built in keras with tensorflow as background. It is performing pretty well on the data (~82% accurate after training for 10 epochs with a batch size of 50 images.) \nSince the VGG16 architecture have 16 convolution layers and the pretrained weights are of trainig of network on real world images(animals, faces, cars etc) and we are dealing with low resolution satellite images, we decided to not use the later convolution layers(after #5). So, we are using only initial 5 conviolution layers of pretarained VGG16 and then added two fully connected layers to it(relu activation). \nWe came to this above conclusion after reading at several sources on why and how to finetune pretrained networks(links in refrences). \nData augmentation is also applied before feeding the data to pretrained network (keras makes it so easy) \nwe set the pretained layers as non trainable and only trained the new dense layers that we added. \nwe are now experimenting with more layers on top of those initial five layers, the strategy is as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Deep learning project that solves the problem of classification of given satellite images as iceberg or a ship.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/singh-shakti94/Deep-Learning-Project/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Tue, 28 Dec 2021 17:31:26 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/singh-shakti94/Deep-Learning-Project/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "singh-shakti94/Deep-Learning-Project",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/KerasBaseline.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/Resnet.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/data_exploration2.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/data_augmentation.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/keras%20VGG%20model.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/data_exploration.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/CNN%20training.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/.ipynb_checkpoints/data_exploration-checkpoint.ipynb",
+      "https://raw.githubusercontent.com/singh-shakti94/Deep-Learning-Project/master/.ipynb_checkpoints/data_exploration2-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8219714998556322
+      ],
+      "excerpt": "The data is provided in .json format (train.json and test.json). The files consist of a list of images and for each image the following fields \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.840389975025629,
+        0.8515536220146066
+      ],
+      "excerpt": "Input : flattened data points (shape = batch_size x 5625) of 75 x 75 images  \nOutput : one-hot vector of predicted class (shape = batch_size x 2)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8438673227198062,
+        0.8606765071893975
+      ],
+      "excerpt": "* input : 10 x 10 x 128 (reshaped to ? X 1024) \n* output size : batch_size x 1024 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.840389975025629,
+        0.8515536220146066
+      ],
+      "excerpt": "  * Input : flattened data points (shape = batch_size x 16875) of 75 x 75 x 3 images  \n  * Output : one-hot vector of predicted class (shape = batch_size x 2)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8606765071893975
+      ],
+      "excerpt": "* output size : batch_size x 512 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.850302460584936
+      ],
+      "excerpt": "  * output layer : \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/singh-shakti94/Deep-Learning-Project/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "A Ship or an Iceberg?",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deep-Learning-Project",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "singh-shakti94",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/singh-shakti94/Deep-Learning-Project/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Tue, 28 Dec 2021 17:31:26 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

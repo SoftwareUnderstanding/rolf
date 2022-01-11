@@ -1,0 +1,284 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8592871015078071
+      ],
+      "excerpt": "Prediction: \"il est important de savoir .\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9982305439845571,
+        0.9998249662256476
+      ],
+      "excerpt": "Prediction: \"ce debat et l amendement de la directive nous permet d integrer les elements qui demontrent la diversite de notre europe .\" \nGoogle Translate: ce d\u00e9bat et l'amendement de la directive actuellement en vigueur nous permettent d'int\u00e9grer des \u00e9l\u00e9ments de diff\u00e9renciation qui d\u00e9montrent la diversit\u00e9 de cette Europe qui est la n\u00f4tre.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906174419333412
+      ],
+      "excerpt": "Input: \"la collaborazione \u00e8 la chiave del successo.\" \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Transformer-Multi-Language-Translator",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-09T04:37:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-29T23:38:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9859172795477282
+      ],
+      "excerpt": "A multi-language translator that utilizes the transformer neural network model described by the paper titled Attention Is All You Need in late 2017. A recently rising Natural Language Processing Model shown to often compete with and even out perform LSTMs and GRUs. This Translator uses the Transformer Model is its basis. This project has multiple languages trained. The limit currently are resources thus all languages are paired with English. Please refer the languages section below for more information. This translator has fairly good accuracy considering it was trained on downsized datasets due to resource limitations as well as low epochs. If you have the resources, then you may clone the REPO and train the model on larger datasets as well as more Epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993208766751942,
+        0.9969460965916628
+      ],
+      "excerpt": "Currently, the transformer model is the state-of-the-art approach to a lot of major natural language processing tasks such machine translation and language modelling. The Transformer model can be split into two main components, the encoder and the decoder. \nThe input is embedded using nn.Embedding to create an embedding vector to uniquely represent each word token as well as closely relate similar words. Positional encoding encodes a token based on the position in the input sequence instead of it's token value. The encoder outputs a sequence of context vectors. Unlike the RNN where the token being read is only influenced by the hiddens states of previous tokens, in the transformer model, each token is influenced by all tokens in the sequence. This also means that the entire input sentence can be processed simultaneously instead of word by word, allowing for much more parallelism. The transformer model in the original paper uses static embedding while current and state-of-the-art transformer NLP models such as BERT use dynamic or learnable positional embeddings. As such, we will use learnable position embeddings. After the input sequence is embedded, it is passed through the Multi-Head Attention layer, which is the promiment aspect of a transformer model. Multiheaded attention takes in a value, key, and query. The Query and key are multiplied and scaled before their product is multiplied by the value. This is known as Scaled Dot-Product Attention as seen in the Diagram Below. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8224410695511608,
+        0.9177851515329597
+      ],
+      "excerpt": "The Decoder takes in the target value and applies token and positional encoding to it aswell. The decoder also contains a Multi-Head Attention layer, however the scaled dot-production attention layer in the Multi-Head Attention masks out all values that the softmax activation deems unnecessary or illegal, hence the name Masked Multi-Head Attention Layer. The output of the MMHAL is the query for the next regular Multi-Headed Attention while the key and value are the outputs from the encoder (encoded inputs). The decoder then passes the result through a Feed Forward Layer and then a classification Dense network for final predictions \nPlease refer to the dataset section for more details on the datasets I'm using. The data files I'm using for training are line-by-line text files meaning each line is training data. Each langauge file comes in pairs. For example, if I want to train the translator to work with English and French, the files I have are located in the data/french-english/ directory and the files present english.txt and french.txt. Thus, we have the file locations data/french-english/english.txt and data/french-english/french.txt. This is the organization format I used in this project and the organization applies to all language pairs. Keep in mind, English, is usually the latter in the data/language-language directory name as you can see in the data directory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8765760136010888,
+        0.8979411005071259
+      ],
+      "excerpt": "    --hyperparameters are a list of hyperparameters to call in order to properly execute train.py. Each hyperparamter is to be entered in this format: \n    --data_directory data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.964132786400462
+      ],
+      "excerpt": "creates a Dictionary class which keeps track of all words seen from the dataset in each language and assigns a unique token to every new word. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9785349899798309
+      ],
+      "excerpt": "contains utility functions to help with preprocessing and post processing data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9640433142870483,
+        0.9170713419161695
+      ],
+      "excerpt": "Since I do not know many of the langauges I have trained on the Transformer model, I will be using more robust translators as comparison such as Google Translate. \nInput: \"it is important to know.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.993426019169031
+      ],
+      "excerpt": "Input: \"this debate and the amendment of the directive currently in force allow us to incorporate differentiating elements which demonstrate the diversity of this Europe of ours.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9954275290019396,
+        0.9052445146858625,
+        0.8709431930539356
+      ],
+      "excerpt": "Google Translate Back Translation of Prediction: \"this debate and the amendment of the directive allow us to integrate the elements which demonstrate the diversity of our europe.\"   \nAs you can see with the example above, the prediction may not be word to word with Google Translate results, but the prediction still maintains the semantic information and context that was in the input. \nInput: \"this is a short paragraph.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133088146281712
+      ],
+      "excerpt": "Google Translate: \"today is a beautiful day.\"   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8755067165244167,
+        0.966176180438914
+      ],
+      "excerpt": "Prediction: \"cooperation is key to success .\" \nGoogle Translate: \"collaboration is the key to success.\" \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9276688344464733,
+        0.9880432458193307
+      ],
+      "excerpt": "Prediction: \"it is important to promote their mental health .\" \nGoogle Translate: \"it is important to take care of your mental health.\"   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A multi-langauge translator that utilizes the transformer neural network model from the paper titled Attention is all you need. ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Transformer-Multi-Language-Translator/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 08:25:26 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/u7javed/Transformer-Multi-Language-Translator/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "u7javed/Transformer-Multi-Language-Translator",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8422182619071705
+      ],
+      "excerpt": "If you want to test the software without training or any other steps described above, then follow the following steps: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.950563948951535,
+        0.8486083573997023,
+        0.9099440223319041
+      ],
+      "excerpt": "  - train.py \n    - an executable python script that takes in parameters including hyperparameters for the transformer model as well as training paramters. While running, the programs save the model weights to a specified directory every epoch and displays training loss. Run this file as follows: \n    python train.py --hyperparameters \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.846522077634543
+      ],
+      "excerpt": "Run the python script translate.py and entering the hyperparameters input_text, input_lang, output_lang. For example, \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/u7javed/Transformer-Multi-Language-Translator/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Umer \\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Transformer Multi-Language Translator",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Transformer-Multi-Language-Translator",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "u7javed",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/u7javed/Transformer-Multi-Language-Translator/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Wed, 22 Dec 2021 08:25:26 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite as:\n\n```bibtex\n@inproceedings{yan-etal-2021-fastseq,\n    title = \"{F}ast{S}eq: Make Sequence Generation Faster\",\n    author = \"Yan, Yu and Hu, Fei and Chen, Jiusheng and Bhendawade, Nikhil and Ye, Ting and Gong, Yeyun  and Duan, Nan  and Cui, Desheng  and Chi, Bingyu and Zhang, Ruofei\",\n    booktitle = \"Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing: System Demonstrations\",\n    year = \"2021\",\n}\n\n\n@InProceedings{pmlr-v139-yan21a,\n  title = \t {EL-Attention: Memory Efficient Lossless Attention for Generation},\n  author =       {Yan, Yu and Chen, Jiusheng and Qi, Weizhen and Bhendawade, Nikhil and Gong, Yeyun and Duan, Nan and Zhang, Ruofei},\n  booktitle = \t {Proceedings of the 38th International Conference on Machine Learning},\n  pages = \t {11648--11658},\n  year = \t {2021},\n}\n\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@InProceedings{pmlr-v139-yan21a,\n  title =    {EL-Attention: Memory Efficient Lossless Attention for Generation},\n  author =       {Yan, Yu and Chen, Jiusheng and Qi, Weizhen and Bhendawade, Nikhil and Gong, Yeyun and Duan, Nan and Zhang, Ruofei},\n  booktitle =    {Proceedings of the 38th International Conference on Machine Learning},\n  pages =    {11648--11658},\n  year =     {2021},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{yan-etal-2021-fastseq,\n    title = \"{F}ast{S}eq: Make Sequence Generation Faster\",\n    author = \"Yan, Yu and Hu, Fei and Chen, Jiusheng and Bhendawade, Nikhil and Ye, Ting and Gong, Yeyun  and Duan, Nan  and Cui, Desheng  and Chi, Bingyu and Zhang, Ruofei\",\n    booktitle = \"Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing: System Demonstrations\",\n    year = \"2021\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9055392137394023
+      ],
+      "excerpt": "EL-Attention: Memory Efficient Lossless Attention for Generation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| Bart (hf) | 4.5 | 12.4 | 2.8x  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| WMT16 En-De (fs)        | 144.5   | 422.8  | 2.9x  | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9515557539764941
+      ],
+      "excerpt": "fs stands for Fairseq 0.10.2 version, hf stands for Huggingface Transformers 4.12.0 version. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeOfConduct": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://raw.githubusercontent.com/microsoft/fastseq/main/CODE_OF_CONDUCT.md",
+    "technique": "File Exploration"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/fastseq",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-15T17:23:18Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T21:15:29Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "FastSeq provides efficient implementation of popular sequence models (e.g. [Bart](https://arxiv.org/pdf/1910.13461.pdf), [ProphetNet](https://github.com/microsoft/ProphetNet)) for text generation, summarization, translation tasks etc. It automatically optimizes inference speed based on popular NLP toolkits (e.g. [FairSeq](https://github.com/pytorch/fairseq) and [HuggingFace-Transformers](https://github.com/huggingface/transformers)) without accuracy loss. All these can be easily done (no need to change any code/model/data if using our command line tool, or simply add one-line code `import fastseq` if using source code).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9151514663885442
+      ],
+      "excerpt": "| Model            | W/O FastSeq (in samples/s) | W/ FastSeq (in samples/s) | Speedup | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9568094358787645
+      ],
+      "excerpt": "All benchmarking experiments run on NVIDIA-V100-16GB with docker. Highest speed recorded for each model by tuning batch size. For parameter setting details, click link of corresponding model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8290863265012094,
+        0.9776538954623145
+      ],
+      "excerpt": "Optimizations were automatically applied to all generation/sequence models in Fairseq & Huggingface Transformers. Above only lists a subset of them. \nFastSeq develops multiple speedup techniques, including an attention cache optimization, an efficient algorithm for detecting repeated n-grams, and an asynchronous generation pipeline with parallel I/O. These optimizations support various Transformer-based model architectures, such as the encoder-decoder architecture, the decoder-only  architecture, and the encoder-only architecture. The more efficient implementations in FastSeq will be automatically patched to replace the ones in existing NLP toolkits (e.g., HuggingFace-Transformers and FairSeq), so there is no need of big code changes to integrate FastSeq with these toolkits. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8199837720617734
+      ],
+      "excerpt": "a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8073737513954784,
+        0.9783267603835809
+      ],
+      "excerpt": "This project has adopted the Microsoft Open Source Code of Conduct. \nFor more information see the Code of Conduct FAQ or \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An efficient implementation of the popular sequence models for text generation, summarization, and translation tasks. https://arxiv.org/pdf/2106.04718.pdf",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/fastseq/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 29,
+      "date": "Sat, 25 Dec 2021 13:28:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/fastseq/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft/fastseq",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/docker/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/examples/EL-attention/EL_attention_Demo.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/utils.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/benchmark.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/benchmark_fs.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/run_all_benchmarks.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/range.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/benchmark_hf.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/hf.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_t5.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_bart.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/fs_bart.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_gpt2.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/fs_wmt.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_distibart.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_prophetnet.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/hf_mbart.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/benchmarks/models/fs_prophetnet.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/tests/run_fairseq_tests.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/tests/run_fastseq_tests.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/tests/run_transformers_tests.sh",
+      "https://raw.githubusercontent.com/microsoft/fastseq/main/examples/prophetnet/generate_binary_data_for_prophetnet.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n#: when fairseq and/or transformers has been installed\n$ pip install git+https://github.com/microsoft/fastseq.git\n\n#: install fastseq + transformers\n$ pip install git+https://github.com/microsoft/fastseq.git#:egg=fastseq[transformers]\n\n#: install fastseq + fairseq\n$ pip install git+https://github.com/microsoft/fastseq.git#:egg=fastseq[fairseq]\n\n#: install fastseq + transformers + fairseq\n$ pip install git+https://github.com/microsoft/fastseq.git#:egg=fastseq[transformers,fairseq]\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8289245287342258
+      ],
+      "excerpt": "Changes to Python code should conform to PEP 8. yapf can be used to help format the python code, and use pylint to check your Python changes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8003352366805131
+      ],
+      "excerpt": "a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/microsoft/fastseq/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell",
+      "Dockerfile",
+      "Cuda",
+      "C++"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'    MIT License\\n\\n    Copyright (c) Microsoft Corporation.\\n\\n    Permission is hereby granted, free of charge, to any person obtaining a copy\\n    of this software and associated documentation files (the \"Software\"), to deal\\n    in the Software without restriction, including without limitation the rights\\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\n    copies of the Software, and to permit persons to whom the Software is\\n    furnished to do so, subject to the following conditions:\\n\\n    The above copyright notice and this permission notice shall be included in all\\n    copies or substantial portions of the Software.\\n\\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\n    SOFTWARE\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Introduction",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "fastseq",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "microsoft",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/microsoft/fastseq/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "feihugis",
+        "body": "This version supports FairSeq-v0.9.0 and Transformers-v3.0.2.",
+        "dateCreated": "2021-09-08T18:09:02Z",
+        "datePublished": "2021-09-09T00:21:42Z",
+        "html_url": "https://github.com/microsoft/fastseq/releases/tag/v0.1.0",
+        "name": "v0.1.0",
+        "tag_name": "v0.1.0",
+        "tarball_url": "https://api.github.com/repos/microsoft/fastseq/tarball/v0.1.0",
+        "url": "https://api.github.com/repos/microsoft/fastseq/releases/49239741",
+        "zipball_url": "https://api.github.com/repos/microsoft/fastseq/zipball/v0.1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python version >= 3.6\n- [torch](http://pytorch.org/) >= 1.4.0\n- [fairseq](https://github.com/pytorch/fairseq) >= 0.10.0\n- [transformers](https://github.com/huggingface/transformers) >= 4.12.0\n- [requests](https://pypi.org/project/requests/) >= 2.24.0\n- [absl-py](https://pypi.org/project/absl-py/) >= 0.9.0\n- [rouge-score](https://pypi.org/project/rouge-score/) >= 0.0.4\n\nIf you use fairseq or transformers, you only need to install one of them. If you use both, you need to install both.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\n#: run a single test.\n$ python tests/optimizer/fairseq/test_fairseq_optimizer.py\n\n#: run all the tests.\n$ python -m unittest discover -s tests/ -p '*.py'\n\n#: run all the benchmarks.\n$ cd benchmarks && bash run_all_benchmarks.sh\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 323,
+      "date": "Sat, 25 Dec 2021 13:28:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Only one line of code change is needed to use the optimizations provided by `FastSeq`.\n\n```Python\n#: import fastseq at the beginning of your program\nimport fastseq\nimport torch\n\n#: Download bart.large.cnn\nbart = torch.hub.load('pytorch/fairseq', 'bart.large.cnn')\n\nbart.cuda()  #: use GPU\nbart.eval()  #: disable dropout for evaluation\nbart.half()\n\nslines = ['FastSeq provides efficient implementations of the popular sequence models. Please visit https://github.com/microsoft/fastseq for more details.']\n\nhypotheses = bart.sample(\n    slines, beam=4, lenpen=2.0, max_len_b=140, min_len=55, no_repeat_ngram_size=3)\n\nprint(hypotheses)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Example usage for bart model on cnn daily mail task.\n\n```bash\n$ fastseq-generate-for-fairseq \\\n    cnn_dnn/bin \\\n    --path bart.large.cnn/model.pt \\\n    --fp16 \\\n    --task translation \\\n    --batch-size 128 \\\n    --gen-subset valid \\\n    --truncate-source  \\\n    --bpe gpt2 \\\n    --beam 4 \\\n    --num-workers 4 \\\n    --min-len 55 \\\n    --max-len-b 140 \\\n    --no-repeat-ngram-size 3 \\\n    --lenpen 2.0\n```\nBoth model file and task data file are the same as original Fairseq version.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Example usage for bart model on cnn daily mail task.\n\n```bash\n$ fastseq-generate-for-transformers \\\n    facebook/bart-large-cnn \\\n    cnn_dm/val.source \\\n    out.summary \\\n    --reference_path cnn_dm/val.target \\\n    --device cuda \\\n    --bs 128 \\\n    --fp16 \\\n    --score_path out.score \\\n    --task summarization\n```\nBoth model file and task data file are the same as original Transformers version.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

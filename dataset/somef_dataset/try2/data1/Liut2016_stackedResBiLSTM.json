@@ -1,0 +1,243 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.08989\n\nHere is the BibTeX citation code: \n```\n@article{DBLP:journals/corr/abs-1708-08989,\n  author    = {Yu Zhao and\n               Rennong Yang and\n               Guillaume Chevalier and\n               Maoguo Gong},\n  title     = {Deep Residual Bidir-LSTM for Human Activity Recognition Using Wearable\n               Sensors},\n  journal   = {CoRR},\n  volume    = {abs/1708.08989},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1708.08989},\n  archivePrefix = {arXiv},\n  eprint    = {1708.08989},\n  timestamp = {Mon, 13 Aug 2018 16:46:48 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-08989},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n```",
+      "https://arxiv.org/abs/ https://arxiv.org/abs/1708.08989\n\nHere is the BibTeX citation code: \n```\n@article{DBLP:journals/corr/abs-1708-08989,\n  author    = {Yu Zhao and\n               Rennong Yang and\n               Guillaume Chevalier and\n               Maoguo Gong"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The paper is available on arXiv: https://arxiv.org/abs/1708.08989\n\nHere is the BibTeX citation code: \n```\n@article{DBLP:journals/corr/abs-1708-08989,\n  author    = {Yu Zhao and\n               Rennong Yang and\n               Guillaume Chevalier and\n               Maoguo Gong},\n  title     = {Deep Residual Bidir-LSTM for Human Activity Recognition Using Wearable\n               Sensors},\n  journal   = {CoRR},\n  volume    = {abs/1708.08989},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1708.08989},\n  archivePrefix = {arXiv},\n  eprint    = {1708.08989},\n  timestamp = {Mon, 13 Aug 2018 16:46:48 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-08989},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{DBLP:journals/corr/abs-1708-08989,\n  author    = {Yu Zhao and\n               Rennong Yang and\n               Guillaume Chevalier and\n               Maoguo Gong},\n  title     = {Deep Residual Bidir-LSTM for Human Activity Recognition Using Wearable\n               Sensors},\n  journal   = {CoRR},\n  volume    = {abs/1708.08989},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1708.08989},\n  archivePrefix = {arXiv},\n  eprint    = {1708.08989},\n  timestamp = {Mon, 13 Aug 2018 16:46:48 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-08989},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Liut2016/stackedResBiLSTM",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-13T08:24:53Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-13T08:29:26Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9978220157096224,
+        0.9870048172785774,
+        0.8864868561364461,
+        0.9849272594852685,
+        0.9356320264066977
+      ],
+      "excerpt": "The project is based on this repository which is presented as a tutorial. It consists of Human Activity Recognition (HAR) using stacked residual bidirectional-LSTM cells (RNN) with TensorFlow.  \nIt resembles to the architecture used in \"Google\u2019s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation\" without an attention mechanism and with just the encoder part. In fact, we started coding while thinking about applying residual connections to LSTMs - and it is only afterwards that we saw that such a deep LSTM architecture was already being used.  \nHere, we improve accuracy on the previously used dataset from 91% to 94% and we push the subject further by trying our architecture on another dataset. \nOur neural network has been coded to be easy to adapt to new datasets (assuming it is given a fixed, non-dynamic, window of signal for every prediction) and to use different breadth, depth and length by using a new configuration file. \nHere is a simplified overview of our architecture: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9789888152730281,
+        0.9860756021085323,
+        0.9636675372079037,
+        0.9796598093081605,
+        0.892051549171945
+      ],
+      "excerpt": "Bear in mind that the time steps expands to the left for the whole sequence length and that this architecture example is what we call a \"2x2\" architecture: 2 residual cells as a block stacked 2 times for a total of 4 bidirectional cells, which is in reality 8 unidirectional LSTM cells. We obtain best results with a 3x3 architecture, consisting of 18 LSTM cells. \nMainly, the number of stacked and residual layers can be parametrized easily as well as whether or not bidirectional LSTM cells are to be used. Input data needs to be windowed to an array with one more dimension: the training and testing is never done on full signal lengths and use shuffling with resets of the hidden cells' states. \nWe are using a deep neural network with stacked LSTM cells as well as residual (highway) LSTM cells for every stacked layer, a little bit like in ResNet, but for RNNs. \nOur LSTM cells are also bidirectional in term of how they pass trough the time axis, but differ from classic bidirectional LSTMs by the fact we concatenate their output features rather than adding them in an element-wise fashion. A simple hidden ReLU layer then lowers the dimension of those concatenated features for sending them to the next stacked layer. Bidirectionality can be disabled easily. \nThis dataset named A Public Domain Dataset for Human Activity Recognition Using Smartphones is about classifying the type of movement amongst six categories: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9850965441812901
+      ],
+      "excerpt": "The bests results for a test accuracy of 94% are achieved with the 3x3 bidirectional architecture with a learning rate of 0.001 and an L2 regularization multiplier (weight decay) of 0.005, as seen in the 3x3_result_HAR_6.txt file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8477817157602849
+      ],
+      "excerpt": "The neural network has also been tried on the Opportunity dataset to see if the architecture could be easily adapted to a similar task. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9723821091685845,
+        0.9991989163186363
+      ],
+      "excerpt": "We obtain a test F1-score of 0.893. Our results can be compared to the state of the art DeepConvLSTM that is used on the same dataset and achieving a test F1-score of 0.9157. \nWe only used a subset of the full dataset as done in other research in order to simulate the conditions of the competition, using 113 sensor channels and classifying on the 17 categories output (and with the NULL class for a total of 18 classes). The windowing of the series for feeding in our neural network is also the same 24 time steps per classification, on a 30 Hz signal. However, we observed that there was no significant difference between using 128 time steps or 24 time steps (0.891 vs 0.893 F1-score). Our LSTM cells' inner representation is always reset to 0 between series. We also used mean and standard deviation normalization rather than min to max rescaling to rescale features to a zero mean and a standard deviation of 0.5. More details about preprocessing are explained furthermore in their paper. Other details, such as the fact that the classification output is sampled only at the last timestep for the training of the neural network, can be found in their preprocessing script that we adapted in our repository. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Upgrade HAR-stacked-residual-bidir-LSTMs to tensorflow 1.15 and tensorflow 2.0",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Liut2016/stackedResBiLSTM/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Wed, 22 Dec 2021 09:43:53 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Liut2016/stackedResBiLSTM/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Liut2016/stackedResBiLSTM",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We used `TensorFlow 0.11` and `Python 2`. `Sklearn` is also used.\n\nThe two datasets can be loaded by running `python download_datasets.py` in the `data/` folder.\n\nTo preprocess the second dataset (opportunity challenge dataset), the `signal` submodule of scipy is needed, as well as `pandas`.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9202509175650415
+      ],
+      "excerpt": "  <img src=\"architecture_example_2x2.jpg\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8998517268431501
+      ],
+      "excerpt": "Training and testing can be launched by running the config: python config_dataset_HAR_6_classes.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8266678513775988
+      ],
+      "excerpt": "The config file can be runned like this: config_dataset_opportunity_18_classes.py. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Liut2016/stackedResBiLSTM/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright 2016 Guillaume Chevalier and Yu Zhao\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "HAR-stacked-residual-bidir-LSTM",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "stackedResBiLSTM",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Liut2016",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Liut2016/stackedResBiLSTM/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 09:43:53 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

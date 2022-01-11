@@ -1,0 +1,400 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Great thanks to Josh Achiam, the author of OpenAI Spinning Up for providing the spinup documentation and original codebase. Many thanks to hpc admin Zhiguo for his enormous support.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.01290\n\nOpenAI Spinup docs on SAC: https://spinningup.openai.com/en/latest/algorithms/sac.html\n\nrlkit sac implementation: https://github.com/vitchyr/rlkit\n\nBest practice for install conda and pip environments...\nhttps://www.anaconda.com/blog/using-pip-in-a-conda-environment\n\"using pip only after all other requirements have been installed via conda is the safest practice.\"\n\n## Fix problems\nIt is highly likely you will run into some problems when installing on your own machine, most of the time, this is because some python, or (more commonly"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Original SAC paper: https://arxiv.org/abs/1801.01290\n\nOpenAI Spinup docs on SAC: https://spinningup.openai.com/en/latest/algorithms/sac.html\n\nrlkit sac implementation: https://github.com/vitchyr/rlkit\n\nBest practice for install conda and pip environments...\nhttps://www.anaconda.com/blog/using-pip-in-a-conda-environment\n\"using pip only after all other requirements have been installed via conda is the safest practice.\"\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/watchernyu/spinningup-drl-prototyping",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-06-18T12:41:45Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-23T09:33:27Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9980980456815496
+      ],
+      "excerpt": "Soft Actor-Critic Pytorch Implementation, based on the OpenAI Spinup documentation and some of its code base. This is a minimal, easy-to-learn and well-commented Pytorch implementation, and recommended to be studied along with the OpenAI Spinup Doc. This SAC implementation is based on the OpenAI spinningup repo, and uses spinup as a dependency. Target audience of this repo is Pytorch users (especially NYU students) who are learning DRL. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372396012058242
+      ],
+      "excerpt": "On OSX:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.855789541585143
+      ],
+      "excerpt": "Now by default use sac_adapt_fast.py, which takes one udpate after each data collection. This is more consistent with SAC paper and might be more robust. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9803964638464487
+      ],
+      "excerpt": "This is likely due to lack of C++ compile tools, look for the gtatiya response:  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It can take some time, especially for pytorch and tensorflow installation part. You can install them in the background, and when one step is finished, move on to the next. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "These are python packages, they provide the simulated environments where we test DRL agents. Make sure your terminal's current location is at a place where you can find, and where you have space to download some stuff. Note I have a `cd ..` in between installing these 2 packages, please don't install a package inside the folder of another. \n```\ngit clone https://github.com/openai/gym.git\ncd gym\npip install -e .\ncd ..\ngit clone https://github.com/openai/mujoco-py\ncd mujoco-py\npip install -e . --no-cache\ncd ..\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "On mac, you first need to install openmpi with brew: `brew install openmpi`. If you are still in python from last step, then use `quit()`, or use the shortcut Ctrl+D to exit python and return to your terminal. We will now download and install some other packages. This repo is based on the openai spinup repo. We have added the pytorch version of the SAC algorithm and some hpc sample scripts etc. Make sure your terminal's current location is not inside a package folder, you can use `cd ..` to move to the parent folder. Now run the commands to download and install this repo:\n\n```\ngit clone https://github.com/watchernyu/spinningup-drl-prototyping.git\ncd spinningup-drl-prototyping\npip install numpy==1.16.4\npip install tensorflow==1.12.0\npip install seaborn==0.8.1\npip install -e .\ncd ..\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/watchernyu/spinningup-drl-prototyping/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It is highly likely you will run into some problems when installing on your own machine, most of the time, this is because some python, or (more commonly) non-python packages are missing. Solutions to some of these problems can be found on the github pages or the documentation site of the packages we use. But here we also list a number of common issues and solutions. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Some **mac** users will run into gcc error. Typically it will first tell you to install gcc with brew. From past experience, it seems `gcc-6` works, so first try install with brew with the command `brew install gcc@6`, if you don't have brew, you will need to first install brew. If your brew is not installing things correctly, then you might try uninstall your brew and then reinstall brew, and then try `brew install gcc@6` again. After this step, you should have `gcc-6` now, but things might still not work, because your `gcc` command is mapped to the wrong gcc version. Check your gcc version wtih the command: `gcc --version`, gcc-6 is the version that works. gcc-4 and gcc-7 seem to fail (not sure why gcc 7 works on linux but fails on mac??). Likely you will see sth that is not gcc-6, so now you want to change your default gcc. This can be done with the command:\n\n```\ncd /usr/local/bin\nrm gcc\nln -s gcc-6 gcc\n```\n\nEssentially you create a symbolic link so that your `gcc` points to `gcc-6`. If you are interested, here is a tutorial on how symbolic link works: https://www.youtube.com/watch?v=-edTHKZdkjo start from 4:25. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "When you install spinning up, you might see this: `ERROR: After October 2020 you may experience errors when installing or updating packages. This is because pip will change the way that it resolves dependency conflicts.` Ignore it. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Simply do what the instructions tell you. Find that file and add that line. You can use export or nano, if you don't know what these are, you can use filezilla to connect, and once you connect, you can try to find that file (the file is located at `/gpfsnyu/home/netid`, which is precisely the default location after you connected to the hpc). This is your home directory on the hpc, and in the terminal you can use `cd ~` to go to the same place. You can send this file back to your local machine, edit it with any text editor, and then send it back to the hpc to overwrite it. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Fri, 24 Dec 2021 15:27:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/watchernyu/spinningup-drl-prototyping/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "watchernyu/spinningup-drl-prototyping",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/watchernyu/spinningup-drl-prototyping/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/watchernyu/spinningup-drl-prototyping/master/travis_setup.sh",
+      "https://raw.githubusercontent.com/watchernyu/spinningup-drl-prototyping/master/sample_hpc_scripts/sample_quick_test_job_array_script.sh",
+      "https://raw.githubusercontent.com/watchernyu/spinningup-drl-prototyping/master/sample_hpc_scripts/sample_job_array_script.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It is highly likely you will run into some problems when installing on your own machine, most of the time, this is because some python, or (more commonly) non-python packages are missing. Solutions to some of these problems can be found on the github pages or the documentation site of the packages we use. But here we also list a number of common issues and solutions. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "After you login to the HPC, you will now be on a login node, we will download and install python packages on this node, then test somewhere else. First load anaconda3 and some other modules:\n```\nmodule load anaconda3\nmodule load cuda/9.0 glfw/3.3 gcc/7.3 mesa/19.0.5 llvm/7.0.1\n```\nThen you can proceed to perform the same installation process. Except that you need the linux mujoco files. You can install filezilla: https://filezilla-project.org/ and use it to transfer files between your machine and the hpc. To connect to the hpc via Filezilla, open the site manager (its icon is typically at the top left corner of the window), add a new site: set Host = `hpc.shanghai.nyu.edu`, port = `22`, protocol: `SFTP`, Logon Type:`Normal`, and enter your NYU credentials. Later on you can also add bookmarks so that you can easily go to certain commonly-used locations on the hpc. You can also use quickconnect. \n\nAfter you installed everything, use this command to start an interactive shell on a non-login node: \n`srun -p aquila --pty --mem  5000 -t 0-01:00 bash`, now you will be in one of the non-login nodes, these nodes don't have internet connection so you cannot download stuff, but you can perform test here, now use `source deactive` to deactivate your virtual environment, then you can active your environment, and then perform the tests (import mujoco, run sac etc.) here. \n\nNote: if you are submitting jobs using sbatch, make sure you deactivate your environment, or simply log out and log in again before submitting the job. \n\nFor a list of common commands, check `commonly_used_hpc_commands.txt`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "On mac, you first need to install openmpi with brew: `brew install openmpi`. If you are still in python from last step, then use `quit()`, or use the shortcut Ctrl+D to exit python and return to your terminal. We will now download and install some other packages. This repo is based on the openai spinup repo. We have added the pytorch version of the SAC algorithm and some hpc sample scripts etc. Make sure your terminal's current location is not inside a package folder, you can use `cd ..` to move to the parent folder. Now run the commands to download and install this repo:\n\n```\ngit clone https://github.com/watchernyu/spinningup-drl-prototyping.git\ncd spinningup-drl-prototyping\npip install numpy==1.16.4\npip install tensorflow==1.12.0\npip install seaborn==0.8.1\npip install -e .\ncd ..\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Openai gym has a number of environments to test on, we want to test on a list of robotic environments that are called MuJoCo environments. For these to work, we also need to download the MuJoCo physics engine. Go to this website `https://www.roboti.us/index.html`, and download the mujoco files for your operating system. For example, if you are on mac, click `mujoco200 macos`. We need to put these files to the correct location so that the python package `mujoco-py` can work, and then we can use those environments in `gym`. You will also need a license, ask your TA for the license. The instructions are given on this page `https://github.com/openai/mujoco-py`, basically, if you use linux or mac, (copy-pasted from that page), Unzip the downloaded `mujoco200` directory into `~/.mujoco/mujoco200`, and place your license key (the `mjkey.txt` or `authorized_keys`) in the folder `~/.mujoco/`. So in the end, under the folder `~/.mujoco/`, you should have a mujoco key file, and then also the folder `mujoco200`. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "These are python packages, they provide the simulated environments where we test DRL agents. Make sure your terminal's current location is at a place where you can find, and where you have space to download some stuff. Note I have a `cd ..` in between installing these 2 packages, please don't install a package inside the folder of another. \n```\ngit clone https://github.com/openai/gym.git\ncd gym\npip install -e .\ncd ..\ngit clone https://github.com/openai/mujoco-py\ncd mujoco-py\npip install -e . --no-cache\ncd ..\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It can take some time, especially for pytorch and tensorflow installation part. You can install them in the background, and when one step is finished, move on to the next. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Make sure Go to a place on your machine where you can put python files. (for example, desktop or home, or create a folder), make sure you have Anaconda on your machine, then run the following commands in your terminal, which will create a conda environment called rl and then install for you:\n\nIf `source activate drl` does not work, you should try `conda activate drl`. You might want to run these commands one line at a time. Or if you konw what you are doing and you have setup certain required system packages correctly already, you can run multiple lines at a time. But please do spend a little time think about what you are doing by running that line, for example, `cd ..` will let you go to the parent folder's directory, so if you are in a location where you can download files, you run some commands, then you move to another location, and run another terminal, and you didn't change the current directory, and you also run the exact next command, without thinking about what is happening, then things will go wrong. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9469600697952557,
+        0.8967744555437658,
+        0.8077864829004744,
+        0.954950449355536,
+        0.9770335174395833,
+        0.9865441524656512
+      ],
+      "excerpt": "If conda activate drl does not work, then try source activate drl.  \nIf you are installing on the NYU Shanghai hpc, you first need to apply for an account, then you will use ssh &lt;netid&gt;@hpc.shanghai.nyu.edu to connect to the hpc, replace &lt;netid&gt; with your own netid. You can only access the hpc with this command when you are inside NYU network (using nyu wifi, or using nyu vpn). When you are connected, first run module load anaconda3 so you have anaconda3. If you are using your own machine, you need to install anaconda on your own machine.  \nOn Linux and Windows (Note, for our test environments, Windows is not well supported, so will be problematic, consider use a ubuntu virtual machine): \nconda create -n drl python=3.6 \nconda activate drl  \nconda install pytorch==1.3.1 torchvision==0.4.2 cudatoolkit=10.1 -c pytorch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.954950449355536,
+        0.9770335174395833,
+        0.9951750829147036,
+        0.8958634981324679
+      ],
+      "excerpt": "conda create -n drl python=3.6 \nconda activate drl  \nconda install pytorch==1.3.1 torchvision==0.4.2 -c pytorch \nNow before we move on, we want to test if MuJoCo works. Run python (make sure you are still in that drl virtual env), after you entered python: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8474895321345809
+      ],
+      "excerpt": "e = gym.make('Ant-v2') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.920143359479325,
+        0.9066401002378417
+      ],
+      "excerpt": "Now you have both the environment and the pytorch code for an SAC agent, make sure your current location is at the folder that contains spinningup-drl-prototyping, and run the following command for a quick test:  \ncd spinningup-drl-prototyping/spinup/algos/sac_pytorch \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312165937764387,
+        0.9770335174395833
+      ],
+      "excerpt": "Go to the sample_data folder, and you can test the plotting functionality. Start a terminal and run the following commands (skip the first line if you are already in the virtualenv): \nconda activate drl \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9859156504307792
+      ],
+      "excerpt": "If you are seeing error related to openmpi, go to this page https://spinningup.openai.com/en/latest/user/installation.html and then follow the instructions on brew install openmpi. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9133368656218674,
+        0.9133368656218674
+      ],
+      "excerpt": "import gym \nimport mujoco_py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8524457426084595
+      ],
+      "excerpt": "python sac_adapt_fast.py --hid 4 --steps_per_epoch 1000 --epochs 2 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8678264521905716,
+        0.9163958516866254
+      ],
+      "excerpt": "python -m spinup.run plot -s 10 alg1data/alg1_ant-v2/ alg2data/alg2_ant-v2/ --legend algorithm1 algorithm2 --color tab:orange tab:blue --value Performance --xlabel timestep --ylabel Performance \npython -m spinup.run plot -s 10 alg1data/alg1_ant-v2/ alg2data/alg2_ant-v2/ --legend alg1 alg2 --color red blue --value AverageQ1Vals --xlabel timestep --ylabel QValue \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/watchernyu/spinningup-drl-prototyping/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License\\n\\nCopyright (c) 2018 OpenAI (http://openai.com)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in\\nall copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\\nTHE SOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Soft Actor-Critic Pytorch Implementation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "spinningup-drl-prototyping",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "watchernyu",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/watchernyu/spinningup-drl-prototyping/blob/master/readme.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The SAC and SAC adaptive implementation can be found under `spinup/algos/sac_pytorch/`\n\nRun experiments with pytorch sac: \n\nIn the sac_pytorch folder, run the SAC code with `python sac_pytorch`\n\nNote: currently there is no parallel running for SAC (also not supported by spinup), so you should always set number of cpu to 1 when you use experiment grid.\n\nThe program structure, though in Pytorch has been made to be as close to spinup tensorflow code as possible so readers who are familiar with other algorithm code in spinup will find this one easier to work with. I also referenced rlkit's SAC pytorch implementation, especially for the policy and value models part, but did a lot of simplification. \n\nConsult Spinup documentation for output and plotting:\n\nhttps://spinningup.openai.com/en/latest/user/saving_and_loading.html\n\nhttps://spinningup.openai.com/en/latest/user/plotting.html\n\nFeatures of original spinup are mostly supported. In addition, we have some new features:\n\n`sample_hpc_scripts` folder contains sample scripts that you can use to run parallel job arrays on the hpc. \n\n`sample_plot_helper` contains a short sample program that can help you do plotting in a more automatic way. The program can be tested to plot the data in `sample_data`. \n\n`sample_quick_test_job_array_grid.py` and `sample_quick_test_job_array_script.sh` are similar but run very quick jobs that are good for testing your environment setup. \n\nAfter you get the results (by default they show up in a folder called data), you can then use `python -m spinup.run plot <your data folder name>`. For example, if your folder name is \"sac\", then you should do `python -m spinup.run plot sac/`, make sure the name has that slash and it's not `python -m spinup.run plot sac`. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Fri, 24 Dec 2021 15:27:00 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

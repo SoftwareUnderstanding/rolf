@@ -1,0 +1,325 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1509.06461"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- [Intro to Reinforcement Learning](https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ) by David Silver (greatly helped to get insights of Reinforcement learning)  \n- [Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/pdf/1509.06461.pdf) paper  \n- [Human-level control through deep reinforcement learning](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf) paper - for the Atari environment  \n- Medium Blog - https://towardsdatascience.com/dueling-deep-q-networks-81ffab672751\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9949147839882485,
+        0.992159593203624
+      ],
+      "excerpt": "Authors: Ziyu Wang, Tom Schaul, Matteo Hessel, Hado van Hasselt, Marc Lanctot, Nando de Freitas \nLink to the paper: https://arxiv.org/pdf/1511.06581.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9702452505706127
+      ],
+      "excerpt": "<img src=\"https://media.geeksforgeeks.org/wp-content/uploads/20200318200401/Screenshot-2020-03-18-at-8.03.38-PM.png\" />   \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hemilpanchiwala/Dueling_Network_Architectures",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-16T07:14:41Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-26T15:19:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9949287521787468
+      ],
+      "excerpt": "This repository provides the Pytorch implementation of Dueling Network Architectures for Deep Reinforcement Learning paper   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9941282124963157,
+        0.9855501509147867
+      ],
+      "excerpt": "This paper presents a complete new network architecture for the model-free reinforcement learning layered over the existing architectures. This dueling network represents two separate estimates, one for the state value function and another for the action advantage function. The main benefit of separating estimates is that the agent can learn over the actions without imposing any change in the basic reinforcement learning algorithm.  It is an alternative but complementary approach of focusing primarily on innovating a neural network architecture which provides more better results for model-free RL. This dueling algorithm outperforms the state-of-the-art on the Atari 2600 domain.   \nIn the implementation, I have used both the Q-Network algorithms, DeepQNetwork and improvised DoubleDeepQNetwork (similar to the DeepQNetwork with a small update in the output value y) of van Hasselt et al. (2015). I have also used an experience replay memory which improves the algorithm more better as the experience tuples can provide high expected learning progress and also leads to faster learning and better policy. I have currently used the random policy for getting a experience from the replay memory (prioritized replay even performs better).   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8856327060315577
+      ],
+      "excerpt": "The dueling network architecture now considers the action value function as the combination of the value and the advantage functions. The paper first starts with the addition of value and advantage but that had an issue of identifiability (adding some constant to value and subtracting same from advantage results in same Q value). To address this, paper says to force the advantage estimator function to have zero advantage at the chosen action. The equation looks as follows:   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9879284875575587
+      ],
+      "excerpt": "I have used an alternative equation (mentioned in the paper) which replaces the max operator in the above equation to average of all the advantages. Also, this makes the equation linear. Here's the equation used:   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8175739297061304
+      ],
+      "excerpt": "As dueling network shares the same input-output interface as the simple Q-networks, all the learning algorithms of Q-networks can be used for training the dueling architecture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9269510764960397,
+        0.9423686142276831,
+        0.9271162601037031,
+        0.939410117221863,
+        0.9487056720928418,
+        0.9480887332532947,
+        0.8554823072754384
+      ],
+      "excerpt": "main.py - Performs the main work of running the model over the number of games for learning with initializing the agents, calculating different result statistics, and plotting the results.   \nDuelingDeepQNetwork.py - Contains the complete architecture of converting the input frame (in form of an array) to getting the outputs (value and advantage functions). It contains the 3 convolution layers (with ReLU function applied) followed by two fully connected (with ReLU) outputing the value and advantage. It also has the optimizer, and loss function.   \nDuelingDQNAgent.py - This file provides agent for the DuelingDeepQNetwork containing the main learning function. With this, it also contains methods for changing epsilon, getting samples, storing experiences, choosing actions (using epsilon-greedy approach), replacing target networks, etc.   \nDuelingDDQNAgent.py - This file provides agent for the DuelingDoubleDeepQNetwork having major things similar to the DuelingDQNAgent with some changes in the learn function.   \nExperienceReplayMemory.py - This file contains the past experiences observed by the agent while playing the games which becomes useful in learning. It contains the methods for adding an experience, and getting any random experience.   \nutils.py - This file contains the code for building the environment of the Atari game with methods for preprocessing frames, stacking frames, etc. needed to make it similar to the DeepMind paper. \nresults/ - This folder contains the saved models learnt by DuelingDeepQNetwork and DuelingDoubleDeepQNetwork. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8772084708126624
+      ],
+      "excerpt": "README.md - This file which gives complete overview of the implementation.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9645521764219115,
+        0.8576370214174447,
+        0.8713261226164939
+      ],
+      "excerpt": "The architecture of the Dueling Deep Q Network is quite simple with just one important thing of taking two outputs from the same neural network (instead of one). Here, basically the input_dimensions are passed to the network which are convoluted using three convolution layers with each following the ReLU (Rectified Linear Unit) activation. The first convolution layer convolutes the input to 32 output channels with kernel size of 3 x 3 and stride of 4. The second convolution convolutes the output from the first one into 64 output channels with kernel size of 4 x 4 and stride of 2. The final convolution layer convolutes the 64 channels from the second one to 64 output channels again but with a kerner size of 3 x 3 and stride of 1.   \nThis convoluted outputs are then flattened and passed into the fully connected layers. The first layer applies linear transformation from the flattened outputs dimensions to 1024 which is again linearly transformed to 512 by the next layer. This 512 neurons are then linearly transformed into two outputs separately: value (from 512 to 1) and advantage (from 512 to the number of actions) function.   \nThese value and advantage functions are then used to calculate the Q value of the learning function basically described as below \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9741340274787909
+      ],
+      "excerpt": "Both the architectures provided good results of winning with a scores up to 20-22 in Pong game (PongFrameskip-v4) by learning over 1000 games. Here are the learning plots of both the algorithms with scores averaged over last 30 to avoid high fluctuations: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.892418711165829
+      ],
+      "excerpt": "Here, the high fluctuations in between the plots shows that the agent explores instead of choosing any greedy action which may result in some better policy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8376945824789221
+      ],
+      "excerpt": "The DuelingDeepQNetwork as well as DuelingDoubleDeepQNetwork agents were trained for 1000 games with storing the scores, epsilon, and steps count. The hyperparameters which provided good results after training are as follows:   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.892945976129038
+      ],
+      "excerpt": "| Input dimensions | Shape of observation space | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Implementation of Dueling Network Architectures for Deep Reinforcement Learning paper with Pytorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hemilpanchiwala/Dueling_Network_Architectures/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 12:19:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hemilpanchiwala/Dueling_Network_Architectures/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hemilpanchiwala/Dueling_Network_Architectures",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8837680365796365,
+        0.8233588558014837
+      ],
+      "excerpt": "Python    \nNumpy    \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9322609392449874
+      ],
+      "excerpt": "Pytorch   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9851533852962743,
+        0.9935459261120722
+      ],
+      "excerpt": "For installing all the requirements just run the requirements.txt file using the following command: \npip3 install -r requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9620579789601548
+      ],
+      "excerpt": "requirements.txt - Provides ready to install all the required libraries for running the implementation. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9210128293156316,
+        0.8822220980012943
+      ],
+      "excerpt": "You can train the model by running the main.py file using the command \npython main.py- You can set the number of games for training by changing the value of variable n_games (current is 500) in main.py.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8575523954739335
+      ],
+      "excerpt": "Q_value = Value + (Advantage - mean(Advantage)) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hemilpanchiwala/Dueling_Network_Architectures/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Dueling Network Architectures for Deep Reinforcement Learning",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Dueling_Network_Architectures",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hemilpanchiwala",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hemilpanchiwala/Dueling_Network_Architectures/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Just run the main.py file by the command `python main.py` with making the `load_checkpoint` variable to `True` which will load the saved parameters of the model and output the results.  \n  \n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Thu, 23 Dec 2021 12:19:00 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pytorch",
+      "dueling-network-architectures",
+      "reinforcement-learning-algorithms"
+    ],
+    "technique": "GitHub API"
+  }
+}

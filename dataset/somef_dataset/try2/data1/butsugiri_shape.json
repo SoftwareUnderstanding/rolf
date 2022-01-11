@@ -1,0 +1,441 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository is based on [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py), a wonderful and state-of-the-art NMT framework.\n\nI would like thank the contributors of the original codebase.\n\n---\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "OpenNMT-py is run as a collaborative open-source project.\nThe original code was written by [Adam Lerer](http://github.com/adamlerer) (NYC) to reproduce OpenNMT-Lua using PyTorch.\n\nMajor contributors are:\n* [Sasha Rush](https://github.com/srush) (Cambridge, MA)\n* [Vincent Nguyen](https://github.com/vince62s) (Ubiqus)\n* [Ben Peters](http://github.com/bpopeters) (Lisbon)\n* [Sebastian Gehrmann](https://github.com/sebastianGehrmann) (Harvard NLP)\n* [Yuntian Deng](https://github.com/da03) (Harvard NLP)\n* [Guillaume Klein](https://github.com/guillaumekln) (Systran)\n* [Paul Tardy](https://github.com/pltrdy) (Ubiqus / Lium)\n* [Fran\u00e7ois Hernandez](https://github.com/francoishernandez) (Ubiqus)\n* [Linxiao Zeng](https://github.com/Zenglinxiao) (Ubiqus)\n* [Jianyu Zhan](http://github.com/jianyuzhan) (Shanghai)\n* [Dylan Flaute](http://github.com/flauted) (University of Dayton)\n* ... and more!\n\nOpenNMT-py is part of the [OpenNMT](https://opennmt.net/) project.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1705.03122",
+      "https://arxiv.org/abs/1709.02755"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you are using OpenNMT-py for academic work, please cite the initial [system demonstration paper](https://www.aclweb.org/anthology/P17-4012) published in ACL 2017:\n\n```\n@inproceedings{klein-etal-2017-opennmt,\n    title = \"{O}pen{NMT}: Open-Source Toolkit for Neural Machine Translation\",\n    author = \"Klein, Guillaume  and\n      Kim, Yoon  and\n      Deng, Yuntian  and\n      Senellart, Jean  and\n      Rush, Alexander\",\n    booktitle = \"Proceedings of {ACL} 2017, System Demonstrations\",\n    month = jul,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P17-4012\",\n    pages = \"67--72\",\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{klein-etal-2017-opennmt,\n    title = \"{O}pen{NMT}: Open-Source Toolkit for Neural Machine Translation\",\n    author = \"Klein, Guillaume  and\n      Kim, Yoon  and\n      Deng, Yuntian  and\n      Senellart, Jean  and\n      Rush, Alexander\",\n    booktitle = \"Proceedings of {ACL} 2017, System Demonstrations\",\n    month = jul,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P17-4012\",\n    pages = \"67--72\",\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9332767710678362
+      ],
+      "excerpt": "audio, image and video inputs; \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/butsugiri/shape",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Contributors\nOpenNMT-py is a community developed project and we love developer contributions.\nGuidelines\nBefore sending a PR, please do this checklist first:\n\nPlease run onmt/tests/pull_request_chk.sh and fix any errors. When adding new functionality, also add tests to this script. Included checks:\nflake8 check for coding style;\nunittest;\ncontinuous integration tests listed in .travis.yml.\n\n\nWhen adding/modifying class constructor, please make the arguments as same naming style as its superclass in PyTorch.\nIf your change is based on a paper, please include a clear comment and reference in the code (more on that below). \n\nDocstrings\nAbove all, try to follow the Google docstring format\n(Napoleon example,\nGoogle styleguide).\nThis makes it easy to include your contributions in the Sphinx documentation. And, do feel free\nto autodoc your contributions in the API .rst files in the docs/source folder! If you do, check that\nyour additions look right.\nHow to build the docs locally?\n```bash\ncd docs\ninstall some dependencies if necessary:\nrecommonmark, sphinx_rtd_theme, sphinxcontrib-bibtex\npip install requirements.txt\nmake html\nfirefox build/html/main.html  # or your browser of choice\n```\nSome particular advice:\n- Try to follow Python 3 typing module conventions when documenting types.\n    - Exception: use \"or\" instead of unions for more readability\n    - For external types, use the full \"import name\". Common abbreviations (e.g. np) are acceptable.\n      For torch.Tensor types, the torch. is optional.\n    - Please don't use tics like (`str`) or rst directives like (:obj:`str`). Napoleon handles types\n      very well without additional help, so avoid the clutter.\n- Google docstrings don't support multiple returns.\nFor multiple returns, the following works well with Sphinx and is still very readable.\n  ```python\n  def foo(a, b):\n      \"\"\"This is my docstring.\n  Args:\n      a (object): Something.\n      b (class): Another thing.\n\n  Returns:\n      (object, class):\n\n      * a: Something or rather with a long\n        description that spills over.\n      * b: And another thing.\n  \"\"\"\n\n  return a, b\n\n- When citing a paper, avoid directly linking in the docstring! Add a Bibtex entry to `docs/source/refs.bib`.\nE.g., to cite \"Attention Is All You Need\", visit [arXiv](https://arxiv.org/abs/1706.03762), choose the\n[bibtext](https://dblp.uni-trier.de/rec/bibtex/journals/corr/VaswaniSPUJGKP17) link, search `docs/source/refs.bib`\nusing `CTRL-F` for `DBLP:journals/corr/VaswaniSPUJGKP17`, and if you do not find it then copy-paste the\ncitation into `refs.bib`. Then, in your docstring, use ``:cite:`DBLP:journals/corr/VaswaniSPUJGKP17` ``.\n    - However, a link is better than nothing.\n- Please document tensor shapes. Prefer the format (a, b, c) `. This style is easy to read, allows usingx`` for multplication, and is common\n  (PyTorch uses a few variations on the parentheses format, AllenNLP uses exactly this format, Fairseq uses\n  the parentheses format with single ticks).\n    - Again, a different style is better than no shape documentation.\n- Please avoid unnecessary space characters, try to capitalize, and try to punctuate.\nFor multi-line docstrings, add a blank line after the closing \"\"\".\n  Don't use a blank line before the closing quotes.\n\"\"\" not this \"\"\" \"\"\"This.\"\"\"\npython\n  \"\"\"\n      Not this.\n  \"\"\"\n  python\n  \"\"\"This.\"\"\"\nThis note is the least important. Focus on content first, but remember that consistent docs look good.\n- Be sensible about the first line. Generally, one stand-alone summary line (per the Google guidelines) is good.\n  Sometimes, it's better to cut directly to the args or an extended description. It's always acceptable to have a\n  \"trailing\" citation.",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-02T07:53:45Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-10-26T07:31:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8731820126316536
+      ],
+      "excerpt": "This repository contains source files we used in the following paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8948087953230467,
+        0.9335450257414387,
+        0.9059040725126424,
+        0.9131075090978731
+      ],
+      "excerpt": "A basic usage of this repository should be almost the same as the original OpenNMT-py framework; please follow the documentations available there. \nThe only difference is that --pe_noise_size is available in the training config. \nThis value corresponds to the maximum shift for SHAPE (i.e., K in the paper) \nSetting --pe_noise_size` to0` is equivalent to the vanilla Transformer \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9900099907020264
+      ],
+      "excerpt": "OpenNMT-py is the PyTorch version of the OpenNMT project, an open-source (MIT) neural machine translation framework. It is designed to be research friendly to try out new ideas in translation, summary, morphology, and many other domains. Some companies have proven the code to be production ready. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8301261243264954,
+        0.9290897910466779,
+        0.9909734950614364
+      ],
+      "excerpt": "Unless there is a bug, please use the forum or Gitter to ask questions. \nWe're happy to announce the upcoming release v2.0 of OpenNMT-py. \nThe major idea behind this release is the -- almost -- complete makeover of the data loading pipeline. A new 'dynamic' paradigm is introduced, allowing to apply on the fly transforms to the data. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9331365562165165,
+        0.9122531327139245
+      ],
+      "excerpt": "increase the possibilities of data augmentation and manipulation through on-the fly transforms. \nThese transforms can be specific tokenization methods, filters, noising, or any custom transform users may want to implement. Custom transform implementation is quite straightforward thanks to the existing base class and example implementations. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8790098059700309
+      ],
+      "excerpt": "All the readily available transforms are described here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8880054542348116,
+        0.9542242762236678,
+        0.9968029537584643
+      ],
+      "excerpt": "For any user that still need these features, the previous codebase will be retained as legacy in a separate branch. It will no longer receive extensive development from the core team but PRs may still be accepted. \nFeel free to check it out and let us know what you think of the new paradigm! \nTable of Contents \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9045832791808871
+      ],
+      "excerpt": ":warning: New in OpenNMT-py 2.0: On the fly data processing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259,
+        0.908310429166611
+      ],
+      "excerpt": "Data preprocessing \nInference (translation) with batching and beam search \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9054062094407921
+      ],
+      "excerpt": "SRU \"RNNs faster than CNN\" paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057976747647034
+      ],
+      "excerpt": "Model export to CTranslate2, a fast and efficient inference engine \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207615526026563
+      ],
+      "excerpt": "To train a model, we need to add the following to the YAML configuration file: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8442045002819809
+      ],
+      "excerpt": ": Where to save the checkpoints \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.92403895398056,
+        0.9602181476976245
+      ],
+      "excerpt": "Before the training process actually starts, the *.vocab.pt together with *.transforms.pt will be dumpped to -save_data with configurations specified in -config yaml file. We'll also generate transformed samples to simplify any potentially required visual inspection. The number of sample lines to dump per corpus is set with the -n_sample flag. \nFor more advanded models and parameters, see other example configurations or the FAQ. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8264888222171723,
+        0.837127672057456
+      ],
+      "excerpt": "The predictions are going to be quite terrible, as the demo dataset is small. Try running on some larger datasets! For example you can download millions of parallel sentences for translation or summarization. \nWhen you are satisfied with your trained model, you can release it for inference. The release process will remove training-only parameters from the checkpoint: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Repository for Shifted Absolute Position Embedding (SHAPE)",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/butsugiri/shape/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 10:36:18 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/butsugiri/shape/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "butsugiri/shape",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/butsugiri/shape/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/butsugiri/shape/main/docs/source/examples/Library.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/butsugiri/shape/main/examples/scripts/prepare_wmt_data.sh",
+      "https://raw.githubusercontent.com/butsugiri/shape/main/examples/scripts/prepare_wikitext-103_data.sh",
+      "https://raw.githubusercontent.com/butsugiri/shape/main/tools/bpe_pipeline.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To get started, we propose to download a toy English-German dataset for machine translation containing 10k tokenized sentences:\n\n```bash\nwget https://s3.amazonaws.com/opennmt-trainingdata/toy-ende.tar.gz\ntar xf toy-ende.tar.gz\ncd toy-ende\n```\n\nThe data consists of parallel source (`src`) and target (`tgt`) data containing one sentence per line with tokens separated by a space:\n\n* `src-train.txt`\n* `tgt-train.txt`\n* `src-val.txt`\n* `tgt-val.txt`\n\nValidation files are used to evaluate the convergence of the training. It usually contains no more than 5k sentences.\n\n```text\n$ head -n 3 toy-ende/src-train.txt\nIt is not acceptable that , with the help of the national bureaucracies , Parliament &apos;s legislative prerogative should be made null and void by means of implementing provisions whose content , purpose and extent are not laid down in advance .\nFederal Master Trainer and Senior Instructor of the Italian Federation of Aerobic Fitness , Group Fitness , Postural Gym , Stretching and Pilates; from 2004 , he has been collaborating with Antiche Terme as personal Trainer and Instructor of Stretching , Pilates and Postural Gym .\n&quot; Two soldiers came up to me and told me that if I refuse to sleep with them , they will kill me . They beat me and ripped my clothes .\n```\n\nWe need to build a **YAML configuration file** to specify the data that will be used:\n\n```yaml\n#: toy_en_de.yaml\n\n#:#: Where the samples will be written\nsave_data: toy-ende/run/example\n#:#: Where the vocab(s) will be written\nsrc_vocab: toy-ende/run/example.vocab.src\ntgt_vocab: toy-ende/run/example.vocab.tgt\n#: Prevent overwriting existing files in the folder\noverwrite: False\n\n#: Corpus opts:\ndata:\n    corpus_1:\n        path_src: toy-ende/src-train.txt\n        path_tgt: toy-ende/tgt-train.txt\n    valid:\n        path_src: toy-ende/src-val.txt\n        path_tgt: toy-ende/tgt-val.txt\n...\n\n```\n\nFrom this configuration, we can build the vocab(s) that will be necessary to train the model:\n\n```bash\nonmt_build_vocab -config toy_en_de.yaml -n_sample 10000\n```\n\n**Notes**:\n- `-n_sample` is required here -- it represents the number of lines sampled from each corpus to build the vocab.\n- This configuration is the simplest possible, without any tokenization or other *transforms*. See [other example configurations](https://github.com/OpenNMT/OpenNMT-py/tree/master/config) for more complex pipelines.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "OpenNMT-py requires:\n\n- Python >= 3.6\n- PyTorch == 1.6.0\n\nInstall `OpenNMT-py` from `pip`:\n```bash\npip install OpenNMT-py\n```\n\nor from the sources:\n```bash\ngit clone https://github.com/OpenNMT/OpenNMT-py.git\ncd OpenNMT-py\npip install -e .\n```\n\nNote: if you encounter a `MemoryError` during installation, try to use `pip` with `--no-cache-dir`.\n\n*(Optional)* Some advanced features (e.g. working pretrained models or specific transforms) require extra packages, you can install them with:\n\n```bash\npip install -r requirements.opt.txt\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8602203648687922
+      ],
+      "excerpt": "Given sufficient CPU resources according to GPU computing power, most of the transforms should not slow the training down. (Note: for now, one producer process per GPU is spawned -- meaning you would ideally need 2N CPU threads for N GPUs). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8765759599592822
+      ],
+      "excerpt": "- the vocabulary path(s) that will be used: can be that generated by onmt_build_vocab; \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9059075538066198
+      ],
+      "excerpt": ": Train on a single GPU \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9149095244083293
+      ],
+      "excerpt": "Then you can simply run: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8245539886860519
+      ],
+      "excerpt": "Pretrained models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9591182894954394,
+        0.9065932471709682
+      ],
+      "excerpt": "src_vocab: toy-ende/run/example.vocab.src \ntgt_vocab: toy-ende/run/example.vocab.tgt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8351544984160078
+      ],
+      "excerpt": "save_model: toy-ende/run/model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9600244234901413
+      ],
+      "excerpt": "onmt_translate -model toy-ende/run/model_step_1000.pt -src toy-ende/src-test.txt -output toy-ende/pred_1000.txt -gpu 0 -verbose \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8910874578167113
+      ],
+      "excerpt": "onmt_release_model -model toy-ende/run/model_step_1000.pt -output toy-ende/run/model_step_1000_release.pt \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/butsugiri/shape/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Perl",
+      "Shell",
+      "Smalltalk",
+      "Ruby",
+      "NewLisp",
+      "JavaScript",
+      "Slash",
+      "SystemVerilog"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017-Present OpenNMT\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Shifted Absolute Position Embedding for Transformers\n\nThis repository contains source files we used in the following paper:\n\n> SHAPE: Shifted Absolute Position Embedding for Transformers\n> Shun Kiyono, Sosuke Kobayashi, Jun Suzuki, Kentaro Inui\n\n## About\n\n- A basic usage of this repository should be almost the same as the original [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py) framework; please follow the documentations available there.\n- The only difference is that `--pe_noise_size` is available in the training config.\n- This value corresponds to the maximum shift for SHAPE (i.e., `K` in the paper)\n- Setting --pe_noise_size`` to `0` is equivalent to the vanilla Transformer\n- You may find `config_shape` useful: this directory contains all the configuration `*.yaml` files used in our experiments.\n\n## Acknowledgements\n\nThis repository is based on [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py), a wonderful and state-of-the-art NMT framework.\n\nI would like thank the contributors of the original codebase.\n\n---\n\n# OpenNMT-py: Open-Source Neural Machine Translation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "shape",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "butsugiri",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/butsugiri/shape/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[![Run on FloydHub](https://static.floydhub.com/button/button.svg)](https://floydhub.com/run?template=https://github.com/OpenNMT/OpenNMT-py)\n\nClick this button to open a Workspace on [FloydHub](https://www.floydhub.com/?utm_medium=readme&utm_source=opennmt-py&utm_campaign=jul_2018) for training/testing your code.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Fri, 24 Dec 2021 10:36:18 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

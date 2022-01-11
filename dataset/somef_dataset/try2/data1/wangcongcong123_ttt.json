@@ -1,0 +1,380 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1910.10683",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1810.04805",
+      "https://arxiv.org/abs/1910.10683",
+      "https://arxiv.org/abs/1910.10683",
+      "https://arxiv.org/abs/1910.10683"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wangcongcong123/ttt",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-09-03T21:08:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-15T09:01:54Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9994941014378725,
+        0.8153796931945869,
+        0.970752081259189
+      ],
+      "excerpt": "TTT or (Triple T) is short for a package for fine-tuning \ud83e\udd17 Transformers with TPUs, written in Tensorflow2.0+. It is motivated to be completed due to bugs I found tricky to solve when using the xla library with PyTorch. As a newcomer to the TF world, I am humble to learn more from the community and hence it is open sourced here. \nTutorial in progress - Guide to use Google's TPUs with Good Details. \nOur work at W-NUT 2020 Shared task 3 for COVID event extraction on social media. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8079776590161284
+      ],
+      "excerpt": "Fine-tuning BERT-like transformers (DistilBert, ALBERT, Electra, RoBERTa) using keras High-level API. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9275550241815962,
+        0.8566075136646358
+      ],
+      "excerpt": "Supported tasks include single sequence-based classification task (both BERT-like models and T5 model), and translation, QA, or summarization (T5, as long as an example is characterized by: {\"source\",\"....\",\"target\",\"....\"} \nThis has to be run in Google GCP VM instance since the tpu_address is internal IP from Google (or change --use_tpu to use_gpu if you have enough GPUs). The flag --tpu_address should be replaced with yours. Notice: these runs are run with a set of \"look-good\" hyper-parameters but not exhaustively selected. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9548615827890915
+      ],
+      "excerpt": "* In addition, experiments on larger batch sizes were also conducted on TPUv2-8. For example, when per_device_train_batch_size is 128 (batch size=8128=1024), this first epoch takes around ~1 minute and the rest of each takes just ~15 seconds! That is fast but the sst2 accuracy goes down significantly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8042990266301183,
+        0.8876925619915671
+      ],
+      "excerpt": "* *refer to the estimated time including training, every 400 steps evaluation and evaluation on testing. \n* Looks good, the results are close to the original reported results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9709107456121077
+      ],
+      "excerpt": " failed (out-of-memory) although per_device_train_batch_size=2. Does a TPUv2-8 not have enough memory to fine-tune a t5-large model? Looking for solutions to fine-tune t5-large. Update:** Later on, I am lucky to get a TPUv3-8 (128G), so it is run successfully. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8042990266301183,
+        0.8570678504691955,
+        0.8515294853715322
+      ],
+      "excerpt": "*refer to the estimated time including training, every 400 steps evaluation and evaluation on testing. \n**the same but with a TPUv3-8 and smaller batch size (see command C-2-3). \nLooks not bad, the results are a bit close to the original reported results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9404218525131256,
+        0.9713518082630757,
+        0.8912347143416285
+      ],
+      "excerpt": "To include more different language tasks, such as sequence-pair based classificaton, t5 toy pretraining, etc. \nLR scheduler so far include \"warmuplinear\", \"warmupconstant\", \"constant\", \"constantlinear\". The plan is to implement all these that are available in optimizer_schedules.  \nNow all fine-tuning use Adam as the default optimizer. The plan is to implement others such as AdaFactor, etc. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9953362709412177,
+        0.9943135623153053
+      ],
+      "excerpt": "I have been looking for PyTorch alternatives that can help train large models with Google's TPUs in Google's GCP VM instance env. Although the xla lib seems good, I gave it up due to some bugs I found hard to fix. Something like \"process terminated with SIGKILL\" confused me a lot, and took me loads of time, and eventually fail to solve after searching all kinds of answers online (ref1, ref2, the community looks not that active in this field). Later on, some clues online tell me this problem is something related to memory overloading and I expect the xla lib will be more stable release in the future. It works well when being experimented with the MNIST example provided in Google's official website but comes up the \"memory\" problem when tested on big models like transformers (I did not make this \ud83e\udd17 transformers' xla_spawn.py run successful either). \nHence, I shift to learn Tensorflow as a newcomer from PyTorch to make my life easy whenever I feel needed to train a model on TPUs. Thankfully, Tensorflow-2.0 makes this shift not that difficult although some complains on it always go on. After around three days of researching and coding, I end up with this simple package. This package is made public-available in hope of helping whoever has the same encountering as me. Most of the training code (so-called boilerplate codes) flow in this package looks a style of PyTorch due to my old habit. Hopefully, this makes it easy to know Tensorflow-2.0 when you are from PyTorch and you need TPUs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A package for fine-tuning Transformers with TPUs, written in Tensorflow2.0+",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wangcongcong123/ttt/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Wed, 29 Dec 2021 00:15:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wangcongcong123/ttt/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wangcongcong123/ttt",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/wangcongcong123/ttt/master/ttt_notebook.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npip install pytriplet\n```\n\nor if you want to get the latest updates:\n\n```shell\ngit clone https://github.com/wangcongcong123/ttt.git\ncd ttt\npip install -e .\n```\n\n* make sure `transformers>=3.1.0`. If not, install via `pip install transformers -U`\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8529480793264086
+      ],
+      "excerpt": "python3 run.py --model_select bert-base-uncased --data_path data/glue/sst2 --task single-label-cls --per_device_train_batch_size 8 --num_epochs_train 6 --max_seq_length 128 --lr 5e-5 --schedule warmuplinear --do_train --do_eval --do_test --use_tpu --tpu_address x.x.x.x \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8528809969464652
+      ],
+      "excerpt": "python3 run.py --model_select bert-large-uncased --data_path data/glue/sst2 --task single-label-cls --per_device_train_batch_size 8 --num_epochs_train 6 --max_seq_length 128 --lr 5e-5 --schedule warmuplinear --do_train --do_eval --do_test --use_tpu --tpu_address x.x.x.x \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8574009126925011
+      ],
+      "excerpt": "| sst2 (test set, acc.) | 93.36                      | 93.5                                           | C-1-1                       | 16 minutes                      | 94.45                       | 94.9                                           | C-1-2                       | 37 minutes                      | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9019170246026852
+      ],
+      "excerpt": "python3 run.py --model_select t5-small --data_path data/glue/sst2 --task t2t --per_device_train_batch_size 8 --num_epochs_train 6 --max_seq_length 128 --lr 5e-5 --schedule warmuplinear --do_train --do_eval --do_test --use_tpu --tpu_address x.x.x.x \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8920491025744894
+      ],
+      "excerpt": "python3 run.py --model_select t5-base --data_path data/glue/sst2 --task t2t --per_device_train_batch_size 8 --num_epochs_train 6 --max_seq_length 128 --lr 5e-5 --schedule warmuplinear --do_train --do_eval --do_test --use_tpu --tpu_address x.x.x.x \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.893884185806171
+      ],
+      "excerpt": "python3 run.py --model_select t5-large --data_path data/glue/sst2 --task t2t --per_device_train_batch_size 2 --eval_batch_size 8 --num_epochs_train 6 --max_seq_length 128 --lr 5e-5 --schedule warmuplinear --do_train --do_eval --do_test --use_tpu --tpu_address x.x.x.x \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/wangcongcong123/ttt/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 wangcongcongcc\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# TTT: Fine-tuning Transformers with TPUs or GPUs acceleration, written in Tensorflow2.0+",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ttt",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "wangcongcong123",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/wangcongcong123/ttt/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "wangcongcong123",
+        "body": "* Add a tutorial of how to use GCP's TPUs with good details, [link](https://github.com/wangcongcong123/ttt/blob/master/use_tpu_tutorial).\r\n* Run with HF's datasets\r\n* Add an example of customizing data loading and evaluation metric calculation\r\n",
+        "dateCreated": "2020-11-04T01:01:28Z",
+        "datePublished": "2020-11-04T01:02:44Z",
+        "html_url": "https://github.com/wangcongcong123/ttt/releases/tag/v0.0.5",
+        "name": "Better compatability with HF's libs",
+        "tag_name": "v0.0.5",
+        "tarball_url": "https://api.github.com/repos/wangcongcong123/ttt/tarball/v0.0.5",
+        "url": "https://api.github.com/repos/wangcongcong123/ttt/releases/33431467",
+        "zipball_url": "https://api.github.com/repos/wangcongcong123/ttt/zipball/v0.0.5"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wangcongcong123",
+        "body": "- Bug fixes and code optimization\r\n- Add T5 pre-train objective function\r\n- [Add our work at W-NUT 2020 task 3](https://github.com/wangcongcong123/ttt/tree/master/covid_event)",
+        "dateCreated": "2020-09-20T11:51:50Z",
+        "datePublished": "2020-09-20T11:57:51Z",
+        "html_url": "https://github.com/wangcongcong123/ttt/releases/tag/v0.0.3",
+        "name": "v0.0.3",
+        "tag_name": "v0.0.3",
+        "tarball_url": "https://api.github.com/repos/wangcongcong123/ttt/tarball/v0.0.3",
+        "url": "https://api.github.com/repos/wangcongcong123/ttt/releases/31574768",
+        "zipball_url": "https://api.github.com/repos/wangcongcong123/ttt/zipball/v0.0.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "wangcongcong123",
+        "body": "Main features - First release\r\n- quick employment in GCP and fine-tune transformers with TPUs acceleration.\r\n- LR scheduler impls: warmuplinear, constantlinear, constant, etc.\r\n- To make compatible with HF's transformers 3.1.0 (output.logits, T5 auto add special tokens)\r\n- Tasks include single sequence-based classification task (both BERT-like models and T5 model), and translation, QA, or summarization (T5, as long as an example is characterized by: `{\"source\",\"....\",\"target\",\"....\"}`",
+        "dateCreated": "2020-09-12T23:18:39Z",
+        "datePublished": "2020-09-13T19:03:07Z",
+        "html_url": "https://github.com/wangcongcong123/ttt/releases/tag/v0.0.0.1",
+        "name": "v0.0.0.1-alpha",
+        "tag_name": "v0.0.0.1",
+        "tarball_url": "https://api.github.com/repos/wangcongcong123/ttt/tarball/v0.0.0.1",
+        "url": "https://api.github.com/repos/wangcongcong123/ttt/releases/31218332",
+        "zipball_url": "https://api.github.com/repos/wangcongcong123/ttt/zipball/v0.0.0.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 34,
+      "date": "Wed, 29 Dec 2021 00:15:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "transformers",
+      "tpus",
+      "tensorflow2",
+      "nlp",
+      "t5"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": " [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wangcongcong123/ttt/blob/master/ttt_notebook.ipynb)\n \nThe following demonstrates the example of fine-tuning T5-small for sst2 ([example_t5.py](example_t5.py)).\n\n![](ttt_demo.png)\n<!-- \n* This can be scaled to t5-large, t5-large, or even 3B if a 8-cores TPU is available. For GPUs, this fine-tuning is tested on T5-large in a server of 4 12-GB GTX-1080s even with per_device_train_batch_size=2, leading to a out-of-memory exception (OOM).\n-->\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\nfrom ttt import iid_denoise_text\ntext=\"ttt is short for a package for fine-tuning \ud83e\udd17 Transformers with TPUs, written in Tensorflow2.0\"\n#: here the text is split by space to tokens, you can use huggingface's T5Tokenizer to tokenize as well.\noriginal, source, target=iid_denoise_text(text.split(), span_length=3, corrupt_ratio=0.25)\n\n#: original: ['ttt', 'is', 'short', 'for', 'a', 'package', 'for', 'fine-tuning', '\ud83e\udd17', 'Transformers', 'with', 'TPUs,', 'written', 'in', 'Tensorflow2.0']\n#: source: ['ttt', '<extra_id_0>', 'a', 'package', 'for', 'fine-tuning', '\ud83e\udd17', 'Transformers', 'with', '<extra_id_1>', '<extra_id_2>']\n#: target: ['<extra_id_0>', 'is', 'short', 'for', '<extra_id_1>', 'TPUs,', 'written', 'in', 'Tensorflow2.0']\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "<a name=\"wmt_en_ro_t5\"></a>\n**Fine-tuning**: No boilerplate codes changed (the same as [example_t5](example_t5.py)) except for the following args:\n```python3\n#: any one from MODELS_SUPPORT (check:ttt/args.py)\nargs.model_select = \"t5-small\"\n#: the path to the translation dataset, each line represents an example in jsonl format like: {\"target\": \"...\", \"source\",\"...\"}\n#: it will download automatically for the frist time from: https://s3.amazonaws.com/datasets.huggingface.co/translation/wmt_en_ro.tar.gz\nargs.data_path = \"data/wmt_en_ro\"\n#: any one from TASKS_SUPPORT (check:ttt/args.py)\nargs.task = \"translation\"\nargs.max_src_length=128\nargs.max_tgt_length=128\nargs.source_field_name=\"source\"\nargs.target_field_name=\"target\"\nargs.eval_on=\"bleu\" #:this refers to sacrebleu as used in T5 paper\n```\n\n** On a TPUv3-8, the bleu score achieved by t5-base is 27.9 (very close to 28 as reported in [the T5 paper](https://arxiv.org/abs/1910.10683)), the fine-tuning args are [here](https://ucdcs-student.ucd.ie/~cwang/ttt/models/en2ro_t5_base/args.json) and training log is [here](https://ucdcs-student.ucd.ie/~cwang/ttt/models/en2ro_t5_base/train.log). \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python3\nfrom ttt import *\n\nif __name__ == '__main__':\n    args = get_args()\n    #: check what args are available\n    logger.info(f\"args: {json.dumps(args.__dict__, indent=2)}\")\n    #:#:#:#:#:#:#:#:#:#:#:#:#:#:#: customize args\n    #: args.use_gpu = True\n    args.use_tpu = True\n    args.do_train = True\n    args.use_tb = True\n    #: any one from MODELS_SUPPORT (check:ttt/args.py)\n    args.model_select = \"bert-base-uncased\"\n    #: select a dataset following jsonl format, where text filed name is \"text\" and label field name is \"label\"\n    args.data_path = \"data/glue/sst2\"\n    #: any one from TASKS_SUPPORT (check:ttt/args.py)\n    args.task = \"single-label-cls\"\n    args.log_steps = 400\n    #: any one from LR_SCHEDULER_SUPPORT (check:ttt/args.py)\n    args.scheduler=\"warmuplinear\"\n    #: set do_eval = False if your data does not contain a validation set. In that case, patience, and early_stop will be invalid\n    args.do_eval = True\n    args.tpu_address = \"x.x.x.x\" #: replace with yours\n    #:#:#:#:#:#:#:#:#:#:#:#:#:#:#: end customize args\n    #: to have a sanity check for the args\n    sanity_check(args)\n    #: seed everything, make deterministic\n    set_seed(args.seed)\n    tokenizer = get_tokenizer(args)\n    inputs = get_inputs(tokenizer, args)\n    model, _ = create_model(args, logger, get_model)\n    #: start training, here we keras high-level API\n    training_history = model.fit(\n        inputs[\"x_train\"],\n        inputs[\"y_train\"],\n        epochs=args.num_epochs_train,\n        verbose=2,\n        batch_size=args.per_device_train_batch_size*args.num_replicas_in_sync,\n        callbacks=get_callbacks(args, inputs, logger, get_evaluator),\n    )\n```\n\nSo far the package has included the following supports for `args.model_select`, `args.task` and `args.scheduler` ([args.py](ttt/args.py)).\n\n```python3\n#: these have been tested and work fine. more can be added to this list to test\nMODELS_SUPPORT = [\"distilbert-base-cased\",\"bert-base-uncased\", \"bert-large-uncased\", \"google/electra-base-discriminator\",\n                  \"google/electra-large-discriminator\", \"albert-base-v2\", \"roberta-base\",\n                  \"t5-small\",\"t5-base\"]\n#: if using t5 models, the tasks has to be t2t* ones\nTASKS_SUPPORT = [\"single-label-cls\", \"t2t\"]\n#: in the future, more schedulers will be added, such as warmupconstant, warmupcosine, etc.\nLR_SCHEDULER_SUPPORT = [\"warmuplinear\", \"warmupconstant\", \"constant\"]\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

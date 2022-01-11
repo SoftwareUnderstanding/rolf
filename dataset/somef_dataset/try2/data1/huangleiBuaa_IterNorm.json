@@ -1,0 +1,273 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1904.03441",
+      "https://arxiv.org/abs/1804.08450",
+      "https://arxiv.org/abs/1904.03441](https://arxiv.org/abs/1904.03441)\n\n\nThis is the torch implementation (results of experimetns are based on this implementation). Other implementation are shown as follows: \n\n### [1. Pytorch re-implementation](https://github.com/huangleiBuaa/IterNorm-pytorch)\n### [2. Tensorflow implementation](https://github.com/bhneo/decorrelated_bn) by Lei Zhao. \n=======================================================================\n\n## Requirements and Dependency\n* Install [Torch](http://torch.ch) with CUDA (for GPU).\n* Install [cudnn](http://torch.ch).\n* Install the dependency `optnet` by:\n```Bash\nluarocks install optnet\n ```\n \n ## Experiments\n \n #### 1.  Reproduce the results of VGG-network on Cifar-10 datasets:\n Prepare the data:  download [CIFAR-10](https://yadi.sk/d/eFmOduZyxaBrT) , and put the data files under `./data/`.\n * Run: \n```Bash\nbash y_execute_vggE_base.sh               //basic configuration\nbash y_execute_vggE_b1024.sh              //batch size of 1024\nbash y_execute_vggE_b16.sh                //batch size of 16\nbash y_execute_vggE_LargeLR.sh            //10x larger learning rate\nbash y_execute_vggE_IterNorm_Iter.sh      //effect of iteration number\nbash y_execute_vggE_IterNorm_Group.sh     //effect of group size\n```\nNote that the scripts don't inculde the setups of [Decorrelated Batch Noarmalizaiton (DBN)](https://arxiv.org/abs/1804.08450). To reproduce the results of DBN please follow the instructions of the [DBN project](https://github.com/princeton-vl/DecorrelatedBN), and the corresponding hyper-parameters described in the paper. \n\n\n#### 2.  Reproduce the results of Wide-Residual-Networks on Cifar-10 datasets:\n Prepare the data: same as in VGG-network on Cifar-10 experiments.\n  * Run: \n```Bash\nbash y_execute_wr.sh               \n```\n\n#### 3. Reproduce the ImageNet experiments. \n *  Download ImageNet and put it in: `/data/lei/imageNet/input_torch/` (you can also customize the path in `opts_imageNet.lua`)\n *  Install the IterNorm module to Torch as a Lua package: go to the directory `./models/imagenet/cuSpatialDBN/` and run  `luarocks make cudbn-1.0-0.rockspec`. (Note that the modules in `./models/imagenet/cuSpatialDBN/` are the same as in the `./module/`, and the installation by `luarocks` is for convinience in  training ImageNet with multithreads.)\n *  run the script with `z_execute_imageNet_***'\n \n ### This project is based on the training scripts of [Wide Residual Network repo](https://github.com/szagoruyko/wide-residual-networks) and  [Facebook's ResNet repo](https://github.com/facebook/fb.resnet.torch).\n \n ## Contact\nEmail: huanglei@nlsde.buaa.edu.cn.. Discussions and suggestions are welcome!"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9559715772848645,
+        0.9999269880796062,
+        0.9999999986086507
+      ],
+      "excerpt": "Iterative Normalization: Beyond Standardization towards Efficient Whitening  \nLei Huang, Yi Zhou, Fan Zhu, Li Liu, Ling Shao \nIEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm",
+    "technique": "GitHub API"
+  },
+  "contact": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Email: huanglei@nlsde.buaa.edu.cn.. Discussions and suggestions are welcome!\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-01T08:45:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-27T06:42:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9131873759692358
+      ],
+      "excerpt": "Code for reproducing the results in the following paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9751752746114706
+      ],
+      "excerpt": "This is the torch implementation (results of experimetns are based on this implementation). Other implementation are shown as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9928516487352602
+      ],
+      "excerpt": "Note that the scripts don't inculde the setups of Decorrelated Batch Noarmalizaiton (DBN). To reproduce the results of DBN please follow the instructions of the DBN project, and the corresponding hyper-parameters described in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This project is the Torch implementation of our  accepted CVPR 2019 paper,  Iterative Normalization: Beyond Standardization towards Efficient Whitening",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Mon, 27 Dec 2021 23:08:38 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huangleiBuaa/IterNorm/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huangleiBuaa/IterNorm",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_BN_d18_h48_g64_b256_NE100_nDE30_s1_C0.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_d50_h48_g64_b256_NE100_nDE30_s1_C3.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_b1024.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_wr.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_d18_h48_g64_b256_NE100_nDE30_s1_C0.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_b16.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_DF_d101_h48_g64_b256_NE100_nDE30_s1_C3.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_IterNorm_Iter.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_IterNorm_Group.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_DF_d50_h48_g64_b256_NE100_nDE30_s1_C3.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_DF_d18_h48_g64_b256_NE100_nDE30_s1_C0.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_LargeLR.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/y_execute_vggE_base.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm/master/z_execute_imageNet_resnet_IterNorm_L1_d101_h48_g64_b256_NE100_nDE30_s1_C3.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.856477819104204
+      ],
+      "excerpt": "bash y_execute_vggE_base.sh               //basic configuration \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8180903127850242
+      ],
+      "excerpt": "bash y_execute_vggE_LargeLR.sh            //10x larger learning rate \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494
+      ],
+      "excerpt": "bash y_execute_wr.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8409240444625692
+      ],
+      "excerpt": "Install the IterNorm module to Torch as a Lua package: go to the directory ./models/imagenet/cuSpatialDBN/ and run  luarocks make cudbn-1.0-0.rockspec. (Note that the modules in ./models/imagenet/cuSpatialDBN/ are the same as in the ./module/, and the installation by luarocks is for convinience in  training ImageNet with multithreads.) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8375431300615155,
+        0.8008331685760428
+      ],
+      "excerpt": "Prepare the data:  download CIFAR-10 , and put the data files under ./data/. \n * Run:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "  * Run:  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huangleiBuaa/IterNorm/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Lua",
+      "Shell",
+      "CMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 2-Clause \"Simplified\" License",
+      "url": "https://api.github.com/licenses/bsd-2-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'BSD 2-Clause License\\n\\nCopyright (c) 2019, Lei Huang\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n Redistributions of source code must retain the above copyright notice, this\\n  list of conditions and the following disclaimer.\\n\\n Redistributions in binary form must reproduce the above copyright notice,\\n  this list of conditions and the following disclaimer in the documentation\\n  and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# IterNorm\n\nCode for reproducing the results in the following paper:\n\n**Iterative Normalization: Beyond Standardization towards Efficient Whitening** \n\nLei Huang, Yi Zhou, Fan Zhu, Li Liu, Ling Shao\n\n*IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019.*\n[arXiv:1904.03441](https://arxiv.org/abs/1904.03441)\n\n\nThis is the torch implementation (results of experimetns are based on this implementation). Other implementation are shown as follows: \n\n### [1. Pytorch re-implementation](https://github.com/huangleiBuaa/IterNorm-pytorch)\n### [2. Tensorflow implementation](https://github.com/bhneo/decorrelated_bn) by Lei Zhao.",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IterNorm",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huangleiBuaa",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Install [Torch](http://torch.ch) with CUDA (for GPU).\n* Install [cudnn](http://torch.ch).\n* Install the dependency `optnet` by:\n```Bash\nluarocks install optnet\n ```\n \n ",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 17,
+      "date": "Mon, 27 Dec 2021 23:08:38 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

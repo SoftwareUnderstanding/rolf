@@ -1,0 +1,334 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2001.07685"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9278824608274014
+      ],
+      "excerpt": "|Paper (RA) | 86.19 \u00b1 3.37 | 94.93 \u00b1 0.65 | 95.74 \u00b1 0.05 | - | - | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9537267708315463
+      ],
+      "excerpt": "|Paper (RA) | 51.15 \u00b1 1.75 | 71.71 \u00b1 0.11 | 77.40 \u00b1 0.12 | - | - | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LeeDoYup/FixMatch-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-10-08T00:16:52Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T13:49:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8111279620865924,
+        0.9163135504750498
+      ],
+      "excerpt": "Unofficial pytorch code for \"FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence,\" NeurIPS'20. \nThis implementation can reproduce the results (CIFAR10 & CIFAR100), which are reported in the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9542822381400733
+      ],
+      "excerpt": "In addition to the results of semi-supervised learning in the paper, we also attach extra results of fully supervised learning (50000 labels, sup only) + consistency regularization (50000 labels, sup+consistency). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8866883830139494
+      ],
+      "excerpt": "Evaluation is conducted by EMA (exponential moving average) of models in the SGD training trajectory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8965435098052231,
+        0.8981098173787471,
+        0.906493257986577,
+        0.9838994791321243
+      ],
+      "excerpt": "In the case of CIFAR100@40, the result does not reach the paper's result and is out of the confidence interval. \nDespite the result, the accuracy with a small amount of labels highly depends on the label selection and other hyperparameters. \nFor example, we find that changing the momentum of batch normalization can give better results, closed to the reported accuracies. \nFor the detailed explanations of arguments, see here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836962749992213,
+        0.8786137648367788,
+        0.9755265923635364
+      ],
+      "excerpt": "- This code assumes 1 epoch of training, but the number of iterations is 220. \n- If you restart the training, use --resume --load_path [YOUR_CHECKPOINT_PATH]. Then, the checkpoint is loaded to the model, and continues to training from the ceased iteration. see here and the related method. \n- We set the number of workers for DataLoader when distributed training with a single node having V100 GPUs x 4 is used. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8649966477523732,
+        0.935534577738944
+      ],
+      "excerpt": "- With 4 GPUs, for the fast update, running statistics of BN** is not gathered in distributed training. However, a larger number of GPUs with the same batch size might affect overall accuracies. Then, you can 1) replace BN to syncBN (see here) or 2) use torch.distributed.all_reduce  for BN buffers before this line. \n- We checked that syncBN slightly improves accuracies, but the training time is much increased. Thus, this code doesn't include it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9833434275081644,
+        0.8098063030285219
+      ],
+      "excerpt": "To reproduce the results on CIFAR100, the --widen_factor has to be increased to --widen_factor=8. (see this issue in the official repo.), and --weight_decay=0.001. \nIn this repo, we use WideResNet with LeakyReLU activations, implemented in models/net/wrn.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8030084736355545
+      ],
+      "excerpt": "Also, we support to use various backbone networks in torchvision.models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9619723031124513,
+        0.9444320340247477
+      ],
+      "excerpt": "We checked that the training time of each iteration is reduced by about 20-30 %. \nWe trace various metrics, including training accuracy, prefetch & run times, mask ratio of unlabeled data, and learning rates. See the details in here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Unofficial Pytorch code for  \"FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence\" in NeurIPS'20. This repo contains reproduced checkpoints.",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In here, we attached some google drive links, which includes **training logs and the trained models**.  \nBecause of security issues of google drive,  \nyou may fail to download each checkpoint in the result tables by curl/wget.  \nThen, use [gdown](https://github.com/wkentaro/gdown) to download without the issues.  \n\nAll checkpoints are included in [this directory](https://drive.google.com/drive/folders/1sNDkEOs_ezNAEwQEAGger7reL3bney0B?usp=sharing)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LeeDoYup/FixMatch-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 28,
+      "date": "Tue, 28 Dec 2021 11:44:52 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LeeDoYup/FixMatch-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LeeDoYup/FixMatch-pytorch",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8984886183632496
+      ],
+      "excerpt": "tensorboard --logdir=[SAVE PATH] --port=[YOUR PORT] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/fixmatch.png\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8942982916245393,
+        0.889453416574333
+      ],
+      "excerpt": "python train.py --world-size 1 --rank 0 --multiprocessing-distributed --num_labels 4000 --save_name cifar10_4000 --dataset cifar10 --num_classes 10 \npython train.py --world-size 1 --rank 0 --multiprocessing-distributed --num_labels 10000 --save_name cifar100_10000 --dataset cifar100 --num_classes 100 --widen_factor 8 --weight_decay 0.001 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228
+      ],
+      "excerpt": "For example, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8769422573275946
+      ],
+      "excerpt": "--net [MODEL's NAME in torchvision] --net_from_name True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9066896736323384,
+        0.9066896736323384
+      ],
+      "excerpt": "<img src=\"assets/eval_metrics.png\" height=400>   \n<img src=\"assets/train_metrics.png\" height=400> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/LeeDoYup/FixMatch-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Doyup Lee\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FixMatch-pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FixMatch-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "LeeDoYup",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/LeeDoYup/FixMatch-pytorch/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- python 3.6\n- pytorch 1.6.0\n- torchvision 0.7.0\n- tensorboard 2.3.0\n- pillow\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 153,
+      "date": "Tue, 28 Dec 2021 11:44:52 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "After unzip the checkpoints into your own path, you can run\n```\npython eval.py --load_path saved_models/cifar10_400/model_best.pth --dataset cifar10 --num_classes 10\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npython train.py --rank 0 --gpu [0/1/...] @@@other args@@@\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npython train.py --world-size 1 --rank 0 @@@other args@@@\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**With V100x4 GPUs, CIFAR10 training takes about 16 hours (0.7 days), and CIFAR100 training takes about 62 hours (2.6 days).**\n\n- single node  \n```\npython train.py --world-size 1 --rank 0 --multiprocessing-distributed @@@other args@@@\n```\n\n- multiple nodes (assuming two nodes)\n```\n#: at node 0\npython train.py --world-size 2 --rank 0 --dist_url [rank 0's url] --multiprocessing-distributed @@@@other args@@@@\n#: at node 1\npython train.py --world-size 2 --rank 1 --dist_url [rank 0's url] --multiprocessing-distributed @@@@other args@@@@\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

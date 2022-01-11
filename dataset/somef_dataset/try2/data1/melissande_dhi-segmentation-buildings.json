@@ -1,0 +1,303 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1709.05932. Data augmentation has been performed on the training set. The network has first been trained on the Spacenet dataset (see model in 'TRAINED_MODELS/RUBV3D2_final_model_spacenet.pth'"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_1_Rio/processedData/processedBuildingLabels.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_2_Vegas/AOI_2_Vegas_Train.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_2_Vegas/AOI_2_Vegas_Test_public.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_3_Paris/AOI_3_Paris_Train.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_3_Paris/AOI_3_Paris_Test_public.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_4_Shanghai/AOI_4_Shanghai_Train.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_4_Shanghai/AOI_4_Shanghai_Test_public.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_5_Khartoum/AOI_5_Khartoum_Train.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "    --key AOI_5_Khartoum/AOI_5_Khartoum_Test_public.tar.gz \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/melissande/dhi-segmentation-buildings",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-06-07T15:52:35Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-10T11:40:12Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.88408903416202,
+        0.9839299663742221,
+        0.9161881228746966
+      ],
+      "excerpt": "After some months of master thesis, several models have been used and compared and this repository contains the best model. This model is a Res-Unet (https://arxiv.org/abs/1505.04597)  with batch normalization and dropout layers. It has been combined to a distance module presented in https://arxiv.org/abs/1709.05932. Data augmentation has been performed on the training set. The network has first been trained on the Spacenet dataset (see model in 'TRAINED_MODELS/RUBV3D2_final_model_spacenet.pth') and then transfer learning has been performed on ghana dataset ('TRAINED_MODELS/RUBV3D2_final_model_ghana.pth'). The metric the most important is the not the pixel wise error but the F1 score of the Spacenet Challenge described in https://github.com/SpaceNetChallenge/utilities and that can be found in IOU_computations.py. \nI am currently trying to finalize domain space adapatation and the use of another loss more adpated to pixel wise segmentation (http://blog.kaggle.com/2017/05/09/dstl-satellite-imagery-competition-3rd-place-winners-interview-vladimir-sergey/). I also would like to run my model on the official test set of Spacenet challenge using their code of evaluation and upload on their platform my results. \nModel is in RUBV3D2.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9478874020505293,
+        0.8625203663806009,
+        0.9878971623409775
+      ],
+      "excerpt": "Other parameters can be set and are well explained in the script train_model.py or in the notebook train_model.ipynb which is very playful and it is good to use this notebook to get familiar to the training process before launching the script train_model.py at higher scale. \nThe notebook real_time_loss_tracker.ipynb allows to track the metrics on the validation and training set during a training experience, which can take a very long time. \nTipycally, training on data set of Ghana, takes up to a couple of hours rather than for the Spacenet dataset, it is about a couple of days. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "AWS create account\nGet the credentials keys on the desktop of AWS online\ncreate a bucket and make it \"requester payer\" (see: https://docs.aws.amazon.com/fr_fr/AmazonS3/latest/dev/configure-requester-pays-console.html )\ninstall aws console:\n```sh\n$ pip install awscli\n```\nput credentials connection info  (only put key and secret key, the rest do enter) \n```sh\n$ aws configure\n```\ncheck what is in the bucket spaceNet\n```sh\n$ aws s3 ls spacenet-dataset --request-payer requester\n```\nget the list of what is in the bucket \n```sh\n$ aws s3api list-objects --bucket spacenet-dataset --request-payer requester\n```\n\nDownload Building Dataset Spacenet\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/melissande/dhi-segmentation-buildings/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5,
+      "date": "Thu, 23 Dec 2021 03:08:34 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/melissande/dhi-segmentation-buildings/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "melissande/dhi-segmentation-buildings",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/evaluation_test_set.py.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/real_time_loss_tracker.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/predict.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/train_model.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/Adversarial_domain_adaptation/train_adda.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/Adversarial_domain_adaptation/real_time_classif_tracker_adda.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/Adversarial_domain_adaptation/real_time_loss_adda_tracker.ipynb",
+      "https://raw.githubusercontent.com/melissande/dhi-segmentation-buildings/master/Adversarial_domain_adaptation/balancing_ghana_dataset.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9918536485787921,
+        0.9554169436001461,
+        0.998877000272434,
+        0.9990325799587574,
+        0.9975394505186967,
+        0.9990696733218749,
+        0.9869219130263003,
+        0.9977583516187369,
+        0.9987159354607185,
+        0.9901573012849963,
+        0.999746712887969,
+        0.999746712887969,
+        0.9487834825218575,
+        0.9923058512001258,
+        0.9486550687453098
+      ],
+      "excerpt": "$ conda create -n env_thales python=3.6 numpy pip \n$ source activate env_dhi \n$ pip install scipy \n$ pip install matplotlib \n$ pip install h5py \n$ pip install tensorflow-gpu  \n$ conda install -c menpo opencv \n$ pip install pandas \n$ conda install gdal \n$ conda install -c ioos rtree  \n$ pip install centerline \n$ pip install osmnx \n$ pip install http://download.pytorch.org/whl/cu90/torch-0.3.1-cp36-cp36m-linux_x86_64.whl \n$ pip install torchvision \npay attention to the cuda version installed, you need to know what version of tensorflow-gpu and cuda/cdnn is corresponding to                              add it to the bashrc \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.999746712887969,
+        0.9876422738722964
+      ],
+      "excerpt": "$pip install ipykernel \n$python -m ipykernel install --user --name=env_dhi \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8994097456061613
+      ],
+      "excerpt": "To run the training, use, on a CUDA gpu devices: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8476771578987604
+      ],
+      "excerpt": "Model is in RUBV3D2.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9138120312599702
+      ],
+      "excerpt": "$python train_model.py 'path_folder_to_dataset' 'path_folder_to_store_model' 'name_model' 'path_file_to_model_to_restore' --epochs=10 --iou_step=15 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8583471892289017
+      ],
+      "excerpt": "The notebook predict.ipynb allows to predict any patch from the test set. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/melissande/dhi-segmentation-buildings/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Virtual environments on cluster",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "dhi-segmentation-buildings",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "melissande",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/melissande/dhi-segmentation-buildings/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 8,
+      "date": "Thu, 23 Dec 2021 03:08:34 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

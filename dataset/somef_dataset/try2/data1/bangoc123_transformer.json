@@ -1,0 +1,205 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": "- Github: bangoc123 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bangoc123/transformer",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-06-22T03:09:54Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-19T10:07:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "Model Explanation: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9539045330504526
+      ],
+      "excerpt": "This library belongs to our project: Papers-Videos-Code where we will implement AI SOTA papers and publish all source code. Additionally, videos to explain these models will be uploaded to ProtonX Youtube channels. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9738001168273962,
+        0.9862947364926473,
+        0.9270518359467552
+      ],
+      "excerpt": "In this project, you can see that we try to compile all the pipeline into tf.keras.Model class in model.py file and using fit functionto train the model. Unfortunately, there are few critical bugs we need to fix for a new release. \nFix exporting model using save_weights API. (Currently, the system is unable to reload checkpoint for some unknown reasons.)  \nNew Features: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Build English-Vietnamese machine translation with ProtonX Transformer. :D",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bangoc123/transformer/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 10,
+      "date": "Wed, 29 Dec 2021 18:06:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bangoc123/transformer/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bangoc123/transformer",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Design train dataset with 2 files:\n- train.en\n- train.vi\n\nFor example: \n\n| train.en   |   train.vi      |\n|----------|:-------------:|\n| I love you       |  T\u00f4i y\u00eau b\u1ea1n|\n| ...              |    .... |\n\nYou can see mocking data in `./data/mock` folder.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Make sure you have installed Miniconda. If not yet, see the setup document [here](https://conda.io/en/latest/user-guide/install/index.html#regular-installation).\n\n2. `cd` into `transformer` and use command line `conda env create -f environment.yml` to set up the environment\n\n3. Run conda environment using the command `conda activate transformer`\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/bangoc123/transformer/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ProtonX Transformer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "transformer",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bangoc123",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/bangoc123/transformer/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Training script:\n\n```bash\npython train.py --epochs ${epochs} --input-lang en --target-lang vi --input-path ${path_to_en_text_file} --target-path ${path_to_vi_text_file}\n```\n\nExample: You want to build English-Vietnamese machine translation in 10 epochs\n\n\n```bash\npython train.py --epochs 10 --input-lang en --target-lang vi --input-path ./data/mock/train.en --target-path ./data/mock/train.vi\n```\n\nThere are some `important` arguments for the script you should consider when running it:\n\n- `input-lang`: The name of the input language (E.g. en)\n- `target-lang`: The name of the target language (E.g. vi)\n- `input-path`: The path of the input text file (E.g. ./data/mock/train.en)\n- `target-path`: The path of the output text file (E.g. ./data/mock/train.vi)\n- `model-folder`: Saved model path\n- `vocab-folder`: Saved tokenizer + vocab path\n- `batch-size`: The batch size of the dataset\n- `max-length`: The maximum length of a sentence you want to keep when preprocessing\n- `num-examples`: The number of lines you want to train. It was set small if you want to experiment with this library quickly.\n- `d-model`: The dimension of linear projection for all sentence.  It was mentioned in Section `3.2.2 ` on the [page 5](https://arxiv.org/pdf/1706.03762.pdf)\n- `n`: The number of Encoder/Decoder Layers. Transformer-Base sets it to 6.\n- `h`: The number of Multi-Head Attention. Transformer-Base sets it to 6.\n- `d-ff`: The hidden size of Position-wise Feed-Forward Networks.  It was mentioned in Section `3.3`\n- `activation`: The activation of Position-wise Feed-Forward Networks. If we want to experiment `GELU` instead of `RELU`, which activation was wisely used recently.\n- `dropout-rate`. Dropout rate of any Layer. Transformer-Base sets it to 0.1\n- `eps`. Layer Norm parameter. Default value: 0.1\n\nAfter training successfully, your model will be saved to `model-folder` defined before\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "When you want to modify the model, you need to run the test to make sure your change does not affect the whole system.\n\nIn the `./transformer` folder please run:\n\n```bash\npytest\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 22,
+      "date": "Wed, 29 Dec 2021 18:06:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "transformer",
+      "tensorflow2",
+      "machine-translation"
+    ],
+    "technique": "GitHub API"
+  }
+}

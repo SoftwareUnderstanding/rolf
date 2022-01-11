@@ -1,0 +1,302 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1701.03077\n\nState-value is optimized with Barron loss. Advantages are scaled using Barron loss derivative.\nTo use MSE loss for state-value and unscaled advantages set `barron_alpha_c = (2, 1",
+      "https://arxiv.org/abs/1611.01576\n\nSee `PPO_QRNN`, `QRNNActor`, `CNN_QRNNActor`. \nQRNN implementation requires https://github.com/salesforce/pytorch-qrnn. \nWith some effort QRNN could be replaced with another RNN architecture like LSTM or GRU.\n\n## Installation\n\n`pip install git+https://github.com/SSS135/ppo-pytorch`\n\nRequired packages:\n- PyTorch 0.4.1\n- gym\n- [tensorboardX](https://github.com/lanpa/tensorboardX"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SSS135/pytorch-rl-kit",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-02-08T16:05:50Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-11-27T10:46:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8105378968585113
+      ],
+      "excerpt": "State-value is optimized with Barron loss. Advantages are scaled using Barron loss derivative. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9240708169136583
+      ],
+      "excerpt": "On average when used with Atari, instead of MSE / Huber loss, it does not change performance much. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9309954844082823,
+        0.8655710877296513,
+        0.952822582095466,
+        0.9150286539880311,
+        0.898507364717791
+      ],
+      "excerpt": "As with Barron loss, on average I haven't observed much difference with or without it. \nWhen kl &lt; kl_target it is not applied. \nWhen kl &gt; kl_target it is scaled quadratically based on abs(kl - kl_target) \nand policy and entropy maximization objectives are disabled. \nI've found this implementation to be much easier to tune than original KL div penalty. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9632492556057971
+      ],
+      "excerpt": "Sometimes it helps with convergence on continuous control tasks when used with clip or kl constraints. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8860343588114771,
+        0.8769269419559386
+      ],
+      "excerpt": "Entropy maximization helps in some games. See entropy_reward_scale in PPO. \nIn addition to original network architecture, biggger one is available. See cnn_kind in CNNActor. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.808274215371622
+      ],
+      "excerpt": "See PPO_QRNN, QRNNActor, CNN_QRNNActor.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8333976311631821
+      ],
+      "excerpt": "With some effort QRNN could be replaced with another RNN architecture like LSTM or GRU. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8960845695714105,
+        0.9261999727915949
+      ],
+      "excerpt": "When library is imported following gym environments are registered: \nContinuous versions of Acrobot and CartPole AcrobotContinuous-v1, CartPoleContinuous-v0, CartPoleContinuous-v1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.92273188010413
+      ],
+      "excerpt": "Absolute value of gradients of state pixels (sort of pixel importance) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Proximal Policy Optimization in PyTorch",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SSS135/ppo-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 10:05:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SSS135/pytorch-rl-kit/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SSS135/pytorch-rl-kit",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "`pip install git+https://github.com/SSS135/ppo-pytorch`\n\nRequired packages:\n- PyTorch 0.4.1\n- gym\n- [tensorboardX](https://github.com/lanpa/tensorboardX)\n- [pytorch-qrnn](https://github.com/salesforce/pytorch-qrnn) (only if using QRNN)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9536113194427553
+      ],
+      "excerpt": "QRNN implementation requires https://github.com/salesforce/pytorch-qrnn.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8761378562877554,
+        0.9490702209160508,
+        0.9057079995070014,
+        0.9269228821721229
+      ],
+      "excerpt": "CartPole-v1 for 500K steps without CUDA (--force-cuda to enable it, won't improve performance) \npython example.py --env-name CartPole-v1 --steps 500_000 --tensorboard-path /tensorboard/output/path \nPongNoFrameskip-v4 for 10M steps (40M emulator frames) with CUDA \npython example.py --atari --env-name PongNoFrameskip-v4 --steps 10_000_000 --tensorboard-path /tensorboard/output/path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8061755670799057
+      ],
+      "excerpt": "CartPole with 10000 steps limit CartPoleContinuous-v2, CartPole-v2 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8716404035684004
+      ],
+      "excerpt": "python example.py --env-name CartPole-v1 --steps 500_000 --tensorboard-path /tensorboard/output/path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.879041545498085
+      ],
+      "excerpt": "python example.py --atari --env-name PongNoFrameskip-v4 --steps 10_000_000 --tensorboard-path /tensorboard/output/path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042534665813847
+      ],
+      "excerpt": "<img src=\"images/pong.png\" width=\"500\"> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9042534665813847
+      ],
+      "excerpt": "<img src=\"images/pong_activations.png\" width=\"300\"> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SSS135/pytorch-rl-kit/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Alexander Penkin\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Proximal Policy Optimization in PyTorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pytorch-rl-kit",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SSS135",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SSS135/pytorch-rl-kit/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 10:05:13 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "pytorch",
+      "ppo",
+      "proximal-policy-optimization",
+      "deep-reinforcement-learning",
+      "deep-learning",
+      "deep-neural-networks",
+      "actor-critic",
+      "gym",
+      "atari",
+      "ale",
+      "gym-environment"
+    ],
+    "technique": "GitHub API"
+  }
+}

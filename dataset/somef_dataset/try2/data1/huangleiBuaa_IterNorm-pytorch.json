@@ -1,0 +1,239 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1904.03441",
+      "https://arxiv.org/abs/1804.08450",
+      "https://arxiv.org/abs/1904.03441](https://arxiv.org/abs/1904.03441)\n\n\nThis project also provide the pytorch implementation of Decorrelated Batch Normalization (CVPR 2018, [https://arxiv.org/abs/1804.08450](https://arxiv.org/abs/1804.08450)), more details please refer to the [Torch project](https://github.com/princeton-vl/DecorrelatedBN). \n\n## Requirements and Dependency\n* Install [PyTorch](http://torch.ch) with CUDA (for GPU). (Experiments are validated on python 3.6.8 and pytorch-nightly 1.0.0)\n* (For visualization if needed), install the dependency [visdom](https://github.com/facebookresearch/visdom) by:\n```Bash\npip install visdom\n ```\n\n\n## Experiments\n \n #### 1.  VGG-network on Cifar-10 datasets:\n \nrun the scripts in the `./cifar10/experiments/vgg`. Note that the dataset root dir should be altered by setting the para '--dataset-root', and the dataset style is described as:\n```\n-<dataset-root>\n|-cifar10-batches-py\n||-data_batch_1\n||-data_batch_2\n||-data_batch_3\n||-data_batch_4\n||-data_batch_5\n||-test_batch\n```\nIf the dataset is not exist, the script will download it, under the conditioning that the `dataset-root` dir is existed\n\n #### 2.  Wide-Residual-Network on Cifar-10 datasets:\n \nrun the scripts in the `./cifar10/experiments/wrn`. \n\n#### 3. ImageNet experiments.\n\nrun the scripts in the `./ImageNet/experiment`. Note that resnet18 experimetns are run on one GPU, and resnet-50/101 are run on 4 GPU in the scripts. \n\nNote that the dataset root dir should be altered by setting the para '--dataset-root'.\n and the dataset style is described as:\n \n ```\n -<dataset-root>\n|-train\n||-class1\n||-...\n||-class1000  \n|-var\n||-class1\n||-...\n||-class1000  \n```\n  \n ## Using IterNorm in other projects/tasks\n  (1) copy `./extension/normalization/iterative_normalization.py` to the respective dir.\n  \n  (2) import the `IterNorm` class in `iterative_normalization.py`\n  \n  (3) generally speaking, replace the `BatchNorm` layer by `IterNorm`, or add it in any place if you want to the feature/channel decorrelated. Considering the efficiency (Note that `BatchNorm` is intergrated in `cudnn` while `IterNorm` is based on the pytorch script without optimization), we recommend 1) replace the first `BatchNorm`; 2) insert extra `IterNorm` before the first skip connection in resnet; 3) inserted before the final linear classfier as described in the paper.\n  \n  (4) Some tips related to the hyperparamters (Group size `G` and Iterative Number `T`). We recommend `G=64` (i.e., the channel number in per group is 64) and `T=5` by default. If you run on large batch size (e.g.>1024), you can either increase `G` or `T`. For fine tunning, fix `G=64 or G=32`, and search `T={3,4,5,6,7,8",
+      "https://arxiv.org/abs/1804.08450](https://arxiv.org/abs/1804.08450)), more details please refer to the [Torch project](https://github.com/princeton-vl/DecorrelatedBN). \n\n## Requirements and Dependency\n* Install [PyTorch](http://torch.ch) with CUDA (for GPU). (Experiments are validated on python 3.6.8 and pytorch-nightly 1.0.0)\n* (For visualization if needed), install the dependency [visdom](https://github.com/facebookresearch/visdom) by:\n```Bash\npip install visdom\n ```\n\n\n## Experiments\n \n #### 1.  VGG-network on Cifar-10 datasets:\n \nrun the scripts in the `./cifar10/experiments/vgg`. Note that the dataset root dir should be altered by setting the para '--dataset-root', and the dataset style is described as:\n```\n-<dataset-root>\n|-cifar10-batches-py\n||-data_batch_1\n||-data_batch_2\n||-data_batch_3\n||-data_batch_4\n||-data_batch_5\n||-test_batch\n```\nIf the dataset is not exist, the script will download it, under the conditioning that the `dataset-root` dir is existed\n\n #### 2.  Wide-Residual-Network on Cifar-10 datasets:\n \nrun the scripts in the `./cifar10/experiments/wrn`. \n\n#### 3. ImageNet experiments.\n\nrun the scripts in the `./ImageNet/experiment`. Note that resnet18 experimetns are run on one GPU, and resnet-50/101 are run on 4 GPU in the scripts. \n\nNote that the dataset root dir should be altered by setting the para '--dataset-root'.\n and the dataset style is described as:\n \n ```\n -<dataset-root>\n|-train\n||-class1\n||-...\n||-class1000  \n|-var\n||-class1\n||-...\n||-class1000  \n```\n  \n ## Using IterNorm in other projects/tasks\n  (1) copy `./extension/normalization/iterative_normalization.py` to the respective dir.\n  \n  (2) import the `IterNorm` class in `iterative_normalization.py`\n  \n  (3) generally speaking, replace the `BatchNorm` layer by `IterNorm`, or add it in any place if you want to the feature/channel decorrelated. Considering the efficiency (Note that `BatchNorm` is intergrated in `cudnn` while `IterNorm` is based on the pytorch script without optimization), we recommend 1) replace the first `BatchNorm`; 2) insert extra `IterNorm` before the first skip connection in resnet; 3) inserted before the final linear classfier as described in the paper.\n  \n  (4) Some tips related to the hyperparamters (Group size `G` and Iterative Number `T`). We recommend `G=64` (i.e., the channel number in per group is 64) and `T=5` by default. If you run on large batch size (e.g.>1024), you can either increase `G` or `T`. For fine tunning, fix `G=64 or G=32`, and search `T={3,4,5,6,7,8"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9559715772848645,
+        0.9999269880796062,
+        0.9999999986086507
+      ],
+      "excerpt": "Iterative Normalization: Beyond Standardization towards Efficient Whitening  \nLei Huang, Yi Zhou, Fan Zhu, Li Liu, Ling Shao \nIEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019 (accepted). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm-pytorch",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-04-08T12:31:56Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-03T10:25:45Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9895717856941444
+      ],
+      "excerpt": "Pytorch reimplementation of the IterNorm methods, which is described in the following paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9745663646550862
+      ],
+      "excerpt": "This project also provide the pytorch implementation of Decorrelated Batch Normalization (CVPR 2018, arXiv:1804.08450), more details please refer to the Torch project. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9057880101432781
+      ],
+      "excerpt": " and the dataset style is described as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This is the pytorch re-implementation of the IterNorm",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm-pytorch/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Sun, 26 Dec 2021 07:16:17 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huangleiBuaa/IterNorm-pytorch/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huangleiBuaa/IterNorm-pytorch",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet50_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet18_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet18_ItN_DF.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet50_ItN_DF.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet101_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/ImageNet/experiments/resnet101_ItN_DF.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/wrn/wrn_28_10_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/wrn/wrn_28_10_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/wrn/wrn_40_10_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/wrn/wrn_40_10_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_LargeLR_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_base_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_base_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_b1024_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_b16_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_b16_ItN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_b1024_BN.sh",
+      "https://raw.githubusercontent.com/huangleiBuaa/IterNorm-pytorch/master/cifar10/experiments/vgg/vgg_LargeLR_ItN.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.947029777776805
+      ],
+      "excerpt": "run the scripts in the ./ImageNet/experiment. Note that resnet18 experimetns are run on one GPU, and resnet-50/101 are run on 4 GPU in the scripts.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9151442082891261
+      ],
+      "excerpt": "(2) import the IterNorm class in iterative_normalization.py \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/huangleiBuaa/IterNorm-pytorch/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 2-Clause \"Simplified\" License",
+      "url": "https://api.github.com/licenses/bsd-2-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'BSD 2-Clause License\\n\\nCopyright (c) 2019, Lei Huang\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n\\n1. Redistributions of source code must retain the above copyright notice, this\\n   list of conditions and the following disclaimer.\\n\\n2. Redistributions in binary form must reproduce the above copyright notice,\\n   this list of conditions and the following disclaimer in the documentation\\n   and/or other materials provided with the distribution.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IterNorm-pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IterNorm-pytorch",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "huangleiBuaa",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/huangleiBuaa/IterNorm-pytorch/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Install [PyTorch](http://torch.ch) with CUDA (for GPU). (Experiments are validated on python 3.6.8 and pytorch-nightly 1.0.0)\n* (For visualization if needed), install the dependency [visdom](https://github.com/facebookresearch/visdom) by:\n```Bash\npip install visdom\n ```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 25,
+      "date": "Sun, 26 Dec 2021 07:16:17 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

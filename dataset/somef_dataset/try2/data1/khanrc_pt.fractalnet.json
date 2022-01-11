@@ -1,0 +1,388 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.04552",
+      "https://arxiv.org/abs/1605.07648* (2016).\n\n\n## Requirements\n\n```bash\npip install -r requirements.txt\n```\n\n- python 3\n- pytorch >= 0.4\n- torchvision\n- numpy, tensorboard, tensorboardX\n\n\n## Usage\n\nDefault options are same as the paper, but I failed to reproduce the results of paper with the default options. So I've tried a lot to improve the performance and found a better option. `best` indicates this option.\n\n```bash\n# train (default)\npython train.py --data cifar10 --name cifar10\n# train (best)\npython train.py --data cifar10 --name cifar10-best --init torch --gap 1 --pad reflect\n```\n\nFor the test, you must specify the same name and same options that you used for the training. Some options are only required for training such as epochs, dropout, droppath, init, and data augmentation.\n\n```bash\n# test (for deepest)\npython test.py --data cifar10 --name cifar10\npython test.py --data cifar10 --name cifar10-best --init torch --gap 1 --pad reflect\n```\n\n\n### Run options\n\n#### Train\n\n```\n$ python train.py --help\nusage: Config [-h] --name NAME [--data DATA] [--batch_size BATCH_SIZE]\n              [--lr LR] [--momentum MOMENTUM] [--print_freq PRINT_FREQ]\n              [--gpu GPU] [--epochs EPOCHS] [--init_channels INIT_CHANNELS]\n              [--gdrop_ratio GDROP_RATIO] [--p_ldrop P_LDROP]\n              [--dropout_probs DROPOUT_PROBS] [--blocks BLOCKS]\n              [--columns COLUMNS] [--seed SEED] [--workers WORKERS]\n              [--aug_lv AUG_LV] [--off-drops] [--gap GAP] [--init INIT]\n              [--pad PAD] [--doubling] [--gdrop_type GDROP_TYPE]\n              [--dropout_pos DROPOUT_POS]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --name NAME\n  --data DATA           CIFAR10 (default) / CIFAR100\n  --batch_size BATCH_SIZE\n                        default: 100\n  --lr LR               learning rate (default: 0.02)\n  --momentum MOMENTUM\n  --print_freq PRINT_FREQ\n                        print frequency\n  --gpu GPU             gpu device id\n  --epochs EPOCHS       # of training epochs (default: 400)\n  --init_channels INIT_CHANNELS\n                        doubling each block except the last (default: 64)\n  --gdrop_ratio GDROP_RATIO\n                        ratio of global drop path (default: 0.5)\n  --p_ldrop P_LDROP     local drop path probability (default: 0.15)\n  --dropout_probs DROPOUT_PROBS\n                        dropout probs for each block with comma separated\n                        (default: 0.0, 0.1, 0.2, 0.3, 0.4)\n  --blocks BLOCKS       default: 5\n  --columns COLUMNS     default: 3\n  --seed SEED           random seed\n  --workers WORKERS     # of workers\n  --aug_lv AUG_LV       data augmentation level (0~2). 0: no augmentation, 1:\n                        horizontal mirroring + [-4, 4] translation, 2: 1 +\n                        cutout.\n\nExperiment:\n  --off-drops           turn off all dropout and droppath\n  --gap GAP             0: max-pool (default), 1: GAP - FC, 2: 1x1conv - GAP\n  --init INIT           xavier (default) / he / torch (pytorch default)\n  --pad PAD             zero (default) / reflect\n  --doubling            turn on 1x1 conv channel doubling\n  --gdrop_type GDROP_TYPE\n                        ps (per-sample, various gdrop per block) / ps-consist\n                        (default; per-sample, consist global drop)\n  --dropout_pos DROPOUT_POS\n                        CDBR (default; conv-dropout-BN-relu) / CBRD (conv-BN-\n                        relu-dropout) / FD (fractal_block-dropout)\n```\n\n#### Test\n\n```\n$ python test.py --help\nusage: Config [-h] --name NAME [--data DATA] [--batch_size BATCH_SIZE]\n              [--print_freq PRINT_FREQ] [--gpu GPU]\n              [--init_channels INIT_CHANNELS] [--blocks BLOCKS]\n              [--columns COLUMNS] [--workers WORKERS] [--gap GAP] [--pad PAD]\n              [--doubling] [--dropout_pos DROPOUT_POS]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --name NAME\n  --data DATA           CIFAR10 (default) / CIFAR100\n  --batch_size BATCH_SIZE\n                        default: 200\n  --gpu GPU             gpu device id\n  --init_channels INIT_CHANNELS\n                        doubling each block except the last (default: 64)\n  --blocks BLOCKS       default: 5\n  --columns COLUMNS     default: 3\n  --workers WORKERS     # of workers\n\nExperiment:\n  --gap GAP             0: max-pool (default), 1: GAP - FC, 2: 1x1conv - GAP\n  --pad PAD             zero (default) / reflect\n  --doubling            turn on 1x1 conv channel doubling\n```\n\n\n## Results\n\n### Disclaimer\n\n- The data augmentation method for C10++ is not described in the paper. Here I used the [Cutout](https://arxiv.org/abs/1708.04552) method in addition to horizontal mirroring and [-4, 4] translation.\n- In C10++ and C100++, the epoch was increased to 600, if necessary.\n\n### Best plots\n\n![best](./assets/results-bests.png)\n\nBest results for CIFAR10 and CIFAR100. 3.91% and 21.64%, respectively.\n\n### CIFAR10\n\n| Method                | C10       | C10+      | C10++     |\n| --------------------- | --------- | --------- | --------- |\n| Default               | 12.07%    | 6.06%     | 5.05%     |\n| \u2800\u2800+ drop-path + dropout | 9.64%     | 6.44%     | 5.57%     |\n| \u2800\u2800\u2800\u2800=> deepest            | 10.14%    | 7.19%     | 5.85%     |\n| Best                  | 10.87%    | 6.16%     | 5.19%     |\n| \u2800\u2800+ drop-path + dropout | **8.47%** | 6.04%     | 5.49%     |\n| \u2800\u2800\u2800\u2800=> deepest            | 9.47%     | 6.90%     | 6.09%     |\n| Paper                 | 10.18%    | 5.22%     | 5.11%     |\n| \u2800\u2800+ drop-path + dropout | 7.33%     | 4.60%     | 4.59%     |\n| \u2800\u2800\u2800\u2800=> deepest            | 7.27%     | 4.68%     | 4.63%     |\n| Best + FDO + local DP | 8.61%     | **5.25%** | **3.91%** |\n\nAs mentioned before, the results of the paper were not reproduced. After several attempts, I've got the `best` option, which is `--init torch --gap 1 --pad reflect`. The `best` option got about 1.2% better than the default.\n\nFurthermore, I got better results with less regularization. The last row is that: \"Best + FDO (Fractal dropout) + local DP (No global drop-path)\". The run option is `--init torch --gap 1 --pad reflect --global_drop_ratio 0. --dropout_pos FD`.\n\n### CIFAR100\n\n| Method                              | C100       | C100+      | C100++     |\n| ----------------------------------- | ---------- | ---------- | ---------- |\n| Default                             |            |            |            |\n| \u2800\u2800+ drop-path + dropout | 34.04%     | 28.71%     | 27.73%     |\n| \u2800\u2800\u2800\u2800=> deepest                  | 36.69% | 31.95% | 30.66% |\n| Best                                | 36.99%     |            |            |\n| \u2800\u2800+ drop-path + dropout | **31.84%** | 29.18%     | 29.04%     |\n| \u2800\u2800\u2800\u2800=> deepest                  | 34.75% | 32.45% | 32.41% |\n| Paper                               | 35.34%     | 23.30%     | 22.85%     |\n| \u2800\u2800+ drop-path + dropout | 28.20%     | 23.73%     | 23.36%     |\n| \u2800\u2800\u2800\u2800=> deepest                  | 29.05%     | 24.32%     | 23.60%     |\n| Best + FDO + local DP               | 32.11%     | **24.08%** | 22.02%     |\n| Best + FDO + local DP + doubling    | 33.65%     | 24.36%     | **21.64%** |\n\nLikewise C100, the paper results were not reproduced. In C100, I did not perform as many experiments as C10. But the results is similar - \"Best + FDO + local DP\" is better.\n\nHowever, there are some difference: default option is better than `best` option in C100+ and C100++, and the doubling works better in C100 than in C10.\n\n\n## ETC\n\n- The Keras implementation [snf/keras-fractalnet](https://github.com/snf/keras-fractalnet) also failed to reproduce the results of the paper.\n- If you are familiar with Korean, there are more discussions and results in [exp-note (kor)](./exp-note-kor.md)."
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9999826505171083
+      ],
+      "excerpt": "Larsson, Gustav, Michael Maire, and Gregory Shakhnarovich. \"Fractalnet: Ultra-deep neural networks without residuals.\" arXiv preprint arXiv:1605.07648 (2016). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8462879767024605
+      ],
+      "excerpt": "Best results for CIFAR10 and CIFAR100. 3.91% and 21.64%, respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "| \u2800\u2800\u2800\u2800=> deepest            | 10.14%    | 7.19%     | 5.85%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9934273497841208
+      ],
+      "excerpt": "| Paper                 | 10.18%    | 5.22%     | 5.11%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "| \u2800\u2800\u2800\u2800=> deepest                  | 36.69% | 31.95% | 30.66% | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9537267708315463
+      ],
+      "excerpt": "| Paper                               | 35.34%     | 23.30%     | 22.85%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "| \u2800\u2800\u2800\u2800=> deepest                  | 29.05%     | 24.32%     | 23.60%     | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/khanrc/pt.fractalnet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-06T01:13:33Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-23T07:48:05Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9598235882618746
+      ],
+      "excerpt": "PyTorch Implementation of FractalNet. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309693268295236
+      ],
+      "excerpt": "  --data DATA           CIFAR10 (default) / CIFAR100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8771487309456139
+      ],
+      "excerpt": "                        dropout probs for each block with comma separated \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968029537584643
+      ],
+      "excerpt": "  --workers WORKERS     #: of workers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8309693268295236
+      ],
+      "excerpt": "  --data DATA           CIFAR10 (default) / CIFAR100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9968029537584643
+      ],
+      "excerpt": "  --workers WORKERS     #: of workers \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9925747686872465
+      ],
+      "excerpt": "The data augmentation method for C10++ is not described in the paper. Here I used the Cutout method in addition to horizontal mirroring and [-4, 4] translation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8532756137167552,
+        0.8150771532802734
+      ],
+      "excerpt": "Best results for CIFAR10 and CIFAR100. 3.91% and 21.64%, respectively. \n| Method                | C10       | C10+      | C10++     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.923336762923612
+      ],
+      "excerpt": "As mentioned before, the results of the paper were not reproduced. After several attempts, I've got the best option, which is --init torch --gap 1 --pad reflect. The best option got about 1.2% better than the default. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150771532802734
+      ],
+      "excerpt": "| Method                              | C100       | C100+      | C100++     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.963146869572855,
+        0.8828374567672442,
+        0.985485165396385
+      ],
+      "excerpt": "Likewise C100, the paper results were not reproduced. In C100, I did not perform as many experiments as C10. But the results is similar - \"Best + FDO + local DP\" is better. \nHowever, there are some difference: default option is better than best option in C100+ and C100++, and the doubling works better in C100 than in C10. \nThe Keras implementation snf/keras-fractalnet also failed to reproduce the results of the paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "PyTorch Implementation of FractalNet ",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/khanrc/pt.fractalnet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Wed, 29 Dec 2021 21:58:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/khanrc/pt.fractalnet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "khanrc/pt.fractalnet",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9748709027320682
+      ],
+      "excerpt": "              [--gpu GPU] [--epochs EPOCHS] [--init_channels INIT_CHANNELS] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  --name NAME \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9508351213242872
+      ],
+      "excerpt": "  --gpu GPU             gpu device id \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9748709027320682
+      ],
+      "excerpt": "              [--print_freq PRINT_FREQ] [--gpu GPU] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "  --name NAME \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9508351213242872
+      ],
+      "excerpt": "  --gpu GPU             gpu device id \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057675898656085
+      ],
+      "excerpt": "| \u2800\u2800+ drop-path + dropout | 7.33%     | 4.60%     | 4.59%     | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9355986061254542,
+        0.9164557705694029
+      ],
+      "excerpt": "$ python train.py --help \nusage: Config [-h] --name NAME [--data DATA] [--batch_size BATCH_SIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179,
+        0.8384882265790006
+      ],
+      "excerpt": "  --name NAME \n  --data DATA           CIFAR10 (default) / CIFAR100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8000318663973657
+      ],
+      "excerpt": "                        default: 100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8020443549355778
+      ],
+      "excerpt": "                        print frequency \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9366020278571597,
+        0.9164557705694029
+      ],
+      "excerpt": "$ python test.py --help \nusage: Config [-h] --name NAME [--data DATA] [--batch_size BATCH_SIZE] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179,
+        0.8384882265790006
+      ],
+      "excerpt": "  --name NAME \n  --data DATA           CIFAR10 (default) / CIFAR100 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/khanrc/pt.fractalnet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FractalNet: Ultra-deep neural networks without residuals",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pt.fractalnet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "khanrc",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/khanrc/pt.fractalnet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\npip install -r requirements.txt\n```\n\n- python 3\n- pytorch >= 0.4\n- torchvision\n- numpy, tensorboard, tensorboardX\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 17,
+      "date": "Wed, 29 Dec 2021 21:58:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Default options are same as the paper, but I failed to reproduce the results of paper with the default options. So I've tried a lot to improve the performance and found a better option. `best` indicates this option.\n\n```bash\n#: train (default)\npython train.py --data cifar10 --name cifar10\n#: train (best)\npython train.py --data cifar10 --name cifar10-best --init torch --gap 1 --pad reflect\n```\n\nFor the test, you must specify the same name and same options that you used for the training. Some options are only required for training such as epochs, dropout, droppath, init, and data augmentation.\n\n```bash\n#: test (for deepest)\npython test.py --data cifar10 --name cifar10\npython test.py --data cifar10 --name cifar10-best --init torch --gap 1 --pad reflect\n```\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

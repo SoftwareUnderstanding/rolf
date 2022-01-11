@@ -1,0 +1,368 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[image1]: ./images/dense_block.jpg \"A dense block example\"\n[image2]: ./images/tiramisu.jpg \"Fully Convolutional DenseNets for Semantic Segmentation\"\n[image3]: ./images/test_run_1.png \"Before training with IoU\"\n[image4]: ./images/test_run_2.png \"Before training with IoU\"\n[image5]: ./images/test_run_3.png \"Before training with IoU\"\n[image6]: ./images/augmented_train1.png \"Augmented training sample\"\n[image7]: ./images/augmented_train2.png \"Augmented training sample\"  \n[image8]: ./images/processed_val1.png \"Validation sample\"\n[image9]: ./images/processed_val2.png \"Validation sample\"\n[image10]: ./images/test_newrun_1.png \"After training with IoU\"\n[image11]: ./images/test_newrun_2.png \"After training with IoU\"\n[image12]: ./images/test_newrun_3.png \"After training with IoU\"\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[1] [Densely Connected Convolutional Networks](https://arxiv.org/pdf/1608.06993v3.pdf)\n\n[2] [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)\n\n[3] [The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation](https://arxiv.org/pdf/1611.09326v2.pdf)\n\n[4] [Dense Net in Keras](https://github.com/titu1994/DenseNet/)\n\n[5] [Small U-Net for vehicle detection](https://chatbotslife.com/small-u-net-for-vehicle-detection-9eec216f9fd6)\n\n[//]: ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9714928102915596
+      ],
+      "excerpt": "Shear limit between -10 and 10 degrees \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9972508553966268
+      ],
+      "excerpt": "source: https://arxiv.org/pdf/1608.06993v3.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8100655823024339
+      ],
+      "excerpt": "|TU + DB (10 layers), m = 800  | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Vamshi399/NanoDegree-Vehicle-Detection",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-05T18:55:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-03-29T23:42:12Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9735924103324354,
+        0.9748956060950598
+      ],
+      "excerpt": "In this project, your goal is to write a software pipeline to detect vehicles in a video (start with the test_video.mp4 and later implement on full project_video.mp4). \nThe goals / steps of this project are the following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8150751582630265
+      ],
+      "excerpt": "Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9164615478848465
+      ],
+      "excerpt": "Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9398402566229892,
+        0.9806447061460938
+      ],
+      "excerpt": "Computer vision techniques like the ones proposed above were widely used for classification and segmentation in the past, but the advances in deep learning architectures have made many of these approaches almost obsolete. \nSince 2012, the winner of classification and object detection competitions (ImageNet, CIFAR, MSCOCO, etc) have always been Convolutional Neural Networks - this is a strong indication that these architectures are much better suited for the ultimate goal of this project - detecting vehicles on a video stream. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9443522282286813,
+        0.9833396979783129,
+        0.9605388491060651
+      ],
+      "excerpt": "The dataset includes driving in Mountain View California and neighboring cities during daylight conditions. It contains over 65,000 labels across 9,423 frames collected from a Point Grey research cameras running at full resolution of 1920x1200 at 2hz. The dataset was annotated by CrowdAI using a combination of machine learning and humans. \nThe dataset are frames from a video of roughly 80 minutes of continuous driving in California and if we are not careful about how we split our data there will be a lot of information leaking from the training set into the validation set and our results will not be representative of the real performance of the pipeline. \nAfter a meticulous analysis of all provided frames, I have selected 998 frames to be our validation set. That would be equivalent of removing a little over 8 minutes of driving from our training data set. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9234067962288427,
+        0.9285493890339639,
+        0.9793224716619903
+      ],
+      "excerpt": "During the visual exploration of the dataset it also became evident that many frames are still too similar to each other, even with the video being recorder at 2Hz. \nTo adress this issue while also being mindful that we will need a large dataset in order to properly train our model, I came up with the following pre-processing steps: \nSkip every other frame to resample our training data to 1Hz. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9112849635605561,
+        0.9451835875760781,
+        0.9258976490783553
+      ],
+      "excerpt": "Augment our dataset using random rotations, scalings, translations and crops. \nNow that we have image masks with the same dimensions of the input image, we can define a data augmentation pipeline. We apply the same transformations to both the input image and the image mask, ensuring we will always have the exact location of the the vehicles highlighted in the augmented dataset as well. \nFor the data augmentation parameters we will leverage from knowledge acquired while implementing our Traffic Sign Classifier. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8527279406913855
+      ],
+      "excerpt": "Translation between -5% and +5% of image width \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8011809586467153,
+        0.8712303265456931,
+        0.9559944403307263
+      ],
+      "excerpt": "Motion blur kernel size of 3 pixels \nOn top of those transformations we will also reduce the input size to cut down on computation time. This will be done in two different steps, first scaling the images down to 20% of its original size and randomly cropping the image to 224 x 224 - the same size as ImageNet images, so we can leverage from pretrained DenseNet weights if we want. \nThe validation set will not receive any augmentation, but will need to be scaled down to the same size as our training dataset. To keep the objects with the same proportion as they are in a live video stream, we will scale down the lower dimension of the image to 224 pixels and do a center crop to fit the other dimension to 224 rather than scaling it down. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9891289703254401,
+        0.9794764219281766,
+        0.8841212061711273,
+        0.950205594133992
+      ],
+      "excerpt": "Also known as DenseNets[1] is a fairly new architecture, published in late 2016, that expands ideas introduced by ResNets[2], where blocks of convolutional layers receives not only the feature-maps of the previous block, but also it's input as well. Since they are forward feeding not only their outputs, but also their inputs, the optimization process is done on the residuals of each transformation, hence the name Residual Networks. \nThe biggest changes introduced by DenseNets are that the feature-maps of each block are passed to all subsequent layers of each block and that these feature-maps are concatenated together instead of summed. \nFor each layer, the feature-maps of all preceding layers are used as inputs, and its own feature-maps are used as inputs into all subsequent layers. DenseNets have several compelling \nadvantages: they alleviate the vanishing-gradient problem, strengthen feature propagation, encourage feature reuse, and substantially reduce the number of parameters. We evaluate our proposed architecture on four highly competitive object recognition benchmark tasks (CIFAR- 10, CIFAR-100, SVHN, and ImageNet). DenseNets obtain significant improvements over the state-of-the-art on most of them, whilst requiring less memory and computation to achieve high performance. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8988925008426101,
+        0.9023373229122105
+      ],
+      "excerpt": "Following the great results shown by DenseNets in image classification, J\u00e9gou et al. [3] extended the previous work, proposing an architecture for semantic image segmentation that uses several dense blocks during downsampling and upsampling. \nThe proposed network is called Fully Convolutional DenseNets for Semantic Segmentation, but was also named \"The One Hundred Layers Tiramisu\" and the diagram below gives a great overview of the architecture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9683740269158665
+      ],
+      "excerpt": "Diagram of our architecture for semantic segmentation. Our architecture is built from dense blocks. The diagram is com- posed of a downsampling path with 2 Transitions Down (TD) and an upsampling path with 2 Transitions Up (TU). A circle repre- sents concatenation and arrows represent connectivity patterns in the network. Gray horizontal arrows represent skip connections, the feature maps from the downsampling path are concatenated with the corresponding feature maps in the upsampling path. Note that the connectivity pattern in the upsampling and the downsam- pling paths are different. In the downsampling path, the input to a dense block is concatenated with its output, leading to a linear growth of the number of feature maps, whereas in the upsampling path, it is not. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9775248614337794,
+        0.970975736951565,
+        0.9781181613762713,
+        0.9903615072484478,
+        0.8954142243617816
+      ],
+      "excerpt": "The main architecture described on their work is a 103 layer network, called FC-DenseNet103. The definition of each of the key blocks of the model can be seen below. \nDense block layers are composed of BN, followed by ReLU, a 3 \u00d7 3 same convolution (no resolution loss) and dropout with probability p = 0.2. The growth rate of the layer is set to k = 16. \nTransition down is composed of BN, followed by ReLU, a 1 \u00d7 1 convolution, dropout with p = 0.2 and a non-overlapping max pooling of size 2 \u00d7 2. \nTransition up is composed of a 3\u00d73 transposed convolution with stride 2 to compensate for the pooling operation. \nAnd the overview of the architecture: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9953220274906796
+      ],
+      "excerpt": "Architecture details of FC-DenseNet103 model used in our experiments. This model is built from 103 convolutional layers. In the Table we use following notations: DB stands for Dense Block, TD stands for Transition Down, TU stands for Transition Up, BN stands for Batch Normalization and m corresponds to the total number of feature maps at the end of a block. c stands for the number of classes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9923135111436636,
+        0.9816512800182918,
+        0.9562088166695175,
+        0.8244402147087877
+      ],
+      "excerpt": "The power of very deep DenseNets was already proven by the authors of [1, 3], so the focus of this work will be in testing the performance of smaller versions of these networks to vehicle detection. \nThey are an excellent choice for autonomous vehicles as they can deliver state-of-the-art performance while using only a fraction of the parameters - usually about 10 fold reduction when compared to other similar performing architectures. \nMy goal is not to just deliver a pipeline that accurately identifies vehicles on a video stream, but I want to do so with a small footprint (for scalability) and real-time performance. \nThe starting point was the 56 layer FC-DenseNet56 as proposed in [3], but some minor changes were made. The table below shows our final architecture. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9444811974005667,
+        0.9638090593498747,
+        0.9175708157848891,
+        0.9378030658593896,
+        0.9930506673628228,
+        0.8927724821839034
+      ],
+      "excerpt": "I leveraged from a Python generator and our preprocessing function to create a virtually unlimited training dataset. Differently than what was found by the authors of [3], I've found that Adam was a much more efficient optimizer for our problem than RMSProp. \nBatch size was set at 4, limited by the memory of the GPU, and it was first optimized for 20 epochs with Adam and learning rate 1e-3 and then for another 20 epochs with learning rate 1e-4. The recommended dropout of 0.2 and weight decay of 1e-4 were both used to prevent overfitting. \nAfter 40 epochs the training loss was significantly lower than the validation loss, which is usually a sign that the augmentation is too strong and at that point augmentation was turned off before training the model for another 20 epochs. \nJ\u00e9gou et al. reported a mean IoU (intersection over union) accuracy of 73.2% for the car class, while using the FC-DenseNet56 architecture, but the overall model accuracy was 88.9%. It took us 60 epochs (roughly 10 hours) to get to 72.3% in a different dataset, but this model was  trained to identify just one class, so there was clearly room for improvement. \nDuring the first attempts to optimize the model, the suggested IoU loss was not efficient and the model wouldn't start converging, so I used a weighted binary cross entropy loss. After 10h of optimization, however, the model had a rough idea of where the vehicles were, so I thought that this time IoU could improve our accuracy and decided to try it again, with the goal of getting a similar performance than the authors of [3]. \nAfter another 40 epochs (and another 8 hours), the accuracy was much better, with mean IoU constantly above 86%, so I decided to stop training, but it is possible that it would continue to improve if given more time to train. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9832393217810037,
+        0.972220971954946
+      ],
+      "excerpt": "With a very strong performance on the validation set, the model was tested on the provided video and the results were very promising. The model was able to detect the location of vehicles accurately in all lanes, but it encountered some difficulties in scenarios that were not in the training set (e.g change in light conditions and trash on the side of the highway). \nTo address those minor details I curated a fine tuning set of a little under 50 frames and retrained the model with a very low learning rate (1e-5) over 10 epochs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Automatic vehicle detection and tracking.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Vamshi399/CarND-Vehicle-Detection/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 20:38:56 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Vamshi399/NanoDegree-Vehicle-Detection/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vamshi399/NanoDegree-Vehicle-Detection",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Vamshi399/CarND-Vehicle-Detection/master/P5.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8183298011147799
+      ],
+      "excerpt": "Train a model from scratch and discuss results. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749
+      ],
+      "excerpt": "![alt text][image6] \n![alt text][image7] \n![alt text][image8] \n![alt text][image9] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "![alt text][image1] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "![alt text][image2] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749,
+        0.8359299706379749
+      ],
+      "excerpt": "![alt text][image3] \n![alt text][image10] \n![alt text][image4] \n![alt text][image11] \n![alt text][image5] \n![alt text][image12] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Vamshi399/NanoDegree-Vehicle-Detection/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vehicle Detection",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NanoDegree-Vehicle-Detection",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Vamshi399",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Vamshi399/NanoDegree-Vehicle-Detection/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 20:38:56 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8283216015784888
+      ],
+      "excerpt": "tunedit (ditto): http://tunedit.org/challenges/ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9949073513984403,
+        0.9252715981805578,
+        0.9967308033814641,
+        0.8670498468297771,
+        0.9411565553159184,
+        0.9863714424608271,
+        0.943801151069526,
+        0.9350430934772219,
+        0.8275348815826218
+      ],
+      "excerpt": "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.29.274&rep=rep1&type=pdf (1992), \nhttps://papers.nips.cc/paper/613-bayesian-learning-via-stochastic-dynamics.pdf (1992), \nhttps://www.tandfonline.com/doi/abs/10.1088/0954-898X_6_3_011 (1995), \nhttps://www.nature.com/articles/nature14541.pdf (2015) \ntalks on bnns from icml 2018 (9): \nhttps://icml.cc/Conferences/2018/Schedule?showParentSession=3437,  \ntalks on bnns from icml 2017: (3) \ntalks on bnns from icml 2016 (1): \ntalks on bnns from icml 2015 (2): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9999494609316011
+      ],
+      "excerpt": "https://pdfs.semanticscholar.org/33fd/c91c520b54e097f5e09fae1cfc94793fbfcf.pdf (1987), https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=118274 (1989, not worth printing), https://papers.nips.cc/paper/419-transforming-neural-net-output-levels-to-probability-distributions.pdf (1991), https://pdfs.semanticscholar.org/c836/84f6207697c12850db423fd9747572cf1784.pdf (1991) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9964189199332645
+      ],
+      "excerpt": "http://bayesiandeeplearning.org/2016/slides/nips16bayesdeep.pdf (2016) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9993204166986093
+      ],
+      "excerpt": "http://www.cs.toronto.edu/~fritz/absps/colt93.pdf (1993), https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/bishop-ensemble-nato-98.pdf (1998), https://papers.nips.cc/paper/4329-practical-variational-inference-for-neural-networks.pdf (2011) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9977994744046882,
+        0.9992654138177659
+      ],
+      "excerpt": "https://arxiv.org/pdf/1511.03243.pdf (2015), \nhttps://arxiv.org/pdf/1512.05287.pdf (2016), \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SuperKam91/bnn",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-04T09:08:19Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-04-23T10:51:10Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Mackay uses Gaussian approximation to get solutions to BNNs, approximates posterior centred around most probable parameter values which are found via optimisation. Error is estimated from Hessian. This approximation assumes posterior is unimodal, and breaks down when number of parameters approaches numbr of datapoints. Uses this analytic approximation to calculate the evidence. Picks value of hyperparameters which maximise evidence, which equivalently maximise the posterior of the hyperparameters given the data, for a uniform prior on the hyperparameters. Thus essentially assumes that marginalising over hyperparameters and taking their maximum are equal, i.e. the hyperparam posterior is also Gaussian. then looks at evidence values given these best hyperparameters and training set error to evaluate models. Uses some approximation of the evidence maximisation to update the hyperparameter.\n\n- finds when a rubbish model used, evidence and test error not as correlated as when good model is used. Further, the evidence is low in some cases where test error is good. Uses this to deduce structure of model is wrong. Also sees Occam's hill.\n\n- Likelihood variance is fixed. Initially one hyperparam used for all weights and biases. Found evidence and generalisation don\u2019t correlate well. MacKay argues this is because the scales of the inputs, outputs and hidden layers are not the same, so one cannot expect scaling the weights by the same amount to work well. So then tried one hyperparam for hidden unit weights, one for hidden unit biases, then one for output weights and biases. This gave higher evidence, higher test set performance, and stronger correlation between the two\n\n- Neal uses HMC to sample the BNN parameters, and Gibbs sampling to sample the hyperparameters. n.b. HMC requires gradient information, so can't be used to sample hyperparameters directly (to my knowledge). Also, HMC in essence has characteristics similar to common optimisation methods which use 'momentum' and 'velocity'.\n\n- Neal also introduces concept of using Gaussian processes to introduce a prior over functions, which tells us what nn predicts mapping function to be without any data.\n\n- From Neal it seems that sampling hyperparameters seems rather necessary to justify allowing NN to be arbitrarily big- if complex model is not needed, hyperparameters will 'quash' nodes which aren't important, according to the hyperparameter values assigned by the data during the training, and 'upweight' important nodes. Also avoids cross validation step.\n\n- Uses stochastic/mini-batch methods.\n\n- Neal's result (with same simple model as Mackay) on test data is similar to the Mackay best evidence model's results, but not as good as his best test error model results. Performance didn't necessarily get worse with larger networks for BNNs, but did for MAP estimates (though don't think this treated hyperparameters as stochastic).\n\n- n.b. hyperparams in first layer indicate which inputs to network are important. using it generalises to test data better, as irrelevant attributes fit to noise in train. Furthermore, Neal scales hyperprior (gamma parameter w, which is mean precision) by number of units in previous layer i.e. for layer i w_i -> w_i * H_{i-1} for i >= 2 (note he doesn't scale first hidden layer). Note that he does not use this scaling on the biases, in particular, for hidden layers, biases are given standard hyperprior, and for output layer the biases aren't given a stochastic variance at all (instead they are usually fixed to a Gaussian with unit variance).\n\n- larger network is, more uncertain it is to out of training distribution data.\n\n- for bh, BNN does much better on test error than traditional (though I don't think this uses cross validation in traditional sense).\n\n- Freitas uses reversible jump MCMC to sample neural network systems. reversible jump MCMC is necessary when number of parameters changes. This is the case here, as the number of radial basis functions (neurons) is allowed to vary in the analysis, resulting in a varying number of model parameters/hyperparameters throughout the sampling. Gives posteriors on number of functions, as well as the usual param/hyperparams ones.\n\n- Also uses SMC to train NNs where data arrives one at a time. Idea is to model joint distribution of model parameters at each timestep, and appears to do a better job of predicting it with more time/data.\n\n- Also does model selection, using posterior over number of basis functions. Can do this in sequential context as well. \n\n- Finds reversible jump MCMC does as well as Mackay and Neal, and better than expectation maximisation algorithm (which is similar/equivalent to variational inference), but is slower than EM algo.\n\n- Gal provides the genius insight that stochastic draws from the distribution over neural networks can be done using traditional methods. Usually if using dropout regularisation, one disables the dropout once training is finished. Gal shows that using dropout during model deployment is equivalent to using variational inference to get a probabilistic model output. The parameters of the variational inference problem are determined by the dropout properties I believe. The higher the dropout probability, the stronger the prior on the inference problem.\n\n- This essentially means a Bayesian approach can be used even for high dimensional problems, the training time is the same as that of maximisation methods, and during deployment, one is only limited by how many samples from the posterior one wants.\n\n- Gal finds that this method exceeds traditional variational inference methods both in terms of speed and test set performance for most tasks, with the only doubts occurring in some CNNs. He also finds it outperforms traditional methods in terms of test set performance, with the added bonus that one gets an uncertainty estimate. The method however cannot give evidence estimates.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9843106434530038
+      ],
+      "excerpt": "Qualitative document giving an overview of BNNs and what is included in our implementation: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8206605526807055
+      ],
+      "excerpt": "Currently runs with PolyChordLite version 1.15. e.g. checkout 316effd815b2da5bafa66cfd0388a7c601eaa21d \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9244721738104238
+      ],
+      "excerpt": "UCI database of datasets, includes counts of number of records and number of features, as well as papers which cite the datasets: https://archive.ics.uci.edu/ml/datasets.html?sort=nameUp&view=list \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9704423737430097
+      ],
+      "excerpt": "bnn workshop @ nips. Contains extended abstracts and videos to some of workshops: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "earliest resources relating to bnns: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8372396012058242
+      ],
+      "excerpt": "talks on bnns: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8673106229733034
+      ],
+      "excerpt": "variational inference and bnns: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9693233393948762
+      ],
+      "excerpt": "misc papers relating to bnns: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Bayesian neural networks trained with MCMC methods, implemented in TensorFlow and C++",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SuperKam91/bnn/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Tue, 21 Dec 2021 05:18:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SuperKam91/bnn/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SuperKam91/bnn",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/SuperKam91/bnn/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Note we do not currently have a user guide, but the code is well documented. If you are interested in learning more about running the code, please don't hesitate to send me an email at: `kj316@cam.ac.uk`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The data used in our BNN experiments (in particular the training/test splits) can be found in the `data` repo.\n\nThe code which implements our BNNs can be found in the `forward_models` directory. The `Python` implementations of the BNNs (`NumPy`, `Keras`, and `TensorFlow` versions are available) are in the `forward_models/python_models` directory. The `C++` implementation is in the `forward_models/cpp_models` directory. The `MPE_examples` directory gives some basic examples of traditionally trained neural networks, implemented in `Keras` and `TensorFlow`.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/SuperKam91/bnn/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bnn",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "bnn",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "SuperKam91",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/SuperKam91/bnn/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "SuperKam91",
+        "body": "Used to produce BNN paper",
+        "dateCreated": "2020-04-20T11:21:30Z",
+        "datePublished": "2020-04-20T19:20:56Z",
+        "html_url": "https://github.com/SuperKam91/bnn/releases/tag/v1.0",
+        "name": "First public release",
+        "tag_name": "v1.0",
+        "tarball_url": "https://api.github.com/repos/SuperKam91/bnn/tarball/v1.0",
+        "url": "https://api.github.com/repos/SuperKam91/bnn/releases/25694944",
+        "zipball_url": "https://api.github.com/repos/SuperKam91/bnn/zipball/v1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Tue, 21 Dec 2021 05:18:55 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

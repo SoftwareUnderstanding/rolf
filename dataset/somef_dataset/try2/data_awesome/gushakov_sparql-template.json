@@ -1,0 +1,154 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gushakov/sparql-template",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-01-17T06:58:18Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-01-17T07:12:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.958251808516393
+      ],
+      "excerpt": "Small library for traversing an RDF store using automatic mapping of triples to annotated POJOs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9862572341567125,
+        0.8963052069060742
+      ],
+      "excerpt": "On-demand (lazy) loading of relations using automatic proxying with ByteBuddy \nEasily extended for conversion from any org.apache.jena.graph.Node to a custom Java type \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "RDF store traversal with Jena API via automatic mapping between POJO and SPARQL.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gushakov/sparql-template/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 20 Dec 2021 14:10:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gushakov/sparql-template/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gushakov/sparql-template",
+    "technique": "GitHub API"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gushakov/sparql-template/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Java"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# SPARQL Template",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sparql-template",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gushakov",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gushakov/sparql-template/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 20 Dec 2021 14:10:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Assume we want to retrieve some information about a person from the [DBPedia](http://dbpedia.org) using the [SPARQL endpoint](http://dbpedia.org/sparql).\nWe annotate our domain POJO as following.\n\n```java\n// marks this as an RDF entity\n@Rdf\npublic class Person {\n\n    // will be mapped from the value of http://dbpedia.org/ontology/birthName\n    @Predicate(DBP_NS)\n    private String birthName;\n\n    // will be mapped from the value of http://www.w3.org/2000/01/rdf-schema#:label for the Russian language\n    @Predicate(value = RDFS_NS, language = \"ru\")\n    private String label;\n\n    // will be mapped from the value of http://dbpedia.org/property/birthDate, automatic conversion to java.time.ZonedDateTime\n    @Predicate(DBP_NS)\n    private ZonedDateTime birthDate;\n\n    // will be mapped from the values of http://dbpedia.org/property/spouse, lazy load of relationships\n    @Predicate(DBP_NS)\n    @Relation\n    private Collection<Person> spouse;\n}\n```\n\nThen we can just use `ch.unil.sparql.template.SparqlTemplate` to load the triples from the DBPedia converting\nthem automatically to the required Java instance.\n\n```java\n    // get the default SPARQL template\n    final SparqlTemplate sparqlTemplate = new SparqlTemplate(\"https://dbpedia.org/sparql\");\n\n    // load information about Angelina Jolie\n    final Person person = sparqlTemplate.load(DBR_NS + \"Angelina_Jolie\", Person.class);\n\n    System.out.println(person.getBirthName());\n    // Angelina Jolie Voight\n\n    System.out.println(person.getLabel());\n    // \u0414\u0436\u043e\u043b\u0438, \u0410\u043d\u0434\u0436\u0435\u043b\u0438\u043d\u0430\n\n    System.out.println(person.getBirthDate().format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy (EEE)\", Locale.ENGLISH)));\n    // 04/06/1975 (Wed)\n\n    System.out.println(person.getSpouse().stream()\n            .filter(p -> p.getBirthName() != null && p.getBirthName().contains(\"Pitt\"))\n            .findAny().get().getBirthName());\n    // William Bradley Pitt\n\n```\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

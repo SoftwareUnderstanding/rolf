@@ -1,0 +1,281 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you are using this work for your research, please consider citing:\n```\n@misc{kwot_sin_lee_2017_3403269,\n  author       = {Kwot Sin Lee},\n  title        = {kwotsin/TensorFlow-ENet: DOI},\n  month        = jun,\n  year         = 2017,\n  doi          = {10.5281/zenodo.3403269},\n  url          = {https://doi.org/10.5281/zenodo.3403269}\n}\n```\n[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3403269.svg)](https://doi.org/10.5281/zenodo.3403269)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [ENet: A Deep Neural Network Architecture for Real-Time Semantic Segmentation](https://arxiv.org/pdf/1606.02147.pdf)\n2. [Implementation of Max Unpooling](https://github.com/tensorflow/tensorflow/issues/2169)\n3. [Implementation of PReLU](https://stackoverflow.com/questions/39975676/how-to-implement-prelu-activation-in-tensorflow)\n4. [Clarifications from ENet author](https://github.com/e-lab/ENet-training/issues/56)\n5. [Original Torch implementation of ENet](https://github.com/e-lab/ENet-training)\n6. [ResNet paper for clarification on residual bottlenecks](https://arxiv.org/pdf/1512.03385.pdf)\n7. [Colouring scheme](https://github.com/alexgkendall/SegNet-Tutorial/blob/c922cc4a4fcc7ce279dd998fb2d4a8703f34ebd7/Scripts/test_segmentation_camvid.py)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{kwot_sin_lee_2017_3403269,\n  author       = {Kwot Sin Lee},\n  title        = {kwotsin/TensorFlow-ENet: DOI},\n  month        = jun,\n  year         = 2017,\n  doi          = {10.5281/zenodo.3403269},\n  url          = {https://doi.org/10.5281/zenodo.3403269}\n}",
+      "technique": "Regular expression"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kwotsin/TensorFlow-ENet",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-06-05T07:24:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T04:24:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8993878661477152,
+        0.820039885248869
+      ],
+      "excerpt": "TensorFlow implementation of ENet: A Deep Neural Network Architecture for Real-Time Semantic Segmentation. \nThis model was tested on the CamVid dataset with street scenes taken from Cambridge, UK. For more information on this dataset, please visit: http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8274465207923678,
+        0.8219461834593706
+      ],
+      "excerpt": "enet.py: The ENet model definition, including the argument scope. \ntrain_enet.py: The file for training. Includes saving of images for visualization and tunable hyperparameters. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8350573407218568
+      ],
+      "excerpt": "preprocessing.py: The preprocessing does just image resizing, just in case anyone wants to use a smaller image size due                         to memory issues or for other datasets. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9444262854223808
+      ],
+      "excerpt": "checkpoint: The checkpoint directory that could be used for predicting the segmentation output. The model was trained using the default parameters mentioned in the paper, except that it uses median frequency balancing to obtain the class   weights. The final checkpoint model size is under 5MB. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9586572062900794,
+        0.9200451274299418,
+        0.9641254740568619,
+        0.8545717774729876,
+        0.845745219382304,
+        0.8275857828948373,
+        0.8162887656152167,
+        0.826684741049978,
+        0.8394146741487196,
+        0.9381128551708954
+      ],
+      "excerpt": "As the Max Unpooling layer is not officially available from TensorFlow, a manual implementation was used to build the decoder portion of the network. This was based on the implementation suggested in this TensorFlow github issue. \nBatch normalization and 2D Spatial Dropout are still retained during testing for good performance.  \nClass weights are used to tackle the problem of imbalanced classes, as certain classes appear more dominantly than others. More notably, the background class has weight of 0.0, in order to not reward the model for predicting background. \nOn the labels and colouring scheme: The dataset consists of only 12 labels, with the road-marking class merged with the road class. The last class is the unlabelled class.  \nNo preprocessing is done to the images for ENet. (see references below on clarifications with author). \nOnce you've fine-tuned to get your best hyperparameters, there's an option to combine the training and validation datasets together. However, if your training dataset is large enough, this won't make a lot of difference. \nSkip connections can be added to connect the corresponding encoder and decoder portions for better performance. \nThe number of initial blocks and the depth of stage 2 residual bottlenecks are tunable hyperparameters. This allows you to build a deeper network if required, since ENet is rather lightweight. \nFused batch normalization is used over standard batch normalization for faster computations. See TensorFlow's best practices. \nTo obtain the class weights for computing the weighted loss, Median Frequency Balancing (MFB) is used by default instead of the custom ENet class weighting function. This is due to an observation that MFB gives a slightly better performance than the custom function, at least on my machine. However, the option of using the ENet custom class weights is still possible. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TensorFlow implementation of ENet",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kwotsin/TensorFlow-ENet/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 126,
+      "date": "Thu, 23 Dec 2021 04:34:39 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kwotsin/TensorFlow-ENet/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kwotsin/TensorFlow-ENet",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/kwotsin/TensorFlow-ENet/master/test.sh",
+      "https://raw.githubusercontent.com/kwotsin/TensorFlow-ENet/master/train.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "identifier": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://doi.org/10.5281/zenodo.3403269",
+      "technique": "Regular expression"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8884801941452609
+      ],
+      "excerpt": "test_enet.py: The file for evaluating on the test dataset. Includes option to visualize images as well. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8787455774539052,
+        0.8706264050856682
+      ],
+      "excerpt": "train.sh: Example training script to train the different variations of the model. \ntest.sh Example testing script to test the different variants you trained. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/kwotsin/TensorFlow-ENet/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2017 Kwotsin\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TensorFlow-ENet",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TensorFlow-ENet",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "kwotsin",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/kwotsin/TensorFlow-ENet/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "kwotsin",
+        "body": "DOI",
+        "dateCreated": "2017-12-01T01:58:44Z",
+        "datePublished": "2019-09-09T18:36:52Z",
+        "html_url": "https://github.com/kwotsin/TensorFlow-ENet/releases/tag/v1.0",
+        "name": "DOI",
+        "tag_name": "v1.0",
+        "tarball_url": "https://api.github.com/repos/kwotsin/TensorFlow-ENet/tarball/v1.0",
+        "url": "https://api.github.com/repos/kwotsin/TensorFlow-ENet/releases/19860176",
+        "zipball_url": "https://api.github.com/repos/kwotsin/TensorFlow-ENet/zipball/v1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 255,
+      "date": "Thu, 23 Dec 2021 04:34:39 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "tensorflow",
+      "computer-vision",
+      "deep-learning",
+      "machine-learning",
+      "segmentation"
+    ],
+    "technique": "GitHub API"
+  }
+}

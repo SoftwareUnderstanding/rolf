@@ -1,0 +1,283 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2004.10934?",
+      "https://arxiv.org/abs/2004.10934?"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8768594116348547
+      ],
+      "excerpt": "Authors: Miguel Arduengo, Ce Xu Zheng, Adri\u00e0 Colom\u00e9 and Carme Torras. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "Published Topics \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MiguelARD/cloth_point_cloud_segmentation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-01-25T11:16:25Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-06T13:56:17Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8737206171069265
+      ],
+      "excerpt": "Real-time multi-cloth point cloud segmentation ROS package. Object detection, image and point cloud processing are combined for segmenting cloth-like objects (dishcloths, towels, rags...) from point clouds. The implementation is based on YOLOv4, GrabCut and Color-based region growing segmentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9312973807274495
+      ],
+      "excerpt": "Affiliation: All the authors are with Institut de Rob\u00f2tica i Inform\u00e0tica Industrial, CSIC-UPC (IRI), Barcelona.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9743716524502405
+      ],
+      "excerpt": "Cloth-like object detection is performed on the color image using a custom YOLOv4 model trained specifically for this purpose. You only look once (YOLO) is a state-of-the-art, real-time object detection system that provides a list of object categories present in the image along with an axis-aligned bounding box indicating the position and scale of every instance of each object category. In this way, just a small region of interest around the cloth can be extracted for further processing. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9883009818724402
+      ],
+      "excerpt": "Segmenting the cloth requires a far more granular understanding of the object in the image. For classifying the pixels within the bounding boxes between those that belong to the cloth and those that belong to the background the GrabCut algorithm is used. Starting with the bounding box around the cloth to be segmented, pixels are divided according to the estimated color distribution of the target object and that of the background. For enhacing the algorithm performance a small axis-aligned elliptical region that certainly belongs to the cloth, whose size is relative to the bounding box dimensions, is defined. Also, morphological operations are applied for refining the resulting mask provided by GrabCut. Note that, since segmentation is color-based, the best performance is obtained for cloths with a uniform color that contrasts with the background. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906404741956275
+      ],
+      "excerpt": "The algorithm requires the point cloud to be organized, that is, the points that are adjacent in the cloud structure also correspond to adjacent pixels in the color image. Then, the mask obtained in the previous step can also be used to filter the point cloud since the points are arranged following the same structure than the pixels in the color image. Additionally, taking advantage of the spatial information enconded in the point cloud, the segmentation is refined using the color-based region growing segmentation method. The purpose of the said algorithm is to merge the points that are close enough in terms of both distance and color, dividing the input cloud into a series of clusters. In this way, the cloth points are merged together into a single cluster, sepparating them from points that might have not been filtered in the previous step. Note that again, the best performance is obtained for cloths with a uniform color. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9605295743432931
+      ],
+      "excerpt": "The ROS implementation of the multi-cloth point cloud segmentation package consists on a single node cloth_segmentation, which depends on the package darknet_ros to obtain the YOLOv4 detections. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8938459719870383
+      ],
+      "excerpt": "Array of bounding boxes that gives information of the position and size of the bounding box corresponding to each cloth in the image in pixel coordinates. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9410315825148351
+      ],
+      "excerpt": "Color image that includes only the pixels corresponding to the segmented cloths after performing step 2 of the algorithm. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/miguelard/cloth_point_cloud_segmentation/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 18:29:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MiguelARD/cloth_point_cloud_segmentation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MiguelARD/cloth_point_cloud_segmentation",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9452797457628369,
+        0.9706017609038395,
+        0.9906248903846466,
+        0.8829192148852169
+      ],
+      "excerpt": "cd ~/catkin_workspace/src \n  git clone --recurse-submodules https://github.com/MiguelARD/cloth_point_cloud_segmentation.git \n  cd .. \nThen compile the package using ROS. The first time it might take some minutes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9308763864079042,
+        0.9096104964140866
+      ],
+      "excerpt": "Alternatively, you can also compile the package using the catkin command line tools. \ncatkin build \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.897176225947782
+      ],
+      "excerpt": "Basic Usage \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8016021503115456,
+        0.8016021503115456,
+        0.8016021503115456
+      ],
+      "excerpt": "    <img src=\".github/media/fig2.gif\" width=275 height=200> \n    <img src=\".github/media/fig3.gif\" width=275 height=200> \n    <img src=\".github/media/fig4.gif\" width=275 height=200> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8629400568140789
+      ],
+      "excerpt": "cd ~/catkin_workspace/src \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8478071600740889
+      ],
+      "excerpt": "Color image provided by the RGB-D camera. This topic can be specified in the params.yaml file from the cloth_segmentation/config folder. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8684292908091403
+      ],
+      "excerpt": "Point cloud provided by the RGB-D camera. This topic can be specified in the params.yaml file from the cloth_segmentation/config folder. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MiguelARD/cloth_point_cloud_segmentation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "CMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Cloth Point Cloud Segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cloth_point_cloud_segmentation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MiguelARD",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MiguelARD/cloth_point_cloud_segmentation/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The cloth point cloud segmentation package depends on the following software:\n* [Robot Operating System (ROS)](http://wiki.ros.org/ROS/Installation): Software libraries and tools for robot applications.\n* [OpenCV](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html) (>= 4.x): Open source computer vision and machine learning software library.\n* [Point Cloud Library (PCL)](https://pointclouds.org/downloads/): Standalone, large scale, open project for 2D/3D image and point cloud processing.\n* [YOLOv4 requirements](https://github.com/AlexeyAB/darknet#requirements): State-of-the-art, real-time object detection system.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sun, 26 Dec 2021 18:29:30 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Running the cloth point cloud segmentation ROS package is very simple. First, you have to download the [YOLOv4 network weights](https://drive.google.com/file/d/1ua9XE0xd5pX8GwNdo98NDojhlTGP6-Dg/view?usp=sharing) and place it in the `cloth_segmentation/yolo_network_config/weights` folder. \n\n```\ncd ~/catkin_ws/src/cloth_point_cloud_segmentation/cloth_segmentation/yolo_network_config/weights\n\nwget --load-cookies /tmp/cookies.txt \"https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ua9XE0xd5pX8GwNdo98NDojhlTGP6-Dg' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\\1\\n/p')&id=1ua9XE0xd5pX8GwNdo98NDojhlTGP6-Dg\" -O yolo_cloth.weights && rm -rf /tmp/cookies.txt\n```\n\nOnce the weights are in the corresponding folder, specify the topics where your RGB-D camera is publishing the color image, the point cloud and the raw image in the [params.yaml](cloth_segmentation/config/params.yaml) file from the `cloth_segmentation/config` folder.\n\n```yaml\n#: Camera topics\nsubscribers:\n\n  #: Color image\n  rgb_reading:\n  \ttopic: /your_color_image_topic\n  \t\n  #: Point cloud\n  point_cloud_reading: \n  \ttopic: /your_point_cloud_topic\n  \t\n  #: Raw image\n  camera_reading:\n    \ttopic: /your_raw_image_topic\n```\n\n\nFinally, once your camera is running in ROS, source your catkin workspace and launch the package. \n\n```\ncd ~/catkin_ws\nsource devel/setup.bash\nroslaunch cloth_segmentation cloth_segmentation.launch\n```\n\nIf everything is working correctly you should see something similar to the figure below. A [rviz](http://wiki.ros.org/rviz) window, a display for the YOLOv4 detections and a sepparate terminal for printing the detections' information will appear. Note that in order to visualize it in rviz correctly you have to specify your `fixed_frame` and the topics where your camera is publishing the color image and the point cloud. These parameters can be set directly on the rviz interface in the places highlighted in red. \n\n<p align=\"center\">\n\t<img src=\".github/media/fig8.png\" width=850>\n</p>\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

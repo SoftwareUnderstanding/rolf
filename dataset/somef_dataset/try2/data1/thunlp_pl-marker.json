@@ -1,0 +1,350 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you use our code in your research, please cite our work:\n```bibtex\n@article{ye2021plmarker,\n  author    = {Deming Ye and Yankai Lin and Maosong Sun},\n  title     = {Pack Together: Entity and Relation Extraction with Levitated Marker},\n  journal   = {arXiv Preprint},\n  year={2021}\n}\n```",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{ye2021plmarker,\n  author    = {Deming Ye and Yankai Lin and Maosong Sun},\n  title     = {Pack Together: Entity and Relation Extraction with Levitated Marker},\n  journal   = {arXiv Preprint},\n  year={2021}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8715509475085587
+      ],
+      "excerpt": "wget -P bert_models/bert-base-uncased https://huggingface.co/bert-base-uncased/resolve/main/pytorch_model.bin \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8715509475085587
+      ],
+      "excerpt": "wget -P bert_models/albert-xxlarge-v1 https://huggingface.co/albert-xxlarge-v1/resolve/main/pytorch_model.bin \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8715509475085587
+      ],
+      "excerpt": "wget -P bert_models/scibert_scivocab_uncased https://huggingface.co/allenai/scibert_scivocab_uncased/resolve/main/pytorch_model.bin \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thunlp/PL-Marker",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "How to contribute to transformers?\nEveryone is welcome to contribute, and we value everybody's contribution. Code\nis thus not the only way to help the community. Answering questions, helping\nothers, reaching out and improving the documentations are immensely valuable to\nthe community.\nIt also helps us if you spread the word: reference the library from blog posts\non the awesome projects it made possible, shout out on Twitter every time it has\nhelped you, or simply star the repo to say \"thank you\".\nYou can contribute in so many ways!\nThere are 4 ways you can contribute to transformers:\n* Fixing outstanding issues with the existing code;\n* Implementing new models;\n* Contributing to the examples or to the documentation;\n* Submitting issues related to bugs or desired new features.\nAll are equally valuable to the community.\nSubmitting a new issue or feature request\nDo your best to follow these guidelines when submitting an issue or a feature\nrequest. It will make it easier for us to come back to you quickly and with good\nfeedback.\nDid you find a bug?\nThe transformers are robust and reliable thanks to the users who notify us of\nthe problems they encounter. So thank you for reporting an issue.\nFirst, we would really appreciate it if you could make sure the bug was not\nalready reported (use the search bar on Github under Issues).\nDid not find it? :( So we can act quickly on it, please follow these steps:\n\nInclude your OS type and version, the versions of Python, PyTorch and\n  Tensorflow when applicable;\nA short, self-contained, code snippet that allows us to reproduce the bug in\n  less than 30s;\nProvide the full traceback if an exception is raised.\n\nTo get the OS and software versions automatically, you can run the following command:\nbash\npython transformers-cli env\nDo you want to implement a new model?\nAwesome! Please provide the following information:\n\nShort description of the model and link to the paper;\nLink to the implementation if it is open-source;\nLink to the model weights if they are available.\n\nIf you are willing to contribute the model yourself, let us know so we can best\nguide you.\nWe have added a detailed guide and templates to guide you in the process of adding a new model. You can find them in the templates folder.\nDo you want a new feature (that is not a model)?\nA world-class feature request addresses the following points:\n\nMotivation first:\nIs it related to a problem/frustration with the library? If so, please explain\n    why. Providing a code snippet that demonstrates the problem is best.\nIs it related to something you would need for a project? We'd love to hear\n    about it!\nIs it something you worked on and think could benefit the community?\n    Awesome! Tell us what problem it solved for you.\nWrite a full paragraph describing the feature;\nProvide a code snippet that demonstrates its future use;\nIn case this is related to a paper, please attach a link;\nAttach any additional information (drawings, screenshots, etc.) you think may help.\n\nIf your issue is well written we're already 80% of the way there by the time you\npost it.\nWe have added templates to guide you in the process of adding a new example script for training or testing the models in the library. You can find them in the templates folder.\nStart contributing! (Pull Requests)\nBefore writing code, we strongly advise you to search through the exising PRs or\nissues to make sure that nobody is already working on the same thing. If you are\nunsure, it is always a good idea to open an issue to get some feedback.\nYou will need basic git proficiency to be able to contribute to\ntransformers. git is not the easiest tool to use but it has the greatest\nmanual. Type git --help in a shell and enjoy. If you prefer books, Pro\nGit is a very good reference.\nFollow these steps to start contributing:\n\n\nFork the repository by\n   clicking on the 'Fork' button on the repository's page. This creates a copy of the code\n   under your GitHub user account.\n\n\nClone your fork to your local disk, and add the base repository as a remote:\n\n\nbash\n   $ git clone git@github.com:&lt;your Github handle&gt;/transformers.git\n   $ cd transformers\n   $ git remote add upstream https://github.com/huggingface/transformers.git\n\nCreate a new branch to hold your development changes:\n\nbash\n   $ git checkout -b a-descriptive-name-for-my-changes\ndo not work on the master branch.\n\nSet up a development environment by running the following command in a virtual environment:\n\nbash\n   $ pip install -e \".[dev]\"\n(If transformers was already installed in the virtual environment, remove\n   it with pip uninstall transformers before reinstalling it in editable\n   mode with the -e flag.)\nRight now, we need an unreleased version of isort to avoid a\n   bug:\nbash\n   $ pip install -U git+git://github.com/timothycrosley/isort.git@e63ae06ec7d70b06df9e528357650281a3d3ec22#egg=isort\n\nDevelop the features on your branch.\n\nAs you work on the features, you should make sure that the test suite\n   passes:\nbash\n   $ make test\ntransformers relies on black and isort to format its source code\n   consistently. After you make changes, format them with:\nbash\n   $ make style\ntransformers also uses flake8 to check for coding mistakes. Quality\n   control runs in CI, however you can also run the same checks with:\nbash\n   $ make quality\nOnce you're happy with your changes, add changed files using git add and\n   make a commit with git commit to record your changes locally:\nbash\n   $ git add modified_file.py\n   $ git commit\nPlease write good commit\n   messages.\nIt is a good idea to sync your copy of the code with the original\n   repository regularly. This way you can quickly account for changes:\nbash\n   $ git fetch upstream\n   $ git rebase upstream/master\nPush the changes to your account using:\nbash\n   $ git push -u origin a-descriptive-name-for-my-changes\n\n\nOnce you are satisfied (and the checklist below is happy too), go to the\n   webpage of your fork on GitHub. Click on 'Pull request' to send your changes\n   to the project maintainers for review.\n\n\nIt's ok if maintainers ask you for changes. It happens to core contributors\n   too! So everyone can see the changes in the Pull request, work in your local\n   branch and push the changes to your fork. They will automatically appear in\n   the pull request.\n\n\nChecklist\n\nThe title of your pull request should be a summary of its contribution;\nIf your pull request adresses an issue, please mention the issue number in\n   the pull request description to make sure they are linked (and people\n   consulting the issue know you are working on it);\nTo indicate a work in progress please prefix the title with [WIP]. These\n   are useful to avoid duplicated work, and to differentiate it from PRs ready\n   to be merged;\nMake sure existing tests pass;\nAdd high-coverage tests. No quality test, no merge. \nIf you are adding a new model, make sure that you use ModelTester.all_model_classes = (MyModel, MyModelWithLMHead,...), which triggers the common tests.\nIf you are adding new @slow tests, make sure they pass using RUN_SLOW=1 python -m pytest tests/test_my_new_model.py. \nCircleCI does not run them. \nAll public methods must have informative docstrings;\n\nTests\nYou can run \ud83e\udd17 Transformers tests with unittest or pytest.\nWe like pytest and pytest-xdist because it's faster. From the root of the\nrepository, here's how to run tests with pytest for the library:\nbash\n$ python -m pytest -n auto --dist=loadfile -s -v ./tests/\nand for the examples:\nbash\n$ pip install -r examples/requirements.txt  # only needed the first time\n$ python -m pytest -n auto --dist=loadfile -s -v ./examples/\nIn fact, that's how make test and make test-examples are implemented!\nYou can specify a smaller set of tests in order to test only the feature\nyou're working on.\nBy default, slow tests are skipped. Set the RUN_SLOW environment variable to\nyes to run them. This will download many gigabytes of models \u2014 make sure you\nhave enough disk space and a good Internet connection, or a lot of patience!\nbash\n$ RUN_SLOW=yes python -m pytest -n auto --dist=loadfile -s -v ./tests/\n$ RUN_SLOW=yes python -m pytest -n auto --dist=loadfile -s -v ./examples/\nLikewise, set the RUN_CUSTOM_TOKENIZERS environment variable to yes to run\ntests for custom tokenizers, which don't run by default either.\n\ud83e\udd17 Transformers uses pytest as a test runner only. It doesn't use any\npytest-specific features in the test suite itself.\nThis means unittest is fully supported. Here's how to run tests with\nunittest:\nbash\n$ python -m unittest discover -s tests -t . -v\n$ python -m unittest discover -s examples -t examples -v\nStyle guide\nFor documentation strings, transformers follows the google\nstyle.\nThis guide was heavily inspired by the awesome scikit-learn guide to contributing",
+    "technique": "File Exploration"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-11T15:33:25Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T08:42:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Preprocessing \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9398135355185242,
+        0.9458264314374545,
+        0.8901127538355511,
+        0.9805035783522701,
+        0.967166022351074,
+        0.8949662992553772
+      ],
+      "excerpt": "In this work, we present a novel span representation approach, named Packed Levitated Markers,  to consider the dependencies between the spans (pairs) by strategically packing the markers in the encoder. Our approach is evaluated on two typical span (pair) representation tasks: \nNamed Entity Recognition (NER): Adopt a group packing strategy for enabling our model to process massive spans together to consider their dependencies with limited resources. \nRelation Extraction (RE): Adopt a subject-oriented packing strategy for packing each subject and all its objects into an instance to model the dependencies between the same-subject span pairs \nPlease find more details of this work in our paper. \nWe release our trained NER models and RE models on ACE05 and SciERC datasets on Google Drive/Tsinghua Cloud. And we release our trained models on flat NER datasets on  Tsinghua Cloud. \nNote: the performance of the models might be slightly different from the reported numbers in the paper, since we reported the average numbers based on multiple runs. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "| Model | Ent | Rel | Rel+ | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Source code for \"Pack Together: Entity and Relation Extraction with Levitated Marker\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Our experiments are based on three datasets: ACE04, ACE05, and SciERC. Please find the links and pre-processing below:\n* CoNLL03: We use the Enlish part of CoNLL03 from [Google Drive](https://drive.google.com/drive/folders/1ZxytgzPLTA7ge9sX-JgIoIZj7kUCdh9h?usp=sharing)/[Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/8885dca5b3b442e1834a/).\n* OntoNotes: We use `preprocess_ontonotes.py`  to preprocess the [OntoNote 5.0](https://catalog.ldc.upenn.edu/LDC2013T19).\n* Few-NERD: The dataseet can be downloaed in their [website](https://ningding97.github.io/fewnerd/)\n* ACE04/ACE05: We use the preprocessing code from [DyGIE repo](https://github.com/luanyi/DyGIE/tree/master/preprocessing). Please follow the instructions to preprocess the ACE05 and ACE04 datasets.\n* SciERC: The preprocessed SciERC dataset can be downloaded in their project [website](http://nlp.cs.washington.edu/sciIE/data/sciERC_processed.tar.gz).\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thunlp/pl-marker/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Thu, 23 Dec 2021 17:56:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/thunlp/PL-Marker/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thunlp/PL-Marker",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/docker/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/thunlp/pl-marker/tree/master/transformers/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/notebooks/Comparing-TF-and-PT-models-SQuAD.ipynb",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/notebooks/Comparing-TF-and-PT-models.ipynb",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/notebooks/Comparing-PT-and-TF-models.ipynb",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/notebooks/Comparing-TF-and-PT-models-MLM-NSP.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/scripts/run_train_ner_TokenCat.sh",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/scripts/run_train_re.sh",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/scripts/run_train_ner_BIO.sh",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/scripts/run_train_ner_PLMarker.sh",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/deploy_multi_version_doc.sh",
+      "https://raw.githubusercontent.com/thunlp/pl-marker/master/transformers/.circleci/deploy.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code is based on huggaface's [transformers](https://github.com/huggingface/transformers). \n\nInstall dependencies and [apex](https://github.com/NVIDIA/apex):\n```\npip3 install -r requirement.txt\npip3 install --editable transformers\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9954583257582014
+      ],
+      "excerpt": "Install Dependencies \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8395049169232494
+      ],
+      "excerpt": "mkdir -p bert_models/albert-xxlarge-v1 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8902627162932362
+      ],
+      "excerpt": "mkdir -p bert_models/scibert_scivocab_uncased \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9414119019616536,
+        0.9414119019616536,
+        0.9414119019616536
+      ],
+      "excerpt": "bash scripts/run_train_ner_PLMarker.sh \nbash scripts/run_train_ner_BIO.sh \nbash scripts/run_train_ner_TokenCat.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9465718491881494
+      ],
+      "excerpt": "bash run_train_re.sh \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8077319622579018,
+        0.8606280910157142
+      ],
+      "excerpt": "Training Script \nQuick Start \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.869248625815457
+      ],
+      "excerpt": "Train NER Models: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/thunlp/PL-Marker/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Shell",
+      "CSS",
+      "Makefile",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'\\n                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PL-Marker",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PL-Marker",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thunlp",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/thunlp/PL-Marker/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code is based on huggaface's [transformers](https://github.com/huggingface/transformers). \n\nInstall dependencies and [apex](https://github.com/NVIDIA/apex):\n```\npip3 install -r requirement.txt\npip3 install --editable transformers\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 30,
+      "date": "Thu, 23 Dec 2021 17:56:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The following commands can be used to run our pre-trained models on SciERC.\n\nEvaluate the NER model:\n```\nCUDA_VISIBLE_DEVICES=0  python3  run_acener.py  --model_type bertspanmarker  \\\n    --model_name_or_path  ../bert_models/scibert-uncased  --do_lower_case  \\\n    --data_dir scierc  \\\n    --learning_rate 2e-5  --num_train_epochs 50  --per_gpu_train_batch_size  8  --per_gpu_eval_batch_size 16  --gradient_accumulation_steps 1  \\\n    --max_seq_length 512  --save_steps 2000  --max_pair_length 256  --max_mention_ori_length 8    \\\n    --do_eval  --evaluate_during_training   --eval_all_checkpoints  \\\n    --fp16  --seed 42  --onedropout  --lminit  \\\n    --train_file train.json --dev_file dev.json --test_file test.json  \\\n    --output_dir sciner_models/sciner-scibert  --overwrite_output_dir  --output_results\n```\n\n\nEvaluate the RE model:\n```\nCUDA_VISIBLE_DEVICES=0  python3  run_re.py  --model_type bertsub  \\\n    --model_name_or_path  ../bert_models/scibert-uncased  --do_lower_case  \\\n    --data_dir scierc  \\\n    --learning_rate 2e-5  --num_train_epochs 10  --per_gpu_train_batch_size  8  --per_gpu_eval_batch_size 16  --gradient_accumulation_steps 1  \\\n    --max_seq_length 256  --max_pair_length 16  --save_steps 2500  \\\n    --do_eval  --evaluate_during_training   --eval_all_checkpoints  --eval_logsoftmax  \\\n    --fp16  --lminit   \\\n    --test_file sciner_models/sciner-scibert/ent_pred_test.json  \\\n    --use_ner_results \\\n    --output_dir scire_models/scire-scibert\n```\nHere,  `--use_ner_results` denotes using the original entity type predicted by NER models.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

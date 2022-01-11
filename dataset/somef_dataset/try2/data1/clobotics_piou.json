@@ -1,0 +1,308 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2007.09584",
+      "https://arxiv.org/abs/2007.09584](https://arxiv.org/abs/2007.09584))*         \r\n\r\n## Abstract \r\n\r\nObject detection using an oriented bounding box (OBB) can better target rotated objects by reducing the overlap with background areas. Existing OBB approaches are mostly built on horizontal bounding box detectors by introducing an additional angle dimension optimized by a distance loss. However, as the distance loss only minimizes the angle error of the OBB and that it loosely correlates to the IoU, it is insensitive to objects with high aspect ratios. Therefore, a novel loss, Pixels-IoU (PIoU) Loss, is formulated to exploit both the angle and IoU for accurate OBB regression. The PIoU loss is derived from IoU metric with a pixel-wise form, which is simple and suitable for both horizontal and oriented bounding box. To demonstrate its effectiveness, we evaluate the PIoU loss on both anchor-based and anchor-free frameworks. The experimental results show that PIoU loss can dramatically improve the performance of OBB detectors, particularly on objects with high aspect ratios and complex backgrounds. Besides, previous evaluation datasets did not include scenarios where the objects have high aspect ratios, hence a new dataset, Retail50K, is introduced to encourage the community to adapt OBB detectors for more complex environments.\r\n\r\n## Installation\r\n\r\nThe code was tested on Ubuntu 16.04, with [Anaconda](https://www.anaconda.com/download) Python 3.6 and [PyTorch]((http://pytorch.org/)) v0.4.1. NVIDIA GPUs are needed for both training and testing.\r\nAfter install Anaconda:\r\n\r\n1. Install pytorch1.3.1:\r\n\r\n    ~~~\r\n    conda install pytorch=1.3.1 torchvision -c pytorch\r\n    ~~~\r\n\r\n2. Install [COCOAPI](https://github.com/cocodataset/cocoapi):\r\n\r\n    ~~~\r\n    # COCOAPI=/path/to/clone/cocoapi\r\n    git clone https://github.com/cocodataset/cocoapi.git $COCOAPI\r\n    cd $COCOAPI/PythonAPI\r\n    make\r\n    python setup.py install --user\r\n    ~~~\r\n\r\n3. Install the requirements\r\n\r\n    ~~~\r\n    pip install -r requirements.txt\r\n    ~~~\r\n\r\n4. Compile \r\n    ~~~\r\n    cd $CenterNet_ROOT/src/lib/models/networks/DCNv2\r\n    ./make.sh\r\n    ~~~\r\n    ~~~\r\n    cd $CenterNet_ROOT/src/lib/external\r\n    make\r\n    ~~~\r\n    cd $CenterNet_ROOT/src/lib/piou_loss\r\n    python setup.py install\r\n\r\n## Training and Testing\r\n\r\n1. Data pre-processing\r\n\r\n    - retail50k2coco.py\r\n\r\n2. Data-related parameters\r\n\r\n    - retail50k.py\r\n    \r\n3. Training\r\n    \r\n    - ctrdet_retail50k_512.sh\r\n\r\n4. Testing\r\n\r\n    - retail50k_demo.py\r\n    - retail50k_eval.py\r\n    \r\n## Results\r\n![](readme/results.png)\r\n\r\n## License\r\nPIoU is released under the MIT License (refer to the LICENSE file for details). Portions of the code are borrowed from CenterNet. Please refer to the original License of this project.\r\n\r\n## Citation\r\n\r\nIf you find this project useful for your research, please use the following BibTeX entry.\r\n\r\n    @inproceedings{Yang2020PLT,\r\n      title      = {PIoU Loss: Towards Accurate Oriented Object Detection in Complex Environments"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nIf you find this project useful for your research, please use the following BibTeX entry.\r\n\r\n    @inproceedings{Yang2020PLT,\r\n      title      = {PIoU Loss: Towards Accurate Oriented Object Detection in Complex Environments},\r\n      author     = {Chen, Zhiming and Chen, Kean and Lin, Weiyao and See, John See and Yu, Hui and Ke, Yan and Yang, Cong},\r\n      booktitle  = {European Conference on Computer Vision},\r\n      pages      = {1-17},\r\n      year       = {2020}\r\n    }\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{Yang2020PLT,\n  title      = {PIoU Loss: Towards Accurate Oriented Object Detection in Complex Environments},\n  author     = {Chen, Zhiming and Chen, Kean and Lin, Weiyao and See, John See and Yu, Hui and Ke, Yan and Yang, Cong},\n  booktitle  = {European Conference on Computer Vision},\n  pages      = {1-17},\n  year       = {2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9146894306581498
+      ],
+      "excerpt": "Orientated Object Detection; IoU Loss \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9998523057718084,
+        0.9850208871866275
+      ],
+      "excerpt": "Zhiming Chen, Kean Chen, Weiyao Lin, John See, Hui Yu, Yan Ke, Cong Yang \narXiv technical report (arXiv:2007.09584) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/clobotics/piou",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-04T15:24:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-25T02:59:56Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9915156357733862
+      ],
+      "excerpt": "Object detection using an oriented bounding box (OBB) can better target rotated objects by reducing the overlap with background areas. Existing OBB approaches are mostly built on horizontal bounding box detectors by introducing an additional angle dimension optimized by a distance loss. However, as the distance loss only minimizes the angle error of the OBB and that it loosely correlates to the IoU, it is insensitive to objects with high aspect ratios. Therefore, a novel loss, Pixels-IoU (PIoU) Loss, is formulated to exploit both the angle and IoU for accurate OBB regression. The PIoU loss is derived from IoU metric with a pixel-wise form, which is simple and suitable for both horizontal and oriented bounding box. To demonstrate its effectiveness, we evaluate the PIoU loss on both anchor-based and anchor-free frameworks. The experimental results show that PIoU loss can dramatically improve the performance of OBB detectors, particularly on objects with high aspect ratios and complex backgrounds. Besides, previous evaluation datasets did not include scenarios where the objects have high aspect ratios, hence a new dataset, Retail50K, is introduced to encourage the community to adapt OBB detectors for more complex environments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "piou loss and Retail50K dataset",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/clobotics/piou/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 38,
+      "date": "Wed, 29 Dec 2021 14:18:57 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/clobotics/piou/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "clobotics/piou",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_hg.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_resdcn101.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/exdet_coco_dla.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_resdcn18.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_resdcn101_384.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_dla_2x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ddd_3dop.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_resdcn101_512.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/multi_pose_hg_1x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_dla_1x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/multi_pose_hg_3x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_coco_dla_1x_test.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_resdcn18_384.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_dla_512.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/exdet_coco_hg.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_resdcn18_512.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/multi_pose_dla_3x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctdet_pascal_dla_384.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ctrdet_retail50k_512.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/ddd_sub.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/experiments/multi_pose_dla_1x.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/src/tools/get_pascal_voc.sh",
+      "https://raw.githubusercontent.com/clobotics/piou/master/src/tools/get_kitti.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "\r\nThe code was tested on Ubuntu 16.04, with [Anaconda](https://www.anaconda.com/download) Python 3.6 and [PyTorch]((http://pytorch.org/)) v0.4.1. NVIDIA GPUs are needed for both training and testing.\r\nAfter install Anaconda:\r\n\r\n1. Install pytorch1.3.1:\r\n\r\n    ~~~\r\n    conda install pytorch=1.3.1 torchvision -c pytorch\r\n    ~~~\r\n\r\n2. Install [COCOAPI](https://github.com/cocodataset/cocoapi):\r\n\r\n    ~~~\r\n    ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9581417088847103,
+        0.9148228801291415,
+        0.9528557246768159
+      ],
+      "excerpt": "git clone https://github.com/cocodataset/cocoapi.git $COCOAPI \ncd $COCOAPI/PythonAPI \npython setup.py install --user \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9983303888193586
+      ],
+      "excerpt": "Install the requirements \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9979947896609701
+      ],
+      "excerpt": "pip install -r requirements.txt \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8516685309054747
+      ],
+      "excerpt": "Compile  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8417789402649514,
+        0.9525337382044011
+      ],
+      "excerpt": "    cd $CenterNet_ROOT/src/lib/models/networks/DCNv2 \n    ./make.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8754215253820645,
+        0.8474895321345809
+      ],
+      "excerpt": "    cd $CenterNet_ROOT/src/lib/external \n    make \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.915721296546315,
+        0.9820226428242687
+      ],
+      "excerpt": "    cd $CenterNet_ROOT/src/lib/piou_loss \n    python setup.py install \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/clobotics/piou/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "Cuda",
+      "Shell",
+      "CMake"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 Clobotics (www.clobotics.com)\\nAll rights reserved.\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "PIoU Loss",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "piou",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "clobotics",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/clobotics/piou/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "Organization",
+        "author_name": "clobotics",
+        "body": "souce codes for piou loss\r\ntraining and testing data of retail50k",
+        "dateCreated": "2020-07-19T09:14:38Z",
+        "datePublished": "2020-07-19T09:18:55Z",
+        "html_url": "https://github.com/clobotics/piou/releases/tag/piou",
+        "name": "piou",
+        "tag_name": "piou",
+        "tarball_url": "https://api.github.com/repos/clobotics/piou/tarball/piou",
+        "url": "https://api.github.com/repos/clobotics/piou/releases/28710508",
+        "zipball_url": "https://api.github.com/repos/clobotics/piou/zipball/piou"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 166,
+      "date": "Wed, 29 Dec 2021 14:18:57 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2101.01097v2",
+      "https://arxiv.org/abs/2010.11929"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8109194328925066
+      ],
+      "excerpt": "args['transformer_params'] = [2, 32, 8, 64] \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/junyongyou/triq",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-12-30T18:28:51Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T07:56:02Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9507410744949212
+      ],
+      "excerpt": "TF-Keras implementation of TRIQ as described in Transformer for Image Quality Assessment. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9450574870132871
+      ],
+      "excerpt": "Argparser should be used, but the authors prefer to use dictionary with parameters being defined. It is easy to convert to take arguments. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    model = create_triq_model(n_quality_levels=args['n_quality_levels'], \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9776488910292708,
+        0.9499099003283195,
+        0.8906068885309057,
+        0.9006283525631982,
+        0.9553275936706221,
+        0.9371939265476629,
+        0.9884127193249115
+      ],
+      "excerpt": "Other three models are also included in the work. The original implementations of metrics are employed, and they can be found below. \nKoncept512 KonIQ-10k: An ecologically valid database for deep learning of blind image quality assessment \nSGDNet SGDNet: An end-to-end saliency-guided deep neural network for no-reference image quality assessment \nCaHDC End-to-end blind image quality prediction with cascaded deep neural network \nWe have conducted several experiments to evaluate the performance of TRIQ, please see results.pdf for detailed results. \nThis work is heavily inspired by ViT An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale.  \nThe module vit_iqa contains implementation of ViT for IQA, and mainly followed the implementation of ViT-PyTorch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "TRIQ implementation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/junyongyou/triq/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In case errors/exceptions are encountered, please first check all the paths. After fixing the path isse, please report any errors in Issues.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* To be added\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Thu, 23 Dec 2021 04:23:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/junyongyou/triq/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "junyongyou/triq",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/junyongyou/triq/master/src/vit_iqa/ViT_pytorch/visualize_attention_map.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This work uses two publicly available databases: KonIQ-10k [KonIQ-10k: An ecologically valid database for deep learning of blind image quality assessment](https://ieeexplore.ieee.org/document/8968750) by V. Hosu, H. Lin, T. Sziranyi, and D. Saupe;\n and LIVE-wild [Massive online crowdsourced study of subjective and objective picture quality](https://ieeexplore.ieee.org/document/7327186) by D. Ghadiyaram, and A.C. Bovik\n\n1) The two databases were merged, and then split to training and testing sets. Please see README in databases for details.\n2) Make MOS files (note: do NOT include head line):\n\n    For database with score distribution available, the MOS file is like this (koniq format):\n    ```\n        image path, voter number of quality scale 1, voter number of quality scale 2, voter number of quality scale 3, voter number of quality scale 4, voter number of quality scale 5, MOS or Z-score\n        10004473376.jpg,0,0,25,73,7,3.828571429\n        10007357496.jpg,0,3,45,47,1,3.479166667\n        10007903636.jpg,1,0,20,73,2,3.78125\n        10009096245.jpg,0,0,21,75,13,3.926605505\n    ```\n\n    For database with standard deviation available, the MOS file is like this (live format):\n    ```\n        image path, standard deviation, MOS or Z-score\n        t1.bmp,18.3762,63.9634\n        t2.bmp,13.6514,25.3353\n        t3.bmp,18.9246,48.9366\n        t4.bmp,18.2414,35.8863\n    ```\n\n    The format of MOS file ('koniq' or 'live') and the format of MOS or Z-score ('mos' or 'z_score') should also be specified in misc/imageset_handler/get_image_scores.\n3) In the train script in train/train_triq.py the folders containing training and testing images are provided.\n4) Pretrained ImageNet weights can be downloaded (see README in.\\pretrained_weights) and pointed to in the train script.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    args['image_aug'] = True ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    args['gpu'] = 0  ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1) Clone this repository.\n2) Install required Python packages. The code is developed by PyCharm in Python 3.7. The requirements.txt document is generated by PyCharm, and the code should also be run in latest versions of the packages.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9345698308901582
+      ],
+      "excerpt": "An example of training TRIQ can be seen in train/train_triq.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137,
+        0.8589534893990137
+      ],
+      "excerpt": "    r'..\\databases\\train\\koniq_normal', \n    r'..\\databases\\train\\koniq_small', \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "args['lr_schedule'] = True \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9508435825796167,
+        0.9357055752773047
+      ],
+      "excerpt": "In the \"examples\" folder, an example script examples\\image_quality_prediction.py is provided to use the trained weights to predict quality of example images. \nIn the \"train\" folder, an example script train\\validation.py is provided to use the trained weights to predict quality of images in folders. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/junyongyou/triq/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 jeonsworld\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TRIQ Implementation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "triq",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "junyongyou",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/junyongyou/triq/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 82,
+      "date": "Thu, 23 Dec 2021 04:23:23 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "support": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In case errors/exceptions are encountered, please first check all the paths. After fixing the path isse, please report any errors in Issues.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "image-quality-assessment"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    args['result_folder'] = r'..\\databases\\experiments' ",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    args['lr_base'] = 1e-4 / 2  ",
+      "technique": "Header extraction"
+    }
+  ]
+}

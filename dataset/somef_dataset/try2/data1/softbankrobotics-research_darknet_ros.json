@@ -1,0 +1,378 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1506.02640"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The YOLO methods used in this software are described in the paper: [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640).\n\nIf you are using YOLO V3 for ROS, please add the following citation to your publication:\n\nM. Bjelonic\n**\"YOLO ROS: Real-Time Object Detection for ROS\"**,\nURL: https://github.com/leggedrobotics/darknet_ros, 2018.\n\n    @misc{bjelonicYolo2018,\n      author = {Marko Bjelonic},\n      title = {{YOLO ROS}: Real-Time Object Detection for {ROS}},\n      howpublished = {\\url{https://github.com/leggedrobotics/darknet_ros}},\n      year = {2016--2018},\n    }\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@misc{bjelonicYolo2018,\n  author = {Marko Bjelonic},\n  title = {{YOLO ROS}: Real-Time Object Detection for {ROS}},\n  howpublished = {\\url{https://github.com/leggedrobotics/darknet_ros}},\n  year = {2016--2018},\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9818894004866677,
+        0.8028046190715653
+      ],
+      "excerpt": "Author: Marko Bjelonic, marko.bjelonic@mavt.ethz.ch \nAffiliation: Robotic Systems Lab, ETH Zurich \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/softbankrobotics-research/darknet_ros",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-09-25T08:47:07Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-01-23T16:25:39Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9534032920134845,
+        0.8669438482901752,
+        0.9640666758817465,
+        0.9276786488311825
+      ],
+      "excerpt": "-- Fixed issue that this node would publish garbage into ROS when using with a TX1 or TX2. \n-- Added semaphores to avoid processing the same image twice (the original version of this branch would be extensively using CPU/GPU reprocessing repeated images that were at a low frequency). \nThis is a ROS package developed for object detection in camera images. You only look once (YOLO) is a state-of-the-art, real-time object detection system. In the following ROS package you are able to use YOLO (V3) on GPU and CPU. The pre-trained model of the convolutional neural network is able to detect pre-trained classes including the data set from VOC and COCO, or you can also create a network with your own detection objects. For more information about YOLO, Darknet, available training data and training YOLO see the following link: YOLO: Real-Time Object Detection. \nThe YOLO packages have been tested under ROS Melodic and Ubuntu 18.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8059111616315568
+      ],
+      "excerpt": "Based on the Pascal VOC 2012 dataset, YOLO can detect the 20 Pascal object classes: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8773699319417355
+      ],
+      "excerpt": "In order to install darknet_ros, clone the latest version using SSH (see how to set up an SSH key) from this repository into your catkin workspace and compile the package using ROS. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9444616548503062
+      ],
+      "excerpt": "This is the main YOLO ROS: Real-Time Object Detection for ROS node. It uses the camera measurements to detect pre-learned objects in the frames. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8560517666081495
+      ],
+      "excerpt": "Publishes the number of detected objects. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8606570744541496
+      ],
+      "excerpt": "Publishes an array of bounding boxes that gives information of the position and size of the bounding box in pixel coordinates. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8195382195604031
+      ],
+      "excerpt": "Publishes an image of the detection image including the bounding boxes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8048808983027805
+      ],
+      "excerpt": "Sends an action with an image and the result is an array of bounding boxes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9813701041535947
+      ],
+      "excerpt": "Wait key delay in ms of the open cv window. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9648847443737689
+      ],
+      "excerpt": "Threshold of the detection algorithm. It is defined between 0 and 1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "YOLO ROS: Real-Time Object Detection for ROS",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The yolo-voc.weights and tiny-yolo-voc.weights are downloaded automatically in the CMakeLists.txt file. If you need to download them again, go into the weights folder and download the two pre-trained weights from the COCO data set:\n\n    cd catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/weights/\n    wget http://pjreddie.com/media/files/yolov2.weights\n    wget http://pjreddie.com/media/files/yolov2-tiny.weights\n\nAnd weights from the VOC data set can be found here:\n\n    wget http://pjreddie.com/media/files/yolov2-voc.weights\n    wget http://pjreddie.com/media/files/yolov2-tiny-voc.weights\n\nAnd the pre-trained weight from YOLO v3 can be found here:\n\n    wget http://pjreddie.com/media/files/yolov3-voc.weights\n    wget http://pjreddie.com/media/files/yolov3.weights\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/softbankrobotics-research/darknet_ros/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 00:15:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/softbankrobotics-research/darknet_ros/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "softbankrobotics-research/darknet_ros",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9459962853963781,
+        0.9452797457628369,
+        0.9799489993452795,
+        0.9906248903846466,
+        0.9190369500138394
+      ],
+      "excerpt": "In order to install darknet_ros, clone the latest version using SSH (see how to set up an SSH key) from this repository into your catkin workspace and compile the package using ROS. \ncd catkin_workspace/src \ngit clone --recursive https://github.com/AkellaSummerResearch/darknet_ros.git \ncd ../ \nTo maximize performance, make sure to build in Release mode. You can specify the build type by setting \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8958410609422458,
+        0.9775321692453951,
+        0.8517281706197345,
+        0.8979399988148568
+      ],
+      "excerpt": "catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release \nDarknet on the CPU is fast (approximately 1.5 seconds on an Intel Core i7-6700HQ CPU @ 2.60GHz \u00d7 8) but it's like 500 times faster on GPU! You'll have to have an Nvidia GPU and you'll have to install CUDA. The CMakeLists.txt file automatically detects if you have CUDA installed or not. CUDA is a parallel computing platform and application programming interface (API) model created by Nvidia. If you do not have CUDA on your System the build process will switch to the CPU version of YOLO. If you are compiling with CUDA, you might receive the following build error: \nnvcc fatal : Unsupported gpu architecture 'compute_61'. \nThis means that you need to check the compute capability (version) of your GPU. You can find a list of supported GPUs in CUDA here: CUDA - WIKIPEDIA. Simply find the compute capability of your GPU and add it into darknet_ros/CMakeLists.txt. Simply add a similar line like \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8426607952463744
+      ],
+      "excerpt": "You will see the image above popping up. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "yolo_model/config_file/name (string) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "yolo_model/weight_file/name (string) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "aeroplane, bicycle, boat, bus, car, motorbike, train \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8589534893990137
+      ],
+      "excerpt": "bicycle, car, motorbike, aeroplane, bus, train, truck, boat \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8629400568140789
+      ],
+      "excerpt": "cd catkin_workspace/src \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9113302220453173
+      ],
+      "excerpt": "Run the unit tests using the Catkin Command Line Tools \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8182167632496727
+      ],
+      "excerpt": "yolo_model/config_file/name (string) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8182167632496727
+      ],
+      "excerpt": "yolo_model/weight_file/name (string) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8138063587424429
+      ],
+      "excerpt": "yolo_model/threshold/value (float) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/softbankrobotics-research/darknet_ros/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "CMake",
+      "C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "url": "https://api.github.com/licenses/bsd-3-clause"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Copyright (c) 2017, Marko Bjelonic, Robotic Systems Lab, ETH Zurich\\nAll rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without\\nmodification, are permitted provided that the following conditions are met:\\n    * Redistributions of source code must retain the above copyright\\n      notice, this list of conditions and the following disclaimer.\\n    * Redistributions in binary form must reproduce the above copyright\\n      notice, this list of conditions and the following disclaimer in the\\n      documentation and/or other materials provided with the distribution.\\n    * Neither the name of the copyright holder nor the names of its\\n      contributors may be used to endorse or promote products derived\\n      from this software without specific prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY\\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "YOLO ROS: Real-Time Object Detection for ROS",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "darknet_ros",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "softbankrobotics-research",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/softbankrobotics-research/darknet_ros/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This software is built on the Robotic Operating System ([ROS]), which needs to be [installed](http://wiki.ros.org) first. Additionally, YOLO for ROS depends on following software:\n\n- [OpenCV](http://opencv.org/) (computer vision library),\n- [boost](http://www.boost.org/) (c++ library),\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 29 Dec 2021 00:15:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to use your own detection objects you need to provide your weights and your cfg file inside the directories:\n\n    catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/weights/\n    catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/cfg/\n\nIn addition, you need to create your config file for ROS where you define the names of the detection objects. You need to include it inside:\n\n    catkin_workspace/src/darknet_ros/darknet_ros/config/\n\nThen in the launch file you have to point to your new config file in the line:\n\n    <rosparam command=\"load\" ns=\"darknet_ros\" file=\"$(find darknet_ros)/config/your_config_file.yaml\"/>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In order to get YOLO ROS: Real-Time Object Detection for ROS to run with your robot, you will need to adapt a few parameters. It is the easiest if duplicate and adapt all the parameter files that you need to change from the `darkned_ros` package. These are specifically the parameter files in `config` and the launch file from the `launch` folder.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

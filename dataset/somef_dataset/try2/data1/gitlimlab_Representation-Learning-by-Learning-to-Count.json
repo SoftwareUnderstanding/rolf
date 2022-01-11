@@ -1,0 +1,265 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.06734",
+      "https://arxiv.org/abs/1409.1556",
+      "https://arxiv.org/abs/1206.5538",
+      "https://arxiv.org/abs/1603.09246"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/clvrai/Representation-Learning-by-Learning-to-Count",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-08-23T12:21:59Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-10T02:28:17Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project is a [Tensorflow](https://www.tensorflow.org/) implementation of [Representation Learning by Learning to Count](https://arxiv.org/abs/1708.06734). This paper proposes a novel framework for representation learning, where we are interested in learning good representations of visual content, by utilizing the concept of counting visual primitives. \n\nIn particular, it exploits the fact that the number of visual primitives presented in an image should be invariant to transformations such as scaling, rotation, etc. Given this fact, the model is able to learn meaningful representations by minimizing a contrastive loss where we enforce that the counting feature should be different between a pair of randomly selected images. During the fine-tuning phase, we train a set of linear classifiers to perform an image classification task on ImageNet based on learned representations to verify the effectiveness of the proposed framework. An illustration of the proposed framework is as follows.\n\n<img src=\"figure/framework.png\" height=\"450\" style=\"float:middle\"/>\n\nThe implemented model is trained and tested on [ImageNet](http://www.image-net.org/). \n\nNote that this implementation only follows the main idea of the original paper while differing a lot in implementation details such as model architectures, hyperparameters, applied optimizer, etc. For example, the implementation adopts the [VGG-19](https://arxiv.org/abs/1409.1556) architecture instead of [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) which is used in the origianl paper.\n\n\\*This code is still being developed and subject to change.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9978311828557267,
+        0.9506170325706332
+      ],
+      "excerpt": "As part of the implementation series of Joseph Lim's group at USC, our motivation is to accelerate (or sometimes delay) research in the AI community by promoting open-source projects. To this end, we implement state-of-the-art research papers, and publicly share them with concise reports. Please visit our group github site for other projects. \nThis project is implemented by Shao-Hua Sun and the codes have been reviewed by Te-Lin Wu before being published. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.970858577271064
+      ],
+      "excerpt": "Note that you must specify a checkpoint storing the pretrained model. Also, linear classifiers are applied to all the features including conv1, conv2, ..., fc1, fc2, ..., etc, coming from the pretrained model with the same learning rate, optimizers, etc. To fine tune the model only with a certain feature, please specify it in the code model_classifier.py. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "A Tensorflow implementation of Representation Learning by Learning to Count",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "http://pillow.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gitlimlab/Representation-Learning-by-Learning-to-Count/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Sun, 26 Dec 2021 01:07:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/clvrai/Representation-Learning-by-Learning-to-Count/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "clvrai/Representation-Learning-by-Learning-to-Count",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8036865890729671
+      ],
+      "excerpt": "Train models with downloaded datasets. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8036865890729671
+      ],
+      "excerpt": "Train models with downloaded datasets. For example: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8398652999770644
+      ],
+      "excerpt": "Train models with downloaded datasets. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8027129817046952,
+        0.8398652999770644
+      ],
+      "excerpt": "$ python trainer.py --prefix train_from_scratch --learning_rate 1e-4 --batch_size 8 \nTrain models with downloaded datasets. For example: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8634680874369955
+      ],
+      "excerpt": "$ python trainer_classifier.py --prefix fine_tune --learning_rate 1e-5 --batch_size 8 --checkpoint train_dir/train_from_scratch-ImageNet_lr_0.003-20170828-172936/model-10001 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9209874447430304
+      ],
+      "excerpt": "$ python evaler.py --checkpoint train_dir/fine_tune-ImageNet_lr_0.0001-20170915-172936/model-10001 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8691548537477936
+      ],
+      "excerpt": "Create a input helper datasets/YOUR_DATASET.py following the format of datasets/ImageNet.py \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8332519218106421,
+        0.8329841008426223
+      ],
+      "excerpt": "Modify trainer.py. \nFinally, train and test your models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8768534703174159,
+        0.930224969118462,
+        0.930224969118462,
+        0.8986723325521514
+      ],
+      "excerpt": "$ python trainer.py --dataset YOUR_DATASET \n$ python trainer_classifier.py --dataset YOUR_DATASET --checkpoint train_dir/train_from_scratch-YOUR_DATASET_lr_0.003-20170828-172936/model-10001 \n$ python evaler.py --dataset YOUR_DATASET --checkpoint train_dir/fine_tune-YOUR_DATASET_lr_0.0001-20170915-172936/model-10001 \n<img src=\"figure/training.png\" height=\"400\" style=\"float:middle\"/> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/clvrai/Representation-Learning-by-Learning-to-Count/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License (MIT)\\n\\nCopyright (c) 2017 Shao-Hua Sun\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Representation Learning by Learning to Count in Tensorflow",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Representation-Learning-by-Learning-to-Count",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "clvrai",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/clvrai/Representation-Learning-by-Learning-to-Count/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Python 2.7\n- [Tensorflow 1.2.0](https://github.com/tensorflow/tensorflow/tree/r1.2)\n- [SciPy](http://www.scipy.org/install.html)\n- [NumPy](http://www.numpy.org/)\n- [PIL](http://pillow.readthedocs.io/en/3.1.x/installation.html)\n- [h5py](http://docs.h5py.org/en/latest/)\n- [colorlog](https://github.com/borntyping/python-colorlog)\n- [imageio](https://imageio.github.io/)\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 106,
+      "date": "Sun, 26 Dec 2021 01:07:55 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

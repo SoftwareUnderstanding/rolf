@@ -1,0 +1,171 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1608.03983  \n\n\n## Environment\n  \nUse [Colaboratory](https://colab.research.google.com"
+    ],
+    "technique": "Regular expression"
+  },
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yumatsuoka/check_cosine_annealing_lr",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-01-25T08:33:28Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-08T17:00:21Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9304838809123421
+      ],
+      "excerpt": "I checked the PyTorch implementation of the learning rate scheduler with some learning rate decay conditions.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9933828545368454
+      ],
+      "excerpt": "Which is the implementation of this paper.   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Used torch.optim.lr_scheduler.CosineAnnealingLR()",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yumatsuoka/check_cosine_annealing_lr/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Wed, 22 Dec 2021 15:16:39 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yumatsuoka/check_cosine_annealing_lr/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yumatsuoka/check_cosine_annealing_lr",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/yumatsuoka/check_cosine_annealing_lr/master/check_CosineAnnealingLR.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/yumatsuoka/check_cosine_annealing_lr/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Check cosine annealing lr on Pytorch",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "check_cosine_annealing_lr",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "yumatsuoka",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/yumatsuoka/check_cosine_annealing_lr/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 25,
+      "date": "Wed, 22 Dec 2021 15:16:39 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\nimport torch\n\ndef check_annealing(model, optimizer, param_dict):\n    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(\n        optimizer, T_max=param_dict['t_max'], eta_min=param_dict['eta_min'], last_epoch=-1)\n\n    lr_list = [0. for i in range(param_dict['epochs']) for j in range(param_dict['steps'])]\n    for epoch in range(param_dict['epochs']):\n        for idx in range(param_dict['steps']):\n        \n            now_itr = epoch * param_dict['steps'] + idx\n            now_lr = scheduler.get_lr()\n\n            lr_list[epoch*steps+idx] = now_lr\n            optimizer.step()\n\n            scheduler.step()\n            if optimizer.param_groups[0]['lr'] == param_dict['eta_min']:\n                if param_dict['whole_decay']:\n                    annealed_lr = param_dict['lr'] * (1 + math.cos(\n                        math.pi * now_itr / (param_dict['epochs'] * param_dict['steps']) )) / 2\n                    optimizer.param_groups[0]['initial_lr'] = annealed_lr\n                param_dict['t_max'] *= param_dict['t_mult']\n                scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(\n                    optimizer, T_max=param_dict['t_max'], eta_min=param_dict['eta_min'], last_epoch=-1)\n                \n    return lr_list\n\nepochs = 100\nsteps = 200\nlr = 1.\n\nt01_tmult2 = {\n    'epochs':       epochs,\n    'steps':        steps,\n    't_max':        steps*1,\n    't_mult':       2,\n    'eta_min':      0,\n    'lr':           lr,\n    'whole_decay':  False,\n    'out_name':     \"T_0={}-T_mult={}\".format(steps*1, 2),\n    }\n\nmodel = torch.nn.Linear(10, 2)\noptimizer = torch.optim.SGD(model.parameters(), lr=lr)\n\n#: Run\nt01_tmult2_out = check_annealing(model, optimizer, t01_tmult2)\n\n#: Visualize\ndef show_graph(lr_lists, epochs, steps, out_name):\n    plt.clf()\n    plt.rcParams['figure.figsize'] = [20, 5]\n    x = list(range(epochs * steps))\n    plt.plot(x, lr_lists, label=\"line L\")\n    plt.plot()\n\n    plt.ylim(10e-5, 1)\n    plt.yscale(\"log\")\n    plt.xlabel(\"iterations\")\n    plt.ylabel(\"learning rate\")\n    plt.title(\"Check Cosine Annealing Learing Rate with {}\".format(out_name))\n    plt.legend()\n    plt.show()\n\nshow_graph(t01_tmult2_out, epochs, steps, t01_tmult2['out_name'])\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

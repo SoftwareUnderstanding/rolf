@@ -1,0 +1,932 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.06146\nhttps://www.cs.cmu.edu/~hovy/papers/16HLT-hierarchical-attention-networks.pdf\n\n\n\n\n```python\nimport numpy as np\nimport pandas as pd\nfrom numpy import array\nfrom collections import defaultdict\nimport re\n\nfrom bs4 import BeautifulSoup\n\nimport sys\nimport os\nimport string\nos.environ['KERAS_BACKEND']='tensorflow'\n\nfrom keras.preprocessing.text import Tokenizer, text_to_word_sequence\nfrom keras.preprocessing.sequence import pad_sequences\nfrom keras.utils.np_utils import to_categorical\n\nfrom keras.layers import Embedding\nfrom keras.layers import Dense, Input, Flatten\nfrom keras.layers import Conv1D, MaxPooling1D, Embedding, Dropout, LSTM, GRU, Bidirectional, TimeDistributed\nfrom keras.models import Model, Sequential\nfrom keras.callbacks import ModelCheckpoint, Callback\nfrom keras.models import load_model\n\nfrom keras import backend as K\nfrom keras.engine.topology import Layer, InputSpec\nfrom keras import initializers\n\nimport tensorflow as tf\nfrom keras.backend.tensorflow_backend import set_session\nfrom pickle import dump\n```\n\n    Using TensorFlow backend.\n    \n\n# IMDb data\n\n## Data loading\n\n\n```python\nfrom pathlib import Path\n\nDATA_PATH=Path('./dat/'"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "100 80.2M  100 80.2M    0     0  35.0M      0  0:00:02  0:00:02 --:--:-- 35.1M \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906174419333412
+      ],
+      "excerpt": "            texts.append(fixup(fname.open('r', encoding='utf-8').read())) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8088275851153562
+      ],
+      "excerpt": "for t in trn_texts[:10]: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8618528462889455
+      ],
+      "excerpt": "int2str = dict([(value, key) for (key, value) in str2int.items()]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8997685820877459,
+        0.9786576118199277,
+        0.9385132832191166
+      ],
+      "excerpt": "--2019-05-07 11:16:32--  https://github.com/ahmadelsallab/HierarichalAttentionClassifier_HATT_Sentiment/raw/master/data/glove/glove.6B.100d.txt \nResolving github.com (github.com)... 192.30.253.112 \nConnecting to github.com (github.com)|192.30.253.112|:443... connected. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8890774387208659
+      ],
+      "excerpt": "2019-05-07 11:16:33 (63.6 MB/s) - \u2018./dat/glove/glove.6B.100d.txt\u2019 saved [6339063/6339063] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8840467439138965
+      ],
+      "excerpt": "    f = open(embeddings_file) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8456806903995955
+      ],
+      "excerpt": "    if i &lt; VOCAB_SIZE: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8906174419333412
+      ],
+      "excerpt": "Trainable params: 12,341,401 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "Epoch 10/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8283216015784888
+      ],
+      "excerpt": "    print('Prediction: ', prediction) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmadelsallab/READ",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-12-16T13:37:34Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-05-25T15:39:31Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8098105163772505
+      ],
+      "excerpt": "UNK_ID = 0 #: 0 index is reserved for the UNK in both Keras Tokenizer and Embedding \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9245376587127198,
+        0.9726509971522646,
+        0.9464845422794019,
+        0.9959885563413653,
+        0.9457566473057392,
+        0.987521063655111,
+        0.9707550766078847,
+        0.9943559729070307,
+        0.8451772958619627,
+        0.8579654522796626,
+        0.9096473262996405,
+        0.9949348722118599
+      ],
+      "excerpt": "As someone who was staggered at the incredible visuals of \"Hero,\" I was anxious to see this film which was billed as being along the same lines, but better. It also featured an actress I like: Ziyi Zhang. Well, I was disappointed on both counts. I bought the DVD of this film sight-unseen, and that was a mistake. It was not better. \nI realize these flying-through-the-air martial arts films are pure fantasy but this story is stretched so far past anything remotely believable it just made me shake my head in disappointing disbelief. A blind woman defeating hundreds of opponents? Sorry, that's going a little far. Also, the major male character 'Jin\" (Takeshi Kaneshiro) was so annoying with his dialog, stupid look on his face and stupid laugh, that he ruined the film, too. \nDespite the wonderful colors and amazing action scenes, this story - to me - just didn't have an appeal to make it a movie worth owning. This film is no \"Hero\" of mine! \nOne of Scorsese's worst. An average thriller; the only thing to recommend it is De Niro playing the psycho. The finale is typically of this genre i.e. over-the-top, with yet another almost invincible, immune-to-pain villain. I didn't like the 60s original, and this version wasn't much of an improvement on it. I have no idea why Scorsese wasted his time on a remake. Then again, considering how bad his recent movies have been (I'm referring to his dull Buddhist movie and all the ones with his new favourite actress, the blond girl Di Caprio) this isn't even that bad by comparison. And considering Spielberg wanted to do the remake... could have been far worse. \nOh man. If you want to give your internal Crow T. Robot a real workout, this is the movie to pop into the ol' VCR. The potential for cut-up lines in this film is just endless. \n(Minor spoilers ahead. Hey, do you really care if a film of this quality is \"spoiled?\") Traci is a girl with a problem. Psychology has developed names for it when a child develops a sexual crush on the opposite-sex parent. But this girl seems to have one for her same-sex one, and I don't think there's a term for that. It might be because her mother Dana is played by Rosanna Arquette, whose cute overbite, neo-flowerchild sexuality and luscious figure makes me forgive her any number of bad movies or unsympathetic characters. Here Dana is not only clueless to her daughter's conduct; she seems to be competing for the gold medal in the Olympic Indulgent Mother competition. \nIt's possible that Dana misses Traci's murderous streak because truth be told, Traci seems to have the criminal skills of a hamster. It's only because the script dictates so that she manages to pull off any kind of a body count. \nA particularly hilarious note in this movie is the character of Carmen, a Mexican maid who is described by Dana as around so long she's like one of the family although she dresses in what the director thought would say, \"I just fell off the tomato truck from Guadalajara.\" Carmen is so wise to Traci's scheming, she might also wear a sign saying, \"Hey, I'm the Next Victim!\" Sure enough, Traci confronts Carmen as Carmen is making her way back from Mass, and bops her with one of those slightly angled lug wrenches that car manufacturers put next to your spare as a bad joke. I rather suspect than in real life those things are as useless as a murder weapon as they are for changing a tire. \nIn another sequence, Arquette wears a flimsy dress to a vineyard, under cloudy skies, talking to the owner. Cut to her in another flimsy dress under sunny skies, talking to the owner's brother. Then cut to her wearing the first dress, in the first location, under cloudy skies - but it's supposed to be later. You get the picture. We're talking really bad directing. \nAs for skin, don't expect much, although Traci does own a nice couple of bikinis. \nFor those looking for a trash wallow, 8. For anybody else, 1/2. \nStereotyped, derivative, unoriginal and boring Western. The two popular stars (Charlton Heston and James Coburn) both give performances that are far from their best, and justifiably so; they both have superficial roles and character traits stated mainly by dialogue. Heston is a sheriff who \"liked the world better as it used to be before\" and Coburn is an outlaw who \"owes something to the man who locked him up and has to pay his debt\". Additionally, Heston is so old that he has trouble riding a horse and Coburn is mean and tough but not as cold-blooded a killer as some of the minor villains. Apparently, the filmmakers couldn't come up with even ONE original idea about how to make this movie somewhat distinguished. (*1/2) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8112010123791698
+      ],
+      "excerpt": "Hollywood need to stop dumb down audience and make movie that have people with brain who know how speak proper English. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9247777520411838,
+        0.9512949315272408
+      ],
+      "excerpt": "I was expecting a lot better from the Battlestar Galactica franchise. Very boring prequel to the main series. After the first 30 minutes, I was waiting for it to end. The characters do a lot of talking about religion, computers, programming, retribution, etc... There are gangsters, mafia types, who carry out hits. However, Caprica doesn't have the action of the original series to offset the slower parts. \nLet me give you some helpful advice when viewing movies: As a general rule, if there is a lot of excessive exploitive titillation, then you know the movie will be a dud. Caprica has lots of this. The director/writer usually attempts to compensate for his poor abilities by throwing in a few naked bodies. It never works and all it does is demean the (very) young actresses involved and I feel sorry for them. Directors/writers who do this should be banned from the business. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9775101089861878,
+        0.965419976277461,
+        0.9957937086152142,
+        0.975659730373012
+      ],
+      "excerpt": "Also I originally saw it in a theatre were the last section (reaccounting Freddy's childhood) was in 3-D. Well--the 3-D was lousy--faded colors and the image going in and out of focus. Also the three flying skulls which were supposed to be scary (I think) had the opposite reaction from my audience. EVERYBODY broke down laughing. Looks even worse on TV in 2-D. Pointless and stupid--very dull also. Skip this one and see \"Freddy vs. Jason\" again. \nTo be completely honest,I haven't seen that many western films but I've seen enough to know what a good one is.This by far the worst western on the planet today.First off there black people in the wild west? Come on! Who ever thought that this could be a cool off the wall movie that everyone would love were slightly, no no, completely retarded!Secondly in that day and age women especially black women were not prone to be carrying and or using guns.Thirdly whats with the Asian chick speaking perfect English? If the setting is western,Asia isn't where your going. Finally,the evil gay chick was too much the movie was just crap from the beginning.Now don't get me wrong I'm not racist or white either so don't get ticked after reading this but this movie,this movie is the worst presentation of black people I have ever seen! \nDO NOT WATCH THIS MOVIE IF YOU LOVED THE CLASSICS SUCH AS TOM WOPAT, JOHN SCHNEIDER, CATHERINE BACH, SORRELL BOOKE, JAMES BEST, DENVER PYLE, SONNY SHROYER, AND BEN JONES! THIS MOVIE WILL DISSAPPOINT YOU BADLY! First of all, this movie starts out with Bo and Luke running moonshine for Jesse. Bo and Luke would not do that ever on the real series! This movie portrays unimaginable characters doing things that never would have happened in the series. In the series, Uncle Jesse was honest, and law-abiding. In this movie, he is a criminal who is making moonshine and smoking weed with the governor of Georgia. Plus, if this was an extension adding on to the Dukes of Hazzard Reunion! and the Dukes of Hazzard in Hollywood, I have one question: HOW COULD UNCLE JESSE BE MAKING MOONSHINE WHEN HE DIED BEFORE THE DUKES OF HAZZARD IN Hollywood MOVIE? AND HOW IS BOSS HOGG ALIVE WHEN HE DIED BEFORE THE REUNION MOVIE IN 1997! MOVIE AND ROSCO RAN HAZZARD? IT SEEMS MAGICAL THAT THESE CHARACTERS CAME BACK TO LIFE, WHEN THEY HAVE BEEN DEAD FOR 11 AND 8 YEARS? If Hollywood really wanted to make a good movie, they should have brought back James Best, John Schneider, Tom Wopat, Ben Jones, and Catherine Bach like they did in 1997 and 2000 and made a family friendly movie with the living original characters that made the show what it was and still is compared to this disgusting, disgraced movie! If you want to see good Dukes movies, either buy the original series, or go out to walmart.com and buy the DVD set of 2 that includes the Reunion, and Dukes of Hazzard in Hollywood movies! They both star the original cast, and are family friendly! Don't waste your time on a movie that isn't worth the CD it's written on! \nThe movie had a lot of potential, unfortunately, it came apart because of a weak/implausible story line, miscasting, and general lack of content/substance. One of the very obvious flaws was that Sean Connery, who played an Arab man, didn't know how to pronounce his own Arab name! This may seem a small flaw but it points to the seeming lack of effort in paying attention to details. The quality of acting was uniformly well below average. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.911478160601604
+      ],
+      "excerpt": "  warnings.warn('The `nb_words` argument in `Tokenizer` ' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9560187895509076
+      ],
+      "excerpt": "for word, i in str2int.items(): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8632765492980445
+      ],
+      "excerpt": "[nltk_data] Downloading package punkt to /root/nltk_data... \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.860059181823877,
+        0.836826055306294
+      ],
+      "excerpt": ": define model \n:model = Sequential() \n:model.add(Embedding(vocab_size, 50, input_length=seq_length)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8554097952488632
+      ],
+      "excerpt": ":model.add(Dense(100, activation='relu')) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298775026294136
+      ],
+      "excerpt": ":model.add(Dense(vocab_size, activation='softmax')) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "word_enc = Model(sentence_input, l_word_enc) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "Instructions for updating: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875
+      ],
+      "excerpt": "dense_3 (Dense)              (None, 60001)             6060101    \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8373958842399327
+      ],
+      "excerpt": ": save the model to file \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "  model = load_model(filepath) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model = load_model(filepath) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": ": fit model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9394449182630016
+      ],
+      "excerpt": "Instructions for updating: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "word_enc_model = Model(sentence_input, l_word_enc)   \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "sentEncoder = Model(sentence_input, l_att) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8577302739126875,
+        0.860059181823877
+      ],
+      "excerpt": "preds = Dense(2, activation='softmax')(l_att_sent) \nmodel = Model(review_input, preds) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "    model = load_model(filepath)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model.fit(x_train, y_train, validation_data=(x_val, y_val), nb_epoch=NUM_EPOCHS, batch_size=BATCH_SIZE, callbacks=callbacks_lst) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmadelsallab/READ/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Mon, 27 Dec 2021 08:30:24 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ahmadelsallab/READ/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ahmadelsallab/READ",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM_ATT.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_Simple_BiLSTM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Word%20Language%20Modelling%20LSTM%20.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2word_pretrained_char.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Blog_Hierarichal%20Attention%20Seq2Seq%20Neural%20Language%20Models%20for%20NLP.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-KerasIMDB.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Elmo%20Keras.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-senti-2.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-for%20loops%2Btimedistributed.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-senti-Pretrain_LM_nmgram.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-for%20loops-fix%20data%20prep.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/ngram_lm.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Vanilla_Word%20Level_NLM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-Copy1.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM_Pre-trained%20NLM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2word_SimpleLSTM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM_char_level.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Vanilla_Word%20Level_NLM-IMDB-Keras.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_Simple_BiLSTM-Copy1.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-No%20glove.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_HATT_char_level.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM_Pre-trained%20NLM-Copy1.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2word_SimpleLSTM-2.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/ULMFiT_Flat%20code.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2char_basic_train_from_scratch.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_Simple_BiLSTM-Fixes%20from%20H_LSTM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Vanilla_Word%20Level_NLM-IMDB-Keras-HATT-WordEncoder%20model.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_HATT-for%20loops-char2doc.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/ULMFiT.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_HATT_pre-trained_NLM-2.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-for%20loops.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/keras-transformer.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/keras-bert.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Vanilla_Word%20Level_NLM-IMDB.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-2.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Spell%20corrector-Attention-dot-var%20time%20steps-Embedding.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Word%20Language%20Modelling%20LSTM%20-Embedding.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_char%20NLM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2char_basic_short_inference.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Blog_Hierarichal%20Attention%20Seq2Seq%20Neural%20Language%20Models%20for%20Sentiment%20Classification.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_HATT_char_level-Full%20Att.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_HATT-for%20loops.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Untitled.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Blog-Copy1.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Blog.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_HATT_pre-trained_NLM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Character%20Language%20Modelling%20LSTM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/Blog_Neural%20Language%20Modeling%20with%20Hierarichal%20Attention%20Seq2Seq%20models.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/ulmfit_fastai.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-senti-Pretrain_LM_n1gram.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_char2char_basic_short_inference-utils.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM-for%20loops-char2doc.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-senti-Pretrain_spell.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/train_hierarichal_model-3.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/READ_senti_H_LSTM_ATT-Copy1.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/cod/textClassifierHierLSTM.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/cod/Untitled.ipynb",
+      "https://raw.githubusercontent.com/ahmadelsallab/READ/master/cod/textClassifierH_LSTM_And_ATT.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\nfrom nltk import tokenize\ndef prepare_hier_data(in_texts, in_labels):\n    \n    reviews = []\n    labels = []\n    texts = []\n    \n    for idx in range(len(in_texts)):\n        text = in_texts[idx]\n        label = in_labels[idx]\n        if label != 2:\n          #:print('Parsing review ' + str(idx))\n          texts.append(text)\n          sentences = tokenize.sent_tokenize(text)\n          reviews.append(sentences)       \n          labels.append(label)\n    return reviews, labels\n```\n\n\n```python\n\nfrom keras.utils.np_utils import to_categorical\n\ndef binarize_hier_data(reviews, labels, tokenizer):\n    data_lst = []\n    labels_lst = []\n    for i, sentences in enumerate(reviews):\n        data = UNK_ID * np.ones((MAX_SENTS, MAX_SENT_LENGTH), dtype='int32') #: Init all as UNK\n        for j, sent in enumerate(sentences):\n            if j< MAX_SENTS:\n                wordTokens = text_to_word_sequence(sent)\n                k=0\n                for _, word in enumerate(wordTokens):\n                    if word in tokenizer.word_index:\n                      if k<MAX_SENT_LENGTH and tokenizer.word_index[word]<MAX_NB_WORDS:\n                          data[j,k] = tokenizer.word_index[word]\n                          k=k+1\n        data_lst.append(data)\n        labels_lst.append(labels[i])\n    data = np.array(data_lst)\n    targets = np.array(labels_lst) \n    targets = to_categorical(np.asarray(targets))\n    return data, targets\n```\n\n\n```python\ntrain_texts_, train_labels_ = prepare_hier_data(trn_texts, trn_labels)\ntrain_data, train_targets = binarize_hier_data(train_texts_, train_labels_, tokenizer)\n\n```\n\n\n```python\n#: 25k only are training out of 75k, becasue 50k are unsup --> label = 2\nprint('Shape of data tensor:', train_data.shape)\nprint('Shape of label tensor:', train_targets.shape)\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```python\ndef prepare_lm_data(in_texts, seq_len, size):\n    \n    #: organize into sequences of tokens\n    length = seq_len + 1\n    sequences = list()\n    for i in range(length, len(in_texts)):\n      if i < size:\n        #: select sequence of tokens\n        seq = in_texts[i-length:i]\n        if(len(seq) != 51):\n          print(len(seq))\n        #: convert into a line\n        #:line = ' '.join(seq)\n        #: store\n\n        sequences.append(seq)\n        '''\n        l = len(line.split())#:len(tokenizer.texts_to_sequences(line)) \n        if  l!= 51:\n          print(l)\n        '''\n        #:print(line)\n      else:\n        break\n        \n    return sequences\n```\n\n\n```python\ndef binarize_lm_data(in_texts, tokenizer):\n    \n    sequences = []\n    for t in in_texts:\n      words_idx = []\n      for w in t:\n        if w in tokenizer.word_index:\n          idx = tokenizer.word_index[w]\n          if idx < VOCAB_SIZE:\n            words_idx.append(idx)\n          else:\n            words_idx.append(UNK_ID)\n        else:\n          words_idx.append(UNK_ID)\n          \n      sequences.append(words_idx) \n    \n    #:sequences = [[tokenizer.word_index[w] for w in t] for t in in_texts]\n    #:return np.array(tokenizer.texts_to_sequences(in_texts))\n    return np.array(sequences)\n```\n\n\n```python\n\ntexts = text_to_word_sequence(' '.join(list(trn_texts)))#:list(trn_texts)#: np.concatenate([trn_texts, val_texts])\n\n\ntext_sequences = prepare_lm_data(texts, LM_SEQ_LEN, size=LM_DATA_SIZE)\n\n\n```\n\n\n```python\nfor t in text_sequences[:10]:\n  print(t)\n```\n\n    ['i', 'read', 'somewhere', 'that', 'when', 'kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway']\n    ['read', 'somewhere', 'that', 'when', 'kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though']\n    ['somewhere', 'that', 'when', 'kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it']\n    ['that', 'when', 'kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\"]\n    ['when', 'kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain']\n    ['kay', 'francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain', 'why']\n    ['francis', 'refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain', 'why', 'donald']\n    ['refused', 'to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain', 'why', 'donald', 'crisp']\n    ['to', 'take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain', 'why', 'donald', 'crisp', 'and']\n    ['take', 'a', 'cut', 'in', 'pay', 'warner', 'bros', 'retaliated', 'by', 'casting', 'her', 'in', 'inferior', 'projects', 'for', 'the', 'remainder', 'of', 'her', 'contract', 'she', 'decided', 'to', 'take', 'the', 'money', 'but', 'her', 'career', 'suffered', 'accordingly', 'that', 'might', 'explain', 'what', 'she', 'was', 'doing', 'in', 'comet', 'over', 'broadway', 'though', 'it', \"doesn't\", 'explain', 'why', 'donald', 'crisp', 'and', 'ian']\n    \n\n\n```python\nsequences = binarize_lm_data(text_sequences, tokenizer)\n\nsz_limit = LM_DATA_SIZE#: len(sequences)\n\n#: separate into input and output\nsequences = array(sequences[:sz_limit])\nX, y = sequences[:,:-1], sequences[:,-1]\n\n#:y = to_categorical(y, num_classes=vocab_size)\n```\n\n\n```python\nprint(X.shape)\nprint(y.shape)\n```\n\n    (199949, 50)\n    (199949,)\n    \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8844870196198279
+      ],
+      "excerpt": ":if not os.path.exists('./dat/aclImdb_v1.tar.gz'): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8644500257064217
+      ],
+      "excerpt": "    !tar -xf aclImdb_v1.tar.gz -C {DATA_PATH} \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057675898656085
+      ],
+      "excerpt": "def get_texts(path): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8692151083780105
+      ],
+      "excerpt": "trn_texts,trn_labels = get_texts(PATH/'train') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8376689635218023
+      ],
+      "excerpt": "    os.mkdir(os.path.join('./dat', 'glove')) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8891401888405708
+      ],
+      "excerpt": "      embedding_vector = embeddings_index.get(word) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.858204411280099
+      ],
+      "excerpt": "Instructions for updating: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.858204411280099
+      ],
+      "excerpt": "Instructions for updating: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8550650925410873
+      ],
+      "excerpt": "from pathlib import Path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8049479523717038
+      ],
+      "excerpt": "                                 Dload  Upload   Total   Spent    Left  Speed \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9457175861910134
+      ],
+      "excerpt": "import numpy as np \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9067663612571737
+      ],
+      "excerpt": "    return np.array(texts),np.array(labels) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8237095076431212,
+        0.8263892220638023
+      ],
+      "excerpt": "trn_texts,trn_labels = get_texts(PATH/'train') \nval_texts,val_labels = get_texts(PATH/'test') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.936606094659785,
+        0.936606094659785
+      ],
+      "excerpt": "  print(t) \n  print('\\n') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9112927358002096,
+        0.9112927358002096
+      ],
+      "excerpt": "trn_idx = np.random.permutation(len(trn_texts)) \nval_idx = np.random.permutation(len(val_texts)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8617172590052248
+      ],
+      "excerpt": "from keras.preprocessing.text import Tokenizer, text_to_word_sequence \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8997243352845468
+      ],
+      "excerpt": "tokenizer.fit_on_texts(np.concatenate([trn_texts, val_texts])) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8187794354459599
+      ],
+      "excerpt": "int2str = dict([(value, key) for (key, value) in str2int.items()]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "Length: 6339063 (6.0M) [text/plain] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8423926555248434
+      ],
+      "excerpt": "        values = line.split() \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8948437344322264
+      ],
+      "excerpt": "        coefs = np.asarray(values[1:], dtype='float32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9123782769951961,
+        0.8231935249170123
+      ],
+      "excerpt": "print('Total %s word vectors.' % len(embeddings_index)) \nembedding_matrix = np.random.random((VOCAB_SIZE+1, EMBEDDING_DIM)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9133368656218674
+      ],
+      "excerpt": "import nltk \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8017285540429218
+      ],
+      "excerpt": "[nltk_data]   Unzipping tokenizers/punkt.zip. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.811854372964597
+      ],
+      "excerpt": "MAX_SENTS = 15 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8798585018719796
+      ],
+      "excerpt": ":model.add(LSTM(100, return_sequences=True)) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260181710543005
+      ],
+      "excerpt": "sentence_input = Input(shape=(LM_SEQ_LEN,), dtype='int32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774487611383154
+      ],
+      "excerpt": "l_lstm = Bidirectional(GRU(100, return_sequences=True))(embedded_sequences) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8384734708649709
+      ],
+      "excerpt": "model = Model(sentence_input, output) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.906614234580968
+      ],
+      "excerpt": "Layer (type)                 Output Shape              Param \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.840438666861417
+      ],
+      "excerpt": "Total params: 12,341,401 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8474299929105741
+      ],
+      "excerpt": ": save the model to file \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8401558704798054
+      ],
+      "excerpt": "import os \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8337731032438952
+      ],
+      "excerpt": "checkpoint = ModelCheckpoint(filepath, monitor='acc', verbose=1, save_best_only=True, mode='max') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8339444914341047
+      ],
+      "excerpt": "model.fit(X, y, batch_size=128, epochs=100, callbacks=callbacks_lst) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 1/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 2/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 3/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 4/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 5/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 6/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 7/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 8/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8183181927103621
+      ],
+      "excerpt": "Epoch 9/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8551462003855878
+      ],
+      "excerpt": "Epoch 10/100 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8287936326628794
+      ],
+      "excerpt": "indices = np.arange(train_data.shape[0]) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8203001362399951
+      ],
+      "excerpt": "print('Number of positive and negative reviews in traing and validation set') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8900486270063179
+      ],
+      "excerpt": "from keras.models import load_model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260181710543005
+      ],
+      "excerpt": "sentence_input = Input(shape=(LM_SEQ_LEN,), dtype='int32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774487611383154
+      ],
+      "excerpt": "l_lstm = Bidirectional(GRU(100, return_sequences=True))(embedded_sequences) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8172342705654815
+      ],
+      "excerpt": "        assert len(input_shape)==3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8172342705654815
+      ],
+      "excerpt": "        assert len(input_shape)==3 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8463579979869013
+      ],
+      "excerpt": "    return tf.reduce_sum(weighted_input, axis=1) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260181710543005
+      ],
+      "excerpt": "sentence_input = Input(shape=(MAX_SENT_LENGTH,), dtype='int32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774487611383154
+      ],
+      "excerpt": "l_lstm = Bidirectional(GRU(100, return_sequences=True))(embedded_sequences) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8260181710543005
+      ],
+      "excerpt": "review_input = Input(shape=(MAX_SENTS,MAX_SENT_LENGTH), dtype='int32') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8774487611383154
+      ],
+      "excerpt": "l_lstm_sent = Bidirectional(GRU(100, return_sequences=True))(review_encoder) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8823597741265126
+      ],
+      "excerpt": "    print('HATT model loaded') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8337731032438952
+      ],
+      "excerpt": "checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max') \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8410461883327057
+      ],
+      "excerpt": "print(\"model fitting - Hierachical attention network\") \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9010303020259913,
+        0.868808614036751
+      ],
+      "excerpt": "print('Shape of data tensor:', test_data.shape) \nprint('Shape of label tensor:', test_targets.shape) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.936606094659785
+      ],
+      "excerpt": "    print(rev) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8741104605150087,
+        0.8127791514879013
+      ],
+      "excerpt": "    test_input = np.reshape(test_input, (1,test_input.shape[0], test_input.shape[1])) \n    prediction = model.predict(test_input) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/ahmadelsallab/READ/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "IMDb data",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "READ",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ahmadelsallab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/ahmadelsallab/READ/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 27 Dec 2021 08:30:24 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

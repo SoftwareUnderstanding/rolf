@@ -1,0 +1,661 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/2101.00027",
+      "https://arxiv.org/abs/2005.14165",
+      "https://arxiv.org/abs/2004.05150",
+      "https://arxiv.org/abs/1812.01243",
+      "https://arxiv.org/abs/1701.06538",
+      "https://arxiv.org/abs/1912.12180",
+      "https://arxiv.org/abs/2009.04534",
+      "https://arxiv.org/abs/1701.06538",
+      "https://arxiv.org/abs/1912.12180. \n- `mlp_glu`: If true, uses a gated linear unit variant of feed forward layers.\n- `scalenorm`: If true, uses scalenorm instead of layernorm.\n- `rezero`: If true, uses [rezero](https://www.groundai.com/project/rezero-is-all-you-need-fast-convergence-at-large-depth/1",
+      "https://arxiv.org/abs/2101.00027",
+      "https://arxiv.org/abs/2101.00027"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you have found GPT-Neo helpful in your work, you can cite this repository as\n\n```\n@software{gpt-neo,\n  author       = {Black, Sid and\n                  Gao, Leo and\n                  Wang, Phil and\n                  Leahy, Connor and\n                  Biderman, Stella},\n  title        = {{GPT-Neo: Large Scale Autoregressive Language \n                   Modeling with Mesh-Tensorflow}},\n  month        = mar,\n  year         = 2021,\n  note         = {{If you use this software, please cite it using \n                   these metadata.}},\n  publisher    = {Zenodo},\n  version      = {1.0},\n  doi          = {10.5281/zenodo.5297715},\n  url          = {https://doi.org/10.5281/zenodo.5297715}\n}\n\n```\nThe version number should be replaced with the version number you are using, and the year corresponds to the project's open-source release.\n\nIf you are specifically interested in citing the GPT-Neo models trained on [the Pile](https://arxiv.org/abs/2101.00027), we would appreciate also citing\n```\n@article{gao2020pile,\n  title={The Pile: An 800GB Dataset of Diverse Text for Language Modeling},\n  author={Gao, Leo and Biderman, Stella and Black, Sid and Golding, Laurence and Hoppe, Travis and Foster, Charles and Phang, Jason and He, Horace and Thite, Anish and Nabeshima, Noa and others},\n  journal={arXiv preprint arXiv:2101.00027},\n  year={2020}\n}\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Pick a valid config from `/configs` and tweak the parameters as needed:\n\n- `n_heads`: The number of attention heads.\n- `n_embd`: Size of the hidden layers, must be divisible by `n_heads`.\n- `n_vocab`: Vocabulary size.\n- `embed_dropout`, `res_dropout`, `attn_dropout`: Dropout probability for word embedding/residuals/attention\n- `lr`: Learning rate\n- `warmup_steps`: Number of steps before full learning rate is reached (linear ramp from `0` to `lr`).\n- `lr_decay`: `cosine` or `linear`.\n- `opt_name`: `adam` or `adafactor`.\n- `beta1`, `beta2` and `epsilon`: `adam` optimizer params.\n- `beta1`, `ada_epsilon1` and `ada_epsilon2`: `adafactor` optimizer params.\n- `weight_decay`: Weight decay parameter, if not present no weight decay is used (the weight decay fix for Adam is used) (default: 0.01) (optional).\n- `train_batch_size`: Batch size during training.\n- `train_steps`: Number of training steps (batches), set to roughly ~1 epoch for now (total number of tokens in your dataset / number of tokens per batch (= `train_batch_size` / `n_ctx`)).\n- `eval_steps`: Number of steps to run for each evaluation. Set to `0` for no eval. i.e After every checkpoint, the model is tested for `eval_steps`\n- `iterations`: Number of steps queued to the TPU, must be smaller than `steps_per_checkpoint`. (default: 500)\n- `datasets`: List of tfrecords datasets to use. Each dataset is a list with the following parameters: `[train glob , eval glob, stitch, sampling_mode, weight]`. So for example for a single dataset (note the double list): `[[\"bundestag_*.tfrecords\", \"\", 10, \"random_sample\", 1.0]]`\n    + `dataset_id`: The name of a dataset configuration file in `./configs/dataset_configs`\n    + `stitch`: If `sampling_mode` `random_sample` is used, the input pipeline samples this amount of texts into one to sample from. You must select stitch so that `stitch * minimum_document_length >= n_ctx`\n    + `sampling_mode`: `chunks` (tfrecords are preprocessed into the correct length and are read sequentially) or `documents_random` (`stitch` amount of documents are concatenated and then a `n_ctx` chunk is randomly subsampled)\n    + `weights`: How much relative weight this dataset should have compared to others\n- `model`: Which model to train. Currently only `GPT` is supported, and it defaults to this if not present.\n- `model_path`: Google storage bucket location (or local path, if using GPUs) to save model checkpoints and logs.\n- `n_ctx`: Size of context window. Default is 2048\n- `n_layer`: Number of layers (blocks) in the model.\n- `scale_by_depth`: If true, the weight initialization of layers are scaled by their depth as in the GPT2 paper.\n- `scale_by_in`: If true, the weight initialization of layers are scaled by their number of inputs as in the GPT2 paper.\n- `mesh_shape`: A Mesh is an n-dimensional array of processors with named dimensions used for parallelism in the mesh-tensorflow library. Each Tensor is split evenly across mesh dimensions according to the layout (see below). The 'mesh_shape' is the shape of this array, and must be equal to the number of processors. e.g., for a v3-128 TPU \"mesh_shape\": \u201cx:16,y:8\u201d.\n- `layout`: A Tensor is laid out on its mesh with one slice on each processor. A Tensor \"layout\", is an injective partial map specifying which dimensions of the tensor are (evenly) split across which dimensions of the mesh. No dimension of a tensor may be split across two dimensions of its mesh and no two dimensions of a tensor may be split across the same dimension of its mesh. The user defines a global set of layout rules in the form of (tensor-dimension-name, mesh-dimension-name) pairs. A dimension of a tensor is split across a dimension of its mesh if there is a matching rule, e.g. (for the above example mesh_shape: \"layout\":\"batch:x,heads:y\"\n- `activation_function`: `selu` (self normalizing) or `gelu` (used by OA), activation function used in feed-forward passes. (default: gelu)\n- `attention_types`: the type of attention for each layer in a list of the following format [[[\"attention_type\"], n_layers]]. e.g. for a 12 layer net [[[\"global\"], 12]] or [[[\"local\"], 10], [[\"global\"], 2]].\n    + Choose from: `linear`, `global`, `local` or `none`. We have found a 50/50 mix of `global` and `linear` to work well. `none` allows you to create feed-forward only layers for more efficient [PAR Transformer](https://arxiv.org/abs/2009.04534) models.\n- `precision`: `float32` or `bfloat16`.\n- `tokens_per_mb_per_replica`: If not None, will split the batch up into smaller microbatches containing `tokens_per_mb_per_replica` tokens to avoid OOMs. Gradients are accumulated locally and reduced once. IMPORTANT: mb refers to *minibatch* not megabyte here. \n\n**Mixture of Experts**\n\n- `moe_layers`: A list of layer numbers to append a [mixture of experts](https://arxiv.org/abs/1701.06538) layer onto. E.G: `[2,4,6,8,10,12]`.\nWe have experimentally found a moe layer for every two self-attention layers to work well.\n-  `moe_params`: a dictionary of additional kwargs to pass in to the moe layer. E.G\n    `{\"moe_dropout_rate\": 0.0 }`\n    \n**Experimental features** \n\n- `axial_pos_emb_`: If true, uses [axial positional embedding](https://arxiv.org/abs/1912.12180. \n- `mlp_glu`: If true, uses a gated linear unit variant of feed forward layers.\n- `scalenorm`: If true, uses scalenorm instead of layernorm.\n- `rezero`: If true, uses [rezero](https://www.groundai.com/project/rezero-is-all-you-need-fast-convergence-at-large-depth/1) instead of layernorm.\n- `num_mem_kv`: adds memory / key values from the [all-attention paper](https://arxiv.org/pdf/1907.01470.pdf). Param is an int with the number of desired mem/key values.\n- `macaron`: if true - uses a [macaron transformer](https://arxiv.org/pdf/1906.02762.pdf) for each layer block.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@article{gao2020pile,\n  title={The Pile: An 800GB Dataset of Diverse Text for Language Modeling},\n  author={Gao, Leo and Biderman, Stella and Black, Sid and Golding, Laurence and Hoppe, Travis and Foster, Charles and Phang, Jason and He, Horace and Thite, Anish and Nabeshima, Noa and others},\n  journal={arXiv preprint arXiv:2101.00027},\n  year={2020}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@software{gpt-neo,\n  author       = {Black, Sid and\n                  Gao, Leo and\n                  Wang, Phil and\n                  Leahy, Connor and\n                  Biderman, Stella},\n  title        = {{GPT-Neo: Large Scale Autoregressive Language \n                   Modeling with Mesh-Tensorflow}},\n  month        = mar,\n  year         = 2021,\n  note         = {{If you use this software, please cite it using \n                   these metadata.}},\n  publisher    = {Zenodo},\n  version      = {1.0},\n  doi          = {10.5281/zenodo.5297715},\n  url          = {https://doi.org/10.5281/zenodo.5297715}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9392395551057171
+      ],
+      "excerpt": "| GPT-Neo 125M | -----      | -----     | 32.285   | 30.266  | 37.36%  | 50.43% | 28.67% | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "| GPT-Neo 1.3B | 0.7527 | 6.159 | 13.10    | 7.498   | 57.23%  | 55.01% | 38.66% | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "| GPT-2 1.5B       | 1.0468     | -----     | 17.48        | 10.634      | 51.21%      | 59.40%     | 40.03%     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266
+      ],
+      "excerpt": "| GPT-Neo 125M | 22.78% | 55.10% | 63.06% | \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/EleutherAI/gpt-neo",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-07-05T10:23:46Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-24T15:14:42Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9756969273806851
+      ],
+      "excerpt": "An implementation of model & data parallel GPT3-like models using the mesh-tensorflow library. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9768019743382792,
+        0.9060288692923694
+      ],
+      "excerpt": "Training and inference is officially supported on TPU and should work on GPU as well. This repository will be (mostly) archived as we move focus to our GPU-specific repo, GPT-NeoX. \nIn addition to the functionality offered by GPT-3, we also offer the following: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8666738124108497
+      ],
+      "excerpt": "* Mixture of Experts \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9561060945113865
+      ],
+      "excerpt": "NB, while neo can technically run a training step at 200B+ parameters, it is very inefficient at those scales. This, as well as the fact that many GPUs became available to us, among other things, prompted us to move development over to GPT-NeoX. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9829641887330008
+      ],
+      "excerpt": "For more information on how to get these set up, see the colab notebook, or read through the rest of the readme. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8822565696061282
+      ],
+      "excerpt": "| Model and Size   | MathQA     | PubMedQA   | Piqa       | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9934721935477233,
+        0.9357769008070449
+      ],
+      "excerpt": "Note: All evaluations were done using our evaluation harness. Some results for GPT-2 and GPT-3 are inconsistent with the values reported in the respective papers. We are currently looking into why, and would greatly appreciate feedback and further testing of our eval harness. \nSign up for Google Cloud Platform, and create a storage bucket.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9792109509272059
+      ],
+      "excerpt": "Google colab provides tpu-v8s for free, which should be enough to finetune our models up to GPT3XL (1.5B parameter) sizes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9824757901840109
+      ],
+      "excerpt": "Note: Some users have reported having difficulty getting MTF to recognize their GPUs. See here for details and instructions on how to fix it. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8638110375394665
+      ],
+      "excerpt": "Your data must either be in the form of lots of normal .txt files (one document per file), or in any format supported by lm_dataformat.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9820494360142684
+      ],
+      "excerpt": "In document mode Each example in the tfrecords is one (variably sized) document. This is to be used with the documents_fixed and documents_random sampling modes (For more details see the parameters reference section). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8085549336239765
+      ],
+      "excerpt": "The below command will tokenize all files in acceptable formats in base_dir using gpt2 tokenizer and save them to output_dir \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.921004134758335
+      ],
+      "excerpt": "output_dir: Where to save the tfrecords to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8307278046590114,
+        0.9640143418008593
+      ],
+      "excerpt": "separator: Written in list format, the separator token(s) to insert between documents (e.g. \"[0]\"). Will depend on your encoder. \nminimum_size: The minimum size (in tokens) a document must have, otherwise it is discarded. This is what will later determine your stitch parameter: stitch * minimum_size must always be greater or equal n_ctx (For more details see the parameters reference section). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9352430015131346,
+        0.8197737177860174
+      ],
+      "excerpt": "Here we use a GPT3-XL sized model as an example, but there are many more in ./configs, all of which have short summaries in the Available Configs section. \nAll you need to do is edit the dataset id as described above, and edit model_path (where logs and checkpoints will be saved) to point to a cloud bucket you have write access to (or local path, if using GPUs). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9062438478189437
+      ],
+      "excerpt": "We have several model sizes available, but some of our configs require large TPUs and will need tweaking to run on smaller machines, or GPUs. Below is a short guide to each model in the configs directory: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9325728962815288
+      ],
+      "excerpt": "Sacred helps track experiments and is much nicer to work with than tensorboard. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8164174236859093
+      ],
+      "excerpt": "Ensure model_dir doesn't have any metric logs in it (it trips up the metric stuff for tensorboard, which assumes that it's a continuation of the existing run). You can use gsutil rm -r ... to delete model dir \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9411043242604977
+      ],
+      "excerpt": "If you are ever confused by the dataset of a particular config file, you can easily check the minimum and maximum token ids with a single command. This is useful for making sure that the vocabulary size of the model is at least as large as the maximum token id. Tensorflow will not error if you try to gather on a matrix with out of bounds indices, so you need to make sure your vocabulary size is sufficiently large. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8853296293592626
+      ],
+      "excerpt": "In addition to being able to train large GPT's, this repository also allows you to easily do masked language modeling (BERT, RoBERTa). In order to do so, you must follow two additional steps. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8961746790312165
+      ],
+      "excerpt": "That's all you need to train a model with the MLM objective, good for any type of data that you have encoded properly. If you would like to tweak the other related hyperparameters, please continue reading. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9817982645638204
+      ],
+      "excerpt": "\"mlm_mask_prob\": 0.15,                             #: the probability of masking a token, defaults to 15% \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8087148134590445
+      ],
+      "excerpt": "\"mlm_random_token_prob\": 0.10,                     #: probability of tokens that are replaced with random tokens, 10% was recommended by the BERT paper \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "An implementation of model parallel GPT-2 and GPT-3-style models using the mesh-tensorflow library.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/EleutherAI/gpt-neo/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 472,
+      "date": "Fri, 24 Dec 2021 22:00:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/EleutherAI/gpt-neo/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EleutherAI/gpt-neo",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/EleutherAI/gpt-neo/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/EleutherAI/gpt-neo/master/GPTNeo_example_notebook.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "identifier": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://doi.org/10.5281/zenodo.5297715",
+      "technique": "Regular expression"
+    }
+  ],
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```bash\ngit clone https://github.com/EleutherAI/GPTNeo\ncd GPTNeo\npip3 install -r requirements.txt\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8958838139511275
+      ],
+      "excerpt": "Create your VM through a google shell (https://ssh.cloud.google.com/) with ctpu up --vm-only so that it can connect to your Google bucket and TPUs and install the requirements with pip (see above). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9498974037476763
+      ],
+      "excerpt": "You can also choose to train GPTNeo locally on your GPUs. To do so, you can omit the Google cloud setup steps above, and git clone the repo locally. Run through the Training Guide below, then when running main.py, you simply have to omit the tpu flag, and pass in GPU ids instead. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8637714113475533
+      ],
+      "excerpt": "We recommend you use Huggingface's pretrained GPT2 tokenizer with our repo (instructions provided below), but if you want to train a model with a different vocabulary size, we provide facilities to train your own tokenizer like so: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8409639627119173,
+        0.8414690675263378
+      ],
+      "excerpt": "    --base_dir ./path/to/your/txt/files \\ \n    --output_dir ./output/path \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.863181696658783
+      ],
+      "excerpt": ": if it succeeded, you should see the message \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9473483084736907
+      ],
+      "excerpt": "If you have a dataset encoded using the pretrained gpt2 tokenizer, you can specify that like so: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8824464052247472
+      ],
+      "excerpt": "    \"path\": \"./path/to/your/*.tfrecords\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828763070107037
+      ],
+      "excerpt": "The &lt;dataset id&gt; will be the filename, excluding the .json, that you created above \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8782546741414335
+      ],
+      "excerpt": "To setup: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.893917808063375
+      ],
+      "excerpt": "| GPT-Neo 350M | 23.45% | 53.80% | 65.07% | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8138934149343644
+      ],
+      "excerpt": "Once you have a trained model, or you've downloaded one of our pre-trained models, generating text is as simple as running the main.py script with the --predict flag on. You can pass a path to your prompt txt file with the --prompt flag, like so: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9382892056106165
+      ],
+      "excerpt": "python data/train_tokenizer.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8110006651696245
+      ],
+      "excerpt": "    --output_dir ./output/path \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8446107500807354
+      ],
+      "excerpt": "If using your own data to train, you can use the data/create_tfrecords.py script to encode your text data into tfrecords. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8878817290750385
+      ],
+      "excerpt": "name: Name of output files will be name_i.tfrecords where i is the number of the file. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8580554319817669
+      ],
+      "excerpt": "To use a dataset in a model, you must first register that dataset under ./configs/dataset_configs folder. First choose a filename with a .json extension. That filename will serve as the dataset identification. The config should be filled out the following manner. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    \"tokenizer_is_pretrained\": true, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8138852845215678
+      ],
+      "excerpt": "Finally, in your model config, add the filename that you created above to the datasets array. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8242939330578681
+      ],
+      "excerpt": "    \"model_path\": \"gs://neo-models/GPT3_XL\", \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    \"scale_by_depth\": true, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    \"recompute_grad\": true, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9642980390704003
+      ],
+      "excerpt": "Run python3 run_experiment.py --tpu sometpuhere --model someconfig.json Options are the same as main.py.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8671606020543179
+      ],
+      "excerpt": "python main --model {config_name} --check_dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8508704703493274
+      ],
+      "excerpt": "\"mlm_training\": true,                           #: must be set to true \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/EleutherAI/gpt-neo/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Jupyter Notebook",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2020 EleutherAI\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "GPT Neo",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gpt-neo",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "EleutherAI",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/EleutherAI/gpt-neo/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "leogao2",
+        "body": "",
+        "dateCreated": "2021-10-06T01:32:04Z",
+        "datePublished": "2021-10-06T01:51:11Z",
+        "html_url": "https://github.com/EleutherAI/gpt-neo/releases/tag/v1.1.1",
+        "name": "v1.1.1",
+        "tag_name": "v1.1.1",
+        "tarball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/tarball/v1.1.1",
+        "url": "https://api.github.com/repos/EleutherAI/gpt-neo/releases/50855966",
+        "zipball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/zipball/v1.1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "StellaAthena",
+        "body": "Vulnerabilities have been found in tensorflow which are patched in the most recent version. This release updates the codebase to use the secure version of tensorflow.\r\n\r\nThis release also fixes a small but significant bug in how documents are loaded. For details, see #230 ",
+        "dateCreated": "2021-08-28T01:25:15Z",
+        "datePublished": "2021-08-28T01:26:00Z",
+        "html_url": "https://github.com/EleutherAI/gpt-neo/releases/tag/v1.1",
+        "name": "Fixed vulnerabilities",
+        "tag_name": "v1.1",
+        "tarball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/tarball/v1.1",
+        "url": "https://api.github.com/repos/EleutherAI/gpt-neo/releases/48603678",
+        "zipball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/zipball/v1.1"
+      },
+      {
+        "authorType": "User",
+        "author_name": "sdtblck",
+        "body": "We're proud to release two pretrained GPT-Neo models trained on The Pile, the weights and configs can be freely downloaded from the-eye.eu.\r\n\r\n1.3B: https://the-eye.eu/eleuther_staging/gptneo-release/GPT3_XL/\r\n\r\n2.7B: https://the-eye.eu/eleuther_staging/gptneo-release/GPT3_2-7B/\r\n\r\nFor more information on how to get these set up, see the colab notebook, or read through the rest of the readme.\r\n\r\nThis repository will be (mostly) archived as we move focus to our GPU training repo, [GPT-Neox](https://github.com/EleutherAI/gpt-neox/)",
+        "dateCreated": "2021-03-21T19:58:40Z",
+        "datePublished": "2021-03-21T20:00:36Z",
+        "html_url": "https://github.com/EleutherAI/gpt-neo/releases/tag/v1.0",
+        "name": "Release Pretrained Models",
+        "tag_name": "v1.0",
+        "tarball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/tarball/v1.0",
+        "url": "https://api.github.com/repos/EleutherAI/gpt-neo/releases/40127627",
+        "zipball_url": "https://api.github.com/repos/EleutherAI/gpt-neo/zipball/v1.0"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\npython3 main.py --model <your_config_name> --steps_per_checkpoint <n> --tpu <tpu-name>\n```\n\n- `tpu`: Name of the TPU to use.\n- `steps_per_checkpoint`: The frequency in steps at which to save checkpoints.\n- `--auto_layout` and `--auto_layout_and_mesh_shape` (Optional): Disable training and instead auto generate a memory efficient `layout` (and `mesh_shape`)\n- `gpu_ids`: if training using GPUs, omit the `tpu` flag and pass in the ids of your gpus. In the example below, we train on 3 GPUs, specifying their device ids delimited by spaces:\n\n```\npython3 main.py --model <your_config_name> --steps_per_checkpoint <n> --gpu_ids <device:GPU:0 device:GPU:1>\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 5962,
+      "date": "Fri, 24 Dec 2021 22:00:55 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "language-model",
+      "transformers",
+      "gpt",
+      "gpt-2",
+      "gpt-3"
+    ],
+    "technique": "GitHub API"
+  }
+}

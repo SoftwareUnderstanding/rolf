@@ -1,0 +1,401 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1907.12915\">\"Reg R-CNN: Lesion Detection and Grading under Noisy Labels\"</a>. In: UNSURE Workshop at MICCAI, 2019.<br>\n[2] He, Kaiming, et al.  <a href=\"https://arxiv.org/abs/1703.06870\">\"Mask R-CNN\"</a> ICCV, 2017<br>\n<br>\n\n## Overview\nThis is a comprehensive framework for object detection featuring:\n- 2D + 3D implementations of common object detectors: e.g., Mask R-CNN [2], Retina Net [3], Retina U-Net [4]. \n- Modular and light-weight structure ensuring sharing of all processing steps (incl. backbone architecture",
+      "https://arxiv.org/abs/1703.06870\">\"Mask R-CNN\"</a> ICCV, 2017<br>\n<br>\n\n## Overview\nThis is a comprehensive framework for object detection featuring:\n- 2D + 3D implementations of common object detectors: e.g., Mask R-CNN [2], Retina Net [3], Retina U-Net [4]. \n- Modular and light-weight structure ensuring sharing of all processing steps (incl. backbone architecture",
+      "https://arxiv.org/abs/1708.02002\">\"Focal Loss for Dense Object Detection\"</a> TPAMI, 2018.<br>\n[4] Jaeger, Paul et al. <a href=\"http://arxiv.org/abs/1811.08661\"> \"Retina U-Net: Embarrassingly Simple Exploitation\nof Segmentation Supervision for Medical Object Detection\" </a>, 2018\n\n[5] https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py<br/>\n[6] https://github.com/MIC-DKFZ/batchgenerators<br/><br>\n\n## How to cite this code\nPlease cite the Reg R-CNN publication [1] or the original publication [4] depending on what features you use.\n\n## Installation\nSetup package in virtual environment\n```\ngit clone https://github.com/MIC-DKFZ/RegRCNN.git.\ncd RegRCNN\nvirtualenv -p python3.7 regrcnn_env\nsource regrcnn_env/bin/activate\npython setup.py install\n```\n##### Custom Extensions\nThis framework uses two custom mixed C++/CUDA extensions: Non-maximum suppression (NMS"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please cite the Reg R-CNN publication [1] or the original publication [4] depending on what features you use.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9999993056816402,
+        0.9997545153815715,
+        0.9771915282488536
+      ],
+      "excerpt": "[3] Lin, Tsung-Yi, et al.  <a href=\"https://arxiv.org/abs/1708.02002\">\"Focal Loss for Dense Object Detection\"</a> TPAMI, 2018.<br> \n[4] Jaeger, Paul et al. <a href=\"http://arxiv.org/abs/1811.08661\"> \"Retina U-Net: Embarrassingly Simple Exploitation \nof Segmentation Supervision for Medical Object Detection\" </a>, 2018 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9105368110547479
+      ],
+      "excerpt": "[6] https://github.com/MIC-DKFZ/batchgenerators<br/><br> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MIC-DKFZ/RegRCNN",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-07-09T13:54:48Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-21T07:24:04Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This repository holds the code framework used in the paper Reg R-CNN: Lesion Detection and Grading under Noisy Labels [1].\nThe framework is a fork of MIC's [medicaldetectiontoolkit](https://github.com/MIC-DKFZ/medicaldetectiontoolkit) with added regression\ncapabilities.\n\nAs below figure shows, the regression capability allows for the preservation of ordinal relations in the training signal as opposed to a standard categorical classification loss like the cross entropy loss (see publication for details).\n<p align=\"center\"><img src=\"assets/teaser.png\"  width=50%></p><br>\nNetwork Reg R-CNN is a version of Mask R-CNN [2] but with a regressor in place of the object-class head (see figure below). In this scenario, the first stage makes foreground (fg) vs background (bg) detections, then the regression head determines the class on an ordinal scale. Consequently, prediction confidence scores are taken from the first stage as opposed to the head in the original Mask R-CNN.\n<p align=\"center\"><img src=\"assets/regrcnn.png\"  width=50%></p><br>\n\nIn the configs file of a data set in the framework, you may set attribute self.prediction_tasks = [\"task\"] to a value \"task\" from [\"class\", \"regression_bin\", \"regression\"]. \"class\" produces the same behavior as the original framework, i.e., standard object-detection behavior. \"regression\" on the other hand, swaps the class head of network Mask R-CNN [2] for a regression head. Consequently, objects are identified as fg/bg and then the class is decided by the regressor. For the sake of comparability, \"regression_bin\" produces a similar behavior but with a classification head. Both methods should be evaluated with the (implemented) Average Viewpoint Precision instead of only Average Precision.\n\nBelow you will found a description of the general framework operations and handling. Basic framework functionality and description are for the most part identical to the original [medicaldetectiontoolkit](https://github.com/MIC-DKFZ/medicaldetectiontoolkit).\n\n<br/>\n[1] Ramien, Gregor et al., <a href=\"https://arxiv.org/abs/1907.12915\">\"Reg R-CNN: Lesion Detection and Grading under Noisy Labels\"</a>. In: UNSURE Workshop at MICCAI, 2019.<br>\n[2] He, Kaiming, et al.  <a href=\"https://arxiv.org/abs/1703.06870\">\"Mask R-CNN\"</a> ICCV, 2017<br>\n<br>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9623706954681039,
+        0.9609940929621171
+      ],
+      "excerpt": "- 2D + 3D implementations of common object detectors: e.g., Mask R-CNN [2], Retina Net [3], Retina U-Net [4].  \n- Modular and light-weight structure ensuring sharing of all processing steps (incl. backbone architecture) for comparability of models. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9285874974900725
+      ],
+      "excerpt": "- dynamic patching and tiling of 2D + 3D images (for training and inference). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9118942247299243
+      ],
+      "excerpt": "- integration of MIC-DKFZ batch generators for extensive data augmentation [6]. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9679867345262712
+      ],
+      "excerpt": "This framework features models explored in [4] (implemented in 2D + 3D): The proposed Retina U-Net, a simple but effective Architecture fusing state-of-the-art semantic segmentation with object detection,<br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9407201306269225
+      ],
+      "excerpt": "also implementations of prevalent object detectors, such as Mask R-CNN, Faster R-CNN+ (Faster R-CNN w\\ RoIAlign), Retina Net, Detection U-Net (a U-Net like segmentation architecture with heuristics for object detection.)<br><br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8630192195489743
+      ],
+      "excerpt": "This framework features training with pixelwise and/or bounding box annotations. To overcome the issue of box coordinates in  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9481857649768051,
+        0.9507316293845159,
+        0.9583729990152429
+      ],
+      "excerpt": "A label map with individual ROIs identified by increasing label values, accompanied by a vector containing in each position the class target for the lesion with the corresponding label (for this mode set get_rois_from_seg_flag = False when calling ConvertSegToBoundingBoxCoordinates in your Data Loader). This is usual use case as explained in section \"Prepare the data\". \nA binary label map. There is only one foreground class and single lesions are not identified. All lesions have the same class target (foreground). In this case the data loader runs a Connected Component Labelling algorithm to create processable lesion - class target pairs on the fly (for this mode set get_rois_from_seg_flag = True when calling ConvertSegToBoundingBoxCoordinates in your data loader). \nThis framework provides an inference module, which automatically handles patching of inputs, and tiling, ensembling, and weighted consolidation of output predictions:<br><br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8718000051360572,
+        0.9226891239103407
+      ],
+      "excerpt": "In opposition to the original framework, this fork uses tensorboard for monitoring training and validation progress. Since, for now, the framework cannot easily be updated to pytorch >= 1.x, we need third-party package tensorboardX to use tensorboard with pytorch. \nYou can set an applicable choice of implemented metrics like \"ap\" for Average Precision or \"auc\" for patient-level ROC-AUC in the configs under self.metrics = [...]. Metrics are then evaluated by evaluator.py and recorded in monitor_metrics. logger.metrics2tboard sends monitor_metrics to your tensorboard logfiles at the end of each epoch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "This repository holds the code framework used in the paper Reg R-CNN: Lesion Detection and Grading under Noisy Labels. It is a fork of MIC-DKFZ/medicaldetectiontoolkit with regression capabilites.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MIC-DKFZ/DetectionAndRegression/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 20,
+      "date": "Thu, 23 Dec 2021 08:40:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MIC-DKFZ/RegRCNN/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MIC-DKFZ/RegRCNN",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/MIC-DKFZ/DetectionAndRegression/master/shell_scripts/job_starter.sh",
+      "https://raw.githubusercontent.com/MIC-DKFZ/DetectionAndRegression/master/shell_scripts/update_scripts_on_cluster.sh",
+      "https://raw.githubusercontent.com/MIC-DKFZ/DetectionAndRegression/master/shell_scripts/cluster_runner_meddec.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This framework is meant for you to be able to train models on your own data sets.\n\nIn order to include a data set in the framework, create a new folder in RegRCNN/datasets, for instance \"example_data\". Your data set needs to have a config file in the style of the provided example data sets \"lidc\" and \"toy\". It also needs a data loader meeting the same requirements as the provided examples. Likely, you will also need a preprocessing script that transforms your data (once per data set creation, i.e., not a repetitive operation) into a suitable and easily processable format.\nImportant requirements: \n- The framework expects numpy arrays as data and segmentation ground truth input.\n- Segmentations need to be suited for object detection, i.e., Regions of Interest (RoIs) need to be marked by integers (RoI-ID) in the segmentation volume (0 is background). Corresponding properties of a RoI, e.g., the \"class_targets\" need to be provided in a separate array or list with (RoI-ID - 1) corresponding to the index of the property in the list (-1 due to zero-indexing). Example: A data volume contains two RoIs. The second RoI is marked in the segmentation by number 2. The \"class_targets\" info associated with the data volume holds the list [2, 3]. Hence, RoI-ID 2 is assigned class 3.\n- This framework uses a modified version of MIC's batchgenerators' segmentation-to-bounding-box conversion tool. In this version, \"class_targets\", i.e., object classes start at 1, 0 is reserved for background. Thus, if you use \"ConvertSegToBoundingBoxCoordinates\" classes in your preprocessed data need to start at 1, not 0. \n\n\nTwo example data loaders are provided in RegRCNN/datasets. The way I load data is to have a preprocessing script, which after preprocessing saves the data of whatever data type into numpy arrays (this is just run once). During training / testing, the data loader then loads these numpy arrays dynamically. Please note the data input side is meant to be customized by you according to your own needs and the provided data loaders are merely examples: LIDC has a powerful data loader that handles 2D/3D inputs and is optimized for patch-based training and inference. Due to the large data volumes of LIDC, this loader is slow. The provided toy data set, however, is light weight and a good starting point to get familiar with the framework. It is fully creatable from scratch within a few minutes with RegRCNN/datasets/toy/generate_toys.py.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Setup package in virtual environment\n```\ngit clone https://github.com/MIC-DKFZ/RegRCNN.git.\ncd RegRCNN\nvirtualenv -p python3.7 regrcnn_env\nsource regrcnn_env/bin/activate\npython setup.py install\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8284976383135427,
+        0.8918974083095406
+      ],
+      "excerpt": "[5] https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py<br/> \n[6] https://github.com/MIC-DKFZ/batchgenerators<br/><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8999854802900565,
+        0.9132605042188134,
+        0.9201083617058622,
+        0.9277107651156752
+      ],
+      "excerpt": "The extensions are automatically compiled from the provided source files under RegRCNN/custom_extensions with above setup.py.  \nHowever, the extensions need to be compiled specifically for certain GPU architectures. Hence, please ensure that the architectures you need are included in your shell's \nenvironment variable TORCH_CUDA_ARCH_LIST before compilation.  \nExample: You want to use the modules with the new TITAN RTX GPU, which has  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8040257997553811
+      ],
+      "excerpt": "export TORCH_CUDA_ARCH_LIST=\"6.1;7.5\". A link list of GPU model names to Compute Capability can be found here: https://developer.nvidia.com/cuda-gpus.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.862585190620727
+      ],
+      "excerpt": "You need to separately start a virtual tensorboard server, pass it your experiment directory (or directories, but it crashes if its more than ~5 experiments) and navigate to the server address. (You can also read up on tensoardboard usage in the original documentation). \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8452022228876318
+      ],
+      "excerpt": "<p align=\"center\"><img src=\"assets/retu_figure.png\"  width=50%></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8408011420158433
+      ],
+      "excerpt": "<p align=\"center\"><img src=\"assets/baseline_figure.png\"  width=85%></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8463239293552544
+      ],
+      "excerpt": "<p align=\"center\"><img src=\"assets/annotations.png\"  width=85%></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8836704212480256
+      ],
+      "excerpt": "<img src=\"assets/prediction_pipeline.png\" ><br><br> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8408011420158433,
+        0.8408011420158433
+      ],
+      "excerpt": "<p align=\"center\"><img src=\"assets/wcs_text.png\"  width=650><br><br></p> \n<p align=\"center\"><img src=\"assets/wcs_readme.png\"  width=800><br><br></p> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828712279716933
+      ],
+      "excerpt": "For qualitative monitoring, example plots are saved to yourexpdir/plots for training and validation and yourexpdir/test/example_plots for testing. Note, that test-time example plots may contain unconsolidated predictions over test-time augmentations, thereby possibly showing many overlapping and/or noisy predictions. You may adapt/use separate file RegRCNN/inference_analysis.py to create clean and nice plots of (consolidated) test-time predictions. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/MIC-DKFZ/RegRCNN/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Cuda",
+      "C++",
+      "Shell",
+      "C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Apache License 2.0",
+      "url": "https://api.github.com/licenses/apache-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \"License\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \"Licensor\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \"Legal Entity\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \"control\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \"Source\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \"Object\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \"Work\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \"Derivative Works\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \"Contribution\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \"submitted\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \"Not a Contribution.\"\\n\\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \"NOTICE\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\\n      replaced with your own identifying information. (Don\\'t include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \"printed page\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \"License\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \"AS IS\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Release Notes",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "RegRCNN",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "MIC-DKFZ",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MIC-DKFZ/RegRCNN/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Set I/O paths, model and training specifics in the configs file: RegRCNN/datasets/_your_dataset_/configs.py\n2. i) Train the model: \n\n    ```\n    python exec.py --mode train --dataset_name your_dataset --exp_dir path/to/experiment/directory       \n    ``` \n    This copies snapshots of configs and model to the specified exp_dir, where all outputs will be saved. By default, the data is split into 60% training and 20% validation and 20% testing data to perform a 5-fold cross validation (can be changed to hold-out test set in configs) and all folds will be trained iteratively. In order to train a single fold, specify it using the folds arg: \n    ```\n    python exec.py --folds 0 1 2 .... #: specify any combination of folds [0-configs.n_cv_splits]\n    ```\n    ii) Alternatively, train and test consecutively:\n    ```\n    python exec.py --mode train_test --dataset_name your_dataset --exp_dir path/to/experiment/directory       \n    ``` \n3. Run inference:\n    ```\n    python exec.py --mode test --exp_dir path/to/experiment/directory \n    ```\n    This runs the prediction pipeline and saves all results to exp_dir.\n4. Additional settings:\n    - Check the args parser in exec.py to see which arguments and modes are available.\n    - E.g., you may pass ```-d``` or ```--dev``` to enable a short development run of the whole train_test procedure (small batch size, only one epoch, two folds, one test patient, etc.).     \n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 39,
+      "date": "Thu, 23 Dec 2021 08:40:48 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "detection",
+      "object-detection",
+      "mask-rcnn",
+      "retinanet",
+      "3d-detection",
+      "3d-object-detection",
+      "medical-image-processing",
+      "medical-image-computing",
+      "medical-image-analysis",
+      "deep-learning",
+      "pytorch-implementation",
+      "regression-head",
+      "lesion-detection",
+      "non-maximum-suppression",
+      "roialign",
+      "3d-mask-rcnn"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Activate your virtualenv where tensorboard is installed.\n2. Start tensorboard server. For instance, your experiment directory is\n    _yourexpdir_: <br> \n    ```tensorboard --port 6007 --logdir yourexpdir```\n3. Navigate to ```localhost:6007``` in your browser.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The data loaders of the provided example data sets employ a custom mechanism with the goal of assembling target-balanced batches or training sequences. I.e., the amount of examples shown per target class should be near balance. \n\nThe mechanism creates a sampling-likelihood distribution, as shown below, over all available patients (PIDs). At batch generation, some patients are drawn according to this distribution, others are drawn completely randomly (according to a uniform distribution across all patients). The ratio of uniformly and target-dependently drawn patients is set in your configs file by configs.batch_random_ratio. configs.balance_target determines which targets are considered for the balancing distribution.\n\nThe balancing distribution assigns probabilities s.t. expected occurrences of fg and bg RoIs among all classes are as similar as possible.\nThe balance is naturally limited by multiple RoIs occurring in the same patient (e.g, if each patient has 4 RoIs of class 1 and 1 RoI of class 2 the best balancing ratio achievable is still 4:1).\nSee utils/dataloader_utils.BatchGenerator.balance_target_distribution.\n\nExperience has shown, that showing at least one foreground example in each batch is most critical, other properties have less impact.\n\n<p align=\"center\"><img src=\"assets/train_gen.png\"  width=800><br><br></p>\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

@@ -1,0 +1,582 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A special thanks to our amazing summer intern [Neel Kant](https://github.com/kantneel) for all the work he did with transformers, tokenization, and pretraining+finetuning classification models.\n\nA special thanks to [@csarofeen](https://github.com/csarofeen) and [@Michael Carilli](https://github.com/mcarilli) for their help developing and documenting our RNN interface, Distributed Data Parallel model, and fp16 optimizer. The latest versions of these utilities can be found at the [APEx github page](https://github.com/NVIDIA/apex).\n\nThanks to [@guillitte](https://github.com/guillitte) for providing a lightweight pytorch [port](https://github.com/guillitte/pytorch-sentiment-neuron) of openai's sentiment-neuron repo.\n\nThis project uses the [amazon review dataset](http://jmcauley.ucsd.edu/data/amazon/) collected by J. McAuley\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1812.01207",
+      "https://arxiv.org/abs/1706.03762"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8840467439138965
+      ],
+      "excerpt": "Open Questions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.971679416046096
+      ],
+      "excerpt": "  --text-key reviewText --label-key overall --optim Adam --split 1000,1,1  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8840467439138965
+      ],
+      "excerpt": "Open Questions \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/sentiment-discovery",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-11-30T21:50:15Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T07:01:49Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.87342264770056
+      ],
+      "excerpt": "This repo has been deprecated. Please visit Megatron-LM for our up to date Large-scale unsupervised pretraining and finetuning code. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9923667703942481,
+        0.8639007707411119,
+        0.9520447684311816,
+        0.9953848263354274,
+        0.9968405767859622,
+        0.9891838295220932,
+        0.9812723550428369
+      ],
+      "excerpt": "This codebase contains pretrained binary sentiment and multimodel emotion classification models as well as code to reproduce results from our series of large scale pretraining + transfer NLP papers: Large Scale Language Modeling: Converging on 40GB of Text in Four Hours and Practical Text Classification With Large Pre-Trained Language Models. This effort was born out of a desire to reproduce, analyze, and scale the Generating Reviews and Discovering Sentiment paper from OpenAI. \nThe techniques used in this repository are general purpose and our easy to use command line interface can be used to train state of the art classification models on your own difficult classification datasets. \nThis codebase supports mixed precision training as well as distributed, multi-gpu, multi-node training for language models (support is provided based on the NVIDIA APEx project). In addition to training language models, this codebase can be used to easily transfer and finetune trained models on custom text classification datasets. \nFor example, a Transformer language model for unsupervised modeling of large text datasets, such as the amazon-review dataset, is implemented in PyTorch. We also support other tokenization methods, such as character or sentencepiece tokenization, and language models using various recurrent architectures. \nThe learned language model can be transferred to other natural language processing (NLP) tasks where it is used to featurize text samples. The featurizations provide a strong initialization point for discriminative language tasks, and allow for competitive task performance given only a few labeled samples. For example, we consider finetuning our models on the difficult task of multimodal emotion classification based on a subset of the plutchik wheel of emotions. \nCreated by Robert Plutchik, this wheel is used to illustrate different emotions in a compelling and nuanced way. He suggested that there are 8 primary bipolar emotions (joy versus sadness, anger versus fear, trust versus disgust, and surprise versus anticipation) with different levels of emotional intensity. For our classification task we utilize tweets from the SemEval2018 Task 1E-c emotion classification dataset to perform multilabel classification of anger, anticipation, disgust, fear, joy, sadness, surprise, and trust. This is a difficult task that suffers from real world classification problems such as class imbalance and labeler disagreement.  \nOn the full SemEval emotion classification dataset we find that finetuning our model on the data achieves competitive state of the art performance with no additional domain-specific feature engineering. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Downloads \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8137862769503446
+      ],
+      "excerpt": "Difficulties of Supervised Natural Language \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8384324945285517
+      ],
+      "excerpt": "Model/Optimization Robustness \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9145672372688731
+      ],
+      "excerpt": "We've included our sentencepiece tokenizer model and vocab as a zip file: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9668386379460147
+      ],
+      "excerpt": "We've included a transformer language model base as well as a 4096-d mlstm language model base. For examples on how to use these models please see our finetuning and transfer sections. Even though these models were trained with FP16 they can be used in FP32 training/inference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9554186315801588
+      ],
+      "excerpt": "We've also included classifiers trained on a subset of SemEval emotions corresponding to the 8 plutchik emotions (anger, anticipation, disgust, fear, joy, sadness, surprise, and trust):  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9354307247832387,
+        0.9768519817127546,
+        0.9357405424236082,
+        0.8626051519741572,
+        0.8262182478101481
+      ],
+      "excerpt": "To use classification models that reproduce results from our original large batch language modeling paper please use the following commit hash and set of models. \nWe did not include pretrained models leveraging ELMo. To reproduce our papers' results with ELMo, please see our available resources. \nEach file has a dictionary containing a PyTorch state_dict consisting of a language model (lm_encoder keys) trained on Amazon reviews and a classifier (classifier key) as well as accompanying args necessary to run a model with that state_dict. \nClassify an input csv/json using one of our pretrained models or your own. \nPerforms classification on Binary SST by default. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9158277436985327
+      ],
+      "excerpt": "See here for more documentation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8638494228376596,
+        0.8966077083072886
+      ],
+      "excerpt": "This is the first step of a 2-step process to training your own sentiment classifier. \nSaves model to lang_model.pt by default. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9696959431054872,
+        0.983461418339709,
+        0.9411788583724459
+      ],
+      "excerpt": "For more documentation of our language modeling functionality look here \nIn order to learn about our language modeling experiments and reproduce results see the training reproduction section in analysis. \nFor information about how we achieve numerical stability with FP16 training see our fp16 training analysis. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8883933083225471,
+        0.9385238080656972,
+        0.8430703347117341
+      ],
+      "excerpt": "It then uses sklearn logistic regression to fit a classifier to predict sentiment from these features. \nLastly it performs feature selection to try and fit a regression model to the top n most relevant neurons (features). \nBy default only one neuron is used for this second regression. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9894198169757338
+      ],
+      "excerpt": "The difference between this script and transfer.py is that the model training is performed end to end: the loss from the classifier is backpropagated into the language model encoder as well. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8581170731196718,
+        0.8097896013623597
+      ],
+      "excerpt": "This script supports building arbitrary multilable, multilayer, and multihead perceptron classifiers. Additionally it allows using language modeling as an auxiliary task loss during training and multihead variance as an auxiliary loss during training. \nLastly this script supports automatically selecting classification thresholds from validation performance. To measure validation performance this script includes more complex metrics including: f1-score, mathew correlation coefficient, jaccard index, recall, precision, and accuracy. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8320877192184045
+      ],
+      "excerpt": "python3 finetune_classifier.py --load mlstm.pt --automatic-thresholding --threshold-metric f1     #:finetune mLSTM model on sst and automatically select classification thresholds based on the validation f1 score \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.98902398398552
+      ],
+      "excerpt": "See how to reproduce our finetuning experiments in the finetuning reproduction section of analysis. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8137862769503446
+      ],
+      "excerpt": "Difficulties of Supervised Natural Language \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8384324945285517
+      ],
+      "excerpt": "Model/Optimization Robustness \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9059780023979369
+      ],
+      "excerpt": "Want to help out? Open up an issue with questions/suggestions or pull requests ranging from minor fixes to new functionality. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Unsupervised Language Modeling at scale for robust sentiment classification",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In the `./data` folder we've provided processed copies of [the Binary Stanford Sentiment Treebank (Binary SST)](https://nlp.stanford.edu/sentiment/index.html), [IMDB Movie Review](http://ai.stanford.edu/~amaas/data/sentiment/), and the [SemEval2018 Tweet Emotion](https://competitions.codalab.org/competitions/17751) datasets as part of this repository. In order to train on the amazon dataset please download the \"aggressively deduplicated data\" version from Julian McAuley's original [site](http://jmcauley.ucsd.edu/data/amazon/). Access requests to the dataset should be approved instantly. While using the dataset make sure to load it with the `--loose-json` flag.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/sentiment-discovery/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 199,
+      "date": "Tue, 28 Dec 2021 02:12:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/NVIDIA/sentiment-discovery/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NVIDIA/sentiment-discovery",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/run_se_singlehead.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/train_transformer_singlenode.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/run_sk_sst.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/run_se_multihead.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/train_mlstm_singlenode.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/run_sst.sh",
+      "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/experiments/run_sk_imdb.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Install the sentiment_discovery package with `python3 setup.py install` in order to run the modules/scripts within this repo.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.81861431867963
+      ],
+      "excerpt": "If you would still like to use this codebase, see our tagged releases and install required software/dependencies that was available publicly at that date. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9322609392449874
+      ],
+      "excerpt": "PyTorch + GIL \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8218824405953196,
+        0.8218824405953196
+      ],
+      "excerpt": "bash ./experiments/train_mlstm_singlenode.sh                                      #:run our mLSTM training script on 1 DGX-1V \nbash ./experiments/train_transformer_singlenode.sh                                #:run our transformer training script on 1 DGX-1V \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9217980927519754,
+        0.9217980927519754
+      ],
+      "excerpt": "bash ./experiments/run_sk_sst.sh                                    #:run transfer learning with mlstm on imdb dataset \nbash ./experiments/run_sk_imdb.sh                                   #:run transfer learning with mlstm on sst dataset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9545477269281809
+      ],
+      "excerpt": "bash ./experiments/se_transformer_multihead.sh                                                    #:finetune a multihead transformer on 8 semeval categories \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9322609392449874
+      ],
+      "excerpt": "PyTorch + GIL \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8245539886860519
+      ],
+      "excerpt": "Pretrained Models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8359299706379749
+      ],
+      "excerpt": "Classifying Text \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "FP16 Training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8415234825066029
+      ],
+      "excerpt": "Classify an input csv/json using one of our pretrained models or your own. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8329850224155213
+      ],
+      "excerpt": "python3 run_classifier.py --load_model ama_sst_16.pt --fp16                     #: run classification in fp16 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8458539184089898,
+        0.8294628599205764,
+        0.8748543725553289,
+        0.8445943541535412,
+        0.8764891262036115
+      ],
+      "excerpt": "python3 pretrain.py                                                               #:train a large model on imdb \npython3 pretrain.py --model LSTM --nhid 512                                       #:train a small LSTM instead \npython3 pretrain.py --fp16 --dynamic-loss-scale                                   #:train a model with fp16 \npython3 -m multiproc pretrain.py                                                  #:distributed model training \npython3 pretrain.py --data ./data/amazon/reviews.json --lazy --loose-json \\       #:train a model on amazon data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8954852478961907,
+        0.8148482466160263,
+        0.8954852478961907,
+        0.8156973288395627
+      ],
+      "excerpt": "python3 pretrain.py --tokenizer-type SentencePieceTokenizer --vocab-size 32000 \\  #:train a model with our sentencepiece tokenization \n  --tokenizer-type bpe --tokenizer-path ama_32k_tokenizer.model  \npython3 pretrain.py --tokenizer-type SentencePieceTokenizer --vocab-size 32000 \\  #:train a transformer model with our sentencepiece tokenization \n  --tokenizer-type bpe --tokenizer-path ama_32k_tokenizer.model --model transformer \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9088680993642032
+      ],
+      "excerpt": "Given a trained language model, this script will featurize text from train, val, and test csv/json's. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8145687492408091
+      ],
+      "excerpt": "python3 transfer.py --load mlstm.pt --fp16                          #:run model in fp16 for featurization step \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8799080390690445,
+        0.8273591576989606
+      ],
+      "excerpt": "python3 finetune_classifier.py --tokenizer-type SentencePieceTokenizer --vocab-size 32000 \\       #:finetune transformer with sentencepiece on SST \n  --tokenizer-type bpe tokenizer-path ama_32k_tokenizer.model --model transformer --lr 2e-5 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174540907975313
+      ],
+      "excerpt": "FP16 Training  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/NVIDIA/sentiment-discovery/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/NVIDIA/sentiment-discovery/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'# Copyright (c) 2017, NVIDIA CORPORATION. All rights reserved.\\n#\\n# Redistribution and use in source and binary forms, with or without\\n# modification, are permitted provided that the following conditions\\n# are met:\\n#  * Redistributions of source code must retain the above copyright\\n#    notice, this list of conditions and the following disclaimer.\\n#  * Redistributions in binary form must reproduce the above copyright\\n#    notice, this list of conditions and the following disclaimer in the\\n#    documentation and/or other materials provided with the distribution.\\n#  * Neither the name of NVIDIA CORPORATION nor the names of its\\n#    contributors may be used to endorse or promote products derived\\n#    from this software without specific prior written permission.\\n#\\n# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS\\'\\' AND ANY\\n# EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\\n# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\\n# PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR\\n# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\\n# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\\n# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\\n# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY\\n# OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\\n# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\\n# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\\n\\n\\n------------------ LICENSE FOR fairseq(transformer) repository --------------------\\n\\n\\nBSD License\\n\\nFor fairseq software\\n\\nCopyright (c) 2017-present, Facebook, Inc. All rights reserved.\\n\\nRedistribution and use in source and binary forms, with or without modification,\\nare permitted provided that the following conditions are met:\\n\\n * Redistributions of source code must retain the above copyright notice, this\\n    list of conditions and the following disclaimer.\\n\\n * Redistributions in binary form must reproduce the above copyright notice,\\n    this list of conditions and the following disclaimer in the documentation\\n       and/or other materials provided with the distribution.\\n\\n * Neither the name Facebook nor the names of its contributors may be used to\\n    endorse or promote products derived from this software without specific\\n       prior written permission.\\n\\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "** DEPRECATED **",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "sentiment-discovery",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "NVIDIA",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/NVIDIA/sentiment-discovery/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "raulpuric",
+        "body": "This release is used to reproduce results from our [Large Scale LM](https://arxiv.org/abs/1808.01371) paper.",
+        "dateCreated": "2018-10-12T16:20:47Z",
+        "datePublished": "2018-12-14T19:44:49Z",
+        "html_url": "https://github.com/NVIDIA/sentiment-discovery/releases/tag/v0.3.large_batch_stable",
+        "name": "v0.3.large_batch_stable: Code necessary to reproduce results from our large batch training paper",
+        "tag_name": "v0.3.large_batch_stable",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/tarball/v0.3.large_batch_stable",
+        "url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/releases/14545519",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/zipball/v0.3.large_batch_stable"
+      },
+      {
+        "authorType": "User",
+        "author_name": "raulpuric",
+        "body": "We've switched our mLSTM model to internally used PyTorch's fused LSTM cell which provides significantly improved GPU memory usage (allowing for larger batch size training) and slight improvements to speed compared to the unfused version we had included in earlier versions.\r\n\r\nIn order to convert any models you've trained in the past to be usable with this version, please see this [issue](https://github.com/NVIDIA/sentiment-discovery/issues/18).\r\n\r\nWe've also updated our distributed code to address the recent April 3rd changes made to PyTorch's Tensors and Variables.\r\n\r\n",
+        "dateCreated": "2018-04-06T19:32:09Z",
+        "datePublished": "2018-04-06T19:41:22Z",
+        "html_url": "https://github.com/NVIDIA/sentiment-discovery/releases/tag/v0.3",
+        "name": "v0.3 Release: Speed & Memory Usage improvements + PyTorch 0.5 updates",
+        "tag_name": "v0.3",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/tarball/v0.3",
+        "url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/releases/10433942",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/zipball/v0.3"
+      },
+      {
+        "authorType": "User",
+        "author_name": "raulpuric",
+        "body": "Our main goal with this release is two-fold:\r\n * address concerns around usability\r\n * Update repo with new code for FP16, distributed training\r\n\r\n## Usability\r\n * We've brought our training/generation code more in line with the pytorch word language model example\r\n * Provide PyTorch classifier module/function for classifying sentiment from input text tensor\r\n   * Provide pretrained classifiers/language models for this module\r\n   * Provide simple standalone classifier script/example capable of classifying an input csv/json and writing results to other csv/jsons\r\n * Flattening our directory structure to make code easier to find\r\n * Putting reusable PyTorch functionality (new RNN api, weight norm functionality, eventually all fp16 functionality) in its own standalone python module to be published at a later date\r\n\r\n## FP16 + Distributed\r\n * FP16 optimizer wrapper for optimizating FP16 models according to our [best practices] (https://github.com/NVIDIA/sentiment-discovery/blob/master/analysis/reproduction.md#fp16-training)\r\n   * available in `fp16/fp16.py`\r\n * Lightweight distributed wrapper for all reducing gradients across multiple gpus with either nccl or gloo backends\r\n   * `model/distributed.py`\r\n * distributed worker launch script \r\n   * `multiproc.py`\r\n\r\n",
+        "dateCreated": "2018-03-13T19:21:52Z",
+        "datePublished": "2018-03-13T19:41:40Z",
+        "html_url": "https://github.com/NVIDIA/sentiment-discovery/releases/tag/v0.2",
+        "name": "v0.2 Release: FP16, Distributed, and Usability updates",
+        "tag_name": "v0.2",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/tarball/v0.2",
+        "url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/releases/10071418",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/zipball/v0.2"
+      },
+      {
+        "authorType": "User",
+        "author_name": "raulpuric",
+        "body": "**Module updates**\r\n * Fused LSTM kernels in mLSTM module with `fuse_lstm` flags\r\n**Model updates**\r\n * improved model serialization size and options\r\n   * no saving of gradients\r\n   * saving optimizer is optional\r\n   * reloading weights trained with weight norm is more stable\r\n**Weight Norm/Reparameterization update**\r\n * modified hooks to work with fused LSTM kernel\r\n**Data updates**\r\n * Parses dataset types (csv, json, etc) automatically. Only need to specify supervised vs unsupervised\r\n * Added loose json functionality\r\n * Tested csv datasets more thoroughly\r\n * Save Names of processed results fixed so that original file's name stays the same now.\r\n * Fixed DataParallel/DistributedDP batching of evaluation datasets\r\n * Made it easier to specify validation/test datasets\r\n * Made it easier to specify dataset shards\r\n * Added negative sequence lengths for datasets.",
+        "dateCreated": "2017-12-12T19:34:18Z",
+        "datePublished": "2017-12-12T19:35:02Z",
+        "html_url": "https://github.com/NVIDIA/sentiment-discovery/releases/tag/v0.1",
+        "name": "Main v0 release",
+        "tag_name": "v0.1",
+        "tarball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/tarball/v0.1",
+        "url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/releases/8877183",
+        "zipball_url": "https://api.github.com/repos/NVIDIA/sentiment-discovery/zipball/v0.1"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "At this time we only support python3.\n * numpy\n * pytorch (>= 0.4.1)\n * pandas\n * scikit-learn\n * matplotlib\n * unidecode\n * sentencepiece\n * seaborn\n * emoji\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1037,
+      "date": "Tue, 28 Dec 2021 02:12:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In addition to providing easily reusable code of the core functionalities (models, distributed, fp16, etc.) of this work, we also provide scripts to perform the high-level functionalities of the original paper:\n * sentiment classification of input text\n * unsupervised reconstruction/language modeling of a corpus of text (+ script for launching distributed workers)\n * transfer of learned language model to perform sentiment analysis on a specified corpus\n * sampling from language model to generate text (possibly of fixed sentiment) + heatmap visualization of sentiment in text\n\n<!--Script results will be saved/logged to the `<experiment_dir>/<experiment_name>/*` directory hierarchy.-->\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

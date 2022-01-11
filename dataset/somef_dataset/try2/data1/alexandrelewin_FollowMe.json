@@ -1,0 +1,282 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.9869405348645832
+      ],
+      "excerpt": "Extracted from: https://arxiv.org/pdf/1511.00561.pdf \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9421445313892758
+      ],
+      "excerpt": "- https://courses.cs.washington.edu/courses/cse576/17sp/notes/Sachin_Talk.pdf \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrelewin/FollowMe",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-13T21:15:22Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-13T21:25:16Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The Follow Me project consists in making a UAV able to follow a *specific* human.\nTo achieve this goal, we build and train a fully convolutional network (FCN).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9303881200544566,
+        0.9423282380142469
+      ],
+      "excerpt": "The encoder role is to extract features from the image. \nThe filters number is the depth of the output of each encoder (The input RGB image, having three colors channel, is of depth 3). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9676124746316025
+      ],
+      "excerpt": "Symmetrically, to the encoders, we put decoders. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.974424200467874
+      ],
+      "excerpt": "The decoder role is to upscale the output of encoders (features) to the same size as the original image. That is why there is one decoder linked to each encoder, mirroring the same filter parameter. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363369914147728,
+        0.9662393701617051,
+        0.8822870524210101
+      ],
+      "excerpt": "As explained in the course, we put a 1x1 convolution layer between the encoders and decoders. \nThe idea is to increase the depth by adding this \"mini neural network\" working over the patch. It allows non linearity in the feature analyzes, and can ignore correlation within a feature to focus instead on the correlations accross features.  The good thing is, being a 1x1 convolution layer, the computing cost is low (mathematically, it is matrix multiplications). \nTherefore, it offers more deepness for a cheap computive cost. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8363515463486485,
+        0.8674728253391277
+      ],
+      "excerpt": "This order in explanation initially misled me in thinking that the first part (therefore encoder) was the decreasing depth, and the lst part (therefore decoder) was the increasing depth, whereas it is the opposite. \nFortunately, it still provided good results; although re-ordering the depth and training on an expensive cloud again might led to better results at the end \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9557354956982782,
+        0.937392097442166,
+        0.8362749735358621,
+        0.8745832720522825,
+        0.9319875935375691,
+        0.973352075816584,
+        0.9514437354477239
+      ],
+      "excerpt": "The batch normalization (part of the encoder) ensures that features with different value ranges are normalized to e.g. 0-1, improving the training speed. \nThe FCN is widely used for semantic segmentation (looking at the image and being able to distinguish/identify each object in the scene). \nUsing a Fully CONNECTED Network would not be good: as said in the lecture, it could \"recognize a hot dog, but not a hot dog in a plate\". Here, the hero would not be correctly recognized in the scene. \nUsing a classic convolution layer would not allow to recognize correctly the hero at different distances: the hero would be of different sizes and therefore not recognized (no skipping). \nWe explained above the FCN parameters. \nHow about the meaning of the Learning parameters ? \nThe learning rate is the size of the jump/steps: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8886034359529978
+      ],
+      "excerpt": "- More epochs \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9241427601685215
+      ],
+      "excerpt": "The number of stepsper epoch is the number of changes per epoch (closely linked to the learning rate): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8738622922964108,
+        0.9525098842511769,
+        0.906413694216463
+      ],
+      "excerpt": "Note: in the course, it is recommended to use the number of images divided by the batch size \nThe number of workers is linked to the number of cores in the CPU. \nTherefore, based on the course and the above understanding: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.889049051957422
+      ],
+      "excerpt": "After following the GPU Cloud instructions on the course, I connected with converted private key and Putty to: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8743539750225984
+      ],
+      "excerpt": "I achieved a score of: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.932556709087413
+      ],
+      "excerpt": ": And the final grade score is \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9169075305491174,
+        0.8587232885088827,
+        0.830123270085321,
+        0.9687920944428321,
+        0.9560896307491431,
+        0.8837059157053851
+      ],
+      "excerpt": "To go more into results, let's look at different situations \nLooking at the training and validation curve, it seems that there is no use to go beyond 100 epochs. \nI could have save some bucks on Amazon Cloud :-) \nAs the final score says, the results seems pretty good as the hero is correctly followed and distinguished from other people, which are correctly also correctly identified. \nAt patrol, other humans are detected but not misidentified as our hero. That's a good thing ! \nI was quite impressed when finding out that the UAV could recognize the hero from far away while at patrol. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": " In this project, you will build your own segmentation network, train it, validate it, and deploy it in the Follow Me project. In the end, you will have your own drone tracking and following a single hero target using your own network pipeline!",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrelewin/FollowMe/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 22:50:06 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/alexandrelewin/FollowMe/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alexandrelewin/FollowMe",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/alexandrelewin/FollowMe/master/code/model_training.ipynb",
+      "https://raw.githubusercontent.com/alexandrelewin/FollowMe/master/code/.ipynb_checkpoints/model_training-checkpoint.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8097901573639492
+      ],
+      "excerpt": "The batch size (number of images processed per batch): \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/alexandrelewin/FollowMe/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "HTML",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Project: Follow Me",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "FollowMe",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "alexandrelewin",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/alexandrelewin/FollowMe/blob/master/Readme.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 22:50:06 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

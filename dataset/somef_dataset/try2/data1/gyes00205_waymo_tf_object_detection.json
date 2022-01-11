@@ -1,0 +1,494 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1708.02002\n# Trained on COCO, initialized from Imagenet classification checkpoint\n# Train on TPU-8\n#\n# Achieves 34.3 mAP on COCO17 Val\n\nmodel {\n  ssd {\n    inplace_batchnorm_update: true\n    freeze_batchnorm: false\n    num_classes: 3 # 3 kinds of classes\n    box_coder {\n      faster_rcnn_box_coder {\n        y_scale: 10.0\n        x_scale: 10.0\n        height_scale: 5.0\n        width_scale: 5.0\n      }\n    }\n    matcher {\n      argmax_matcher {\n        matched_threshold: 0.5\n        unmatched_threshold: 0.5\n        ignore_thresholds: false\n        negatives_lower_than_unmatched: true\n        force_match_for_each_row: true\n        use_matmul_gather: true\n      }\n    }\n    similarity_calculator {\n      iou_similarity {\n      }\n    }\n    encode_background_as_zeros: true\n    anchor_generator {\n      multiscale_anchor_generator {\n        min_level: 3\n        max_level: 7\n        anchor_scale: 4.0\n        aspect_ratios: [1.0, 2.0, 0.5]\n        scales_per_octave: 2\n      }\n    }\n    image_resizer {\n      fixed_shape_resizer {\n        height: 640\n        width: 640\n      }\n    }\n    box_predictor {\n      weight_shared_convolutional_box_predictor {\n        depth: 256\n        class_prediction_bias_init: -4.6\n        conv_hyperparams {\n          activation: RELU_6,\n          regularizer {\n            l2_regularizer {\n              weight: 0.0004\n            }\n          }\n          initializer {\n            random_normal_initializer {\n              stddev: 0.01\n              mean: 0.0\n            }\n          }\n          batch_norm {\n            scale: true,\n            decay: 0.997,\n            epsilon: 0.001,\n          }\n        }\n        num_layers_before_predictor: 4\n        kernel_size: 3\n      }\n    }\n    feature_extractor {\n      type: 'ssd_resnet50_v1_fpn_keras'\n      fpn {\n        min_level: 3\n        max_level: 7\n      }\n      min_depth: 16\n      depth_multiplier: 1.0\n      conv_hyperparams {\n        activation: RELU_6,\n        regularizer {\n          l2_regularizer {\n            weight: 0.0004\n          }\n        }\n        initializer {\n          truncated_normal_initializer {\n            stddev: 0.03\n            mean: 0.0\n          }\n        }\n        batch_norm {\n          scale: true,\n          decay: 0.997,\n          epsilon: 0.001,\n        }\n      }\n      override_base_feature_extractor_hyperparams: true\n    }\n    loss {\n      classification_loss {\n        weighted_sigmoid_focal {\n          alpha: 0.25\n          gamma: 2.0\n        }\n      }\n      localization_loss {\n        weighted_smooth_l1 {\n        }\n      }\n      classification_weight: 1.0\n      localization_weight: 1.0\n    }\n    normalize_loss_by_num_matches: true\n    normalize_loc_loss_by_codesize: true\n    post_processing {\n      batch_non_max_suppression {\n        score_threshold: 1e-8\n        iou_threshold: 0.6\n        max_detections_per_class: 100\n        max_total_detections: 100\n      }\n      score_converter: SIGMOID\n    }\n  }\n}\n\ntrain_config: {\n  fine_tune_checkpoint_version: V2\n  #pretrained model ckpt-0 path\n  fine_tune_checkpoint: \"pre-trained-models/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0\" \n  fine_tune_checkpoint_type: \"detection\" # set to detection\n  batch_size: 2\n  sync_replicas: true\n  startup_delay_steps: 0\n  replicas_to_aggregate: 8\n  use_bfloat16: false # if not use tpu, set to false\n  num_steps: 6000 # training steps\n  data_augmentation_options {\n    random_horizontal_flip {\n    }\n  }\n  data_augmentation_options {\n    random_crop_image {\n      min_object_covered: 0.0\n      min_aspect_ratio: 0.75\n      max_aspect_ratio: 3.0\n      min_area: 0.75\n      max_area: 1.0\n      overlap_thresh: 0.0\n    }\n  }\n  optimizer {\n    momentum_optimizer: {\n      learning_rate: {\n        cosine_decay_learning_rate {\n          learning_rate_base: .04\n          total_steps: 25000\n          warmup_learning_rate: .013333\n          warmup_steps: 2000\n        }\n      }\n      momentum_optimizer_value: 0.9\n    }\n    use_moving_average: false\n  }\n  max_number_of_boxes: 100\n  unpad_groundtruth_tensors: false\n}\n\ntrain_input_reader: {\n  label_map_path: \"./label_map.pbtxt\"\n  tf_record_input_reader {\n    input_path: \"data/processed/*.tfrecord\"\n  }\n}\n\neval_config: {\n  metrics_set: \"coco_detection_metrics\"\n  use_moving_averages: false\n}\n\neval_input_reader: {\n  label_map_path: \"./label_map.pbtxt\"\n  shuffle: false\n  num_epochs: 1\n  tf_record_input_reader {\n    input_path: \"data/processed/*.tfrecord\"\n  }\n}\n```\n```\nWaymo\n\u251c\u2500\u2500\u2500models\n\u251c\u2500\u2500\u2500training_configs \n\u2502   \u2514\u2500\u2500\u2500ssd_resnet50_v1_fpn_640x640_coco17_tpu-8\n\u2502       \u2514\u2500\u2500\u2500pipeline.config # create pipeline.config\n\u251c\u2500\u2500\u2500pre-trained-models \n\u2502   \u2514\u2500\u2500\u2500ssd_resnet50_v1_fpn_640x640_coco17_tpu-8\n\u2502       \u251c\u2500 checkpoint/\n\u2502       \u251c\u2500 saved_model/\n\u2502       \u2514\u2500 pipeline.config\n\u251c\u2500\u2500\u2500exported-models \n\u2514\u2500\u2500\u2500data\n    \u251c\u2500\u2500\u2500processed\n    \u2502   \u2514\u2500\u2500\u2500segment-???.tfrecord\n    \u2514\u2500\u2500\u2500segment-???.tfrecord\n```\n## Train Model\n\n**model_main_tf2.py**\n\nmodel_dir: the training checkpoint will be stored in the model_dir directory\n\npipeline_config_path: pipeline.config path\n\nExecute code: \n\n```shell \npython model_main_tf2.py \\\n--model_dir=training_configs/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8 \\\n--pipeline_config_path=training_configs/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/pipeline.config\n```\nExecution results: it will be printed every 100 steps.\n```\nStep 2100 per-step time 0.320s\nINFO:tensorflow:{'Loss/classification_loss': 0.121629156,\n 'Loss/localization_loss': 0.16370133,\n 'Loss/regularization_loss': 0.2080817,\n 'Loss/total_loss': 0.4934122,\n 'learning_rate': 0.039998136}\nI0605 08:29:04.605577 139701982308224 model_lib_v2.py:700] {'Loss/classification_loss': 0.121629156,\n 'Loss/localization_loss': 0.16370133,\n 'Loss/regularization_loss': 0.2080817,\n 'Loss/total_loss': 0.4934122,\n 'learning_rate': 0.039998136}\n```\n\n## Evaluate Model (Optional"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. [LevinJ/tf_obj_detection_api](https://github.com/LevinJ/tf_obj_detection_api)\n2. [Waymo Open Dataset](https://waymo.com/open/)\n3. [Waymo quick start tutorial](https://colab.research.google.com/github/waymo-research/waymo-open-dataset/blob/r1.0/tutorial/tutorial.ipynb)\n4. [Tensorflow Object Detection API Tutorial](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html)",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9998252172478531
+      ],
+      "excerpt": ": See Lin et al, https://arxiv.org/abs/1708.02002 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9030859728368266,
+        0.9030859728368266
+      ],
+      "excerpt": "        y_scale: 10.0 \n        x_scale: 10.0 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8569692218416274
+      ],
+      "excerpt": "$AP^{medium}:$ AP for medium object : $32^2$ < area < $96^2$  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gyes00205/waymo_tf_object_detection",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-07-01T15:19:12Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-08-17T06:49:35Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8538209605305322
+      ],
+      "excerpt": "5 kinds of camera photos and Lidar informations \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8749320051682523
+      ],
+      "excerpt": "    In this project, we don't need sign and Unknown classes, so we should modify label_map.pbtxt : \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8477678735851494
+      ],
+      "excerpt": "\u251c\u2500\u2500\u2500exported-models #:exported model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9132346745770793,
+        0.938905119665355,
+        0.9750041396848633,
+        0.8470947026103242,
+        0.9141611220008493
+      ],
+      "excerpt": "Besides of Lidar informations in waymo's tfrecord, the below is its bbox format: \n(x0, y0): is center coordinate. (w, h): is width and height. \nOur goal is to filter out Lidar and convert bbox to the following format: \n(x1, y1): is left-top coordinate. (x2, y2): is right-down coordinate. \nThe reference code that convert tfrecord is LevinJ/tf_obj_detection_api, and make some minor changes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8140586351376183
+      ],
+      "excerpt": ": loss (a.k.a Retinanet). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877
+      ],
+      "excerpt": "model { \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8270544903406768
+      ],
+      "excerpt": "    num_classes: 3 #: 3 kinds of classes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8846047890635227
+      ],
+      "excerpt": "INFO:tensorflow:Assets written to: exported-models/my_model_6000steps/saved_model/assets \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Waymo Open Dataset: Tensorflow 2 Object Detection API",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "[Waymo Open Dataset](https://console.cloud.google.com/storage/browser/waymo_open_dataset_v_1_2_0)\n**domain_adaptation** directory doesn't have label data, so please download the data in **training** directory\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "go to [Tensorflow Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) and download pretrained model.\n\n![](https://i.imgur.com/x34zpZL.png)\n\nI download `SSD ResNet50 V1 FPN 640x640 (RetinaNet50)` pretrained model. \n* go to pre-trained-models directory.\n\n`cd pre-trained-models`\n\n* download SSD ResNet50 pretrained model\n\n```\nwget http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz\n```\n\n* unzip the file\n\n`tar zxvf ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz`\n\n```\nWaymo\n\u251c\u2500\u2500\u2500models\n\u251c\u2500\u2500\u2500training_configs \n\u251c\u2500\u2500\u2500pre-trained-models \n\u2502   \u2514\u2500\u2500\u2500ssd_resnet50_v1_fpn_640x640_coco17_tpu-8\n\u2502       \u251c\u2500 checkpoint/\n\u2502       \u251c\u2500 saved_model/\n\u2502       \u2514\u2500 pipeline.config\n\u251c\u2500\u2500\u2500exported-models \n\u2514\u2500\u2500\u2500data\n    \u251c\u2500\u2500\u2500processed\n    \u2502   \u2514\u2500\u2500\u2500segment-???.tfrecord #:processed tfrecord\n    \u2514\u2500\u2500\u2500segment-???.tfrecord\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gyes00205/waymo_tf_object_detection/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1,
+      "date": "Sat, 25 Dec 2021 12:29:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gyes00205/waymo_tf_object_detection/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gyes00205/waymo_tf_object_detection",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Refer to [TensorFlow 2 Object Detection API tutorial](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/index.html) to install toolkits\n* git clone Tensorflow 2 Object Detection API\n```shell \ngit clone https://github.com/tensorflow/models.git\n```\n* go to models/research/ and run\n```shell \nprotoc object_detection/protos/*.proto --python_out=.\n```\n* add API to your environment path\n```\nexport PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim\n```\n* copy setup.py to models/research/\n```shell \ncp object_detection/packages/tf2/setup.py ./\n```\n* install setup.py\n```shell \npython -m pip install .\n```\n* Test whether the installation is successful\n```\npython object_detection/builders/model_builder_tf2_test.py\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```shell \npip install cython\npip install git+https://github.com/philferriere/cocoapi.git#:subdirectory=PythonAPI\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```shell \npip3 install waymo-open-dataset-tf-2-1-0==1.2.0\n```\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name: 'vehicle' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name: 'pedestrian' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8661176197453521
+      ],
+      "excerpt": "    name: 'cyclist' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466,
+        0.8902627162932362
+      ],
+      "excerpt": "cd training_configs \nmkdir ssd_resnet50_v1_fpn_640x640_coco17_tpu-8 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8057675898656085
+      ],
+      "excerpt": "label_map_path: label_map.pbtxt path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8089826770620532
+      ],
+      "excerpt": "pipeline_config_path: pipeline.config path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8089826770620532
+      ],
+      "excerpt": "pipeline_config_path:  pipeline.config path \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "    name: 'pedestrian' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8421074476017179
+      ],
+      "excerpt": "    name: 'cyclist' \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8066801932719337,
+        0.8581655729477125
+      ],
+      "excerpt": "\u251c\u2500\u2500\u2500training_configs #:training config \n\u251c\u2500\u2500\u2500pre-trained-models #:pretrained model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8650167462728087
+      ],
+      "excerpt": "\u2514\u2500\u2500\u2500data #:training data \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python create_record.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8196618335347756
+      ],
+      "excerpt": "Create folder in training_configs directory \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8234555920621246
+      ],
+      "excerpt": "fine_tune_checkpoint: modify to pretrained model ckpt-0 path \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8007146942957083
+      ],
+      "excerpt": "train_input_reader: set input_path to the tfrecord path for training \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    inplace_batchnorm_update: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "        negatives_lower_than_unmatched: true \n        force_match_for_each_row: true \n        use_matmul_gather: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "    encode_background_as_zeros: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8828665034782968
+      ],
+      "excerpt": "              stddev: 0.01 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "      override_base_feature_extractor_hyperparams: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984,
+        0.8594142235991984
+      ],
+      "excerpt": "    normalize_loss_by_num_matches: true \n    normalize_loc_loss_by_codesize: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8149417287038307,
+        0.8161356448973771
+      ],
+      "excerpt": "  #:pretrained model ckpt-0 path \n  fine_tune_checkpoint: \"pre-trained-models/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0\"  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8594142235991984
+      ],
+      "excerpt": "  sync_replicas: true \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550660257338367
+      ],
+      "excerpt": "model_dir: the training checkpoint will be stored in the model_dir directory \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python model_main_tf2.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8612457341622831
+      ],
+      "excerpt": "checkpoint_dir: the directory to read checkpoint. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "python model_main_tf2.py \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9246227682586091
+      ],
+      "excerpt": "!python exporter_main_v2.py \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/gyes00205/waymo_tf_object_detection/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Waymo Open Dataset: Tensorflow 2 Object Detection Development Record",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "waymo_tf_object_detection",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gyes00205",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/gyes00205/waymo_tf_object_detection/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sat, 25 Dec 2021 12:29:25 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "object-detection",
+      "tensorflow",
+      "deep-learning",
+      "waymo"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**detect.py**\n\nsaved_model_path: exported model path\n\ntest_path: image path\n\noutput_path: output predicted image path\n\nmin_score_thresh: confidience\n\nExecute code:\n\n```shell \n!python detect.py \\\n--saved_model_path=exported-models/my_model_6000steps \\\n--test_path=test_image \\\n--output_path=output_image \\\n--min_score_thresh=.1\n```\nExecution results:\n\n<img src=\"https://i.imgur.com/NNE6OuI.png\" width=250px height=200px> \n<img src=\"https://i.imgur.com/dyRuUpA.png\" width=300px height=200px>\n<img src=\"https://i.imgur.com/vICSrnI.png\" width=250px height=200px>\n<img src=\"https://i.imgur.com/it53kPf.png\" width=300px height=200px>\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

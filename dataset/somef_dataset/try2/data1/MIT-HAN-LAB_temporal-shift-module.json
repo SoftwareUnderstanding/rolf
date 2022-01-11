@@ -1,0 +1,578 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1811.08383",
+      "https://arxiv.org/abs/1811.08383",
+      "https://arxiv.org/abs/1711.07971",
+      "https://arxiv.org/abs/1608.00859>"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{lin2019tsm,\n  title={TSM: Temporal Shift Module for Efficient Video Understanding},\n  author={Lin, Ji and Gan, Chuang and Han, Song},\n  booktitle={Proceedings of the IEEE International Conference on Computer Vision},\n  year={2019}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9156566588472104,
+        0.8955886365383559,
+        0.8444342525991423
+      ],
+      "excerpt": "| TSN ResNet50 (2D) | 8 * 10clips | 70.6%         | link | link | \n| TSM ResNet50      | 8 * 10clips | 74.1%         | link | link | \n| TSM ResNet50 NL   | 8 * 10clips | 75.6%         | link | link | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "| TSM MobileNetV2    | 8 * 10clips | 69.5%         | link | link | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9156566588472104,
+        0.8955886365383559
+      ],
+      "excerpt": "| TSN ResNet50 (2D) | 8 * 1clip  | 68.8%        | 69.9%         | link | link | \n| TSM ResNet50      | 8 * 1clip  | 71.2%        | 72.8%         | link | link | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "| TSM ResNet50  | 8 * 2clip | 61.2     | link | link | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8955886365383559
+      ],
+      "excerpt": "| TSM ResNet101 | 8 * 2clip | 63.3     | link | link | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9696971001562653
+      ],
+      "excerpt": "Change to --test_crops=10 for 10-crop evaluation. With the above scripts, you should get around 68.8% and 71.2% results respectively. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9064844758369414
+      ],
+      "excerpt": "For the efficient (center crop and 1 clip) and accurate setting (full resolution and 2 clip) on Something-Something, you can try something like this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9343900839872272
+      ],
+      "excerpt": ": efficient setting: center crop and 1 clip \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8550101043698384
+      ],
+      "excerpt": "       --gd 20 --lr 0.001 --lr_steps 10 20 --epochs 25 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mit-han-lab/temporal-shift-module",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-27T22:49:33Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-23T16:18:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8750498580969852,
+        0.88451917169333,
+        0.9397409884240798,
+        0.9630530293722905
+      ],
+      "excerpt": "[NEW!] We update the environment setup for the online_demo, and should be much easier to set up. Check the folder for a try! \n[NEW!] We have released the pre-trained optical flow model on Kinetics. We believe the pre-trained weight will help the training of two-stream models on other datasets. \n[NEW!] We have released the code of online hand gesture recognition on NVIDIA Jeston Nano. It can achieve real-time recognition at only 8 watts. See online_demo folder for the details. [Full Video] \nWe release the PyTorch code of the Temporal Shift Module. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8979411005071259
+      ],
+      "excerpt": "Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9942026895833965,
+        0.9425653279771917
+      ],
+      "excerpt": "This code is based on the TSN codebase. The core code to implement the Temporal Shift Module is ops/temporal_shift.py. It is a plug-and-play module to enable temporal reasoning, at the cost of zero parameters and zero FLOPs. \nHere we provide a naive implementation of TSM. It can be implemented with just several lines of code: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8619089259402867
+      ],
+      "excerpt": ": shape of x: [N, T, C, H, W] \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9642399867141984,
+        0.9415288136450898,
+        0.9891910244601945,
+        0.9287442472215485
+      ],
+      "excerpt": "Note that the naive implementation involves large data copying and increases memory consumption during training. It is suggested to use the in-place version of TSM to improve speed (see ops/temporal_shift.py Line 12 for the details.) \nTraining video models is computationally expensive. Here we provide some of the pretrained models. The accuracy might vary a little bit compared to the paper, since we re-train some of the models. \nIn the latest version of our paper, we reported the results of TSM trained and tested with I3D dense sampling (Table 1&4, 8-frame and 16-frame), using the same training and testing hyper-parameters as in Non-local Neural Networks paper to directly compare with I3D.  \nWe compare the I3D performance reported in Non-local paper: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9674073786842188,
+        0.9870968654541159
+      ],
+      "excerpt": "TSM outperforms I3D under the same dense sampling protocol. NL TSM model also achieves better performance than NL I3D model. Non-local module itself improves the accuracy by 1.5%. \nHere is a list of pre-trained models that we provide (see Table 3 of the paper). The accuracy is tested using full resolution setting following here. The list is keeping updating. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9964527171429906
+      ],
+      "excerpt": "We also provide the checkpoints of TSN and TSM models using uniform sampled frames as in Temporal Segment Networks paper, which is more sample efficient and very useful for fine-tuning on other datasets. Our TSM module improves consistently over the TSN baseline. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9805114071650656
+      ],
+      "excerpt": "We provide the optical flow model pre-trained on Kinetics. The model is trained using uniform sampling. We did not carefully tune the training hyper-parameters. Therefore, the model is intended for transfer learning on other datasets but not for performance evaluation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9477756535494953,
+        0.9586292889237371
+      ],
+      "excerpt": "Something-Something V1&V2 datasets are highly temporal-related. TSM achieves state-of-the-art performnace on the datasets: TSM achieves the first place on V1 (50.72% test acc.) and second place on V2 (66.55% test acc.), using just ResNet-50 backbone (as of 09/28/2019). \nHere we provide some of the models on the dataset. The accuracy is tested using both efficient setting (center crop * 1clip) and accuate setting (full resolution * 2clip) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9256302050283434
+      ],
+      "excerpt": "On V2 dataset, the accuracy is reported under the accurate setting (full resolution * 2clip). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9844061064182301
+      ],
+      "excerpt": "To get the Kinetics performance of our dense sampling model under Non-local protocol, run: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8698436229212654
+      ],
+      "excerpt": "For the efficient (center crop and 1 clip) and accurate setting (full resolution and 2 clip) on Something-Something, you can try something like this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9068756609271439
+      ],
+      "excerpt": "After getting the Kinetics pretrained models, we can fine-tune on other datasets using the Kinetics pretrained models. For example, we can fine-tune 8-frame Kinetics pre-trained model on UCF-101 dataset using uniform sampling by running: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[ICCV 2019] TSM: Temporal Shift Module for Efficient Video Understanding",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/MIT-HAN-LAB/temporal-shift-module/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 363,
+      "date": "Thu, 23 Dec 2021 22:10:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mit-han-lab/temporal-shift-module/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mit-han-lab/temporal-shift-module",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/scripts/train_tsn_kinetics_rgb_5f.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/scripts/train_tsm_kinetics_rgb_16f.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/scripts/train_tsm_kinetics_rgb_8f.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/scripts/test_tsm_kinetics_rgb_8f.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/scripts/finetune_tsm_ucf101_rgb_8f.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/tsm_fpga/fpga_build/model_tf_split/compile_split.sh",
+      "https://raw.githubusercontent.com/MIT-HAN-LAB/temporal-shift-module/master/tsm_fpga/fpga_build/model_tf_split/quantize_split.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We need to first extract videos into frames for fast reading. Please refer to [TSN](https://github.com/yjxiong/temporal-segment-networks) repo for the detailed guide of data pre-processing.\n\nWe have successfully trained on [Kinetics](https://deepmind.com/research/open-source/open-source-datasets/kinetics/), [UCF101](http://crcv.ucf.edu/data/UCF101.php), [HMDB51](http://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/), [Something-Something-V1](https://20bn.com/datasets/something-something/v1) and [V2](https://20bn.com/datasets/something-something/v2), [Jester](https://20bn.com/datasets/jester) datasets with this codebase. Basically, the processing of video data can be summarized into 3 steps:\n\n- Extract frames from videos (refer to [tools/vid2img_kinetics.py](tools/vid2img_kinetics.py) for Kinetics example and [tools/vid2img_sthv2.py](tools/vid2img_sthv2.py) for Something-Something-V2 example)\n- Generate annotations needed for dataloader (refer to [tools/gen_label_kinetics.py](tools/gen_label_kinetics.py) for Kinetics example, [tools/gen_label_sthv1.py](tools/gen_label_sthv1.py) for Something-Something-V1 example, and [tools/gen_label_sthv2.py](tools/gen_label_sthv2.py) for Something-Something-V2 example)\n- Add the information to [ops/dataset_configs.py](ops/dataset_configs.py)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8866514995846129
+      ],
+      "excerpt": "[NEW!] We update the environment setup for the online_demo, and should be much easier to set up. Check the folder for a try! \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9425339501450113
+      ],
+      "excerpt": "For example, to test the downloaded pretrained models on Kinetics, you can run scripts/test_tsm_kinetics_rgb_8f.sh. The scripts will test both TSN and TSM on 8-frame setting by running: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9469241685289078,
+        0.8793671372991584
+      ],
+      "excerpt": "To train on Kinetics from ImageNet pretrained models, you can run scripts/train_tsm_kinetics_rgb_8f.sh, which contains: \n  #: You should get TSM_kinetics_RGB_resnet50_shift8_blockres_avg_segment8_e50.pth \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8262157230141619
+      ],
+      "excerpt": "Data Preparation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8245539886860519
+      ],
+      "excerpt": "Pretrained Models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.899033830196233
+      ],
+      "excerpt": "| model             | n-frame     | Kinetics Acc. | checkpoint                                                   | test log                                                     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8856720469821113
+      ],
+      "excerpt": "| model             | n-frame    | acc (1-crop) | acc (10-crop) | checkpoint                                                   | test log                                                     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8004960939118476
+      ],
+      "excerpt": "| model        | n-frame   | top-1 acc | top-5 acc | checkpoint                                                   | test log | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8080103736662064
+      ],
+      "excerpt": "| model         | n-frame | acc (center crop * 1clip) | acc (full res * 2clip) | checkpoint                                                   | test log                                                     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8108568244951687
+      ],
+      "excerpt": "| model         | n-frame   | accuracy | checkpoint                                                   | test log                                                     | \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8076904413800101
+      ],
+      "excerpt": "For example, to test the downloaded pretrained models on Kinetics, you can run scripts/test_tsm_kinetics_rgb_8f.sh. The scripts will test both TSN and TSM on 8-frame setting by running: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664,
+        0.9298336810758577,
+        0.8148043622917135
+      ],
+      "excerpt": ": test TSN \npython test_models.py kinetics \\ \n    --weights=pretrained/TSM_kinetics_RGB_resnet50_avg_segment5_e50.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8633989807152664,
+        0.9298336810758577,
+        0.8148043622917135
+      ],
+      "excerpt": ": test TSM \npython test_models.py kinetics \\ \n    --weights=pretrained/TSM_kinetics_RGB_resnet50_shift8_blockres_avg_segment8_e50.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298336810758577,
+        0.8148043622917135
+      ],
+      "excerpt": "python test_models.py kinetics \\ \n    --weights=pretrained/TSM_kinetics_RGB_resnet50_avg_segment5_e50.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298336810758577,
+        0.8148043622917135
+      ],
+      "excerpt": "python test_models.py kinetics \\ \n    --weights=pretrained/TSM_kinetics_RGB_resnet50_shift8_blockres_avg_segment8_e100_dense.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9298336810758577,
+        0.8148043622917135
+      ],
+      "excerpt": "python test_models.py kinetics \\ \n    --weights=pretrained/TSM_kinetics_RGB_resnet50_shift8_blockres_avg_segment8_e100_dense_nl.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8065752872631573,
+        0.8148043622917135
+      ],
+      "excerpt": "python test_models.py something \\ \n    --weights=pretrained/TSM_something_RGB_resnet50_shift8_blockres_avg_segment8_e45.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8065752872631573,
+        0.8148043622917135
+      ],
+      "excerpt": "python test_models.py something \\ \n    --weights=pretrained/TSM_something_RGB_resnet50_shift8_blockres_avg_segment8_e45.pth \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9207504233295029
+      ],
+      "excerpt": "  python main.py kinetics RGB \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8559395774122353
+      ],
+      "excerpt": "       --batch-size 128 -j 16 --dropout 0.5 --consensus_type=avg --eval-freq=1 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8843046402447461,
+        0.876976154230365
+      ],
+      "excerpt": "After getting the Kinetics pretrained models, we can fine-tune on other datasets using the Kinetics pretrained models. For example, we can fine-tune 8-frame Kinetics pre-trained model on UCF-101 dataset using uniform sampling by running: \npython main.py ucf101 RGB \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8109532309113273,
+        0.8257168972922656
+      ],
+      "excerpt": "       --gd 20 --lr 0.001 --lr_steps 10 20 --epochs 25 \\ \n       --batch-size 64 -j 16 --dropout 0.8 --consensus_type=avg --eval-freq=1 \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8509653106547419
+      ],
+      "excerpt": "       --tune_from=pretrained/TSM_kinetics_RGB_resnet50_shift8_blockres_avg_segment8_e50.pth \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8438291436061371
+      ],
+      "excerpt": "  python main.py something RGB \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8382281083223193,
+        0.8257168972922656
+      ],
+      "excerpt": "       --gd 20 --lr 0.01 --lr_steps 20 40 --epochs 50 \\ \n       --batch-size 64 -j 16 --dropout 0.5 --consensus_type=avg --eval-freq=1 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mit-han-lab/temporal-shift-module/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C++",
+      "Shell",
+      "Makefile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2021 MIT HAN Lab\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "TSM: Temporal Shift Module for Efficient Video Understanding [[Website]](https://hanlab.mit.edu/projects/tsm/) [[arXiv]](https://arxiv.org/abs/1811.08383)[[Demo]](https://www.youtube.com/watch?v=0T6u7S_gq-4)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "temporal-shift-module",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mit-han-lab",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mit-han-lab/temporal-shift-module/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The code is built with following libraries:\n\n- [PyTorch](https://pytorch.org/) 1.0 or higher\n- [TensorboardX](https://github.com/lanpa/tensorboardX)\n- [tqdm](https://github.com/tqdm/tqdm.git)\n- [scikit-learn](https://scikit-learn.org/stable/)\n\nFor video data pre-processing, you may need [ffmpeg](https://www.ffmpeg.org/).\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1575,
+      "date": "Thu, 23 Dec 2021 22:10:03 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "acceleration",
+      "low-latency",
+      "temporal-modeling",
+      "video-understanding",
+      "efficient-model",
+      "nvidia-jetson-nano",
+      "tsm"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "We have build an online hand gesture recognition demo using our TSM. The model is built with MobileNetV2 backbone and trained on Jester dataset. \n\n- Recorded video of the live demo [[link]](https://hanlab.mit.edu/projects/tsm/#live_demo)\n- Code of the live demo and set up tutorial:  [`online_demo`](online_demo) \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

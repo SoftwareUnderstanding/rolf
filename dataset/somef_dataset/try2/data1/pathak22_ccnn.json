@@ -1,0 +1,262 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{pathakICCV15ccnn,\n    Author = {Pathak, Deepak and Kr\\\"ahenb\\\"uhl, Philipp and Darrell, Trevor},\n    Title = {Constrained Convolutional Neural Networks for Weakly Supervised Segmentation},\n    Booktitle = {International Conference on Computer Vision ({ICCV})},\n    Year = {2015}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.9999807428864829,
+        0.9933537248551054,
+        0.9631270713445117,
+        0.9999988213495836,
+        0.9864698047705643
+      ],
+      "excerpt": "If you find CCNN useful in your research, please cite: \n    Author = {Pathak, Deepak and Kr\\\"ahenb\\\"uhl, Philipp and Darrell, Trevor}, \n    Title = {Constrained Convolutional Neural Networks for Weakly Supervised Segmentation}, \n    Booktitle = {International Conference on Computer Vision ({ICCV})}, \n    Year = {2015} \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/pathak22/ccnn",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2015-12-09T11:29:48Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-05-18T06:36:34Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9660970977863651,
+        0.9006139800578629,
+        0.9802690481878812
+      ],
+      "excerpt": "CCNN is a framework for optimizing convolutional neural networks with linear constraints. \n - It has been shown to achieve state-of-the-art results on the task of weakly-supervised semantic segmentation. \n - It is written in Python and C++, and based on Caffe. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.860059181823877,
+        0.8405850228561714
+      ],
+      "excerpt": "Model Prototxts: \n- models/fcn_8s/ : Atrous algorithm based 8-strided VGG, described here. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "[ICCV 2015] Framework for optimizing CNNs with linear constraints for Semantic Segmentation",
+      "technique": "GitHub API"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "- Pascal VOC Image List: [train](http://www.cs.berkeley.edu/~pathak/ccnn/train.txt), [val](http://www.cs.berkeley.edu/~pathak/ccnn/val.txt), [trainval](http://www.cs.berkeley.edu/~pathak/ccnn/trainval.txt), [test](http://www.cs.berkeley.edu/~pathak/ccnn/test.txt)\n- [Training image-level label indicator files](http://www.cs.berkeley.edu/~pathak/ccnn/trainIndicatorFiles.tar.gz)\n- [Pascal VOC 2012 validation result images](http://www.cs.berkeley.edu/~pathak/ccnn/voc_2012_val_results.tar.gz)\n- [Pascal VOC 2012 test result images](http://www.cs.berkeley.edu/~pathak/ccnn/voc_2012_test_results.tar.gz)\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/pathak22/ccnn/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 26,
+      "date": "Sun, 26 Dec 2021 15:38:51 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/pathak22/ccnn/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pathak22/ccnn",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/pathak22/ccnn/master/models/scripts/download_pretrained_models.sh",
+      "https://raw.githubusercontent.com/pathak22/ccnn/master/models/scripts/download_ccnn_models.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Clone the CCNN repository\n  ```Shell\n  #: Make sure to clone with --recursive\n  git clone --recursive https://github.com/pathak22/ccnn.git\n  ```\n  \n2. Build Caffe and pycaffe\n\n  - Now follow the Caffe installation instructions [here](http://caffe.berkeleyvision.org/installation.html)\n  - Caffe *must* be built with support for Python layers!\n  - In your Makefile.config, make sure to have this line uncommented\n    `WITH_PYTHON_LAYER := 1`\n  - You can download my [Makefile.config](http://www.cs.berkeley.edu/~pathak/ccnn/Makefile.config) for reference.\n  \n  ```Shell\n  cd ccnn/caffe-ccnn\n  #: If you have all caffe requirements installed\n  #: and your Makefile.config in place, then simply do:\n  make -j8 && make pycaffe\n  ```\n    \n3. Now build CCNN\n\n    ```Shell\n    cd ccnn\n    mkdir build\n    cd build\n    cmake ..\n    make -j8\n    ```\n    \n  - **Note:** If anaconda is installed, then python paths may have been messed b/w anaconda and system python. \n  - I usually run this command : \n\n  ```Shell\n  cmake .. -DBOOST_ROOT=/home/pathak/anaconda -DPYTHON_LIBRARY=/home/pathak/anaconda/lib/libpython2.7.so -DPYTHON_INCLUDE_DIR=/home/pathak/anaconda/include/python2.7/ -DCMAKE_C_COMPILER=gcc-4.8 -DCMAKE_CXX_COMPILER=g++-4.8\n  ```\n  \n  - To verify this do : `ccmake ./` inside the build folder and manually check the following things : \n  `MAKE_CXX_COMPILER, CMAKE_C_COMPILER , PYTHON_EXECUTABLE , PYTHON_INCLUDE_DIR , PYTHON_LIBRARY`\n  - Make sure that cmake doesn't mess the anaconda boost to system boost.\n\n4. Configure path (if needed) in `src/user_config.py`.\n\n5. (Optional -- I don't do it) If everything runs fine, set `CMAKE_BUILD_TYPE` using `ccmake .` to `Release`. This prevents eigen from checking all assertions etc. and works faster.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8526755238785734
+      ],
+      "excerpt": "- src/config.py : Set glog-minlevel accordingly to get desired caffe output to terminal \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.898700390966953
+      ],
+      "excerpt": "- src/config.py : Set glog-minlevel accordingly to get desired caffe output to terminal \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/pathak22/ccnn/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "CMake",
+      "MATLAB",
+      "C",
+      "Shell",
+      "Objective-C"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/pathak22/ccnn/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'UC Berkeley\\'s Standard Copyright and Disclaimer Notice:\\n\\nCopyright (c) 2015, Deepak Pathak, Philipp Kr\\xc3\\xa4henb\\xc3\\xbchl \\nand The Regents of the University of California (Regents). \\nAll Rights Reserved. \\n\\nPermission to use, copy, modify, and distribute this software and its \\ndocumentation for educational, research, and not-for-profit purposes, without \\nfee and without a signed licensing agreement, is hereby granted, provided that \\nthe above copyright notice, this paragraph and the following two paragraphs appear \\nin all copies, modifications, and distributions. Contact The Office of Technology \\nLicensing, UC Berkeley, 2150 Shattuck Avenue, Suite 510, Berkeley, CA 94720-1620, \\n(510) 643-7201, for commercial licensing opportunities.\\n\\nIN NO EVENT SHALL REGENTS BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, \\nINCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE \\nUSE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF REGENTS HAS BEEN ADVISED OF THE \\nPOSSIBILITY OF SUCH DAMAGE. REGENTS SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, \\nBUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR \\nPURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS \\nPROVIDED \"AS IS\". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, \\nENHANCEMENTS, OR MODIFICATIONS.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# CCNN: Constrained Convolutional Neural Networks for Weakly Supervised Segmentation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "ccnn",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pathak22",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/pathak22/ccnn/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. Requirements for `Caffe` and `pycaffe` (see: [Caffe installation instructions](http://caffe.berkeleyvision.org/installation.html))\n2. GCC version more than 4.7\n3. Boost version more than 1.53 (recommended). If system dependencies give issues, install anaconda dependencies:\n\n  ```\n  $ conda install boost\n  $ conda install protobuf\n  ```\n  \n4. A good GPU (e.g., Titan, K20, K40, ...) with at least 3G of memory is sufficient.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 61,
+      "date": "Sun, 26 Dec 2021 15:38:51 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-learning",
+      "constraints",
+      "linear-constraints",
+      "segmentation",
+      "fcn",
+      "fully-convolutional-networks",
+      "machine-learning",
+      "computer-vision"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "**Demo** CCNN.\n\n```Shell\ncd ccnn\nbash ./models/scripts/download_ccnn_models.sh\n#: This will populate the `ccnn/models/` folder with trained models.\npython ./src/demo.py\n```\n\n**Train** CCNN.\n\n```Shell\ncd ccnn\nbash ./models/scripts/download_pretrained_models.sh\n#: This will populate the `ccnn/models/` folder with imagenet pre-trained models.\npython ./src/train.py 2> log.txt\n```\n\n**Test** CCNN.\n\n```Shell\ncd ccnn\npython ./src/test.py  #: To test IOU with CRF post-processing\npython ./src/test_argmax.py  #: To test IOU without CRF\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

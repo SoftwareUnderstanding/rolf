@@ -1,0 +1,347 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1801.06146",
+      "https://arxiv.org/abs/1801.06146",
+      "https://arxiv.org/abs/1708.02182",
+      "https://arxiv.org/abs/1711.03953"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\n@software{charin_polpanumas_2021_4429691,\n  author       = {Charin Polpanumas and\n                  Wannaphong Phatthiyaphaibun},\n  title        = {thai2fit: Thai language Implementation of ULMFit},\n  month        = jan,\n  year         = 2021,\n  publisher    = {Zenodo},\n  version      = {v0.3},\n  doi          = {10.5281/zenodo.4429691},\n  url          = {https://doi.org/10.5281/zenodo.4429691}\n}\n```\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@software{charin_polpanumas_2021_4429691,\n  author       = {Charin Polpanumas and\n                  Wannaphong Phatthiyaphaibun},\n  title        = {thai2fit: Thai language Implementation of ULMFit},\n  month        = jan,\n  year         = 2021,\n  publisher    = {Zenodo},\n  version      = {v0.3},\n  doi          = {10.5281/zenodo.4429691},\n  url          = {https://doi.org/10.5281/zenodo.4429691}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.959546310417776
+      ],
+      "excerpt": "Named-entity recognition \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cstorm125/thai2fit",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-01-25T11:15:34Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-26T05:18:22Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.8101253135645936,
+        0.9115600609697126
+      ],
+      "excerpt": "ULMFit Language Modeling, Text Feature Extraction and Text Classification in Thai Language. \nCreated as part of pyThaiNLP with ULMFit implementation from fast.ai \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9950353620736577,
+        0.9981053750117125,
+        0.845667961638481,
+        0.9251533965485016,
+        0.8382276962706032
+      ],
+      "excerpt": "We pretrained a language model with 60,005 embeddings on Thai Wikipedia Dump (perplexity of 28.71067) and text classification (micro-averaged F-1 score of 0.60322 on 5-label classification problem. Benchmarked to 0.5109 by fastText and 0.4976 by LinearSVC on Wongnai Challenge: Review Rating Prediction. The language model can also be used to extract text features for other downstream tasks. \nPretrained language model based on Thai Wikipedia with the perplexity of 46.61 \nPretrained word embeddings (.vec) with 51,556 tokens and 300 dimensions \nClassification benchmark of 94.4% accuracy compared to 65.2% by fastText for 4-label classification of BEST \nRefactored to use fastai.text instead of torchtext \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8688667003201755
+      ],
+      "excerpt": "Classification benchmark of 0.60925 micro-averaged F1 score compared to 0.49366 by fastText and 0.58139 by competition winner for 5-label classification of Wongnai Challenge: Review Rating Prediction (ulmfit_wongnai.ipynb) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8793805384625096,
+        0.9096420599049226,
+        0.9207156521841738,
+        0.992389684568992,
+        0.8678152712208402,
+        0.8688667003201755
+      ],
+      "excerpt": "Repo name changed to thai2fit in order to avoid confusion since this is ULMFit not word2vec implementation \nMigrate to Pytorch 1.0 and fastai 1.0 API \nAdd QRNN-based models; inference time drop by 50% on average \nPretrained language model based on Thai Wikipedia with the perplexity of 46.04264 (20% validation) and 23.32722 (1% validation) (pretrain_wiki.ipynb) \nPretrained word embeddings (.vec and .bin) with 60,000 tokens and 400 dimensions (word2vec_examples.ipynb) based on QRNN \nClassification benchmark of 0.60925 micro-averaged F1 score compared to 0.49366 by fastText and 0.58139 by competition winner for 5-label classification of Wongnai Challenge: Review Rating Prediction (ulmfit_wongnai.ipynb) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9372110241929753,
+        0.9682785879550758,
+        0.9610216674433865
+      ],
+      "excerpt": "in language models, there is a bias in the decoder in fastai v1 that you probably won\u2019t have \nin the classifier, the order you see for the layers is artificial (it\u2019s the pytorch representation that takes the things in the order you put them in init when not using Sequential) but the two models (old and new) apply batchnorm, dropout and linear in the same order \ntokenizing is done differently in fastai v1, so you may have to fine-tune your models again (we add an xxmaj token for words beginning with a capital for instance) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8308422885352775,
+        0.911983360796228,
+        0.9170292397517946
+      ],
+      "excerpt": "Classification benchmarks now include for wongnai-corpus (See wongnai_cls), prachathai-67k (See prachathai_cls), and wisesight-sentiment (See wisesight_cls) \nBetter text cleaning rules resulting in Thai Wikipedia Dump pretrained perplexity of 28.71067. \nReplace AWD-LSTM/QRNN with tranformers-based models \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9739859527156726,
+        0.9949013365443831,
+        0.9472630873296799
+      ],
+      "excerpt": "We trained the ULMFit model implemented bythai2fit for text classification. We use Wongnai Challenge: Review Rating Prediction as our benchmark as it is the only sizeable and publicly available text classification dataset at the time of writing (June 21, 2018). It has 39,999 reviews for training and validation, and 6,203 reviews for testing.  \nWe achieved validation perplexity at 35.75113 and validation micro F1 score at 0.598 for five-label classification. Micro F1 scores for public and private leaderboards are 0.59313 and 0.60322 respectively, which are state-of-the-art as of the time of writing (February 27, 2019). FastText benchmark based on their own pretrained embeddings has the performance of 0.50483 and 0.49366 for public and private leaderboards respectively. See ulmfit_wongnai.ipynb for more details. \nThe pretrained language model of thai2fit can be used to convert Thai texts into vectors, after which said vectors can be used for various machine learning tasks such as classification, clustering, translation, question answering and so on. The idea is to train a language model that \"understands\" the texts then extract certain vectors that the model \"thinks\" represents the texts we want. You can access this functionality easily via pythainlp \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9980327064342999,
+        0.9608448641224352,
+        0.8489497986500742
+      ],
+      "excerpt": "The goal of this notebook is to train a language model using the fast.ai version of AWD LSTM Language Model, with data from Thai Wikipedia Dump last updated February 17, 2019. Using 40M/200k/200k tokens of train-validation-test split, we achieved validation perplexity of 27.81627 with 60,004 embeddings at 400 dimensions, compared to state-of-the-art as of October 27, 2018 at 42.41 for English WikiText-2 by Yang et al (2018). To the best of our knowledge, there is no comparable research in Thai language at the point of writing (February 17, 2019). See thwiki_lm for more details. \nWe use the embeddings from v0.1 since it was trained specifically for word2vec as opposed to latter versions which garner to classification. The thai2vec.bin 51,556 word embeddings of 300 dimensions, in descending order by their frequencies (See thai2vec.vocab). The files are in word2vec format readable by gensim. Most common applications include word vector visualization, word arithmetic, word grouping, cosine similarity and sentence or document vectors. For sample code, see thwiki_lm/word2vec_examples.ipynb. \nYou can do simple \"arithmetic\" with words based on the word vectors such as: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8219263602928509,
+        0.9764778400115706,
+        0.9308686655251236,
+        0.9568348458927135
+      ],
+      "excerpt": "It can also be used to do word groupings. For instance: \n* \u0e2d\u0e32\u0e2b\u0e32\u0e23\u0e40\u0e0a\u0e49\u0e32 \u0e2d\u0e32\u0e2b\u0e32\u0e23\u0e2a\u0e31\u0e15\u0e27\u0e4c \u0e2d\u0e32\u0e2b\u0e32\u0e23\u0e40\u0e22\u0e47\u0e19 \u0e2d\u0e32\u0e2b\u0e32\u0e23\u0e01\u0e25\u0e32\u0e07\u0e27\u0e31\u0e19 (breakfast animal-food dinner lunch) - \u0e2d\u0e32\u0e2b\u0e32\u0e23\u0e2a\u0e31\u0e15\u0e27\u0e4c (animal-food) is type of food whereas others are meals in the day \n* \u0e25\u0e39\u0e01\u0e2a\u0e32\u0e27 \u0e25\u0e39\u0e01\u0e2a\u0e30\u0e43\u0e20\u0e49 \u0e25\u0e39\u0e01\u0e40\u0e02\u0e22 \u0e1b\u0e49\u0e32 (duaghter daughter-in-law son-in-law aunt) - \u0e25\u0e39\u0e01\u0e2a\u0e32\u0e27 (daughter) is immediate family whereas others are not \n* \u0e01\u0e14 \u0e01\u0e31\u0e14 \u0e01\u0e34\u0e19 \u0e40\u0e04\u0e35\u0e49\u0e22\u0e27 (press bite eat chew) - \u0e01\u0e14 (press) is not verbs for the eating process \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.908925214220865,
+        0.908925214220865,
+        0.908925214220865,
+        0.908925214220865,
+        0.908925214220865,
+        0.9084072797197749
+      ],
+      "excerpt": "\u0e08\u0e35\u0e19 (China) and \u0e1b\u0e31\u0e01\u0e01\u0e34\u0e48\u0e07 (Beijing): 0.31359560752667964 \n\u0e2d\u0e34\u0e15\u0e32\u0e25\u0e35 (Italy) and \u0e42\u0e23\u0e21 (Rome): 0.42819627065839394 \n\u0e1b\u0e31\u0e01\u0e01\u0e34\u0e48\u0e07 (Beijing) and \u0e42\u0e23\u0e21 (Rome): 0.27347283956785434 \n\u0e08\u0e35\u0e19 (China) and \u0e42\u0e23\u0e21 (Rome): 0.02666692964073511 \n\u0e2d\u0e34\u0e15\u0e32\u0e25\u0e35 (Italy) and \u0e1b\u0e31\u0e01\u0e01\u0e34\u0e48\u0e07 (Beijing): 0.17900795797557473 \nGetting Started with PyThaiNLP \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "ULMFit Language Modeling, Text Feature Extraction and Text Classification in Thai Language. Created as part of pyThaiNLP",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cstorm125/thai2fit/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 43,
+      "date": "Sat, 25 Dec 2021 03:26:51 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cstorm125/thai2fit/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cstorm125/thai2fit",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/cstorm125/thai2fit/master/thwiki_lm/thwiki_lm.ipynb",
+      "https://raw.githubusercontent.com/cstorm125/thai2fit/master/thwiki_lm/word2vec_examples.ipynb",
+      "https://raw.githubusercontent.com/cstorm125/thai2fit/master/thwiki_lm/thwiki_lm_example.ipynb",
+      "https://raw.githubusercontent.com/cstorm125/thai2fit/master/wongnai_cls/classification.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8281766541911924
+      ],
+      "excerpt": "Note that this could be relying on a different \"take\" than you would expect. For example, you could have answered \u0e25\u0e39\u0e01\u0e40\u0e02\u0e22 in the second example because it  is the one associated with male gender. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8242924068024562
+      ],
+      "excerpt": "Pretrained Thai Wikipedia Dump with the same training scheme as ulmfit-multilingual \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8801854956928516
+      ],
+      "excerpt": "from pythainlp.ulmfit import * \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.816041083255496
+      ],
+      "excerpt": "array([ 0.066298,  0.307813,  0.246051,  0.008683, ..., -0.058363,  0.133258, -0.289954, -1.770246], dtype=float32) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/cstorm125/thai2fit/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'MIT License\\n\\nCopyright (c) 2018 Charin\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thai2fit (formerly thai2vec)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "thai2fit",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "cstorm125",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/cstorm125/thai2fit/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "cstorm125",
+        "body": "",
+        "dateCreated": "2020-05-22T15:37:16Z",
+        "datePublished": "2021-01-09T14:06:49Z",
+        "html_url": "https://github.com/cstorm125/thai2fit/releases/tag/v0.3",
+        "name": "",
+        "tag_name": "v0.3",
+        "tarball_url": "https://api.github.com/repos/cstorm125/thai2fit/tarball/v0.3",
+        "url": "https://api.github.com/repos/cstorm125/thai2fit/releases/36177347",
+        "zipball_url": "https://api.github.com/repos/cstorm125/thai2fit/zipball/v0.3"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "* Python>=3.6\n* PyTorch>=1.0\n* fastai>=1.0.38\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 180,
+      "date": "Sat, 25 Dec 2021 03:26:51 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8356013927728488
+      ],
+      "excerpt": "mvn org.gephi:gephi-maven-plugin:migrate \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9449187648369126,
+        0.9581122666042796,
+        0.9886170131020391
+      ],
+      "excerpt": "    Author: My Name \n    Author email (optional): \n    Author URL (optional): \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Wimmics/gephi-semantic-web-import",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2016-01-08T16:47:42Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-08-16T21:20:53Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9956484651167674,
+        0.918090177232813,
+        0.9357508885568626,
+        0.8967449259966123,
+        0.9634715897311052
+      ],
+      "excerpt": "This repository is an out-of-the-box development environment for Gephi plugins. Gephi plugins are implemented in Java and can extend Gephi in many different ways, adding or improving features. Getting started is easy with this repository but also checkout the Bootcamp for examples of plugins you can create. \nThe process in which plugins are developed and submitted had an overhaul when Gephi 0.9 was released. Details can be read on this article: Plugin development gets new tools and opens-up to the community. \nThis section is a step-by-step guide to migrate 0.8 plugins. Before going through the code and configuration, let's summerize the key differences between the two environements. \nThe 0.8 base is built using Ant, whereas the 0.9 uses Maven. These two are significantly different. If you aren't familiar with Maven, you can start with Maven in 5 Minutes. Maven configurations are defined in the pom.xml files. \nThe 0.8 base finds the Gephi modules into the platform folder checked in the repository, whereas the 0.9 base downloads everything from the central Maven repository, where all Gephi modules are available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9940121647425939
+      ],
+      "excerpt": "A custom migrate goal is available in the Gephi Maven Plugin to facilitate the migration from 0.8 to 0.9. This automated process migrates ant-based plugins to maven and takes care of copying the configuration and code. Follow these steps to migrate your plugin: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8492806089119121
+      ],
+      "excerpt": "If you've already had a forked repository based on 0.8 we suggest to save your code somewhere, delete it and fork again as the history was cleared. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9623981597189105
+      ],
+      "excerpt": "The creation of a new plugin is simple thanks to our custom Gephi Maven Plugin. The generate goal asks a few questions and then configures everything for you. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8244639543066388
+      ],
+      "excerpt": "This is an example of what this process will ask: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8271103024731479
+      ],
+      "excerpt": "    Long description (i.e multiple sentences): Plugin features are great \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9848602539700084,
+        0.9454385932724386
+      ],
+      "excerpt": "In addition of compiling and building the JAR and NBM, this command uses the Gephi Maven Plugin to verify the plugin's configuration. In care something is wrong it will fail and indicte the reason. \nSubmitting a Gephi plugin for approval is a simple process based on GitHub's pull request mechanism. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8783789965235085
+      ],
+      "excerpt": "Add and commit your work. It's recommended to keep your fork synced with the upstream repository, as explained here, so you can run git merge upstream/master beforehand. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9510639441267591
+      ],
+      "excerpt": "Navigate to your fork's URL and create a pull request. Select master-forge instead of master as base branch. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9548176957030482
+      ],
+      "excerpt": "Start Netbeans and go to File and then Open Project. Navigate to your fork repository, Netbeans automatically recognizes it as Maven project.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9673197726443599,
+        0.8941180658311362
+      ],
+      "excerpt": "To debug Gephi with your plugin, right click on the gephi-plugins project and select Debug. \nStart IntelliJ and Open the project by navigating to your fork repository. IntelliJ may prompt you to import the Maven project, select yes. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8441984038863511
+      ],
+      "excerpt": "Gephi can be extended in many ways but the major categories are Layout, Export, Import, Data Laboratory, Filter, Generator, Metric, Preview, Tool, Appearance and Clustering. A good way to start is to look at examples with the bootcamp. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8659964380593227
+      ],
+      "excerpt": "The pom.xml file in modules is the parent pom for plugins. A Maven pom can inherit configurations from a parent and that is something we use to keep each plugin's pom very simple. Notice that each plugin's pom (i.e. the pom.xml file in the plugin folder) has a &lt;parent&gt; defined. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9245122760712722
+      ],
+      "excerpt": "The second option is preferable when the short or long description have too many characters as the manifest format is pretty restrictive. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9233733574150165
+      ],
+      "excerpt": "This applies for suite plugins with multiple modules. A module should declare the packages it wants to nake accessible to other modules. For instance, if a module B depends on the class my.org.project.ExampleController defined in a module A, the A module should declare my.org.project as public package. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "SemanticWebImport plugin for gephi, forked from gephi/gephi-plugins",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Wimmics/gephi-semantic-web-import/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This error appears when you try to run a module. To run Gephi with your plugin you need to run the `gephi-plugins` project, not your module.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Mon, 20 Dec 2021 19:06:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Wimmics/gephi-semantic-web-import/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Wimmics/gephi-semantic-web-import",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8720917196715255
+      ],
+      "excerpt": "Fork and checkout this repository:git clone git@github.com:username/gephi-plugins.git \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8225480180632009
+      ],
+      "excerpt": "Copy your plugin folder at the root of this directory. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.809926093908668
+      ],
+      "excerpt": "The plugin code can then be inspected in Netbeans or built via command line with mvn clean package. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9147039841669397,
+        0.815465540397743
+      ],
+      "excerpt": "Fork and checkout the latest version of this repository:git clone git@github.com:username/gephi-plugins.git \nRun the following command and answer the questions: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8049173226279793,
+        0.9717106327039013,
+        0.9369804216186238,
+        0.897297454181368
+      ],
+      "excerpt": "    Name of artifact (e.g my-plugin): my-plugin \n    Version (e.g. 1.0.0): 1.0.0 \n    Directory name (e.g MyPlugin): MyPlugin \n    Branding name (e.g My Plugin): My Plugin \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8747791955730849
+      ],
+      "excerpt": "    Short description (i.e. one sentence): Plugin catch-phrase \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8700242142575508
+      ],
+      "excerpt": "The plugin configuration is created. Now you can (in any order): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9882068453502229
+      ],
+      "excerpt": "Run the following command to compile and build your plugin: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8514510376878005,
+        0.8956729127828624,
+        0.9235178105918865
+      ],
+      "excerpt": "First, make sure you're working on a fork of gephi-plugins. You can check that by running git remote -v and look at the url, it should contain your GitHub username, for example git@github.com:username/gephi-plugins.git. \nAdd and commit your work. It's recommended to keep your fork synced with the upstream repository, as explained here, so you can run git merge upstream/master beforehand. \nPush your commits to your fork with git push origin master. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8136602611188751
+      ],
+      "excerpt": "To run Gephi with your plugin pre-installed, right click on the gephi-plugins project and select Run. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.959963519933944
+      ],
+      "excerpt": "To run Gephi with your plugin pre-installed when you click Run, create a Maven run configuration and enter org.gephi:gephi-maven-plugin:run in the command field. The working directory is simply the current project directory. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8054548504991564
+      ],
+      "excerpt": "Maven requires to separate source files (e.g. .java) and resources files (e.g. .properties) into distinct folders. Sources are located in src/main/java and resources in src/main/resources. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8646532696384699
+      ],
+      "excerpt": "    Directory name (e.g MyPlugin): MyPlugin \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8048619603822019,
+        0.9049643630874794
+      ],
+      "excerpt": "Add some Java code in the src/main/java folder of your plugin \nAdd some resources (e.g. Bundle.properties, images) into the src/main/resources/ folder of your plugin \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8499338765251033
+      ],
+      "excerpt": "Edit the description or category details into the src/main/nbm/manifest.mf file in your plugin folder \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Wimmics/gephi-semantic-web-import/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Java",
+      "Python",
+      "HTML"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Gephi Plugins",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "gephi-semantic-web-import",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Wimmics",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Wimmics/gephi-semantic-web-import/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Developing Gephi plugins requires [JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or later and [Maven](http://maven.apache.org/). Although any IDE/Editor can be used, [Netbeans IDE](https://netbeans.org/) is recommend as Gephi itself is based on [Netbeans Platform](https://netbeans.org/features/platform/index.html).\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Dependencies are configured in the `<dependencies>` section in the plugin folder's `pom.xml`. Each dependency has a `groupId`, an `artifactId` and a `version`. There are three types of dependencies a plugin can have: an external library, a Gephi module or a Netbeans module.\n\nThe list of Gephi and Netbeans dependencies one can use can be found in the `modules/pom.xml` file. All possible dependencies are listed in the `<dependencyManagement>` section. Because each plugin module inherits from this parent pom the version can be omitted when the dependency is set. For instance, this is how a plugin depends on `GraphAPI` and Netbeans's `Lookup`.\n\n```\n<dependencies>\n     <dependency>\n         <groupId>org.netbeans.api</groupId>\n         <artifactId>org-openide-util-lookup</artifactId>\n     </dependency>\n     <dependency>\n         <groupId>org.gephi</groupId>\n         <artifactId>graph-api</artifactId>\n    </dependency>\n</dependencies>\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Run the following command to run Gephi with your plugin pre-installed. Make sure to run `mvn package` beforehand to rebuild.\n\n       mvn org.gephi:gephi-maven-plugin:run\n\nIn Gephi, when you navigate to `Tools` > `Plugins` you should see your plugin listed in `Installed`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This error appears when you try to run a module. To run Gephi with your plugin you need to run the `gephi-plugins` project, not your module.\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 3,
+      "date": "Mon, 20 Dec 2021 19:06:37 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This error appears when you try to run a module. To run Gephi with your plugin you need to run the `gephi-plugins` project, not your module.\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

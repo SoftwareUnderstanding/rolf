@@ -1,0 +1,277 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1509.06461",
+      "https://arxiv.org/abs/1511.06581",
+      "https://arxiv.org/abs/1511.06581",
+      "https://arxiv.org/abs/1509.06461](https://arxiv.org/abs/1509.06461).\n* `dueling` for dueling Q-Network from [https://arxiv.org/abs/1511.06581](https://arxiv.org/abs/1511.06581) paper.\n\nThe agents rely on a network with a single hidden layer the number of neurons for which is defined by the `hidden_layer_size` parameter.\n\nThe meaning and effects of other values for these field are discussed in the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb). \n\n## Implementation details\n\nTwo neural network architectures are defined in the `qnetwork.py` file. \n* QNetwork class implement a three-layer neural network with a parameterized hidden layer size.\n* DuelQNetwork class implements a dueling q-network as described in the \"Dueling Network Architectures for Deep Reinforcement Learning\" paper ([https://arxiv.org/abs/1511.06581](https://arxiv.org/abs/1511.06581))\n\nImplementations of DQN and DDQN agents are located inside of `agents.py`. Both of them rely on the same neural network architecture as well as the replay buffer which is in `replay_buffer.py`.\n\nTo see the performance of agents using DQN and DDQN with different sets of hyperparameters (lr, batch_size, etc) as well training code example please check the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb).\n\n## Results \n\nPlease check the [following notebook](Report.ipynb) for the best set of hyperparameters I managed to identify.\n",
+      "https://arxiv.org/abs/1511.06581](https://arxiv.org/abs/1511.06581) paper.\n\nThe agents rely on a network with a single hidden layer the number of neurons for which is defined by the `hidden_layer_size` parameter.\n\nThe meaning and effects of other values for these field are discussed in the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb). \n\n## Implementation details\n\nTwo neural network architectures are defined in the `qnetwork.py` file. \n* QNetwork class implement a three-layer neural network with a parameterized hidden layer size.\n* DuelQNetwork class implements a dueling q-network as described in the \"Dueling Network Architectures for Deep Reinforcement Learning\" paper ([https://arxiv.org/abs/1511.06581](https://arxiv.org/abs/1511.06581))\n\nImplementations of DQN and DDQN agents are located inside of `agents.py`. Both of them rely on the same neural network architecture as well as the replay buffer which is in `replay_buffer.py`.\n\nTo see the performance of agents using DQN and DDQN with different sets of hyperparameters (lr, batch_size, etc) as well training code example please check the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb).\n\n## Results \n\nPlease check the [following notebook](Report.ipynb) for the best set of hyperparameters I managed to identify.\n",
+      "https://arxiv.org/abs/1511.06581](https://arxiv.org/abs/1511.06581))\n\nImplementations of DQN and DDQN agents are located inside of `agents.py`. Both of them rely on the same neural network architecture as well as the replay buffer which is in `replay_buffer.py`.\n\nTo see the performance of agents using DQN and DDQN with different sets of hyperparameters (lr, batch_size, etc) as well training code example please check the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb).\n\n## Results \n\nPlease check the [following notebook](Report.ipynb) for the best set of hyperparameters I managed to identify.\n"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.881848456479086,
+        0.9218387569487573
+      ],
+      "excerpt": "24: hparm(5e-4, 4,  64,  int(1e5), 0.99, 1e-3, 10,  36, \"dueling\"   ), \n25: hparm(5e-4, 4,  64,  int(1e5), 0.99, 1e-3, 10,  36, \"dueling\"   ) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.864047425846718,
+        0.9453584762253807
+      ],
+      "excerpt": "ddqn for double deep Q-learning from arXiv:1509.06461. \ndueling for dueling Q-Network from arXiv:1511.06581 paper. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jezzarax/drlnd_p1_navigation",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-09-25T19:34:22Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-11-06T16:46:11Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9838703728190547
+      ],
+      "excerpt": "The executable part of code is built as a three-stage pipeline comprising of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9624970094770932,
+        0.9756075088748052,
+        0.9177981688453892
+      ],
+      "excerpt": "The training pipeline was created with the idea of helping the researcher to keep track of his experimentation process as well as keeping the running results. The training process is spawned by executing the trainer.py script and is expected to be idempotent to the training results, i.e. if the result for a specific set of hyperparameters already exists and persisted, the trainer will skip launching a training session for this set of hyperparameters. \nThe sets of hyperparameters for training are defined inside of trainer.py in the simulation_hyperparameter_reference dictionary which is supposed to be append-only in order to keep consistency of the training result data. Each of the hyperparameters sets will produce a file with a scores of number of runs of an agent which will be stored inside of ./hp_search_results directory with an id referring to the key from the simulation_hyperparameter_reference dictionary. The neural networks weights for every agent training run will be stored in the same directory with the relevant hyperparameters key as well as random seed used. \nTo train an agent with a new set of hyperparameters just add an item into simulation_hyperparameter_reference object. Here's an example of adding an item with id 25 after existing hyperparameter set with id 24: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9683195230532317
+      ],
+      "excerpt": "The set of hyperparameters is represented as an instance of a namedtuple hparm which has the following set of fields: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9679589418515194,
+        0.8557066078765118
+      ],
+      "excerpt": "The algorithm field defines an implementation of an agent, currently only the following values are supported: \ndqn which implements a basic deep Q-learning from this paper. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9846934219350986,
+        0.984431836408287
+      ],
+      "excerpt": "The agents rely on a network with a single hidden layer the number of neurons for which is defined by the hidden_layer_size parameter. \nThe meaning and effects of other values for these field are discussed in the hyperparameter search notebook. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Solution of a first project of the deep reinforcement learning nanodegree at Udacity.",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://pipenv.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jezzarax/drlnd_p1_navigation/releases",
+    "technique": "GitHub API"
+  },
+  "faq": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The reinforcement learning agent is travelling through a 2d space filled with blue and yellow bananas. The agent is expected to gather the banana if it is yellow or avoid the blue ones. The agent receives a positive reward for every yellow banana it gathers and a negative reward for every blue banana. The state the agent receives comprises of its speed as well as the raytraced positions of the nearest bananas in the field of view, the size of the state space is 37. The agent is able to move forwards and backwards as well as turn left and right, thus the size of the action space is 4. The minimal expected performance of the agent after training is a score of +13 over 100 consecutive episodes.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 03:06:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jezzarax/drlnd_p1_navigation/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jezzarax/drlnd_p1_navigation",
+    "technique": "GitHub API"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/jezzarax/drlnd_p1_navigation/master/Navigation_Pixels.ipynb",
+      "https://raw.githubusercontent.com/jezzarax/drlnd_p1_navigation/master/Training.ipynb",
+      "https://raw.githubusercontent.com/jezzarax/drlnd_p1_navigation/master/Report.ipynb",
+      "https://raw.githubusercontent.com/jezzarax/drlnd_p1_navigation/master/Training_hyperparameter_search_analysis.ipynb",
+      "https://raw.githubusercontent.com/jezzarax/drlnd_p1_navigation/master/Navigation.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please ensure you have [Pipenv](https://pipenv.readthedocs.io/en/latest/) installed. Clone the repository and use `pipenv --three install` to create yourself an environment to run the code in. Otherwise just install the packages mentioned in Pipfile.\n\nDue to the transitive dependency to tensorflow that comes from unity ml-agents and the [bug](https://github.com/pypa/pipenv/issues/1716) causing incompatibility to jupyter you might want to either drop the jupyter from the list of dependencies or run `pipenv --three install --skip-lock` to overcome it.\n\nTo activate a virtual environment with pipenv issue `pipenv shell` while in the root directory of the repository.\n\nAfter creating and entering the virtual environment you need to set a `DRLUD_P1_ENV` shell environment which must point to the binaries of the Unity environment. Example of for Mac OS version of binaries it might be \n```\nDRLUD_P1_ENV=../deep-reinforcement-learning/p1_navigation/Banana.app; export DRLUD_P1_ENV\n```\n\nDetails of downloading and setting of the environment are described in Udacity nanodegree materials.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8453752708313834
+      ],
+      "excerpt": "* demo notebook \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8105780624949206,
+        0.8199953168930012
+      ],
+      "excerpt": "The sets of hyperparameters for training are defined inside of trainer.py in the simulation_hyperparameter_reference dictionary which is supposed to be append-only in order to keep consistency of the training result data. Each of the hyperparameters sets will produce a file with a scores of number of runs of an agent which will be stored inside of ./hp_search_results directory with an id referring to the key from the simulation_hyperparameter_reference dictionary. The neural networks weights for every agent training run will be stored in the same directory with the relevant hyperparameters key as well as random seed used. \nTo train an agent with a new set of hyperparameters just add an item into simulation_hyperparameter_reference object. Here's an example of adding an item with id 25 after existing hyperparameter set with id 24: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8086570644375757,
+        0.8248290901301685
+      ],
+      "excerpt": "24: hparm(5e-4, 4,  64,  int(1e5), 0.99, 1e-3, 10,  36, \"dueling\"   ), \n25: hparm(5e-4, 4,  64,  int(1e5), 0.99, 1e-3, 10,  36, \"dueling\"   ) \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jezzarax/drlnd_p1_navigation/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Jupyter Notebook",
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# Problem definition",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "drlnd_p1_navigation",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jezzarax",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jezzarax/drlnd_p1_navigation/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 03:06:50 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "deep-reinforcement-learning",
+      "artificial-intelligence"
+    ],
+    "technique": "GitHub API"
+  }
+}

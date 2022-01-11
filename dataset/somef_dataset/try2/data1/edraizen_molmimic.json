@@ -1,0 +1,244 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1711.10275",
+      "https://arxiv.org/abs/1606.06650",
+      "https://arxiv.org/abs/1707.06017",
+      "https://arxiv.org/abs/1711.10275](https://arxiv.org/abs/1711.10275)\n2. 3D U-net: Cicek, Abdulkadir, *et al.* International Conference on Medical Image Computing and Computer Assisted Intervention. 2016. [arXiv](https://arxiv.org/abs/1606.06650)\n3. IBIS LUCA: Goncearenco, Shaytan, *et al.* Biophysical J. 2015. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/26213149)\n4. IBIS: Shoemaker, Zhang, *et al.* Nucleic Acids Res. 2012. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/22102591)\n5. DeepSite: Jimenez, Doerr, *et al.* Bioinformatics. 2017. doi:10.1093/bioinformatics/btx350 [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/28575181)\n6. 3DCNN: Torng, Altman. BMC Bioinformatics. 2017. doi:10.1186/s12859-017-1702-0. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/28615003)\n7. EnzyNet: Amidi, *et al.* [https://arxiv.org/abs/1707.06017](https://arxiv.org/abs/1707.06017)",
+      "https://arxiv.org/abs/1707.06017](https://arxiv.org/abs/1707.06017)"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "1. SparseConvNet: Graham, Engelcke, Maaten. [arXiv:1711.10275](https://arxiv.org/abs/1711.10275)\n2. 3D U-net: Cicek, Abdulkadir, *et al.* International Conference on Medical Image Computing and Computer Assisted Intervention. 2016. [arXiv](https://arxiv.org/abs/1606.06650)\n3. IBIS LUCA: Goncearenco, Shaytan, *et al.* Biophysical J. 2015. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/26213149)\n4. IBIS: Shoemaker, Zhang, *et al.* Nucleic Acids Res. 2012. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/22102591)\n5. DeepSite: Jimenez, Doerr, *et al.* Bioinformatics. 2017. doi:10.1093/bioinformatics/btx350 [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/28575181)\n6. 3DCNN: Torng, Altman. BMC Bioinformatics. 2017. doi:10.1186/s12859-017-1702-0. [Pubmed](https://www.ncbi.nlm.nih.gov/pubmed/28615003)\n7. EnzyNet: Amidi, *et al.* [arXiv:1707.06017](https://arxiv.org/abs/1707.06017)\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8090016440670298
+      ],
+      "excerpt": ". venv/bin/activate \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/edraizen/molmimic",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-10-02T17:06:01Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-10T22:16:50Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9384941587035345,
+        0.9697057861005037,
+        0.8679066181697392,
+        0.8233667100179041
+      ],
+      "excerpt": "Note: this is all research code and is not functional \nmolmimic is a tool to annotate binding sites involved in protein-protein interactions (PPI) given the structure of only one of the interaction partners. This method differs from other binding site prediction programs becuase we treat the problem as a 3D image/volume segmentaion problem. We use Sparse 3D Fully Convolutionary Neural Networks, or Sparse 3D Unet, to make voxel level predictions, where each atom is mapped to one or more voxels. \nIn the future we hope to report binding partners, binding sites for protein-ligand interactions (PLI), sites shared by PPI an PLI for drug repurposing, and sites that are 'mimicking' known interactions, e.g. host-pathogen PPI. \nTo create all of the necessary data, please run the Toil workflow in the generate_data directory. You have the option to run this locally, on bare-metal cluster (e.g. SLURM or SGE), or on the cloud (e.g. AWS, Google Cloud, or Azure). For local or bare-metal cluster with shared filesytem, make sure all of the python dependencies are availble (and non python dependencies in your PATH if you don't want to use docker) and run the whole workflow or only part of it by calling: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8246736412842565
+      ],
+      "excerpt": "2) Copy molmimic to the cluster \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8711998401653926
+      ],
+      "excerpt": "3) SSH into the cluster \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Predict Host Pathogen Protein Protein Interactions using 3D Fully Convolutional Neural Networks",
+      "technique": "GitHub API"
+    }
+  ],
+  "documentation": [
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "https://toil.readthedocs.io/",
+      "technique": "Regular expression"
+    }
+  ],
+  "download": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "```\ngit clone https://github.com/edraizen/molmimic.git\ncd molmimic\ngit submodule init\ngit submodule update\n```\nIf not running on aws or cloud-based cluster, install module with all requirements:\n```python setup.py install\n```\nElse, follow the AWS steps in the Data generation section to install with all requirments\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/edraizen/molmimic/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 2,
+      "date": "Sun, 26 Dec 2021 22:47:22 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/edraizen/molmimic/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "edraizen/molmimic",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.808920171268109
+      ],
+      "excerpt": "1) Follow Preparing yur AWS environment instruction on toil documentation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8373559491258792,
+        0.896521657964572
+      ],
+      "excerpt": "4) In the cluster's shell, create a virtual enviroment and install molmimic and its requirments (noting to make sure to use the --system-site-packages option!): \nvirtualenv --system-site-packages venv \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9408644462925223,
+        0.999746712887969
+      ],
+      "excerpt": "cd /root/molmimic \npip install . \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.9604130415991707
+      ],
+      "excerpt": "python /path/to/molmimic/generate_data/run.py file:dataset-name --defaultCores 4 --maxLocalJobs 1000 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/edraizen/molmimic/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "molmimic",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "molmimic",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "edraizen",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/edraizen/molmimic/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Python requirements\n```\npytorch>=0.4\ntorchvision\npytorchviz\ntnt\nSparseConvNet\nnumpy\nscikit-learn\nBiopython\nseaborn\ntqdm\ndask\npandas\n```\nNon python requirements:\n```\npdb2pqr\napbs\nCNS\nopenbabel\nDSSP\nCX\n```\nAll non-python requirments can be run using docker:\n```\ndocker://edraizen/pdb2pqr:latest\ndocker://edraizen/apbs:latest\ndocker://edraizen/openbabel:latest\ndocker://edraizen/dssp:latest\ndocker://edraizen/cx:latest\n```\n\nToil is a requirment, but cannot be installed autmatically through pip. You must choose which type of cluster you want to use:\n```\npip install toil #:Only local clusters\npip install toil[aws]\npip install toil[gce]\npip install toil[azure]\npip install toil[all]\n```\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 7,
+      "date": "Sun, 26 Dec 2021 22:47:22 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

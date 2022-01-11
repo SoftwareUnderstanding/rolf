@@ -1,0 +1,337 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        0.8714162992508173
+      ],
+      "excerpt": "            + \"  col_16  STRING(MAX)) \\n\" + \" PRIMARY KEY (subject)\")); \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9619086538391723
+      ],
+      "excerpt": "     select t5.student, t4.teacher, t4.course from t4, t5, t1 where t4.course = t5.course and t4.teacher = t1.advisor and t5.student = t1.student \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Quetzal-RDF/quetzal",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2014-12-12T20:09:17Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-15T05:27:37Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9011252655708295
+      ],
+      "excerpt": "SPARQL to SQL translation engine for multiple backends, such as DB2, PostgreSQL and Apache Spark.    \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9914114437500404,
+        0.9982306972465295,
+        0.9683320220795901,
+        0.9236483152200765,
+        0.8490904400983312,
+        0.9972333860325348,
+        0.9952758997105886,
+        0.9908077281762651,
+        0.9954324519771205
+      ],
+      "excerpt": "The goal of Quetzal is to provide researchers with a framework to experiment with various techniques to store and query graph data efficiently.  To this end, we provide 3 modular components that: \n* Store data:  In the current implementation, data is stored in using a schema similar to the one described in SIGMOD 2013 paper.  The schema lays out all outgoing (or incoming) labeled edges of a given vertex based on the analysis of data characteristics to optimize storage for a given dataset.  The goal in the layout is to store the data for a given vertex on a single row in table to optimize for STAR queries which are very common in SPARQL. \n* Compile SPARQL to SQL:  In the current implementation, given a set of statistics about the dataset's characteristics, the compiler can compile SPARQL 1.1 queries into SQL.  The compiler will optimize the order in which it executes the SPARQL query based on statistics of the dataset. \n* Support for SQL on multiple backends:  In the current implementation, we support DB2, PostgreSQL, and Apache Spark.  The first two are useful for workloads that require characteristics normally supported by relational backends (e.g., transactional support), the third targets analytic workloads that might mix graph analytic workloads with declarative query workloads.  \nOverview of Components \nData Layout:  The current implementation uses a row based layout of graph data, such that each vertex's incoming edges or outgoing edges are laid out as much as possible on the same row.  For a detailed set of experiments that examine when this layout is advantageous, see SIGMOD 2013 paper.  Outgoing edges are stored in a table called DPH (direct primary hashtable), and incoming edges are stored in a table called RPH (reverse primary hashtable).  Because RDF can have many thousand properties, dedicating a column per property is not an option (in fact, some datasets will exhaust most database systems limits on the number of columns).  RDF data is sparse though, so each vertex tends to have a small subset of the total number of properties.  The current implementation performs an analysis of which properties co-occur with which others, and uses graph coloring to build a hash function that maps properties to columns.  Properties that co-occur together are typically not assigned to the same row.  If they do get assigned to the same row because a single vertex has several hundred edges to all sorts of properties, then collisions are possible and the schema records this fact, and the SQL is adjusted appropriately.  Note that for multi-valued properties, DPH and RPH record only the existence of the property for a given vertex, actual values require a join with a DS (direct secondary) and RS (reverse secondary) table, respectively. \nSPARQL-SQL compiler:  In the current implementation, this compilation job is done by a class called com.ibm.research.rdf.store.sparql11.planner.Planner, in a method called public Plan plan(Query q, Store store, SPARQLOptimizerStatistics stats).  The goal of the planner is to compile the SPARQL query into SQL, re-ordering the query in order to start with the most selective triples (triples with the least cost), joining it with the second most selective triple based on what becomes available when one evaluates the first triple, and so on.  In doing so, the planner must respect the semantics of SPARQL (e.g., not join two variables that are named the same but are on two separate brances of a UNION).  The Planner employs a greedy algorithm to evaluate what available nodes exist for planning, and which one should be planned first.  AND nodes get collapsed into a single \"region\" of QueryTriple nodes because any triples within an AND node can be targeted first.  Each triple node within an AND can evaluate its cost based on what variables are available, and each node has a notion of what variables it can produce bindings to based on the access method used (e.g., if the access method is DPH, it typically would produce an object variable binding; conversely if the access method is RPH, it would typically produce a subject variable binding).  The cost of producing these bindings is estimated based on the average number of outgoing (DPH) or incoming (RPH) edges in most cases, unless the triple happens to have a popular node which appears in a top K set.  Other complex nodes such as EXISTs, UNION or OPTIONAL nodes evaluate their costs recursively by planning for their subtrees. (See https://github.com/Quetzal-RDF/quetzal/tree/master/doc/QuetzalPlanner.pdf)  The planner then chooses the cheapest node to schedule first.  Once it has chosen a node, the set of available variables has changed, so a new of cost computations are performed to find the next step.  The planner proceeds in this manner till there are no more available nodes to plan.  The output of the planner is com.ibm.research.rdf.store.sparql11.planner.Plan, which is basically a binary plan tree that is composed of AND plan nodes, LEFT JOIN nodes, etc.  This serves as the input for the next step. \nSQL generator:  In the current implementation, the plan serves as input to a number of SQL templates, which get created for every type of node in the plan tree.  The com.ibm.research.rdf.store.sparql11.sqltemplate package contains the templates, which generate SQL modularly per node in the plan tree using common table expressions (CTEs).  The template code is general purpose and keeps track of things such as the specific CTE to node mappings, what external variables need to be projected, which variables should be joined together etc.  The actual job of generating SQL for different backends is accomplished using specialized String Templates from the String Template library.  Example files are com.ibm.research.rdf.store.sparql11.sqltemplate.common.stg which has the templates that are common to all backends. \nFor more information on how to get started, click on the Wiki to this repository \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9934936591460366,
+        0.9994140103715331,
+        0.9942122310386869,
+        0.9967850478922742,
+        0.8118055649777214
+      ],
+      "excerpt": "Storage of graph data on cloud SQL backing stores such as Spanner and BigQuery \nSince the time we worked on Quetzal, a number of cloud databases have emerged that support the complex SQL queries needed to access graph data. One question that we started to ask recently is whether storage of graph data is better suited for a column oriented, nested type data layout such as BigQuery, or whether a row store such as Spanner is better suited for storage of graph data.  There are tradeoffs to each, and this is by no means an exhaustive comparison of the two different approaches, but we performed some very initial experiments on the following layout on BigQuery versus Spanner for a simple graph query which is not just a 1 hop neighborhood of a node, and we note the rather interesting results here. \n* The data and the query:  The graph data are generated from the Lehigh University Benchmark (LUBM) LUBM which has a set of students taking courses at a university, and they have advisors.  The data is sparse, and many entities have 1->many edges.  The query is query 9 from that benchmark, which is to find students taking courses taught by their advisors.  Students in that graph take many courses, and have a single advisor.  Each advisor teaches many courses.  And the query asks to find the 'triangle' between them, which is to specify which students take a class that is taught by their advisor.  The graph has 1 billion triples in it, which translates to ~174M rows in an entity oriented store, assuming that 1->many edges such as taking a course, or teaching a course are represented in a single row using arrays or nested data structures.  The dataset is about 79G when written as a JSON file. \n* The layout:  Both Spanner and BigQuery provide support for nested data.  Following the entity oriented view of data in Quetzal, the data model is that of a 'subject' or entity, with various edge types mapped to distinct columns. Because BigQuery is ideal for storing columnar, sparse data, we used a 1-1 mapping of each edge type to columns. Furthermore, we did not actually need a reverse mapping since BigQuery has no indexes (every query is a scan).  Instead, it exploits the fact that only specific columns will ever be invoked in a given query. We maintained the same schema for Spanner just to ensure we had an apples to apples comparison.  The layout is therefore like just the DPH table in the SIGMOD 2013 paper, with the one change that we did not separate out the many valued edges into a separate table.  We used Spanner and BigQuery's support for array types to store multi valued predicates in the same column.  Note that Spanner also supports interleaving rows between the two tables which we could have used to support multi valued predicates but we did not do so in this first experiment.  All the code is checked into the spanner-loader and bigquery-loader directories. \nHere are the mappings of edge types to column names in LUBM: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9816596766915042
+      ],
+      "excerpt": "* Here is the schema for all the edges in BigQuery for LUBM: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.934884700713922
+      ],
+      "excerpt": "Here is the corresponding schema for Spanner, written as Java code: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869360466642413,
+        0.9567588029116127,
+        0.8196452478584549,
+        0.802715363343771,
+        0.802715363343771
+      ],
+      "excerpt": " * And now for the queries.  BigQuery supports common table expressions which were crucial in providing a nice abstraction to construct complex graph queries.  Here is the query for BigQuery: \nwith  \n     t1 as (select subject as student, col_13 as advisor from lubm.DPH where col_13 is not null), \n     t2 as (select subject as student, col_14 as course from lubm.DPH where col_14 is not null), \n     t3 as (select subject as teacher, col_7 as course from lubm.DPH where col_7 is not null), \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "SPARQL to SQL translation engine for multiple backends, such as DB2, PostgreSQL and Apache Spark",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Quetzal-RDF/quetzal/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 14,
+      "date": "Mon, 20 Dec 2021 14:11:45 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Quetzal-RDF/quetzal/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Quetzal-RDF/quetzal",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/db2/Dockerfile",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/postgresql/Dockerfile",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/Quetzal-RDF/quetzal/tree/master/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasExecutableNotebook": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/DrugPairGOSimilarity/R/SimilarityServices.ipynb"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/bulk_load.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/stacm3-xiv-db-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/pasta-dev-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/setup-schema-experiments.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-sp2b-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/test.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/helix1-lubm-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/randomSample.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/sl-rational-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-lubm-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-dbp-pg-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/loadFileToNTriples.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/check_line.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/run-query.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/helix1-sp2b-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/stringLengthDistribution.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/run-load.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/replaceWithPrefixes.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/rdfload.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/sl-lubm-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/hiveDeleteKB.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/pawk.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/min-1-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/check-mapping.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/load-setup.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-lubm-pg-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/DropRDFStore.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/runJUnitTest.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/load-load-files.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/stacm3-tms-db-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/sample-db-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/helix1-bsbm-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/run-dir.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/sl-db-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/build-load-files.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/flatten_predicate.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/run-stats.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-sp2b-pg-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/check_sets.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/fix-escapes-for-ntriples.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/triple-pawk.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/rc2-db-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/fix-dbpedia-quotes.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/helix1-fb-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/slssd-dbp-cfg.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/scripts/run-test.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/src/com/ibm/research/proppaths/db2graphTest.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/src/com/ibm/research/proppaths/db2graph.all.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/dockerEnvt.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/db2/db2Envt.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/db2/runLoadDB2.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/db2/run-dir.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/db2/createDockerImage.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/postgresql/run-dir.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/postgresql/postgresEnvt.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/postgresql/runLoadPostgres.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/runLoadSpark.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/run-dir.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/sparkEnvt.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/files/init.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/files/beeline.sh",
+      "https://raw.githubusercontent.com/Quetzal-RDF/quetzal/master/com.ibm.research.quetzal.core/docker/spark/files/start.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.9594234620598057,
+        0.9771725371200778,
+        0.9874367952755558,
+        0.8650195066909437
+      ],
+      "excerpt": "Install and build issues \nIf you are building from source, get the following: \ngit clone https://github.com/themadcreator/rabinfingerprint and build using maven. \n* Also install the latest JDBC driver from: https://cloud.google.com/bigquery/partners/simba-drivers/#current_jdbc_driver_releases_1151005 and drop it into lib to compile. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/Quetzal-RDF/quetzal/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Java",
+      "GAP",
+      "SQLPL",
+      "Awk",
+      "Shell",
+      "Python",
+      "Jupyter Notebook",
+      "Dockerfile",
+      "R",
+      "PLpgSQL",
+      "Batchfile",
+      "Ruby"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Eclipse Public License 2.0",
+      "url": "https://api.github.com/licenses/epl-2.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Eclipse Public License - v 1.0\\n\\nTHE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE PUBLIC\\nLICENSE (\"AGREEMENT\"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM\\nCONSTITUTES RECIPIENT\\'S ACCEPTANCE OF THIS AGREEMENT.\\n\\n1. DEFINITIONS\\n\\n\"Contribution\" means:\\n\\na) in the case of the initial Contributor, the initial code and documentation\\n   distributed under this Agreement, and\\nb) in the case of each subsequent Contributor:\\n    i) changes to the Program, and\\n   ii) additions to the Program;\\n\\n   where such changes and/or additions to the Program originate from and are\\n   distributed by that particular Contributor. A Contribution \\'originates\\'\\n   from a Contributor if it was added to the Program by such Contributor\\n   itself or anyone acting on such Contributor\\'s behalf. Contributions do not\\n   include additions to the Program which: (i) are separate modules of\\n   software distributed in conjunction with the Program under their own\\n   license agreement, and (ii) are not derivative works of the Program.\\n\\n\"Contributor\" means any person or entity that distributes the Program.\\n\\n\"Licensed Patents\" mean patent claims licensable by a Contributor which are\\nnecessarily infringed by the use or sale of its Contribution alone or when\\ncombined with the Program.\\n\\n\"Program\" means the Contributions distributed in accordance with this\\nAgreement.\\n\\n\"Recipient\" means anyone who receives the Program under this Agreement,\\nincluding all Contributors.\\n\\n2. GRANT OF RIGHTS\\n  a) Subject to the terms of this Agreement, each Contributor hereby grants\\n     Recipient a non-exclusive, worldwide, royalty-free copyright license to\\n     reproduce, prepare derivative works of, publicly display, publicly\\n     perform, distribute and sublicense the Contribution of such Contributor,\\n     if any, and such derivative works, in source code and object code form.\\n  b) Subject to the terms of this Agreement, each Contributor hereby grants\\n     Recipient a non-exclusive, worldwide, royalty-free patent license under\\n     Licensed Patents to make, use, sell, offer to sell, import and otherwise\\n     transfer the Contribution of such Contributor, if any, in source code and\\n     object code form. This patent license shall apply to the combination of\\n     the Contribution and the Program if, at the time the Contribution is\\n     added by the Contributor, such addition of the Contribution causes such\\n     combination to be covered by the Licensed Patents. The patent license\\n     shall not apply to any other combinations which include the Contribution.\\n     No hardware per se is licensed hereunder.\\n  c) Recipient understands that although each Contributor grants the licenses\\n     to its Contributions set forth herein, no assurances are provided by any\\n     Contributor that the Program does not infringe the patent or other\\n     intellectual property rights of any other entity. Each Contributor\\n     disclaims any liability to Recipient for claims brought by any other\\n     entity based on infringement of intellectual property rights or\\n     otherwise. As a condition to exercising the rights and licenses granted\\n     hereunder, each Recipient hereby assumes sole responsibility to secure\\n     any other intellectual property rights needed, if any. For example, if a\\n     third party patent license is required to allow Recipient to distribute\\n     the Program, it is Recipient\\'s responsibility to acquire that license\\n     before distributing the Program.\\n  d) Each Contributor represents that to its knowledge it has sufficient\\n     copyright rights in its Contribution, if any, to grant the copyright\\n     license set forth in this Agreement.\\n\\n3. REQUIREMENTS\\n\\nA Contributor may choose to distribute the Program in object code form under\\nits own license agreement, provided that:\\n\\n  a) it complies with the terms and conditions of this Agreement; and\\n  b) its license agreement:\\n      i) effectively disclaims on behalf of all Contributors all warranties\\n         and conditions, express and implied, including warranties or\\n         conditions of title and non-infringement, and implied warranties or\\n         conditions of merchantability and fitness for a particular purpose;\\n     ii) effectively excludes on behalf of all Contributors all liability for\\n         damages, including direct, indirect, special, incidental and\\n         consequential damages, such as lost profits;\\n    iii) states that any provisions which differ from this Agreement are\\n         offered by that Contributor alone and not by any other party; and\\n     iv) states that source code for the Program is available from such\\n         Contributor, and informs licensees how to obtain it in a reasonable\\n         manner on or through a medium customarily used for software exchange.\\n\\nWhen the Program is made available in source code form:\\n\\n  a) it must be made available under this Agreement; and\\n  b) a copy of this Agreement must be included with each copy of the Program.\\n     Contributors may not remove or alter any copyright notices contained\\n     within the Program.\\n\\nEach Contributor must identify itself as the originator of its Contribution,\\nif\\nany, in a manner that reasonably allows subsequent Recipients to identify the\\noriginator of the Contribution.\\n\\n4. COMMERCIAL DISTRIBUTION\\n\\nCommercial distributors of software may accept certain responsibilities with\\nrespect to end users, business partners and the like. While this license is\\nintended to facilitate the commercial use of the Program, the Contributor who\\nincludes the Program in a commercial product offering should do so in a manner\\nwhich does not create potential liability for other Contributors. Therefore,\\nif a Contributor includes the Program in a commercial product offering, such\\nContributor (\"Commercial Contributor\") hereby agrees to defend and indemnify\\nevery other Contributor (\"Indemnified Contributor\") against any losses,\\ndamages and costs (collectively \"Losses\") arising from claims, lawsuits and\\nother legal actions brought by a third party against the Indemnified\\nContributor to the extent caused by the acts or omissions of such Commercial\\nContributor in connection with its distribution of the Program in a commercial\\nproduct offering. The obligations in this section do not apply to any claims\\nor Losses relating to any actual or alleged intellectual property\\ninfringement. In order to qualify, an Indemnified Contributor must:\\na) promptly notify the Commercial Contributor in writing of such claim, and\\nb) allow the Commercial Contributor to control, and cooperate with the\\nCommercial Contributor in, the defense and any related settlement\\nnegotiations. The Indemnified Contributor may participate in any such claim at\\nits own expense.\\n\\nFor example, a Contributor might include the Program in a commercial product\\noffering, Product X. That Contributor is then a Commercial Contributor. If\\nthat Commercial Contributor then makes performance claims, or offers\\nwarranties related to Product X, those performance claims and warranties are\\nsuch Commercial Contributor\\'s responsibility alone. Under this section, the\\nCommercial Contributor would have to defend claims against the other\\nContributors related to those performance claims and warranties, and if a\\ncourt requires any other Contributor to pay any damages as a result, the\\nCommercial Contributor must pay those damages.\\n\\n5. NO WARRANTY\\n\\nEXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE PROGRAM IS PROVIDED ON AN\\n\"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR\\nIMPLIED INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE,\\nNON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. Each\\nRecipient is solely responsible for determining the appropriateness of using\\nand distributing the Program and assumes all risks associated with its\\nexercise of rights under this Agreement , including but not limited to the\\nrisks and costs of program errors, compliance with applicable laws, damage to\\nor loss of data, programs or equipment, and unavailability or interruption of\\noperations.\\n\\n6. DISCLAIMER OF LIABILITY\\n\\nEXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER RECIPIENT NOR ANY\\nCONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL,\\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING WITHOUT LIMITATION\\nLOST PROFITS), HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\\nARISING IN ANY WAY OUT OF THE USE OR DISTRIBUTION OF THE PROGRAM OR THE\\nEXERCISE OF ANY RIGHTS GRANTED HEREUNDER, EVEN IF ADVISED OF THE POSSIBILITY\\nOF SUCH DAMAGES.\\n\\n7. GENERAL\\n\\nIf any provision of this Agreement is invalid or unenforceable under\\napplicable law, it shall not affect the validity or enforceability of the\\nremainder of the terms of this Agreement, and without further action by the\\nparties hereto, such provision shall be reformed to the minimum extent\\nnecessary to make such provision valid and enforceable.\\n\\nIf Recipient institutes patent litigation against any entity (including a\\ncross-claim or counterclaim in a lawsuit) alleging that the Program itself\\n(excluding combinations of the Program with other software or hardware)\\ninfringes such Recipient\\'s patent(s), then such Recipient\\'s rights granted\\nunder Section 2(b) shall terminate as of the date such litigation is filed.\\n\\nAll Recipient\\'s rights under this Agreement shall terminate if it fails to\\ncomply with any of the material terms or conditions of this Agreement and does\\nnot cure such failure in a reasonable period of time after becoming aware of\\nsuch noncompliance. If all Recipient\\'s rights under this Agreement terminate,\\nRecipient agrees to cease use and distribution of the Program as soon as\\nreasonably practicable. However, Recipient\\'s obligations under this Agreement\\nand any licenses granted by Recipient relating to the Program shall continue\\nand survive.\\n\\nEveryone is permitted to copy and distribute copies of this Agreement, but in\\norder to avoid inconsistency the Agreement is copyrighted and may only be\\nmodified in the following manner. The Agreement Steward reserves the right to\\npublish new versions (including revisions) of this Agreement from time to\\ntime. No one other than the Agreement Steward has the right to modify this\\nAgreement. The Eclipse Foundation is the initial Agreement Steward. The\\nEclipse Foundation may assign the responsibility to serve as the Agreement\\nSteward to a suitable separate entity. Each new version of the Agreement will\\nbe given a distinguishing version number. The Program (including\\nContributions) may always be distributed subject to the version of the\\nAgreement under which it was received. In addition, after a new version of the\\nAgreement is published, Contributor may elect to distribute the Program\\n(including its Contributions) under the new version. Except as expressly\\nstated in Sections 2(a) and 2(b) above, Recipient receives no rights or\\nlicenses to the intellectual property of any Contributor under this Agreement,\\nwhether expressly, by implication, estoppel or otherwise. All rights in the\\nProgram not expressly granted under this Agreement are reserved.\\n\\nThis Agreement is governed by the laws of the State of New York and the\\nintellectual property laws of the United States of America. No party to this\\nAgreement will bring a legal action under this Agreement more than one year\\nafter the cause of action arose. Each party waives its rights to a jury trial in\\nany resulting litigation.\\n\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Quetzal (*Que*ry Tran*z*l*a*tion *L*ibraries)",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "quetzal",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Quetzal-RDF",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/Quetzal-RDF/quetzal/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 75,
+      "date": "Mon, 20 Dec 2021 14:11:45 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

@@ -1,0 +1,715 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1512.03385",
+      "https://arxiv.org/abs/1509.04874",
+      "https://arxiv.org/abs/1409.4842",
+      "https://arxiv.org/abs/1512.02325"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.8665716475375693
+      ],
+      "excerpt": "If needed: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8444342525991423
+      ],
+      "excerpt": "Let us continue our experiment.  \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jimheaton/Ultra96_ML_Embedded_Workshop",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-03-05T01:18:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2020-11-18T06:42:56Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This lab is based on the XDF 2018  Machine learning for Embedded Workshop. It has been modified to run on the Ultra96 board.\n\nDuring this session you will gain hands-on experience with the Xlinx DNNDK, and learn how to quantize, compile and deploy pre-trained network models to Xilinx embedded SoC platforms. \n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8698949587553885
+      ],
+      "excerpt": "Elements of DNNDK: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9955034813231483,
+        0.9868083523431477,
+        0.9563324206076468,
+        0.9814353806453495
+      ],
+      "excerpt": "DNNDK is a tool suite which is designed specifically to deploy deep neural networks(DNNs) to Xilinx FPGA platforms with high efficiency and productivity. \nDNNDK is comprised of quantizer, compiler, assembler, linker, and other useful utilities such as profiler, simulator and run-time libraries to increase the productivity of developing DNN applications with Xilinx embedded platforms. \nAn embedded DNN application consists of a hybrid executable including Xilinx Deep-learning Processing Unit (DPU) kernels in the programmable logic(PL) region and CPU kernels in the processor(PS) of Xilinx embedded SoC.  \nDNNDK provides high-level user-space APIs in C++ to hide the low-level details for machine learning algorithm and application developers. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.964188008300316,
+        0.8386479342186246,
+        0.8376451361404003,
+        0.8912447879100709,
+        0.9434215565795507
+      ],
+      "excerpt": "Experiencing DNNDK with Resnet50: Let us start with a classical image classification example. In this module you experienced the quantization, compilation and deployment of pretrained Resnet50 with DNNDK for Xilinx embedded platform \nTry face detection with Densebox: Let us try a live-I/O machine learning example which is more interactive. You will build a real-time face detection application with Densebox network using a USB camera. \nWrap-up and next steps: Explore next steps to continue your DNNDK experience after the machine learning for embedded Workshop. \nFor your convenience, all the modules of this Developer Workshop will use the scripts and datasets which have been prepared for you. \nIn this module you will have a hands-on experience of the Xilinx DNNDK to quantize, compile,and deploy to the Ultra96 board with a pre-trained Resnet50 network.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8895301618939125
+      ],
+      "excerpt": "1. Quantization to generate the fixed-point network model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8829159021593068
+      ],
+      "excerpt": "4. Hybrid compilation to produce the executable for Ultra96 board \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.822840279860336,
+        0.8929450301865132
+      ],
+      "excerpt": "At the bottom of float.prototxt, two 'Accuracy' type layers have been added to compute top-1 and top-5 accuracy. \ndecent is used to convert a pre-trained floating point (FP32) network model to a fix-point (INT8) model without hurting the accuracy. Using 8-bit calculations help your models run faster and use less power. This is especially important for many embedded applications that can't run floating point code efficiently. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9461761861233505
+      ],
+      "excerpt": "The command above quantizes the float-point model and automatically checks the accuracy of the quantized model. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8853876989437779,
+        0.8443428484004492,
+        0.9922939593594357,
+        0.9339572895517414,
+        0.8335039043631646,
+        0.9734295305327871,
+        0.8920753286184617
+      ],
+      "excerpt": "It takes about 4 minutes to complete. \nDuring the execution, you can see some output information scrolling on the screen. The figure below shows how DNNDK uses calibration technique to measure the dynamic range of each layer without the time-consuming retrain process.  \nAt the end, it checks the accuracy of the quantized model and generates the deploy.prototxt and deploy.caffemodel which are the input to the next step.  \nThis concludes the quantization process. We successfully quantized the float-point Resnet50 model to the fix-point model and achieved with a good accuracy (top-1 0.736 top-5 0.906) vs float-point accuracy (top-1 0.744, top-5 0.914). The decent quantization is simple, fast and accurate.  \nLet us go to the next step. \nIn this step, you will use dnnc, Deep Neural Network Compiler, to compile the quantized fixed-point model into DPU kernels which are ELF format object files containing the DPU instructions and parameters for the network model. Please note DPU is Xilinx Deep Learning IP core for Xilinx Embedded devices. \nThe DNNDK compilation has two phases: the 1st phase (run on AWS) uses dnnc to generate DPU kernel ELF files; the 2nd phase (run on the Ultra96 board), which is the hybrid compilation. In hyrbrid compilation all the DPU and CPU ELF object files and other necessary libraries (including DNNDK libraries) are linked together to generate the final executable.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9957574541303784
+      ],
+      "excerpt": "In this case, we target the Ultra96 platform which uses Cortex-A53 based ZU3EG device, so the option \u201carm64\u201d is used and the DPU IP core option \u201c1152FA\u201d is chosen for dnnc. The details of the DPU IP core are beyond the scope of this workshop. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9606112345434451
+      ],
+      "excerpt": "dpu_resnet50_0.elf is generated in dnnc_output folder, which are the output of dnnc. It corresponds to the DPU kernel described previously. This elf file will be used in the next phase to generate the final executables. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8965340327188827,
+        0.935392446650595
+      ],
+      "excerpt": "The Ultra96 is used as the hardware platform for this workshop. A 16GB SD card which holds the boot image and necessary demo files has been provided as the boot device.  \nA DP monitor is required as the display. In addition the Avnet USB to JTAG adaptor board is required for a serial port connection. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9307203313037182,
+        0.8291571846160776,
+        0.9321188749984789
+      ],
+      "excerpt": "To turn on the board:  press the power button. \nTo turn off the board: press and hold the power button for 10 seconds. \nInsert the SD card in the slot and power on \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8382051977908797
+      ],
+      "excerpt": "Now we will run the Dsight Profiler to see the effective utilization of the DPU \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8545657564083625,
+        0.89574150821986
+      ],
+      "excerpt": "Power off the Ultra96 and remove the SD Card and insert in your host machine \nCopy the html to your host machine and open up in a web browser \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9872988140035557,
+        0.8218038065056597,
+        0.8680190091102505
+      ],
+      "excerpt": "The average utilization (percentage of time the DPU is performing numerical ops) of the DPU should be about 49%. This number is quite good, when comparing with GPUs.  \nGPUs typically have lower utilization below 20% for real time (batch size 1) inference applications like we have have just run. \nIt is easy to build a live-I/O embedded ML application with DNNDK. Now let us try to do real-time face detection with Densebox (https://arxiv.org/abs/1509.04874) using USB camera. Densebox is another popular object detection network with fully convolutional framework. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8739331583392914
+      ],
+      "excerpt": "The content is shown below: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8277310191902858,
+        0.8611246902544202,
+        0.9392321971464788,
+        0.8426260214522182,
+        0.9905322124851829
+      ],
+      "excerpt": "Use dnnc_densebox.sh to compile the network into DPU kernel ELF file, the content of script is as follow: \nThe kernel information is as follow: \nYou have successfully completed all the modules of Machine Learning for Embedded Workshop. \nYou started a pre-configured EC2 P2 instance and connected to it using a remote desktop client \nYou experienced the quantization, compilation and deployment of pretrained Resnet50 with DNNDK for Xilinx embedded platform \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8081350560018346
+      ],
+      "excerpt": "You built a real-time face detection demo with Densebox network using USB camera as input \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9227693115550613
+      ],
+      "excerpt": "Otherwise stop the AWS instance. It is always important to always stop the AWS EC2 instances when you are done using them to avoid unwanted charges. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9283593195547335
+      ],
+      "excerpt": "After about 1 minute please refresh your browser and verify that the instance state is stopped: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8895301618939125
+      ],
+      "excerpt": "1. Quantization to generate the fixed-point network model \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8829159021593068
+      ],
+      "excerpt": "Hybrid compilation to produce the executable for Ultra96 board \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9948081450421092,
+        0.8312625662604725
+      ],
+      "excerpt": "It takes about 4 minutes to complete. At the end, it checks the accuracy of the quantized model and generates the deploy.prototxt and deploy.caffemodel which are the input to the next step. \nIn this step, use dnnc to compile the quantized fixed-point model into DPU kernels ELF files. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8284364254501432
+      ],
+      "excerpt": "dpu_inception_v1_0.elf is generated in dnnc_output folder. It corresponds to one DPU kernel described above. The elf file and kernel/input/output node names will be used in the next step to generate the final executables. We have dumped the kernel info in the ~/dnndk/Ultra96/inception_v1/kernel.info log file for the later use. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9020529010962219,
+        0.9938057323813051,
+        0.8969909587680112
+      ],
+      "excerpt": "We need you to finish the main.cc for this design. It is located in ~/dnndk/Ultra96/samples/inception_v1/src  \nPlease refer to main.cc and Makefile of the resnet50 project for an example of how to finish it. \nCopy this file to your host machine for ease of editing: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8765627404822376
+      ],
+      "excerpt": "The missing elements of main.cc and the Makefile which you need to finish are shown in the following figures. Don\u2019t worry if your code is incorrect. It will not cause any unrecoverable crashes. The message like undefined kernel or node will be displayed when you run it on the board. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8858573244721752
+      ],
+      "excerpt": "After you have completed the coding, you should have a better understanding of how to write application code with DNNDK APIs and how to use the generated DPU kernels in the compilation process. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9063836893902766
+      ],
+      "excerpt": "You are now done with the AWS instance for the rest of this lab. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8375369336637754,
+        0.8080157810910714
+      ],
+      "excerpt": "Copy the DPU kernel elf file and main.cc to the Ultra96 with the following: \nPower off the Ultra96 board remove the SD Card, and insert in your host machine. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8314722560120228
+      ],
+      "excerpt": "Otherwise, please stop the AWS instance. If youIt is always important to always stop the AWS EC2 instances when you are done using them to avoid unwanted charges. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9283593195547335
+      ],
+      "excerpt": "After about 1 minute please refresh your browser and verify that the instance state is stopped: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8440814395063838
+      ],
+      "excerpt": "Power off the Ultra96, remove the SD Card and insert it in your host machine. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8921031976262797
+      ],
+      "excerpt": "Reinsert the SD Card into Ultra96 and power back on. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8314722560120228
+      ],
+      "excerpt": "Otherwise, please stop the AWS instance. If youIt is always important to always stop the AWS EC2 instances when you are done using them to avoid unwanted charges. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9283593195547335
+      ],
+      "excerpt": "After about 1 minute please refresh your browser and verify that the instance state is stopped: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jimheaton/Ultra96_ML_Embedded_Workshop/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 4,
+      "date": "Wed, 29 Dec 2021 21:59:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jimheaton/Ultra96_ML_Embedded_Workshop/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jimheaton/Ultra96_ML_Embedded_Workshop",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        0.8419209381546623
+      ],
+      "excerpt": "Connecting to your P2 instance: You will start an EC2 P2 instance connect to it using SSH. You can either use a terminal program like PuTTy, or MobaXterm. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9523553932808112
+      ],
+      "excerpt": "You will go through the following steps, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd ~/dnndk/Ultra96/resnet50 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8388093766303126,
+        0.8712623316920368
+      ],
+      "excerpt": "decent_resnet50.sh: script for Resnet50 quantization \ndnnc_resnet50.sh: script for Resnet50 compilation \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8905948130075204
+      ],
+      "excerpt": "We've created a script decent_resnet50.sh for you.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.866524803984103
+      ],
+      "excerpt": "A script dnnc_resnet50.sh has been created.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd dnnc_output \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8815765932635824
+      ],
+      "excerpt": "Prepare hardware environment: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869968786516774
+      ],
+      "excerpt": "You should now see Linux booting from the serial terminal. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8724929406198045
+      ],
+      "excerpt": "Rerun the resent50 application. You will note that execution has now slowed down due to the profiling.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8907050749760864
+      ],
+      "excerpt": "Now you can copy the html file to your host using the commands: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8322178863063514
+      ],
+      "excerpt": "Helpful Hint: you may want to minimize you serial port terminal to the Ultra96 to avoid the confusion of working in the wrong terminal. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9906248903846466
+      ],
+      "excerpt": "cd ~/dnndk/Ultra96/densebox \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9201597962558999
+      ],
+      "excerpt": "To take your experience further, we recommend the following next steps: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9523553932808112
+      ],
+      "excerpt": "You will go through the following steps, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9758500477472091,
+        0.9906248903846466,
+        0.9023697225149864
+      ],
+      "excerpt": "On your AWS terminal run decent with the following commands \n cd ~/dnndk/Ultra96/inception_v1 \n./decent_ inception_v1.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9023697225149864
+      ],
+      "excerpt": "./dnnc_ inception_v1.sh \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8053475808598407
+      ],
+      "excerpt": "The missing elements of main.cc and the Makefile which you need to finish are shown in the following figures. Don\u2019t worry if your code is incorrect. It will not cause any unrecoverable crashes. The message like undefined kernel or node will be displayed when you run it on the board. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8257962706320793
+      ],
+      "excerpt": "If you would like to try the Going Further with SSD you can go directly to that section. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9201597962558999
+      ],
+      "excerpt": "To take your experience further, we recommend the following next steps: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8811336480177817
+      ],
+      "excerpt": "If you would like to try the SSD Lab you can go to that section. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9201597962558999
+      ],
+      "excerpt": "To take your experience further, we recommend the following next steps: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8442249551907908
+      ],
+      "excerpt": "float.caffemodel: pre-trained Caffe float-point (FP32) weight file \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8417532036538499
+      ],
+      "excerpt": "decent_output: the output folder of Resnet50 quantization \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "Run:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "Run dnnc: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8338194880161297
+      ],
+      "excerpt": "A file dpu_trace_[PID].prof will be generated. Next generate a html file using the command: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8008331685760428
+      ],
+      "excerpt": "Run dnnc \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.832663069693776
+      ],
+      "excerpt": "dpu_inception_v1_0.elf is generated in dnnc_output folder. It corresponds to one DPU kernel described above. The elf file and kernel/input/output node names will be used in the next step to generate the final executables. We have dumped the kernel info in the ~/dnndk/Ultra96/inception_v1/kernel.info log file for the later use. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8563968600699917
+      ],
+      "excerpt": "main.cc Function \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8991834128995857
+      ],
+      "excerpt": "Copy the completed main.cc to the Ultra96 board at ~/dnndk/Ultra96/samples/inception_v1/src \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jimheaton/Ultra96_ML_Embedded_Workshop/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "XDF 2018 Workshop Machine Learning for Embedded on the Ultra96",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Ultra96_ML_Embedded_Workshop",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jimheaton",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jimheaton/Ultra96_ML_Embedded_Workshop/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    Power off the Ultra96, and remove the SD card, and insert it in your host machine \n    Copy the dpu_resnet50_0.elf you downloaded from the AWS instance to the SD card \n    Insert the SD card and power back on the Ultra96.\n  \nThe sd card should automatically be mounted after linux boots. Copy the dpu_resnet50_0.elf to the example directory with the following command:\n\n    cp -f /media/card/dpu_resnet50_0.elf /root/Ultra96/samples/resnet50/model/\n\n**Note: If you are unable to copy the files due limitation on your machine we have already copied an example to the model dir for you.**\n\nBuild the final executable with the following commands:\n  \n    cd /root/Ultra96/samples/resnet50\n    make\n\nSet the display envar for the remote display\n\n    \n\nExecute the resnet50 executable:\n   \n    ./restnet50\t\n\n![Happy DOg](./images/happy_dog.png)\n\nAfter the completion of this session, you have just learned how to: \n\n1. Quantize the pre-trained float-point network model to fixed-point quantized model\r\n\r\n\n2. Check the network accuracy after the quantization\r\n\r\n3. Compile the quantized model to generate ELF object files for DPU kernels\r\n\n4. Have a basic understanding of programming main.cc with high-level DNNDK APIs\r\n\n5. Make the hybrid compilation to generate the hybrid executables which runs on Xilinx embedded platform\r\n\n6. Run the executables on Xilinx embedded platform to see the visual output\r\n\r\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "    In the MobaXterm Gui browse to the dir /home/ubuntu/dnndk/Ultra96/densebox/dnnc_output/\n    Right click on the file dpu_densebox.elf and select download\n    Copy the elf file to the SD card, insert the SD Card into the Ultra96 and power back on.\n\nNow we will go back to working on the Ultra96 board serial port terminal:\n\n    cp -f /media/card/dpu_densebox.elf /root/Ultra96/samples/face_detection/model/\n\n**Note: If you are unable to copy the files due a limitation on your machine we have already copied an example to the model dir for you.**\n\nRun Hybrid compilation:\n \n\n    cd  /root/Ultra96/samples/face_detection\n    make \n\nRun the executable:\n\n    ./face_detection\n\nYou will see faces detected in real-time with bounding boxes like below:\n\n![DenseBox Faces](./images/densebox_faces.jpg)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Then from the Ultra96 Linux prompt use the following commands:\n  \n     cp /media/card/dpu_inception_v1_0.elf /root/Ultra96/samples/inception_v1/model/\n     cp /media/card/main.cc  /root/Ultra96/samples/inception_v1/src/\n\n**Note: If you are unable to copy the files due a limitation on your machine we have already copied an example to the model and src dirs for you.**\n\n\n     cd /root/Ultra96/samples/inception_v1\n     make\n\nThe final executable file is generated in same folder. \n\n    ./inception_v1\n\nYou will see the following display with image and the top-5 probability.\n\n![Inception Results](./images/inception_results.png)\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Then from the Ultra96 Linux prompt use the following commands:\n  \n     cp /media/card/dpu_ssd.elf.elf /root/Ultra96/samples/ssd/model/\n\n**Note: If you are unable to copy the file due a limitation on your machine we have already copied an example to the model  dir for you.**\n\n     cd /root/Ultra96/samples/ssd\n     make\n\nTo run the application use:\n\n     ./video_analysis vido/structure.mp4\n\n\nYou will see the following display with bounding box around different classes of objects.\nThe input image size is 480x360 and we can achieve 28 fps.\n\n![Structure_MP4](./images/structure_mp4.png)\n\nWe are successfully running a modern object detection network to detect the vehicles, motorcycles and pedestrians in the city traffic in real time on an embedded platform. This is done within a few minutes with the help of DNNDK.\n\nAfter completing this section, you have:\n\n1. Become more familiar with the DNNDK end-to-end flow by repeating the steps\n2. Be able to build a real-time multi-class object detection demo on Xilinx embedded platform in minutes.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 6,
+      "date": "Wed, 29 Dec 2021 21:59:58 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You should have received the following:\n\nA piece of paper which has the user name which will be a userxxx (for example user6)\r\n\r\nA link to the login to AWS\r\n\r\nA password \r\n\nIf you don\u2019t have it, please raise your hand and ask for help.\n\r\n    Login to AWS, and make sure you have the correct user number in your link.\r\n\r\n   \nFor example, if you user name is user6, the the link should be something similar **(note your region might be different from us-west)** to:\n**https://console.aws.amazon.com/ec2/v2/home?region=us-west-2#Instances:tag:Name=user6;sort=tag:Name**\n    \nUse the following login information\n\n\n    Account ID: xilinx-aws-f1-developer-labs\n    IAM User name: userxxx (for example: user6)\n    Password: (will be provided)\n\n\n![AWS Login](./images/AWS_login.png)\n    \n\n  \r\nAfter logging in you should see an instance corresponding to **your provided user name**. If you see a different user name, you have logged into the wrong machine, and you need to logout and login with the correct link and user name.\r\n\n    Select the instance associated with your user name\n    click __*Actions > Instance State > Start*__. \n    Then click \"Yes, start\" button in the Start Instances dialog. \n   \n**AWS Instances:**\n![AWS Login](./images/AWS_Instances.png)\n\n\nThe startup time is about 10 ~20 seconds and you need to refresh the browser to see the status update. You will see the instance state becomes running and there is an IPv4 public IP address associated with it. Later, you will use this IP address for SSH or Remote Desktop Connection to access the working directory. \n   \n**AWS Instance Runing:**\n![AWS Login](./images/AWS_Instance_Running.png)\n\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Please use **MobaXterm** as your SSH client. We will taking advantage of its easy ability to copy files back to you host machine.\n\nIf you do not have **MobaXterm** installed, you can download it from:https://mobaxterm.mobatek.net/download.html\n\n    In the SSH client start a new SSH sessionm, use the IPv4 Public IP of your AWS instance and ubuntu for the host name\n    For the password use the same as the AWS login\n\n\n![AWS Login](./images/MobaXterm.PNG)\n\nYou should now have a terminal prompt\n\n\n![AWS Login](./images/ssh_login.png)\n\n\n\n\nGo to the the working directory \n\n    cd ~/dnndk/Ultra96\n    ls\n\n![RDP Login](./images/xrdp_console.png)\n\nYou can see there are six folders which are respectively,\n\n- densebox: lab files for face detection with Densebox\n- inception_v1: lab files for Inception V1(Googletnet)\n- resnet50: lab files for resnet50\n- ssd: lab files for SSD\r\n- samples: C code source for incecption_v1\r\n\r\nIn today's lab we will be working with the resnet50 and densbox examples.\n\n\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Reminder: for the rest of this section you will be using your terminal connection to the Ultra96 **NOT** the terminal to the AWS instance.\n\n**Helpful Hint:** You may want to close of minimize you SSH terminal to avoid the confusion of typing in the wrong terminal.\n\nTo simplify the machine learning application programming, high-level DNNDK APIs written in C++ are provided for developers to write a main.cc file. The main.cc is in charge of DPU kernel management, CPU kernel implementation as well as the interaction between kernels and the system such as video peripherals. \n\nmain.cc file for Resnet50 is on the target board at /root/Ultra96/samples/resnet50/src/\n\n    To examine this file you can run vi from on the terminal console\n    Or for ease of viweing you can download a copy of the file from github repo: \n    https://github.com/jimheaton/Ultra96_ML_Embedded_Workshopsrc/resnet50/main.cc to view on an editor on your host machine.\n    \n\nExamine the code in main.cc to get familiar with DNNDK APIs. The following shows a code snippet of function main() in main.cc:\n\n![MAIN.CC](./images/resnet_main_cc.png)\n    \nThe main operations are: \n\n* Call __dpuOpen()__ to open DPU device\r\n\n* Call __dpuLoadKernel()__ to load DPU kernel resnet50_0 & resnet50_2 generated by dnnc\r\n\n* Call __dpuCreateTask()__ to create task for DPU kernel resnet50_0 & resnet50_2\r\n\n* Call __runResnet50()__ to do image classification \r\n\n* Call __dpuDestoryTask()__ to destroy Task and free its resources\r\n\n* Call __dpuDestroyKernel()__ to destroy Kernel and free its resources\r\n\n* Call __dpuClose()__ to close DPU device \r\n\n\nPlease make sure the kernel and node names are aligned with the output log in dnnc compilation, shown as follows,\n\n![Define Kernel](./images/resnet_define_kernel.png)\n    \nIf incorrect node name is specified, the following kind of error will be reported while launching the running of ResNet50 demo:\n\n![DNNDK Error](./images/dnndk_error.png)\n\nThe following shows a code snippet of function runResnet50(): \n\n![Resnet50 Code](./images/resnet50_code_snippet.png)\n\n__runResnet50()__ does the following tasks: \n\n1. Read picture and set it as the input to DPU kernel resnet50_0 by calling dpuSetInputImage() API\r\n\n2. Call dpuRunTask() to run Conv, Relu, Pool, FC operation etc. for DPU Kernel resnet50_0\r\n\n3. Do Softmax operation on CPU using the output of full connection operation as input.\r\n\n4. Output the top-5 classification category and the corresponding probability\n\nFor details of DNNDK APIs, please refer to DNNDK User Guide which can be downloaded from the Xilinx website - https://www.xilinx.com/support/documentation/user_guides/ug1327-dnndk-user-guide.pdf\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this module you will quantize, compile and deploy to the Ultra96 board with a pre-trained SSD network. \n\nSSD (https://arxiv.org/abs/1512.02325) is a commonly used real-time object detection network for a wide range of applications. The backbone of SSD can use different networks such as Resnet, VGG, Googlenet etc. In this experiment, we will use SSD with VGG16 as the backbone. \n\nThe overall flow of SSD experiment is almost the same with the previous Resnet50 lab.\n\nThe working directory on your AWS instance is ~/dnndk/Ultra96/ssd/\n\n     cd ~/dnndk/Ultra96/ssd/\n\nIt is quite straightforward to go through the lab by repeating the steps in Resnet50.\n\nRun **decent** to quantize and generate deploy.prototxt and deploy.caffemodel in ~/dnndk/Ultra96/ssd/decent\\_output\n\n     ./decent_sdd.sh\n\n\nRun **dnnc** to generate DPU kernel ELF file dpu_ssd.elf in ~/dnndk/Ultra96/ssd/dnnc\\_output\n\n     ./dnnc_ssd.sh\n\nCopy the elf file from AWS to your host machine:\n\n    In the MobaXterm Gui browse to the dir /home/ubuntu/dnndk/Ultra96/ssd/dnnc_ouput/\n    Right click on the file dpu_ssd.elf and select download\n\nYou are now down with the AWS Instance for the rest of this lab.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

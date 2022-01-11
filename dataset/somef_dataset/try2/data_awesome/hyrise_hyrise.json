@@ -1,0 +1,380 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "When referencing this version of Hyrise, please use the following bibtex entry:\n<details><summary>(click to expand)</summary>\n  \n```bibtex\n@inproceedings{DBLP:conf/edbt/DreselerK0KUP19,\n  author    = {Markus Dreseler and\n               Jan Kossmann and\n               Martin Boissier and\n               Stefan Klauck and\n               Matthias Uflacker and\n               Hasso Plattner},\n  editor    = {Melanie Herschel and\n               Helena Galhardas and\n               Berthold Reinwald and\n               Irini Fundulaki and\n               Carsten Binnig and\n               Zoi Kaoudi},\n  title     = {Hyrise Re-engineered: An Extensible Database System for Research in\n               Relational In-Memory Data Management},\n  booktitle = {Advances in Database Technology - 22nd International Conference on\n               Extending Database Technology, {EDBT} 2019, Lisbon, Portugal, March\n               26-29, 2019},\n  pages     = {313--324},\n  publisher = {OpenProceedings.org},\n  year      = {2019},\n  url       = {https://doi.org/10.5441/002/edbt.2019.28},\n  doi       = {10.5441/002/edbt.2019.28},\n  timestamp = {Mon, 18 Mar 2019 16:09:00 +0100},\n  biburl    = {https://dblp.org/rec/conf/edbt/DreselerK0KUP19.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n```\n</details>\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "@inproceedings{DBLP:conf/edbt/DreselerK0KUP19,\n  author    = {Markus Dreseler and\n               Jan Kossmann and\n               Martin Boissier and\n               Stefan Klauck and\n               Matthias Uflacker and\n               Hasso Plattner},\n  editor    = {Melanie Herschel and\n               Helena Galhardas and\n               Berthold Reinwald and\n               Irini Fundulaki and\n               Carsten Binnig and\n               Zoi Kaoudi},\n  title     = {Hyrise Re-engineered: An Extensible Database System for Research in\n               Relational In-Memory Data Management},\n  booktitle = {Advances in Database Technology - 22nd International Conference on\n               Extending Database Technology, {EDBT} 2019, Lisbon, Portugal, March\n               26-29, 2019},\n  pages     = {313--324},\n  publisher = {OpenProceedings.org},\n  year      = {2019},\n  url       = {https://doi.org/10.5441/002/edbt.2019.28},\n  doi       = {10.5441/002/edbt.2019.28},\n  timestamp = {Mon, 18 Mar 2019 16:09:00 +0100},\n  biburl    = {https://dblp.org/rec/conf/edbt/DreselerK0KUP19.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+      "technique": "Regular expression"
+    },
+    {
+      "confidence": [
+        0.8654671031158477
+      ],
+      "excerpt": "Contact: firstname.lastname@hpi.de \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyrise/hyrise",
+    "technique": "GitHub API"
+  },
+  "contributingGuidelines": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "The Four Commandments\n\nThy code shalt be the primary method of documentation. Part of this is to choose concise but descriptive names.\n   Comments should be used to explain the concept and usage of classes (in the hpp file) and the structure of the\n   algorithms (in the implementation).\nThou shalt program defensively. Use Assert wherever it makes sense, use DebugAssert in performance-critical parts\n   (e.g., within hot loops). Also, we do not handle exceptions in Hyrise. If an invalid state is reached, we crash\n   immediately. This makes debugging easier. An exception to this is user-facing code where we handle, e.g., typos in\n   SQL queries.\nThou shalt reflect on existing code. Just as your code is not perfect, neither is the code that people wrote before\n   you. Try to improve it as part of your PRs and do not hesitate to ask if anything is unclear. Chances are that it can\n   be improved.\nThou shalt properly test thy code. This includes unit and integration tests. Try to isolate parts that can be\n   independently tested.\n\nC++\n\nUse automatic memory management (RAII, smart pointers). new and malloc are evil words.\nBe mindful of ownership. Not everything needs to be a smart pointer. Consider passing around references to the object\n  or references to a shared_ptr instead of copying the shared_ptr. Remember that this might not be safe when passing\n  shared_ptrs into, e.g., JobTasks.\n\nUse const whenever possible. Consider variables, methods, pointers, and their pointees.\n\n\nHeader files\n\nReduce the size of your hpp files, both in terms of the number of lines and the code complexity. This keeps the\n    compilation duration low.\nCode in hpp files is compiled for every cpp file that includes the header. As such, move code to cpp files where\n    possible. This often includes templated classes, where it is sometimes possible to implement their code in cpp\n    files.\nAnonymous namespaces are a good way to define local helper methods.\n\nUse forward declarations instead of full header includes wherever possible.\n\n\nLoops\n\nUse range-based for loops when possible: for (const auto&amp; item : items) {...}.\n\nIf you have to use old-style loops, keep in mind that the loop condition is evaluated every time: Instead of\n    for (auto offset = size_t{0}; offset &lt; something.size(); ++offset), the size should be retrieved just once. See\n    also this document.\n\n\nData structures\n\nWhen creating a vector where you know the size beforehand, use reserve to avoid unnecessary resizes and\n    allocations.\n\nHash-based data structures are usually faster than tree-based data structures. Unless you have a reason to use the\n    latter, prefer unordered_(map|set) over map and set.\n\n\nCopies\n\nAvoid unnecessary copies, C++ makes it too easy to inadvertently copy objects.\nFor larger elements (e.g., vectors), pass a (const) reference instead.\nIf your implemented class does not need to be copied (e.g., a Table should never exist more than once), inherit\n  from Noncopyable to avoid these potentially expensive copies.\n\n\n\nMiscellaneous\n\nPrefer if (object) over if (object != nullptr) or if (object.has_value()).\nDon't write this-&gt; if you don't have to.\nBe explicit with types: Use [u]int(8|16|32|64)_t instead of int, long, uint etc.\nUse auto-to-stick: auto x = 17; or\n    auto y = std::vector&lt;size_t&gt;{};.\nNamespaces: Do not create nested namespaces, do not import namespaces.\nConsider structured bindings: const auto&amp; [iterator, added] = unordered_map.emplace(...);\nPrefer braced control statements (if (...) { x(); } over if (...) x();). For multi-line statements, this is\n    mandatory.\n\nFormatting and Naming\n\nMuch of this is enforced by clang-tidy. However, clang-tidy does not yet cover hpp files (see #1901). Also, while\n  clang-tidy is a great help, do not rely on it.\nCall ./scripts/format.sh before committing your code.\nChoose clear and concise names, and avoid, e.g., i, j, ch_ptr.\nFormatting details: 2 spaces for indentation, 120 columns, comments above code.\nUse empty lines to structure your code.\n\nNaming conventions:\n\nFiles: lowercase separated by underscores, e.g., abstract_operator.cpp, usually corresponding to a class, e.g.,\n  AbstractOperator.\nTypes (classes, structs, enums, typedefs, using): PascalCase starting with uppercase letter, e.g., TableScan.\nVariables: lowercase separated by underscores, e.g., chunk_size.\nFunctions: lowercase separated by underscores, e.g., append_mutable_chunk().\nPrivate / protected members / methods: like variables / functions with leading underscore, e.g., _on_execute().\nClasses that are used only to have a non-templated base class are named BaseXY (e.g., BaseValueSegment, while\n  classes that have multiple differing implementations are named AbstractXY (e.g., AbstractOperator).\nIn cases where a constructor parameter would have the same name as the member it initializes, prefix it with\n  init: C(int init_foo) : foo(init_foo) {}.\nIf an identifier contains a verb or an adjective in addition to a noun, the schema [verb|adjective][noun] is\n  preferred, e.g., use left_input rather than ~~input_left~~ and set_left_input() rather than\n  ~~set_input_left()~~.\n\n\n\nMaintain correct orthography and grammar. Comments should start with a capital letter, sentences should be finished\n  with a full stop.\n\nClass names within comments are written in PascalCase - e.g., \"As the input may be a ReferenceSegment, a valid RowID\n    may point to a row that is NULL.\"\n\nPull Requests\nOpening PRs\n\nWhen you submit a non-trivial PR, include the results of benchmark_all.sh.\nThese results help in understanding potential performance changes as well as document potential changes to the compilation\n    costs.\nWe do not do this automatically as the CI server is not sufficiently isolated and the performance results would\n    vary. Similarly, your personal laptop is likely to produce unreliable results.\nIf your PR is related to an existing issue, reference it in the PR's description (e.g., fixes #123 or refs #123).\nIf you are not a member of the Hyrise organization, your PR will not be built by our CI server. Contact a maintainer\n  for this. They can add you to the organization or manually trigger builds from within Jenkins.\nFor your PR to be merged, it must pass a FullCI run. Set the FullCI tag in GitHub before committing to trigger the\n  complete (but more expensive!) run.\nWhen merging your PR, copy your PR description (excluding the benchmark results) into the commit message. The commit\n  message of the squash merge should NOT contain the individual commit messages from your branch.\n\nReviewing PRs\n\nKeep the whole picture in mind. Often, it makes sense to make two passes: One for the code style and line-level\n  modifications; one for checking how it fits into the overall picture.\nCheck if the PR sufficiently adds tests both for happy and unhappy cases.\nDo not shy away from requesting changes on surrounding code that was not modified in the PR. Remember that after a PR,\n  the code base should be better than before.\nVerify the CI results, including how the reported coverage changed, and check if the compile time or query performance\n  have been negatively affected. For this, the author should have posted the results of benchmark_all.sh into the PR\n  description.",
+    "technique": "File Exploration"
+  },
+  "contributor": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "-   Yannick   B\u00e4umer\n-   Lawrence  Benson\n-   Timo      Dj\u00fcrken\n-   Alexander Dubrawski\n-   Fabian    Dumke\n-   Leonard   Geier\n-   Richard   Ebeling\n-   Fabian    Engel\n-   Moritz    Eyssen\n-   Martin    Fischer\n-   Christian Flach\n-   Pedro     Flemming\n-   Mathias   Fl\u00fcggen\n-   Johannes  Frohnhofen\n-   Pascal    F\u00fchrlich\n-   Carl      G\u00f6decken\n-   Adrian    Holfter\n-   Ben       Hurdelhey\n-   Sven      Ihde\n-   Ivan      Illic\n-   Jonathan  Janetzki\n-   Michael   Janke\n-   Max       Jendruk\n-   David     Justen\n-   Youri     Kaminsky\n-   Marvin    Keller\n-   Mirko     Krause\n-   Eva       Krebs\n-   Sven      Lehmann\n-   Till      Lehmann\n-   Tom       Lichtenstein\n-   Daniel    Lindner\n-   Alexander L\u00f6ser\n-   Jan       Mattfeld\n-   Arne      Mayer\n-   Dominik   Meier\n-   Julian    Menzler\n-   Torben    Meyer\n-   Leander   Nei\u00df\n-   Hendrik   R\u00e4tz\n-   Alexander Riese\n-   Johannes  Schneider\n-   David     Schumann\n-   Simon     Siegert\n-   Arthur    Silber\n-   Toni      Stachewicz\n-   Daniel    Stolpe\n-   Jonathan  Striebel\n-   Nils      Thamm\n-   Hendrik   Tjabben\n-   Justin    Trautmann\n-   Carsten   Walther\n-   Marcel    Weisgut\n-   Lukas     Wenzel\n-   Fabian    Wiebe\n-   Tim       Zimmermann\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2017-04-06T10:03:31Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-20T11:03:59Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9913655587836702,
+        0.9964973893039635
+      ],
+      "excerpt": "Hyrise is a research in-memory database system that has been developed by HPI since 2009 and has been entirely rewritten in 2017. Our goal is to provide a clean and flexible platform for research in the area of in-memory data management. Its architecture allows us, our students, and other researchers to conduct experiments around new data management concepts. To enable realistic experiments, Hyrise features comprehensive SQL support and performs powerful query plan optimizations. Well-known benchmarks, such as TPC-H or TPC-DS, can be executed with a single command and without any preparation. \nThis readme file focuses on the technical aspects of the repository. For more background on our research and for a list of publications, please visit the Hyrise project page. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9725073439898897,
+        0.8247103789864673
+      ],
+      "excerpt": "Hyrise is developed for Linux (preferrably the most current Ubuntu version) and optimized to run on server hardware. We support Mac to facilitate the local development of Hyrise, but do not recommend it for benchmarking. \nWe support a number of benchmarks out of the box. This makes it easy to generate performance numbers without having to set up the data generation, loading CSVs, and finding a query runner. You can run them using the ./hyriseBenchmark* binaries. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319588271112815
+      ],
+      "excerpt": "| JCC-H      | Call the hyriseBenchmarkTPCH binary with the -j flag.                                                                    |  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8217250331766046
+      ],
+      "excerpt": "Subsequent calls to CMake, e.g., when adding files to the build will not be necessary, the generated Makefiles will take care of that. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869331100714671,
+        0.9755525275014101
+      ],
+      "excerpt": "Starting with cmake 3.16, you can use -DCMAKE_UNITY_BUILD=On to perform unity builds. For a complete (re-)build or when multiple files have to be rebuilt, these are usually faster, as the relative cost of starting a compiler process and loading the most common headers is reduced. However, this only makes sense for debug builds. See our blog post on reducing the compilation time for details. \nFor development, you may want to use ccache, which reduces the time needed for recompiles significantly. Especially when switching branches, this can reduce the time to recompile from several minutes to one or less. On the downside, we have seen random build failures on our CI server, which is why we do not recommend ccache anymore but merely list it as an option. To use ccache, add -DCMAKE_CXX_COMPILER_LAUNCHER=ccache to your cmake call. You will need to adjust some ccache settings either in your environment variables or in your ccache config so that ccache can handle the precompiled headers. On our CI server, this worked for us: CCACHE_SLOPPINESS=file_macro,pch_defines,time_macros CCACHE_DEPEND=1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8936976759552862
+      ],
+      "excerpt": "Supports only clang on MacOS and only gcc on linux \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8202879335749285
+      ],
+      "excerpt": "To specify a custom location for the symbolizer, set $ASAN_SYMBOLIZER_PATH to the path of the executable. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9836610949705262,
+        0.9944650483424903
+      ],
+      "excerpt": "cmake -DENABLE_THREAD_SANITIZATION=ON will work as above but with the ThreadSanitizer. Some sanitizers are mutually exclusive, which is why we use two configurations for this. \nWhen trying to optimize the time spent building the project, it is often helpful to have an idea how much time is spent where. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Hyrise is a research in-memory database.",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyrise/hyrise/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 107,
+      "date": "Mon, 20 Dec 2021 11:37:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hyrise/hyrise/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hyrise/hyrise",
+    "technique": "GitHub API"
+  },
+  "hasBuildFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/Dockerfile"
+    ],
+    "technique": "File Exploration"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/install_dependencies.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/lint.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/format.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/benchmark.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/compare_coverage.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/run_benchmarks_over_commit_range.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/benchmark_all.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/coverage.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/compile_time.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/clang_tidy_wrapper.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/run_server_tests.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/planviz/is_iterm2.sh",
+      "https://raw.githubusercontent.com/hyrise/hyrise/master/scripts/planviz/imgcat.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "If you want to create a Docker-based development environment using CLion, head over to our [dedicated tutorial](https://github.com/hyrise/hyrise/wiki/Use-Docker-with-CLion). \n\nOtherwise, to get all dependencies of Hyrise into a Docker image, run\n```\ndocker build -t hyrise .\n```\n\nYou can start the container via\n```\ndocker run -it hyrise\n```\n\nInside the container, you can then checkout Hyrise and run `./install_dependencies.sh` to download the required submodules.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can install the dependencies on your own or use the install_dependencies.sh script (**recommended**) which installs all of the therein listed dependencies and submodules.\nThe install script was tested under macOS Big Sur (10.16) and Ubuntu 20.10 (apt-get).\n\nSee [dependencies](DEPENDENCIES.md) for a detailed list of dependencies to use with `brew install` or `apt-get install`, depending on your platform. As compilers, we generally use the most recent version of clang and gcc (Linux only). Please make sure that the system compiler points to the most recent version or use cmake (see below) accordingly.\nOlder versions may work, but are neither tested nor supported.\n\n**Note about LLVM 13 and TBB 2021:** Hyrise can currently not be built with LLVM 13. We hope to get LLVM 13 running soon. For TBB, please use a `2020*` version until https://github.com/oneapi-src/oneTBB/issues/378 is resolved. On MacOS with brew, LLVM 12 and TBB 2020 can be installed as follows: `brew install tbb@2020 && brew install llvm@12`\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8376559444853855,
+        0.8261552225793094
+      ],
+      "excerpt": "You can still find the (archived) previous version of Hyrise on Github. \nHyrise is developed for Linux (preferrably the most current Ubuntu version) and optimized to run on server hardware. We support Mac to facilitate the local development of Hyrise, but do not recommend it for benchmarking. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8357998829854303
+      ],
+      "excerpt": "Advisable names for this directory would be cmake-build-{debug,release}, depending on the build type. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8624587828190543
+      ],
+      "excerpt": "By default, we use very strict compiler flags (beyond -Wextra, including -Werror). If you use one of the officially supported environments, this should not be an issue. If you simply want to test Hyrise on a different system and run into issues, you can call cmake -DHYRISE_RELAXED_BUILD=On .., which will disable these strict checks. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8867235234440751,
+        0.9160879107042781
+      ],
+      "excerpt": "CMake will default to your system's default compiler. \nTo use a different one, call cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ .. in a clean build directory. See dependencies for supported compiler versions. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8505212358000286
+      ],
+      "excerpt": "For development, you may want to use ccache, which reduces the time needed for recompiles significantly. Especially when switching branches, this can reduce the time to recompile from several minutes to one or less. On the downside, we have seen random build failures on our CI server, which is why we do not recommend ccache anymore but merely list it as an option. To use ccache, add -DCMAKE_CXX_COMPILER_LAUNCHER=ccache to your cmake call. You will need to adjust some ccache settings either in your environment variables or in your ccache config so that ccache can handle the precompiled headers. On our CI server, this worked for us: CCACHE_SLOPPINESS=file_macro,pch_defines,time_macros CCACHE_DEPEND=1. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9264535087946818
+      ],
+      "excerpt": "To configure a build directory for a release build make sure it is empty and call CMake like cmake -DCMAKE_BUILD_TYPE=Release \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9001827065092403
+      ],
+      "excerpt": "Calling make hyriseTest from the build directory builds all available tests. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9106675056299008
+      ],
+      "excerpt": "scripts/compile_time.sh helps with that. Get usage instructions by running it without any arguments. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.849048584817422
+      ],
+      "excerpt": "It will fail on the first detected error and will print a summary. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/hyrise/hyrise/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "C++",
+      "Python",
+      "CMake",
+      "Shell",
+      "PLpgSQL",
+      "DTrace",
+      "Dockerfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'This directory contains parts of slightly modified software by TPC whose license can be viewed at http://www.tpc.org/tpc_documents_current_versions/txt/eula_v2.2.0.txt\\n\\nThe original version of the software can be obtained from http://www.tpc.org/tpc_documents_current_versions/download_programs/tools-download-request.asp?bm_type=TPC-H&bm_vers=2.17.3&mode=CURRENT-ONLY'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Welcome to Hyrise",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hyrise",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "hyrise",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Organization",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/hyrise/hyrise/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 456,
+      "date": "Mon, 20 Dec 2021 11:37:14 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "database",
+      "in-memory-database",
+      "cpp",
+      "sql"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "*Have a look at our [contributor guidelines](CONTRIBUTING.md)*.\n\nYou can find definitions of most of the terms and abbreviations used in the code in the [glossary](GLOSSARY.md). If you cannot find something that you are looking for, feel free to open an issue.\n\nThe [Step by Step Guide](https://github.com/hyrise/hyrise/wiki/Step-by-Step-Guide) is a good starting point to get to know Hyrise.\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

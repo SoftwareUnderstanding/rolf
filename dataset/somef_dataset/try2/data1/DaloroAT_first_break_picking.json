@@ -1,0 +1,634 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1505.04597",
+      "https://arxiv.org/abs/1708.02002"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.909900852992773
+      ],
+      "excerpt": "for machine learning. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DaloroAT/first_break_picking",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-28T05:37:30Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-22T08:38:28Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In seismic exploration, the features of wave propagation in elastic media are studied. Processing of seismic data \nallows you to determine the structure and elastic properties of the studied medium.\n\nTo obtain seismic data, a source of excitation of elastic waves and a recording system are required.\nIn small-scale ground research, a sledgehammer is usually used as a source, and geophones as receivers.\n\nA geophone is a device that consists of an electric coil and a permanent magnet. During the propagation of elastic\nwaves, the magnet inside the geophone oscillates, thereby creating an alternating current in the coil.\nThe signal is recorded for some time. The waveform is usually similar to the velocity or acceleration of the \noscillation of the particles of the medium (depending on the design of the geophone).\n\nThe figure below schematically shows the process of obtaining data. Geophones are placed on the profile with some\ndistance from the metal plate (offset). An engineer hits a metal plate with a sledgehammer, creating an elastic wave that \npropagates in the medium under study. At this time, geophones record the amplitude of the signal for some time. \nRecords of each geophone are called a seismic trace (1D data).\n\n![](examples/seismic_survey.svg)\n\nSince the data on adjacent seismic traces have similarities in the features of the wave field, it is convenient to\nconsider the data together. Therefore, the traces are combined into a seismogram (2D data). The trace number is \nindicated on the horizontal axis, and the time of registration (in the number of samples) is indicated on \nthe vertical axis.\n\nWhen visualizing traces in a seismogram, positive or negative amplitudes are usually indicated in black. Also, \nthe amplitudes of each trace are normalized to the maximum amplitude of the seismogram, or each trace is normalized \nindividually. Waves with large amplitudes are usually clip at the threshold.\n\nWhen only the amplitude, and not the waveform, is important, a seismogram can be displayed using color. \nUsually a color seismogram is drawn in grayscale.\n\nThe figure below shows the equal seismograms in wiggle and color mode.\n\n![](examples/color.png)\n\nNote that despite the square shape of the picture, it is not square. Usually, the number of samples in a trace is\nseveral thousand, and the number of trace is 24 or more. Therefore, when displayed in color, interpolation is used.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9680788234929841,
+        0.8804050252128031,
+        0.8709759062740576,
+        0.8397200836735625,
+        0.982554889651265,
+        0.9626661989978632
+      ],
+      "excerpt": "Traditionally, this procedure is performed manually. When processing field data, the number of picks reaches hundreds of \nthousands. Existing analytical methods allow you to automate picking only on high-quality data with a high  \nsignal / noise ratio. So it is proposed to build a neural network to pick the first breaks. PyTorch framework is used  \nfor machine learning. \nSeismic tomography is a method of processing seismograms that allows you to determine the structure of the geological \nmedium and the distribution of wave propagation velocities. Also, seismograms before the appearance of the first waves  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9869486150714151
+      ],
+      "excerpt": "amplitude begins to increase for the first time and a signal is observed. Obviously, on noisy data, this definition is  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9470542236048832
+      ],
+      "excerpt": "Usually, the intersection of the tangent to the signal and the time axis is used as the first break. In practice, this \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9240049772283665,
+        0.9418289994650872
+      ],
+      "excerpt": "picking with the tangent and with the start of the signal differs by a constant value. \nFor network training, a labeled data set is needed. Unfortunately, such data is not publicly available. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9634949765862558
+      ],
+      "excerpt": "In this regard, we will construct a synthetic dataset and the corresponding pick. The size of synthetic model is  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.907471381169201
+      ],
+      "excerpt": "The figures below show examples of field data (time discretization step is 250 mcs) and manual picking with a red line. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9411075912373794
+      ],
+      "excerpt": "The following figures show noiseless synthetic data with a pick. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9539420548117717,
+        0.968764035908758,
+        0.911478160601604
+      ],
+      "excerpt": "Synthetic data is very similar to real and can be used for training. Synthetic data also have a reliable pick. However,  \nin order to use the neural network on real data, it is necessary to add some transformations, which will be discussed  \nin the next section. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.82062506937287
+      ],
+      "excerpt": "As a result, you get a set of files with .npy extension. Each file contains a tuple with model and picking  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9904511191943348,
+        0.9755469307562176,
+        0.8633356493185388
+      ],
+      "excerpt": "The neural network is trained on synthetic data. In order for a picker to work correctly on real data,  \nit is necessary to add transformations inherent in real data. \nList of possible seismogram distortions and the reasons for their occurrence: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8236259771062968,
+        0.9968029537584643,
+        0.912501092439949
+      ],
+      "excerpt": " This noise occurs in any electronic equipment that digitizes an analog signal. \nInversion of trace amplitude polarity.\\ \n When assembling geophones, an engineer can reverse the polarity of receivers.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9897445407161569,
+        0.8174275611712326
+      ],
+      "excerpt": "Zeroing the amplitude of the trace. \\ \nIt occurs when the geophone has an electronic circuit break. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9754239288829549,
+        0.9302454328205979,
+        0.9567717335332233,
+        0.9832887332015838
+      ],
+      "excerpt": "This phenomenon occurs when a geophone is unstably inserted or not inserted on the surface. \nA powerful impulse at the beginning of recording at the same times for all traces. \\ \nWhen an engineer hits a plate with  \na sledgehammer, a radio signal is sent to the geophones control station about the beginning of recording. In this case, \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.900073588499931
+      ],
+      "excerpt": "  has occurred, then the radio signal is again called, which also causes a false signal in the coil of geophones. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8518311900999062
+      ],
+      "excerpt": "It occurs if the signal preamplifier is poorly tuned. The value of the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9936268426807753,
+        0.9788526569548647,
+        0.9387173209075181,
+        0.9665980106021008,
+        0.8405196556002387
+      ],
+      "excerpt": "Nonlinearity of the frequency response of geophones. \\ \nIt is a mechanical characteristic of the device. In some cases, due to poor assembly, the geophone can have  \na non-linear characteristic, which is difficult to formalize. Also, the geophone has resonant frequencies  \nat which the signal level is very high. This transformation is implemented by supplementing the sine  \nsignal in random channels (instead of attenuating all frequencies except the resonant one). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8375890744860969,
+        0.9706097112021863,
+        0.9848110348742883,
+        0.96848091465082,
+        0.8285450967066791
+      ],
+      "excerpt": "During wave propagation, the signal attenuates due to geometric divergence  \n(a fixed impact energy propagates throughout the medium in all directions) and energy  \nabsorption by an inelastic medium. Also, most of the energy goes deep into the medium and \n does not return to the surface. Regardless of the cause of the phenomenon, the signal \n  amplitude decays at large times (differently for different channels). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9584588733135014,
+        0.9034057872150718,
+        0.9846720738379225
+      ],
+      "excerpt": "The listed transformations are implemented and added to PyTorch DataLoader. All distortions,  \nexcept orandom noise, arise only occasionally, therefore they are applied with a given probability to a random trace.  \n When a sync pulse occurs, it is superimposed on all traces. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9520386904323876
+      ],
+      "excerpt": "the traces are normalized individually. Further, all amplitudes are multiplied by 2, this is enough to confidently  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8865442425520375
+      ],
+      "excerpt": "the picking problem. These amplitude transforms are added as the last transformation in the DataLoader. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9628336711973822,
+        0.898440071422315,
+        0.9815900125185483
+      ],
+      "excerpt": "It is worth noting that some transformations (such as amplitude zeroing, frequency response  \nnonlinearity, high noise and the intersection of the sync pulse with the first arrivals) make it impossible  \nto manually pick a trace. In such a situation, picking is not performed, or is established by  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9834310511180303
+      ],
+      "excerpt": "to learn how to interpolate values for seismic traces with this kind of noise. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9767274256556782
+      ],
+      "excerpt": "In the course of our experiments, the second approach have better quality and accuracy when processing real data than \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8694344748106221,
+        0.8586735342432857,
+        0.8790278799875368,
+        0.9726031565090779,
+        0.9501798710097091
+      ],
+      "excerpt": "In this case, a small error in determining the boundaries of the classes does not greatly increase the loss function. \nWhen working with the second approach, the class with a narrow strip contains very few pixels compared  \nto the other two. Therefore, errors in determining a narrow strip increases the loss function more strongly.  \nIt is also useful to increase weights for a class with a narrow strip to more accurately determine the border. \nAt this stage, there is data for training, transformations are introduced, and classes are labeled.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9345682256060638
+      ],
+      "excerpt": "It is worth noting that the amplitudes of the first arrivals and the waveform of the first arrivals are very similar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9729064000733942,
+        0.9725903775688826,
+        0.9487591896665477
+      ],
+      "excerpt": "The architecture of the used neural network is based on U-Net. Unlike the original \n article, raw data is not expanded by mirroring. The depth of the model is less, as a result of which the \n  transfer of features from contracting to expanding path occurs three times instead of four. Larger kernel size in the  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9283703443114383,
+        0.8393590248535565,
+        0.9944316372665384,
+        0.9932096943270634,
+        0.9674948890168086,
+        0.9944316372665384,
+        0.9651575190320337
+      ],
+      "excerpt": "The parameters of the neural network are as follows: \nThe blue arrow represents the sequence of 2D convolution, batch normalization and ReLU. \n The size of the convolution kernel is (9, 3), zero padding is (4, 1) and stride is 1. \nDownsampling (red arrow) is performed using 2D average pooling with a kernel size of 2 and a stride of 2.  \nUpsampling (green arrow) is carried out by 2D transposed convolution with a halving of the number of channels. \nThe size of the convolution kernel is (7, 3), zero padding is (3, 1) and stride is 2. \nSince the size of features map does not differ, then transferring of features (gray arrow)  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9961706837500819,
+        0.8933160349107426
+      ],
+      "excerpt": "The mapping (yellow arrow) of results to 3 classes is carried out by 2D convolution with kernel size of 1 and stride of 1. \nIn one of the previous sections, we said that we will solve the picking problem as a problem of image  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8167761149757592,
+        0.9241608490762279,
+        0.9161235776796822
+      ],
+      "excerpt": " unbalanced number of pixels in the image. \nSince we solve the segmentation problem, Intersection over Union (IoU) is used as one of the metrics.  \nIt is also necessary to use additional metrics, since the main task is to correctly pick the first arrivals. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9648917003458168
+      ],
+      "excerpt": "a class 1 probability map is used. For this, the probability map is binarized and the position of  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8387709944250694,
+        0.8660801004669815
+      ],
+      "excerpt": "For each seismogram, the Maximum, Minimum, and RMS errors between the real pick and the calculated one are estimated. \nFor a training stage, these errors are averaged over seismograms in a batch, and for a validation and test \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9254525370928951
+      ],
+      "excerpt": "the proportions in which it is necessary to split the dataset into a training, validation and test subset \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.980371789699172,
+        0.9785598606520401
+      ],
+      "excerpt": "frequency is greater than 0 and more than the number of batches, then the frequency of  \nvalidation is equal to the number of batches. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9035624087095215
+      ],
+      "excerpt": "and probability maps of class 1. You can set the frequency of visualizing and the number  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8576307701496162
+      ],
+      "excerpt": "In order to stop the learning process in time, we will calculate the IoU on the validation dataset. If the IoU does not increase  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9749434354643377,
+        0.9240538329310535,
+        0.9474359088333656,
+        0.8537197809000598
+      ],
+      "excerpt": "With these parameters, the training dataset consists of 400 batches, and validation is performed at intervals of 100 batches. \nAs noted, the number of pixels in the classes is unbalanced, so we compare the two loss functions (cross-entropy loss - CEL and focal loss - FL) with different weights.  \nThe width of the strip is 8 pixels, and the length of the trace is 1000 pixels, so we will use the weight (1000 - 8) / 1000 = 0.992. \nFor the other two classes we use the same weights (1 - 0.992) / 2 = 0.004. Compare the results with and without weights. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8894239569373562,
+        0.9770420672058135,
+        0.9572517994241505,
+        0.9944257386201129,
+        0.8392617792235219
+      ],
+      "excerpt": "As you can see, the choice of the loss function affects only the beginning of training,  \nbut by the end of training the metrics are almost equal. It is worth noting that without weights,  \nthe metrics are higher, although not significantly (IoU is 1% higher, the error is less by 5 samples). \nIt is necessary to test the picker on real data. For this, a picked seismogram consisting of 96 traces is used,  \nwhich is splitted into 4 segments with 24 channels. Each segment was processed by a neural network trained in four ways:  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8154626760474798
+      ],
+      "excerpt": "For each case, a seismogram (zoomed to 400 samples after segmentation) with a real  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9267285073761632,
+        0.9792639526702629,
+        0.9148541980209389,
+        0.8050554675445901,
+        0.8425881761773525,
+        0.9631037593849333,
+        0.8967420306399333,
+        0.808512664731969
+      ],
+      "excerpt": "Based on the real pick and the calculated pick, the error vector is estimated. The error vector  \nconsists of 24 elements, each element of which is equal to the absolute value of the difference between  \nthe real and the calculated pick for the trace. \nEach figure shows the median, mean, minimum and maximum values of the error vector.  \nSince some traces can be picked fairly accurately, while others are inaccurate, the mean and  \nmedian values are also calculated based on the 12 largest and 12 smallest elements of the error vector. \nBefore considering the results, it is worth noting that the error in manual picking can be up to 3 samples  \nwhen picking by different people. If the signal is quite complex and noisy, the difference in the pick can be greater. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.879346501725363,
+        0.9088922744136326,
+        0.938372847871908,
+        0.9095462951247228
+      ],
+      "excerpt": "In this segment (1 - 24), when using weights, picking very well coincides with manual picks.  \nFor traces from 11 to 16, the largest errors were made. It is worth noting that  \non these traces the impulse of the first arrivals waves is very long and does not have a sharp initial front. \nSuch situations are very complex and ambiguous when picking. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8813397241370695,
+        0.981528706271836
+      ],
+      "excerpt": "In the 25-48 segment, the best pick was also made using a neural network with weights.  \nThere is a faulty channel with number 11, the presence of which did not affect the accuracy of the pick.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8407174409859755
+      ],
+      "excerpt": " loss, the picking error on adjacent traces turns out to be less. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9473186954593515,
+        0.821999710420175
+      ],
+      "excerpt": "On segment 3 (traces 49 - 72), there are a lot of features that can complicate the pick. Firstly, t \nraces 1 to 9 contain a sync pulse at the beginning, which was successfully ignored during a picking.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8739646216545673,
+        0.9597992771975868
+      ],
+      "excerpt": "The channels on the right half of the seismogram were located near the seismic source.  \nThe signal on them is complex and varies greatly on each trace. In this section of the seismogram,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8866239070986582
+      ],
+      "excerpt": "is still well picked by a neural network with weights. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8175842854931625,
+        0.919153792306264,
+        0.9948932348640298,
+        0.8078300363131893,
+        0.8741271213522995,
+        0.9980803350752845,
+        0.9028476372730989,
+        0.8378669897610864
+      ],
+      "excerpt": "The last segment (73 - 96) contains many traces with high noise before the first arrivals. \nAt the same time, neural networks with weights very accurately picked these traces. \nIt is very strange that the pick is absolutely wrong on the left side of the seismogram with using weights.  \nHowever, without the use of weights, it is accurate. \nWe present the error vector for the entire seismogram: \nIt is interesting to note the contribution of some transformations to the generalization of the model to real data. \nBelow are two figures obtained by a neural network during the training of which energy absorption and distortion by a low-period sine were not used. \nThe training parameters are the same as in the previous section. The Focal loss with weights are used. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9630887076152832,
+        0.9195092094816053,
+        0.8088185878648193,
+        0.991429320207508,
+        0.8033285206860583
+      ],
+      "excerpt": "The figure on the left shows that trace 7 is incorrectly segmented, due to there is no  \nlow-period interference in the training. It also distorts the segmentation of adjacent traces.  \nProbably, the error extends to adjacent traces during upsampling. \nThe figure on the right shows that on the left side of the seismogram with a time of more than 800 samples,  \nthe signal has a low amplitude. The neural network determined that the low-amplitude area is not class 1.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9812880834075666
+      ],
+      "excerpt": "The using of weights significantly increases the accuracy of the pick. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9674277355939505,
+        0.827844095494742,
+        0.8410939752122725,
+        0.9959902707869422,
+        0.868861115040405,
+        0.9158812537734694,
+        0.8382758449861157,
+        0.9371250600151052
+      ],
+      "excerpt": "In some cases, when using FL, mean and median of 12 worst errors turn out to be less. \nThe traces near the seismic source are incorrectly picked by a neural network with weights.  \nIt is necessary to conduct fine tuning to improve the result. \nWhen using FL, a smoother probability map is also obtained. The probabilities of CEL are more sharp.  \nThis result is expected based on the formulae for the loss function. However, with the same processing, almost the same results are obtained. \nTo improve neural network accuracy on picking data obtained near seismic source, it is worth trying the following modifications: \nIncrease weights for class 1 in order to better define the signal area.  \nUse a broadband signal near the source, but for this it is necessary to modify the data generator. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "First break picking in seismic gather",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DaloroAT/first_break_picking/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 16,
+      "date": "Thu, 23 Dec 2021 20:45:01 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DaloroAT/first_break_picking/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DaloroAT/first_break_picking",
+    "technique": "GitHub API"
+  },
+  "invocation": [
+    {
+      "confidence": [
+        0.8122493782861829
+      ],
+      "excerpt": "Zeroing the amplitude of the trace. \\ \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8007705231447954
+      ],
+      "excerpt": "  arrivals), data before the first breaks strip and data after the first breaks strip. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8571066970320794
+      ],
+      "excerpt": "Below are a few examples from the training dataset. Yellow is labeled class with data before narrow strip of first breaks,  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216270093103228
+      ],
+      "excerpt": " (for example --fracs_dataset \"(0.8, 0.1, 0.1)\"). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8517548208048084
+      ],
+      "excerpt": "For example, to validate at intervals of 100 training batches, set --freq_valid 100. If the validation  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8533421454031557,
+        0.906228591704655
+      ],
+      "excerpt": "of visualizations for each stage of training. For example, if --visual \"{'train': [50, 5], 'valid': [15, 4], 'test': [10, 3]}\" are set, \nthen 5, 4 and 3 images will be created withinterval of 50, 15 and 10 batches for train, validation and test datasets correspondingly. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8207155640534879
+      ],
+      "excerpt": "--num epoch 3 \\ \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/DaloroAT/first_break_picking/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "technique": "GitHub API"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "First break picking",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "first_break_picking",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "DaloroAT",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/DaloroAT/first_break_picking/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 47,
+      "date": "Thu, 23 Dec 2021 20:45:01 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}

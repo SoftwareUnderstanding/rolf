@@ -1,0 +1,283 @@
+{
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1703.06870",
+      "https://arxiv.org/abs/1703.06870. https://arxiv.org/abs/1703.06870"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9243188970772274
+      ],
+      "excerpt": "<span style=\"color:blue\">egg: blue </span> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jsklimavicz/Plate_Analyzer",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-09-03T14:25:37Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-11-19T20:45:19Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9914192998275076
+      ],
+      "excerpt": "The purpose of this program is to analyze the images taken from the Biotek Cytation5 platereader. The program also has the ability to perform dose-response curve analysis and calculate LC values. Platereader images are preprocessed, and larvae are identified, classified, and counted using a modification of the matterport implementation[^2] of Mask R-CNN[^3]. Dose-response data is determined using a Bayesian approach to generate dose-response curves, estimated LC values, and corresponding credible intervals. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8706376727517426,
+        0.9665580574118178
+      ],
+      "excerpt": "The Plate Configuration section of the GUI allows the user to input the compound code, compound name, and maximum concentration information, which is used to fill out the output .csv file. This data is best entered before starting the run--if this information is not entered prior to running the image analysis, it will have to be entered manually into the output file.  \nThe image analysis/larva counting process is initiated by hitting the \"Run Image Analysis\" button. The status bar shows the progress of the program, and an estimated percentage completion is show. If there are any errors, this information is also showed above the status bar.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8667374427141163
+      ],
+      "excerpt": "The pipeline from image collection to data output is as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9671996804159333
+      ],
+      "excerpt": "  <figcaption aria-hidden=\"true\">Example of the three images of a single well, taken fractions of a second apart. Note the movement of some larvae near the top of the image.</figcaption> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8346881662412365
+      ],
+      "excerpt": "For each well, these three images are used to make a composite image with six channels as follows: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9004400752227418,
+        0.9780820398881042,
+        0.9965221653471791,
+        0.9079346119916182,
+        0.8511675109641373
+      ],
+      "excerpt": "Grayscale of the second image \nGrayscale of the third image \nThe grayscale of the first image is also subjected to a Circle Hough Transform to determine the edge of the well. The area outside the well is set to mean value of the inside of the well for each image channel. The image is also cropped and centered on the center of the well, and downsized to 800x800 pixels and single precision. Setting the area outside the well to a uniform color removes any reflections of the larvae and ensures that objects are not detected in this area.  \nThe trained Mask R-CNN algorithm processes each image to classify larvae as dead, alive, moribund, L2 larvae, egg, long-dead, or artifact.  \nThe number of each class is counted, and, if the user has selected the option, composite images are made. Options for composite images include a stack of the three grayscale images for the well as the red, green, and blue channels; a grayscale of the first image with bounding boxes, or a grayscle of the first image with colored masks. In images with bounding boxes or masks shown, the following colors are used: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8541750130347409
+      ],
+      "excerpt": "  <figcaption aria-hidden=\"true\">The RGB composite, bounding box, and masked output images corresponding to the three raw images shown above. Note that the images are centered on the well, and the area outside the well is a uniform gray. Artifact bounding boxes are not shown in the bounding box image to prevent visual crowding in wells with significant debris. Note that this well contains objects identified as live, dead, morbund, and L2, as well as several small bubbles classified as artifacts. </figcaption> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9431795469482228,
+        0.8364758940287728,
+        0.9983131154875348,
+        0.9977287344611453
+      ],
+      "excerpt": "A .csv file containing the count data for each well is produced. Only the live, dead, and moribund larvae are counted; the moribund larvae are included with the dead larvae. The other four groups are not included in the count data; however, if there are more than five total objects not classified as live, dead, or moribund, a note is included in the .csv file stating the number of eggs, L2 larvae, long-dead larvae, and artifacts in the well. \nA more-comprehensive treatment of the statistical analysis is provided in the ./docs/statistical_overview.pdf file or its corresponding $\\LaTeX$ file.  \nBriefly, the live/dead count data for each well is used to generate a beta distribution posterior distribution, with the beta prior set using the BETA_PRIOR paramter in the ./stats/analysis_config.txt file. Each replicate of dose-response data is correlated by some unknown amount (based simply on the fact that each concentration is produced through serial dilutions of the initial concentration, and that all larvae in a replicate come from the same cohort). The RHO parameter is used to set the correlation betwee adjacent concentrations in a single replicate; the correlation between different cohorts of larvae is assumed to be zero. See ./docs/statistical_overview.pdf for details on the correlation matrix. The correlation matrix is then used to generated correlated MVN variables, and a copula is used to convert these variable to correlated beta variables sampled from the posterior beta distributions of each live/dead sample. This process is repeated BOOTSTRAP_ITERS times to produce a sample of bootstrapped data.  \nThe default behavior is to fit the bootstrapped data to a three-parameter dose-response curve s(x) = b<sub>2</sub>/(1 + exp(b<sub>0</sub> + b<sub>1</sub>x), where s(x) is the survival probability at log-concentration x, b<sub>2</sub> is the background survival rate (which is typically somewhat less than 1 due to background mortality), b<sub>1</sub> is related to the slope/steepness of the dose-response curve, and the ratio -b<sub>0</sub>/b<sub>1</sub> is equal to the LC<sub>50</sub>.These curves are then used to generate posterior distributions of LC values to permit the determination of the LC value and corresponding credible intervals, and sampling these curves at various concentrations allows us to create credible intervals for the curve itself.  \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8174374569384752
+      ],
+      "excerpt": "[^2]: Waleed Abdulla. 2017. Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow. GitHub repository. https://github.com/matterport/Mask_RCNN \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jsklimavicz/Plate_Analyzer/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 05:45:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jsklimavicz/Plate_Analyzer/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jsklimavicz/Plate_Analyzer",
+    "technique": "GitHub API"
+  },
+  "hasDocumentation": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://github.com/jsklimavicz/Plate_Analyzer/tree/main/docs"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "The Mask R-CNN algorithm was trained using a set of 800 hand-classified wells. This training set included 6032 live larvae, 942 moribund larvae, 2178 dead larvae, 164 eggs, 290 aged dead larvae, 173 L2 larve, and 328 artifacts. Labelling of images was performed using the [VGG Image Annotator (VIA) version 2](https://www.robots.ox.ac.uk/~vgg/software/via/).[^1] \n\nThe data set was augmented to produce 48,000 training images and 8,000 validation images. Augmentation was performed using `misc/image_augment.py`, which applies random rotations, scaling, gamma adjustments, blurring, and flipping about the y-axis to generate new images and corresponding json images. The augmentation program also creates a new annotation `.json` file for all the transformed labels for the augmented images. Note that the `.json` annotation file must match that of the VIA output annotation to be properly adjusted during the augmentation process.\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8829034954418226,
+        0.8829034954418226,
+        0.8829034954418226
+      ],
+      "excerpt": "  <img src=\"./docs/img/B2_04.jpg\" width=\"200\" /> \n  <img src=\"./docs/img/B2_05.jpg\" width=\"200\" />  \n  <img src=\"./docs/img/B2_06.jpg\" width=\"200\" /> \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8583851341007658,
+        0.8583851341007658,
+        0.8583851341007658
+      ],
+      "excerpt": "  <img src=\"./docs/img/B2_comp.png\" width=\"200\" /> \n  <img src=\"./docs/img/B2_bbox.png\" width=\"200\" />  \n  <img src=\"./docs/img/B2_splash.png\" width=\"200\" /> \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/jsklimavicz/Plate_Analyzer/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "C",
+      "Makefile",
+      "Batchfile"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "GNU General Public License v3.0",
+      "url": "https://api.github.com/licenses/gpl-3.0"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'Mask R-CNN\\n\\nThe MIT License (MIT)\\n\\nCopyright (c) 2017 Matterport, Inc.\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in\\nall copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\\nTHE SOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Merlin Bioassay Data Analyzer",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Plate_Analyzer",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "jsklimavicz",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/jsklimavicz/Plate_Analyzer/blob/main/README.md",
+    "technique": "GitHub API"
+  },
+  "requirement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This program requires the use of Python 3. The testing was performed with Python 3.8. The Anaconda distribution is recommended for ease; otherwise, `scikit-image`, `numpy`, `scipy`, `tensorflow`, `tkinter`, and other packages may be needed. \n\nThe GUI does require the addition of `tkcalendar`, which is easily installed using pip. \n\nTesting has been performed on Ubuntu 20.04 and Windows 10 using Python 3.8.8.\n\nTensorflow is used for analyzing the images with the Mask R-CNN algorithm. The process is highly parallelized, and runs fastest with a CUDA-enabled NVIDIA graphics card; however, images can also be processed on multiple CPU cores.\n\nThe statistics module, which analyzes live/dead count data, contains several functions that are written in both C and python. The C code must be compiled and requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/), and must be linked to this library during compilation into a `.so` or `.dll` file on Linux/MacOS or Windows, respectively. See the statistic readme for more details. If the C library is not compiled, full functionality is maintained using python functions; however, the C library provides substantial speed-up. \n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Sun, 26 Dec 2021 05:45:41 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "For Windows 10, the recommended method is to use the included batch file to invoke the program. The PYTHON_HOME variable should be set to the computer's path to the python executable. Once the program is started, the GUI can be used to enter all the required data. See the [Graphical User Interface section](#gui) for details. \n\nAlternatively, one may invoke the program directly with `main.py`, which takes no command line arguments. \n\nAll variables used by the program are set in either `./config.txt` or in `./stats/analysis_config.txt`; the former contains arguments for the GUI and general program options and filepaths, while the latter contains options related to data analysis, statistical options, and filepaths related to the statistical analysis output. The [`./docs/stats_config`](./docs/stats_config.md) file describes the permitted variables and their actions for the statistical analysis and plotting options, while [`./docs/general_config`](./docs/general_config.md) describes the permitted options for the general program. \n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

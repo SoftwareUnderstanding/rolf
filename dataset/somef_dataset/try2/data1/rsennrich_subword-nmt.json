@@ -1,0 +1,337 @@
+{
+  "acknowledgement": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project has received funding from Samsung Electronics Polska sp. z o.o. - Samsung R&D Institute Poland, and from the European Union\u2019s Horizon 2020 research and innovation programme under grant agreement 645452 (QT21).\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "arxivLinks": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://arxiv.org/abs/1910.13267\n  use the argument `--dropout 0.1` for `subword-nmt apply-bpe` to randomly drop out possible merges.\n  Doing this on the training corpus can improve quality of the final system; at test time, use BPE without dropout.\n  In order to obtain reproducible results, argument `--seed` can be used to set the random seed.\n  \n  **Note:** In the original paper, the authors used BPE-Dropout on each new batch separately. You can copy the training corpus several times to get similar behavior to obtain multiple segmentations for the same sentence.\n\n- support for glossaries:\n  use the argument `--glossaries` for `subword-nmt apply-bpe` to provide a list of words and/or regular expressions\n  that should always be passed to the output without subword segmentation\n\nPUBLICATIONS\n------------\n\nThe segmentation methods are described in:\n\nRico Sennrich, Barry Haddow and Alexandra Birch (2016"
+    ],
+    "technique": "Regular expression"
+  },
+  "citation": [
+    {
+      "confidence": [
+        0.9996206392528283
+      ],
+      "excerpt": "BPE dropout (Provilkov, Emelianenko and Voita, 2019): https://arxiv.org/abs/1910.13267 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9440663002812514
+      ],
+      "excerpt": "Rico Sennrich, Barry Haddow and Alexandra Birch (2016): \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8357315313722677
+      ],
+      "excerpt": "    Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (ACL 2016). Berlin, Germany. \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rsennrich/subword-nmt",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2015-09-01T10:50:32Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-22T21:40:00Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9461703702935128,
+        0.9694150992568333,
+        0.8976411548341239,
+        0.9587268429307656,
+        0.9603473156164236,
+        0.9674529298127713
+      ],
+      "excerpt": "This repository contains preprocessing scripts to segment text into subword \nunits. The primary purpose is to facilitate the reproduction of our experiments \non Neural Machine Translation with subword units (see below for reference). \nWe found that for languages that share an alphabet, learning BPE on the \nconcatenation of the (two or more) involved languages increases the consistency \nof segmentation, and reduces the problem of inserting/deleting characters when \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9580348515765398
+      ],
+      "excerpt": "in a way that has only been observed in the other language, and is thus unknown \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9683382666420595
+      ],
+      "excerpt": "which also appear in the vocabulary (with at least some frequency). \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.965056191403427
+      ],
+      "excerpt": "Learn byte pair encoding on the concatenation of the training text, and get resulting vocabulary for each: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8336268748987861
+      ],
+      "excerpt": "as a last step, extract the vocabulary to be used by the neural network. Example with Nematus: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9878165768803667
+      ],
+      "excerpt": "On top of the basic BPE implementation, this repository supports: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8779327149682016
+      ],
+      "excerpt": "Note: In the original paper, the authors used BPE-Dropout on each new batch separately. You can copy the training corpus several times to get similar behavior to obtain multiple segmentations for the same sentence. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9575481434803285
+      ],
+      "excerpt": "  use the argument --glossaries for subword-nmt apply-bpe to provide a list of words and/or regular expressions \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8603770321867172,
+        0.9419449601199447,
+        0.808833592685456,
+        0.966397152644664,
+        0.9388839545473456
+      ],
+      "excerpt": "    Neural Machine Translation of Rare Words with Subword Units \n    Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (ACL 2016). Berlin, Germany. \nThis repository implements the subword segmentation as described in Sennrich et al. (2016), \nbut since version 0.2, there is one core difference related to end-of-word tokens. \nIn Sennrich et al. (2016), the end-of-word token &lt;/w&gt; is initially represented as a separate token, which can be merged with other subwords over time: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9744347458710813
+      ],
+      "excerpt": "Since 0.2, end-of-word tokens are initially concatenated with the word-final character: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9834098768101177
+      ],
+      "excerpt": "The new representation ensures that when BPE codes are learned from the above examples and then applied to new text, it is clear that a subword unit und is unambiguously word-final, and un is unambiguously word-internal, preventing the production of up to two different subword units from each BPE merge operation. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Unsupervised Word Segmentation for Neural Machine Translation and Text Generation",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rsennrich/subword-nmt/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 423,
+      "date": "Fri, 24 Dec 2021 18:05:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rsennrich/subword-nmt/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rsennrich/subword-nmt",
+    "technique": "GitHub API"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "install via pip (from PyPI):\n\n    pip install subword-nmt\n\ninstall via pip (from Github):\n\n    pip install https://github.com/rsennrich/subword-nmt/archive/master.zip\n\nalternatively, clone this repository; the scripts are executable stand-alone.\n\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8785707789751308
+      ],
+      "excerpt": "more conventiently, you can do the same with with this command: \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8774087892169199
+      ],
+      "excerpt": "nematus/data/build_dictionary.py {train_file}.BPE.L1 {train_file}.BPE.L2 \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/rsennrich/subword-nmt/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License (MIT)\\n\\nCopyright (c) 2015 University of Edinburgh\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Subword Neural Machine Translation",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "subword-nmt",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "rsennrich",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/rsennrich/subword-nmt/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "releases": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      {
+        "authorType": "User",
+        "author_name": "rsennrich",
+        "body": "  - multiprocessing support (get_vocab and apply_bpe)\r\n  - progress bar for learn_bpe\r\n  - seed parameter for deterministic BPE dropout\r\n  - ignore some unicode line separators which would crash subword-nmt",
+        "dateCreated": "2021-12-08T10:01:34Z",
+        "datePublished": "2021-12-08T10:05:19Z",
+        "html_url": "https://github.com/rsennrich/subword-nmt/releases/tag/v0.3.8",
+        "name": "0.3.8",
+        "tag_name": "v0.3.8",
+        "tarball_url": "https://api.github.com/repos/rsennrich/subword-nmt/tarball/v0.3.8",
+        "url": "https://api.github.com/repos/rsennrich/subword-nmt/releases/54858787",
+        "zipball_url": "https://api.github.com/repos/rsennrich/subword-nmt/zipball/v0.3.8"
+      }
+    ],
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 1822,
+      "date": "Fri, 24 Dec 2021 18:05:09 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "topics": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "neural-machine-translation",
+      "segmentation",
+      "machine-translation",
+      "nmt",
+      "subword-units",
+      "bpe"
+    ],
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "Check the individual files for usage instructions.\n\nTo apply byte pair encoding to word segmentation, invoke these commands:\n\n    subword-nmt learn-bpe -s {num_operations} < {train_file} > {codes_file}\n    subword-nmt apply-bpe -c {codes_file} < {test_file} > {out_file}\n\nTo segment rare words into character n-grams, do the following:\n\n    subword-nmt get-vocab --train_file {train_file} --vocab_file {vocab_file}\n    subword-nmt segment-char-ngrams --vocab {vocab_file} -n {order} --shortlist {size} < {test_file} > {out_file}\n\nThe original segmentation can be restored with a simple replacement:\n\n    sed -r 's/(@@ )|(@@ ?$)//g'\n\nIf you cloned the repository and did not install a package, you can also run the individual commands as scripts:\n\n    ./subword_nmt/learn_bpe.py -s {num_operations} < {train_file} > {codes_file}\n\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

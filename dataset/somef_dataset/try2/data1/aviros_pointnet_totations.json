@@ -1,0 +1,169 @@
+{
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aviros/pointnet_totations",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-08-21T07:36:23Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2019-12-27T13:43:24Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "In this work, 3D image features are learned in a self-supervised way by training pointNet network to recognize the 3d rotation that been applied to an input image. Those learned features are being used for classification task learned on top of this base network.\n\nIn this repository I uploaded code and data.\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aviros/pointnet_totations/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 18:08:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aviros/pointnet_totations/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aviros/pointnet_totations",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/aviros/pointnet_totations/master/train.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You may need to install <a href=\"https://www.tensorflow.org/get_started/os_setup\" target=\"_blank\">TensorFlow</a>. You may also need to install h5py.\n\nTo install h5py for Python:\n```bash\nsudo apt-get install libhdf5-dev\nsudo pip install h5py\n```\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/aviros/pointnet_totations/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "Other",
+      "url": "https://raw.githubusercontent.com/aviros/pointnet_totations/master/LICENSE"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation.\\n\\nCopyright (c) 2017, Geometric Computation Group of Stanford University\\n\\nThe MIT License (MIT)\\n\\nCopyright (c) 2017 Charles R. Qi\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "# *Semi-Supervised Classification By Predicting Image Rotations In Point Cloud*",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "pointnet_totations",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "aviros",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/aviros/pointnet_totations/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 0,
+      "date": "Wed, 22 Dec 2021 18:08:49 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "usage": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To train a complete model to classify point clouds sampled from 3D shapes run the following bash script:\n\n\t!chmod 777 train.sh\n     run.sh\n     \nThe training split into two parts and can be run with different parameters (see code): \n\nself-suprevised task predicting randomly rotating images:\n\t\n\tpython trainRotation.py --model_save_path=fourRotations --rotation_list=[0,3,5,6]\n(rotation_list default value is [0,3,5,6]. It is list of numbers in between 0-7 represents the pi/2 rotation upon the axis. i.e, 3 represents X not rotate, Y rotate, Z rotate)\n\nThen, Classifier is learned on top of previous network. Exampled usage:\n\t\n\tpython trainClasiffiers.py \\\n\t--model_save_path=fc3_stop_gradient_4rotations \\\n\t--model_restore_path=fourRotations \\\n\t--fc_layers_number=3 \\\n\t--freeze_weights='True'\n\n(Note: 'model_restore_path'  have to be consistent with the same name of 'model_save_path' parameter from trainRotation.py, as it use the trained parameters of previous network at initialization)\n\nLog files and network parameters will be saved to `log` folder in default. Point clouds of <a href=\"http://modelnet.cs.princeton.edu/\" target=\"_blank\">ModelNet40</a> models in HDF5 files will be automatically downloaded (416MB) to the data folder. Each point cloud contains 2048 points uniformly sampled from a shape surface. Each cloud is zero-mean and normalized into an unit sphere. There are also text files in `data/modelnet40_ply_hdf5_2048` specifying the ids of shapes in h5 files.\n\nTo see HELP for the training script:\n\nWe can use TensorBoard to view the network architecture and monitor the training progress.\n\n    tensorboard --logdir log\n",
+      "technique": "Header extraction"
+    }
+  ]
+}

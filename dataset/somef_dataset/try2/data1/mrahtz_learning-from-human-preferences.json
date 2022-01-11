@@ -1,0 +1,549 @@
+{
+  "citation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "A2C code in [`a2c`](a2c) is based on the implementation from [OpenAI's baselines](https://github.com/openai/baselines), commit [`f8663ea`](https://github.com/openai/baselines/commit/f8663ea).\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.9960527539278196
+      ],
+      "excerpt": "based on the paper at https://arxiv.org/pdf/1706.03741.pdf. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9566780095499668
+      ],
+      "excerpt": "should look something like: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8944178096468923
+      ],
+      "excerpt": "  randomization? E.g. would randomly \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "codeRepository": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mrahtz/learning-from-human-preferences",
+    "technique": "GitHub API"
+  },
+  "dateCreated": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2018-01-03T15:54:29Z",
+    "technique": "GitHub API"
+  },
+  "dateModified": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "2021-12-06T03:34:10Z",
+    "technique": "GitHub API"
+  },
+  "description": [
+    {
+      "confidence": [
+        0.9704397925862845
+      ],
+      "excerpt": "Reproduction of OpenAI and DeepMind's Deep Reinforcement Learning from Human \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9334951301658982,
+        0.8561004709107445,
+        0.9414829989269738
+      ],
+      "excerpt": "Training an agent to move the dot to the middle in a simple environment using synthetic preferences. \nTraining an agent to play Pong using synthetic preferences. \nTraining an agent to stay alongside other cars in Enduro using human preferences. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8354787873893249
+      ],
+      "excerpt": "On a machine with a GPU, this takes about an hour. TensorBoard logs (created in \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8546102376922632
+      ],
+      "excerpt": "To train Enduro (a modified version with a time limit so the weather doesn't change, which the paper notes can confuse the reward predictor) using human preferences: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8799231620346603
+      ],
+      "excerpt": "behaviour, and another smaller window showing the last full episode that the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9319603531375243,
+        0.8757917741429679,
+        0.8124552697082933
+      ],
+      "excerpt": "On an 8-core machine with GPU, it takes about 2.5 hours to reproduce the video \nabove - about an hour to collect 500 preferences about behaviour from a random \npolicy, then half an hour to pretrain the reward predictor using those 500 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8500228586705473
+      ],
+      "excerpt": "This only takes about half an hour. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9853675517719799
+      ],
+      "excerpt": "The flow of data begins with the A2C workers, which generate video clips of the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9583823265789226
+      ],
+      "excerpt": "These video clips (referred to in the code as 'segments') are sent to the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9754560847295582,
+        0.9665969264854942
+      ],
+      "excerpt": "shows more of the kind of behaviour the user wants. \nPreferences are sent to the reward predictor, which trains a deep neural \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8581026708549877
+      ],
+      "excerpt": "Preferences are predicted based on a comparison between two penultimate scalar \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9028648447160246
+      ],
+      "excerpt": "how much the user likes each of the two clips in the pair. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8938764069444397
+      ],
+      "excerpt": "feeding the clip in, running a forward pass to calculate the \"how much the user \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.903594950925293
+      ],
+      "excerpt": "workers according to the preferences given by the user. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.855004715902966
+      ],
+      "excerpt": "* The preference interface queries the user for preference. \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8614128456595563
+      ],
+      "excerpt": "There are three tricky parts to this: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.952882100230956,
+        0.8690185321576936
+      ],
+      "excerpt": "  about each pair of clips. (Pairs to show the user are selected from the clip \n  database internal to the preference interface into which clips from the queue \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8167087243980514
+      ],
+      "excerpt": "  constantly receives from the queue, storing preference in the reward \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8723586129239197,
+        0.8821984948027228
+      ],
+      "excerpt": "  the reward predictor network. This is done using Distributed TensorFlow: each \n  process maintains its own copy of the network, and parameter updates from \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9275583367866407,
+        0.9411094535619136,
+        0.9609901745879552,
+        0.90463068724846,
+        0.9067108643951961,
+        0.9470638596299767,
+        0.8111106650756812
+      ],
+      "excerpt": "If you want to hack on this project to learn some deep RL, here are some ideas \nfor extensions and things to investigate: \nBetter ways of selecting video clips for query. As mentioned above and in \n  the paper, it looks like using variance across ensemble members to select \n  video clips to ask the user about sometimes harms performance. Why is this? \n  Is there some inherent reason that \"Ask the user about the clips we're most \n  uncertain about\" is a bad heuristic (e.g. because then we focus too much on \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9598453847437314,
+        0.9095095627118155
+      ],
+      "excerpt": "  situations)? Or is it a problem with the uncertainty calculation? Do we get \n  different results using dropout-based \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8354549392469336,
+        0.9423911868054077,
+        0.8755325402748758,
+        0.9454907712599714,
+        0.9178292595856817
+      ],
+      "excerpt": "  with shared parameters? \nDomain randomisation for the reward predictor. The paper notes that when \n  training an agent to stay alongside other cars in Enduro, \"the agent learns \n  to stay almost exactly even with other moving cars for a substantial fraction \n  of the episode, although it gets confused by changes in background\". Could \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9911922899403225
+      ],
+      "excerpt": "  changing the colours of the frames encourage the reward predictor to be more \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.828769232983871,
+        0.9249343527843759
+      ],
+      "excerpt": "Alternative reward predictor architectures. When training Enduro, the \n  user ends up giving enough preferences to cover pretty much the full range of \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9842963361070683,
+        0.9137835243910536
+      ],
+      "excerpt": "  in the kinds of simple environments we're playing with here is down to the \n  interesting generalisation capabilities of deep neural networks, and how much \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8909498289983245
+      ],
+      "excerpt": "  simpler architectures of reward predictor - for example, one which tries to \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8067808586106386
+      ],
+      "excerpt": "  familiar with the literature, but e.g. Efficient Ranking from Pairwise \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8312749265277413,
+        0.9799860093293763
+      ],
+      "excerpt": "  reward corresponding to the rank of the most similar video clip. \nAutomatic reward shaping. Watching the graph of rewards predicted by the \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8216005971067902,
+        0.9283173234868703
+      ],
+      "excerpt": "  better-shaped than the original rewards, even when trained with synthetic \n  preferences based on the original rewards. Specifically, in Pong, it looks \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        1.0
+      ],
+      "excerpt": "Reproduction of OpenAI and DeepMind's \"Deep Reinforcement Learning from Human Preferences\"",
+      "technique": "GitHub API"
+    }
+  ],
+  "downloadUrl": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mrahtz/learning-from-human-preferences/releases",
+    "technique": "GitHub API"
+  },
+  "forks_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 43,
+      "date": "Sun, 26 Dec 2021 22:46:24 GMT"
+    },
+    "technique": "GitHub API"
+  },
+  "forks_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mrahtz/learning-from-human-preferences/forks",
+    "technique": "GitHub API"
+  },
+  "fullName": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mrahtz/learning-from-human-preferences",
+    "technique": "GitHub API"
+  },
+  "hasScriptFile": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "https://raw.githubusercontent.com/mrahtz/learning-from-human-preferences/master/floydhub_utils/create_floyd_base.sh",
+      "https://raw.githubusercontent.com/mrahtz/learning-from-human-preferences/master/floydhub_utils/floyd_wrapper.sh",
+      "https://raw.githubusercontent.com/mrahtz/learning-from-human-preferences/master/floydhub_utils/floyd_wrapper_base.sh"
+    ],
+    "technique": "File Exploration"
+  },
+  "installation": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "It turned out to be possible to reach the milestones in the results section\nabove even without implementing a number of features described in the original\npaper.\n\n* For regularisation of the reward predictor network, the paper uses dropout,\n  batchnorm and an adaptive L2 regularisation scheme. Here, we only use\n  dropout. (Batchnorm is also supported. L2 regularisation is not implemented.)\n* In the paper's setup, the rate at which preferences are requested is\n  gradually reduced over time. We just ask for preferences at a constant rate.\n* The paper selects video clips to show the user based on predicted reward\n  uncertainty among an ensemble of reward predictors. Early experiments\n  suggested a higher chance of successful training by just selecting video\n  clips randomly (also noted by the paper in some situations), so we don't do\n  any ensembling. (Ensembling code *is* implemented in\n  [`reward_predictor.py`](reward_predictor.py), but we always operate with only\n  a single-member ensemble, and [`pref_interface.py`](pref_interface.py) just\n  chooses segments randomly.)\n* The preference for each pair of video clips is calculated based on a softmax\n  over the predicted latent reward values for each clip. In the paper,\n  \"Rather than applying a softmax directly...we assume there is a 10% chance\n  that the human responds uniformly at random. Conceptually this adjustment is\n  needed because human raters have a constant probability of making an error,\n  which doesn\u2019t decay to 0 as the difference in reward difference becomes\n  extreme.\" I wasn't sure how to implement this - at least, I couldn't see a\n  way to implement it that would actually affect the gradients - so we just do\n  the softmax directly. (Update: see https://github.com/mrahtz/learning-from-human-preferences/issues/8.)\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "This project uses Tensorflow 1, which needs Python 3.7 or below.\n\nTo set up an isolated environment and install dependencies, install\n[Pipenv](https://github.com/pypa/pipenv), then just run:\n\n`$ pipenv install`\n\nHowever, note that TensorFlow must be installed manually. Either:\n\n`$ pipenv run pip install tensorflow==1.15`\n\nor\n\n`$ pipenv run pip install tensorflow-gpu==1.15`\n\ndepending on whether you have a GPU. (If you run into problems, try installing\nTensorFlow 1.6.0, which was used for development.)\n\nIf you want to run tests, also run:\n\n`$ pipenv install --dev`\n\nFinally, before running any of the scripts, enter the environment with:\n\n`$ pipenv shell`\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        0.8476620667434611
+      ],
+      "excerpt": "To train using the original rewards from the environment rather than rewards \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8081582650381526
+      ],
+      "excerpt": "For example, to train MovingDotNoFrameskip-v0 using synthetic preferences: \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.900165186685447
+      ],
+      "excerpt": "in the terminal to indicate that you prefer the left example; 'R' to indicate \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "invocation": [
+    {
+      "confidence": [
+        0.8892433622532201,
+        0.923843976992855
+      ],
+      "excerpt": "For example, to train Pong: \n$ python3 run.py train_policy_with_original_rewards PongNoFrameskip-v4 --n_envs 16 --million_timesteps 10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8073980731422798,
+        0.9414364295658795
+      ],
+      "excerpt": "For example, to train MovingDotNoFrameskip-v0 using synthetic preferences: \n$ python3 run.py train_policy_with_preferences MovingDotNoFrameskip-v0 --synthetic_prefs --ent_coef 0.02 --million_timesteps 0.15 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.901521829322411
+      ],
+      "excerpt": "$ python3 run.py train_policy_with_preferences PongNoFrameskip-v4 --synthetic_prefs --dropout 0.5 --n_envs 16 --million_timesteps 20 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9103696532875771
+      ],
+      "excerpt": "$ python3 run.py train_policy_with_preferences EnduroNoFrameskip-v4 --n_envs 16 --render_episodes \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9026035664630053
+      ],
+      "excerpt": "$ python3 run.py train_policy_with_preferences EnduroNoFrameskip-v4 --n_envs 16 --render_episodes --load_prefs_dir runs/enduro --n_initial_epochs 10 \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9049871006494447
+      ],
+      "excerpt": "* The A2C workers (a2c/a2c/a2c.py) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9049871006494447
+      ],
+      "excerpt": "* The reward predictor (reward_predictor.py) \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8087263032336878
+      ],
+      "excerpt": "likes this clip\" value, then normalising the result to have zero mean and \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.8113678619774201
+      ],
+      "excerpt": "This normalised value is then used directly as a reward signal to train the A2C \n",
+      "technique": "Supervised classification"
+    },
+    {
+      "confidence": [
+        0.9168512561176207
+      ],
+      "excerpt": "  reward predictor (run run_checkpoint.py with a reward \n",
+      "technique": "Supervised classification"
+    }
+  ],
+  "issueTracker": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://api.github.com/repos/mrahtz/learning-from-human-preferences/issues{/number}",
+    "technique": "GitHub API"
+  },
+  "languages": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": [
+      "Python",
+      "Shell"
+    ],
+    "technique": "GitHub API"
+  },
+  "license": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "name": "MIT License",
+      "url": "https://api.github.com/licenses/mit"
+    },
+    "technique": "GitHub API"
+  },
+  "licenseText": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "b'The MIT License\\n\\nCopyright (c) 2017 OpenAI (http://openai.com)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \"Software\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\\ncopies of the Software, and to permit persons to whom the Software is\\nfurnished to do so, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in\\nall copies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\\nTHE SOFTWARE.\\n'",
+    "technique": "File Exploration"
+  },
+  "long_title": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Deep Reinforcement Learning from Human Preferences",
+    "technique": "Regular expression"
+  },
+  "name": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "learning-from-human-preferences",
+    "technique": "GitHub API"
+  },
+  "owner": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "mrahtz",
+    "technique": "GitHub API"
+  },
+  "ownerType": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "User",
+    "technique": "GitHub API"
+  },
+  "readme_url": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "https://github.com/mrahtz/learning-from-human-preferences/blob/master/README.md",
+    "technique": "GitHub API"
+  },
+  "run": [
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "All training is done using [`run.py`](run.py). Basic usage is:\n\n`$ python3 run.py <mode> <environment>`\n\nSupported environments are\n[`MovingDotNoFrameskip-v0`](https://github.com/mrahtz/gym-moving-dot),\n`PongNoFrameskip-v4`, and `EnduroNoFrameskip-v4`.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "You can also run different parts of the training process separately, saving\ntheir results for later use:\n* Use the `gather_initial_prefs` mode to gather the initial 500 preferences\n  used for pretraining the reward predictor. This saves preferences to\n  `train_initial.pkl.gz` and `val_initial.pkl.gz` in the run directory.\n* Use `pretrain_reward_predictor` to just pretrain the reward predictor (200\n  epochs). Specify the run directory to load initial preferences from with\n  `--load_prefs_dir`.\n* Load a pretrained reward predictor using the `--load_reward_predictor_ckpt`\n  argument when running in `train_policy_with_preferences` mode.\n\nFor example, to gather synthetic preferences for `MovingDotNoFrameskip-v0`,\nsaving to run directory `moving_dot-initial_prefs`:\n\n`$ python run.py gather_initial_prefs MovingDotNoFrameskip-v0 --synthetic_prefs --run_name moving_dot-initial_prefs`\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To run on [FloydHub](https://www.floydhub.com) (a cloud platform for\n running machine learning jobs), use something like:\n\n`floyd run --follow --env tensorflow-1.5 --tensorboard\n'bash floydhub_utils/floyd_wrapper.sh python run.py\n--log_dir /output --synthetic_prefs\ntrain_policy_with_preferences PongNoFrameskip-v4'`\n\nCheck out runs reproducing the above results at\n<https://www.floydhub.com/mrahtz/projects/learning-from-human-preferences>.\n\n",
+      "technique": "Header extraction"
+    },
+    {
+      "confidence": [
+        1
+      ],
+      "excerpt": "To run a trained policy checkpoint so you can see what the agent was doing, use\n[`run_checkpoint.py`](run_checkpoint.py) Basic usage is:\n\n`$ python3 run_checkpoint.py <environment> <policy checkpoint directory>`\n\nFor example, to run an agent saved in `runs/pong`:\n\n`$ python3 run_checkpoint.py PongNoFrameskip-v4 runs/pong/policy_checkpoints`\n\n\n",
+      "technique": "Header extraction"
+    }
+  ],
+  "stargazers_count": {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": {
+      "count": 174,
+      "date": "Sun, 26 Dec 2021 22:46:24 GMT"
+    },
+    "technique": "GitHub API"
+  }
+}
