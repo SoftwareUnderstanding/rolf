@@ -13,7 +13,7 @@ class DataframeContainer:
         return self.y_pred[0]
 
     def load_pickle(self):
-        filename = 'pickles/' + sys.argv[1] + '/' + self.name + '.sav'
+        filename = 'pickles/' + sys.argv[1] + '/' + self.name + ".sav"
         self.clf = pickle.load(open(filename, 'rb'))
 
 args = ' '.join(sys.argv[2:])
