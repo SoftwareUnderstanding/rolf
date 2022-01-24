@@ -1,0 +1,130 @@
+![](./media/logo.png)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/vivus_colab.ipynb)
+[![Powered by PyTorch](https://img.shields.io/badge/powered%20by-PyTorch-critical)](https://pytorch.org/)
+[![Formatter](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![GitHub tag](https://img.shields.io/github/tag/UltraSound-AI/vivus-sdk)](https://github.com/UltraSound-AI/vivus-sdk/releases/?include_prereleases&sort=semver "View GitHub releases")
+[![License](https://img.shields.io/badge/License-MIT-blue)](#license "Go to license section")
+[![CodeQL](https://github.com/UltraSound-AI/vivus-sdk/workflows/CodeQL/badge.svg)](https://github.com/UltraSound-AI/vivus-sdk/actions?query=workflow%3ACodeQL "Code quality workflow status")
+
+
+This script analyzes 20Mhz venous intravascular ultrasound (IVUS) images to identify
+luminary and scaffold boundaries, the presence of stenosis, and to compute various
+geometric quantities including areas, min/max diameters, perimeters, and equivalent radii. Images can be processed
+through a simple deterministic rule-based approach, convolutional
+neural network models _( based on [![arXiv](https://img.shields.io/badge/arXiv-1703.06870-<COLOR>.svg)](https://arxiv.org/abs/1703.06870) )_
+or a hybrid version that combined both. 
+
+A detailed description along with sample applications on venous IVUS
+pullbacks will be presented in an upcoming medical journal publication.
+
+### VIVUS toolkit in action on a sample IVUS pullback:
+![](./media/pullback.gif)
+
+# 1. Installation
+
+The recommended way of installation is to use the provided shell script to setup a conda virtual environment:
+
+```
+cd vivus/scripts/
+chmod +x setup-dev-env-[cpu|gpu].sh # Select the right hardware version.
+./setup-dev-env-[cpu|gpu].sh
+conda activate vivus-dev-[cpu|gpu]
+```
+
+Use `./setup-dev-env-gpu.sh` if you have a cuda enabled device (see Colab Notebook Above).
+
+Once the environment and requirements are set, download the [trained weights](https://www.dropbox.com/sh/7kgbiqz5iy8ozoa/AADvhh7iJrXa4iVBh6j-6TMEa?dl=0) and place
+them inside a new directory called `data/`. 
+
+You can do this manually or from the terminal as:
+```
+mkdir vivus/data/
+wget -O data/filled.pth https://www.dropbox.com/s/4ls0vcepcz68e59/filled.pth?dl=0
+wget -O data/hollow.pth https://www.dropbox.com/s/deodqaym71kjx2x/hollow.pth?dl=0
+```
+
+Note that the current version is only supported for Mac-OS, Linux and Unix-based systems.
+
+
+# 2. Running
+
+Use following syntax to run:
+```[cmd]
+python3 vivus.py [inputImage(s)]
+```
+
+`[inputImage]` is a symmetric image file in either DICOM or JPEG, or PNG format (sample DICOM
+  images from a Phillips-Volcano system are provided in `sample/`[^1]). A directory containing multiple
+  images can be given as input for batch processing:
+```[cmd]
+python3 vivus.py sample/sample1.dcm
+```
+to process only `sample1.dcm` or
+```[cmd]
+python3 vivus.py sample
+```
+to process all images inside `sample/`[^1].
+
+The above calls the default running mode where both CNN based models will be employed. The code can also
+be executed at the specified mode by:
+
+```[cmd]
+python3 vivus.py [MODE] [inputImage(s)]
+```
+
+where modes are labeled by integers as follows:
+
+| Integer | Description                                                 |
+|---------|-------------------------------------------------------------|
+| 0       | CNN model based on hollow-type mask                         |
+| 1       | CNN model based on filled-type mask + deterministic model   |
+| 2[^ref]   | fully deterministic model                                 |
+
+[^ref]: The latter mode `2` was developed for educational purposes only, its application is highly limited. The default
+running mode (when `[MODE]` is not specified) is effectively a combination of `0` and `1`.
+
+```[cmd]
+python3 vivus.py 0 sample
+```
+
+will process all images inside `sample/`[^1] through mode 0.
+
+The tunable parameters are all listed inside `src/params.py`.
+
+
+
+# 3. Outputs
+
+The code returns all processed data as an ASCII text file `inputImage.txt` and as labeled
+image in PNG format `inputImage.png` in directory `OUT/`. It will create the
+directory if it doesn't exist already, and won't erase the existing files inside (though it will
+re-write files with the same name). Running the default mode on all images inside `sample` will
+create:
+
+```
+OUT
+├- sample1.txt
+├- sample2.txt
+├- sample1.png
+├- sample2.png
+```
+The text file lists DICOM metadata when available, as well as some run configurations. The
+structure of measurements in both text and image outputs are determined by the presence of
+stenosis in the image. 
+
+Here are sample results for images with and without stenosis:
+![](./media/sampleImg.png)
+![](./media/sampleTxt.png)
+
+
+# 4. Meta
+<!-- Add automated code for all contributers to this repo ---> 
+This Repo is provided by  [Tuguldur Sukhbold](tuguldur.s@gmail.com), [Anudari Ulziibayar](Anudari.Ulziibayar@nationwidechildrens.org) as an open source package for personal and commercial use "as-is" without warranty under the MIT license.[^2] 
+
+Currrent Maintainers: [Tuguldur Sukhbold](tuguldur.s@gmail.com), [Neelesh Rastogi](rastogineelesh1@gmail.com)
+
+[^2]: See [LICENSE](./LICENSE) for more information.
+
+[^1]: The files inside `sample/` are venous IVUS images from a large animal sheep model and are published here
+with the permission of [Dr. Breuer's lab at Nationwide Children's Hospital](https://www.nationwidechildrens.org/research/areas-of-research/center-for-regenerative-medicine/breuer-lab).

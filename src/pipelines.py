@@ -200,7 +200,7 @@ class DataframeContainer:
                                 str(self.recall) + ' ' +  self.metrics_type, 
                                 self.currentDatetime + '/' + self.pickleFilename, 
                                 self.currentDatetime, 
-                                pkg_resources.get_distribution('sklearn').version])
+                                '1.0'])
 
 
 names_list = ["Audio", "Computer Vision", "General", "Graphs", "Natural Language Processing", "Reinforcement Learning", "Sequential"]

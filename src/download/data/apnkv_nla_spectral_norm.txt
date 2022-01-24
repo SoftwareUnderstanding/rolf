@@ -1,0 +1,1 @@
+In this project, we explore and compare different techniques of spectral normalization for weights of convolutional layers in GANs (https://arxiv.org/abs/1802.05957). Our results show that true spectral normalization can fail where the original kernel reshape worked. This is a result that calls for following research.

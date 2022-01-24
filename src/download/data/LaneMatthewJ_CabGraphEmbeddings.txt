@@ -1,0 +1,45 @@
+# CabGraphEmbeddings
+Cabs and Graphs and lower dimensional spaces
+
+### Team:
+Brett Hagan
+Ben Smith
+Matt Lane
+
+### Problem definition:
+A large amount of yellow cab data from New York City is available to the public. Each trip record contains the latitude and longitude of the pickup and dropoff locations, the date and time of the pickup and dropoff, and additional information. We will construct a grid over NYC and create undirected graphs where an edge represents a trip between two points on the grid. The ultimate goal is to feed these graphs (each graph constituting a days worth of trips) into an LSTM network in order to predict the next days’ trips. To do this we will test a selection of different node embedding methods on the graphs in order to feed the information into the LSTM. The different node embedding methods we will make use of are below:
+o  Deep Walk
+o  V2V: Vector Embedding
+o  LINE: Large Scale Information Network Embedding
+
+### Motivation:
+I.  Why is it interesting?
+- The effect that the different embedding methods have upon the prediction task in the LSTM network is of interest to the ML community at large. As the need to employ deep learning and other machine learning techniques on graph structured data continues to increase, the effectiveness of various node embedding methods in representing the data accurately in a manner that can be fed directly into existing deep learning models is of increasing importance. 
+II. Where do you think it's going to be used, i.e., application area?
+- In addition to the general relevance to deep learning on graphs, this particular problem would be of interest to the dispatchers of the yellow cab and to the rival rideshare industry. The ability to accurately predict the flow of traffic and appropriately place cabs in locations where a higher number of rides will be requested could lead to a significant financial benefit. 
+
+ 
+### Literature review:
+What reading will you examine to provide context and background? Please put citations of the article/blog posts with full citations.
+
+#### Graph/Node Embedding Papers:
+Deep Walk: https://arxiv.org/pdf/1403.6652.pdf
+Perozzi, B., Al-Rfou, R., & Skiena, S. (2014). DeepWalk. Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. doi:10.1145/2623330.2623732
+
+- LINE: Large-scale information Network Embedding https://arxiv.org/pdf/1503.03578.pdf
+Tang, J., Qu, M., Wang, M., Zhang, M., Yan, J., & Mei, Q. (2015). Line. Proceedings of the 24th International Conference on World Wide Web. doi:10.1145/2736277.2741093
+Random Walk with Restart: https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca
+Stanford Network Analysis Project Embeddings Lecture: http://snap.stanford.edu/proj/embeddings-www/files/nrltutorial-part1-embeddings.pdf
+
+- V2V: Vector Embeddings of a Graph and Applications: https://www.ece.iastate.edu/snt/files/2018/03/v2v-graml18.pdf
+    - Nguyen, T. D., & Tirthapura, S. (2018). V2V: Vector embedding of a graph and applications. 2018 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW). doi:10.1109/ipdpsw.2018.00182
+
+#### Network Information:
+- Pytorch Geometric Documentation: https://pytorch-geometric.readthedocs.io/en/latest/
+- Pytorch Data Loading: https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
+- Pytorch LSTM: https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html
+
+### Dataset: 
+What data will you use? If you are collecting new data, how will you do it?
+The NYC Taxi and Limousine Commission makes the records of yellow cab taxi trips across the city publicly available by year. The specific attributes recorded for each trip vary by individual year. The trips are arranged into .csv files for each month.
+https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page

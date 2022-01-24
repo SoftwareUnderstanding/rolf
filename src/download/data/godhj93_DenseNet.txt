@@ -1,0 +1,58 @@
+# DenseNet with CIFAR Dataset
+This repository is not stable. do not use.
+## Table of Contents
+1. Dependencies
+2. Usage
+3. Implementation
+   - Transfer learning
+   - Weight Decay
+   - Data Augmentation
+   - Knowledge Distillation        
+4. Results
+
+## Dependencies
+- Tensorflow >=2.4
+
+## Usage
+### Exmaple
+```shell
+python train.py --arch densenet201 --data cifar100 --bs 32 --ep 300 --pretrained True 
+
+```
+### Options
+```shell
+python train.py --help
+                                           
+optional arguments:
+  -h, --help     show this help message and exit
+  --arch         {densenet201, densenet121}
+  --ep           Training Epochs
+  --kdep         Initialization Epochs for AB Distillation
+  --bs           Batch Size
+  --kd           Use Knowledge Distillation {ab, ht}
+  --temp         Temperature for Hinton KD
+  --alpha        Alpha for Hinton KD
+  --pretrained   Use Transfer Learning(Imagenet)
+  --data         {cifar100, cifar10}
+  --teacher      Path to Teacher for KD
+```
+
+## Implementations
+  1. Transfer Learning
+  2. Weight Decay  
+   [Add L2 Norm euqations]
+  3. Learning Rate Schedule
+  4. Knowledge Distillation
+     - Hinton, Geoffrey, Oriol Vinyals, and Jeff Dean. "Distilling the knowledge in a neural network." arXiv preprint arXiv:1503.02531 (2015).
+     - Heo, Byeongho, et al. "Knowledge transfer via distillation of activation boundaries formed by hidden neurons." Proceedings of the AAAI Conference on Artificial Intelligence. Vol. 33. No. 01. 2019. 
+     - 
+
+## Result
+All results has implemented with Weight Decaying and Learning rate Scheduler used in [here](https://arxiv.org/pdf/1608.06993.pdf).
+1. Transfer Learning  
+   [IMG : CIFAR100]  
+   [IMG : CIFAR10]
+2. Knowledge Distillation  
+   - Hinton Knowledge Distillation
+   - Activation Boundary Knowledge Distillation
+  

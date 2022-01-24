@@ -1,0 +1,23 @@
+Novel learning techniques in ULMFiT
+
+The following novel techniques from the ULMFit paper are what allow it to generalize well even on unseen data from a different distribution. It is recommended to read the full paper for a deeper understanding(https://arxiv.org/pdf/1801.06146.pdf), but a summary is given below.
+
+Discriminative Fine-tuning: 
+
+Each layer of the model captures different types of information. Hence, it makes sense to fine-tune each layer’s learning rates differently, and this is done in ULMFiT based on extensive empirical testing and implementation updates. It was empirically found that first fine-tuning only the last layer (with the others frozen), and then unfreezing all the layers and applying a learning rate lowered by a factor of 2.6 for all other layers during language model fine-tuning worked well in most cases.
+
+1-cycle learning rate policy:
+
+In the fine-tuning stage, we apply 1-cycle learning rates, which comes from this report by Leslie Smith. It is a modification of the cyclical learning rate policy, which has been around for a long time, but the 1-cycle policy allows a larger initial learning rate (say max_LR = 1e-03), but decreases it by several orders of magnitude just at the last epoch. This seems to provide greater final accuracy. Note that this doesn’t mean we run it for one epoch — the ‘1’ in 1-cycle means it just cycles the learning rate down one epoch before the max epochs that we specify. In the ULMFiT implementation, this 1-cycle policy has been tweaked and is referred to as slanted triangular learning rates.
+
+Gradual unfreezing:
+
+During classification, rather than fine-tuning all the layers at once, the layers are “frozen” and the last layer is fine-tuned first, followed by the next layer before it, and so on. This avoids the phenomenon known as catastrophic forgetting (by losing all prior knowledge gained from the language model).
+
+Concatenated pooling:
+
+Pooling is a component of neural networks to aggregate the learned features and reduce the overall computational burden of a large network. In case you’re curious, a good introduction to pooling as applied in LSTMs is given in this paper. In ULMFiT, because an input text can consist of hundreds or thousands of words, information might get lost if we only consider the last hidden state in the LSTM. To avoid this information loss, the hidden state at the last time step is concatenated with both the max-pooled and mean-pooled representation of the hidden states over as many time steps as can fit in GPU memory.
+
+
+Note that this method is not converting the text to lowercase and removing stopwords (which was a common pre-tokenization approach in NLP until recently) — this would result in a tremendous loss of information that the model could instead use to gather an understanding of the new task's vocabulary. Instead, a number of added tags are applied to each word as shown above so that minimal information is lost. All punctuation, hashtags and special characters are also retained.
+For example, the xxmaj token indicates that there is capitalization of the word. "The" will be tokenized as "xxmaj the". Words that are fully capitalized, such as "I AM SHOUTING", are tokenized as "xxup i xxup am xxup shouting". The method still uses spaCy's underlying tokenizer (including a multi-thread wrapper around spaCy to speed things up), but adds tags in a very smart way . This balances capturing semantic meaning with reducing the number of overall tokens — so it is both powerful and efficient.

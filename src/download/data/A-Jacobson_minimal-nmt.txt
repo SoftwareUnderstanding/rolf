@@ -1,0 +1,56 @@
+# Minimal Neural Machine Translation
+![im](assets/encoder-decoder.png)
+
+## Resources
+NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE
+https://arxiv.org/pdf/1409.0473.pdf
+
+Effective Approaches to Attention-based Neural Machine Translation
+https://arxiv.org/pdf/1508.04025.pdf
+
+Massive Exploration of Neural Machine Translation Architectures
+https://arxiv.org/pdf/1703.03906.pdf
+
+
+## Contents
+- Encoder --> Attention --> Decoder Architecture.
+- Luong Attention.
+- Training on Multi30k German to English translation task.
+- Attention Visualization.
+- Teacher Forcing.
+- Greedy Decoding.
+- [nmt tutorial notebook](https://github.com/A-Jacobson/minimal-nmt/blob/master/nmt_tutorial.ipynb)
+- minimal beam search decoding.
+
+## Setup
+
+1. install pytorch 0.4:
+```
+conda install pytorch -c pytorch=0.4.1 
+```
+
+2. install other requirements:
+```
+pip install -r requirements.txt
+```
+## System Requirements
+Training with a batch size of 32 takes ~3gb GPU ram.
+If this is too much, lower the batch size or reduce network dimensionality in `hyperparams.py`.
+
+## Usage
+```
+python train.py
+```
+
+view logs in Tensorboard
+decent alignments should be seen after 2-3 epochs.
+```
+tensorboard --logdir runs
+```
+(partially trained attention heatmap)
+
+![img](assets/attention_vis.png)
+
+
+
+

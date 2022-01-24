@@ -1,0 +1,86 @@
+# CE7490_ass1_gnn
+
+Team: Li.zhiming, Wang.jian, Xu.xiufeng 
+
+This is a GraphNeuralNetwork based project to predict the demanding of vehicle amount when by inputing timestamp, this repository focus on "How to Preprocssing, Traning and Evaluating on baselines". However, there is another frontend, Node-javascript based project, to show a Visualization demo, if you interest [Visualization Project & Demo](https://github.com/jianwang-ntu/CE7490_ass1_project)
+
+## Object
+
+A large amount of yellow cab data from New York City is available to the public. Each trip record contains the latitude and longitude of the pickup and dropoff locations, the date and time of the pickup and dropoff, and additional information. We will construct a grid over NYC and create undirected graphs where an edge represents a trip between two points on the grid.
+
+The goal is to feed these graphs (each graph constituting one trip from starting to its end) into an GNN network in order to predict the next demand hotpot 
+
+## Preprocess and Train 
+* step1, cluster by gridbased region, see as the deepmind's <br/> <center> ![](./deepmind_small.gif) </center>
+* step2, build a graph dataset to train and evaluate 
+* step3, do prediction for hotpot demand <br/> <center><img width=500 src="./demand_nyc.png"></img></center>
+* Additional, we also use an animation to show the individual route lane at demand area after predicting <br/> <center>![](./ezgif.com-gif-maker.gif) </center>
+
+
+
+### Network Archtecture 
+
+#### Graph/Node Embedding Papers:
+Deep Walk: https://arxiv.org/pdf/1403.6652.pdf
+#### Diffusion Convolutional Recurrent Neural Network:
+DCRNN: https://arxiv.org/abs/1707.01926
+#### CCRNN coupling layer-wise convolutional network:
+CCRNN: https://arxiv.org/abs/2012.08080
+
+### Benchmark 
+
+According to the [snap-stanford/ogb](https://ogb.stanford.edu/docs/home/), to make a fair comparison between different proposed, they build a benchmark platform to evaluate the score respectively. We put it into practise to test our models. 
+
+Paper [Benchmarking Graph Neural Networks](https://arxiv.org/pdf/2003.00982.pdf)
+
+
+
+### Dataset: 
+The NYC Taxi and Limousine Commission makes the records of yellow cab taxi trips across the city publicly available by year. The specific attributes recorded for each trip vary by individual year. The trips are arranged into .csv files for each month.
+https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+
+
+OGB contains graph datasets that are managed by data loaders. The loaders handle downloading and pre-processing of the datasets. Additionally, OGB has standardized evaluators and leaderboards to keep track of state-of-the-art results.
+https://ogb.stanford.edu/docs/home/
+
+DIDI Chengdu city
+A competition is built on the Didi Chuxing Gaia Open Data Initiative. The available data sets are derived from the trajectory data of DiDi Express and DiDi Premier drivers of Chengdu City (October – November 2016). The driver and trip order information was encrypted and anonymized. When registering to get access to the data online.
+
+https://technode.com/2019/10/21/didi-two-datasets-research-community/
+
+### Prepare Dataset
+see [preprocess/readme.md](./preprocess/readme.md)
+
+## Install 
+see [Install.md](./install.md)
+
+## Train 
+
+```
+cat run.sh
+```
+
+## Evaluate 
+```
+cat one_time_inference.sh
+```
+
+# Reference 
+
+## ThirdParty Libraries:
+- Pytorch Geometric Documentation: https://pytorch-geometric.readthedocs.io/en/latest/
+- Pytorch Data Loading: https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
+- Pytorch LSTM: https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html
+- Kepler.gl is a powerful open source geospatial analysis tool for large-scale data sets. [Kepler.gl](Kepler.gl)
+- NTU graph lab [GNN NTU](https://graphdeeplearning.github.io/)
+
+# Acknowledge 
+This project's training code and model's archtecture were extended from [(Paper)](https://arxiv.org/abs/2012.08080), [(Code)](https://github.com/Essaim/CGCDemandPrediction) 
+
+What's we contribute into:
+- We cannot reproduce the arxiv.org/abs/2012.08080, we checkout the commit 467aba7704570fa62b944f96c2f3e99d4f9637e6, modify it as our project required.   
+- We import a new and insolated dataset, the DIDI Gaia Chengdu, to compare a NYC combined dataset. As we worry that whatif the Bike's training mislead taxi's inference, whatif they are correlated. 
+- We import more baselines into projects 
+- We import a comprehensive ablation studies to address some suspects, such as, does it be influenced by different layers or gate numbers, dose the dataset's size be a crucial point to performance, and so on .   
+
+more detail, please check our report.pdf 

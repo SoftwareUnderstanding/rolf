@@ -1,0 +1,95 @@
+## Resnet In keras(CPU)
+
+
+Residual Paper
+```
+Kaiming He, Xiangyu Zhang, ShaoQing Ren, and Jian Sun
+Microsoft Resarch
+"Deep Residual Learing for Image Recognition",
+Deep convoluational neural networks 'very Deep than 19-layer' 2012
+```
+
+## "Plain" Deep Network
+```
+you can see that the 20-layer is better.
+Training error (left) and test error(right) on CIFAR-10 with 20-layer and 56 layer "plain" Networks, Layerts to start con-verging
+for stochastic gradint descent(SGD) with back-propagation.The network depth increasing, accuracy gets saturated (which might be
+unsurprising) and then degrades rapidly. Unexpectedly,such degradation is not caused by "overfitting"
+```
+Screenshots
+------------
+<div>
+  <h3>Plain network Cifar-10</h3>
+<img width="387" alt="tradisional" src="https://user-images.githubusercontent.com/45196240/63851749-b0055c80-c9d1-11e9-8785-03507f47682f.PNG">
+<img width="379" alt="traditisional" src="https://user-images.githubusercontent.com/45196240/63852001-433e9200-c9d2-11e9-9de3-8d8d64ac0ef9.PNG">
+  
+</div>
+
+
+## Residual - Learning building block
+
+```
+Experiments show that our current solvers on hand are unable to find solutions 
+that are comparably good or better than the constructed solution.
+using the "skip connetion"  
+```
+Screenshots
+------------
+
+
+<div>
+  <h3>Resnet idnetity block</h3>
+  <h4>Vaildation low acc, Must be used The Data argumentation or 'Drop out'</h4> 
+<img width="160" alt="resnet" src="https://user-images.githubusercontent.com/45196240/63852768-02477d00-c9d4-11e9-947c-c53a65ada038.png">
+<img width="176" alt="캡처" src="https://user-images.githubusercontent.com/45196240/63852990-8ac61d80-c9d4-11e9-8ff6-32e0a6a2cb7a.PNG">
+<img width="408" alt="캡처2" src="https://user-images.githubusercontent.com/45196240/63853244-248dca80-c9d5-11e9-8084-a44ff6c9180c.PNG">
+</div>
+
+## Introduce
+```
+- Convlution layer 3by3 kernel
+- To reduce Complexity not use Max-pooling, hidden Fully Connected, Dropout 
+- 출력 feature-map의 크기가 같은경우 모든 layer는 모두 동일한 수의 필터 사용
+- 출력 feature-map의 크기가 절반이 될때는 layer의 연산량 보존을 위해 filter의 개수 2배
+- 2개의 convolution layer 마다 skip connection연결
+```
+ResNet50
+----------------
+- https://www.kaggle.com/rhammell/planesnet
+- Use kaggle Data planesnet 
+- 2classes , 32000, 20, 20, 3
+- Train 20000, Validation 5000, Test 7000
+- 5 epoch batch_size = 20
+- Val data = 85%
+- Train set = 98%
+<div>
+  <h3>ResNet50</h3>
+<img width="471" alt="캡처" src="https://user-images.githubusercontent.com/45196240/63903790-bdf6c400-ca49-11e9-81b7-35d7e1277f77.PNG">
+</div>
+
+ResNet152
+----------------
+- https://www.kaggle.com/rhammell/planesnet
+- Use kaggle Data planesnet 
+- 2classes , 32000, 20, 20, 3
+- Train 20000, Validation 5000, Test 7000
+- 5 epoch batch_size = 20
+- Val data = 83.6%
+- Train set = 97.8%
+<div>
+  <h3>ResNet152</h3>
+  <h4>Vaildation low acc, Must be used The Data argumentation or 'Drop out'</h4> 
+<img width="404" alt="150" src="https://user-images.githubusercontent.com/45196240/63922978-ae46a200-ca80-11e9-9b25-97799c2c0e40.PNG">
+</div>
+
+### In the 2classes There is no reason to use Resnet152. 
+### accuracy higher resnet50 than resnet152 67 vs 61
+- (ResNet152 original version made label : 223*223  classes : 1000)
+## Reference
+
+```
+- https://www.coursera.org/learn/convolutional-neural-networks/home/welcome
+- https://m.blog.naver.com/PostView.nhn? blogId=laonple&logNo=221259295035&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+- https://arxiv.org/pdf/1512.03385.pdf
+```
+

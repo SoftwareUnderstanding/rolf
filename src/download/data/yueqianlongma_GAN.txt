@@ -1,0 +1,42 @@
+GAN, �ֳ����ɶԿ�����, Ҳ�� Generative Adversarial Nets �ļ��
+
+����֪����Ȼ���������ʱ�޿̶������໥�Կ���������������������з��ֵķ�������� ��������ǶԿ�����Ľ���ȥ�����׷������ ���߾�������һ�����ġ�
+
+GAN���������Կ�����һ���� Ҳ��һ�����ĵĹ��̡� ����ͨ�������Generatorȥ����ͼƬ�� ͨ��Discriminatorȥ�б�ͼƬ�Ƿ����������ɵĻ�����ʵͼƬ��Generator �� Discriminator�໥�Կ��� Generator��������ͼƬ����Discriminator����Ϊ�ٵķ�������� ��Discriminator����������׼ȷ����ͼƬΪGenerator���ɵķ�������� ���Ƕ��ߵ�һ�����Ĺ��̡�
+
+
+GAN_Mnist: 
+
+loss��
+	����Discriminator�� ����max V(D,G)�� Ҳ���������������� ���log D(x)  �� ���log 1- D(G), �������������ǿʶ���ж�����ͼƬ������������жϾ�ȷ�ʡ� �෴�� ��Ҳ���ڴٽ�Generator���ɵ�ͼƬ������ʵ
+
+	����Generato�� ������С��log(1-D(G)),  Ҳ�������D(G), ��ͼƬ����ʵ��
+
+�Ľ���
+	�ڿ���У� ���Ƕ�����С��loss, ���Զ���max V(D,G),  ���ǿ���min -V(D,G)
+	����Generator,  �����ı���ʹ�� min -log(D(G))�����
+
+���ĵ�ַ�� https://arxiv.org/abs/1406.2661
+
+��������
+	![image](https://github.com/yueqianlongma/GAN/raw/master/img/GAN_Mnist.png)
+
+
+
+
+GAN_Anime:
+
+1.ʹ��ת�þ�������ػ�
+2.ʹ��Batch_Normalization��Generator��Discriminator�� ����Generator����㲻ʹ��
+3.�Ƴ�����������ȫ���Ӳ�
+4.Generator����������ļ����ʹ��relu, �����ʹ��tanh
+   Discriminatorÿһ�㶼ʹ��leaky_Relu, alpha=0.2
+5.ʹ��AdamOptimizer�����ݶ��½��� learning_rate=0.0002, beta1=0.5
+
+DCGAN:���ĵ�ַ��https://arxiv.org/abs/1511.06434
+
+���ݵ�ַ�� 
+	https://pan.baidu.com/s/14XPTghR1BsEa3K0oJPBhWw
+
+��������
+	![image](https://github.com/yueqianlongma/GAN/raw/master/img/GAN_Anime.png)
