@@ -31,16 +31,19 @@ import csv
 from datetime import datetime
 from pathlib import Path
 from sklearn.ensemble import RandomForestClassifier
+from collections import defaultdict
 
 import nltk
 nltk.download('punkt')
 
 
 class DataframeContainer:
-    def __init__(self, name, inputFilename):
+    def __init__(self, name, inputFilename, validationFilename):
         self.name = name
         self.inputFilename = inputFilename
-        self.dataframe = pd.read_csv(inputFilename, sep=';')
+        self.dataframe = pd.read_csv(self.inputFilename, sep=';')
+        self.validationFilename = validationFilename
+        self.validationDataframe = pd.read_csv(self.validationFilename, sep=';')
         
     def filter_dataframe(self):
         count = 0
@@ -49,10 +52,20 @@ class DataframeContainer:
                 count += 1
                 row['Label'] = 'Other'
                 row['Text'] = row['Text'].replace('\n', ' ').replace(',', ' ').lower()
-        print(f'{self.name} filtered {count} rows')  
+        print(f'{self.name} filtered {count} rows in training dataset')
+
+        count = 0
+        for ind, row in self.validationDataframe.iterrows():
+            if self.name != str(row['Label']):
+                count += 1
+                row['Label'] = 'Other'
+                row['Text'] = row['Text'].replace('\n', ' ').replace(',', ' ').lower()
+        print(f'{self.name} filtered {count} rows in validation dataset')
+
 
     def separate_x_y(self):
         self.df_X, self.df_y = self.dataframe['Text'], self.dataframe['Label']
+        self.valdf_X, self.valdf_y = self.validationDataframe['Text'], self.validationDataframe['Label']
         #unique, counts = np.unique(self.df_y , return_counts=True)
         #plt.bar(unique, counts, 1)
         #plt.title('Class Frequency')
@@ -61,7 +74,11 @@ class DataframeContainer:
         #plt.show()
     
     def split_train_test(self, test_size = 0.2, random_state = 42):
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.df_X, self.df_y, test_size=test_size, random_state=random_state, stratify=self.df_y)
+        #self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.df_X, self.df_y, test_size=test_size, random_state=random_state, stratify=self.df_y)
+        self.X_train = self.df_X
+        self.X_test = self.valdf_X
+        self.y_train = self.df_y
+        self.y_test = self.valdf_y
 
     def clf_fit_cv_ru_lsvc(self):
         self.clf = Pipeline([
@@ -192,7 +209,7 @@ class DataframeContainer:
         with open('../results/scoreboards/' + csvFileName, 'a+') as csvfile:
             csvWriter = csv.writer(csvfile, delimiter=';')
             if not csvExists:
-                csvWriter.writerow(["Pipeline", "Input", "F1 score", "Precision", "Recall", "Pickle file name", "Datetime", "Sklearn version"])
+                csvWriter.writerow(["Pipeline", "Input", "F1 score", "Precision", "Recall", "Pickle file name", "Datetime", "Sklearn version", "Validation set"])
             csvWriter.writerow([self.clf.steps, 
                                 self.inputFilename, 
                                 str(self.f1score) + ' ' +  self.metrics_type, 
@@ -200,15 +217,41 @@ class DataframeContainer:
                                 str(self.recall) + ' ' +  self.metrics_type, 
                                 self.currentDatetime + '/' + self.pickleFilename, 
                                 self.currentDatetime, 
-                                '1.0'])
+                                '1.0',
+                                self.validationFilename])
 
+    def getPipelineId(self):
+        csvFileName = f"{self.name.lower().replace(' ', '_')}.csv"
+        with open('../results/scoreboards/' + csvFileName, 'r') as csvfile:
+            return len(csvfile.readlines()) - 1
 
 names_list = ["Audio", "Computer Vision", "General", "Graphs", "Natural Language Processing", "Reinforcement Learning", "Sequential"]
+names_list = ["Graphs"]
+
+#train_sets = ['Somef data', 'Papers with code abstracts', 'Merged data', 'Somef data description']
+#validation_sets = ['Somef data', 'Papers with code abstracts', 'Merged data', 'Somef data description']
+
+my_dict = defaultdict(lambda: [])
+
 
 ### Somef dataset -----------------------------------------------------------------------------------------------------------------------
 
-dataframecontainers_list = [DataframeContainer(name, '../data/somef_data.csv') for name in names_list]
+dataframecontainers_list = [DataframeContainer(name, '../data/somef_data.csv', '../data/somef_data.csv') for name in names_list]
 
+def getF1Score(elem):
+    return elem['F1 score']
+
+def printOverView(dict):
+    for category, results in dict.items():
+        csvFileName = "overviews.csv"
+        csvExists = os.path.exists('../results/overviews/' + csvFileName)
+        with open('../results/overviews/' + csvFileName, 'a+') as csvfile:
+            csvWriter = csv.writer(csvfile, delimiter=';')
+            if not csvExists:
+                csvWriter.writerow(["Category", "F1 score", "Pipeline_id", "Pipeline", "Validation set", "Training dataset"])
+            results.sort(key=lambda x: x['F1 score'], reverse=True)
+            for i in range(2):
+                csvWriter.writerow([category, results[i]['F1 score'], results[i]['pipeline_id'], results[i]['pipeline'], results[i]['validation set'], results[i]['training_dataset']])       
 
 ## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
 
@@ -221,8 +264,22 @@ for container in dataframecontainers_list:
     container.save_pickle()
     container.confusion_matrix_macro()
     container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
+    my_dict[container.name].append({
+        'F1 score': container.f1score,
+        'pipeline': container.clf.steps,
+        'validation set': container.validationFilename,
+        'pipeline_id': container.getPipelineId(),
+        'training_dataset': container.inputFilename,
+    })
+    #container.confusion_matrix_weighted()
+    #container.printScoreboard()#
+
+
+    #break
+
+print(my_dict)
+
+
 
 ## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
 
@@ -235,8 +292,15 @@ for container in dataframecontainers_list:
     container.save_pickle()
     container.confusion_matrix_macro()
     container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
+    my_dict[container.name].append({
+        'F1 score': container.f1score,
+        'pipeline': container.clf.steps,
+        'validation set': 'something',
+        'pipeline_id': container.getPipelineId(),
+        'training_dataset': 'somef data',
+    })
+    #container.confusion_matrix_weighted()
+    #container.printScoreboard()
 
 ## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
 
@@ -249,8 +313,19 @@ for container in dataframecontainers_list:
     container.save_pickle()
     container.confusion_matrix_macro()
     container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
+    my_dict[container.name].append({
+        'F1 score': container.f1score,
+        'pipeline': container.clf.steps,
+        'validation set': 'something',
+        'pipeline_id': container.getPipelineId(),
+        'training_dataset': 'somef data',
+    })
+    #container.confusion_matrix_weighted()
+    #container.printScoreboard()
+print(my_dict)
+printOverView(my_dict)
+
+exit(0)
 
 ## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
 
@@ -491,3 +566,5 @@ for container in dataframecontainers_list:
     container.printScoreboard()
     container.confusion_matrix_weighted()
     container.printScoreboard()
+
+
