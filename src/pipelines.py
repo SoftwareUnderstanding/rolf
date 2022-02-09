@@ -216,6 +216,7 @@ class DataframeContainer:
                 rownum = len(csvfile.readlines())
             print(rownum)
             self.pipelineid = str(rownum) + '_' + self.name
+            self.currentDatetime = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
             csvWriter.writerow([self.pipelineid,
                                 self.clf.steps,
                                 self.inputFilename, 
