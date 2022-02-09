@@ -222,7 +222,8 @@ class DataframeContainer:
                                 str(self.f1score) + ' ' +  self.metrics_type, 
                                 str(self.precision) + ' ' +  str(self.metrics_type), 
                                 str(self.recall) + ' ' +  self.metrics_type, 
-                                self.currentDatetime + '/' + self.pickleFilename, 
+                                #self.currentDatetime + '/' + self.pickleFilename, 
+                                '',
                                 self.currentDatetime, 
                                 '1.0',
                                 self.validationFilename])
