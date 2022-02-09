@@ -250,7 +250,8 @@ def printOverView(dict):
                 csvWriter.writerow(["Category", "F1 score", "PipelineID", "Pipeline", "Validation set", "Training dataset", "Validation dataset"])
             results.sort(key=lambda x: x['F1 score'], reverse=True)
             for i in range(2):
-                csvWriter.writerow([category, results[i]['F1 score'], results[i]['pipeline_id'], results[i]['pipeline'], results[i]['validation set'], results[i]['training_dataset']])       
+                if results[i]['F1 score'] >= 0.75:
+                    csvWriter.writerow([category, results[i]['F1 score'], results[i]['pipeline_id'], results[i]['pipeline'], results[i]['validation set'], results[i]['training_dataset']])       
 
 
 
@@ -262,6 +263,7 @@ datasets = []
 for i in range(len(dirs)):
     if '.csv' in dirs[i]:
         datasets.append(dirs[i])
+
 
 
 # Dataset combinations:
@@ -283,453 +285,123 @@ for i in range(len(dirs)):
 
 for i in range(len(datasets)):
     for j in range(len(datasets)):
-        my_dict = defaultdict(lambda: [])
-        dataframecontainers_list = [DataframeContainer(name, '../data/' + datasets[i], '../data/' + datasets[j]) for name in names_list]
+        if 'test' in datasets[i]:
+            continue
+        elif 'train' in datasets[j]:
+            continue
+        elif i == j:
+            continue
+        else:
+            my_dict = defaultdict(lambda: [])
+            dataframecontainers_list = [DataframeContainer(name, '../data/' + datasets[i], '../data/' + datasets[j]) for name in names_list]
+            
+            ## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_cv_ru_lsvc()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
         
-        ## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_cv_ru_lsvc()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-    
-        ## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_tfidf_ru_lsvc()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-
-        ## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_tfidf_ru_rfc()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-
-        ## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_cv_ru_rfc()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-
-        ## TF+IDF + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_tfidf_ru_mnb()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-
-        ## CountVectorizer + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-        for container in dataframecontainers_list:
-            container.filter_dataframe()
-            container.separate_x_y()
-            container.split_train_test()
-            container.clf_fit_cv_ru_mnb()
-            container.predict()
-            container.save_pickle()
-            container.confusion_matrix_macro()
-            container.printScoreboard()
-            my_dict[container.name].append({
-                'F1 score': container.f1score,
-                'pipeline': container.clf.steps,
-                'validation set': container.validationFilename,
-                'pipeline_id': container.pipelineid,
-                'training_dataset': container.inputFilename,
-            })
-
-        printOverView(my_dict)
-
-
-"""
-
-### Train: somef_data_train -----------------------------------------------------------------------------------------------------------------------
-### Validation: somef_data_test -----------------------------------------------------------------------------------------------------------------------
-
-dataframecontainers_list = [DataframeContainer(name, '../data/somef_data_train_.csv', '../data/somef_data_test.csv') for name in names_list]
-
-
-## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()#
-
-
-
-## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()
-
-## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()
-
-
-## CountVectorizer + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    my_dict[container.name].append({
-        'F1 score': container.f1score,
-        'pipeline': container.clf.steps,
-        'validation set': container.validationFilename,
-        'pipeline_id': container.pipelineid(),
-        'training_dataset': container.inputFilename,
-    })
-    #container.confusion_matrix_weighted()
-    #container.printScoreboard()
-
-printOverView(my_dict)
-
-
-
-
-### Train: somef_data_description_train -----------------------------------------------------------------------------------------------------------------------
-### Validation: somef_data_description_test -----------------------------------------------------------------------------------------------------------------------
-
-
-dataframecontainers_list = [DataframeContainer(name, '../data/somef_data_description.csv') for name in names_list]
-
-
-## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-
-## CountVectorizer + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-
-
-
-
-
-
-
-
-
-
-### Merged dataset -----------------------------------------------------------------------------------------------------------------------
-
-dataframecontainers_list = [DataframeContainer(name, '../data/merged.csv') for name in names_list]
-
-
-## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_lsvc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_rfc()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-## TF+IDF + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_tfidf_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-
-## CountVectorizer + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
-
-for container in dataframecontainers_list:
-    container.filter_dataframe()
-    container.separate_x_y()
-    container.split_train_test()
-    container.clf_fit_cv_ru_mnb()
-    container.predict()
-    container.save_pickle()
-    container.confusion_matrix_macro()
-    container.printScoreboard()
-    container.confusion_matrix_weighted()
-    container.printScoreboard()
-
-
-"""
+            ## TF+IDF + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_tfidf_ru_lsvc()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
+
+            ## TF+IDF + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_tfidf_ru_rfc()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
+
+            ## CountVectorizer + RandomUndersampling + RandomForestClassifier -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_cv_ru_rfc()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
+
+            ## TF+IDF + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_tfidf_ru_mnb()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
+
+            ## CountVectorizer + RandomUndersampling + MultinomialNB -----------------------------------------------------------------------------------------------------------------------
+            for container in dataframecontainers_list:
+                container.filter_dataframe()
+                container.separate_x_y()
+                container.split_train_test()
+                container.clf_fit_cv_ru_mnb()
+                container.predict()
+                #container.save_pickle()
+                container.confusion_matrix_macro()
+                container.printScoreboard()
+                my_dict[container.name].append({
+                    'F1 score': container.f1score,
+                    'pipeline': container.clf.steps,
+                    'validation set': container.validationFilename,
+                    'pipeline_id': container.pipelineid,
+                    'training_dataset': container.inputFilename,
+                })
+
+            printOverView(my_dict)
+ 
