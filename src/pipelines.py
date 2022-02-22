@@ -270,12 +270,14 @@ def printOverView(dict):
 #        datasets.append(dirs[i])
 
 
-datasets = [('abstracts_train.csv', 'abstracts_test.csv'),
-			('somef_data_train.csv', 'somef_data_test.csv'),
-			('somef_data_description_train.csv', 'somef_data_description_test.csv'),
-			('merged_abstracts_somef_data_description.csv', 'somef_data.csv'),
-			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
-			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
+#datasets = [('abstracts_train.csv', 'abstracts_test.csv'),
+#			('somef_data_train.csv', 'somef_data_test.csv'),
+#			('somef_data_description_train.csv', 'somef_data_description_test.csv'),
+#			('merged_abstracts_somef_data_description.csv', 'somef_data.csv'),
+#			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
+#			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
+
+datasets = [('readme_train.csv', 'readme_test.csv')]
 
 # Dataset combinations:
 # Train - Validation
