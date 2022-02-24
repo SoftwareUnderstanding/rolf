@@ -41,14 +41,26 @@ nb_sample = 5000
 #			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
-datasets = [('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv'),
-			('abstracts.csv', 'readme_test.csv'),
-			('somef_data_train.csv', 'readme_test.csv'),
-			('readme_train.csv', 'readme_test.csv'),
-			('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
-			('abstracts.csv', 'somef_data_test.csv'),
-			('somef_data_train.csv', 'somef_data_test.csv'),
-			('readme_train.csv', 'somef_data_test.csv')]
+#datasets = [('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv'),
+#			('abstracts.csv', 'readme_test.csv'),
+#			('somef_data_train.csv', 'readme_test.csv'),
+#			('readme_train.csv', 'readme_test.csv'),
+#			('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
+#			('abstracts.csv', 'somef_data_test.csv'),
+#			('somef_data_train.csv', 'somef_data_test.csv'),
+#			('readme_train.csv', 'somef_data_test.csv')]
+
+
+datasets = [('abstracts.csv', 'somef_data.csv'),
+            ('somef_data_train.csv', 'somef_data_test.csv'),
+            ('readme.csv', 'somef_data.csv'),
+            ('somed_data.csv', 'readme.csv'),
+            ('abstracts.csv', 'readme.csv'),
+            ('readme_train.csv', 'readme_test.csv'),
+            ('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
+            ('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv')]
+
+
 
 results_filename = 'results.csv'
 df_results = pd.DataFrame()
@@ -204,9 +216,9 @@ for train, test in datasets:
 		#writeResults('results.csv', df_results, train, test)
 
 		print(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(LogisticRegression(max_iter=1000), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='LR_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='LR_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(LogisticRegression(max_iter=1000), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='LR_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='LR_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
 		print(df_results)
 
