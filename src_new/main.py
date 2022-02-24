@@ -1,6 +1,7 @@
 from cgi import print_environ
 from time import time
 import pandas as pd
+from sklearn import datasets
 from Preprocessor import Preprocessor
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
@@ -8,11 +9,12 @@ import csv
 from sklearn.linear_model import LogisticRegression
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.utils.class_weight import compute_class_weight
-from sklearn.svm import SVC
+from sklearn.svm import SVC, LinearSVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.naive_bayes import MultinomialNB
 from keras.preprocessing import sequence
 from keras.preprocessing.text import Tokenizer
 from tqdm import tqdm
@@ -32,12 +34,21 @@ CV_splits = 5
 sample = True
 nb_sample = 5000
 
-datasets = [('abstracts_train.csv', 'abstracts_test.csv'),
+#datasets = [('abstracts_train.csv', 'abstracts_test.csv'),
+#			('somef_data_train.csv', 'somef_data_test.csv'),
+#			('somef_data_description_train.csv', 'somef_data_description_test.csv'),
+#			('merged_abstracts_somef_data_description.csv', 'somef_data.csv'),
+#			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
+#			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
+
+datasets = [('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv'),
+			('abstracts.csv', 'readme_test.csv'),
+			('somef_data_train.csv', 'readme_test.csv'),
+			('readme_train.csv', 'readme_test.csv'),
+			('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
+			('abstracts.csv', 'somef_data_test.csv'),
 			('somef_data_train.csv', 'somef_data_test.csv'),
-			('somef_data_description_train.csv', 'somef_data_description_test.csv'),
-			('merged_abstracts_somef_data_description.csv', 'somef_data.csv'),
-			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
-			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
+			('readme_train.csv', 'somef_data_test.csv')]
 
 results_filename = 'results.csv'
 df_results = pd.DataFrame()
@@ -108,33 +119,33 @@ for train, test in datasets:
 		xtest_tfidf = count_vect.transform(x_test)
 		print(f'TF-IDF done in: {time()-start_time:.2f} s')
 
-		start_time = time()
-		print(f'Word embedding starts for {cat=} category {ind}/{len(categories)}')
+		#start_time = time()
+		#print(f'Word embedding starts for {cat=} category {ind}/{len(categories)}')
 		#word_index, xtrain_embeddingmatrix = createWordEmbedding(df_train, TEXT)
 		#token = Tokenizer(oov_token='<OOV>')
 		#token.fit_on_texts(df_train[TEXT])
 		#train_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_train), maxlen=300)
 		#test_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_test), maxlen=300)
 		
-		token = Tokenizer(oov_token='<OOV>')
-		token.fit_on_texts(df_train[TEXT])
-		word_index = token.word_index
+		#token = Tokenizer(oov_token='<OOV>')
+		#token.fit_on_texts(df_train[TEXT])
+		#word_index = token.word_index
 		# convert text to sequence of tokens and pad them to ensure equal length vectors 
-		train_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_train), maxlen=300)
-		test_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_test), maxlen=300)
+		#train_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_train), maxlen=300)
+		#test_seq_x = sequence.pad_sequences(token.texts_to_sequences(x_test), maxlen=300)
 
 		# create token-embedding mapping
 		#!wget https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M-subword.zip
     	#!unzip crawl-300d-2M-subword.zip
-		pretrained = fasttext.FastText.load_model('src_new/crawl-300d-2M-subword.bin')
-		embedding_matrix = np.zeros((len(word_index) + 1, 300))
-		words = []
-		for word, i in tqdm(word_index.items()):
-			embedding_vector = pretrained.get_word_vector(word) #embeddings_index.get(word)
-			words.append(word)
-			if embedding_vector is not None:
-				embedding_matrix[i] = embedding_vector
-		print(f'Word embedding done in: {time()-start_time:.2f} s')
+		#pretrained = fasttext.FastText.load_model('src_new/crawl-300d-2M-subword.bin')
+		#embedding_matrix = np.zeros((len(word_index) + 1, 300))
+		#words = []
+		#for word, i in tqdm(word_index.items()):
+		#	embedding_vector = pretrained.get_word_vector(word) #embeddings_index.get(word)
+		#	words.append(word)
+		#	if embedding_vector is not None:
+		#		embedding_matrix[i] = embedding_vector
+		#print(f'Word embedding done in: {time()-start_time:.2f} s')
 
 		start_time = time()
 		print(f'Random undersampler starts for {cat=} category {ind}/{len(categories)}')
@@ -180,63 +191,75 @@ for train, test in datasets:
 		print(f'Labels: {labels}')
 		print(f'Label encoder done in: {time()-start_time:.2f} s')
 
-		print(f'LSTM starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(cross_validate_NN(create_lstm_model(word_index, labels, embedding_matrix, pre_trained=False), 
-                                                     train_seq_x, y_train, test_seq_x, y_test, name="LSTM_WE",
-                                                     scoring=Report.score_metrics, n_splits=CV_splits, save=True))
-		writeResults('results.csv', df_results, train, test)
+		#print(f'LSTM starts for {cat=} category {ind}/{len(categories)}')
+		#df_results = df_results.append(cross_validate_NN(create_lstm_model(word_index, labels, embedding_matrix, pre_trained=False), 
+        #                                             train_seq_x, y_train, test_seq_x, y_test, name="LSTM_WE",
+        #                                             scoring=Report.score_metrics, n_splits=CV_splits, save=True))
+		#writeResults('results.csv', df_results, train, test)
 
-		print(f'Bi-LSTM starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(cross_validate_NN(create_bidirec_lstm_model(word_index, labels, embedding_matrix, pre_trained=False), 
-                                                     train_seq_x, y_train, test_seq_x, y_test, name="Bi-LSTM_WE",
-                                                     scoring=Report.score_metrics, n_splits=CV_splits, save=True))
-		writeResults('results.csv', df_results, train, test)
+		#print(f'Bi-LSTM starts for {cat=} category {ind}/{len(categories)}')
+		#df_results = df_results.append(cross_validate_NN(create_bidirec_lstm_model(word_index, labels, embedding_matrix, pre_trained=False), 
+        #                                             train_seq_x, y_train, test_seq_x, y_test, name="Bi-LSTM_WE",
+        #                                             scoring=Report.score_metrics, n_splits=CV_splits, save=True))
+		#writeResults('results.csv', df_results, train, test)
 
 		print(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=1000), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='LR_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=1000), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='LR_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		
+		print(df_results)
 
 		print(f'SVC starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(SVC(), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(SVC(), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(SVC(), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(SVC(), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='SVC_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 
 		print(f'KNeighborsClassifier starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='KNN_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='KNN_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='KNN_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='KNN_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 		
 		print(f'RandomForestClassifier starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='RandomForestClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='RandomForestClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='RandomForestClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='RandomForestClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 
 		print(f'SGDClassifier starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(SGDClassifier(loss='modified_huber', max_iter=1000, tol=1e-3,   n_iter_no_change=10, early_stopping=True, n_jobs=-1 ), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SGDClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(SGDClassifier(loss='modified_huber', max_iter=1000, tol=1e-3,   n_iter_no_change=10, early_stopping=True, n_jobs=-1 ), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SGDClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(SGDClassifier(loss='modified_huber', max_iter=1000, tol=1e-3,   n_iter_no_change=10, early_stopping=True, n_jobs=-1 ), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SGDClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(SGDClassifier(loss='modified_huber', max_iter=1000, tol=1e-3,   n_iter_no_change=10, early_stopping=True, n_jobs=-1 ), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='SGDClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 
 		print(f'AdaBoostClassifier starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='AdaBoostClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='AdaBoostClassifier_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='AdaBoostClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='AdaBoostClassifier_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 
-		print(f'SVC starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(SVC(), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		print(f'LinearSVC starts for {cat=} category {ind}/{len(categories)}')
+		df_results = df_results.append(Report.report(LinearSVC(), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(SVC(), xtrain_count, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(LinearSVC(), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='SVC_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
+		print(df_results)
+
+		print(f'MultinomialNB starts for {cat=} category {ind}/{len(categories)}')
+		df_results = df_results.append(Report.report(MultinomialNB(), xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		writeResults('results.csv', df_results, train, test)
+		df_results = df_results.append(Report.report(MultinomialNB(), xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='SVC_TFIDF', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		writeResults('results.csv', df_results, train, test)
+		print(df_results)
 
 		df_results.to_csv('final_results.csv', sep=';')
-		print(df_results)
 
 
 
