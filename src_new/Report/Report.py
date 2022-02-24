@@ -27,7 +27,7 @@ score_metrics = {'acc': accuracy_score,
 			   'tp': tp, 'tn': tn,
 			   'fp': fp, 'fn': fn}
 
-def report(clf, x_train, y_train, X_test, y_test, label, name='classifier', cv=5, dict_scoring=None, fit_params=None, save=False):
+def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, name='classifier', cv=5, dict_scoring=None, fit_params=None, save=False):
 	'''
 		Function create a metric report automatically with cross_validate function.
 		@param clf: (model) classifier
@@ -76,7 +76,9 @@ def report(clf, x_train, y_train, X_test, y_test, label, name='classifier', cv=5
 		rownum = len(csvfile.readlines())
 	# initialisation 
 	res = {'PipelineID' : str(rownum) + '_' + label,
-		   'Pipeline' : name }
+		   'Pipeline' : name ,
+		   'Train dataset' : train_name,
+		   'Validation dataset' : test_name}
 	for i in scores:  # loop on each metric generate text and values
 		if i == "estimator": continue
 		for j in enumerate(scores[i]):
