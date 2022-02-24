@@ -167,6 +167,7 @@ for train, test in datasets:
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='LR_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='LR_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+
 		writeResults('results.csv', df_results, train, test)
 		print(df_results)
 
