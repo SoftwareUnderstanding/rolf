@@ -42,12 +42,14 @@ nltk.download('punkt')
 class DataframeContainer:
     def __init__(self, name, inputFilename, validationFilename):
         self.name = name
+        print(self.name)
         self.inputFilename = inputFilename
         self.dataframe = pd.read_csv(self.inputFilename, sep=';')
         self.validationFilename = validationFilename
         self.validationDataframe = pd.read_csv(self.validationFilename, sep=';')
         Preprocessor(self.validationDataframe).run()
         Preprocessor(self.dataframe).run()
+        print(f'Data read for: {self.name}')
 
     def filter_dataframe(self):
         count = 0
@@ -278,6 +280,7 @@ def printOverView(dict):
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
 datasets = [('readme_train.csv', 'readme_test.csv')]
+print('Datasets set')
 
 # Dataset combinations:
 # Train - Validation
@@ -300,8 +303,10 @@ for i in range(len(datasets)):
     train = datasets[i][0]
     test = datasets[i][1]
     my_dict = defaultdict(lambda: [])
+    print('Start read datasets')
     dataframecontainers_list = [DataframeContainer(name, 'data/' + train, 'data/' + test) for name in names_list]
-    
+    print('Read datasets done')
+
     ## CountVectorizer + RandomUndersampling + LineraSVC -----------------------------------------------------------------------------------------------------------------------
     for container in dataframecontainers_list:
         container.filter_dataframe()
