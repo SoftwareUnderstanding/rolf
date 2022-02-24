@@ -28,7 +28,7 @@ from writeResults import writeResults
 from Report.CrossValidateNN import cross_validate_NN
 from lstmModel import create_lstm_model, create_bidirec_lstm_model
 
-TEXT = "clean_Text"
+TEXT = "Text"
 LABEL = "Label"
 CV_splits = 5
 sample = True
@@ -82,6 +82,19 @@ for train, test in datasets:
 	categories = df_train[LABEL].unique()
 
 	for i, cat in enumerate(categories):
+		print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
+		start_time = time()
+		df_train = pd.read_csv('data/'+train, sep=';')
+		df_test = pd.read_csv('data/'+test, sep = ';')
+		
+		print(f'Read done in: {time()-start_time:.2f} s')
+		start_time = time()
+		print(f'Start preprocessor')
+		Preprocessor(df_train).run()
+		Preprocessor(df_test).run()
+		print(f'Preprocessing done in: {time()-start_time:.2f} s')
+		start_time = time()
+
 		ind = i + 1
 		print(f'Filter starts for {cat=} category {ind}/{len(categories)}')
 		filter_dataframe(df_train, cat)
@@ -90,7 +103,7 @@ for train, test in datasets:
 		
 		start_time = time()
 		print(f'Train test split starts for {cat=} category {ind}/{len(categories)}')
-		df_train = df_train.drop(columns = 'Text')
+		#df_train = df_train.drop(columns = 'Text')
 		df_train = df_train.drop(columns = 'Repo')
 		x_train = df_train[TEXT]
 		y_train = df_train[LABEL]

@@ -47,7 +47,7 @@ class Preprocessor:
 		return [token for token in text if 'http' not in token]
 
 	def run(self):
-		NEWCOLNAME = 'clean_' + TEXT
+		NEWCOLNAME = TEXT
 		#TODO: remove links
 		#self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_links(x)) -> too slow
 
