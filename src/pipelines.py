@@ -47,13 +47,16 @@ class DataframeContainer:
         self.dataframe = pd.read_csv(self.inputFilename, sep=';')
         self.validationFilename = validationFilename
         self.validationDataframe = pd.read_csv(self.validationFilename, sep=';')
-        Preprocessor(self.validationDataframe).run()
         Preprocessor(self.dataframe).run()
+        Preprocessor(self.validationDataframe).run()
+        print(self.dataframe.head())
         print(f'Data read for: {self.name}')
 
     def filter_dataframe(self):
         count = 0
         for ind, row in self.dataframe.iterrows():
+            if str(row['Label']) == 'General':
+                self.dataframe.drop([ind], inplace=True)
             if self.name != str(row['Label']):
                 count += 1
                 row['Label'] = 'Other'
@@ -62,6 +65,8 @@ class DataframeContainer:
 
         count = 0
         for ind, row in self.validationDataframe.iterrows():
+            if str(row['Label']) == 'General':
+                self.validationDataframe.drop([ind], inplace=True)
             if self.name != str(row['Label']):
                 count += 1
                 row['Label'] = 'Other'
@@ -239,8 +244,9 @@ class DataframeContainer:
         with open('results/scoreboards/' + csvFileName, 'r') as csvfile:
             return len(csvfile.readlines())
 
-names_list = ["Audio", "Computer Vision", "General", "Graphs", "Natural Language Processing", "Reinforcement Learning", "Sequential"]
+names_list = ["Audio", "Computer Vision","Graphs", "Natural Language Processing", "Reinforcement Learning", "Sequential"]
 
+#names_list = ["Natural Language Processing"]
 #my_dict = defaultdict(lambda: [])
 
 
@@ -279,7 +285,7 @@ def printOverView(dict):
 #			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
-datasets = [('readme_train.csv', 'readme_test.csv')]
+datasets = [('readme.csv', 'somef_data.csv')]
 print('Datasets set')
 
 # Dataset combinations:
