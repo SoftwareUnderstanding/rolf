@@ -2,7 +2,7 @@ from cgi import print_environ
 from time import time
 import pandas as pd
 from sklearn import datasets
-from Preprocessor import Preprocessor
+from Preprocessor1 import Preprocessor
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import csv
@@ -42,15 +42,16 @@ nb_sample = 5000
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
 datasets = [('somef_data_train.csv', 'somef_data_test.csv'),
-			('somef_data_description_train.csv', 'somef_data_description_test.csv'),
-			('abstracts.csv', 'somef_data.csv'),
-			('readme.csv', 'somef_data.csv'),
-			('somed_data.csv', 'readme.csv'),
-			('abstracts.csv', 'readme.csv'),
-			('readme_train.csv', 'readme_test.csv'),
-			('merged_abstracts_train_somef_data_train.csv', 'somef_data_test.csv'),
-			('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
-			('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv')]
+			('readme_train.csv', 'readme_test.csv')]
+			#('somef_data_description_train.csv', 'somef_data_description_test.csv'),
+			#('abstracts.csv', 'somef_data.csv'),
+			#('readme.csv', 'somef_data.csv'),
+			#('somed_data.csv', 'readme.csv'),
+			#('abstracts.csv', 'readme.csv'),
+			
+			#('merged_abstracts_train_somef_data_train.csv', 'somef_data_test.csv'),
+			#('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
+			#('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv')]
 
 results_filename = 'results.csv'
 df_results = pd.DataFrame()
@@ -66,20 +67,22 @@ def filter_dataframe(df, cat):
 counter = 1
 for train, test in datasets:
 	
-	print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
-	start_time = time()
-	df_train = pd.read_csv('data/'+train, sep=';')
+	#print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
+	#start_time = time()
+	#df_train = pd.read_csv('data/'+train, sep=';')
 	df_test = pd.read_csv('data/'+test, sep = ';')
 	
-	print(f'Read done in: {time()-start_time:.2f} s')
-	start_time = time()
-	print(f'Start preprocessor')
-	Preprocessor(df_train).run()
-	Preprocessor(df_test).run()
-	print(f'Preprocessing done in: {time()-start_time:.2f} s')
-	start_time = time()
+	#print(f'Read done in: {time()-start_time:.2f} s')
+	#start_time = time()
+	#print(f'Start preprocessor')
+	#Preprocessor(df_train).run()
+	#Preprocessor(df_test).run()
+	#print(f'Preprocessing done in: {time()-start_time:.2f} s')
+	#start_time = time()
 
-	categories = df_train[LABEL].unique()
+	#categories = df_test[LABEL].unique()
+
+	categories = ['General']
 
 	for i, cat in enumerate(categories):
 		print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
