@@ -33,6 +33,9 @@ class Preprocessor:
 		token_list = text_to_word_sequence(text)	# tokenize text 
 		return [token for token in token_list if token not in stop_words]
 		
+	def remove_codeblocks(self, text):
+		return re.sub('```.*?```', ' ', text)
+
 	def remove_punctuation(self, text):
 		punctuationfree="".join([i for i in text if i not in string.punctuation])
 		#new_text = []
@@ -45,6 +48,10 @@ class Preprocessor:
 		#		new_text.append(new_word)
 		return punctuationfree
 		#return ''.join(new_text)
+
+	def remove_non_ascii(self, text):
+		encoded_string = text.encode("ascii", "ignore")
+		return encoded_string.decode()
 
 	def stemming(self, text, porter_stemmer):
 		stem_text = [porter_stemmer.stem(word) for word in text]
@@ -82,24 +89,32 @@ class Preprocessor:
 
 	def run(self):
 		NEWCOLNAME = TEXT
-		#TODO: remove links
-		#self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_links(x)) -> too slow
+		
+		#Remove codeblocks
+		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_codeblocks(x))
+		print('After codeblocks:\n', self.data.head())
 
 		#Remove punctuation
-		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_punctuation(x))
+		self.data[NEWCOLNAME]= self.data[NEWCOLNAME].apply(lambda x: self.remove_punctuation(x))
+		print('After punctuation:\n', self.data.head())
+
+		#Remove non ascii
+		#self.data[NEWCOLNAME]= self.data[NEWCOLNAME].apply(lambda x: self.remove_non_ascii(x))
+		#This does not improve the prformance at all and it is pretty slow
 
 		#Transfor to lowercase
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x: x.lower())
 
 		#Remove stop words
 		stop_words = stopwords.words('english')
+		stop_words += ['network', 'install', 'run', 'file', 'used', 'result', 'paper', 'python', 'using', 'code', 'model', 'training', 'implementation', 'use']
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_stop_words(x, stop_words))
 
 		#Remove links
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_links2(x))
 
 		#Keep only common words
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))
+		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))
 
 		#Stemming
 		wordnet_lemmatizer = WordNetLemmatizer()
@@ -111,6 +126,6 @@ class Preprocessor:
 		
 		#Join tokens
 		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: ' '.join(x))
-		#print(self.data.head())
+		print('Final: \n', self.data.head())
 
 		

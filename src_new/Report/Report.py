@@ -75,7 +75,7 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 	with open('results/scoreboards/' + csvFileName, 'r') as csvfile:
 		rownum = len(csvfile.readlines())
 	# initialisation 
-	res = {'PipelineID' : str(rownum) + '_' + label,
+	res = {'PipelineID' : label+'_No_general_in_negativ_samples_structured',
 		   'Pipeline' : name ,
 		   'Train dataset' : train_name,
 		   'Validation dataset' : test_name}

@@ -41,14 +41,12 @@ nb_sample = 5000
 #			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
-datasets = [('somef_data_train.csv', 'somef_data_test.csv'),
+datasets = [#('somef_data_train.csv', 'somef_data_test.csv'),
 			('readme_train.csv', 'readme_test.csv')]
-			#('somef_data_description_train.csv', 'somef_data_description_test.csv'),
 			#('abstracts.csv', 'somef_data.csv'),
 			#('readme.csv', 'somef_data.csv'),
-			#('somed_data.csv', 'readme.csv'),
+			#('somef_data.csv', 'readme.csv'),
 			#('abstracts.csv', 'readme.csv'),
-			
 			#('merged_abstracts_train_somef_data_train.csv', 'somef_data_test.csv'),
 			#('merged_abstracts_somef_data_train_readme_train.csv', 'somef_data_test.csv'),
 			#('merged_abstracts_somef_data_train_readme_train.csv', 'readme_test.csv')]
@@ -64,13 +62,30 @@ def filter_dataframe(df, cat):
 			row[LABEL] = 'Other'
 	print(f'{cat} filtered {count} rows in training dataset')
 
+def get_sampling_strategy(df_train):
+	sizes = df_train.groupby(LABEL).size()
+	indexes = list(sizes.index)
+	cat_size = sizes[indexes.index(cat)]
+	other_cat_size = int(cat_size/(len(df_train[LABEL].unique())-2))+1
+	sampling_stratgy = {}
+	for c in df_train[LABEL].unique():
+		if c == cat:
+			sampling_stratgy[c] = cat_size
+		elif c == 'General':
+			sampling_stratgy[c] = 0
+		else:
+			sampling_stratgy[c] = min(other_cat_size, sizes[indexes.index(c)])
+	print('Sampling strategy: ', sampling_stratgy)
+	return sampling_stratgy
+
+
 counter = 1
 for train, test in datasets:
 	
 	#print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
 	#start_time = time()
 	#df_train = pd.read_csv('data/'+train, sep=';')
-	df_test = pd.read_csv('data/'+test, sep = ';')
+	#df_test = pd.read_csv('data/'+test, sep = ';')
 	
 	#print(f'Read done in: {time()-start_time:.2f} s')
 	#start_time = time()
@@ -82,7 +97,7 @@ for train, test in datasets:
 
 	#categories = df_test[LABEL].unique()
 
-	categories = ['General']
+	categories = ["Sequential", "Natural Language Processing", "Audio", "Computer Vision", "Graphs", "Reinforcement Learning"]
 
 	for i, cat in enumerate(categories):
 		print(f'Reaf file {counter}/{len(datasets)} \nTrain dataset: {train} \nTest dataset: {test}')
@@ -95,15 +110,13 @@ for train, test in datasets:
 		print(f'Start preprocessor')
 		Preprocessor(df_train).run()
 		Preprocessor(df_test).run()
+		df_train.drop( df_train[ df_train[TEXT] == "" ].index , inplace=True)
+		df_test.drop( df_test[ df_test[TEXT] == "" ].index , inplace=True)
 		print(f'Preprocessing done in: {time()-start_time:.2f} s')
 		start_time = time()
+		
 
 		ind = i + 1
-		print(f'Filter starts for {cat=} category {ind}/{len(categories)}')
-		filter_dataframe(df_train, cat)
-		filter_dataframe(df_test, cat)
-		print(f'Filering done in: {time()-start_time:.2f} s')
-		
 		start_time = time()
 		print(f'Train test split starts for {cat=} category {ind}/{len(categories)}')
 		#df_train = df_train.drop(columns = 'Text')
@@ -113,61 +126,97 @@ for train, test in datasets:
 		x_test = df_test[TEXT]
 		y_test = df_test[LABEL]
 
+		#Undersampling
+		print(df_train.groupby(LABEL).size())
+		# Undersamples 
+		undersample = RandomUnderSampler(sampling_strategy=get_sampling_strategy(df_train))
+		#undersample = RandomUnderSampler(sampling_strategy='majority')
+		x_train, y_train = undersample.fit_resample(x_train.to_frame(TEXT), y_train)
+
+		undersample = RandomUnderSampler(sampling_strategy=get_sampling_strategy(df_test))
+		#undersample = RandomUnderSampler(sampling_strategy='majority')
+		#x_test, y_test = undersample.fit_resample(x_test.to_frame(TEXT), y_test)
+
+		print(f'Filter starts for {cat=} category {ind}/{len(categories)}')
+		y_train = y_train.to_frame(LABEL)
+		filter_dataframe(y_train, cat)
+		y_test = y_test.to_frame(LABEL)
+		filter_dataframe(y_test, cat)
+		print(f'Filering done in: {time()-start_time:.2f} s')
+
+		#print([[x, list(y_train).count(x)] for x in set(y_train)])
+
+		#x_train = pd.Series(np.array(x_train))
+		#print(x_train.shape)
+
 		encoder = LabelEncoder()
 		y_train = encoder.fit_transform(y_train)
 		y_test = encoder.transform(y_test)
 		print('y_test: ', y_test)
 		print(f'Train test split done in: {time()-start_time:.2f} s')
 
+
 		start_time = time()
 		# CountVecotirzing
 		print(f'Count vectorizer starts for {cat=} category {ind}/{len(categories)}')
 		count_vect = getCountVectorizer(df_train, TEXT)
-		xtrain_count = count_vect.transform(x_train)
+		xtrain_count = count_vect.transform(x_train[TEXT])
 		xtest_count = count_vect.transform(x_test)
+		#if test is undersampled:
+		#xtest_count = count_vect.transform(x_test[TEXT])
 		print(f'Count vectorizing done in: {time()-start_time:.2f} s')
 
 		start_time = time()
 		# TF-IDF
 		print(f'TF-IDF starts for {cat=} category {ind}/{len(categories)}')
 		count_vect = getWordLevelVectorizer(df_train, TEXT)
-		xtrain_tfidf = count_vect.transform(x_train)
+		xtrain_tfidf = count_vect.transform(x_train[TEXT])
 		xtest_tfidf = count_vect.transform(x_test)
+		#if test is undersampled:
+		#xtest_tfidf = count_vect.transform(x_test[TEXT])
 		print(f'TF-IDF done in: {time()-start_time:.2f} s')
 
-		start_time = time()
-		print(f'Random undersampler starts for {cat=} category {ind}/{len(categories)}')
-		print(f'Shapes befor undersampler: xtrain_count: {xtrain_count.shape}, xtest_count: {xtest_count.shape}')
-		print('Train label: ', df_train.groupby(LABEL).size())
-		print('Test labels: ', df_test.groupby(LABEL).size())
-		undersample = RandomUnderSampler(sampling_strategy='majority')
-		xtrain_count, ytrain_count = undersample.fit_resample(xtrain_count, y_train)
-		xtest_count, ytest_count = undersample.fit_resample(xtest_count, y_test)
+		#start_time = time()
+		#print(f'Random undersampler starts for {cat=} category {ind}/{len(categories)}')
+		#print(f'Shapes befor undersampler: xtrain_count: {xtrain_count.shape}, xtest_count: {xtest_count.shape}')
+		#print('Train label: ', df_train.groupby(LABEL).size())
+		#print('Test labels: ', df_test.groupby(LABEL).size())
+		#undersample = RandomUnderSampler(sampling_strategy='majority')
+		#xtrain_count, ytrain_count = undersample.fit_resample(xtrain_count, y_train)
+		#xtest_count, ytest_count = undersample.fit_resample(xtest_count, y_test)
 		#print('Train label: ', ytrain_count.value_counts())
 		#print('Test labels: ', ytest_count.value_counts())
-		print(f'Shapes after undersampler: xtrain_count: {xtrain_count.shape}, xtest_count: {xtest_count.shape}')
-		print(f'Random undersampler done in: {time()-start_time:.2f} s')
+		#print(f'Shapes after undersampler: xtrain_count: {xtrain_count.shape}, xtest_count: {xtest_count.shape}')
+		#print(f'Random undersampler done in: {time()-start_time:.2f} s')
 
-		start_time = time()
-		print(f'Random undersampler starts for {cat=} category {ind}/{len(categories)}')
-		print(f'Shapes befor undersampler: xtrain_tfidf: {xtrain_tfidf.shape}, xtest_tfidf: {xtest_tfidf.shape}')
-		print('Train label: ', df_train.groupby(LABEL).size())
-		print('Test labels: ', df_test.groupby(LABEL).size())
-		xtrain_tfidf, ytrain_tfidf = undersample.fit_resample(xtrain_tfidf, y_train)
-		xtest_tfidf, ytest_tfidf = undersample.fit_resample(xtest_tfidf, y_test)
+		#start_time = time()
+		#print(f'Random undersampler starts for {cat=} category {ind}/{len(categories)}')
+		#print(f'Shapes befor undersampler: xtrain_tfidf: {xtrain_tfidf.shape}, xtest_tfidf: {xtest_tfidf.shape}')
+		#print('Train label: ', df_train.groupby(LABEL).size())
+		#print('Test labels: ', df_test.groupby(LABEL).size())
+		#xtrain_tfidf, ytrain_tfidf = undersample.fit_resample(xtrain_tfidf, y_train)
+		#xtest_tfidf, ytest_tfidf = undersample.fit_resample(xtest_tfidf, y_test)
 		#print('Train label: ', ytrain_tfidf.value_counts())
 		#print('Test labels: ', ytest_tfidf.value_counts())
-		print(f'Shapes after undersampler: xtrain_tfidf: {xtrain_tfidf.shape}, xtest_tfidf: {xtest_tfidf.shape}')
-		print(f'Random undersampler done in: {time()-start_time:.2f} s')
+		#print(f'Shapes after undersampler: xtrain_tfidf: {xtrain_tfidf.shape}, xtest_tfidf: {xtest_tfidf.shape}')
+		#print(f'Random undersampler done in: {time()-start_time:.2f} s')
+
+		#print(f'Filter starts for {cat=} category {ind}/{len(categories)}')
+		#filter_dataframe(ytrain_count, cat)
+		#filter_dataframe(ytest_count, cat)
+		#filter_dataframe(ytrain_tfidf, cat)
+		#filter_dataframe(ytest_tfidf, cat)
+		#print(f'Filering done in: {time()-start_time:.2f} s')
 
 		start_time = time()
 		print(f'Label encoder starts for {cat=} category {ind}/{len(categories)}')
 		encoder = LabelEncoder()
-		trainy_count = encoder.fit_transform(ytrain_count)
-		testy_count = encoder.transform(ytest_count)
+		trainy_count = encoder.fit_transform(y_train)
+		testy_count = encoder.transform(y_test)
+		print(trainy_count)
 
-		trainy_tfidf = encoder.fit_transform(ytrain_tfidf)
-		testy_tfidf = encoder.transform(ytest_tfidf)
+		trainy_tfidf = encoder.fit_transform(y_train)
+		testy_tfidf = encoder.transform(y_test)
 
 		labels = [0, 1]
 		test1=pd.DataFrame(data=np.transpose([labels,encoder.transform(labels)]), columns=["labels", "encoding"]).sort_values(by=["encoding"])
@@ -180,6 +229,8 @@ for train, test in datasets:
 		print(f'Label encoder done in: {time()-start_time:.2f} s')
 
 		print(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
+		print(f'{xtrain_count.shape=} {trainy_count.shape=} {xtest_count.shape=} {testy_count.shape=}')
+		print(f'ytrain 1: {np.count_nonzero(trainy_count == 1)}, ytrain 0: {np.count_nonzero(trainy_count == 0)}')
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='LR_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
 		df_results = df_results.append(Report.report(LogisticRegression(max_iter=10000), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='LR_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
@@ -215,17 +266,17 @@ for train, test in datasets:
 		writeResults('results.csv', df_results, train, test)
 		print(df_results)
 
-		print(f'AdaBoostClassifier starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='AdaBoostClassifier_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
-		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='AdaBoostClassifier_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
-		writeResults('results.csv', df_results, train, test)
-		print(df_results)
+		#print(f'AdaBoostClassifier starts for {cat=} category {ind}/{len(categories)}')
+		#df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='AdaBoostClassifier_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		#writeResults('results.csv', df_results, train, test)
+		#df_results = df_results.append(Report.report(AdaBoostClassifier(n_estimators=1000), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='AdaBoostClassifier_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		#writeResults('results.csv', df_results, train, test)
+		#print(df_results)
 
 		print(f'LinearSVC starts for {cat=} category {ind}/{len(categories)}')
-		df_results = df_results.append(Report.report(LinearSVC(), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='SVC_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(LinearSVC(), train, test, xtrain_count, trainy_count, xtest_count, testy_count, cat, name='Linear_SVC_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
-		df_results = df_results.append(Report.report(LinearSVC(), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='SVC_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
+		df_results = df_results.append(Report.report(LinearSVC(), train, test, xtrain_tfidf, trainy_tfidf, xtest_tfidf, testy_tfidf, cat, name='Linear_SVC_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		writeResults('results.csv', df_results, train, test)
 		print(df_results)
 
