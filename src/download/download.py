@@ -3,10 +3,9 @@ import json
 import pandas as pd
 import requests
 
-df = pd.read_csv('../../data/train_all.csv', sep=';')
+df = pd.read_csv('../../documentation/dataset/awesome_links.csv', sep=';')
 df_repos = df['Repo']
 df_repos.drop_duplicates(inplace=True)
-#Size: 10674
 
 for repo in df_repos:
     name ='_'.join(repo.split('/')[-2:])
@@ -16,6 +15,6 @@ for repo in df_repos:
     f = open("data/{}.txt".format(name), "w")
     f.write(r.text)
     f.close
-    os.system("somef describe -r {} -o {}.json -p -t 0.8".format(repo, name))
-    os.system("mv {}.json data/".format(name))
+    #os.system("somef describe -r {} -o {}.json -p -t 0.8".format(repo, name))
+    #os.system("mv {}.json data/".format(name))
     
