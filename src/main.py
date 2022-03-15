@@ -41,9 +41,9 @@ nb_sample = 5000
 #			('merged_abstracts_somef_data.csv', 'somef_data_description.csv'),
 #			('merged_somef_data_somef_data_description.csv', 'abstracts.csv')]
 
-datasets = [#('readme_semantic_web_train.csv', 'readme_semantic_web_test.csv')]
+datasets = [('readme_semantic_web_train.csv', 'readme_semantic_web_test.csv')]
 			#('somef_data_train.csv', 'somef_data_test.csv'),
-			('readme_train.csv', 'readme_test.csv')]
+			#('readme_train.csv', 'readme_test.csv')]
 			#('abstracts.csv', 'somef_data.csv'),
 			#('readme.csv', 'somef_data.csv'),
 			#('somef_data.csv', 'readme.csv'),
@@ -95,7 +95,7 @@ for train, test in datasets:
 
 	#categories = df_test[LABEL].unique()
 
-	categories = ["Sequential", "Natural Language Processing", "Audio", "Computer Vision", "Graphs", "Reinforcement Learning", 'Semantic Web']
+	categories = ["Sequential", "Natural Language Processing", "Audio", "Computer Vision", "Graphs", "Reinforcement Learning"]
 	#categories = ['Sequential']
 
 	for i, cat in enumerate(categories):
@@ -110,8 +110,8 @@ for train, test in datasets:
 		print(f'Read done in: {time()-start_time:.2f} s')
 		start_time = time()
 		print(f'Start preprocessor')
-		Preprocessor(df_train).run()
-		Preprocessor(df_test).run()
+		#Preprocessor(df_train).run()
+		#Preprocessor(df_test).run()
 		df_train.drop( df_train[ df_train[TEXT] == "" ].index , inplace=True)
 		df_test.drop( df_test[ df_test[TEXT] == "" ].index , inplace=True)
 		print(f'Preprocessing done in: {time()-start_time:.2f} s')

@@ -117,8 +117,8 @@ class Preprocessor:
 		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))
 
 		#Stemming
-		porter_stemmer = PorterStemmer()
-		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.stemming(x, porter_stemmer))
+		#porter_stemmer = PorterStemmer()
+		#self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.stemming(x, porter_stemmer))
 
 		#Lemmatizer
 		wordnet_lemmatizer = WordNetLemmatizer()
