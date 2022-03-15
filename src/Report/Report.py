@@ -51,8 +51,10 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 				score[i] = make_scorer(score[i], average = 'weighted', multi_class="ovo",needs_proba=True) # make each function scorer
 			else:
 				score[i] = make_scorer(score[i]) # make each function scorer
+		elif i in ['prec', 'recall', 'f1-score'] :
+			score[i] = make_scorer(score[i], pos_label=label) # make each function scorer
 		else:
-			score[i] = make_scorer(score[i]) # make each function scorer
+			score[i] = make_scorer(score[i])
 
 	try:
 		scores = cross_validate(clf, x_train, y_train, scoring=score,

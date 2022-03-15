@@ -31,7 +31,8 @@ class ResultStorage:
 	def processResult(self, results, model):
 		self.bestModel.addModel(model, results['f1-score_overall'].values[0], results['Pipeline'].values[0])
 		global df_results
-		df_results = df_results.append(results)
+		#df_results = df_results.append(results)
+		df_results = pd.concat([df_results, results])
 		self.writeResults('results.csv', results)
 
 	def writeResults(self, results_filename : str, df_results : pd.DataFrame):
