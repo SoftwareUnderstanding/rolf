@@ -2,7 +2,7 @@ from cgi import print_environ
 from time import time
 import pandas as pd
 from sklearn import datasets
-from Preprocessor1 import Preprocessor
+from Preprocessor import Preprocessor
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import csv
