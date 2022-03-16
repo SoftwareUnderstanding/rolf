@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description='Try classification')
 parser.add_argument('--models_dir', dest='models_dir', help='The path to the folder containing the models', required=True)
 parser.add_argument('--readme_url', dest='readme_url', help='GitHub URL to the raw readme')
 parser.add_argument('--text_file', dest='text_file', help='Path to the txt file that contains the text')
+parser.add_argument('--threshold', dest='threshold', type=float, help='Threshold for predicting positive samples', default=0.5)
 args = parser.parse_args()
 
 text = ''
@@ -36,9 +37,11 @@ models = os.listdir(dir)
 predictions = []
 for model in models:
     clf = pickle.load(open(dir/model, 'rb'))
-    pred = clf.predict(text)
+    [prob] = clf.predict_proba(text)
+    if max(prob) >= args.threshold: [pred] = clf.predict(text)
+    else: pred = 'Other'
     if pred != 'Other':
-        predictions.append(pred[0])
+        predictions.append(pred)
 
 print('Predictions:')
 if not predictions:
