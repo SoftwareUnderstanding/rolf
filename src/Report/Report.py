@@ -66,6 +66,10 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 	# Train test on the overall data
 	model = clf
 	model.fit(x_train, y_train)
+	features = model[:-1].get_feature_names_out()
+	print(f'{label}: ', file=open("output.txt", "a"))
+	for i in features:
+		print(f'{i}', file=open("output.txt", "a"))
 	y_pred = model.predict(X_test)#>0.5).astype(int)
 
 	if save:
@@ -79,8 +83,8 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 	# initialisation 
 	res = {'PipelineID' : label,
 		   'Pipeline' : name ,
-		   'Train dataset' : train_name,
-		   'Validation dataset' : test_name}
+		   'train_set' : train_name,
+		   'validation_set' : test_name}
 	for i in scores:  # loop on each metric generate text and values
 		if i == "estimator": continue
 		for j in enumerate(scores[i]):
