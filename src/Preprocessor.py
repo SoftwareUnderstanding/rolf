@@ -3,12 +3,19 @@ import pandas as pd
 #from keras.preprocessing.text import text_to_word_sequence
 from numpy import loadtxt
 import string
-from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import re
 import numpy as np
+import nltk
+import inflect
+import contractions
+from bs4 import BeautifulSoup
+import re, string, unicodedata
+from nltk import word_tokenize, sent_tokenize
+from nltk.stem import LancasterStemmer, WordNetLemmatizer
+from sklearn.preprocessing import LabelEncoder
 
 
 TEXT = 'Text'
@@ -27,14 +34,15 @@ class Preprocessor:
 	def __init__(self, data : pd.DataFrame) -> None:
 		self.data = data
 
-	def remove_stop_words(self, text : str, stop_words):
-		'''
-		Function to remove a list of words
-		@param x : (str) text 
-		@param stop_word: (list) list of stopwords to delete 
-		@return: (str) new string without stopwords 
-		'''
+	def denoise_text(self, text):
+		# Strip html if any. For ex. removing <html>, <p> tags
+		soup = BeautifulSoup(text, "html.parser")
+		text = soup.get_text()
+		# Replace contractions in the text. For ex. didn't -> did not
+		text = contractions.fix(text)
+		return text
 
+	def remove_stop_words(self, text : str, stop_words):
 		#token_list = word_tokenize(text)	# tokenize text 
 		return [token for token in text if token not in stop_words]
 		
@@ -45,19 +53,54 @@ class Preprocessor:
 		res = re.sub(r'[^\w\s]', ' ', text)
 		return res
 
-	def remove_non_ascii(self, text):
-		encoded_string = text.encode("ascii", "ignore")
-		return encoded_string.decode()
+	def remove_non_ascii(self, words):
+		"""Remove non-ASCII characters from list of tokenized words"""
+		new_words = []
+		for word in words:
+			new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+			new_words.append(new_word)
+		return new_words
+
+	def replace_numbers(self, words):
+		"""Replace all interger occurrences in list of tokenized words with textual representation"""
+		p = inflect.engine()
+		new_words = []
+		for word in words:
+			if word.isdigit():
+				new_word = p.number_to_words(word)
+				new_words.append(new_word)
+			else:
+				new_words.append(word)
+		return new_words
 
 	def stemming(self, text, porter_stemmer):
 		stem_text = [porter_stemmer.stem(word) for word in text]
 		return stem_text
+
+	def stem_words(self, words):
+		"""Stem words in list of tokenized words"""
+		stemmer = LancasterStemmer()
+		stems = []
+		for word in words:
+			stem = stemmer.stem(word)
+			stems.append(stem)
+		return stems
 	
-	def lemmatizer(self, text, wordnet_lemmatizer):
-		token_list = word_tokenize(text)
-		lemm_text = [wordnet_lemmatizer.lemmatize(word) for word in token_list if word != '']
+	def lemmatizer(self, text):
+		wordnet_lemmatizer = WordNetLemmatizer()
+		lemm_text = [wordnet_lemmatizer.lemmatize(word, pos='n') for word in text if word != '']
 		return lemm_text
 	
+	def lemmatize_verbs(self, words):
+		"""Lemmatize verbs in list of tokenized words"""
+		lemmatizer = WordNetLemmatizer()
+		lemmas = []
+		for word in words:
+			lemma = lemmatizer.lemmatize(word, pos='v')
+			lemmas.append(lemma)
+		return lemmas
+
+
 	def remove_one_char_and_number_words(self, text):
 		res = [word for word in text if word.isdigit() == False and len(word) > 2]
 		return res
@@ -93,38 +136,40 @@ class Preprocessor:
 		
 		#Remove codeblocks
 		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_codeblocks(x))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
 
 		#Remove links
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_links2(x))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
+
+		#Remove tags
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.denoise_text(x))
 
 		#Remove punctuation
 		self.data[NEWCOLNAME]= self.data[NEWCOLNAME].apply(lambda x: self.remove_punctuation(x))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
 
 		#Transfor to lowercase
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x: x.lower())
-		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
 
+		#Replace numbers
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.replace_numbers(word_tokenize(x)))
 
-		#Lemmatizer
-		wordnet_lemmatizer = WordNetLemmatizer()
-		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.lemmatizer(x, wordnet_lemmatizer))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == np.nan].index, inplace=True)
+		#Remove none ascii
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_non_ascii(x))
 
 		#Remove stop words
 		stop_words = stopwords.words('english')
-		stop_words += ['network', 'install', 'run', 'file', 'used', 'result', 'paper', 'python', 'using', 'code', 'model', 'training', 'implementation', 'use']
-		stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
-		stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
+		#stop_words += ['network', 'install', 'run', 'file', 'used', 'result', 'paper', 'python', 'using', 'code', 'model', 'training', 'implementation', 'use']
+		#stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
+		#stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_stop_words(x, stop_words))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == np.nan].index, inplace=True)
 
+		#Lemmatize verbs
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_verbs(x))
 
-		# Remove tokens only containing numbers or one char
+		#Lemmatize nouns
+		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.lemmatizer(x))
+
+		# Remove tokens only containing numbers or two char
 		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.remove_one_char_and_number_words(x))
-		self.data.drop(self.data[self.data[NEWCOLNAME] == np.nan].index, inplace=True)
 
 		#Keep only common words
 		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))
@@ -135,6 +180,8 @@ class Preprocessor:
 		
 		#Join tokens
 		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: ' '.join(x))
+		self.data.drop(self.data[self.data[NEWCOLNAME] == np.nan].index, inplace=True)
+		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
 		#print('Final: \n', self.data.head())
 
 		
