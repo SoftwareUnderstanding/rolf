@@ -7,16 +7,17 @@ import sys
 
 csv.field_size_limit(sys.maxsize)
 
-
 def countWordOccurences(filename: str, limit: int, output_folder: str):
     output_path = Path(output_folder)
     output_path.mkdir(parents=True, exist_ok=True)
     categories = defaultdict(lambda : Counter())
     sample_count = Counter()
+    
     reader = csv.DictReader(open(filename), delimiter=';')
     for row in reader:
         categories[row['Label']].update(row['Text'].split(' '))
         sample_count[row['Label']] += 1
+
     for category, counter in categories.items():
         most_commons = counter.most_common(limit)
         keys = [key[0] for key in most_commons]
@@ -42,5 +43,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     countWordOccurences(args.filename, args.limit, args.outFolder)
-
-

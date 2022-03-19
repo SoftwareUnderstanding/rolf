@@ -22,9 +22,9 @@ def train_test_split_file(filename: str, test_size = 0.2):
 	logthis.say('Train test set separation done')
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser("python src/final.py", description='Perform all the steps of the moethod.')
+	parser = argparse.ArgumentParser("python src/final.py", description='Perform all the steps of the method.')
 	parser.add_argument('--preprocess_file', help='Name of .csv the file with the preprocessed data. The file will be saved in the same filename with _preprocessed at the end', required='--preprocess' in sys.argv)
-	parser.add_argument('--preprocess', help='Preprocess the file before analsis', required=False, action='store_true')
+	parser.add_argument('--preprocess', help='Preprocess the file before analysis', required=False, action='store_true')
 	parser.add_argument('--train_test_split', help='Separate the file into train and test files.', required=False, action='store_true')
 	parser.add_argument('--train_test_file', help='Name of the file to split.', required='--train_test_split' in sys.argv)
 	parser.add_argument('--test_size', help='Size of the test set. (default = 0.2)', required=False, default=0.2, type=float)

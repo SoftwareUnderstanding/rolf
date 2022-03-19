@@ -1,0 +1,88 @@
+## FreeAnchor
+
+The Code for ["FreeAnchor: Learning to Match Anchors for Visual Object Detection"](https://arxiv.org/abs/1909.02466).
+
+This repository is based on maskrcnn-benchmark, and FreeAnchor has also been implemented in [mmdetection](https://github.com/open-mmlab/mmdetection), thanks [@yhcao6](https://github.com/yhcao6) and [@hellock](https://github.com/hellock).
+
+![architecture](architecture.png)
+
+### New performance on COCO
+We added multi-scale testing support and updated experiments. The previous version is in [this branch](https://github.com/zhangxiaosong18/FreeAnchor/tree/previous). 
+
+| Backbone        | Iteration | Training scales | Multi-scale<br>testing | AP<br>(minival) | AP<br>(test-dev) | Model      |
+| :-------------------: | :-------: | :-------------: | :--------------: | :-------------: | :--------------: | :--------: |
+| ResNet-50-FPN         | 90k       | 800             | N                | 38.7            | 38.7             | [Link](https://drive.google.com/open?id=1o-VvpOIwYCPxyas8n6OngpOznlVy0T6k )                                                      |
+| ResNet-101-FPN        | 90k       | 800             | N                | 40.5            | 40.9             | [Link](https://drive.google.com/open?id=1jc5ncxuuuG3-sm-4OpkOfr51ClwCWHu0 )                                                      |
+| ResNet-101-FPN        | 180k      | [640, 800]      | N                | 42.7            | 43.1             | [Link](https://drive.google.com/open?id=1OvK8Xona8v7mWU2nf5Fp1QzvwUaFhlIg )                                                      |
+| ResNet-101-FPN        | 180k      | [480, 960]      | N                | 43.2            | 43.9             | [Link](https://drive.google.com/open?id=1ZIx2HTexVyU6xTwAm2ABTYjsJuLvlfhB )                                                      |
+| ResNet-101-FPN        | 180k      | [480, 960]      | Y                | 44.7            | 45.2             | [Link](https://drive.google.com/open?id=1ZIx2HTexVyU6xTwAm2ABTYjsJuLvlfhB )                                                      |
+| ResNeXt-64x4d-101-FPN | 180k      | [640, 800]      | N                | 44.5            | 44.9             | [Link](https://drive.google.com/open?id=1MrtXoBGHceq_BBY5cH-kw2ax5-aDPdTv )                                                      |
+| ResNeXt-64x4d-101-FPN | 180k      | [480, 960]      | N                | 45.6            | 46.0             | [Link](https://drive.google.com/open?id=1r17agiu76xtwKxn2oE_pK4R847k-Cu5m )                                                      |
+| ResNeXt-64x4d-101-FPN | 180k      | [480, 960]      | Y                | 46.8            | 47.3             | [Link](https://drive.google.com/open?id=1r17agiu76xtwKxn2oE_pK4R847k-Cu5m )                                                      |
+
+**Notes:**
+
+- We use 8 GPUs with 2 image / GPU. 
+- In multi-scale testing, we use image scales in {480, 640, 800, 960, 1120, 1280} and max_size are 1.666&times; than scales. 
+
+
+## Installation 
+Check [INSTALL.md](INSTALL.md) for installation instructions.
+
+## Usage
+You will need to download the COCO dataset and configure your own paths to the datasets.
+
+For that, all you need to do is to modify `maskrcnn_benchmark/config/paths_catalog.py` to point to the location where your dataset is stored.
+
+#### Config Files
+We provide four configuration files in the configs directory.
+
+| Config File                               | Backbone                | Iteration | Training scales |
+| :---------------------------------------: | :---------------------: | :-------: | :-------------: |
+| configs/free_anchor_R-50-FPN_1x.yaml      | ResNet-50-FPN           | 90k       | 800             | 
+| configs/free_anchor_R-101-FPN_1x.yaml     | ResNet-101-FPN          | 90k       | 800             |
+| configs/free_anchor_R-101-FPN_j2x.yaml    | ResNet-101-FPN          | 180k      | [640, 800]      |
+| configs/free_anchor_X-101-FPN_j2x.yaml    | ResNeXt-64x4d-101-FPN   | 180k      | [640, 800]      |
+| configs/free_anchor_R-101-FPN_e2x.yaml    | ResNet-101-FPN          | 180k      | [480, 960]      |
+| configs/free_anchor_X-101-FPN_e2x.yaml    | ResNeXt-64x4d-101-FPN   | 180k      | [480, 960]      |
+
+#### Training with 8 GPUs
+
+```bash
+cd path_to_free_anchor
+export NGPUS=8
+python -m torch.distributed.launch --nproc_per_node=$NGPUS tools/train_net.py --config-file "path/to/config/file.yaml"
+```
+
+#### Test on COCO test-dev
+
+```bash
+cd path_to_free_anchor
+python -m torch.distributed.launch --nproc_per_node=$NGPUS tools/test_net.py --config-file "path/to/config/file.yaml" MODEL.WEIGHT "path/to/.pth file" DATASETS.TEST "('coco_test-dev',)"
+```
+
+#### Multi-scale testing
+
+```bash
+cd path_to_free_anchor
+python -m torch.distributed.launch --nproc_per_node=$NGPUS tools/multi_scale_test.py --config-file "path/to/config/file.yaml" MODEL.WEIGHT "path/to/.pth file" DATASETS.TEST "('coco_test-dev',)"
+```
+
+#### Evaluate NMS Recall
+
+```bash
+cd path_to_free_anchor
+python -m torch.distributed.launch --nproc_per_node=$NGPUS tools/eval_NR.py --config-file "path/to/config/file.yaml" MODEL.WEIGHT "path/to/.pth file"
+```
+
+## Citations
+Please consider citing our paper in your publications if the project helps your research.
+```
+@inproceedings{zhang2019freeanchor,
+  title   =  {{FreeAnchor}: Learning to Match Anchors for Visual Object Detection},
+  author  =  {Zhang, Xiaosong and Wan, Fang and Liu, Chang and Ji, Rongrong and Ye, Qixiang},
+  booktitle =  {Neural Information Processing Systems},
+  year    =  {2019}
+}
+```
+
