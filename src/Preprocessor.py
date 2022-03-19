@@ -40,6 +40,7 @@ class Preprocessor:
 		text = soup.get_text()
 		# Replace contractions in the text. For ex. didn't -> did not
 		text = contractions.fix(text)
+		text.replace("""404: Not Found""", '')
 		return text
 
 	def remove_stop_words(self, text : str, stop_words):

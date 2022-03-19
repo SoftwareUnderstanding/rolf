@@ -2,7 +2,36 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+import matplotlib.pyplot as plt
 
+df = pd.read_csv('data/readme.csv', sep=';')
+df.drop_duplicates('Text', inplace=True, keep=False)
+print(df.shape)
+
+#df = pd.read_csv('data/readme.csv', sep=';')
+df.drop('Text', axis=1, inplace=True)
+distribution = df.groupby('Label').count()
+distribution.sort_values('Repo', ascending=[False], inplace=True)
+print(distribution)
+
+labels = [key for key, _ in distribution.iterrows()]
+print(labels)
+vals = distribution['Repo'].values
+print(vals)
+
+plt.figure(figsize=(30,15))
+plt.bar(labels, vals, color='#00c7c3')
+plt.title(f'Distribution of samples between categories', size=18, weight='bold')
+plt.xlabel('Categories', size=16, weight='bold')
+plt.ylabel('Frequency', size=16, weight='bold')
+plt.xticks(rotation=0, size=16)
+plt.yticks(size=14)
+plt.legend(prop={'size': 14})
+plt.savefig('results/pics/class_distribution_unique.png')
+plt.close()
+
+
+exit(0)
 #plt.xticks(fontsize=4)
 
 categories = ["Audio", "Computer Vision","Graphs", "Natural Language Processing", "Reinforcement Learning", "Sequential"]
