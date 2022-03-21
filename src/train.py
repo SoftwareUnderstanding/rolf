@@ -75,9 +75,8 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 	logthis.say(f'Read files\nTrain dataset: {train} \nTest dataset: {test}')
 	df_train = pd.read_csv(train, sep=';')
 	df_test = pd.read_csv(test, sep = ';')
-	df_train.drop_duplicates(subset=['Text'], inplace=True, keep=False)
+	#df_test.drop_duplicates(subset=['Text'], inplace=True, keep='last')
 	df_train = df_train.drop(columns = 'Repo')
-	#df_test.drop( df_test[ df_test[LABEL] not in categories ].index , inplace=True)
 	logthis.say('Read done')
 	for i, cat in enumerate(categories):
 		ind = i + 1
@@ -107,54 +106,54 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 	
 		logthis.say(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
-			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', LogisticRegression(max_iter=10000, random_state=1))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='LR_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		pipeline = Pipeline([
-			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True, min_df=0.3)),
             ('lr', LogisticRegression(max_iter=10000, random_state=1))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='LR_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		
 		logthis.say(f'SVC starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
-			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
 			('scaler', StandardScaler(with_mean=False)),
             ('lr', SVC(probability=True))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='SVC_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))		
 		pipeline = Pipeline([
-			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
 			('scaler', StandardScaler(with_mean=False)),
             ('lr', SVC(probability=True))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='SVC_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		
 		logthis.say(f'KNeighborsClassifier starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
-			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='KNN_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		pipeline = Pipeline([
-			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', KNeighborsClassifier(n_neighbors=20, weights='distance', n_jobs=-1))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='KNN_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		
 		logthis.say(f'RandomForestClassifier starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
-			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='RandomForestClassifier_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		pipeline = Pipeline([
-			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True, min_df=0.3)),
+			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', RandomForestClassifier(bootstrap=True,min_impurity_decrease=1e-7,n_jobs=-1, random_state=42))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='RandomForestClassifier_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		
 
 		logthis.say(f'LinearSVC starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
-			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True)),
+			('countvect', CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', CalibratedClassifierCV(LinearSVC()))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='Linear_SVC_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		pipeline = Pipeline([
-			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=1500, lowercase=True)),
+			('tfidf', TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=5000, lowercase=True)),
             ('lr', CalibratedClassifierCV(LinearSVC()))])
 		result_storage.processResult(*Report.report(pipeline, train, test, x_train[TEXT], y_train, x_test, y_test, cat, name='Linear_SVC_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 	

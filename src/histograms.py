@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('data/readme.csv', sep=';')
-df.drop_duplicates('Text', inplace=True, keep=False)
+df = pd.read_csv('data/readme_new_preprocessed_train.csv', sep=';')
+#df.drop_duplicates('Text', inplace=True, keep=False)
 print(df.shape)
 
 #df = pd.read_csv('data/readme.csv', sep=';')
@@ -27,7 +27,7 @@ plt.ylabel('Frequency', size=16, weight='bold')
 plt.xticks(rotation=0, size=16)
 plt.yticks(size=14)
 plt.legend(prop={'size': 14})
-plt.savefig('results/pics/class_distribution_unique.png')
+plt.savefig('results/pics/class_distribution_unique_train.png')
 plt.close()
 
 

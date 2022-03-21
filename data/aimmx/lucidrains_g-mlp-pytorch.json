@@ -1,0 +1,197 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "g-mlp-pytorch",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "lucidrains",
+                "owner_type": "User",
+                "name": "g-mlp-pytorch",
+                "url": "https://github.com/lucidrains/g-mlp-pytorch",
+                "stars": 349,
+                "pushed_at": "2021-08-14 18:54:41+00:00",
+                "created_at": "2021-05-18 02:21:09+00:00",
+                "language": "Python",
+                "description": "Implementation of gMLP, an all-MLP replacement for Transformers, in Pytorch",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".github",
+                "sha": "25fb69e4b6270dbc52070e5bf3b85ed32a35f9ad",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/tree/main/.github"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "b6e47617de110dea7ca47e087ff1347cc2646eda",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/blob/main/.gitignore"
+                    }
+                },
+                "size": 1799
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "a57cdeeca0028353177ac8a12373f0c9df3b6da1",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/blob/main/LICENSE"
+                    }
+                },
+                "size": 1066
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "3f47999d9a3ed6205bee3d99b003cc8e652d0c43",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/tree/main/data"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "g_mlp_pytorch",
+                "sha": "891d8f3899f96f9f56ddd065c609ebf8ec8c2526",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/tree/main/g_mlp_pytorch"
+                    }
+                },
+                "num_files": 3
+            },
+            {
+                "type": "code",
+                "name": "gmlp.png",
+                "sha": "845e99384d166e59842ec848719de38526bae119",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/blob/main/gmlp.png"
+                    }
+                },
+                "size": 81793
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "63ca660a7bf5cc7cf21df94cb7859f052524c490",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/blob/main/setup.py"
+                    }
+                },
+                "size": 723
+            },
+            {
+                "type": "code",
+                "name": "train.py",
+                "sha": "c43b2d9969b1c7bccc460da81af862212f603ae5",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/g-mlp-pytorch/blob/main/train.py"
+                    }
+                },
+                "size": 2791
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Phil Wang",
+            "email": "lucidrains@gmail.com",
+            "github_id": "lucidrains"
+        }
+    ],
+    "tags": [
+        "artificial-intelligence",
+        "deep-learning",
+        "multilayer-perceptron"
+    ],
+    "description": "Implementation of gMLP, an all-MLP replacement for Transformers, in Pytorch",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/lucidrains/g-mlp-pytorch",
+            "stars": 349,
+            "issues": true,
+            "readme": "<img src=\"./gmlp.png\" width=\"400px\"></img>\n\n## gMLP - Pytorch\n\nImplementation of <a href=\"https://arxiv.org/abs/2105.08050\">gMLP</a>, an all-MLP replacement for Transformers, in Pytorch\n\n## Install\n\n```bash\n$ pip install g-mlp-pytorch\n```\n\n## Usage\n\nFor masked language modelling\n\n```python\nimport torch\nfrom torch import nn\nfrom g_mlp_pytorch import gMLP\n\nmodel = gMLP(\n    num_tokens = 20000,\n    dim = 512,\n    depth = 6,\n    seq_len = 256,\n    circulant_matrix = True,      # use circulant weight matrix for linear increase in parameters in respect to sequence length\n    act = nn.Tanh()               # activation for spatial gate (defaults to identity)\n)\n\nx = torch.randint(0, 20000, (1, 256))\nlogits = model(x) # (1, 256, 20000)\n```\n\nFor image classification\n\n```python\nimport torch\nfrom g_mlp_pytorch import gMLPVision\n\nmodel = gMLPVision(\n    image_size = 256,\n    patch_size = 16,\n    num_classes = 1000,\n    dim = 512,\n    depth = 6\n)\n\nimg = torch.randn(1, 3, 256, 256)\nlogits = model(img) # (1, 1000)\n```\n\nYou can also add a tiny amount of attention (one-headed) to boost performance, as mentioned in the paper as `aMLP`, with the addition of one extra keyword `attn_dim`. This applies to both `gMLPVision` and `gMLP`\n\n```python\nimport torch\nfrom g_mlp_pytorch import gMLPVision\n\nmodel = gMLPVision(\n    image_size = 256,\n    patch_size = 16,\n    num_classes = 1000,\n    dim = 512,\n    depth = 6,\n    attn_dim = 64\n)\n\nimg = torch.randn(1, 3, 256, 256)\npred = model(img) # (1, 1000)\n```\n\nNon-square images and patch sizes\n\n```python\nimport torch\nfrom g_mlp_pytorch import gMLPVision\n\nmodel = gMLPVision(\n    image_size = (256, 128),\n    patch_size = (16, 8),\n    num_classes = 1000,\n    dim = 512,\n    depth = 6,\n    attn_dim = 64\n)\n\nimg = torch.randn(1, 3, 256, 128)\npred = model(img) # (1, 1000)\n```\n\n## Experimental\n\nA independent researcher proposes using a multi-headed approach for gMLPs in <a href=\"https://zhuanlan.zhihu.com/p/395005917\">a blogpost on Zhihu</a>. To do so, just set `heads` to be greater than `1`\n\n```python\nimport torch\nfrom torch import nn\nfrom g_mlp_pytorch import gMLP\n\nmodel = gMLP(\n    num_tokens = 20000,\n    dim = 512,\n    depth = 6,\n    seq_len = 256,\n    causal = True,\n    circulant_matrix = True,\n    heads = 4 # 4 heads\n)\n\nx = torch.randint(0, 20000, (1, 256))\nlogits = model(x) # (1, 256, 20000)\n```\n\n## Citations\n\n```bibtex\n@misc{liu2021pay,\n    title   = {Pay Attention to MLPs}, \n    author  = {Hanxiao Liu and Zihang Dai and David R. So and Quoc V. Le},\n    year    = {2021},\n    eprint  = {2105.08050},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@software{peng_bo_2021_5196578,\n    author       = {PENG Bo},\n    title        = {BlinkDL/RWKV-LM: 0.01},\n    month        = aug,\n    year         = 2021,\n    publisher    = {Zenodo},\n    version      = {0.01},\n    doi          = {10.5281/zenodo.5196578},\n    url          = {https://doi.org/10.5281/zenodo.5196578%7D\n}\n```\n",
+            "readme_url": "https://github.com/lucidrains/g-mlp-pytorch",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Pay Attention to MLPs",
+            "arxiv": "2105.08050",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2105.08050v2",
+            "abstract": "Transformers have become one of the most important architectural innovations\nin deep learning and have enabled many breakthroughs over the past few years.\nHere we propose a simple network architecture, gMLP, based on MLPs with gating,\nand show that it can perform as well as Transformers in key language and vision\napplications. Our comparisons show that self-attention is not critical for\nVision Transformers, as gMLP can achieve the same accuracy. For BERT, our model\nachieves parity with Transformers on pretraining perplexity and is better on\nsome downstream NLP tasks. On finetuning tasks where gMLP performs worse,\nmaking the gMLP model substantially larger can close the gap with Transformers.\nIn general, our experiments show that gMLP can scale as well as Transformers\nover increased data and compute.",
+            "authors": [
+                "Hanxiao Liu",
+                "Zihang Dai",
+                "David R. So",
+                "Quoc V. Le"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2105.08050",
+            "year": "2021",
+            "author": [
+                "Liu, Hanxiao",
+                "Dai, Zihang",
+                "So, David R.",
+                "Le, Quoc V."
+            ],
+            "title": "Pay Attention to MLPs",
+            "ENTRYTYPE": "misc",
+            "ID": "liu2021pay",
+            "authors": [
+                "Liu, Hanxiao",
+                "Dai, Zihang",
+                "So, David R.",
+                "Le, Quoc V."
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Unknown"
+    }
+}

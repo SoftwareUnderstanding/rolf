@@ -7,17 +7,16 @@ import sys
 
 csv.field_size_limit(sys.maxsize)
 
+
 def countWordOccurences(filename: str, limit: int, output_folder: str):
     output_path = Path(output_folder)
     output_path.mkdir(parents=True, exist_ok=True)
     categories = defaultdict(lambda : Counter())
     sample_count = Counter()
-    
     reader = csv.DictReader(open(filename), delimiter=';')
     for row in reader:
-        categories[row['Label']].update(row['Text'].split(' '))
-        sample_count[row['Label']] += 1
-
+        categories['Label'].update(row['Text'].split(' '))
+        sample_count['Label'] += 1
     for category, counter in categories.items():
         most_commons = counter.most_common(limit)
         keys = [key[0] for key in most_commons]
@@ -25,7 +24,7 @@ def countWordOccurences(filename: str, limit: int, output_folder: str):
 
         plt.figure(figsize=(20,15))
         plt.bar(keys, values, color='#00c7c3')
-        plt.title(f'Most frequent words in {category} readmes', size=18, weight='bold')
+        plt.title(f'Most frequent words in preprocessed readmes', size=18, weight='bold')
         plt.xlabel('Words', size=16, weight='bold')
         plt.ylabel('Frequency', size=16, weight='bold')
         plt.axhline(y = sample_count[category], color = '#ff556b', linestyle = '-', label='Number of samples')
@@ -43,3 +42,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     countWordOccurences(args.filename, args.limit, args.outFolder)
+    

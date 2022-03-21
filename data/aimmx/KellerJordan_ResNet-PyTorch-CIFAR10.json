@@ -1,0 +1,146 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "PyTorch-ResNet-CIFAR10",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "KellerJordan",
+                "owner_type": "User",
+                "name": "ResNet-PyTorch-CIFAR10",
+                "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10",
+                "stars": 24,
+                "pushed_at": "2018-01-07 20:53:15+00:00",
+                "created_at": "2018-01-02 21:32:11+00:00",
+                "language": "Python",
+                "description": "PyTorch implementation of residual networks trained on CIFAR-10 dataset",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "ab3d4fe724022b1fdf4a3e040b31d62e04bb3eb5",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10/blob/master/.gitignore"
+                    }
+                },
+                "size": 22
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "4c1f4b5761baaf03f82abbb0ce25c0ed3de71a3c",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10/blob/master/main.py"
+                    }
+                },
+                "size": 5244
+            },
+            {
+                "type": "code",
+                "name": "model.py",
+                "sha": "9c2ecd64f3f9d0b0a5fa983c08a855cb2f6f98b4",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10/blob/master/model.py"
+                    }
+                },
+                "size": 4218
+            },
+            {
+                "type": "code",
+                "name": "requirements.txt",
+                "sha": "b5b86d48b944fb0a87049f1b6ffa4f681e7f5fc8",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10/blob/master/requirements.txt"
+                    }
+                },
+                "size": 24
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Keller Jordan",
+            "github_id": "KellerJordan"
+        }
+    ],
+    "tags": [
+        "residual-networks",
+        "pytorch",
+        "cifar10"
+    ],
+    "description": "PyTorch implementation of residual networks trained on CIFAR-10 dataset",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10",
+            "stars": 24,
+            "issues": true,
+            "readme": "# PyTorch-ResNet-CIFAR10\n\nThis is a PyTorch implementation of Residual Networks as described in the paper [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385) by Microsoft Research Asia. It is designed for the CIFAR-10 image classification task, following the ResNet architecture described on page 7 of the paper. This version allows use of dropout, arbitrary value of n, and a custom residual projection option.\n\n#### Motivation\n\nI completed this project in order to gain a better understanding of residual connections, which inspire the design of many state-of-the-art convnets at the present moment, as well as the gradient degradation problem. Having my own custom implementation made it easier to experiment with dropout and custom projection methods, and gave me practice with PyTorch.\n\n## Usage\n\nTo train the network, use the following command:\n\n```python main.py [-n=7] [--res-option='B'] [--use-dropout]```\n\n### Default Hyperparameters\n\nHyperparameter | Default Value | Description\n| - | - | - |\nn | 5 | parameter controlling depth of network given structure described in paper\n`res_option` | A | projection method when number of residual channels increases\n`batch_size` | 128 | -\n`weight_decay` | 0.0001 | -\n`use_dropout` | False | -\n\n## Results\n\nUsing `n=9` with otherwise default hyperparameters, the network achieves a test accuracy of 91.69%. This is somewhat lower than the result reported in the paper, likely because I used fewer training iterations due to compute limitations.\n",
+            "readme_url": "https://github.com/KellerJordan/ResNet-PyTorch-CIFAR10",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Deep Residual Learning for Image Recognition",
+            "arxiv": "1512.03385",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1512.03385v1",
+            "abstract": "Deeper neural networks are more difficult to train. We present a residual\nlearning framework to ease the training of networks that are substantially\ndeeper than those used previously. We explicitly reformulate the layers as\nlearning residual functions with reference to the layer inputs, instead of\nlearning unreferenced functions. We provide comprehensive empirical evidence\nshowing that these residual networks are easier to optimize, and can gain\naccuracy from considerably increased depth. On the ImageNet dataset we evaluate\nresidual nets with a depth of up to 152 layers---8x deeper than VGG nets but\nstill having lower complexity. An ensemble of these residual nets achieves\n3.57% error on the ImageNet test set. This result won the 1st place on the\nILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100\nand 1000 layers.\n  The depth of representations is of central importance for many visual\nrecognition tasks. Solely due to our extremely deep representations, we obtain\na 28% relative improvement on the COCO object detection dataset. Deep residual\nnets are foundations of our submissions to ILSVRC & COCO 2015 competitions,\nwhere we also won the 1st places on the tasks of ImageNet detection, ImageNet\nlocalization, COCO detection, and COCO segmentation.",
+            "authors": [
+                "Kaiming He",
+                "Xiangyu Zhang",
+                "Shaoqing Ren",
+                "Jian Sun"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CIFAR-10 Image Classification"
+            },
+            {
+                "name": "CIFAR-10"
+            },
+            {
+                "name": "ILSVRC 2015"
+            },
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "ImageNet Detection"
+            },
+            {
+                "name": "ImageNet"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999992104843812,
+        "task": "Object Detection",
+        "task_prob": 0.8939406561156238
+    }
+}

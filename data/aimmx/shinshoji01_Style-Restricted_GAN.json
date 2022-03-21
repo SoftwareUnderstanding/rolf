@@ -1,0 +1,171 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Style-Restricted Generative Adversarial Networks",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "shinshoji01",
+                "owner_type": "User",
+                "name": "Style-Restricted_GAN",
+                "url": "https://github.com/shinshoji01/Style-Restricted_GAN",
+                "stars": 9,
+                "pushed_at": "2021-07-28 13:32:29+00:00",
+                "created_at": "2021-03-08 19:13:21+00:00",
+                "language": "Jupyter Notebook",
+                "description": "This repository is to introduce our model, Style-Restricted GAN.",
+                "frameworks": [
+                    "scikit-learn",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitattributes",
+                "sha": "4d469cf6c623bec73802768c71366a31d6ec867e",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/blob/main/.gitattributes"
+                    }
+                },
+                "size": 168
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "6c8c76c61be4c8e1efef8887092c723a3c3b2ac4",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/blob/main/.gitignore"
+                    }
+                },
+                "size": 68
+            },
+            {
+                "type": "code",
+                "name": "Docker",
+                "sha": "3085559abb563b366d0eb2c30857d63a53050d23",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/tree/main/Docker"
+                    }
+                },
+                "num_files": 3
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "68461e90b1b77629e4365dc664d6c8f1bc56cb3d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/tree/main/data"
+                    }
+                },
+                "num_files": 3
+            },
+            {
+                "type": "code",
+                "name": "notebook",
+                "sha": "2562d31268edf479793a0dc682c421fdab2fe23d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/tree/main/notebook"
+                    }
+                },
+                "num_files": 12
+            },
+            {
+                "type": "code",
+                "name": "pyfiles",
+                "sha": "d01b09ad78db559ddbdd7bb26e204fde921a507f",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/shinshoji01/Style-Restricted_GAN/tree/main/pyfiles"
+                    }
+                },
+                "num_files": 5
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Sho Inoue",
+            "email": "s-inoue-tgz@eagle.sophia.ac.jp",
+            "github_id": "shinshoji01"
+        }
+    ],
+    "tags": [
+        "gan",
+        "diversification",
+        "docker-environment",
+        "image-translation",
+        "image-generation"
+    ],
+    "description": "This repository is to introduce our model, Style-Restricted GAN.",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/shinshoji01/Style-Restricted_GAN",
+            "stars": 9,
+            "issues": true,
+            "readme": "# Style-Restricted Generative Adversarial Networks\nThis repository is to introduce the implementation of our paper: [Style-Restricted GAN: Multi-ModalTranslation with Style Restriction Using Generative Adversarial Networks](https://arxiv.org/abs/2105.07621).\n\n---\n## Introduction\nThis is the implementation of our model called Style-Restricted GAN (SRGAN), which is designed for the unpaired image translation with multiple styles. The main features of this models are 1) the enhancement of diversification and 2) the restriction of diversification. As for the former one, while the base model ([SingleGAN](https://github.com/Xiaoming-Yu/SingleGAN)) employed KL divergence loss to restrict the distribution of encoded features like [VAE](https://arxiv.org/abs/1312.6114), SRGAN exploits 3 new losses instead: batch KL divergence loss, correlation loss, and histogram imitation loss. When it comes to the restriction, in the previous, it wasn't explicitly designed to control how the generator diversifies the results, which can have an adverse effect on some applications. Therefore, in this paper, the encoder is pre-trained with the classification task before being used as an encoder.\n\nWe'll proceed this implementation in a notebook form. And we also share our docker environment in order for everybody to run the code as well as observing the implementation.\n\n---\n## Results\nWe would like to share our results first to briefly understand our objective. It consists of 2 experiments.\n\n### Conventional KL Divergence Loss vs. Proposed Loss\n\n<img src=\"./data/images/result_diversity_image.png\" width=\"800\">\n\n### Style Restriction\n\n<img src=\"./data/images/result_restriction_female.png\" width=\"800\">\n\nhttps://user-images.githubusercontent.com/28431328/119615142-09661e00-be3a-11eb-9115-655bbc16a4e3.mp4\n\n---\n## Notebooks\n- `01-test_Conventional_SingleGAN.ipynb`\n  - examination of the conventional SingleGAN\n- `01-train_Conventional_SingleGAN.ipynb`\n  - training of the conventional SingleGAN\n- `02-test_SingleGAN_soloD.ipynb`\n  - examination of the SingleGAN with a solo discriminator\n- `02-train_SingleGAN_soloD.ipynb`\n  - training of the SingleGAN with a solo discriminator\n- `03-test_Style-Restricted_GAN_nopretraining.ipynb`\n  - examinaton of Style-Restricted GAN without pretraining\n- `03-train_Style-Restricted_GAN_nopretraining.ipynb`\n  - training of Style-Restricted GAN without pretraining\n- `04_Facial_Recognition-Encoder.ipynb`\n  - classification for SRGAN\n- `05-test_Style-Restricted_GAN.ipynb`\n  - examination of Style-Restricted GAN\n- `05-train_Style-Restricted_GAN.ipynb`\n  - training of Style-Restricted GAN\n- `06_Comparison_PRDC.ipynb`\n  - compare all the models\n- `A_CelebA_dataset_usage.ipynb`\n  - How to download and use CelebA dataset\n- `B_Facial_Recognition-VGG_Model.ipynb`\n  - classification for evaluation metrics\n\n---\n## Docker\nIn this repository, we share the environment that you can run the notebooks.\n1. Build the docker environment.\n    - with GPU\n      - `docker build --no-cache -f Docker/Dockerfile.gpu .`\n    - without GPU\n      - `docker build --no-cache -f Docker/Dockerfile.cpu .`\n2. Check the \\<IMAGE ID\\> of the created image.\n    - `docker images`\n3. Run the docker environment\n    - with GPU\n      - `docker run --rm --gpus all -it -p 8080:8080 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) -v ~/:/work <IMAGE ID> bash`\n    - without GPU\n      - `docker run --rm -it -p 8080:8080 -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) -v ~/:/work <IMAGE ID> bash`\n4. Run the jupyter lab\n    - `nohup jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port 8080 --NotebookApp.token='' > nohup.out &`\n5. Open the jupyter lab\n    - Put http://localhost:8080/lab? to web browser.\n\n---\n## Installation of some apps\n\n**Git LFS (large file storage)**\n\nSince this repository contains the parameters of the models. I used Git LFS to store a large file. The codes below are the recipe for this.\n\n```bash\nbrew update\nbrew install git-lfs\n```\n- then, navigate to this repository.\n```bash\ngit lfs install\ngit lfs fetch --all\ngit lfs pull\n```\n---\n## Coming soon\nSome are not explained which include:\n- explanations of some functions and models.\n\n---\n## Contact\nFeel free to contact me if you have any questions (<s-inoue-tgz@eagle.sophia.ac.jp>).\n",
+            "readme_url": "https://github.com/shinshoji01/Style-Restricted_GAN",
+            "frameworks": [
+                "scikit-learn",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Auto-Encoding Variational Bayes",
+            "arxiv": "1312.6114",
+            "year": 2013,
+            "url": "http://arxiv.org/abs/1312.6114v10",
+            "abstract": "How can we perform efficient inference and learning in directed probabilistic\nmodels, in the presence of continuous latent variables with intractable\nposterior distributions, and large datasets? We introduce a stochastic\nvariational inference and learning algorithm that scales to large datasets and,\nunder some mild differentiability conditions, even works in the intractable\ncase. Our contributions is two-fold. First, we show that a reparameterization\nof the variational lower bound yields a lower bound estimator that can be\nstraightforwardly optimized using standard stochastic gradient methods. Second,\nwe show that for i.i.d. datasets with continuous latent variables per\ndatapoint, posterior inference can be made especially efficient by fitting an\napproximate inference model (also called a recognition model) to the\nintractable posterior using the proposed lower bound estimator. Theoretical\nadvantages are reflected in experimental results.",
+            "authors": [
+                "Diederik P Kingma",
+                "Max Welling"
+            ]
+        },
+        {
+            "title": "Style-Restricted GAN: Multi-Modal Translation with Style Restriction Using Generative Adversarial Networks",
+            "arxiv": "2105.07621",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2105.07621v2",
+            "abstract": "Unpaired image-to-image translation using Generative Adversarial Networks\n(GAN) is successful in converting images among multiple domains. Moreover,\nrecent studies have shown a way to diversify the outputs of the generator.\nHowever, since there are no restrictions on how the generator diversifies the\nresults, it is likely to translate some unexpected features. In this paper, we\npropose Style-Restricted GAN (SRGAN) to demonstrate the importance of\ncontrolling the encoded features used in style diversifying process. More\nspecifically, instead of KL divergence loss, we adopt three new losses to\nrestrict the distribution of the encoded features: batch KL divergence loss,\ncorrelation loss, and histogram imitation loss. Further, the encoder is\npre-trained with classification tasks before being used in translation process.\nThe study reports quantitative as well as qualitative results with Precision,\nRecall, Density, and Coverage. The proposed three losses lead to the\nenhancement of the level of diversity compared to the conventional KL loss. In\nparticular, SRGAN is found to be successful in translating with higher\ndiversity and without changing the class-unrelated features in the CelebA face\ndataset. To conclude, the importance of the encoded features being\nwell-regulated was proven with two experiments. Our implementation is available\nat https://github.com/shinshoji01/Style-Restricted_GAN.",
+            "authors": [
+                "Sho Inoue",
+                "Tad Gonsalves"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CelebA"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9974558145984511,
+        "task": "Image Generation",
+        "task_prob": 0.9385712450801258
+    }
+}

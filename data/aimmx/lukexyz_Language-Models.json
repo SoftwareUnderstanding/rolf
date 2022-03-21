@@ -1,0 +1,165 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "ULMFiT NLP Transfer Learning :earth_africa::book::speech_balloon:",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "lukexyz",
+                "owner_type": "User",
+                "name": "Language-Models",
+                "url": "https://github.com/lukexyz/Language-Models",
+                "stars": 1,
+                "pushed_at": "2020-02-24 09:58:29+00:00",
+                "created_at": "2019-12-03 13:00:17+00:00",
+                "language": "Jupyter Notebook",
+                "description": ":earth_africa::book::speech_balloon: Sentiment analysis and text generation using BERT and ULMFiT (2018)",
+                "license": "MIT License",
+                "frameworks": [
+                    "Keras",
+                    "scikit-learn",
+                    "TensorFlow",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "894a44cc066a027465cd26d634948d56d13af9af",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lukexyz/Language-Models/blob/master/.gitignore"
+                    }
+                },
+                "size": 1203
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "10ef8bc1fe962c2a40528882ad6f67f1b3ce246f",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lukexyz/Language-Models/blob/master/LICENSE"
+                    }
+                },
+                "size": 1061
+            },
+            {
+                "type": "code",
+                "name": "img",
+                "sha": "148f569d893407eb5656b93db33c417772bea5ff",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lukexyz/Language-Models/tree/master/img"
+                    }
+                },
+                "num_files": 7
+            },
+            {
+                "type": "code",
+                "name": "notebooks",
+                "sha": "777895e5fbbf1f937cbfddcaec833e1a342c5291",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lukexyz/Language-Models/tree/master/notebooks"
+                    }
+                },
+                "num_files": 3
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Luke",
+            "github_id": "lukexyz"
+        }
+    ],
+    "tags": [
+        "language-models",
+        "transformer",
+        "bert",
+        "ulm-fit"
+    ],
+    "description": ":earth_africa::book::speech_balloon: Sentiment analysis and text generation using BERT and ULMFiT (2018)",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/lukexyz/Language-Models",
+            "stars": 1,
+            "issues": true,
+            "readme": "# ULMFiT NLP Transfer Learning :earth_africa::book::speech_balloon:\nSentiment analysis via prediction of restaurant reviews using `ULMFiT (2018)`, a state-of-the-art method (for 2018) which provides a framework for NLP transfer learning. (https://arxiv.org/abs/1801.06146)\n\nTo build the text classification model, there are three stages:  \n\n1. :earth_africa: **General-Domain LM Pretraining**  \nA pretrained `AWD-LSTM SequentialRNN` is imported, which works as a sequence generator (i.e. predicts the next word) for a general-domain corpus, in our case the `WikiText103` dataset.\n\n2. :book: **Target Task LM Fine-Tuning**  \nThe `AWD-LSTM Language Model` is fine-tuned on the domain-specific corpus (Yelp reviews), to be able to generate fake restaurant reviews.\n\n3. :speech_balloon: **Target Task Classifier**  \nThe embeddings learnt from these first two steps are imported into a new `classifier model`, which is then fine-tuned on the target task (star ratings) with gradual unfreezing of the final layers.\n\n<p align=\"center\" >\n  <img src=\"https://github.com/lukexyz/Language-Models/blob/master/img/Artboard%201@1.5x.png?raw=true\">\n</p>\n\n  \u2192 :notebook_with_decorative_cover: See [ULMFiT-Yelp.ipynb](notebooks/02-ULMFiT-Yelp-Full-Train.ipynb) for notebook \n  \n  \u2192 :page_with_curl: See [arxiv.org/abs/1801.06146](https://arxiv.org/abs/1801.06146) for paper \n\n<br/>\n\n## Synthetic Text Generation\nAfter stage 2 of the process is complete, the `AWD-LSTM` RNN language model can now be used for synthetic text generation. The original RNN model was trained to predict the next word in the `WikiText103` dataset, and we have fine-tuned this with our yelp corpus to predict the next word in a restaurant review.\n\n```python\nlearn.predict(\"I really loved the restaurant, the food was\")\n```\n> I really loved the restaurant, the food was `authentic`\n\n```python\nlearn.predict(\"I hated the restaurant, the food tasted\")\n```\n> I hated the restaurant, the food tasted `bad`\n\nYou can generate reviews of any length. The output generally has a believable sentence structure, but they tend to lack higher-order coherency within a paragraph. This is because the RNN has no memory of the start of the sentence by the time it reaches the end of it. Larger `transformer` attention models like OpenAI GPT-2 or BERT do a better job at this.\n```python\nlearn.predict(\"The food is good and the staff\", words=30, temperature=0.75)\n```\n> The food is good and the staff is very friendly. We had the full menu and the Big Lots of Vegas. The food was ok, but there was nothing and this isn't a Chinese place.\n\n\n## Classifier: Predicting the Star-value of a Review \u2605\u2605\u2605\u2605\u2605\nThe overall accuracy of the trained classifier was `0.665`, which means that giving the model and un-seen restaurant review it can predict its rating (1-5 stars) correctly `66.5%` of the time.\n\n_Examples_  \n\nPrediction: 5  | Actual: 5  \n`(INPUT 25816) You can count on excellent quality and fresh baked goods daily. The patisseries are refined and always delicious. I am addicted to their home made salads and strong coffee. \\nYou can order customized cakes and impress your guests. Everything here is made with the finest ingredients. It never disappoints. \\n\\nThe service is formal. You are always treated with respect. Sometimes I don't mind when they call me Madame but I always correct them and ask to be called \\\"Mademoiselle, SVP!\\\"\\n\\nI guarantee you will return here many times.`  \n\nPrediction: 4  | Actual: 3  \n`(INPUT 28342) 8 of us just finished eating here.  Service was very friendly, prices were definitely reasonable, and we all really enjoyed our meals. \\n\\nI would come back again for sure!\\n\\nUnfortunately I didn't snap any photos of our food, but here are a few of the place.`  \n\nPrediction: 2  | Actual: 2  \n`(INPUT 43756) The food was not all that.  The customer service was just okay. Don't get what all the rave is about??`\n\n## Results\nPlotting an Actual vs. Predicted matrix gives us a visual representation of the accuracy of the model. True positives are highlighted on the diagonal. So even when it makes the prediction wrong - the error usually is only off by only 1 star. \n<p align=\"center\">\n  <img src=\"https://github.com/lukexyz/Language-Models/blob/master/img/actual_vs_predicted.png?raw=true\" width=\"350\">\n</p>\n<br/>\n\n\n## Improvements \nIn the paper [MultiFiT: Efficient Multi-lingual Language Model Fine-tuning](https://arxiv.org/abs/1909.04761) (2019), the transfer learning language model is improved using  \n1. `Subword Tokenization`, which uses a mixture of character, subword and word tokens, depending on how common they are. These properties allow it to fit much better to multilingual models (non-english languages).\n    \n<p align=\"center\">\n  <img src=\"https://github.com/lukexyz/Language-Models/blob/master/img/multifit_vocabularies.png?raw=true\" width=\"400\">\n</p>\n<br/>\n\n2. Updates the `AWD-LSTM` base RNN network with a `Quasi-Recurrent Neural Network` (QRNN). The QRNN benefits from attributes from both a CNN and an LSTM:\n* It can be parallelized across time and minibatch dimensions like a CNN (for performance boost) \n* It retains the LSTM\u2019s sequential bias (the output depends on the order of elements in the sequence).  \n    `\"In our experiments, we obtain a 2-3x speed-up during training using QRNNs\"`\n\n<p align=\"center\" >\n  <img src=\"https://github.com/lukexyz/Language-Models/blob/master/img/multifit_qrnn.png?raw=true\" width=\"550\">\n</p>\n\n> _\"We find that our monolingual language models fine-tuned only on `100 labeled examples` of the corresponding task in the target language outperform zero-shot inference (trained on `1000 examples` in the source language) with multilingual BERT and LASER. MultiFit also outperforms the other methods when all models are fine-tuned on 1000 target language examples.\"_\n\nReference: `Efficient multi-lingual language model fine-tuning` by Sebastian Ruder and Julian Eisenschlos (http://nlp.fast.ai/classification/2019/09/10/multifit.html) \n\n\n\n## Installation on AWS\n`Deep Learning AMI (Ubuntu 16.04) Version 25.3`, GPU `p2.xlarge` for training :ballot_box_with_check:, `120 GB`\n\n##### SSH into new linux box, create conda environment\n    $ ssh -i \"<key>.pem\" ubuntu@ec2-<public-ip>.us-east-2.compute.amazonaws.com\n    $ conda create -n fastai python=3.7\n    $ conda activate fastai\n\n##### Dependencies\n    $ conda install jupyter notebook -y\n    $ conda install -c conda-forge jupyter_contrib_nbextensions\n    $ conda install fastai pytorch=1.0.0 -c fastai -c pytorch -c conda-forge\n\n##### Update jupyter kernels (optional)\n    $ conda install nb_conda_kernels -y\n    $ python -m ipykernel install --user --name fastai --display-name \"fastai v1\"\n    $ conda install ipywidgets\n\n##### Validate GPU installation\n    $ python -m fastai.utils.show_install\n\n##### Run notebooks\n    $ jupyter notebook --ip=0.0.0.0 --no-browser\n    # http://<public IP>:8888/?token=<token>\n\n##### Acknowledgements\n* [A Code-First Introduction to NLP](https://github.com/fastai/course-nlp)\n* [Universal Language Model Fine-Tuning (ULMFiT)](https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit)  \n* [NLP & fastai | MultiFiT](https://mc.ai/nlp-fastai-multifit/)\n",
+            "readme_url": "https://github.com/lukexyz/Language-Models",
+            "frameworks": [
+                "Keras",
+                "scikit-learn",
+                "TensorFlow",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Universal Language Model Fine-tuning for Text Classification",
+            "arxiv": "1801.06146",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1801.06146v5",
+            "abstract": "Inductive transfer learning has greatly impacted computer vision, but\nexisting approaches in NLP still require task-specific modifications and\ntraining from scratch. We propose Universal Language Model Fine-tuning\n(ULMFiT), an effective transfer learning method that can be applied to any task\nin NLP, and introduce techniques that are key for fine-tuning a language model.\nOur method significantly outperforms the state-of-the-art on six text\nclassification tasks, reducing the error by 18-24% on the majority of datasets.\nFurthermore, with only 100 labeled examples, it matches the performance of\ntraining from scratch on 100x more data. We open-source our pretrained models\nand code.",
+            "authors": [
+                "Jeremy Howard",
+                "Sebastian Ruder"
+            ]
+        },
+        {
+            "title": "MultiFiT: Efficient Multi-lingual Language Model Fine-tuning",
+            "arxiv": "1909.04761",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1909.04761v2",
+            "abstract": "Pretrained language models are promising particularly for low-resource\nlanguages as they only require unlabelled data. However, training existing\nmodels requires huge amounts of compute, while pretrained cross-lingual models\noften underperform on low-resource languages. We propose Multi-lingual language\nmodel Fine-Tuning (MultiFiT) to enable practitioners to train and fine-tune\nlanguage models efficiently in their own language. In addition, we propose a\nzero-shot method using an existing pretrained cross-lingual model. We evaluate\nour methods on two widely used cross-lingual classification datasets where they\noutperform models pretrained on orders of magnitude more data and compute. We\nrelease all models and code.",
+            "authors": [
+                "Julian Martin Eisenschlos",
+                "Sebastian Ruder",
+                "Piotr Czapla",
+                "Marcin Kardas",
+                "Sylvain Gugger",
+                "Jeremy Howard"
+            ]
+        },
+        {
+            "title": "A Code-First Introduction to NLP",
+            "url": "https://github.com/fastai/course-nlp"
+        },
+        {
+            "title": "Universal Language Model Fine-Tuning (ULMFiT)",
+            "url": "https://humboldt-wi.github.io/blog/research/information_systems_1819/group4_ulmfit"
+        },
+        {
+            "title": "NLP & fastai | MultiFiT",
+            "url": "https://mc.ai/nlp-fastai-multifit/"
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Yelp"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999959063106074,
+        "task": "Language Modelling",
+        "task_prob": 0.6759728389010131
+    }
+}

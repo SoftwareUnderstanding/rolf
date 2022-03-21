@@ -1,0 +1,174 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "GAN-TTS",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "yanggeng1995",
+                "owner_type": "User",
+                "name": "GAN-TTS",
+                "url": "https://github.com/yanggeng1995/GAN-TTS",
+                "stars": 200,
+                "pushed_at": "2019-12-27 05:24:36+00:00",
+                "created_at": "2019-09-26 05:35:43+00:00",
+                "language": "Python",
+                "description": "A pytroch implementation of the GAN-TTS: HIGH FIDELITY SPEECH SYNTHESIS WITH ADVERSARIAL NETWORKS",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "generate.py",
+                "sha": "92b20a158a00fd50f14d7f74525e321e554bd24f",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/blob/master/generate.py"
+                    }
+                },
+                "size": 3414
+            },
+            {
+                "type": "code",
+                "name": "images",
+                "sha": "f414c79030718a8c6861919bd61d79dc22044326",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/tree/master/images"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "models",
+                "sha": "5238c2929d9f284c8166a10dc8aa8dae9d7874fa",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/tree/master/models"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "process.py",
+                "sha": "b12b3d7c1979816631fc994b2970f20a6ff69577",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/blob/master/process.py"
+                    }
+                },
+                "size": 3307
+            },
+            {
+                "type": "code",
+                "name": "samples",
+                "sha": "758d6ec64f4074d0055e36e55344bb874cb9eca3",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/tree/master/samples"
+                    }
+                },
+                "num_files": 8
+            },
+            {
+                "type": "code",
+                "name": "train.py",
+                "sha": "e4b7c86ce185147fac03ef4cd5945b3d444df885",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/blob/master/train.py"
+                    }
+                },
+                "size": 9913
+            },
+            {
+                "type": "code",
+                "name": "utils",
+                "sha": "e2504ccfb71900877a06a6d7624a53742e8b50fc",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/yanggeng1995/GAN-TTS/tree/master/utils"
+                    }
+                },
+                "num_files": 7
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "yanggeng1995",
+            "email": "yanggeng1995@gmail.com",
+            "github_id": "yanggeng1995"
+        }
+    ],
+    "tags": [],
+    "description": "A pytroch implementation of the GAN-TTS: HIGH FIDELITY SPEECH SYNTHESIS WITH ADVERSARIAL NETWORKS",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/yanggeng1995/GAN-TTS",
+            "stars": 200,
+            "issues": true,
+            "readme": "# GAN-TTS\nA pytorch implementation of the GAN-TTS: HIGH FIDELITY SPEECH SYNTHESIS WITH ADVERSARIAL NETWORKS(https://arxiv.org/pdf/1909.11646.pdf)\n\n![](./images/gan-tts.jpg)\n\n## Prepare dataset\n* Download dataset for training. This can be any wav files with sample rate 24000Hz.\n* Edit configuration in utils/audio.py (hop_length must remain unchanged)\n* Process data: python process.py --wav_dir=\"wavs\" --output=\"data\"\n\n## Train & Tensorboard\n* python train.py --input=\"data/train\"\n* tensorboard --logdir logdir\n\n## Inference\n* python generate.py --input=\"data/test\"\n\n## Result\n* You can find the results in the samples directory.\n\n## Attention\n* I did not use the loss function mentioned in the paper. I modified the loss function and learn from ParallelWaveGAN(https://arxiv.org/pdf/1910.11480.pdf).\n* I did not use linguistic features, I use mel spectrogram, so the model can be considered a vocoder.\n\n## Notes\n* This is not official implementation, some details are not necessarily correct.\n* In order to accelerate convergence, I modified some network structures and loss functions.\n\n## Reference\n* kan-bayashi/ParallelWaveGAN(https://github.com/kan-bayashi/ParallelWaveGAN)\n* Parallel WaveGAN(https://arxiv.org/pdf/1910.11480.pdf)\n* GAN-TTS: HIGH FIDELITY SPEECH SYNTHESIS WITH ADVERSARIAL(https://arxiv.org/pdf/1909.11646.pdf)\n",
+            "readme_url": "https://github.com/yanggeng1995/GAN-TTS",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "High Fidelity Speech Synthesis with Adversarial Networks",
+            "arxiv": "1909.11646",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1909.11646v2",
+            "abstract": "Generative adversarial networks have seen rapid development in recent years\nand have led to remarkable improvements in generative modelling of images.\nHowever, their application in the audio domain has received limited attention,\nand autoregressive models, such as WaveNet, remain the state of the art in\ngenerative modelling of audio signals such as human speech. To address this\npaucity, we introduce GAN-TTS, a Generative Adversarial Network for\nText-to-Speech. Our architecture is composed of a conditional feed-forward\ngenerator producing raw speech audio, and an ensemble of discriminators which\noperate on random windows of different sizes. The discriminators analyse the\naudio both in terms of general realism, as well as how well the audio\ncorresponds to the utterance that should be pronounced. To measure the\nperformance of GAN-TTS, we employ both subjective human evaluation (MOS - Mean\nOpinion Score), as well as novel quantitative metrics (Fr\\'echet DeepSpeech\nDistance and Kernel DeepSpeech Distance), which we find to be well correlated\nwith MOS. We show that GAN-TTS is capable of generating high-fidelity speech\nwith naturalness comparable to the state-of-the-art models, and unlike\nautoregressive models, it is highly parallelisable thanks to an efficient\nfeed-forward generator. Listen to GAN-TTS reading this abstract at\nhttps://storage.googleapis.com/deepmind-media/research/abstract.wav.",
+            "authors": [
+                "Miko\u0142aj Bi\u0144kowski",
+                "Jeff Donahue",
+                "Sander Dieleman",
+                "Aidan Clark",
+                "Erich Elsen",
+                "Norman Casagrande",
+                "Luis C. Cobo",
+                "Karen Simonyan"
+            ]
+        },
+        {
+            "title": "Parallel WaveGAN: A fast waveform generation model based on generative adversarial networks with multi-resolution spectrogram",
+            "arxiv": "1910.11480",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1910.11480v2",
+            "abstract": "We propose Parallel WaveGAN, a distillation-free, fast, and small-footprint\nwaveform generation method using a generative adversarial network. In the\nproposed method, a non-autoregressive WaveNet is trained by jointly optimizing\nmulti-resolution spectrogram and adversarial loss functions, which can\neffectively capture the time-frequency distribution of the realistic speech\nwaveform. As our method does not require density distillation used in the\nconventional teacher-student framework, the entire model can be easily trained.\nFurthermore, our model is able to generate high-fidelity speech even with its\ncompact architecture. In particular, the proposed Parallel WaveGAN has only\n1.44 M parameters and can generate 24 kHz speech waveform 28.68 times faster\nthan real-time on a single GPU environment. Perceptual listening test results\nverify that our proposed method achieves 4.16 mean opinion score within a\nTransformer-based text-to-speech framework, which is comparative to the best\ndistillation-based Parallel WaveNet system.",
+            "authors": [
+                "Ryuichi Yamamoto",
+                "Eunwoo Song",
+                "Jae-Min Kim"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Speech",
+        "domain_prob": 0.9781655441300795
+    }
+}

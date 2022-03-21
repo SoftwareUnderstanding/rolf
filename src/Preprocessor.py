@@ -43,9 +43,12 @@ class Preprocessor:
 		text.replace("""404: Not Found""", '')
 		return text
 
-	def remove_stop_words(self, text : str, stop_words):
-		#token_list = word_tokenize(text)	# tokenize text 
-		return [token for token in text if token not in stop_words]
+	def remove_stop_words(self, text : str):
+		stop_words = stopwords.words('english')
+		stop_words += ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'hundred', 'thousand', 'and']
+		stop_words += ['network', 'install', 'run', 'file', 'use', 'result', 'paper', 'python', 'using', 'code', 'model', 'train', 'implementation', 'use']
+		stop_words += ['data', 'dataset', 'example', 'build', 'learn', 'download', 'obj']
+		return [word for word in text if not word in stop_words]
 		
 	def remove_codeblocks(self, text):
 		return re.sub('```.*?```', ' ', text)
@@ -69,7 +72,7 @@ class Preprocessor:
 		for word in words:
 			if word.isdigit():
 				new_word = p.number_to_words(word)
-				new_words.append(new_word)
+				new_words += new_word.split(' ')
 			else:
 				new_words.append(word)
 		return new_words
@@ -98,6 +101,24 @@ class Preprocessor:
 		lemmas = []
 		for word in words:
 			lemma = lemmatizer.lemmatize(word, pos='v')
+			lemmas.append(lemma)
+		return lemmas
+
+	def lemmatize_nouns(self, words):
+		"""Lemmatize verbs in list of tokenized words"""
+		lemmatizer = WordNetLemmatizer()
+		lemmas = []
+		for word in words:
+			lemma = lemmatizer.lemmatize(word, pos='n')
+			lemmas.append(lemma)
+		return lemmas
+
+	def lemmatize_adjectives(self, words):
+		"""Lemmatize verbs in list of tokenized words"""
+		lemmatizer = WordNetLemmatizer()
+		lemmas = []
+		for word in words:
+			lemma = lemmatizer.lemmatize(word, pos='a')
 			lemmas.append(lemma)
 		return lemmas
 
@@ -137,7 +158,7 @@ class Preprocessor:
 		
 		#Remove codeblocks
 		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_codeblocks(x))
-
+		
 		#Remove links
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_links2(x))
 
@@ -151,26 +172,28 @@ class Preprocessor:
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x: x.lower())
 
 		#Replace numbers
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.replace_numbers(word_tokenize(x)))
+		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.replace_numbers(word_tokenize(x)))
 
 		#Remove none ascii
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_non_ascii(x))
-
-		#Remove stop words
-		stop_words = stopwords.words('english')
-		#stop_words += ['network', 'install', 'run', 'file', 'used', 'result', 'paper', 'python', 'using', 'code', 'model', 'training', 'implementation', 'use']
-		#stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
-		#stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_stop_words(x, stop_words))
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_non_ascii(word_tokenize(x)))
 
 		#Lemmatize verbs
 		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_verbs(x))
 
 		#Lemmatize nouns
-		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.lemmatizer(x))
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_nouns(x))
+
+		#Lemmatize adjectives
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_adjectives(x))
+
+		#Remove stop words
+		#stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
+		#stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_stop_words(x))
+
 
 		# Remove tokens only containing numbers or two char
-		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.remove_one_char_and_number_words(x))
+		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_one_char_and_number_words(x))
 
 		#Keep only common words
 		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))

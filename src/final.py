@@ -16,7 +16,9 @@ def preprocess_file(filename: str):
 def train_test_split_file(filename: str, test_size = 0.2):
 	logthis.say('Train test set separation starts')
 	df = pd.read_csv(filename, sep=';')
-	train, test = train_test_split(df, test_size=test_size, random_state=42, stratify=df['Label'])
+	#train, test = train_test_split(df, test_size=test_size, random_state=42, stratify=df['Label'])
+	train = df.drop_duplicates(subset=['Text'], keep=False)
+	test = df[df.duplicated(subset=['Text'], keep=False)]
 	train.to_csv(filename.replace('.csv', '_train.csv'), sep=';', index=False)
 	test.to_csv(filename.replace('.csv', '_test.csv'), sep=';', index=False)
 	logthis.say('Train test set separation done')
