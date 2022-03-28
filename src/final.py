@@ -1,3 +1,4 @@
+from asyncio import run
 import pandas as pd
 import argparse
 import sys
@@ -23,6 +24,12 @@ def train_test_split_file(filename: str, test_size = 0.2):
 	test.to_csv(filename.replace('.csv', '_test.csv'), sep=';', index=False)
 	logthis.say('Train test set separation done')
 
+def run_experiments(models, out, test_set):
+	df_test = pd.read_csv(test_set, sep=';')
+	pass
+
+	
+
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser("python src/final.py", description='Perform all the steps of the method.')
 	parser.add_argument('--preprocess_file', help='Name of .csv the file with the preprocessed data. The file will be saved in the same filename with _preprocessed at the end', required='--preprocess' in sys.argv)
@@ -32,14 +39,17 @@ if __name__ == "__main__":
 	parser.add_argument('--test_size', help='Size of the test set. (default = 0.2)', required=False, default=0.2, type=float)
 	parser.add_argument('--train_models', help='Train the models.', required=False, action='store_true')
 	parser.add_argument('--train_set', help='Path to train set', required='--train_models' in sys.argv)
-	parser.add_argument('--test_set', help='Path to test set', required='--train_models' in sys.argv)
+	parser.add_argument('--test_set', help='Path to test set', required='--train_models' in sys.argv or '--run_experiments' in sys.argv)
 	parser.add_argument('--categories', help='List of categories to apply the models for. (default = all categories that are in the training set)', required=False)
+	parser.add_argument('--run_experiments', help='Run experiments git the given models on the given test set', required=False, action='store_true')
+	parser.add_argument('--models', help='Path to folder containing the models', required='--run_experiments' in sys.argv)
+	parser.add_argument('--output_csv', help='Path to output csv with the results', required='--run_experiments' in sys.argv)
 	args = parser.parse_args()
-	if(args.preprocess):
+	if args.preprocess:
 		preprocess_file(args.preprocess_file)
-	if(args.train_test_split):
+	if args.train_test_split:
 		train_test_split_file(args.train_test_file, args.test_size)
-	if(args.train_models):
-		print(args.train_set)
-		print(args.test_set)
+	if args.train_models:
 		train_models(args.train_set, args.test_set)
+	if args.run_experiment:
+		run_experiments(args.models, args.output_csv, args.test_set)

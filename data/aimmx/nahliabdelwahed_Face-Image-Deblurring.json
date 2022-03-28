@@ -1,0 +1,148 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "BSD 2-Clause \"Simplified\" License"
+    },
+    "name": "Face image deblurring: A Two Phases Data-Driven Learning Strategy",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "nahliabdelwahed",
+                "owner_type": "User",
+                "name": "Face-Image-Deblurring",
+                "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring",
+                "stars": 1,
+                "pushed_at": "2020-01-31 13:20:20+00:00",
+                "created_at": "2020-01-31 13:15:29+00:00",
+                "language": "Python",
+                "description": "Face Image Deblurring: A Data-Driven Learning Strategy ",
+                "license": "BSD 2-Clause \"Simplified\" License",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitattributes",
+                "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring/blob/master/.gitattributes"
+                    }
+                },
+                "size": 66
+            },
+            {
+                "type": "code",
+                "name": "CycleGAN",
+                "sha": "c28e671e1e602f16f3ef27a580ffe5180a9f64b4",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring/tree/master/CycleGAN"
+                    }
+                },
+                "num_files": 3
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "330c9ee5a811a6da1d915b50f74fa710937f64a7",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring/blob/master/LICENSE"
+                    }
+                },
+                "size": 1326
+            },
+            {
+                "type": "code",
+                "name": "SRN",
+                "sha": "c14c1a1dd6531bda454382bc29d0b1602721fc19",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring/tree/master/SRN"
+                    }
+                },
+                "num_files": 9
+            },
+            {
+                "type": "code",
+                "name": "imgs",
+                "sha": "d5576242eae94444585d4776338c86ac90ac92cb",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring/tree/master/imgs"
+                    }
+                },
+                "num_files": 5
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Abdel ",
+            "github_id": "nahliabdelwahed"
+        }
+    ],
+    "tags": [],
+    "description": "Face Image Deblurring: A Data-Driven Learning Strategy ",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring",
+            "stars": 1,
+            "issues": true,
+            "readme": "# Face image deblurring: A Two Phases Data-Driven Learning Strategy\n- This project was motivated by [CycleGAN](https://github.com/vanhuyz/CycleGAN-TensorFlow)and [Scale-recurrent Network ](https://github.com/jiangsutx/SRN-Deblur).\n- CycleGAN Original paper: https://arxiv.org/abs/1703.10593\n- Scale-recurrent Network Original paper: http://www.xtao.website/projects/srndeblur/srndeblur_cvpr18.pdf\n\n### Our main contributions in this work are:\n-Rather than using CycleGAN [6] just for data augmentation as it is communally used in some recent works. Instead we present a use case where we can exploit this algorithm for data labeling moreover than just data augmentation.\n-To better address the face image blurring problematic, we present a sequential learning strategy in a learning chain consists of an unsupervised learning based-algorithm in charge of data labeling and a supervised learning-guided algorithm taking charge of face image recovery.\n-We investigated the face image deblurring impact on the face detection accuracy.\n\n### The first training phase: CycleGAN  \n<img src=\"./imgs/phase1.PNG\" width=\"100%\" alt=\"Real Photo\">\n\n### The second training phase: SNR using the trained CycleGAN as a backbone. \n<img src=\"./imgs/phase2.PNG\" width=\"100%\" alt=\"Testing Dataset\">\n\n### Visual comparisons on our testing dataset. from left to right: Ground truth, Blurred input, Tao et al, Yuan et al, Zhu et al, Ours.\n<img src=\"./imgs/results1.PNG\" width=\"100%\" alt=\"More Cases\">\n\n### Visual comparisons on real blurred face images. From left to right: blurred input, Tao et al, Yuan et al , Zhu et al , Ours. \n<img src=\"./imgs/results2.PNG\" width=\"100%\" alt=\"More Cases\">\n\n### FaceBox, Face detection algorithm performance on our face deblurring results: a, b and c respectively show the ground truth, blurred and restored version.\n<img src=\"./imgs/face.PNG\" width=\"100%\" alt=\"More Cases\">\n\n\n# CycleGAN\n## Requirements\n- [TensorFlow](https://www.tensorflow.org/)\n- [Keras](https://pypi.org/project/Keras/)\n## Dataset\nSamples of dataset we use are in the **CycleGAN/CycleGAN_Data** folder,for better performance collect more real face unlabeled clear/blurred image training data .\n\n* Write the dataset to tfrecords\n```bash\n$ cd CycleGAN/CycleGAN_Code\n$ python build_data.py --X_input_dir  CycleGAN/CycleGAN_dataset/trainA \\\n\t               --Y_input_dir CycleGAN/CycleGAN_dataset/trainB \\\n\t--X_output_file CycleGAN//CycleGAN_dataset/blurred.tfrecords \\\n        --Y_output_file CycleGAN//CycleGAN_dataset/sharp.tfrecords\n```\n\n## Training\n\n```bash\n$ cd CycleGAN/CycleGAN_Code\n$ python train.py --X CycleGAN/CycleGAN_dataset/blurred.tfrecords \\\n\t\t   --Y CycleGAN/CycleGAN_dataset/sharp.tfrecords \\\n\t\t\t\t   --skip False\n```\n\nTo change other default settings, you can check [train.py](https://github.com/QLightman/VRAR-Course-Project/blob/master/%20CycleGAN_Code/train.py)\n\n\n## Check TensorBoard to see training progress and generated images.\n```\n$ tensorboard --logdir checkpoints/${datetime}\n```\n\n## Export model\nYou can export from a checkpoint to a standalone GraphDef file as follow:\n\n```bash\n$ python export_graph.py --checkpoint_dir checkpoints/${datetime} \\\n                          --XtoY_model blurred2sharp.pb \\\n                          --YtoX_model sharp2blurred.pb \\\n                          --image_size 256\n```\n\n## Inference\nAfter exporting model, you can use it for inference. For example:\n```bash\ncd /CycleGAN\npython inference.py --model CycleGAN_Model/sharp2blurred.pb \\\n                     --input input_sample.jpg \\\n                     --output output_sample.jpg \\\n                     --image_size 256\n```\n\n## Pretrained Models\nOur pretrained models are in the **CycleGAN_Model** folder. \n\n# Scale-recurrent Network \n## Prerequisites\n- Python2.7\n- Scipy\n- Scikit-image\n- numpy\n- Tensorflow 1.4 with NVIDIA GPU or CPU (cpu testing is very slow)\n## Installation\nClone this project to your machine. \n\n```bash\ngit clone https://github.com/jiangsutx/SRN-Deblur.git\ncd SRN-Deblur\n```\n## Training\nUsing the trained CycleGAN We inferred a blurred version of [CelebA dataset](https://www.kaggle.com/jessicali9530/celeba-dataset).CebebA is a benchmarked clear face image dataset downloadable from this link: https://www.kaggle.com/jessicali9530/celeba-dataset \nIn order to build the a clear/blurred labed face image dataset:Run the trained CycleGAN inference on whole CelebA dataset using the below command on line.\n```bash\ncd /CycleGAN\npython inference.py --model CycleGAN_Model/sharp2blurred.pb \\\n                     --input input_sample.jpg \\\n                     --output output_sample.jpg \\\n                     --image_size 256\n```\nPlease put the dataset into `training_set/`. And the provided `datalist.txt` can be used to train the model, follow the template and adapt its contain to your data order and location.  \n\nHyper parameters such as batch size, learning rate, epoch number can be tuned through command line:\n\n```bash\ncd /SRN\npython run_model.py --phase=train --batch=16 --lr=1e-4 --epoch=4000\n```\n## Testing\n\nWe provide pretrained models inside `checkpoints/`.\n\nTo test blur images in a folder, just use arguments \n`--input_path=<TEST_FOLDER>` and save the outputs to `--output_path=<OUTPUT_FOLDER>`.\nFor example:\n\n```bash\npython run_model.py --input_path=./testing_set --output_path=./testing_res\n```\n\nIf you have a GPU, please include `--gpu` argument, and add your gpu id to your command. \nOtherwise, use `--gpu=-1` for CPU. \n\n```bash\npython run_model.py --gpu=0\n```\n\nTo test the model, pre-defined height and width of tensorflow \nplaceholder should be assigned. \nOur network requires the height and width be multiples of `16`. \nWhen the gpu memory is enough, the height and width could be assigned to \nthe maximum to accommodate all the images. \n\nOtherwise, the images will be downsampled by the largest scale factor to \nbe fed into the placeholder. And results will be upsampled to the original size.\n\nAccording to our experience, `--height=720` and `--width=1280` work well \non a Gefore GTX 1050 TI with 4GB memory. For example, \n\n```bash\npython run_model.py --height=720 --width=1280\n```\n\n\n\n\n",
+            "readme_url": "https://github.com/nahliabdelwahed/Face-Image-Deblurring",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+            "arxiv": "1703.10593",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1703.10593v7",
+            "abstract": "Image-to-image translation is a class of vision and graphics problems where\nthe goal is to learn the mapping between an input image and an output image\nusing a training set of aligned image pairs. However, for many tasks, paired\ntraining data will not be available. We present an approach for learning to\ntranslate an image from a source domain $X$ to a target domain $Y$ in the\nabsence of paired examples. Our goal is to learn a mapping $G: X \\rightarrow Y$\nsuch that the distribution of images from $G(X)$ is indistinguishable from the\ndistribution $Y$ using an adversarial loss. Because this mapping is highly\nunder-constrained, we couple it with an inverse mapping $F: Y \\rightarrow X$\nand introduce a cycle consistency loss to push $F(G(X)) \\approx X$ (and vice\nversa). Qualitative results are presented on several tasks where paired\ntraining data does not exist, including collection style transfer, object\ntransfiguration, season transfer, photo enhancement, etc. Quantitative\ncomparisons against several prior methods demonstrate the superiority of our\napproach.",
+            "authors": [
+                "Jun-Yan Zhu",
+                "Taesung Park",
+                "Phillip Isola",
+                "Alexei A. Efros"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CelebA dataset",
+                "connection": {
+                    "name": "url",
+                    "source": {
+                        "url": "https://www.kaggle.com/jessicali9530/celeba-dataset"
+                    }
+                }
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999996014838608,
+        "task": "Image-to-Image Translation",
+        "task_prob": 0.9802061365893278
+    }
+}

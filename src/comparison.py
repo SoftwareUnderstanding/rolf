@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 from aimmx import AIMMX
 import json
+from os.path import exists
 
 def getRepoNameFromGitHubUrl(url: str) -> str:
 	return '_'.join(url.split('/')[-2:])
@@ -12,13 +13,18 @@ if __name__ == '__main__':
 	reader = csv.DictReader(open("data/readme_new_preprocessed_test.csv"), delimiter=';')
 	path = Path("data/aimmx_output.csv")
 	new = not path.exists()
+	
 	writer = csv.writer(open("data/aimmx_output.csv", 'a+'), delimiter=';')
 	if new:
 		writer.writeheader()
 	outpath = Path('data/aimmx')
 	outpath.mkdir(parents=True, exist_ok=True)
 	for row in reader:
+		filePath = outpath / getRepoNameFromGitHubUrl(row['Repo'] + '.json')
 		print(row['Repo'])
+		if filePath.is_file():
+			print(filePath)
+			continue
 		if row['Repo'] in repos:
 			metadata = {'domain': {'domain_type': repos[row['Repo']]}}
 			writer.writerow([row['Label'], row['Repo'], metadata['domain']['domain_type'], metadata['domain'].get('task')])
