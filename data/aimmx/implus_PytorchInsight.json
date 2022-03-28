@@ -1,0 +1,286 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "PytorchInsight",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "implus",
+                "owner_type": "User",
+                "name": "PytorchInsight",
+                "url": "https://github.com/implus/PytorchInsight",
+                "stars": 791,
+                "pushed_at": "2020-12-08 06:36:29+00:00",
+                "created_at": "2019-05-17 05:53:26+00:00",
+                "language": "Python",
+                "description": "a pytorch lib with state-of-the-art architectures, pretrained models and real-time updated results",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "08d149556c35912584f9bfdbf36156f95505f63d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/implus/PytorchInsight/blob/master/.gitignore"
+                    }
+                },
+                "size": 20
+            },
+            {
+                "type": "code",
+                "name": "classification",
+                "sha": "293d44b87d96e8e221089d16f1f3d72dcdd8da87",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/implus/PytorchInsight/tree/master/classification"
+                    }
+                },
+                "num_files": 10
+            },
+            {
+                "type": "code",
+                "name": "detection",
+                "sha": "d82286eec1404e730ba87e47b3acd35af4fbf208",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/implus/PytorchInsight/tree/master/detection"
+                    }
+                },
+                "num_files": 10
+            },
+            {
+                "type": "code",
+                "name": "pretrain_log",
+                "sha": "e919b6bab2e51b79404cfc9b9b18f20fa5ab0876",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/implus/PytorchInsight/tree/master/pretrain_log"
+                    }
+                },
+                "num_files": 12
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "implus",
+            "email": "xiang.li.implus@njust.edu.cn",
+            "github_id": "implus"
+        }
+    ],
+    "tags": [
+        "pytorch",
+        "classification",
+        "detection",
+        "state-of-the-art",
+        "pretrained-models",
+        "sknet",
+        "senet",
+        "gcnet",
+        "cbam",
+        "bam",
+        "sge",
+        "cnn",
+        "cnn-tricks",
+        "tricks",
+        "shufflenetv2",
+        "training-shufflenetv2",
+        "convolutional-networks",
+        "weight-decay",
+        "attention-models",
+        "weight-normalization-family"
+    ],
+    "description": "a pytorch lib with state-of-the-art architectures, pretrained models and real-time updated results",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/implus/PytorchInsight",
+            "stars": 791,
+            "issues": true,
+            "readme": "# PytorchInsight\n\nThis is a pytorch lib with state-of-the-art architectures, pretrained models and real-time updated results.\n\nThis repository aims to accelarate the advance of Deep Learning Research, make reproducible results and easier for doing researches, and in Pytorch.\n\n## Including Papers (to be updated):\n\n#### Attention Models\n\n> * SENet: Squeeze-and-excitation Networks <sub>([paper](https://arxiv.org/pdf/1709.01507.pdf))</sub>\n> * SKNet: Selective Kernel Networks <sub>([paper](https://arxiv.org/pdf/1903.06586.pdf))</sub>\n> * CBAM: Convolutional Block Attention Module <sub>([paper](https://arxiv.org/pdf/1807.06521.pdf))</sub>\n> * GCNet: GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond <sub>([paper](https://arxiv.org/pdf/1904.11492.pdf))</sub>\n> * BAM: Bottleneck Attention Module <sub>([paper](https://arxiv.org/pdf/1807.06514v1.pdf))</sub>\n> * SGENet: Spatial Group-wise Enhance: Enhancing Semantic Feature Learning in Convolutional Networks <sub>([paper](https://arxiv.org/pdf/1905.09646.pdf))</sub>\n> * SRMNet: SRM: A Style-based Recalibration Module for Convolutional Neural Networks <sub>([paper](https://arxiv.org/pdf/1903.10829.pdf))</sub>\n\n#### Non-Attention Models\n\n> * OctNet: Drop an Octave: Reducing Spatial Redundancy in Convolutional Neural Networks with Octave Convolution <sub>([paper](https://arxiv.org/pdf/1904.05049.pdf))</sub>\n> * imagenet_tricks.py: Bag of Tricks for Image Classification with Convolutional Neural Networks <sub>([paper](https://arxiv.org/pdf/1812.01187.pdf))</sub>\n> * Understanding the Disharmony between Weight Normalization Family and Weight Decay: e-shifted L2 Regularizer <sub>([to appear]()) \n> * Generalization Bound Regularizer: A Unified Framework for Understanding Weight Decay <sub>([to appear]())\n> * mixup: Beyond Empirical Risk Minimization <sub>([paper](https://arxiv.org/pdf/1710.09412.pdf))\n> * CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features <sub>([paper](https://arxiv.org/pdf/1905.04899.pdf))\n\n----------------------------------------------------\n\n## Trained Models and Performance Table\nSingle crop validation error on ImageNet-1k (center 224x224 crop from resized image with shorter side = 256). \n\n||classifiaction training settings for media and large models|\n|:-:|:-:|\n|Details|RandomResizedCrop, RandomHorizontalFlip; 0.1 init lr, total 100 epochs, decay at every 30 epochs; SGD with naive softmax cross entropy loss, 1e-4 weight decay, 0.9 momentum, 8 gpus, 32 images per gpu|\n|Examples| ResNet50 |\n|Note    | The newest code adds one default operation: setting all bias wd = 0, please refer to the theoretical analysis of \"Generalization Bound Regularizer: A Unified Framework for Understanding Weight Decay\" (to appear), thereby the training accuracy can be slightly boosted|\n\n||classifiaction training settings for mobile/small models|\n|:-:|:-:|\n|Details|RandomResizedCrop, RandomHorizontalFlip; 0.4 init lr, total 300 epochs, 5 linear warm up epochs, cosine lr decay; SGD with softmax cross entropy loss and label smoothing 0.1, 4e-5 weight decay on conv weights, 0 weight decay on all other weights, 0.9 momentum, 8 gpus, 128 images per gpu|\n|Examples| ShuffleNetV2|\n\n## Typical Training & Testing Tips:\n### Small Models \n#### ShuffleNetV2_1x\n```\npython -m torch.distributed.launch --nproc_per_node=8 imagenet_mobile.py --cos -a shufflenetv2_1x --data /path/to/imagenet1k/ \\\n--epochs 300 --wd 4e-5 --gamma 0.1 -c checkpoints/imagenet/shufflenetv2_1x --train-batch 128 --opt-level O0 --nowd-bn # Triaing\n\npython -m torch.distributed.launch --nproc_per_node=2 imagenet_mobile.py -a shufflenetv2_1x --data /path/to/imagenet1k/ \\\n-e --resume ../pretrain/shufflenetv2_1x.pth.tar --test-batch 100 --opt-level O0 # Testing, ~69.6% top-1 Acc\n```\n### Large Models\n#### SGE-ResNet\n```\npython -W ignore imagenet.py -a sge_resnet101 --data /path/to/imagenet1k/ --epochs 100 --schedule 30 60 90 \\\n--gamma 0.1 -c checkpoints/imagenet/sge_resnet101 --gpu-id 0,1,2,3,4,5,6,7 # Training\n\npython -m torch.distributed.launch --nproc_per_node=8 imagenet_fast.py -a sge_resnet101 --data /path/to/imagenet1k/ \\ \n--epochs 100 --schedule 30 60 90 --wd 1e-4 --gamma 0.1 -c checkpoints/imagenet/sge_resnet101 --train-batch 32 \\ \n--opt-level O0 --wd-all --label-smoothing 0. --warmup 0 # Training (faster) \n```\n```\npython -W ignore imagenet.py -a sge_resnet101 --data /path/to/imagenet1k/ --gpu-id 0,1 -e --resume ../pretrain/sge_resnet101.pth.tar \\\n# Testing ~78.8% top-1 Acc\n\npython -m torch.distributed.launch --nproc_per_node=2 imagenet_fast.py -a sge_resnet101 --data /path/to/imagenet1k/ -e --resume \\\n../pretrain/sge_resnet101.pth.tar --test-batch 100 --opt-level O0 # Testing (faster) ~78.8% top-1 Acc\n```\n#### WS-ResNet with e-shifted L2 regularizer, e = 1e-3\n```\npython -m torch.distributed.launch --nproc_per_node=8 imagenet_fast.py -a ws_resnet50 --data /share1/public/public/imagenet1k/ \\\n--epochs 100 --schedule 30 60 90 --wd 1e-4 --gamma 0.1 -c checkpoints/imagenet/es1e-3_ws_resnet50 --train-batch 32 \\\n--opt-level O0 --label-smoothing 0. --warmup 0 --nowd-conv --mineps 1e-3 --el2\n```\n\n--------------------------------------------------------\n## Results of \"SGENet: Spatial Group-wise Enhance: Enhancing Semantic Feature Learning in Convolutional Networks\"\nNote the following results (old) do not set the bias wd = 0 for large models\n\n### Classification\n| Model |#P | GFLOPs | Top-1 Acc | Top-5 Acc | Download1 | Download2 | log |\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n|ShuffleNetV2_1x|2.28M|0.151|69.6420|88.7200||[GoogleDrive](https://drive.google.com/file/d/1pRMFnUnDRgXyVo1Gj-MaCb07aeAAhSQo/view?usp=sharing)|[shufflenetv2_1x.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/shufflenetv2_1x.log.txt)|\n|ResNet50       |25.56M|4.122|76.3840|92.9080|[BaiduDrive(zuvx)](https://pan.baidu.com/s/1gwvuaqlRT9Sl4rDI9SWn_Q)|[GoogleDrive](https://drive.google.com/file/d/1ijUOmyDCSQTU9JaNwOu4_fs1cBXHnHPF/view?usp=sharing)|[old_resnet50.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/old_resnet50.log.txt)|\n|SE-ResNet50    |28.09M|4.130|77.1840|93.6720|||| \n|SK-ResNet50*   |26.15M|4.185|77.5380|93.7000|[BaiduDrive(tfwn)](https://pan.baidu.com/s/1Lx5CNUeRQXOSWjzTlcO2HQ)|[GoogleDrive](https://drive.google.com/file/d/1DGYWPeKc7dyJ9i-zPJcPPa2engExPOnJ/view?usp=sharing)|[sk_resnet50.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/sk_resnet50.log.txt)|\n|BAM-ResNet50   |25.92M|4.205|76.8980|93.4020|[BaiduDrive(z0h3)](https://pan.baidu.com/s/1ijPyAbUNQjlo_BcfDpM9Mg)|[GoogleDrive](https://drive.google.com/file/d/1K5iAUAIF_yRyC2pIiA65F8Ig0x4NzOqk/view?usp=sharing)|[bam_resnet50.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/bam_resnet50.log.txt)|\n|CBAM-ResNet50  |28.09M|4.139|77.6260|93.6600|[BaiduDrive(bram)](https://pan.baidu.com/s/1xSwUg9LiuHfmGGq8nQs4Ug)|[GoogleDrive](https://drive.google.com/open?id=1Q5gIKPARrZzDbCPZHpuj9tqXs06c2YZN)|[cbam_resnet50.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/cbam_resnet50.log.txt)|\n|SGE-ResNet50   |25.56M|4.127|77.5840|93.6640|[BaiduDrive(gxo9)](https://pan.baidu.com/s/11bb2XBGkTqIoOunaSXOOTg)|[GoogleDrive](https://drive.google.com/open?id=13HPCjrEle6aFbiCo8Afkr2jJssdNwdRn)|[sge_resnet50.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/sge_resnet50.log.txt)|\n|ResNet101      |44.55M|7.849|78.2000|93.9060|[BaiduDrive(js5t)](https://pan.baidu.com/s/1gjPo1OQ2DFnJCU1qq39v-g)|[GoogleDrive](https://drive.google.com/file/d/1125qwL4psGqJWrPDtSoxfBRLPMAnRzx4/view?usp=sharing)|[old_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/old_resnet101.log.txt)|\n|SE-ResNet101   |49.33M|7.863|78.4680|94.1020|[BaiduDrive(j2ox)](https://pan.baidu.com/s/1GSvSAlQKFH_tSw1NO88MlA)|[GoogleDrive](https://drive.google.com/file/d/1MOGkkqs6v_LCgO6baGDmcFYbuOkwZjK9/view?usp=sharing)|[se_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/se_resnet101.log.txt)|\n|SK-ResNet101*  |45.68M|7.978|78.7920|94.2680|[BaiduDrive(boii)](https://pan.baidu.com/s/1O1giKnrp3MVXZnlrndv8rg)|[GoogleDrive](https://drive.google.com/file/d/1WB7HXx-cvUIxFRe-M61XZIzUN0a3nsbF/view?usp=sharing)|[sk_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/sk_resnet101.log.txt)|\n|BAM-ResNet101  |44.91M|7.933|78.2180|94.0180|[BaiduDrive(4bw6)](https://pan.baidu.com/s/19bC9AxHt6lxdJEa2CxE-Zw)|[GoogleDrive](https://drive.google.com/open?id=15EUQ6aAoXzPm1YeAH4ZqnF3orEr0dB8f)|[bam_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/cbam_resnet101.log.txt)|\n|CBAM-ResNet101 |49.33M|7.879|78.3540|94.0640|[BaiduDrive(syj3)](https://pan.baidu.com/s/19rcXp5IOOTB0HbxmY-NgUw)|[GoogleDrive](https://drive.google.com/file/d/1UHLt3C59M1fRta6i9iLsj-RvIbKusgQN/view?usp=sharing)|[cbam_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/cbam_resnet101.log.txt)|\n|SGE-ResNet101  |44.55M|7.858|78.7980|94.3680|[BaiduDrive(wqn6)](https://pan.baidu.com/s/1X_qZbmC1G2qqdzbIx6C0cQ)|[GoogleDrive](https://drive.google.com/file/d/1ihu0NVvVJZEv0zj49izapn4V0FhwxCh6/view?usp=sharing)|[sge_resnet101.log](https://github.com/implus/PytorchInsight/blob/master/pretrain_log/sge_resnet101.log.txt)|\n\nHere SK-ResNet* is a modified version (for more fair comparison with ResNet backbone here) of original SKNet. The original SKNets perform stronger, and the pytorch version can be referred in [pppLang-SKNet](https://github.com/pppLang/SKNet).\n\n### Detection\n| Model | #p | GFLOPs | Detector | Neck |  AP50:95 (%) | AP50 (%) | AP75 (%) | Download | \n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n| ResNet50      | 23.51M | 88.0  | Faster RCNN  | FPN | 37.5 | 59.1 | 40.6 | [GoogleDrive](https://drive.google.com/file/d/1IN3Wr_MyrOVm4Kgyx-Fr-ScdaP6vbWaP/view?usp=sharing) |\n| SGE-ResNet50  | 23.51M | 88.1  | Faster RCNN  | FPN | 38.7 | 60.8 | 41.7 | [GoogleDrive](https://drive.google.com/file/d/1XFxix0YZ40viyIyE5KsEWBcS_I8QrWzM/view?usp=sharing) |\n| ResNet50      | 23.51M | 88.0  | Mask RCNN    | FPN | 38.6 | 60.0 | 41.9 | [GoogleDrive](https://drive.google.com/file/d/1P9Vu-AOC0EbFK3sJSo45rCvNGMdrF7AZ/view?usp=sharing) |\n| SGE-ResNet50  | 23.51M | 88.1  | Mask RCNN    | FPN | 39.6 | 61.5 | 42.9 | [GoogleDrive](https://drive.google.com/file/d/1obT-MQ_eIxfDAcy6a4xs1DKdjYKCpl1u/view?usp=sharing) |\n| ResNet50      | 23.51M | 88.0  | Cascade RCNN | FPN | 41.1 | 59.3 | 44.8 | [GoogleDrive](https://drive.google.com/file/d/1aYHeV4O48z9V4Io6Xq1L4-L3_3WfRsGy/view?usp=sharing) |\n| SGE-ResNet50  | 23.51M | 88.1  | Cascade RCNN | FPN | 42.6 | 61.4 | 46.2 | [GoogleDrive](https://drive.google.com/file/d/1Bmxlg5qv9b3_Z2PjQ4bTjSPWQ5PvLxxr/view?usp=sharing) |\n| ResNet101     | 42.50M | 167.9 | Faster RCNN  | FPN | 39.4 | 60.7 | 43.0 | [GoogleDrive](https://drive.google.com/file/d/1R4RGAp0PlZ8eQr6KNk7tvP8XLvKuYI-p/view?usp=sharing) |\n| SE-ResNet101  | 47.28M | 168.3 | Faster RCNN  | FPN | 40.4 | 61.9 | 44.2 | [GoogleDrive](https://drive.google.com/file/d/14BHVJ_grTJXUvKCUsH9PwR-n5U7pussJ/view?usp=sharing) |\n| SGE-ResNet101 | 42.50M | 168.1 | Faster RCNN  | FPN | 41.0 | 63.0 | 44.3 | [GoogleDrive](https://drive.google.com/file/d/1TY-n2bKvOIXQ4sj8VHwzQn0cCYUDHA13/view?usp=sharing) |\n| ResNet101     | 42.50M | 167.9 | Mask RCNN    | FPN | 40.4 | 61.6 | 44.2 | [GoogleDrive](https://drive.google.com/file/d/1bSXAVo25dUq56BU9rmQgBK7cpx_Cn2lY/view?usp=sharing) |\n| SE-ResNet101  | 47.28M | 168.3 | Mask RCNN    | FPN | 41.5 | 63.0 | 45.3 | [GoogleDrive](https://drive.google.com/file/d/1BV4WGgmUjU5oDfiH46FH-7iunkaEyjNv/view?usp=sharing) |\n| SGE-ResNet101 | 42.50M | 168.1 | Mask RCNN    | FPN | 42.1 | 63.7 | 46.1 | [GoogleDrive](https://drive.google.com/file/d/1sGMhVJcsm922c-pjbny12kwVRf0v0Hfa/view?usp=sharing) |\n| ResNet101     | 42.50M | 167.9 | Cascade RCNN | FPN | 42.6 | 60.9 | 46.4 | [GoogleDrive](https://drive.google.com/file/d/1_scOlE4MWAZWdSk3vVCYDTpy9OEVEsvN/view?usp=sharing) |\n| SE-ResNet101  | 47.28M | 168.3 | Cascade RCNN | FPN | 43.4 | 62.2 | 47.2 | [GoogleDrive](https://drive.google.com/file/d/1rKHXxSgJmCAG9oO3V_8oUBgo0WKdOaXA/view?usp=sharing) |\n| SGE-ResNet101 | 42.50M | 168.1 | Cascade RCNN | FPN | 44.4 | 63.2 | 48.4 | [GoogleDrive](https://drive.google.com/file/d/1rXII_efJwI7suttG0q6HojQ_aeIhiiYX/view?usp=sharing) |\n\n--------------------------------------------------------\n## Results of \"Understanding the Disharmony between Weight Normalization Family and Weight Decay: e-shifted L2 Regularizer\"\nNote that the following models are with bias wd = 0.\n\n### Classification\n|Model      | Top-1 | Download |\n|:-:|:-:|:-:|\n|WS-ResNet50           | 76.74 | [GoogleDrive](https://drive.google.com/file/d/1AeZc_4o5XA8a3av8M3NAOipsy_sV_tgH/view?usp=sharing) |\n|WS-ResNet50(e = 1e-3) | 76.86 | [GoogleDrive](https://drive.google.com/file/d/18U_PzzWhOL4GPB7jF36XlCltbAD7Qdcx/view?usp=sharing) |\n|WS-ResNet101          | 78.07 | [GoogleDrive](https://drive.google.com/file/d/1LKHq5gxhT0S6L1OFXlw6azWEsEtobxlF/view?usp=sharing) | \n|WS-ResNet101(e = 1e-6)| 78.29 | [GoogleDrive](https://drive.google.com/file/d/12WQ3oCRCGvM9eU9YAbr6jk_2NcpAsyhS/view?usp=sharing) | \n|WS-ResNeXt50(e = 1e-3) |77.88      |[GoogleDrive](https://drive.google.com/file/d/18U_PzzWhOL4GPB7jF36XlCltbAD7Qdcx/view?usp=sharing)| \n|WS-ResNeXt101(e = 1e-3)|78.80      |[GoogleDrive](https://drive.google.com/file/d/14YxWswfC8nyxH34AGQFOT-csSP4aI5vT/view?usp=sharing)|\n|WS-DenseNet201(e = 1e-8)  | 77.59  |[GoogleDrive](https://drive.google.com/file/d/1I6XEYBLO-488vBUoyexXEmEzTDnv9wuf/view?usp=sharing)|\n|WS-ShuffleNetV1(e = 1e-8) | 68.09  |[GoogleDrive](https://drive.google.com/file/d/1hU8_SJNgFk9uNr8cNCGqDFgkBvm4RdjO/view?usp=sharing)|\n|WS-ShuffleNetV2(e = 1e-8) | 69.70  |[GoogleDrive](https://drive.google.com/file/d/1Oc04IvP9JTFM8yDnlbmB5wnugr_3Cd0I/view?usp=sharing)|\n|WS-MobileNetV1(e = 1e-6)  | 73.60  |[GoogleDrive](https://drive.google.com/file/d/17oAS8W2Mr83qhgI-gTRG1H6WJGMQdFMB/view?usp=sharing)|\n\n--------------------------------------------------------\n## Results of \"Generalization Bound Regularizer: A Unified Framework for Understanding Weight Decay\"\n\n### To appear\n\n--------------------------------------------------------\n## Citation\n\nIf you find our related works useful in your research, please consider citing the paper:\n    \n    @inproceedings{li2019selective,\n      title={Selective Kernel Networks},\n      author={Li, Xiang and Wang, Wenhai and Hu, Xiaolin and Yang, Jian},\n      journal={IEEE Conference on Computer Vision and Pattern Recognition},\n      year={2019}\n    }\n\n    @inproceedings{li2019spatial,\n      title={Spatial Group-wise Enhance: Enhancing Semantic Feature Learning in Convolutional Networks},\n      author={Li, Xiang and Hu, Xiaolin and Xia, Yan and Yang, Jian},\n      journal={arXiv preprint arXiv:1905.09646},\n      year={2019}\n    }\n\n    @inproceedings{li2019understanding,\n      title={Understanding the Disharmony between Weight Normalization Family and Weight Decay: e-shifted L2 Regularizer},\n      author={Li, Xiang and Chen, Shuo and Yang, Jian},\n      journal={arXiv preprint arXiv:},\n      year={2019}\n    }\n\n    @inproceedings{li2019generalization,\n      title={Generalization Bound Regularizer: A Unified Framework for Understanding Weight Decay},\n      author={Li, Xiang and Chen, Shuo and Gong, Chen and Xia, Yan and Yang, Jian},\n      journal={arXiv preprint arXiv:},\n      year={2019}\n    }\n\n\n\n\n\n\n",
+            "readme_url": "https://github.com/implus/PytorchInsight",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features",
+            "arxiv": "1905.04899",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1905.04899v2",
+            "abstract": "Regional dropout strategies have been proposed to enhance the performance of\nconvolutional neural network classifiers. They have proved to be effective for\nguiding the model to attend on less discriminative parts of objects (e.g. leg\nas opposed to head of a person), thereby letting the network generalize better\nand have better object localization capabilities. On the other hand, current\nmethods for regional dropout remove informative pixels on training images by\noverlaying a patch of either black pixels or random noise. Such removal is not\ndesirable because it leads to information loss and inefficiency during\ntraining. We therefore propose the CutMix augmentation strategy: patches are\ncut and pasted among training images where the ground truth labels are also\nmixed proportionally to the area of the patches. By making efficient use of\ntraining pixels and retaining the regularization effect of regional dropout,\nCutMix consistently outperforms the state-of-the-art augmentation strategies on\nCIFAR and ImageNet classification tasks, as well as on the ImageNet\nweakly-supervised localization task. Moreover, unlike previous augmentation\nmethods, our CutMix-trained ImageNet classifier, when used as a pretrained\nmodel, results in consistent performance gains in Pascal detection and MS-COCO\nimage captioning benchmarks. We also show that CutMix improves the model\nrobustness against input corruptions and its out-of-distribution detection\nperformances. Source code and pretrained models are available at\nhttps://github.com/clovaai/CutMix-PyTorch .",
+            "authors": [
+                "Sangdoo Yun",
+                "Dongyoon Han",
+                "Seong Joon Oh",
+                "Sanghyuk Chun",
+                "Junsuk Choe",
+                "Youngjoon Yoo"
+            ]
+        },
+        {
+            "title": "Spatial Group-wise Enhance: Improving Semantic Feature Learning in Convolutional Networks",
+            "arxiv": "1905.09646",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1905.09646v2",
+            "abstract": "The Convolutional Neural Networks (CNNs) generate the feature representation\nof complex objects by collecting hierarchical and different parts of semantic\nsub-features. These sub-features can usually be distributed in grouped form in\nthe feature vector of each layer, representing various semantic entities.\nHowever, the activation of these sub-features is often spatially affected by\nsimilar patterns and noisy backgrounds, resulting in erroneous localization and\nidentification. We propose a Spatial Group-wise Enhance (SGE) module that can\nadjust the importance of each sub-feature by generating an attention factor for\neach spatial location in each semantic group, so that every individual group\ncan autonomously enhance its learnt expression and suppress possible noise. The\nattention factors are only guided by the similarities between the global and\nlocal feature descriptors inside each group, thus the design of SGE module is\nextremely lightweight with \\emph{almost no extra parameters and calculations}.\nDespite being trained with only category supervisions, the SGE component is\nextremely effective in highlighting multiple active areas with various\nhigh-order semantics (such as the dog's eyes, nose, etc.). When integrated with\npopular CNN backbones, SGE can significantly boost the performance of image\nrecognition tasks. Specifically, based on ResNet50 backbones, SGE achieves\n1.2\\% Top-1 accuracy improvement on the ImageNet benchmark and 1.0$\\sim$2.0\\%\nAP gain on the COCO benchmark across a wide range of detectors\n(Faster/Mask/Cascade RCNN and RetinaNet). Codes and pretrained models are\navailable at https://github.com/implus/PytorchInsight.",
+            "authors": [
+                "Xiang Li",
+                "Xiaolin Hu",
+                "Jian Yang"
+            ]
+        },
+        {
+            "title": "GCNet: Non-local Networks Meet Squeeze-Excitation Networks and Beyond",
+            "arxiv": "1904.11492",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1904.11492v1",
+            "abstract": "The Non-Local Network (NLNet) presents a pioneering approach for capturing\nlong-range dependencies, via aggregating query-specific global context to each\nquery position. However, through a rigorous empirical analysis, we have found\nthat the global contexts modeled by non-local network are almost the same for\ndifferent query positions within an image. In this paper, we take advantage of\nthis finding to create a simplified network based on a query-independent\nformulation, which maintains the accuracy of NLNet but with significantly less\ncomputation. We further observe that this simplified design shares similar\nstructure with Squeeze-Excitation Network (SENet). Hence we unify them into a\nthree-step general framework for global context modeling. Within the general\nframework, we design a better instantiation, called the global context (GC)\nblock, which is lightweight and can effectively model the global context. The\nlightweight property allows us to apply it for multiple layers in a backbone\nnetwork to construct a global context network (GCNet), which generally\noutperforms both simplified NLNet and SENet on major benchmarks for various\nrecognition tasks. The code and configurations are released at\nhttps://github.com/xvjiarui/GCNet.",
+            "authors": [
+                "Yue Cao",
+                "Jiarui Xu",
+                "Stephen Lin",
+                "Fangyun Wei",
+                "Han Hu"
+            ]
+        },
+        {
+            "title": "CBAM: Convolutional Block Attention Module",
+            "arxiv": "1807.06521",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1807.06521v2",
+            "abstract": "We propose Convolutional Block Attention Module (CBAM), a simple yet\neffective attention module for feed-forward convolutional neural networks.\nGiven an intermediate feature map, our module sequentially infers attention\nmaps along two separate dimensions, channel and spatial, then the attention\nmaps are multiplied to the input feature map for adaptive feature refinement.\nBecause CBAM is a lightweight and general module, it can be integrated into any\nCNN architectures seamlessly with negligible overheads and is end-to-end\ntrainable along with base CNNs. We validate our CBAM through extensive\nexperiments on ImageNet-1K, MS~COCO detection, and VOC~2007 detection datasets.\nOur experiments show consistent improvements in classification and detection\nperformances with various models, demonstrating the wide applicability of CBAM.\nThe code and models will be publicly available.",
+            "authors": [
+                "Sanghyun Woo",
+                "Jongchan Park",
+                "Joon-Young Lee",
+                "In So Kweon"
+            ]
+        },
+        {
+            "title": "Bag of Tricks for Image Classification with Convolutional Neural Networks",
+            "arxiv": "1812.01187",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1812.01187v2",
+            "abstract": "Much of the recent progress made in image classification research can be\ncredited to training procedure refinements, such as changes in data\naugmentations and optimization methods. In the literature, however, most\nrefinements are either briefly mentioned as implementation details or only\nvisible in source code. In this paper, we will examine a collection of such\nrefinements and empirically evaluate their impact on the final model accuracy\nthrough ablation study. We will show that, by combining these refinements\ntogether, we are able to improve various CNN models significantly. For example,\nwe raise ResNet-50's top-1 validation accuracy from 75.3% to 79.29% on\nImageNet. We will also demonstrate that improvement on image classification\naccuracy leads to better transfer learning performance in other application\ndomains such as object detection and semantic segmentation.",
+            "authors": [
+                "Tong He",
+                "Zhi Zhang",
+                "Hang Zhang",
+                "Zhongyue Zhang",
+                "Junyuan Xie",
+                "Mu Li"
+            ]
+        },
+        {
+            "title": "mixup: Beyond Empirical Risk Minimization",
+            "arxiv": "1710.09412",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1710.09412v2",
+            "abstract": "Large deep neural networks are powerful, but exhibit undesirable behaviors\nsuch as memorization and sensitivity to adversarial examples. In this work, we\npropose mixup, a simple learning principle to alleviate these issues. In\nessence, mixup trains a neural network on convex combinations of pairs of\nexamples and their labels. By doing so, mixup regularizes the neural network to\nfavor simple linear behavior in-between training examples. Our experiments on\nthe ImageNet-2012, CIFAR-10, CIFAR-100, Google commands and UCI datasets show\nthat mixup improves the generalization of state-of-the-art neural network\narchitectures. We also find that mixup reduces the memorization of corrupt\nlabels, increases the robustness to adversarial examples, and stabilizes the\ntraining of generative adversarial networks.",
+            "authors": [
+                "Hongyi Zhang",
+                "Moustapha Cisse",
+                "Yann N. Dauphin",
+                "David Lopez-Paz"
+            ]
+        },
+        {
+            "title": "Selective Kernel Networks",
+            "arxiv": "1903.06586",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1903.06586v2",
+            "abstract": "In standard Convolutional Neural Networks (CNNs), the receptive fields of\nartificial neurons in each layer are designed to share the same size. It is\nwell-known in the neuroscience community that the receptive field size of\nvisual cortical neurons are modulated by the stimulus, which has been rarely\nconsidered in constructing CNNs. We propose a dynamic selection mechanism in\nCNNs that allows each neuron to adaptively adjust its receptive field size\nbased on multiple scales of input information. A building block called\nSelective Kernel (SK) unit is designed, in which multiple branches with\ndifferent kernel sizes are fused using softmax attention that is guided by the\ninformation in these branches. Different attentions on these branches yield\ndifferent sizes of the effective receptive fields of neurons in the fusion\nlayer. Multiple SK units are stacked to a deep network termed Selective Kernel\nNetworks (SKNets). On the ImageNet and CIFAR benchmarks, we empirically show\nthat SKNet outperforms the existing state-of-the-art architectures with lower\nmodel complexity. Detailed analyses show that the neurons in SKNet can capture\ntarget objects with different scales, which verifies the capability of neurons\nfor adaptively adjusting their receptive field sizes according to the input.\nThe code and models are available at https://github.com/implus/SKNet.",
+            "authors": [
+                "Xiang Li",
+                "Wenhai Wang",
+                "Xiaolin Hu",
+                "Jian Yang"
+            ]
+        },
+        {
+            "title": "Squeeze-and-Excitation Networks",
+            "arxiv": "1709.01507",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1709.01507v4",
+            "abstract": "The central building block of convolutional neural networks (CNNs) is the\nconvolution operator, which enables networks to construct informative features\nby fusing both spatial and channel-wise information within local receptive\nfields at each layer. A broad range of prior research has investigated the\nspatial component of this relationship, seeking to strengthen the\nrepresentational power of a CNN by enhancing the quality of spatial encodings\nthroughout its feature hierarchy. In this work, we focus instead on the channel\nrelationship and propose a novel architectural unit, which we term the\n\"Squeeze-and-Excitation\" (SE) block, that adaptively recalibrates channel-wise\nfeature responses by explicitly modelling interdependencies between channels.\nWe show that these blocks can be stacked together to form SENet architectures\nthat generalise extremely effectively across different datasets. We further\ndemonstrate that SE blocks bring significant improvements in performance for\nexisting state-of-the-art CNNs at slight additional computational cost.\nSqueeze-and-Excitation Networks formed the foundation of our ILSVRC 2017\nclassification submission which won first place and reduced the top-5 error to\n2.251%, surpassing the winning entry of 2016 by a relative improvement of ~25%.\nModels and code are available at https://github.com/hujie-frank/SENet.",
+            "authors": [
+                "Jie Hu",
+                "Li Shen",
+                "Samuel Albanie",
+                "Gang Sun",
+                "Enhua Wu"
+            ]
+        },
+        {
+            "title": "SRM : A Style-based Recalibration Module for Convolutional Neural Networks",
+            "arxiv": "1903.10829",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1903.10829v1",
+            "abstract": "Following the advance of style transfer with Convolutional Neural Networks\n(CNNs), the role of styles in CNNs has drawn growing attention from a broader\nperspective. In this paper, we aim to fully leverage the potential of styles to\nimprove the performance of CNNs in general vision tasks. We propose a\nStyle-based Recalibration Module (SRM), a simple yet effective architectural\nunit, which adaptively recalibrates intermediate feature maps by exploiting\ntheir styles. SRM first extracts the style information from each channel of the\nfeature maps by style pooling, then estimates per-channel recalibration weight\nvia channel-independent style integration. By incorporating the relative\nimportance of individual styles into feature maps, SRM effectively enhances the\nrepresentational ability of a CNN. The proposed module is directly fed into\nexisting CNN architectures with negligible overhead. We conduct comprehensive\nexperiments on general image recognition as well as tasks related to styles,\nwhich verify the benefit of SRM over recent approaches such as\nSqueeze-and-Excitation (SE). To explain the inherent difference between SRM and\nSE, we provide an in-depth comparison of their representational properties.",
+            "authors": [
+                "HyunJae Lee",
+                "Hyo-Eun Kim",
+                "Hyeonseob Nam"
+            ]
+        },
+        {
+            "title": "Drop an Octave: Reducing Spatial Redundancy in Convolutional Neural Networks with Octave Convolution",
+            "arxiv": "1904.05049",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1904.05049v3",
+            "abstract": "In natural images, information is conveyed at different frequencies where\nhigher frequencies are usually encoded with fine details and lower frequencies\nare usually encoded with global structures. Similarly, the output feature maps\nof a convolution layer can also be seen as a mixture of information at\ndifferent frequencies. In this work, we propose to factorize the mixed feature\nmaps by their frequencies, and design a novel Octave Convolution (OctConv)\noperation to store and process feature maps that vary spatially \"slower\" at a\nlower spatial resolution reducing both memory and computation cost. Unlike\nexisting multi-scale methods, OctConv is formulated as a single, generic,\nplug-and-play convolutional unit that can be used as a direct replacement of\n(vanilla) convolutions without any adjustments in the network architecture. It\nis also orthogonal and complementary to methods that suggest better topologies\nor reduce channel-wise redundancy like group or depth-wise convolutions. We\nexperimentally show that by simply replacing convolutions with OctConv, we can\nconsistently boost accuracy for both image and video recognition tasks, while\nreducing memory and computational cost. An OctConv-equipped ResNet-152 can\nachieve 82.9% top-1 classification accuracy on ImageNet with merely 22.2\nGFLOPs.",
+            "authors": [
+                "Yunpeng Chen",
+                "Haoqi Fan",
+                "Bing Xu",
+                "Zhicheng Yan",
+                "Yannis Kalantidis",
+                "Marcus Rohrbach",
+                "Shuicheng Yan",
+                "Jiashi Feng"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "CIFAR-10"
+            },
+            {
+                "name": "MS-COCO"
+            },
+            {
+                "name": "CIFAR-100"
+            },
+            {
+                "name": "COCO"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999997430157027,
+        "task": "Image Classification",
+        "task_prob": 0.8270735717317401
+    }
+}

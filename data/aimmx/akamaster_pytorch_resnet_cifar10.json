@@ -1,0 +1,201 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "BSD 2-Clause \"Simplified\" License"
+    },
+    "name": "Proper ResNet Implementation for CIFAR10/CIFAR100 in Pytorch",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "akamaster",
+                "owner_type": "User",
+                "name": "pytorch_resnet_cifar10",
+                "url": "https://github.com/akamaster/pytorch_resnet_cifar10",
+                "stars": 756,
+                "pushed_at": "2022-02-14 11:49:04+00:00",
+                "created_at": "2018-01-15 09:50:56+00:00",
+                "language": "Python",
+                "description": "Proper implementation of ResNet-s for CIFAR10/100 in pytorch that matches description of the original paper.",
+                "license": "BSD 2-Clause \"Simplified\" License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "9eafc9460b883d6dc00165da4c9a1f73533e8d70",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/blob/master/LICENSE"
+                    }
+                },
+                "size": 1273
+            },
+            {
+                "type": "code",
+                "name": "hubconf.py",
+                "sha": "0e03e5af83053e7f6eb591a8b248feaea055a22d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/blob/master/hubconf.py"
+                    }
+                },
+                "size": 138
+            },
+            {
+                "type": "code",
+                "name": "pretrained_models",
+                "sha": "893f32030938d79c928fb2ecf6b0c810f2096ad4",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/tree/master/pretrained_models"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "resnet.py",
+                "sha": "0a252bf6339f82a1c2e3f2317c6ab86b6ad5b1af",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/blob/master/resnet.py"
+                    }
+                },
+                "size": 5001
+            },
+            {
+                "type": "code",
+                "name": "run.sh",
+                "sha": "1027f632e0974689751a0e97d8748336fb50d6ff",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/blob/master/run.sh"
+                    }
+                },
+                "size": 267
+            },
+            {
+                "type": "code",
+                "name": "trainer.py",
+                "sha": "1eef06c4c70529615a579691a94c1939bfbfb3e1",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/akamaster/pytorch_resnet_cifar10/blob/master/trainer.py"
+                    }
+                },
+                "size": 10606
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "akamaster",
+            "github_id": "akamaster"
+        },
+        {
+            "name": "\u9727\u96e8\u9b54\u7406\u6c99",
+            "email": "marisa@cs.utah.edu",
+            "github_id": "MarisaKirisame"
+        },
+        {
+            "name": "Karthik Ramesh Kamath",
+            "github_id": "karthikramesh55"
+        }
+    ],
+    "tags": [
+        "resnet",
+        "resnet20",
+        "resnet32",
+        "resnet44",
+        "resnet56",
+        "resnet110",
+        "resnet1202",
+        "pytorch",
+        "resnet-cifar",
+        "cifar",
+        "torchvision-models-cifar"
+    ],
+    "description": "Proper implementation of ResNet-s for CIFAR10/100 in pytorch that matches description of the original paper.",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/akamaster/pytorch_resnet_cifar10",
+            "stars": 756,
+            "issues": true,
+            "readme": "# Proper ResNet Implementation for CIFAR10/CIFAR100 in Pytorch\n[Torchvision model zoo](https://github.com/pytorch/vision/tree/master/torchvision/models) provides number of implementations of various state-of-the-art architectures, however, most of them are defined and implemented for ImageNet.\nUsually it is straightforward to use the provided models on other datasets, but some cases require manual setup.\n\nFor instance, very few pytorch repositories with ResNets on CIFAR10 provides the implementation as described in the [original paper](https://arxiv.org/abs/1512.03385). If you just use the torchvision's models on CIFAR10 you'll get the model **that differs in number of layers and parameters**. This is unacceptable if you want to directly compare ResNet-s on CIFAR10 with the original paper.\nThe purpose of this repo is to provide a valid pytorch implementation of ResNet-s for CIFAR10 as described in the original paper. The following models are provided:\n\n| Name      | # layers | # params| Test err(paper) | Test err(this impl.)|\n|-----------|---------:|--------:|:-----------------:|:---------------------:|\n|[ResNet20](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet20-12fca82f.th)   |    20    | 0.27M   | 8.75%| **8.27%**|\n|[ResNet32](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet32-d509ac18.th)  |    32    | 0.46M   | 7.51%| **7.37%**|\n|[ResNet44](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet44-014dd654.th)   |    44    | 0.66M   | 7.17%| **6.90%**|\n|[ResNet56](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet56-4bfd9763.th)   |    56    | 0.85M   | 6.97%| **6.61%**|\n|[ResNet110](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet110-1d1ed7c2.th)  |   110    |  1.7M   | 6.43%| **6.32%**|\n|[ResNet1202](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet1202-f3b1deed.th) |  1202    | 19.4M   | 7.93%| **6.18%**|\n\nThis implementation matches description of the original paper, with comparable or better test error.\n\n## How to run?\n```bash\ngit clone https://github.com/akamaster/pytorch_resnet_cifar10\ncd pytorch_resnet_cifar10\nchmod +x run.sh && ./run.sh\n```\n\n## Details of training\nOur implementation follows the paper in straightforward manner with some caveats: **First**, the training in the paper uses 45k/5k train/validation split on the train data, and selects the best performing model based on the performance on the validation set. We *do not perform* validation testing; if you need to compare your results on ResNet head-to-head to the orginal paper keep this in mind. **Second**, if you want to train ResNet1202 keep in mind that you need 16GB memory on GPU.\n\n## Pretrained models for download\n1. [ResNet20, 8.27% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet20.th)\n2. [ResNet32, 7.37% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet32.th)\n3. [ResNet44, 6.90% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet44.th)\n4. [ResNet56, 6.61% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet56.th)\n5. [ResNet110, 6.32% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet110.th)\n6. [ResNet1202, 6.18% err](https://github.com/akamaster/pytorch_resnet_cifar10/raw/master/pretrained_models/resnet1202.th)\n\nIf you find this implementation useful and want to cite/mention this page, here is a bibtex citation:\n\n```bibtex\n@misc{Idelbayev18a,\n  author       = \"Yerlan Idelbayev\",\n  title        = \"Proper {ResNet} Implementation for {CIFAR10/CIFAR100} in {PyTorch}\",\n  howpublished = \"\\url{https://github.com/akamaster/pytorch_resnet_cifar10}\",\n  note         = \"Accessed: 20xx-xx-xx\"\n}\n\n```",
+            "readme_url": "https://github.com/akamaster/pytorch_resnet_cifar10",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Deep Residual Learning for Image Recognition",
+            "arxiv": "1512.03385",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1512.03385v1",
+            "abstract": "Deeper neural networks are more difficult to train. We present a residual\nlearning framework to ease the training of networks that are substantially\ndeeper than those used previously. We explicitly reformulate the layers as\nlearning residual functions with reference to the layer inputs, instead of\nlearning unreferenced functions. We provide comprehensive empirical evidence\nshowing that these residual networks are easier to optimize, and can gain\naccuracy from considerably increased depth. On the ImageNet dataset we evaluate\nresidual nets with a depth of up to 152 layers---8x deeper than VGG nets but\nstill having lower complexity. An ensemble of these residual nets achieves\n3.57% error on the ImageNet test set. This result won the 1st place on the\nILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100\nand 1000 layers.\n  The depth of representations is of central importance for many visual\nrecognition tasks. Solely due to our extremely deep representations, we obtain\na 28% relative improvement on the COCO object detection dataset. Deep residual\nnets are foundations of our submissions to ILSVRC & COCO 2015 competitions,\nwhere we also won the 1st places on the tasks of ImageNet detection, ImageNet\nlocalization, COCO detection, and COCO segmentation.",
+            "authors": [
+                "Kaiming He",
+                "Xiangyu Zhang",
+                "Shaoqing Ren",
+                "Jian Sun"
+            ]
+        },
+        {
+            "note": "Accessed: 20xx-xx-xx",
+            "howpublished": "\\url{https://github.com/akamaster/pytorch_resnet_cifar10}",
+            "title": "Proper {ResNet} Implementation for {CIFAR10/CIFAR100} in {PyTorch}",
+            "author": [
+                "Idelbayev, Yerlan"
+            ],
+            "ENTRYTYPE": "misc",
+            "ID": "Idelbayev18a",
+            "authors": [
+                "Idelbayev, Yerlan"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "ILSVRC 2015"
+            },
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "ImageNet Detection"
+            },
+            {
+                "name": "CIFAR-10"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.999998448196151,
+        "task": "Object Detection",
+        "task_prob": 0.9893581626516275
+    }
+}

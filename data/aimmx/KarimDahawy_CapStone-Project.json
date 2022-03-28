@@ -1,0 +1,174 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "Capstone Project",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "KarimDahawy",
+                "owner_type": "User",
+                "name": "CapStone-Project",
+                "url": "https://github.com/KarimDahawy/CapStone-Project",
+                "stars": 0,
+                "pushed_at": "2022-03-11 23:58:15+00:00",
+                "created_at": "2019-09-07 15:18:32+00:00",
+                "language": "CMake",
+                "license": "MIT License",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "15c2ac18cdabb6733169109117851cba8f8fd946",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/blob/master/LICENSE"
+                    }
+                },
+                "size": 1075
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "01831813d3166c2ae125996595d6a547f5eff585",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/tree/master/data"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "imgs",
+                "sha": "fda511bbde13085e9675b68698caf3c7d0d41962",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/tree/master/imgs"
+                    }
+                },
+                "num_files": 16
+            },
+            {
+                "type": "code",
+                "name": "requirements.txt",
+                "sha": "82dc6014dfad758b4993cbca538de56e8ef3a9a0",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/blob/master/requirements.txt"
+                    }
+                },
+                "size": 155
+            },
+            {
+                "type": "code",
+                "name": "ros",
+                "sha": "15f365d4fcc07577ec13cd753dfa730d0891e867",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/tree/master/ros"
+                    }
+                },
+                "num_files": 3
+            }
+        ]
+    },
+    "trained_model": {
+        "binaries": [
+            {
+                "type": "binary",
+                "name": "Dockerfile",
+                "sha": "54c00ce344e701bb965efa506c2df8809c092c4d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/KarimDahawy/CapStone-Project/blob/master/Dockerfile"
+                    }
+                },
+                "size": 1241
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Karim Dahawy",
+            "email": "karimadahawy@gmail.com",
+            "github_id": "KarimDahawy"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/KarimDahawy/CapStone-Project",
+            "stars": 0,
+            "issues": true,
+            "readme": "# Capstone Project\n\n## Description\n--------------------------------------------------------------\nThis is the project repo for the final project of the Udacity Self-Driving Car Nanodegree-Capstone Project: Programming a Real Self-Driving Car. \n\n## Project Member:\n--------------------------------------------------------------\nThis project is done by: *Karim Dahawy* (karim.dahawy@valeo.com)\n\n[//]: # (Image References)\n\n[image1]: ./imgs/Capstone_Ros_Graph.png\n[image2]: ./imgs/Waypoint_Updater_Node.png\n[image3]: ./imgs/DBW_Node.png\n[image4]: ./imgs/Traffic_Light_Detection_Node.png\n[image5]: ./imgs/move.png\n[image6]: ./imgs/Decelerate.png\n[image7]: ./imgs/stop.png\n[image8]: ./imgs/Accelerate.png\n\n## Introduction:\n--------------------------------------------------------------\nIn order to design a fully autonomous Vehicle the following techniques have been used:\n    \n    1. Waypoint Following techniques\n    2. Control\n    3. Traffic Light Detection and Classification\n    \nThe Waypoint Following technique would take information from the traffic light detection and classification with the current waypoints in order to update the target velocities for each waypoint based on this information.\n\nFor Control part, I have designed a drive-by-wire (dbw) node that could take the target linear and angular velocities and publish commands for the throttle, brake, and steering of the car. \n\nFor Traffic Light Detection and classification, I have designed a classification node that would take the current waypoints of the car and an image taken from the car and determine if the closest traffic light was red or green.\n \n![alt text][image1]\n\n## Project Details:\n--------------------------------------------------------------\n### 1. Waypoint Following techniques:\n-------------------------------------\n\nThis is considered as a ROS Node that listens or subscribes to (/base_waypoint), (/current_pose), and (/traffic_waypoint) topics in order to generate or publishes (/final_waypoint).\n\n![alt text][image2]\n\nThis technique is excuted based on the following:\n    \n 1. Generating the final waypoints to make the vehicle moves on straight lines.\n 2. Use the Controller part in order to control throttle, steering and brake actions of the Autonomous Vehicle.\n 3. Integrating the traffic light detection and classification, so this node subscribes to (/traffic_waypoint) topic.\n 4. The (/final_waypoint) is updated based on the traffic light color:\n    * if RED, the velocity of the vehicle decelerates through the future waypoints.\n    * if GREEN, the velocity accelerates till the Maximum allowable speed through future waypoints.\n      \n### 2. Control:\n---------------\n\nThis is considered as a ROS Node that subscribes to (/twist_cmd), (/current_velocity), and (/dbw_enabled) topics in order to publishes (/vehicle/steering_cmd), (/vehicle/throttle_cmd), and (/vehicle/brake_cmd).\n\n![alt text][image3]\n\nThis Part is responsible to control the vehicles (throttle, steering, and brake) action commands.\nA PID controller is built with parameters (KP = 0.3, KI = 0.1, KD = 0). This part is called Drive by Wire (dbw) which can be defined as having electric control signal for the main control actions of the vehicle. The brake value is functional of the vehicle mass and the wheel radius calculating the vehcile Torque.\n      \n\n### 3. Traffic Light Detection and Classification:\n-------------------------------------------------\n\nThis is considered as a ROS Node that subscribes to (/base_waypoints), (/image_color), and (/current_pose) in order to publishes (/traffic_waypoints).\n\n![alt text][image4]\n\nThe Purpose of this part is to build a deep learning model to detect the position of the traffic light in the image sent by Carla Simulator, then classify its color if it is RED or GREEN. \n\nUsing Bosch traffic light data (https://hci.iwr.uni-heidelberg.de/node/6132), I was able to train a simple classification network (less inference time) that takes the image and output the traffic light color. \n\nA fine-tuned MobileNet (https://arxiv.org/pdf/1704.04861.pdf) is offered a good balance between efficiency and accuracy. I have depended on the information of stop line locations, so we decided not to use an object detection, and instead classify entire images as conraining very simply: RED, YELLOW, or GREEN traffic light.\n\n\n### Vehicle Performance on Unity Simulator\n\nThe vehicle is oving Normally on the Simulator:\n\n![alt text][image5]\n\nThe vehicle is able to decelerate if the traffic light is RED:\n\n![alt text][image6]\n\nThe vehicle stops while the traffic light is RED: \n\n![alt text][image7]\n\nThe vehicle is able to accelerate if the traffic light is GREEN:\n\n![alt text][image8]\n\n## Installation\n\nPlease use **one** of the two installation options, either native **or** docker installation.\n\n### Native Installation\n\n* Be sure that your workstation is running Ubuntu 16.04 Xenial Xerus or Ubuntu 14.04 Trusty Tahir. [Ubuntu downloads can be found here](https://www.ubuntu.com/download/desktop).\n* If using a Virtual Machine to install Ubuntu, use the following configuration as minimum:\n  * 2 CPU\n  * 2 GB system memory\n  * 25 GB of free hard drive space\n\n  The Udacity provided virtual machine has ROS and Dataspeed DBW already installed, so you can skip the next two steps if you are using this.\n\n* Follow these instructions to install ROS\n  * [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) if you have Ubuntu 16.04.\n  * [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu) if you have Ubuntu 14.04.\n* [Dataspeed DBW](https://bitbucket.org/DataspeedInc/dbw_mkz_ros)\n  * Use this option to install the SDK on a workstation that already has ROS installed: [One Line SDK Install (binary)](https://bitbucket.org/DataspeedInc/dbw_mkz_ros/src/81e63fcc335d7b64139d7482017d6a97b405e250/ROS_SETUP.md?fileviewer=file-view-default)\n* Download the [Udacity Simulator](https://github.com/udacity/CarND-Capstone/releases).\n\n### Docker Installation\n[Install Docker](https://docs.docker.com/engine/installation/)\n\nBuild the docker container\n```bash\ndocker build . -t capstone\n```\n\nRun the docker file\n```bash\ndocker run -p 4567:4567 -v $PWD:/capstone -v /tmp/log:/root/.ros/ --rm -it capstone\n```\n\n### Port Forwarding\nTo set up port forwarding, please refer to the \"uWebSocketIO Starter Guide\" found in the classroom (see Extended Kalman Filter Project lesson).\n\n### Usage\n\n1. Clone the project repository\n```bash\ngit clone https://github.com/udacity/CarND-Capstone.git\n```\n\n2. Install python dependencies\n```bash\ncd CarND-Capstone\npip install -r requirements.txt\n```\n3. Make and run styx\n```bash\ncd ros\ncatkin_make\nsource devel/setup.sh\nroslaunch launch/styx.launch\n```\n4. Run the simulator\n\n### Real world testing\n1. Download [training bag](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) that was recorded on the Udacity self-driving car.\n2. Unzip the file\n```bash\nunzip traffic_light_bag_file.zip\n```\n3. Play the bag file\n```bash\nrosbag play -l traffic_light_bag_file/traffic_light_training.bag\n```\n4. Launch your project in site mode\n```bash\ncd CarND-Capstone/ros\nroslaunch launch/site.launch\n```\n5. Confirm that traffic light detection works on real life images\n\n### Other library/driver information\nOutside of `requirements.txt`, here is information on other driver/library versions used in the simulator and Carla:\n\nSpecific to these libraries, the simulator grader and Carla use the following:\n\n|        | Simulator | Carla  |\n| :-----------: |:-------------:| :-----:|\n| Nvidia driver | 384.130 | 384.130 |\n| CUDA | 8.0.61 | 8.0.61 |\n| cuDNN | 6.0.21 | 6.0.21 |\n| TensorRT | N/A | N/A |\n| OpenCV | 3.2.0-dev | 2.4.8 |\n| OpenMP | N/A | N/A |\n\nWe are working on a fix to line up the OpenCV versions between the two.\n",
+            "readme_url": "https://github.com/KarimDahawy/CapStone-Project",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications",
+            "arxiv": "1704.04861",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1704.04861v1",
+            "abstract": "We present a class of efficient models called MobileNets for mobile and\nembedded vision applications. MobileNets are based on a streamlined\narchitecture that uses depth-wise separable convolutions to build light weight\ndeep neural networks. We introduce two simple global hyper-parameters that\nefficiently trade off between latency and accuracy. These hyper-parameters\nallow the model builder to choose the right sized model for their application\nbased on the constraints of the problem. We present extensive experiments on\nresource and accuracy tradeoffs and show strong performance compared to other\npopular models on ImageNet classification. We then demonstrate the\neffectiveness of MobileNets across a wide range of applications and use cases\nincluding object detection, finegrain classification, face attributes and large\nscale geo-localization.",
+            "authors": [
+                "Andrew G. Howard",
+                "Menglong Zhu",
+                "Bo Chen",
+                "Dmitry Kalenichenko",
+                "Weijun Wang",
+                "Tobias Weyand",
+                "Marco Andreetto",
+                "Hartwig Adam"
+            ]
+        },
+        {
+            "title": "ROS Kinetic",
+            "url": "http://wiki.ros.org/kinetic/Installation/Ubuntu"
+        },
+        {
+            "title": "ROS Indigo",
+            "url": "http://wiki.ros.org/indigo/Installation/Ubuntu"
+        },
+        {
+            "title": "Dataspeed DBW",
+            "url": "https://bitbucket.org/DataspeedInc/dbw_mkz_ros"
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.8968719280987093,
+        "task": "Image Classification",
+        "task_prob": 0.5320052501828687
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            }
+        ]
+    }
+}

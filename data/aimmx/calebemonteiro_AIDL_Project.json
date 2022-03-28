@@ -1,0 +1,143 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "SRGAN",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "calebemonteiro",
+                "owner_type": "User",
+                "name": "AIDL_Project",
+                "url": "https://github.com/calebemonteiro/AIDL_Project",
+                "stars": 0,
+                "pushed_at": "2020-09-29 11:02:23+00:00",
+                "created_at": "2020-08-18 08:24:34+00:00",
+                "language": "Python",
+                "description": "SRGAN Project for Postgraduate program.",
+                "frameworks": [
+                    "Keras",
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "model.py",
+                "sha": "a2873991ca5428d6b4004fd67ee26fcbde52cf57",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/calebemonteiro/AIDL_Project/blob/master/model.py"
+                    }
+                },
+                "size": 9365
+            },
+            {
+                "type": "code",
+                "name": "resources",
+                "sha": "412f6090086cc0305f430cad9ea859c20b72230b",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/calebemonteiro/AIDL_Project/tree/master/resources"
+                    }
+                },
+                "num_files": 11
+            },
+            {
+                "type": "code",
+                "name": "train.py",
+                "sha": "d1b6d29965c3be0dbe4f03359411ce7e7ab1eb81",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/calebemonteiro/AIDL_Project/blob/master/train.py"
+                    }
+                },
+                "size": 2080
+            },
+            {
+                "type": "code",
+                "name": "utils.py",
+                "sha": "408da464e755d96b2eedfb48e30381269ad6ef30",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/calebemonteiro/AIDL_Project/blob/master/utils.py"
+                    }
+                },
+                "size": 2364
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Calebe Monteiro",
+            "github_id": "calebemonteiro"
+        }
+    ],
+    "tags": [
+        "keras-tensorflow",
+        "gan",
+        "opencv"
+    ],
+    "description": "SRGAN Project for Postgraduate program.",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/calebemonteiro/AIDL_Project",
+            "stars": 0,
+            "issues": true,
+            "readme": "## SRGAN\nImplementation of _Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network_ using Keras (tf) for my postgraduate project in Universitat Polit\u00e8cnica de Catalunya.\n\n<p align=\"center\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/architecture.jpg\" width=\"640\"\\>\n</p>\n\nPaper: https://arxiv.org/abs/1609.04802\n\n## Metrics:\n\nThe network is implemented as the paper suggests using perceptual loss as metric to measure the performance of the network.\n<p align=\"center\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/percep_loss.JPG\" width=\"350\"\\>\n</p>\n\nTo Extract the the content loss, the paper suggests to use the VGG-19 to calculate the pixel-loss MSE between the features of the Hi-Res image \nand fake Hi-Res image, as it follows:\n\n<p align=\"center\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/content_loss.JPG\" width=\"350\"\\>\n</p>\n\n## Dataset:\n    For SRGAN training we opted to used the CelebA dataset with can be found here: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html\n\n\n## Requirements:\n    You will need the following to run the above:\n    Keras==2.3.1\n    tensorflow==2.1.0\n    opencv-python==4.3.0\n\tmatplotlib==3.3.0\n\targparse==1.4.0\n\tnumpy==1.19.1\n\n## File Structure:\n    Model.py   : Contains Generator and Discriminator Network\n    Utils.py   : Contains utilities to process images\n    train.py   : Used for training the model\n\n## Usage:\n    \n    Note : During the training the images generated and model will be saved into the directories \"images\" \n\tand \"model\" following the \"sample_interval\" parameter. all output folders are automatically created.\n    \n     * Training (due to my hardware specs, im training with default settings):\n        Run below command to start the training process. this script will also download the dataset and prepare the folders needed.\n        > python train.py --train_folder='./data/train/' --batch_size=12 --epochs=500 --sample_interval=25\n\n\n\t\n\n## Output:\nBelow are few results (from epoch 0 to 500):\n\n#### Epoch 0\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_0.png\" width=\"640\"\\>\n</p>\n\n#### Epoch 100\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_100.png\" width=\"640\"\\>\n</p>\n\n#### Epoch 200\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_200.png\" width=\"640\"\\>\n</p>\n\n#### Epoch 300\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_300.png\" width=\"640\"\\>\n</p>\n\n#### Epoch 400\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_400.png\" width=\"640\"\\>\n</p>\n\n#### Epoch 500\n<p align=\"left\">\n    <img src=\"https://github.com/calebemonteiro/AIDL_Project/blob/master/resources/epoch_500.png\" width=\"640\"\\>\n</p>\n\n## Findings / Conclusions:\n* The architecture suggested by the paper, even with very limited computational resources, is able to archieve some very good results.\n* We observed that the network really improves the image quality while applying the upscaling factor by 4 (as suggested by the paper)\n* Even when the images are \"glitched\" the network tries to improve the pixel area of the glitch.\n* For some reason, the generator performs badly when dealing with glasses (suggests of samples in the training set/uneven train set or not enough training time)\n* If the eyes are nearly closed or too dark (Womans makeup, for example) the generator does not perform very well.\n",
+            "readme_url": "https://github.com/calebemonteiro/AIDL_Project",
+            "frameworks": [
+                "Keras",
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network",
+            "arxiv": "1609.04802",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1609.04802v5",
+            "abstract": "Despite the breakthroughs in accuracy and speed of single image\nsuper-resolution using faster and deeper convolutional neural networks, one\ncentral problem remains largely unsolved: how do we recover the finer texture\ndetails when we super-resolve at large upscaling factors? The behavior of\noptimization-based super-resolution methods is principally driven by the choice\nof the objective function. Recent work has largely focused on minimizing the\nmean squared reconstruction error. The resulting estimates have high peak\nsignal-to-noise ratios, but they are often lacking high-frequency details and\nare perceptually unsatisfying in the sense that they fail to match the fidelity\nexpected at the higher resolution. In this paper, we present SRGAN, a\ngenerative adversarial network (GAN) for image super-resolution (SR). To our\nknowledge, it is the first framework capable of inferring photo-realistic\nnatural images for 4x upscaling factors. To achieve this, we propose a\nperceptual loss function which consists of an adversarial loss and a content\nloss. The adversarial loss pushes our solution to the natural image manifold\nusing a discriminator network that is trained to differentiate between the\nsuper-resolved images and original photo-realistic images. In addition, we use\na content loss motivated by perceptual similarity instead of similarity in\npixel space. Our deep residual network is able to recover photo-realistic\ntextures from heavily downsampled images on public benchmarks. An extensive\nmean-opinion-score (MOS) test shows hugely significant gains in perceptual\nquality using SRGAN. The MOS scores obtained with SRGAN are closer to those of\nthe original high-resolution images than to those obtained with any\nstate-of-the-art method.",
+            "authors": [
+                "Christian Ledig",
+                "Lucas Theis",
+                "Ferenc Huszar",
+                "Jose Caballero",
+                "Andrew Cunningham",
+                "Alejandro Acosta",
+                "Andrew Aitken",
+                "Alykhan Tejani",
+                "Johannes Totz",
+                "Zehan Wang",
+                "Wenzhe Shi"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CUHK"
+            },
+            {
+                "name": "CelebA"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999895898190042,
+        "task": "Image Generation",
+        "task_prob": 0.9565350697764292
+    }
+}

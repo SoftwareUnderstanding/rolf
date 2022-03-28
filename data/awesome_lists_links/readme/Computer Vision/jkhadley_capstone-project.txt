@@ -1,0 +1,17 @@
+## Introduction
+The end goal of this project is to try and get the area of leaves from a picture. To do this, the part of the image that is the plant needs to be segmented from the background. There are many ways to do image segmentation such as thresholding the RGB values or using clustering to find patches of similar color, both of which are often paired with edge detection methods to try and find the edges of objects and only keep the pixels that are of interest. However, these methods are sensitive to different lighting conditions and often require color space transformations from RGB to HSV in order to be robust. These methods also don't determine which class the foreground of the image is a part of. However, with a segmentation neural network, there would not have to be any color space transformation of the image and it would output predictions for each class in the foreground that it was told to try and predict.
+
+Once the image is segmented, an estimation of the leaf area could be produced by properly scaling the proportion of the image that contains the desired class to some reference object that has known dimensions. Since there are no reference objects in this data set, the goal for this project would be to get the proportion of each class in the image.
+
+## Data Set
+The data set consists of images of corn, wheat, and mung beans and their segmented labels. The segmented labels are of the same 2-D shape as the images, but the pixel values are either 0 if they are part of the class in the foreground and are 100 if they belong to the background. These labels were generated through some software package that likely uses the segmentation methods discussed earlier. This means that the labels are not perfectly accurate and do misclassify some of the pixels in the images. Because of this, the models produced with this data will not be as accurate as they could be.
+
+The images in this data set consisted of a variety of sizes and were quite large. To standardize the data, the images were cut into 256 x 256 pixel pieces. When the images were loaded into memory and trained, they were normalized so that all of the pixel values were between 0 and 1.  
+
+## Segmentation
+For The image segmentation, the architecture used was [U-net](https://arxiv.org/abs/1505.04597). The original u-net paper calls for the initial convolutional depth to be 64 and to double this depth each time that pooling is done. However, this parameter was experimented with because the model only needs to learn 4 classes. Because of this, the initial convolutional depth was experimented with to try and reduce the size and number of parameters that need to be trained. For a single class model where the two classes were background and corn plants, it was found that an initial convolutional depth of 4 resulted in roughly the same accuracy as the model having an initial convolutional depth of 64 and only about ?? percent of the parameters to train. However for the.
+
+After good models were found for the single and multi-class models, another layer was added to these models so that the output of the model was simply the proportion of the image that each class made up. Then, I attempted to further train the weights of the neural network with the new outputs and labels with a different loss and found that this did not make and significant improvements to the model.
+
+## Documentation
+The documentation is hosted using github-pages and can be found [here](https://jkhadley.github.io/capstone-project/).

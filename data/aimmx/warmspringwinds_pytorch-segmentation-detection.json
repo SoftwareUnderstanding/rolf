@@ -1,0 +1,156 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Image Segmentation and Object Detection in Pytorch",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "warmspringwinds",
+                "owner_type": "User",
+                "name": "pytorch-segmentation-detection",
+                "url": "https://github.com/warmspringwinds/pytorch-segmentation-detection",
+                "stars": 719,
+                "pushed_at": "2021-11-18 21:54:46+00:00",
+                "created_at": "2017-06-10 16:57:15+00:00",
+                "language": "Jupyter Notebook",
+                "description": "Image Segmentation and Object Detection in Pytorch",
+                "frameworks": [
+                    "Caffe2",
+                    "scikit-learn",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "a3d64667cdfc9f14818469ce2fe28acb8d885f7a",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/warmspringwinds/pytorch-segmentation-detection/blob/master/.gitignore"
+                    }
+                },
+                "size": 46
+            },
+            {
+                "type": "code",
+                "name": ".gitmodules",
+                "sha": "caa4e0570c194444e0ab989bf1b8e680cfe087ea",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/warmspringwinds/pytorch-segmentation-detection/blob/master/.gitmodules"
+                    }
+                },
+                "size": 254
+            },
+            {
+                "type": "code",
+                "name": "pytorch_segmentation_detection",
+                "sha": "d62b4a58b1b84b753a74f8a85717249f99c80451",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/warmspringwinds/pytorch-segmentation-detection/tree/master/pytorch_segmentation_detection"
+                    }
+                },
+                "num_files": 10
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Daniil Pakhomov",
+            "email": "warmspringwinds@gmail.com",
+            "github_id": "warmspringwinds"
+        },
+        {
+            "name": "Evgenii Zheltonozhskii",
+            "email": "zheltonozhskiy@gmail.com",
+            "github_id": "Randl"
+        },
+        {
+            "name": "Pete Florence",
+            "github_id": "peteflorence"
+        },
+        {
+            "name": "Mark",
+            "github_id": "erasaur"
+        }
+    ],
+    "tags": [],
+    "description": "Image Segmentation and Object Detection in Pytorch",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/warmspringwinds/pytorch-segmentation-detection",
+            "stars": 719,
+            "issues": true,
+            "readme": "# Image Segmentation and Object Detection in Pytorch \n\n```Pytorch-Segmentation-Detection``` is a library for image segmentation and object detection with reported results achieved on common image segmentation/object detection datasets, pretrained models and scripts to reproduce them.\n\n\n# Segmentation\n\n\n## PASCAL VOC 2012\n\nImplemented models were tested on Restricted PASCAL VOC 2012 Validation dataset (RV-VOC12) or Full PASCAL VOC 2012 Validation dataset (VOC-2012) and trained on\nthe PASCAL VOC 2012 Training data and additional Berkeley segmentation data for PASCAL VOC 12.\n\nYou can find all the scripts that were used for training and evaluation [here](pytorch_segmentation_detection/recipes/pascal_voc/segmentation).\n\nThis code has been used to train networks with this performance:\n\n| Model            | Test data |Mean IOU | Mean pix. accuracy | Pixel accuracy|Inference time (512x512 px. image) | Model Download Link | Related paper |\n|------------------|-----------|---------|--------------------|----------------|----|---------------------|----------|\n| Resnet-18-8s    | RV-VOC12  | 59.0   | in prog.           | in prog.       |28 ms.| [Dropbox](https://www.dropbox.com/s/zxv1hb09fa8numa/resnet_18_8s_59.pth?dl=0)            | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| Resnet-34-8s   | RV-VOC12  | 68.0   | in prog.           | in prog.  | 50 ms.  | [Dropbox](https://www.dropbox.com/s/91wcu6bpqezu4br/resnet_34_8s_68.pth?dl=0)            | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| Resnet-50-16s   | VOC12  | 66.5   | in prog.           | in prog.  | in prog.  | in prog.        | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| Resnet-50-8s   | VOC12  | 67.0   | in prog.           | in prog.  | in prog.  | in prog.        | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| Resnet-50-8s-deep-sup   | VOC12  | 67.1   | in prog.           | in prog.  | in prog.  | in prog.        | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| Resnet-101-16s   | VOC12  | 68.6   | in prog.           | in prog.  | in prog.  | in prog.        | [DeepLab](https://arxiv.org/abs/1606.00915) |\n| PSP-Resnet-18-8s  | VOC12  | 68.3   | n/a              | n/a         | n/a |     in prog.                | [PSPnet](https://arxiv.org/abs/1612.01105) |\n| PSP-Resnet-50-8s  | VOC12  | 73.6   | n/a              | n/a         | n/a |     in prog.                | [PSPnet](https://arxiv.org/abs/1612.01105) |\n\n\nSome qualitative results:\n\n![Alt text](pytorch_segmentation_detection/recipes/pascal_voc/segmentation/segmentation_demo_preview.gif?raw=true \"Title\")\n\n\n## Endovis 2017\n\nImplemented models were trained on Endovis 2017 segmentation dataset and the sequence number\n3 was used for validation and was not included in training dataset. \n\nThe code to acquire the training and validating the model is also provided in the library.\n\nAdditional Qualitative results can be found on [this youtube playlist](https://www.youtube.com/watch?v=DJZxOuT5GY0&list=PLJkMX36nfYD3MpJozA3kdJKQpTVishk5_).\n\n### Binary Segmentation\n\n| Model            | Test data |Mean IOU | Mean pix. accuracy | Pixel accuracy|Inference time (512x512 px. image) | Model Download Link |\n|------------------|-----------|---------|--------------------|----------------|----|---------------------|\n| Resnet-9-8s   | Seq # 3 *  | 96.1   | in prog.           | in prog.       |13.3 ms.| [Dropbox](https://www.dropbox.com/s/3l7o1sfrnqhnpw8/resnet_9_8s.pth?dl=0)            |\n| Resnet-18-8s   | Seq # 3  | 96.0   | in prog.           | in prog.       |28 ms.| [Dropbox](https://www.dropbox.com/s/4lemtiaacrytatu/resnet_18_8s_best.pth?dl=0)            |\n| Resnet-34-8s   | Seq # 3  | in prog.   | in prog.           | in prog.  | 50 ms.  | in prog.            |\n\nResnet-9-8s network was tested on the 0.5 reduced resoulution (512 x 640).\n\nQualitative results (on validation sequence):\n\n![Alt text](pytorch_segmentation_detection/recipes/endovis_2017/segmentation/validation_binary.gif?raw=true \"Title\")\n\n### Multi-class Segmentation\n\n| Model            | Test data |Mean IOU | Mean pix. accuracy | Pixel accuracy|Inference time (512x512 px. image) | Model Download Link |\n|------------------|-----------|---------|--------------------|----------------|----|---------------------|\n| Resnet-18-8s   | Seq # 3  | 81.0   | in prog.           | in prog.       |28 ms.| [Dropbox](https://www.dropbox.com/s/p9ey655mmzb3v5l/resnet_18_8s_multiclass_best.pth?dl=0)            |\n| Resnet-34-8s   | Seq # 3  | in prog.   | in prog.           | in prog.  | 50 ms.  | in prog            |\n\nQualitative results (on validation sequence):\n\n![Alt text](pytorch_segmentation_detection/recipes/endovis_2017/segmentation/validation_multiclass.gif?raw=true \"Title\")\n\n\n## Cityscapes\n\n The dataset contains video sequences recorded in street scenes from 50 different cities, with high quality pixel-level annotations of  ```5\u202f000``` frames. The annotations contain ```19``` classes which represent cars, road, traffic signs and so on.\n \n | Model            | Test data |Mean IOU | Mean pix. accuracy | Pixel accuracy|Inference time (512x512 px. image) | Model Download Link |\n|------------------|-----------|---------|--------------------|----------------|----|---------------------|\n| Resnet-18-32s  | Validation set  | 61.0   | in prog.           | in prog.  | in prog.  | in prog.           |\n| Resnet-18-8s   | Validation set  | 60.0   | in prog.           | in prog.       |28 ms.| [Dropbox](https://www.dropbox.com/s/vdy4sqkk2s3f5v5/resnet_18_8s_cityscapes_best.pth?dl=0)            |\n| Resnet-34-8s   | Validation set  | 69.1   | in prog.           | in prog.  | 50 ms.  | [Dropbox](https://www.dropbox.com/s/jeaw9ny0jtl60uc/resnet_34_8s_cityscapes_best.pth?dl=0)           |\n| Resnet-50-16s-PSP   | Validation set  | 71.2   | in prog.           | in prog.  | in prog.  | in prog.           |\n\nQualitative results (on validation sequence):\n\nWhole sequence can be viewed [here](https://www.youtube.com/watch?v=rYYbmYXmC0E).\n\n![Alt text](pytorch_segmentation_detection/recipes/cityscapes/cityscapes_demo.gif?raw=true \"Title\")\n\n\n## Installation\n\nThis code requires:\n\n1. [Pytorch](https://github.com/pytorch/pytorch).\n\n2. Some libraries which can be acquired by installing [Anaconda package](https://www.continuum.io/downloads).\n \n    Or you can install ```scikit-image```, ```matplotlib```, ```numpy``` using ```pip```.\n \n3. Clone the library:\n\n ```git clone --recursive https://github.com/warmspringwinds/pytorch-segmentation-detection```\n \n   And use this code snippet before you start to use the library:\n \n   ```python\n   import sys\n   # update with your path\n   # All the jupyter notebooks in the repository already have this\n   sys.path.append(\"/your/path/pytorch-segmentation-detection/\")\n   sys.path.insert(0, '/your/path/pytorch-segmentation-detection/vision/')\n   ```\n   Here we use our [pytorch/vision](https://github.com/pytorch/vision) fork, which might\n   be [merged](https://github.com/pytorch/vision/pull/184) and [futher merged](https://github.com/pytorch/vision/pull/190) in a future.\n   We have added it as a submodule to our repository.\n\n4. Download segmentation or detection models that you want to use manually (links can be found below).\n\n## About\n\nIf you used the code for your research, please, cite the paper:\n\n    @article{pakhomov2017deep,\n      title={Deep Residual Learning for Instrument Segmentation in Robotic Surgery},\n      author={Pakhomov, Daniil and Premachandran, Vittal and Allan, Max and Azizian, Mahdi and Navab, Nassir},\n      journal={arXiv preprint arXiv:1703.08580},\n      year={2017}\n    }\n\nDuring implementation, some preliminary experiments and notes were reported:\n- [Converting Image Classification network into FCN](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/10/30/image-classification-and-segmentation-using-tensorflow-and-tf-slim/)\n- [Performing upsampling using transposed convolution](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/11/22/upsampling-and-image-segmentation-with-tensorflow-and-tf-slim/)\n- [Conditional Random Fields for Refining of Segmentation and Coarseness of FCN-32s model segmentations](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/18/image-segmentation-with-tensorflow-using-cnns-and-conditional-random-fields/)\n- [TF-records usage](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/21/tfrecords-guide/)\n",
+            "readme_url": "https://github.com/warmspringwinds/pytorch-segmentation-detection",
+            "frameworks": [
+                "Caffe2",
+                "scikit-learn",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs",
+            "arxiv": "1606.00915",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1606.00915v2",
+            "abstract": "In this work we address the task of semantic image segmentation with Deep\nLearning and make three main contributions that are experimentally shown to\nhave substantial practical merit. First, we highlight convolution with\nupsampled filters, or 'atrous convolution', as a powerful tool in dense\nprediction tasks. Atrous convolution allows us to explicitly control the\nresolution at which feature responses are computed within Deep Convolutional\nNeural Networks. It also allows us to effectively enlarge the field of view of\nfilters to incorporate larger context without increasing the number of\nparameters or the amount of computation. Second, we propose atrous spatial\npyramid pooling (ASPP) to robustly segment objects at multiple scales. ASPP\nprobes an incoming convolutional feature layer with filters at multiple\nsampling rates and effective fields-of-views, thus capturing objects as well as\nimage context at multiple scales. Third, we improve the localization of object\nboundaries by combining methods from DCNNs and probabilistic graphical models.\nThe commonly deployed combination of max-pooling and downsampling in DCNNs\nachieves invariance but has a toll on localization accuracy. We overcome this\nby combining the responses at the final DCNN layer with a fully connected\nConditional Random Field (CRF), which is shown both qualitatively and\nquantitatively to improve localization performance. Our proposed \"DeepLab\"\nsystem sets the new state-of-art at the PASCAL VOC-2012 semantic image\nsegmentation task, reaching 79.7% mIOU in the test set, and advances the\nresults on three other datasets: PASCAL-Context, PASCAL-Person-Part, and\nCityscapes. All of our code is made publicly available online.",
+            "authors": [
+                "Liang-Chieh Chen",
+                "George Papandreou",
+                "Iasonas Kokkinos",
+                "Kevin Murphy",
+                "Alan L. Yuille"
+            ]
+        },
+        {
+            "title": "Pyramid Scene Parsing Network",
+            "arxiv": "1612.01105",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1612.01105v2",
+            "abstract": "Scene parsing is challenging for unrestricted open vocabulary and diverse\nscenes. In this paper, we exploit the capability of global context information\nby different-region-based context aggregation through our pyramid pooling\nmodule together with the proposed pyramid scene parsing network (PSPNet). Our\nglobal prior representation is effective to produce good quality results on the\nscene parsing task, while PSPNet provides a superior framework for pixel-level\nprediction tasks. The proposed approach achieves state-of-the-art performance\non various datasets. It came first in ImageNet scene parsing challenge 2016,\nPASCAL VOC 2012 benchmark and Cityscapes benchmark. A single PSPNet yields new\nrecord of mIoU accuracy 85.4% on PASCAL VOC 2012 and accuracy 80.2% on\nCityscapes.",
+            "authors": [
+                "Hengshuang Zhao",
+                "Jianping Shi",
+                "Xiaojuan Qi",
+                "Xiaogang Wang",
+                "Jiaya Jia"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Cityscapes"
+            },
+            {
+                "name": "PASCAL VOC 2012"
+            },
+            {
+                "name": "PASCAL-Person-Part"
+            },
+            {
+                "name": "ImageNet"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9997863602512522,
+        "task": "Semantic Segmentation",
+        "task_prob": 0.9873543041680217
+    }
+}

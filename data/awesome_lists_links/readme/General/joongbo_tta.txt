@@ -1,0 +1,163 @@
+# T-TA
+
+This repository is for the paper ["Fast and Accurate Deep Bidirectional 
+Language Representations for Unsupervised Learning"](https://www.aclweb.org/anthology/2020.acl-main.76/), 
+which describes our method in detail.
+
+## Introduction
+
+**T-TA**, or **T**ransformer-based **T**ext **A**utoencoder, 
+is a new deep bidirectional language model for unsupervised learning tasks.
+T-TA learns the straightforward learning objective, *language autoencoding*,
+which is to predict all tokens in a sentence at once using only their context.
+Unlike "masked language model", T-TA has *self-masking* mechanism
+in order to avoid merely copying the input to output.
+Unlike BERT (which is for fine-tuning the entire pre-trained model),
+T-TA is especially beneficial to obtain contextual embeddings, 
+which are fixed representations of each input token
+generated from the hidden layers of the trained language model.
+
+T-TA model architecture is based on the [BERT](https://arxiv.org/abs/1810.04805) model architecture,
+which is mostly a standard [Transformer](https://arxiv.org/abs/1706.03762) architecture.
+Our code is based on [Google's BERT github](https://github.com/google-research/bert),
+which includes methods for building customized vocabulary, preparing the Wikipedia dataset, etc.
+
+
+#### This code is tested under:
+
+```
+Ubuntu 16.04 LTS
+Python 3.6.10
+TensorFlow 1.12.0
+```
+
+
+## Usage of the T-TA
+
+```shell
+git clone https://github.com/joongbo/tta.git
+cd tta
+```
+
+
+### Pre-trained Model
+
+We release the pre-trained T-TA model (262.2 MB tar.gz file).
+```shell
+cd models
+wget http://milabfile.snu.ac.kr:16000/tta/tta-layer-3-enwiki-lower-sub-32k.tar.gz
+tar -xvzf tta-layer-3-enwiki-lower-sub-32k.tar.gz
+cd ..
+```
+Then, `tta-layer-3-enwiki-lower-sub-32k` folder will be appear in `model/` folder. 
+For now, the model works on `max_seq_length=128`.
+
+
+### Task: Unsupervised Semantic Textual Similarity on STS Benchmark
+
+We release the code `run_unsupervisedstsb.py` as an example of the usage of T-TA.
+For running this code, you may need several python packages: `numpy`, `scipy`, and `sklearn`.
+
+To obtain the STS Benchmark dataset,
+```shell
+cd data
+wget http://ixa2.si.ehu.es/stswiki/images/4/48/Stsbenchmark.tar.gz
+tar -xvzf Stsbenchmark.tar.gz
+cd ..
+```
+Then, `stsbenchmark` folder will be appear in `data/` folder. 
+
+Run:
+```shell
+python run_unsupervisedstsb.py \
+    --config_file models/tta-layer-3-enwiki-lower-sub-32k/config.layer-3.vocab-lower.sub-32k.json \
+    --model_checkpoint models/tta-layer-3-enwiki-lower-sub-32k/model.ckpt \
+    --vocab_file models/tta-layer-3-enwiki-lower-sub-32k/vocab-lower.sub-32k.txt
+```
+
+Output:
+|Split|*r*|
+|---|:---:|
+|STSb-dev|71.88|
+|STSb-test|62.27|
+
+
+### Training: Language AutoEncoding with T-TA
+
+#### Prepareing Data
+
+We release the *pre-processed* librispeech text-only data (1.66 GB tar.gz file).
+In this corpus, each line is a single sentence, 
+so we use the sentence unit (rather than the paragraph unit) for a training instance.
+The original data can be found in [LibriSpeech-LM](http://www.openslr.org/11/).
+
+```shell
+cd data
+wget http://milabfile.snu.ac.kr:16000/tta/corpus.librispeech-lower.sub-32k.tar.gz
+tar -xvzf corpus.librispeech-lower.sub-32k.tar.gz
+cd ..
+```
+Then, `corpus-eval.librispeech-lower.sub-32k.txt` and 
+`corpus-train.librispeech-lower.sub-32k.txt` will be appear in `data/` folder. 
+
+After getting the pre-processed plain text data, we make tfrecords
+(it takes some time for creating tfrecords of train data):
+
+```shell
+rm tfrecords/tta-librispeech-lower-sub-32k # delete dummy (symbolic link)
+
+python create_tfrecords.py \
+    --input_file data/corpus-eval.librispeech-lower.sub-32k.txt \
+    --vocab_file configs/vocab-lower.sub-32k.txt \
+    --output_file tfrecords/tta-librispeech-lower-sub-32k/eval.tfrecord \
+    --num_output_split 1
+
+python create_tfrecords.py \
+    --input_file data/corpus-train.librispeech-lower.sub-32k.txt \
+    --vocab_file configs/vocab-lower.sub-32k.txt \
+    --output_file tfrecords/tta-librispeech-lower-sub-32k/train.tfrecord
+```
+
+
+### Training T-TA Model
+
+We train the model (random initialization) as follows:
+```shell
+python run_training.py \
+    --config_file configs/config.layer-3.vocab-lower.sub-32k.json \
+    --input_file "tfrecords/tta-librispeech-lower-sub-32k/train-*" \
+    --eval_input_file "tfrecords/tta-librispeech-lower-sub-32k/eval-*" \
+    --output_dir "models/tta-layer-3-librispeech-lower-sub-32k" \
+    --num_train_steps 2000000 \
+    --num_warmup_steps 50000 \
+    --learning_rate 0.0001
+```
+
+For a better initialization, we can add a line
+`--init_checkpoint "models/tta-layer-3-enwiki-lower-sub-32k/model.ckpt"`
+(after download pre-trained weights).
+
+## License
+
+All code *and* models are released under the Apache 2.0 license. See the
+`LICENSE` file for more information.
+
+## Citation
+
+For now, cite [the Arxiv paper](https://arxiv.org/abs/2004.08097):
+
+```
+@article{shin2020fast,
+  title={Fast and Accurate Deep Bidirectional Language Representations for Unsupervised Learning},
+  author={Shin, Joongbo and Lee, Yoonhyung and Yoon, Seunghyun and Jung, Kyomin},
+  journal={arXiv preprint arXiv:2004.08097},
+  year={2020}
+}
+```
+
+## Contact information
+
+For help or issues using T-TA, please submit a GitHub issue.
+
+For personal communication related to T-TA, please contact Joongbo Shin 
+(`jbshin@snu.ac.kr`).

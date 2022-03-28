@@ -1,0 +1,133 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Pytorch implementation of Sobolev GAN (arXiv)",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "chanshing",
+                "owner_type": "User",
+                "name": "sobolev_gan",
+                "url": "https://github.com/chanshing/sobolev_gan",
+                "stars": 7,
+                "pushed_at": "2018-12-29 11:11:21+00:00",
+                "created_at": "2018-05-08 11:33:43+00:00",
+                "language": "Python",
+                "description": "Pytorch implemention of Sobolev GAN (https://arxiv.org/abs/1711.04894)",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "gan_cifar10.py",
+                "sha": "537689f4bb15e92bc80988544151cefa47228e08",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/chanshing/sobolev_gan/blob/master/gan_cifar10.py"
+                    }
+                },
+                "size": 4243
+            },
+            {
+                "type": "code",
+                "name": "gan_toy.py",
+                "sha": "47819ebe710513c76db34dcb323e6064774342b1",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/chanshing/sobolev_gan/blob/master/gan_toy.py"
+                    }
+                },
+                "size": 5956
+            },
+            {
+                "type": "code",
+                "name": "models.py",
+                "sha": "4588d121a02aa8ea95de43ceb879f4c04fe2c2c9",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/chanshing/sobolev_gan/blob/master/models.py"
+                    }
+                },
+                "size": 3191
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Shing Chan",
+            "github_id": "chanshing"
+        }
+    ],
+    "tags": [
+        "generative-adversarial-networks",
+        "sobolev-gan",
+        "wgan-gp"
+    ],
+    "description": "Pytorch implemention of Sobolev GAN (https://arxiv.org/abs/1711.04894)",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/chanshing/sobolev_gan",
+            "stars": 7,
+            "issues": true,
+            "readme": "# Pytorch implementation of Sobolev GAN ([arXiv](https://arxiv.org/abs/1711.04894))\n\n*Requires PyTorch 0.4+*\n\n### Toy problem: Mixture of 8 Gaussians\n`python gan_toy.py [--options]`\n\nG and D are fully connected layers\n\n![8 Gaussians](https://i.imgur.com/3RtQ8kn.gif)\n\n### CIFAR10\n`python gan_cifar10.py [--options]`\n\nG is a Resnet like the one in WGAN-GP paper [https://arxiv.org/abs/1704.00028](https://arxiv.org/abs/1704.00028)\n\nGenerated samples (300+ epochs)\n\n![CIFAR10 generated0](https://i.imgur.com/g2gUziB.png)\n![CIFAR10 generated1](https://i.imgur.com/Fi8VAnU.png)\n\n![CIFAR10 generated2](https://i.imgur.com/OGVrCSL.png)\n![CIFAR10 generated3](https://i.imgur.com/0o1ak7s.png)\n",
+            "readme_url": "https://github.com/chanshing/sobolev_gan",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Sobolev GAN",
+            "arxiv": "1711.04894",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1711.04894v1",
+            "abstract": "We propose a new Integral Probability Metric (IPM) between distributions: the\nSobolev IPM. The Sobolev IPM compares the mean discrepancy of two distributions\nfor functions (critic) restricted to a Sobolev ball defined with respect to a\ndominant measure $\\mu$. We show that the Sobolev IPM compares two distributions\nin high dimensions based on weighted conditional Cumulative Distribution\nFunctions (CDF) of each coordinate on a leave one out basis. The Dominant\nmeasure $\\mu$ plays a crucial role as it defines the support on which\nconditional CDFs are compared. Sobolev IPM can be seen as an extension of the\none dimensional Von-Mises Cram\\'er statistics to high dimensional\ndistributions. We show how Sobolev IPM can be used to train Generative\nAdversarial Networks (GANs). We then exploit the intrinsic conditioning implied\nby Sobolev IPM in text generation. Finally we show that a variant of Sobolev\nGAN achieves competitive results in semi-supervised learning on CIFAR-10,\nthanks to the smoothness enforced on the critic by Sobolev GAN which relates to\nLaplacian regularization.",
+            "authors": [
+                "Youssef Mroueh",
+                "Chun-Liang Li",
+                "Tom Sercu",
+                "Anant Raj",
+                "Yu Cheng"
+            ]
+        },
+        {
+            "title": "Improved Training of Wasserstein GANs",
+            "arxiv": "1704.00028",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1704.00028v3",
+            "abstract": "Generative Adversarial Networks (GANs) are powerful generative models, but\nsuffer from training instability. The recently proposed Wasserstein GAN (WGAN)\nmakes progress toward stable training of GANs, but sometimes can still generate\nonly low-quality samples or fail to converge. We find that these problems are\noften due to the use of weight clipping in WGAN to enforce a Lipschitz\nconstraint on the critic, which can lead to undesired behavior. We propose an\nalternative to clipping weights: penalize the norm of gradient of the critic\nwith respect to its input. Our proposed method performs better than standard\nWGAN and enables stable training of a wide variety of GAN architectures with\nalmost no hyperparameter tuning, including 101-layer ResNets and language\nmodels over discrete data. We also achieve high quality generations on CIFAR-10\nand LSUN bedrooms.",
+            "authors": [
+                "Ishaan Gulrajani",
+                "Faruk Ahmed",
+                "Martin Arjovsky",
+                "Vincent Dumoulin",
+                "Aaron Courville"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.997711469743786,
+        "task": "Image Generation",
+        "task_prob": 0.9849082010121051
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "CIFAR-10"
+            }
+        ]
+    }
+}

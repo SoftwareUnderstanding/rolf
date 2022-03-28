@@ -1,0 +1,191 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "Neural Machine Translation",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "simonjisu",
+                "owner_type": "User",
+                "name": "NMT",
+                "url": "https://github.com/simonjisu/NMT",
+                "stars": 3,
+                "pushed_at": "2018-11-23 08:26:16+00:00",
+                "created_at": "2018-06-07 14:13:37+00:00",
+                "language": "Jupyter Notebook",
+                "description": "Neural Machine Translation",
+                "license": "MIT License",
+                "frameworks": [
+                    "NLTK",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "ae40814efabfd1ba0bc676d2b4c21da2d6c673c3",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/blob/master/.gitignore"
+                    }
+                },
+                "size": 905
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "095c77e5b3381634ddfc15e6f143d44f61932f3d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/blob/master/LICENSE"
+                    }
+                },
+                "size": 1060
+            },
+            {
+                "type": "code",
+                "name": "Neural_Machine_Translation_Tutorial.ipynb",
+                "sha": "3f2e34c611a3614000109936a2804b073f302584",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/blob/master/Neural_Machine_Translation_Tutorial.ipynb"
+                    }
+                },
+                "size": 119408
+            },
+            {
+                "type": "code",
+                "name": "demo",
+                "sha": "0a5568b3eb72786b7d025f317905c26d9b2a59ce",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/tree/master/demo"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "model",
+                "sha": "efd1d6fa3f2d9f18857384f1de1f8ab099414809",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/tree/master/model"
+                    }
+                },
+                "num_files": 19
+            },
+            {
+                "type": "code",
+                "name": "pics",
+                "sha": "9481ec115133566ba88fcec93b70aec096432097",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/tree/master/pics"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "trainlog",
+                "sha": "c7524198b7628de12595badd41b9c4a1ae90e0fe",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/simonjisu/NMT/tree/master/trainlog"
+                    }
+                },
+                "num_files": 6
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Soo",
+            "email": "simonjisu@gmail.com",
+            "github_id": "simonjisu"
+        }
+    ],
+    "tags": [
+        "neural-machine-translation",
+        "nmt"
+    ],
+    "description": "Neural Machine Translation",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/simonjisu/NMT",
+            "stars": 3,
+            "issues": true,
+            "readme": "# Neural Machine Translation\n\nPaper Implementation: [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473) - Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio (v7 2016)\n\n## Getting Started\n\n### Prerequisites\n\n```\npytorch 0.4.0\nargparse 1.1\nnumpy 1.14.3\nmatplotlib 2.2.2\n```\n\n### Tutorial for NMT\n\n* Jupyter notebook: [link](https://nbviewer.jupyter.org/github/simonjisu/NMT/blob/master/Neural_Machine_Translation_Tutorial.ipynb)\n* Preparing for demo\n\n### Result\n\nTrained \"IWSLT\" 2016 dataset. Check [torchtext.dataset.IWSLT](https://torchtext.readthedocs.io/en/latest/datasets.html#iwslt) to download & loading dataset.\n\n<p align=\"center\">\n  <img width=\"720\" height=\"480\" src=\"./pics/result.png\">\n</p>\n\n### How to Start\n\nFor 'HELP' please insert argument behind `main.py -h`. or you can just run \n\n```\n$ cd model\n$ sh runtrain.sh\n```\n\n## Trainlog\n\nI devide trains for 3 times, because of computing power.\n\nAfter 1st training, load model and retrain at 2nd, 3rd time.\n\n* Lowest losses & check points: \n* 1st train: [8/30] (train) loss 2.4335 (valid) loss 5.6971\n* 2nd train: [1/30] (train) loss 2.3545 (valid) loss 5.6575\n* 3rd train: [6/20] (train) loss 1.9401 (valid) loss 5.4970\n\nyou can see how i choose hyperparameters below\n\n### Hyperparameters\n\n| Hyperparameters |1st Train | 2st Train | 3st Train | Explaination | \n|--|--|--|--|--|\n| BATCH| 50 | 50 | 50 | batch size | \n| MAX_LEN | 30 | 30 | 30 | max length of training sentences |\n| MIN_FREQ | 2 | 2 | 2 | minimum frequence of words that appear in training sentences |\n| EMBED | 256 | 256 | 256 | embedding size |\n| HIDDEN | 512 | 512 | 512 | hidden size |\n| ENC_N_LAYER | 3 | 3 | 3 | number of layer in encoder |\n| DEC_N_LAYER | 1 | 1 | 1 | number of layer in decoder |\n| L_NORM | True | True | True | whether to use layer normalization after embedding |\n| DROP_RATE | 0.2 | 0.2 | 0.2 | dropout after embedding, if drop rate equal to 0, means not use it |\n| METHOD | general | general | general | attention methods, \"dot\", \"general\" are ready to use |\n| LAMBDA | 0.00001 | 0.00001 | 0.0001 | weight decay rate |\n| LR | 0.001 | 0.0001 | 1.0 | learning rate |\n| DECLR | 5.0 | 5.0 | - | decoder learning weight, multiplied to LR |\n| OPTIM | adam | adam | adelta | optimizer algorithm |\n| STEP | 30 | 20 | 20 | control learning rate at 1/3*step, 3/4*step by multiply 0.1 |\n| TF | True | True | True | teacher forcing, whether to teach what token becomes next to model |\n\nPlease check train logs are in `trainlog` directory. \n\n## Todo:\n\n* Layer Normalizaiton for GRU: https://discuss.pytorch.org/t/speed-up-for-layer-norm-lstm/5861\n* seq2seq beam search: https://guillaumegenthial.github.io/sequence-to-sequence.html\n* large output vocab problem: http://www.aclweb.org/anthology/P15-1001\n* Recurrent Memory Networks(using Memory Block): https://arxiv.org/pdf/1601.01272\n* BPE: https://arxiv.org/abs/1508.07909 \n\n## License\n\nThis project is licensed under the MIT License \n\n\n",
+            "readme_url": "https://github.com/simonjisu/NMT",
+            "frameworks": [
+                "NLTK",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Neural Machine Translation of Rare Words with Subword Units",
+            "arxiv": "1508.07909",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1508.07909v5",
+            "abstract": "Neural machine translation (NMT) models typically operate with a fixed\nvocabulary, but translation is an open-vocabulary problem. Previous work\naddresses the translation of out-of-vocabulary words by backing off to a\ndictionary. In this paper, we introduce a simpler and more effective approach,\nmaking the NMT model capable of open-vocabulary translation by encoding rare\nand unknown words as sequences of subword units. This is based on the intuition\nthat various word classes are translatable via smaller units than words, for\ninstance names (via character copying or transliteration), compounds (via\ncompositional translation), and cognates and loanwords (via phonological and\nmorphological transformations). We discuss the suitability of different word\nsegmentation techniques, including simple character n-gram models and a\nsegmentation based on the byte pair encoding compression algorithm, and\nempirically show that subword models improve over a back-off dictionary\nbaseline for the WMT 15 translation tasks English-German and English-Russian by\n1.1 and 1.3 BLEU, respectively.",
+            "authors": [
+                "Rico Sennrich",
+                "Barry Haddow",
+                "Alexandra Birch"
+            ]
+        },
+        {
+            "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+            "arxiv": "1409.0473",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1409.0473v7",
+            "abstract": "Neural machine translation is a recently proposed approach to machine\ntranslation. Unlike the traditional statistical machine translation, the neural\nmachine translation aims at building a single neural network that can be\njointly tuned to maximize the translation performance. The models proposed\nrecently for neural machine translation often belong to a family of\nencoder-decoders and consists of an encoder that encodes a source sentence into\na fixed-length vector from which a decoder generates a translation. In this\npaper, we conjecture that the use of a fixed-length vector is a bottleneck in\nimproving the performance of this basic encoder-decoder architecture, and\npropose to extend this by allowing a model to automatically (soft-)search for\nparts of a source sentence that are relevant to predicting a target word,\nwithout having to form these parts as a hard segment explicitly. With this new\napproach, we achieve a translation performance comparable to the existing\nstate-of-the-art phrase-based system on the task of English-to-French\ntranslation. Furthermore, qualitative analysis reveals that the\n(soft-)alignments found by the model agree well with our intuition.",
+            "authors": [
+                "Dzmitry Bahdanau",
+                "Kyunghyun Cho",
+                "Yoshua Bengio"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "torchtext.dataset.IWSLT",
+                "connection": {
+                    "name": "url",
+                    "source": {
+                        "url": "https://torchtext.readthedocs.io/en/latest/datasets.html#iwslt"
+                    }
+                }
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999894713568034,
+        "task": "Machine Translation",
+        "task_prob": 0.9906576166607735
+    }
+}

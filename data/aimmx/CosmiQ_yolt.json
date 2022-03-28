@@ -1,0 +1,204 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "Apache License 2.0"
+    },
+    "name": "YOLT",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "CosmiQ",
+                "owner_type": "Organization",
+                "name": "yolt",
+                "url": "https://github.com/CosmiQ/yolt",
+                "stars": 582,
+                "pushed_at": "2018-10-25 16:49:22+00:00",
+                "created_at": "2018-05-24 18:25:54+00:00",
+                "language": "C",
+                "description": "You Only Look Twice: Rapid Multi-Scale Object Detection In Satellite Imagery",
+                "license": "Apache License 2.0",
+                "frameworks": []
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "12d37bbb4146d5370682bb0eb48cc100aa67e809",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/blob/master/LICENSE"
+                    }
+                },
+                "size": 11348
+            },
+            {
+                "type": "code",
+                "name": "Makefile",
+                "sha": "3a42a4db80fefff972271dd45d782c041de22bc7",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/blob/master/Makefile"
+                    }
+                },
+                "size": 2400
+            },
+            {
+                "type": "code",
+                "name": "cfg",
+                "sha": "aa637cd56da2e8fe3658943518cfb6e6a09faaf2",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/cfg"
+                    }
+                },
+                "num_files": 33
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "7a617f83b93c0a746e63c1d5a96248e603ddfbc8",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/data"
+                    }
+                },
+                "num_files": 8
+            },
+            {
+                "type": "code",
+                "name": "docker",
+                "sha": "fc5945f7755ac296971a2681dbe8b902217cd203",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/docker"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "obj",
+                "sha": "cb80929217f925f180f51d2ed7bac466f2103c6d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/obj"
+                    }
+                },
+                "num_files": 33
+            },
+            {
+                "type": "code",
+                "name": "scripts",
+                "sha": "03394dd8865875adefb70460a10d8f17dd7cc284",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/scripts"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "src",
+                "sha": "63e283d07bf9bf4e5041a1704e6dd93e294b503b",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/src"
+                    }
+                },
+                "num_files": 125
+            },
+            {
+                "type": "code",
+                "name": "test_images",
+                "sha": "a93c52f03ff5a204cca5047b3ecdd76e05e84aa4",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/CosmiQ/yolt/tree/master/test_images"
+                    }
+                },
+                "num_files": 1
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Adam Van Etten",
+            "github_id": "avanetten"
+        }
+    ],
+    "tags": [],
+    "description": "You Only Look Twice: Rapid Multi-Scale Object Detection In Satellite Imagery",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/CosmiQ/yolt",
+            "stars": 582,
+            "issues": false,
+            "readme": "# YOLT #\n\n## You Only Look Twice: Rapid Multi-Scale Object Detection In Satellite Imagery\n\n![Alt text](/test_images/header.jpg?raw=true \"\")\n\n\n____\n### As of 24 October 2018 YOLT has been superceded by [SIMRDWN](https://github.com/CosmiQ/simrdwn) \n____\n\n\nYOLT is an extension of the [YOLO v2](https://pjreddie.com/darknet/yolov2/) framework that can evaluate satellite images of arbitrary size, and runs at ~50 frames per second.  Current applications include vechicle detection (cars, airplanes, boats), building detection, and airport detection.\n\nThe YOLT code alters a number of the files in src/*.c to allow further functionality.  We also built a python wrapper around the C functions to improve flexibility.  We utililize the default data format of YOLO, which places images and labels in different directories.  For example: \n\n    /data/images/train1.tif\n    /data/labels/train1.txt\n\nEach line of the train1.txt file has the format\n\n    <object-class> <x> <y> <width> <height>\n\nWhere x, y, width, and height are relative to the image's width and height. Labels can be created with [LabelImg](https://github.com/tzutalin/labelImg), and converted to the appropriate format with the /yolt/scripts/convert.py script.  \n\n\n### For more information, see:\n\n1. [arXiv paper: You Only Look Twice: Rapid Multi-Scale Object Detection In Satellite Imagery](https://arxiv.org/abs/1805.09512)\n\n2. [Blog1: You Only Look Twice\u200a\u2014\u200aMulti-Scale Object Detection in Satellite Imagery With Convolutional Neural Networks (Part I)](https://medium.com/the-downlinq/you-only-look-twice-multi-scale-object-detection-in-satellite-imagery-with-convolutional-neural-38dad1cf7571)\n\n3. [Blog2: You Only Look Twice (Part II)\u200a\u2014\u200aVehicle and Infrastructure Detection in Satellite Imagery](https://medium.com/the-downlinq/you-only-look-twice-multi-scale-object-detection-in-satellite-imagery-with-convolutional-neural-34f72f659588)\n\n4. [Blog3: Building Extraction with YOLT2 and SpaceNet Data](https://medium.com/the-downlinq/building-extraction-with-yolt2-and-spacenet-data-a926f9ffac4f)\n\n5. [Blog4: Car Localization and Counting with Overhead Imagery, an Interactive Exploration\n](https://medium.com/the-downlinq/car-localization-and-counting-with-overhead-imagery-an-interactive-exploration-9d5a029a596b)\n\n6. [Blog5: The Satellite Utility Manifold; Object Detection Accuracy as a Function of Image Resolution\n](https://medium.com/the-downlinq/the-satellite-utility-manifold-object-detection-accuracy-as-a-function-of-image-resolution-ebb982310e8c)\n\n7. [Blog6: Panchromatic to Multispectral: Object Detection Performance as a Function of Imaging Bands](https://medium.com/the-downlinq/panchromatic-to-multispectral-object-detection-performance-as-a-function-of-imaging-bands-51ecaaa3dc56)\n\n---\n\n## Installation #\n\nThe following has been tested on Ubuntu 16.04.2\n\n1. Install [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)\n\n2. Build docker file\n\n        nvidia-docker build -t yolt yolt_docker_name /path_to_yolt/docker\n\n3. Launch the docker container\n\n        nvidia-docker run -it -v /raid:/raid yolt_docker_name\n        # '/raid' is the root directory of your machine, which will\n        # be shared with the docker container\n\n4. Run Makefile\n\n        cd /path_to_yolt/\n        make clean\n        make\n        \n---\n\n## Execution #\n\nCommands should be executed within the docker file.  To run the container (with name yolt_train0):\n\n    nvidia-docker run -it -v --name yolt_train0 yolt_docker_name\n\n\n### HELP\n    cd /path_to_yolt/scripts\n    python yolt2.py --help\n\n\n### TRAIN (gpu_machine)\n\n\n    # e.g. train boats and planes\n    cd /path_to_yolt/scripts\n    python yolt2.py \\\n        --mode train \\\n        --outname 3class_boat_plane \\\n        --object_labels_str  boat,boat_harbor,airplane \\\n        --cfg_file ave_standard.cfg  \\\n        --nbands 3 \\\n        --train_images_list_file boat_airplane_all.txt \\\n        --single_gpu_machine 0 \\\n        --keep_valid_slices False \\\n        --max_batches 60000 \\\n        --gpu 0\n\n### VALIDATE (gpu_machine)\n\n    # e.g. test on boats, cars, and airplanes\n    cd /path_to_yolt/scripts\n    python yolt2.py \\\n        --mode valid \\\n        --outname qgis_labels_all_boats_planes_cars_buffer \\\n        --object_labels_str airplane,airport,boat,boat_harbor,car \\\n        --cfg_file ave_standard.cfg \\\n        --valid_weight_dir train_cowc_cars_qgis_boats_planes_cfg=ave_26x26_2017_11_28_23-11-36 \\\n        --weight_file ave_standard_30000_tmp.weights \\\n        --valid_testims_dir qgis_validation/all \\\n        --keep_valid_slices False \\\n        --valid_make_pngs True \\\n        --valid_make_legend_and_title False \\\n        --edge_buffer_valid 1 \\\n        --valid_box_rescale_frac 1 \\\n        --plot_thresh_str 0.4 \\\n        --slice_sizes_str 416 \\\n        --slice_overlap 0.2 \\\n        --gpu 2\n\n\n---\n\n## To Do #\n1. Include train/test example\n2. Upload data preparation scripts\n3. Describe multispectral data handling\n4. Describle initial results with YOLO v3\n5. Describe improve labeling methods\n\n\n---\n\n_If you plan on using YOLT in your work, please consider citing [YOLO](https://arxiv.org/abs/1612.08242) and [YOLT](https://arxiv.org/abs/1805.09512)_\n",
+            "readme_url": "https://github.com/CosmiQ/yolt",
+            "frameworks": []
+        }
+    ],
+    "references": [
+        {
+            "title": "You Only Look Twice: Rapid Multi-Scale Object Detection In Satellite Imagery",
+            "arxiv": "1805.09512",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1805.09512v1",
+            "abstract": "Detection of small objects in large swaths of imagery is one of the primary\nproblems in satellite imagery analytics. While object detection in ground-based\nimagery has benefited from research into new deep learning approaches,\ntransitioning such technology to overhead imagery is nontrivial. Among the\nchallenges is the sheer number of pixels and geographic extent per image: a\nsingle DigitalGlobe satellite image encompasses >64 km2 and over 250 million\npixels. Another challenge is that objects of interest are minuscule (often only\n~10 pixels in extent), which complicates traditional computer vision\ntechniques. To address these issues, we propose a pipeline (You Only Look\nTwice, or YOLT) that evaluates satellite images of arbitrary size at a rate of\n>0.5 km2/s. The proposed approach can rapidly detect objects of vastly\ndifferent scales with relatively little training data over multiple sensors. We\nevaluate large test images at native resolution, and yield scores of F1 > 0.8\nfor vehicle localization. We further explore resolution and object size\nrequirements by systematically testing the pipeline at decreasing resolution,\nand conclude that objects only ~5 pixels in size can still be localized with\nhigh confidence. Code is available at https://github.com/CosmiQ/yolt.",
+            "authors": [
+                "Adam Van Etten"
+            ]
+        },
+        {
+            "title": "YOLO9000: Better, Faster, Stronger",
+            "arxiv": "1612.08242",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1612.08242v1",
+            "abstract": "We introduce YOLO9000, a state-of-the-art, real-time object detection system\nthat can detect over 9000 object categories. First we propose various\nimprovements to the YOLO detection method, both novel and drawn from prior\nwork. The improved model, YOLOv2, is state-of-the-art on standard detection\ntasks like PASCAL VOC and COCO. At 67 FPS, YOLOv2 gets 76.8 mAP on VOC 2007. At\n40 FPS, YOLOv2 gets 78.6 mAP, outperforming state-of-the-art methods like\nFaster RCNN with ResNet and SSD while still running significantly faster.\nFinally we propose a method to jointly train on object detection and\nclassification. Using this method we train YOLO9000 simultaneously on the COCO\ndetection dataset and the ImageNet classification dataset. Our joint training\nallows YOLO9000 to predict detections for object classes that don't have\nlabelled detection data. We validate our approach on the ImageNet detection\ntask. YOLO9000 gets 19.7 mAP on the ImageNet detection validation set despite\nonly having detection data for 44 of the 200 classes. On the 156 classes not in\nCOCO, YOLO9000 gets 16.0 mAP. But YOLO can detect more than just 200 classes;\nit predicts detections for more than 9000 different object categories. And it\nstill runs in real-time.",
+            "authors": [
+                "Joseph Redmon",
+                "Ali Farhadi"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999460365036906,
+        "task": "Object Detection",
+        "task_prob": 0.990561921561399
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "ImageNet Detection"
+            },
+            {
+                "name": "ImageNet"
+            }
+        ]
+    }
+}
