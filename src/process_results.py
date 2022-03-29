@@ -16,7 +16,7 @@ for row in reader:
 		res[(row['train_set'], row['validation_set'])][row['PipelineID']]['preprocessing'] = 'Preprocessed'
 
 for (train_set, validation_set), val in res.items():
-	writer = csv.DictWriter(open(f'results/results/{train_set[:-4]}_{validation_set}', 'a+'), delimiter=';', fieldnames=reader.fieldnames+['preprocessing'])
+	writer = csv.DictWriter(open(f'results/results/{train_set[5:-4]}_{validation_set[5:]}', 'a+'), delimiter=';', fieldnames=reader.fieldnames+['preprocessing'])
 	writer.writeheader()
 	vals = (v for v in val.values())
 	writer.writerows(vals)
