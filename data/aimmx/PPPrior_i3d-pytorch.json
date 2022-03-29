@@ -1,0 +1,219 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "I3D-PyTorch",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "PPPrior",
+                "owner_type": "User",
+                "name": "i3d-pytorch",
+                "url": "https://github.com/PPPrior/i3d-pytorch",
+                "stars": 10,
+                "pushed_at": "2020-10-23 03:32:30+00:00",
+                "created_at": "2020-10-13 13:37:28+00:00",
+                "language": "Python",
+                "description": "I3D Models in PyTorch",
+                "frameworks": [
+                    "scikit-learn",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "85e7c1dfcb7fbb33f932c81024018cd8c10519da",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/.gitignore"
+                    }
+                },
+                "size": 8
+            },
+            {
+                "type": "code",
+                "name": "QuoVadis.png",
+                "sha": "f363d44135a3e6a678cad6a8c54c915bb9ef52a3",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/QuoVadis.png"
+                    }
+                },
+                "size": 590871
+            },
+            {
+                "type": "code",
+                "name": "dataset.py",
+                "sha": "212a76963a1e529d194133a5fcd21c17d359d553",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/dataset.py"
+                    }
+                },
+                "size": 3095
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "131b2fc611e1abd3c86f109ddd12e7681f1f3852",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/main.py"
+                    }
+                },
+                "size": 9890
+            },
+            {
+                "type": "code",
+                "name": "models",
+                "sha": "6cabeb5e91bd3b411dd626ccc625f19d31c39f3e",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/tree/master/models"
+                    }
+                },
+                "num_files": 3
+            },
+            {
+                "type": "code",
+                "name": "opts.py",
+                "sha": "97f485833130d9c5bd33487b4d206f414d0862d1",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/opts.py"
+                    }
+                },
+                "size": 3238
+            },
+            {
+                "type": "code",
+                "name": "test_models.py",
+                "sha": "d788517e4634200d612fb424006bb26a169fcbf6",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/test_models.py"
+                    }
+                },
+                "size": 4622
+            },
+            {
+                "type": "code",
+                "name": "transforms.py",
+                "sha": "21f9a352cd935a7396012fb62d2757c2cdf4e363",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/PPPrior/i3d-pytorch/blob/master/transforms.py"
+                    }
+                },
+                "size": 11644
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Prior",
+            "github_id": "PPPrior"
+        }
+    ],
+    "tags": [
+        "i3d",
+        "action-recognition"
+    ],
+    "description": "I3D Models in PyTorch",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/PPPrior/i3d-pytorch",
+            "stars": 10,
+            "issues": true,
+            "readme": "# I3D-PyTorch\nThis is a simple and crude implementation of Inflated 3D ConvNet Models (I3D) in PyTorch. Different from models reported in \"[Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset](https://arxiv.org/abs/1705.07750)\" by Joao Carreira and Andrew Zisserman, this implementation uses [ResNet](https://arxiv.org/pdf/1512.03385.pdf) as backbone.\n\n<div align=\"center\">\n  <img src=\"QuoVadis.png\" width=\"600px\"/>\n</div>\n\nThis implementation is based on OpenMMLab's [MMAction2](https://github.com/open-mmlab/mmaction2). \n\n## Data Preparation\n\nFor optical flow extraction and video list generation, please refer to [TSN](https://github.com/yjxiong/temporal-segment-networks#code--data-preparation) for details.\n\n## Training\n\nTo train a new model, use the `main.py` script.\n\nFor example, command to train models with RGB modality on UCF101 can be\n\n```bash\npython main.py ucf101 RGB <root_path> \\\n    <ucf101_rgb_train_list> <ucf101_rgb_val_list> \\\n    --arch i3d_resnet50 --clip_length 64 \\\n    --lr 0.001 --lr_steps 30 60 --epochs 80 \\\n    -b 32 -j 8 --dropout 0.8 \\\n    --snapshot_pref ucf101_i3d_resnet50\n```\n\nFor flow models:\n\n```bash\npython main.py ucf101 Flow <root_path> \\\n    <ucf101_flow_train_list> <ucf101_flow_val_list> \\\n    --arch i3d_resnet50 --clip_length 64 \\\n    --lr 0.001 --lr_steps 15 30 --epochs 40 \\\n    -b 64 -j 8 --dropout 0.8 \\\n    --snapshot_pref ucf101_i3d_resnet50\n```\n\nPlease refer to [main.py](main.py) for more details.\n\n## Testing\n\nAfter training, there will checkpoints saved by pytorch, for example `ucf101_i3d_resnet50_rgb_model_best.pth.tar`.\n\nUse the following command to test its performance:\n\n```bash\npython test_models.py ucf101 RGB <root_path> \\\n    <ucf101_rgb_val_list> ucf101_i3d_resnet50_rgb_model_best.pth.tar \\\n    --arch i3d_resnet50 --save_scores <score_file_name>\n```\n\nOr for flow models:\n\n```bash\npython test_models.py ucf101 Flow <root_path> \\\n    <ucf101_flow_val_list> ucf101_i3d_resnet50_flow_model_best.pth.tar \\\n    --arch i3d_resnet50 --save_scores <score_file_name>\n```\n\nPlease refer to [test_models.py](test_models.py) for more details.",
+            "readme_url": "https://github.com/PPPrior/i3d-pytorch",
+            "frameworks": [
+                "scikit-learn",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Deep Residual Learning for Image Recognition",
+            "arxiv": "1512.03385",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1512.03385v1",
+            "abstract": "Deeper neural networks are more difficult to train. We present a residual\nlearning framework to ease the training of networks that are substantially\ndeeper than those used previously. We explicitly reformulate the layers as\nlearning residual functions with reference to the layer inputs, instead of\nlearning unreferenced functions. We provide comprehensive empirical evidence\nshowing that these residual networks are easier to optimize, and can gain\naccuracy from considerably increased depth. On the ImageNet dataset we evaluate\nresidual nets with a depth of up to 152 layers---8x deeper than VGG nets but\nstill having lower complexity. An ensemble of these residual nets achieves\n3.57% error on the ImageNet test set. This result won the 1st place on the\nILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100\nand 1000 layers.\n  The depth of representations is of central importance for many visual\nrecognition tasks. Solely due to our extremely deep representations, we obtain\na 28% relative improvement on the COCO object detection dataset. Deep residual\nnets are foundations of our submissions to ILSVRC & COCO 2015 competitions,\nwhere we also won the 1st places on the tasks of ImageNet detection, ImageNet\nlocalization, COCO detection, and COCO segmentation.",
+            "authors": [
+                "Kaiming He",
+                "Xiangyu Zhang",
+                "Shaoqing Ren",
+                "Jian Sun"
+            ]
+        },
+        {
+            "title": "Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset",
+            "arxiv": "1705.07750",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1705.07750v3",
+            "abstract": "The paucity of videos in current action classification datasets (UCF-101 and\nHMDB-51) has made it difficult to identify good video architectures, as most\nmethods obtain similar performance on existing small-scale benchmarks. This\npaper re-evaluates state-of-the-art architectures in light of the new Kinetics\nHuman Action Video dataset. Kinetics has two orders of magnitude more data,\nwith 400 human action classes and over 400 clips per class, and is collected\nfrom realistic, challenging YouTube videos. We provide an analysis on how\ncurrent architectures fare on the task of action classification on this dataset\nand how much performance improves on the smaller benchmark datasets after\npre-training on Kinetics.\n  We also introduce a new Two-Stream Inflated 3D ConvNet (I3D) that is based on\n2D ConvNet inflation: filters and pooling kernels of very deep image\nclassification ConvNets are expanded into 3D, making it possible to learn\nseamless spatio-temporal feature extractors from video while leveraging\nsuccessful ImageNet architecture designs and even their parameters. We show\nthat, after pre-training on Kinetics, I3D models considerably improve upon the\nstate-of-the-art in action classification, reaching 80.9% on HMDB-51 and 98.0%\non UCF-101.",
+            "authors": [
+                "Joao Carreira",
+                "Andrew Zisserman"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset",
+                "connection": {
+                    "name": "url",
+                    "source": {
+                        "url": "https://arxiv.org/abs/1705.07750"
+                    }
+                }
+            },
+            {
+                "name": "UCF101"
+            },
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "ImageNet Detection"
+            },
+            {
+                "name": "ILSVRC 2015"
+            },
+            {
+                "name": "CIFAR-10"
+            },
+            {
+                "name": "COCO"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999983166243496,
+        "task": "Object Detection",
+        "task_prob": 0.6294124937579798
+    }
+}

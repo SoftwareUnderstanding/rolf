@@ -1,0 +1,181 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "Note",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "text-machine-lab",
+                "owner_type": "Organization",
+                "name": "transformerpy",
+                "url": "https://github.com/text-machine-lab/transformerpy",
+                "stars": 1,
+                "pushed_at": "2020-04-27 07:40:26+00:00",
+                "created_at": "2020-04-27 07:24:05+00:00",
+                "language": "Python",
+                "description": "This is a modified transformer for the mathword project",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "4986deffb1da94c5cfece87e36bd103dc585ef65",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/.gitignore"
+                    }
+                },
+                "size": 1164
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "f4bcf39c04bf91c168ccc7b55aa508958a0e2015",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/LICENSE"
+                    }
+                },
+                "size": 1069
+            },
+            {
+                "type": "code",
+                "name": "dataset.py",
+                "sha": "b2888f1872fffefc820a2935fe942656feab899f",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/dataset.py"
+                    }
+                },
+                "size": 2490
+            },
+            {
+                "type": "code",
+                "name": "preprocess.py",
+                "sha": "ff9f119562771bf445c152b4c7f6e36e3024d215",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/preprocess.py"
+                    }
+                },
+                "size": 6424
+            },
+            {
+                "type": "code",
+                "name": "train.py",
+                "sha": "cf530a9a795108e4123b80197038585f3d0b18fa",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/train.py"
+                    }
+                },
+                "size": 10495
+            },
+            {
+                "type": "code",
+                "name": "transformer",
+                "sha": "9cfa5f6a544881c8139b789e66fbf31b8d30e945",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/tree/master/transformer"
+                    }
+                },
+                "num_files": 9
+            },
+            {
+                "type": "code",
+                "name": "translate.py",
+                "sha": "f062b5bbad1b0533479c7fea7e3240b5d6584552",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/text-machine-lab/transformerpy/blob/master/translate.py"
+                    }
+                },
+                "size": 2683
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "ylmeng",
+            "github_id": "ylmeng"
+        }
+    ],
+    "tags": [],
+    "description": "This is a modified transformer for the mathword project",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/text-machine-lab/transformerpy",
+            "stars": 1,
+            "issues": true,
+            "readme": "# Note\nThis is a customized version of the repository https://github.com/jadore801120/attention-is-all-you-need-pytorch\nWe made some changes in the models to suit our [mathword project](https://github.com/text-machine-lab/mathword/tree/stable).\n\nThe following content is copied from the original repository.\n\n# Attention is all you need: A Pytorch Implementation\n\nThis is a PyTorch implementation of the Transformer model in \"[Attention is All You Need](https://arxiv.org/abs/1706.03762)\" (Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin, arxiv, 2017). \n\n\nA novel sequence to sequence framework utilizes the **self-attention mechanism**, instead of Convolution operation or Recurrent structure, and achieve the state-of-the-art performance on **WMT 2014 English-to-German translation task**. (2017/06/12)\n\n> The official Tensorflow Implementation can be found in: [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/models/transformer.py).\n\n> To learn more about self-attention mechanism, you could read \"[A Structured Self-attentive Sentence Embedding](https://arxiv.org/abs/1703.03130)\".\n\n<p align=\"center\">\n<img src=\"http://imgur.com/1krF2R6.png\" width=\"250\">\n</p>\n\n\nThe project support training and translation with trained model now.\n\nNote that this project is still a work in progress.\n\n\nIf there is any suggestion or error, feel free to fire an issue to let me know. :)\n\n\n# Requirement\n- python 3.4+\n- pytorch 0.4.1+\n- tqdm\n- numpy\n\n\n# Usage\n\n## Some useful tools:\n\nThe example below uses the Moses tokenizer (http://www.statmt.org/moses/) to prepare the data and the moses BLEU script for evaluation.\n\n```bash\nwget https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/tokenizer/tokenizer.perl\nwget https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/share/nonbreaking_prefixes/nonbreaking_prefix.de\nwget https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/share/nonbreaking_prefixes/nonbreaking_prefix.en\nsed -i \"s/$RealBin\\/..\\/share\\/nonbreaking_prefixes//\" tokenizer.perl\nwget https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/generic/multi-bleu.perl\n```\n\n## WMT'16 Multimodal Translation: Multi30k (de-en)\n\nAn example of training for the WMT'16 Multimodal Translation task (http://www.statmt.org/wmt16/multimodal-task.html).\n\n### 0) Download the data.\n\n```bash\nmkdir -p data/multi30k\nwget http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/training.tar.gz &&  tar -xf training.tar.gz -C data/multi30k && rm training.tar.gz\nwget http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/validation.tar.gz && tar -xf validation.tar.gz -C data/multi30k && rm validation.tar.gz\nwget http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/mmt16_task1_test.tar.gz && tar -xf mmt16_task1_test.tar.gz -C data/multi30k && rm mmt16_task1_test.tar.gz\n```\n\n### 1) Preprocess the data.\n```bash\nfor l in en de; do for f in data/multi30k/*.$l; do if [[ \"$f\" != *\"test\"* ]]; then sed -i \"$ d\" $f; fi;  done; done\nfor l in en de; do for f in data/multi30k/*.$l; do perl tokenizer.perl -a -no-escape -l $l -q  < $f > $f.atok; done; done\npython preprocess.py -train_src data/multi30k/train.en.atok -train_tgt data/multi30k/train.de.atok -valid_src data/multi30k/val.en.atok -valid_tgt data/multi30k/val.de.atok -save_data data/multi30k.atok.low.pt\n```\n\n### 2) Train the model\n```bash\npython train.py -data data/multi30k.atok.low.pt -save_model trained -save_mode best -proj_share_weight -label_smoothing\n```\n> If your source and target language share one common vocabulary, use the `-embs_share_weight` flag to enable the model to share source/target word embedding. \n\n### 3) Test the model\n```bash\npython translate.py -model trained.chkpt -vocab data/multi30k.atok.low.pt -src data/multi30k/test.en.atok -no_cuda\n```\n---\n# Performance\n## Training\n\n<p align=\"center\">\n<img src=\"https://imgur.com/rKeP1bb.png\" width=\"400\">\n<img src=\"https://imgur.com/9je3X6U.png\" width=\"400\">\n</p>\n\n- Parameter settings:\n  - default parameter and optimizer settings\n  - label smoothing \n  - target embedding / pre-softmax linear layer weight sharing. \n\n- Elapse per epoch (on NVIDIA Titan X):\n  - Training set: 0.888 minutes\n  - Validation set: 0.011 minutes\n  \n## Testing \n- coming soon.\n---\n# TODO\n  - Evaluation on the generated text.\n  - Attention weight plot.\n---\n# Acknowledgement\n- The project structure, some scripts and the dataset preprocessing steps are heavily borrowed from [OpenNMT/OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py).\n- Thanks for the suggestions from @srush, @iamalbert and @ZiJianZhao.\n",
+            "readme_url": "https://github.com/text-machine-lab/transformerpy",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "A Structured Self-attentive Sentence Embedding",
+            "arxiv": "1703.03130",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1703.03130v1",
+            "abstract": "This paper proposes a new model for extracting an interpretable sentence\nembedding by introducing self-attention. Instead of using a vector, we use a\n2-D matrix to represent the embedding, with each row of the matrix attending on\na different part of the sentence. We also propose a self-attention mechanism\nand a special regularization term for the model. As a side effect, the\nembedding comes with an easy way of visualizing what specific parts of the\nsentence are encoded into the embedding. We evaluate our model on 3 different\ntasks: author profiling, sentiment classification, and textual entailment.\nResults show that our model yields a significant performance gain compared to\nother sentence embedding methods in all of the 3 tasks.",
+            "authors": [
+                "Zhouhan Lin",
+                "Minwei Feng",
+                "Cicero Nogueira dos Santos",
+                "Mo Yu",
+                "Bing Xiang",
+                "Bowen Zhou",
+                "Yoshua Bengio"
+            ]
+        },
+        {
+            "title": "Attention Is All You Need",
+            "arxiv": "1706.03762",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1706.03762v5",
+            "abstract": "The dominant sequence transduction models are based on complex recurrent or\nconvolutional neural networks in an encoder-decoder configuration. The best\nperforming models also connect the encoder and decoder through an attention\nmechanism. We propose a new simple network architecture, the Transformer, based\nsolely on attention mechanisms, dispensing with recurrence and convolutions\nentirely. Experiments on two machine translation tasks show these models to be\nsuperior in quality while being more parallelizable and requiring significantly\nless time to train. Our model achieves 28.4 BLEU on the WMT 2014\nEnglish-to-German translation task, improving over the existing best results,\nincluding ensembles by over 2 BLEU. On the WMT 2014 English-to-French\ntranslation task, our model establishes a new single-model state-of-the-art\nBLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction\nof the training costs of the best models from the literature. We show that the\nTransformer generalizes well to other tasks by applying it successfully to\nEnglish constituency parsing both with large and limited training data.",
+            "authors": [
+                "Ashish Vaswani",
+                "Noam Shazeer",
+                "Niki Parmar",
+                "Jakob Uszkoreit",
+                "Llion Jones",
+                "Aidan N. Gomez",
+                "Lukasz Kaiser",
+                "Illia Polosukhin"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999946306359322,
+        "task": "Machine Translation",
+        "task_prob": 0.9874165058420994
+    }
+}

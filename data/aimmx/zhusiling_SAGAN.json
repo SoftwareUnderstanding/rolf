@@ -1,0 +1,226 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Self-Attention GAN",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "zhusiling",
+                "owner_type": "User",
+                "name": "SAGAN",
+                "url": "https://github.com/zhusiling/SAGAN",
+                "stars": 0,
+                "pushed_at": "2019-07-02 09:32:13+00:00",
+                "created_at": "2019-07-02 09:31:52+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "data_loader.py",
+                "sha": "decba55a8c0ed9bd980c08b4f3a025b40b9e4476",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/data_loader.py"
+                    }
+                },
+                "size": 1863
+            },
+            {
+                "type": "code",
+                "name": "download.sh",
+                "sha": "070cd00044cef4382abc7229e58ef5b49813f7e5",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/download.sh"
+                    }
+                },
+                "size": 540
+            },
+            {
+                "type": "code",
+                "name": "image",
+                "sha": "f87373e6a3e9e2ff6b3026b8a2e11f53aaf6e0c6",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/tree/master/image"
+                    }
+                },
+                "num_files": 7
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "9b340eebf2c2f1da37aa305133c18e131d643f0b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/main.py"
+                    }
+                },
+                "size": 1135
+            },
+            {
+                "type": "code",
+                "name": "parameter.py",
+                "sha": "a1a3db31489d3377ab5a00e0ea642cd2a5a444c0",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/parameter.py"
+                    }
+                },
+                "size": 2461
+            },
+            {
+                "type": "code",
+                "name": "sagan_models.py",
+                "sha": "d0d227efe299935f221a5070dc2fb6fb31f12f84",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/sagan_models.py"
+                    }
+                },
+                "size": 5406
+            },
+            {
+                "type": "code",
+                "name": "spectral.py",
+                "sha": "e3b5540c5b02949a9fea0ca19f6e8b55b511d216",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/spectral.py"
+                    }
+                },
+                "size": 2317
+            },
+            {
+                "type": "code",
+                "name": "trainer.py",
+                "sha": "62cc1037c2bef79b6fac896d0215bea50628a77b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/trainer.py"
+                    }
+                },
+                "size": 8760
+            },
+            {
+                "type": "code",
+                "name": "utils.py",
+                "sha": "815ea71808f9fb6f163c5470b1e8bbd44c52e3d0",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/zhusiling/SAGAN/blob/master/utils.py"
+                    }
+                },
+                "size": 524
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "David Park",
+            "github_id": "heykeetae"
+        },
+        {
+            "name": "Cheonbok Park ",
+            "email": "chunbok94@gmail.com",
+            "github_id": "cbokpark"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/zhusiling/SAGAN",
+            "stars": 0,
+            "issues": true,
+            "readme": "# Self-Attention GAN\n**[Han Zhang, Ian Goodfellow, Dimitris Metaxas and Augustus Odena, \"Self-Attention Generative Adversarial Networks.\" arXiv preprint arXiv:1805.08318 (2018)](https://arxiv.org/abs/1805.08318).**\n\n## Meta overview\nThis repository provides a PyTorch implementation of [SAGAN](https://arxiv.org/abs/1805.08318). Both wgan-gp and wgan-hinge loss are ready, but note that wgan-gp is somehow not compatible with the spectral normalization. Remove all the spectral normalization at the model for the adoption of wgan-gp.\n\nSelf-attentions are applied to later two layers of both discriminator and generator.\n\n<p align=\"center\"><img width=\"100%\" src=\"image/main_model.PNG\" /></p>\n\n## Current update status\n* [ ] Supervised setting\n* [ ] Tensorboard loggings\n* [x] **[20180608] updated the self-attention module. Thanks to my colleague [Cheonbok Park](https://github.com/cheonbok94)! see 'sagan_models.py' for the update. Should be efficient, and run on large sized images**\n* [x] Attention visualization (LSUN Church-outdoor)\n* [x] Unsupervised setting (use no label yet) \n* [x] Applied: [Spectral Normalization](https://arxiv.org/abs/1802.05957), code from [here](https://github.com/christiancosgrove/pytorch-spectral-normalization-gan)\n* [x] Implemented: self-attention module, two-timescale update rule (TTUR), wgan-hinge loss, wgan-gp loss\n\n&nbsp;\n&nbsp;\n\n## Results\n\n### Attention result on LSUN (epoch #8)\n<p align=\"center\"><img width=\"100%\" src=\"image/sagan_attn.png\" /></p>\nPer-pixel attention result of SAGAN on LSUN church-outdoor dataset. It shows that unsupervised training of self-attention module still works, although it is not interpretable with the attention map itself. Better results with regard to the generated images will be added. These are the visualization of self-attention in generator layer3 and layer4, which are in the size of 16 x 16 and 32 x 32 respectively, each for 64 images. To visualize the per-pixel attentions, only a number of pixels are chosen, as shown on the leftmost and the rightmost numbers indicate. \n\n### CelebA dataset (epoch on the left, still under training)\n<p align=\"center\"><img width=\"80%\" src=\"image/sagan_celeb.png\" /></p>\n\n### LSUN church-outdoor dataset (epoch on the left, still under training)\n<p align=\"center\"><img width=\"70%\" src=\"image/sagan_lsun.png\" /></p>\n\n## Prerequisites\n* [Python 3.5+](https://www.continuum.io/downloads)\n* [PyTorch 0.3.0](http://pytorch.org/)\n\n&nbsp;\n\n## Usage\n\n#### 1. Clone the repository\n```bash\n$ git clone https://github.com/heykeetae/Self-Attention-GAN.git\n$ cd Self-Attention-GAN\n```\n\n#### 2. Install datasets (CelebA or LSUN)\n```bash\n$ bash download.sh CelebA\nor\n$ bash download.sh LSUN\n```\n\n\n#### 3. Train \n##### (i) Train\n```bash\n$ python python main.py --batch_size 64 --imsize 64 --dataset celeb --adv_loss hinge --version sagan_celeb\nor\n$ python python main.py --batch_size 64 --imsize 64 --dataset lsun --adv_loss hinge --version sagan_lsun\n```\n#### 4. Enjoy the results\n```bash\n$ cd samples/sagan_celeb\nor\n$ cd samples/sagan_lsun\n\n```\nSamples generated every 100 iterations are located. The rate of sampling could be controlled via --sample_step (ex, --sample_step 100). \n",
+            "readme_url": "https://github.com/zhusiling/SAGAN",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Spectral Normalization for Generative Adversarial Networks",
+            "arxiv": "1802.05957",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1802.05957v1",
+            "abstract": "One of the challenges in the study of generative adversarial networks is the\ninstability of its training. In this paper, we propose a novel weight\nnormalization technique called spectral normalization to stabilize the training\nof the discriminator. Our new normalization technique is computationally light\nand easy to incorporate into existing implementations. We tested the efficacy\nof spectral normalization on CIFAR10, STL-10, and ILSVRC2012 dataset, and we\nexperimentally confirmed that spectrally normalized GANs (SN-GANs) is capable\nof generating images of better or equal quality relative to the previous\ntraining stabilization techniques.",
+            "authors": [
+                "Takeru Miyato",
+                "Toshiki Kataoka",
+                "Masanori Koyama",
+                "Yuichi Yoshida"
+            ]
+        },
+        {
+            "title": "Self-Attention Generative Adversarial Networks",
+            "arxiv": "1805.08318",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1805.08318v2",
+            "abstract": "In this paper, we propose the Self-Attention Generative Adversarial Network\n(SAGAN) which allows attention-driven, long-range dependency modeling for image\ngeneration tasks. Traditional convolutional GANs generate high-resolution\ndetails as a function of only spatially local points in lower-resolution\nfeature maps. In SAGAN, details can be generated using cues from all feature\nlocations. Moreover, the discriminator can check that highly detailed features\nin distant portions of the image are consistent with each other. Furthermore,\nrecent work has shown that generator conditioning affects GAN performance.\nLeveraging this insight, we apply spectral normalization to the GAN generator\nand find that this improves training dynamics. The proposed SAGAN achieves the\nstate-of-the-art results, boosting the best published Inception score from 36.8\nto 52.52 and reducing Frechet Inception distance from 27.62 to 18.65 on the\nchallenging ImageNet dataset. Visualization of the attention layers shows that\nthe generator leverages neighborhoods that correspond to object shapes rather\nthan local regions of fixed shape.",
+            "authors": [
+                "Han Zhang",
+                "Ian Goodfellow",
+                "Dimitris Metaxas",
+                "Augustus Odena"
+            ]
+        },
+        {
+            "title": "x] **[20180608] updated the self-attention module. Thanks to my colleague [Cheonbok Park",
+            "url": "https://github.com/cheonbok94"
+        },
+        {
+            "title": "Python 3.5+",
+            "url": "https://www.continuum.io/downloads"
+        },
+        {
+            "title": "PyTorch 0.3.0",
+            "url": "http://pytorch.org/"
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CelebA"
+            },
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "STL-10"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999995658168672,
+        "task": "Image Generation",
+        "task_prob": 0.9921652739453594
+    }
+}

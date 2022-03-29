@@ -1,0 +1,146 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Group 2 - Ethnicity Cycle GAN",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "cvp19g2",
+                "owner_type": "Organization",
+                "name": "cvp19g2",
+                "url": "https://github.com/cvp19g2/cvp19g2",
+                "stars": 0,
+                "pushed_at": "2019-07-24 19:31:13+00:00",
+                "created_at": "2019-05-15 15:18:57+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "Caffe",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "7ab9aef0ce9af695b0481b2057ffb1213bd56bd1",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cvp19g2/cvp19g2/blob/master/.gitignore"
+                    }
+                },
+                "size": 1217
+            },
+            {
+                "type": "code",
+                "name": "classifier",
+                "sha": "a2037e185a3c17127031ba37f92cc84647919f98",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cvp19g2/cvp19g2/tree/master/classifier"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "cycle_gan",
+                "sha": "edaa53f7bb6823eddfa6000bca27cd9e8399d383",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cvp19g2/cvp19g2/tree/master/cycle_gan"
+                    }
+                },
+                "num_files": 14
+            },
+            {
+                "type": "code",
+                "name": "util",
+                "sha": "eefaefa443dcc989fa33b1a6a5cda6194561963d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cvp19g2/cvp19g2/tree/master/util"
+                    }
+                },
+                "num_files": 10
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Kevin Birke",
+            "github_id": "Dragon092"
+        },
+        {
+            "name": "Samuel Kopmann",
+            "github_id": "samkopmann"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/cvp19g2/cvp19g2",
+            "stars": 0,
+            "issues": true,
+            "readme": "# Group 2 - Ethnicity Cycle GAN\n\n**Used articles and papers**\n1. Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks  \nImplementation: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix  \nPaper: https://arxiv.org/pdf/1703.10593.pdf\n\n<img src=\"https://cdn-images-1.medium.com/max/800/1*nKe_kwZoefrELGHh06sbuw.jpeg\" width=500>\n\n\n2. Article having (1.) as basis\n\nhttps://hackernoon.com/gender-and-race-change-on-your-selfie-with-neural-nets-9a9a1c9c5c16\n\n**Goal**  \nHaving Cycle GANs for ethnicity transformation, e.g.  \n1. *Black and White*  \n<img src=\"https://cdn-images-1.medium.com/max/800/1*yFZY_gIOXP5Squmq0TBItA.png\" width=600>\n \n \n1. *White and Asian*  \n<img src=\"https://cdn-images-1.medium.com/max/800/1*3ihWND1xfqTNP_uEgZviYw.png\" width=600>\n\n\n**Used Datasets**  \n1. CelebA ~ 200.000 images  \nhttp://mmlab.ie.cuhk.edu.hk/projects/CelebA.html  \n<img src=\"http://mmlab.ie.cuhk.edu.hk/projects/celeba/intro.png\" width=400>\n\n2. UTKFace ~ 20.000 images  \nhttp://aicip.eecs.utk.edu/wiki/UTKFace  \n<img src=\"http://aicip.eecs.utk.edu/mediawiki/images/thumb/e/ef/LogoFaceWall2.jpg/700px-LogoFaceWall2.jpg\" width=400>\n3. LFW (Labeled Faces in the Wild) Database  ~ 13.000 images\nhttp://vis-www.cs.umass.edu/lfw/  \n\n**Faced Problems**  \n1. CelebA is a huge dataset but does not have ethnicity labels unfortunately.  \n*Approach: train Classifier on UTKFace and LFW to label CelebA.*  \n\n**Improvements**\n2. Replace L1 pixel to pixel identity loss with p2 Norm of feature map distance.\nsee https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf",
+            "readme_url": "https://github.com/cvp19g2/cvp19g2",
+            "frameworks": [
+                "Caffe",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+            "arxiv": "1703.10593",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1703.10593v7",
+            "abstract": "Image-to-image translation is a class of vision and graphics problems where\nthe goal is to learn the mapping between an input image and an output image\nusing a training set of aligned image pairs. However, for many tasks, paired\ntraining data will not be available. We present an approach for learning to\ntranslate an image from a source domain $X$ to a target domain $Y$ in the\nabsence of paired examples. Our goal is to learn a mapping $G: X \\rightarrow Y$\nsuch that the distribution of images from $G(X)$ is indistinguishable from the\ndistribution $Y$ using an adversarial loss. Because this mapping is highly\nunder-constrained, we couple it with an inverse mapping $F: Y \\rightarrow X$\nand introduce a cycle consistency loss to push $F(G(X)) \\approx X$ (and vice\nversa). Qualitative results are presented on several tasks where paired\ntraining data does not exist, including collection style transfer, object\ntransfiguration, season transfer, photo enhancement, etc. Quantitative\ncomparisons against several prior methods demonstrate the superiority of our\napproach.",
+            "authors": [
+                "Jun-Yan Zhu",
+                "Taesung Park",
+                "Phillip Isola",
+                "Alexei A. Efros"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Labeled Faces in the Wild"
+            },
+            {
+                "name": "CelebA"
+            },
+            {
+                "name": "UTKFace"
+            },
+            {
+                "name": "CUHK"
+            },
+            {
+                "name": "LFW"
+            },
+            {
+                "name": "RACE"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999916453957269,
+        "task": "Image-to-Image Translation",
+        "task_prob": 0.9780694413916835
+    }
+}

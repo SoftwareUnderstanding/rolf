@@ -1,0 +1,198 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "pix2pix-tensorflow",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "JobQiu",
+                "owner_type": "User",
+                "name": "hackrice",
+                "url": "https://github.com/JobQiu/hackrice",
+                "stars": 0,
+                "pushed_at": "2018-09-16 02:47:48+00:00",
+                "created_at": "2018-09-15 04:52:07+00:00",
+                "language": "JavaScript",
+                "license": "MIT License",
+                "frameworks": [
+                    "Caffe",
+                    "TensorFlow",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "ea4170641b8aa2fd92f7476510eba1b36944a824",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/blob/master1/.gitignore"
+                    }
+                },
+                "size": 29
+            },
+            {
+                "type": "code",
+                "name": "LICENSE.txt",
+                "sha": "b61525cbe82fcf8de0fa24765c9278ebc1575b38",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/blob/master1/LICENSE.txt"
+                    }
+                },
+                "size": 1074
+            },
+            {
+                "type": "code",
+                "name": "docker",
+                "sha": "c9b47f900dd1ef0ff4739ad51f3bed6741219bac",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/tree/master1/docker"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "docs",
+                "sha": "8f772837bc726cdf0a2da5a3d19dd32cde70ccab",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/tree/master1/docs"
+                    }
+                },
+                "num_files": 29
+            },
+            {
+                "type": "code",
+                "name": "pix2pix.py",
+                "sha": "d766cb78dce9ab7eaff4004dcc7b73b38460174b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/blob/master1/pix2pix.py"
+                    }
+                },
+                "size": 35609
+            },
+            {
+                "type": "code",
+                "name": "server",
+                "sha": "df0e689d08f1d1ba51c3737694753a9d43cdd92c",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/tree/master1/server"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "tools",
+                "sha": "84a32d2eee61536baa48ea9c9d27a1b768ad5e70",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JobQiu/hackrice/tree/master1/tools"
+                    }
+                },
+                "num_files": 6
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Yuqiu",
+            "email": "jywyq96@gmail.com",
+            "github_id": "jywyq"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/JobQiu/hackrice",
+            "stars": 0,
+            "issues": true,
+            "readme": "# pix2pix-tensorflow\n\nBased on [pix2pix](https://phillipi.github.io/pix2pix/) by Isola et al.\n\n[Article about this implemention](https://affinelayer.com/pix2pix/)\n\n[Interactive Demo](https://affinelayer.com/pixsrv/)\n\nTensorflow implementation of pix2pix.  Learns a mapping from input images to output images, like these examples from the original paper:\n\n<img src=\"docs/examples.jpg\" width=\"900px\"/>\n\nThis port is based directly on the torch implementation, and not on an existing Tensorflow implementation.  It is meant to be a faithful implementation of the original work and so does not add anything.  The processing speed on a GPU with cuDNN was equivalent to the Torch implementation in testing.\n\n## Setup\n\n### Prerequisites\n- Tensorflow 1.4.1\n\n### Recommended\n- Linux with Tensorflow GPU edition + cuDNN\n\n### Getting Started\n\n```sh\n# clone this repo\ngit clone https://github.com/affinelayer/pix2pix-tensorflow.git\ncd pix2pix-tensorflow\n# download the CMP Facades dataset (generated from http://cmp.felk.cvut.cz/~tylecr1/facade/)\npython tools/download-dataset.py facades\n# train the model (this may take 1-8 hours depending on GPU, on CPU you will be waiting for a bit)\npython pix2pix.py \\\n  --mode train \\\n  --output_dir facades_train \\\n  --max_epochs 200 \\\n  --input_dir facades/train \\\n  --which_direction BtoA\n# test the model\npython pix2pix.py \\\n  --mode test \\\n  --output_dir facades_test \\\n  --input_dir facades/val \\\n  --checkpoint facades_train\n```\n\nThe test run will output an HTML file at `facades_test/index.html` that shows input/output/target image sets.\n\nIf you have Docker installed, you can use the provided Docker image to run pix2pix without installing the correct version of Tensorflow:\n\n```sh\n# train the model\npython tools/dockrun.py python pix2pix.py \\\n      --mode train \\\n      --output_dir facades_train \\\n      --max_epochs 200 \\\n      --input_dir facades/train \\\n      --which_direction BtoA\n# test the model\npython tools/dockrun.py python pix2pix.py \\\n      --mode test \\\n      --output_dir facades_test \\\n      --input_dir facades/val \\\n      --checkpoint facades_train\n```\n\n## Datasets and Trained Models\n\nThe data format used by this program is the same as the original pix2pix format, which consists of images of input and desired output side by side like:\n\n<img src=\"docs/ab.png\" width=\"256px\"/>\n\nFor example:\n\n<img src=\"docs/418.png\" width=\"256px\"/>\n\nSome datasets have been made available by the authors of the pix2pix paper.  To download those datasets, use the included script `tools/download-dataset.py`.  There are also links to pre-trained models alongside each dataset, note that these pre-trained models require the current version of pix2pix.py:\n\n| dataset | example |\n| --- | --- |\n| `python tools/download-dataset.py facades` <br> 400 images from [CMP Facades dataset](http://cmp.felk.cvut.cz/~tylecr1/facade/). (31MB) <br> Pre-trained: [BtoA](https://mega.nz/#!H0AmER7Y!pBHcH4M11eiHBmJEWvGr-E_jxK4jluKBUlbfyLSKgpY)  | <img src=\"docs/facades.jpg\" width=\"256px\"/> |\n| `python tools/download-dataset.py cityscapes` <br> 2975 images from the [Cityscapes training set](https://www.cityscapes-dataset.com/). (113M) <br> Pre-trained: [AtoB](https://mega.nz/#!K1hXlbJA!rrZuEnL3nqOcRhjb-AnSkK0Ggf9NibhDymLOkhzwuQk) [BtoA](https://mega.nz/#!y1YxxB5D!1817IXQFcydjDdhk_ILbCourhA6WSYRttKLrGE97q7k) | <img src=\"docs/cityscapes.jpg\" width=\"256px\"/> |\n| `python tools/download-dataset.py maps` <br> 1096 training images scraped from Google Maps (246M) <br> Pre-trained: [AtoB](https://mega.nz/#!7oxklCzZ!8fRZoF3jMRS_rylCfw2RNBeewp4DFPVE_tSCjCKr-TI) [BtoA](https://mega.nz/#!S4AGzQJD!UH7B5SV7DJSTqKvtbFKqFkjdAh60kpdhTk9WerI-Q1I) | <img src=\"docs/maps.jpg\" width=\"256px\"/> |\n| `python tools/download-dataset.py edges2shoes` <br> 50k training images from [UT Zappos50K dataset](http://vision.cs.utexas.edu/projects/finegrained/utzap50k/). Edges are computed by [HED](https://github.com/s9xie/hed) edge detector + post-processing. (2.2GB) <br> Pre-trained: [AtoB](https://mega.nz/#!u9pnmC4Q!2uHCZvHsCkHBJhHZ7xo5wI-mfekTwOK8hFPy0uBOrb4) | <img src=\"docs/edges2shoes.jpg\" width=\"256px\"/>  |\n| `python tools/download-dataset.py edges2handbags` <br> 137K Amazon Handbag images from [iGAN project](https://github.com/junyanz/iGAN). Edges are computed by [HED](https://github.com/s9xie/hed) edge detector + post-processing. (8.6GB) <br> Pre-trained: [AtoB](https://mega.nz/#!G1xlDCIS!sFDN3ZXKLUWU1TX6Kqt7UG4Yp-eLcinmf6HVRuSHjrM) | <img src=\"docs/edges2handbags.jpg\" width=\"256px\"/> |\n\nThe `facades` dataset is the smallest and easiest to get started with.\n\n### Creating your own dataset\n\n#### Example: creating images with blank centers for [inpainting](https://people.eecs.berkeley.edu/~pathak/context_encoder/)\n\n<img src=\"docs/combine.png\" width=\"900px\"/>\n\n```sh\n# Resize source images\npython tools/process.py \\\n  --input_dir photos/original \\\n  --operation resize \\\n  --output_dir photos/resized\n# Create images with blank centers\npython tools/process.py \\\n  --input_dir photos/resized \\\n  --operation blank \\\n  --output_dir photos/blank\n# Combine resized images with blanked images\npython tools/process.py \\\n  --input_dir photos/resized \\\n  --b_dir photos/blank \\\n  --operation combine \\\n  --output_dir photos/combined\n# Split into train/val set\npython tools/split.py \\\n  --dir photos/combined\n```\n\nThe folder `photos/combined` will now have `train` and `val` subfolders that you can use for training and testing.\n\n#### Creating image pairs from existing images\n\nIf you have two directories `a` and `b`, with corresponding images (same name, same dimensions, different data) you can combine them with `process.py`:\n\n```sh\npython tools/process.py \\\n  --input_dir a \\\n  --b_dir b \\\n  --operation combine \\\n  --output_dir c\n```\n\nThis puts the images in a side-by-side combined image that `pix2pix.py` expects.\n\n#### Colorization\n\nFor colorization, your images should ideally all be the same aspect ratio.  You can resize and crop them with the resize command:\n```sh\npython tools/process.py \\\n  --input_dir photos/original \\\n  --operation resize \\\n  --output_dir photos/resized\n```\n\nNo other processing is required, the colorization mode (see Training section below) uses single images instead of image pairs.\n\n## Training\n\n### Image Pairs\n\nFor normal training with image pairs, you need to specify which directory contains the training images, and which direction to train on.  The direction options are `AtoB` or `BtoA`\n```sh\npython pix2pix.py \\\n  --mode train \\\n  --output_dir facades_train \\\n  --max_epochs 200 \\\n  --input_dir facades/train \\\n  --which_direction BtoA\n```\n\n### Colorization\n\n`pix2pix.py` includes special code to handle colorization with single images instead of pairs, using that looks like this:\n\n```sh\npython pix2pix.py \\\n  --mode train \\\n  --output_dir photos_train \\\n  --max_epochs 200 \\\n  --input_dir photos/train \\\n  --lab_colorization\n```\n\nIn this mode, image A is the black and white image (lightness only), and image B contains the color channels of that image (no lightness information).\n\n### Tips\n\nYou can look at the loss and computation graph using tensorboard:\n```sh\ntensorboard --logdir=facades_train\n```\n\n<img src=\"docs/tensorboard-scalar.png\" width=\"250px\"/> <img src=\"docs/tensorboard-image.png\" width=\"250px\"/> <img src=\"docs/tensorboard-graph.png\" width=\"250px\"/>\n\nIf you wish to write in-progress pictures as the network is training, use `--display_freq 50`.  This will update `facades_train/index.html` every 50 steps with the current training inputs and outputs.\n\n## Testing\n\nTesting is done with `--mode test`.  You should specify the checkpoint to use with `--checkpoint`, this should point to the `output_dir` that you created previously with `--mode train`:\n\n```sh\npython pix2pix.py \\\n  --mode test \\\n  --output_dir facades_test \\\n  --input_dir facades/val \\\n  --checkpoint facades_train\n```\n\nThe testing mode will load some of the configuration options from the checkpoint provided so you do not need to specify `which_direction` for instance.\n\nThe test run will output an HTML file at `facades_test/index.html` that shows input/output/target image sets:\n\n<img src=\"docs/test-html.png\" width=\"300px\"/>\n\n## Code Validation\n\nValidation of the code was performed on a Linux machine with a ~1.3 TFLOPS Nvidia GTX 750 Ti GPU and an Azure NC6 instance with a K80 GPU.\n\n```sh\ngit clone https://github.com/affinelayer/pix2pix-tensorflow.git\ncd pix2pix-tensorflow\npython tools/download-dataset.py facades\nsudo nvidia-docker run \\\n  --volume $PWD:/prj \\\n  --workdir /prj \\\n  --env PYTHONUNBUFFERED=x \\\n  affinelayer/pix2pix-tensorflow \\\n    python pix2pix.py \\\n      --mode train \\\n      --output_dir facades_train \\\n      --max_epochs 200 \\\n      --input_dir facades/train \\\n      --which_direction BtoA\nsudo nvidia-docker run \\\n  --volume $PWD:/prj \\\n  --workdir /prj \\\n  --env PYTHONUNBUFFERED=x \\\n  affinelayer/pix2pix-tensorflow \\\n    python pix2pix.py \\\n      --mode test \\\n      --output_dir facades_test \\\n      --input_dir facades/val \\\n      --checkpoint facades_train\n```\n\nComparison on facades dataset:\n\n| Input | Tensorflow | Torch | Target |\n| --- | --- | --- | --- |\n| <img src=\"docs/1-inputs.png\" width=\"256px\"> | <img src=\"docs/1-tensorflow.png\" width=\"256px\"> | <img src=\"docs/1-torch.jpg\" width=\"256px\"> | <img src=\"docs/1-targets.png\" width=\"256px\"> |\n| <img src=\"docs/5-inputs.png\" width=\"256px\"> | <img src=\"docs/5-tensorflow.png\" width=\"256px\"> | <img src=\"docs/5-torch.jpg\" width=\"256px\"> | <img src=\"docs/5-targets.png\" width=\"256px\"> |\n| <img src=\"docs/51-inputs.png\" width=\"256px\"> | <img src=\"docs/51-tensorflow.png\" width=\"256px\"> | <img src=\"docs/51-torch.jpg\" width=\"256px\"> | <img src=\"docs/51-targets.png\" width=\"256px\"> |\n| <img src=\"docs/95-inputs.png\" width=\"256px\"> | <img src=\"docs/95-tensorflow.png\" width=\"256px\"> | <img src=\"docs/95-torch.jpg\" width=\"256px\"> | <img src=\"docs/95-targets.png\" width=\"256px\"> |\n\n## Unimplemented Features\n\nThe following models have not been implemented:\n- defineG_encoder_decoder\n- defineG_unet_128\n- defineD_pixelGAN\n\n## Citation\nIf you use this code for your research, please cite the paper this code is based on: <a href=\"https://arxiv.org/pdf/1611.07004v1.pdf\">Image-to-Image Translation Using Conditional Adversarial Networks</a>:\n\n```\n@article{pix2pix2016,\n  title={Image-to-Image Translation with Conditional Adversarial Networks},\n  author={Isola, Phillip and Zhu, Jun-Yan and Zhou, Tinghui and Efros, Alexei A},\n  journal={arxiv},\n  year={2016}\n}\n```\n\n## Acknowledgments\nThis is a port of [pix2pix](https://github.com/phillipi/pix2pix) from Torch to Tensorflow.  It also contains colorspace conversion code ported from Torch.  Thanks to the Tensorflow team for making such a quality library!  And special thanks to Phillip Isola for answering my questions about the pix2pix code.\n",
+            "readme_url": "https://github.com/JobQiu/hackrice",
+            "frameworks": [
+                "Caffe",
+                "TensorFlow",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "year": "2016",
+            "journal": "arxiv",
+            "author": [
+                "Isola, Phillip",
+                "Zhu, Jun-Yan",
+                "Zhou, Tinghui",
+                "Efros, Alexei A"
+            ],
+            "title": "Image-to-Image Translation with Conditional Adversarial Networks",
+            "ENTRYTYPE": "article",
+            "ID": "pix2pix2016",
+            "authors": [
+                "Isola, Phillip",
+                "Zhu, Jun-Yan",
+                "Zhou, Tinghui",
+                "Efros, Alexei A"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CMP Facades dataset",
+                "connection": {
+                    "name": "url",
+                    "source": {
+                        "url": "http://cmp.felk.cvut.cz/~tylecr1/facade/"
+                    }
+                }
+            },
+            {
+                "name": "UT Zappos50K dataset",
+                "connection": {
+                    "name": "url",
+                    "source": {
+                        "url": "http://vision.cs.utexas.edu/projects/finegrained/utzap50k/"
+                    }
+                }
+            },
+            {
+                "name": "Cityscapes"
+            },
+            {
+                "name": "Amazon"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9998890137765304,
+        "task": "Image-to-Image Translation",
+        "task_prob": 0.9905722214710904
+    }
+}

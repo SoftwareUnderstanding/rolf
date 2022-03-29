@@ -1,0 +1,156 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Memory Augmented Neural Network",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "philippe554",
+                "owner_type": "User",
+                "name": "MANN",
+                "url": "https://github.com/philippe554/MANN",
+                "stars": 13,
+                "pushed_at": "2018-06-18 09:12:59+00:00",
+                "created_at": "2017-12-12 10:43:12+00:00",
+                "language": "Python",
+                "description": "Neural Turing Machine",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitattributes",
+                "sha": "1ff0c423042b46cb1d617b81efb715defbe8054d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/blob/master/.gitattributes"
+                    }
+                },
+                "size": 2518
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "e4c9f04a3e63ebe5aa714d6a882b288fbdf008b0",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/blob/master/.gitignore"
+                    }
+                },
+                "size": 4320
+            },
+            {
+                "type": "code",
+                "name": "MANN.sln",
+                "sha": "c679dbfbcb7d27e597720dca43312aee93acad8b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/blob/master/MANN.sln"
+                    }
+                },
+                "size": 923
+            },
+            {
+                "type": "code",
+                "name": "UML",
+                "sha": "fd7b321cd6002eebd1abb2f4df803db41afe0108",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/tree/master/UML"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "e60deb5e7c7067193601d62c3f21e536047ba65d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/tree/master/data"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "src",
+                "sha": "d98f751e34ab1c11045772eae0346260a838671c",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/philippe554/MANN/tree/master/src"
+                    }
+                },
+                "num_files": 10
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "philippe554",
+            "github_id": "philippe554"
+        }
+    ],
+    "tags": [],
+    "description": "Neural Turing Machine",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/philippe554/MANN",
+            "stars": 13,
+            "issues": true,
+            "readme": "# Memory Augmented Neural Network\n\nThis package allows you to make a custom Memory Augmented Neural Network (MANN) by combining different architectures proposed by different papers. It is fully modular, and can be added to any other RNN in Tensorflow.\n\n## Features\n\n* 3 types of contollers\n* 2 types of heads\n* modular\n* compatible with batch training\n* generate random toy data to train a model\n\n\n## Getting Started\n\nPackages needed:\n\n* Python 3 \n* Numpy\n* Tensorflow\n\nImport this package:\n\n```\nimport mann\n```\n\n### Setup\n\nThe model is setup ready to run, no need to change anything. Run the main.py file to start training. The next paragraph explains what can be changed if needed.\n\nFirst define a MANN in the main.py file as follows (Multiple controllers are put in series, multiple heads are put in parallel):\n\n```\ncell = mann.MANNUnit(\"L1MANN\")\ncell.addMemory(mann.BasicMemory(\"M1\", 20, 12))\ncell.addController(mann.FFCell(\"Controller1\", 32))\ncell.addHead(mann.DNCHead(\"Head1\", 1))\n```\n\nNext create a Generator, this is a class that generates training data and contains the corrosponding settings for the network (Input/output size, entropy, ...)\n\n```\ngenerator = mann.Copy(10,8)\n```\n\nNext define your hyper parameters, default ones are fine in most cases\n\n```\nTrainSetSize = 10000\nTestSetSize = 1000\nBatchSize = 100\nTrainSteps = 100\n```\n\nFinnaly define your optimizer\n\n```\noptimizer = tf.train.RMSPropOptimizer(0.001)\n```\n\n### Use MANN as a layer in a bigger network\n\nFirst define a MANN as describes above, next make a layer:\n\n```\ny = cell.build(x, mask, outputSize)\n```\n\nwhere\n\n* x: the input of the layer with size (BatchSize, len(mask), ?)\n* mask: determains which time steps are used to create the output (See example below)\n* outputSize: the size of the last dimention of the output\n* y: the output of the layer with size (BatchSize, amount of ones in mask, outputSize)\n\nNote: there has not yet been a non linearity applied to y\n\nExample on the mask parameter:\n\nIf mask is\n\n```\nmask = [0,0,0,1,1,1]\n```\n\nThen your input tensor has 6 time steps, and your output tensor has 3 timesteps. The last 3 outputs of the RNN/MANN are used to make the y\n\n## Code Structure\n\nUML Diagram of the code\n\n![Alt text](UML/classes.jpg?raw=true \"UML\")\n\n## Papers used\n\n### Neural Turing machine\n\nAdd a read and write head to the MANN:\n\n```\ncell.addHead(mann.NTMHead(\"Head1\"))\n```\n\nThis head is based on the paper:\n\nAlex Graves et Al. Neural Turing Machine. 2014. https://arxiv.org/abs/1410.5401\n\n### Differentiable Neural Computer\n\nAdd a read and write head to the MANN (Where the second parameter defines the amount of reading heads):\n\n```\ncell.addHead(mann.DNCHead(\"Head1\", 1))\n```\n\nThis head is based on the paper:\n\nAlex Graves et Al. Hybrid computing using a neural network with dynamic external memory. 2016. https://www.nature.com/articles/nature20101\n\n### Least Recently Used Acces\n\n*This head is still in development*\n\nAdd a read and write head to the MANN:\n\n```\ncell.addHead(mann.NTMHead(\"Head1\"))\n```\n\nThis head is based on the paper:\n\nAdam Santoro et Al. One-shot Learning with Memory-Augmented Neural Networks. 2016. https://arxiv.org/abs/1605.06065\n\n",
+            "readme_url": "https://github.com/philippe554/MANN",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Neural Turing Machines",
+            "arxiv": "1410.5401",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1410.5401v2",
+            "abstract": "We extend the capabilities of neural networks by coupling them to external\nmemory resources, which they can interact with by attentional processes. The\ncombined system is analogous to a Turing Machine or Von Neumann architecture\nbut is differentiable end-to-end, allowing it to be efficiently trained with\ngradient descent. Preliminary results demonstrate that Neural Turing Machines\ncan infer simple algorithms such as copying, sorting, and associative recall\nfrom input and output examples.",
+            "authors": [
+                "Alex Graves",
+                "Greg Wayne",
+                "Ivo Danihelka"
+            ]
+        },
+        {
+            "title": "One-shot Learning with Memory-Augmented Neural Networks",
+            "arxiv": "1605.06065",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1605.06065v1",
+            "abstract": "Despite recent breakthroughs in the applications of deep neural networks, one\nsetting that presents a persistent challenge is that of \"one-shot learning.\"\nTraditional gradient-based networks require a lot of data to learn, often\nthrough extensive iterative training. When new data is encountered, the models\nmust inefficiently relearn their parameters to adequately incorporate the new\ninformation without catastrophic interference. Architectures with augmented\nmemory capacities, such as Neural Turing Machines (NTMs), offer the ability to\nquickly encode and retrieve new information, and hence can potentially obviate\nthe downsides of conventional models. Here, we demonstrate the ability of a\nmemory-augmented neural network to rapidly assimilate new data, and leverage\nthis data to make accurate predictions after only a few samples. We also\nintroduce a new method for accessing an external memory that focuses on memory\ncontent, unlike previous methods that additionally use memory location-based\nfocusing mechanisms.",
+            "authors": [
+                "Adam Santoro",
+                "Sergey Bartunov",
+                "Matthew Botvinick",
+                "Daan Wierstra",
+                "Timothy Lillicrap"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Unknown"
+    }
+}

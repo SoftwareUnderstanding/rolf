@@ -1,0 +1,131 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "DNC-py3",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "jiankaiwang",
+                "owner_type": "User",
+                "name": "dnc-py3",
+                "url": "https://github.com/jiankaiwang/dnc-py3",
+                "stars": 0,
+                "pushed_at": "2019-01-04 08:12:45+00:00",
+                "created_at": "2019-01-04 04:10:27+00:00",
+                "language": "Jupyter Notebook",
+                "description": "a tutorial for Differentiable Neural Computer (DNC) in python3",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "32355f3ea4de34d6aef22aa98d66fd92a2a94a6e",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jiankaiwang/dnc-py3/blob/master/.gitignore"
+                    }
+                },
+                "size": 1776
+            },
+            {
+                "type": "code",
+                "name": "dnc",
+                "sha": "767ea8411b7e14dab523f5238a7d9f214a911d0d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jiankaiwang/dnc-py3/tree/master/dnc"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "docs",
+                "sha": "849d9f431124cc65f40454cee3d37cca59f59ef8",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jiankaiwang/dnc-py3/tree/master/docs"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "tasks",
+                "sha": "9410b26397d958ca90c36b16e7837b2bbe898f2d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jiankaiwang/dnc-py3/tree/master/tasks"
+                    }
+                },
+                "num_files": 2
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Yuma Kajihara",
+            "github_id": "Kajiyu"
+        }
+    ],
+    "tags": [
+        "dnc",
+        "dnc-tensorflow",
+        "tutorial",
+        "babi-tasks"
+    ],
+    "description": "a tutorial for Differentiable Neural Computer (DNC) in python3",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/jiankaiwang/dnc-py3",
+            "stars": 0,
+            "issues": true,
+            "readme": "# DNC-py3\r\n\r\n\r\nDifferentiable Neural Computer (DNC) is a kind of enhanced neural cell-like LSTM and GRU. It is published in 2016 by Google DeepMind. The main article please refer to https://www.nature.com/articles/nature20101. DNC mainly purposed a new idea to keep memory out of the neural cell but in the external memory. We can train a feedForward or a recurrent neural network to learn how to operate the memory. That is, we are no longer to require RNN cells to keep memorizing and calculating at the same time. \r\n\r\nSuch an idea was not the first time to the public, its predecessor NTM was already published in 2014 (https://arxiv.org/pdf/1410.5401.pdf). Compare to NTM, DNC solved three main problems. First NTM cannot guarantee the write head would update the values directly on the correct position, or say it might encounter \bthe interference while writing. Second external memory can not be reused once it had been written. Third NTM writes data in a consecutive way, and it might change to another location while coming to the boundary. This causes a problem while reading consecutive data, the data would be not continuous. DNC provides new mechanisms, including memory matrix, memory usage vector, linking matrix, and precedence vector, etc. to solve the above issues. DNC's architecture is like the below.\r\n\r\n\r\n\r\n![](./docs/imgs/DNC_architecture.png)\r\n\r\n\r\n\r\nIn this repository, we are going to demo how to implement such DNC architecture and how to use it in real cases.\r\n\r\n\r\n\r\n## Environment\r\n\r\n\r\n\r\nScripts are implemented on python3 and tensorflow r1.11 or r1.12. The core scripts are referred to the following repository.\r\n\r\n* https://github.com/Mostafa-Samir/DNC-tensorflow\r\n* https://github.com/Kajiyu/dnc-py3\r\n* https://github.com/darksigma/Fundamentals-of-Deep-Learning-Book\r\n\r\n\r\n\r\n### Repoisotry structure\r\n\r\n```text\r\n+ dnc-py3\r\n  + dnc\r\n  + docs\r\n  + tasks\r\n    - copy\r\n    - babi\r\n  - README.md\r\n```\r\n\r\nThe implementation of main DNC architecture is under the folder `dnc-py3` as the package for python. Several tasks are implemented both in training and testing. The scripts are under the folder `tasks`. There are two commonplace tasks, `copy` and `bAbI`.\r\n\r\n\r\n\r\n## Experiments\r\n\r\n### Dynamic Memory Mechanisms\r\n\r\nThis experiment is designed to demonstrate the various functionalities of the external memory access mechanisms such as in-order retrieval and allocation/deallocation.\r\n\r\nA similar approach to that of the paper was followed by training a 2-layer feedforward model with only 10 memory locations on a copy task in which a series of 4 random binary sequences each of which is of size 6 (24 piece of information) was presented as input. Details about the training can be found [here](tasks/copy/).\r\n\r\nThe model was able to learn to copy the input successfully, and it indeed learned to use the mentioned memory mechanisms. The following figure (which resembles **Extended Data Figure 1** in the paper) illustrates that.\r\n\r\n*You can re-generate similar figures in the [visualization notebook](tasks/copy/visualization.ipynb)*\r\n\r\n![DNC-Memory-Mechanisms](./docs/imgs/DNC-dynamic-mem.png)\r\n\r\n- In the **Memory Locations** part of the figure, it's apparent that the model is able to read the memory locations in the same order they were written into.\r\n- In the **Free Gate** and the **Allocation Gate** portions of the figure, it's shown that the free gates are fully activated after a memory location is read and becomes obsolete, while being less activated in the writing phase. The opposite is true for the allocation gate. The **Memory Locations Usage** also demonstrates how memory locations are used, freed, and re-used again time after time.\r\n\r\n*The figure differs a little from the one in the paper when it comes to the activation degrees of the gates. This could be due to the small size of the model and the relatively small training time. However, this doesn't affect the operation of the model.*\r\n\r\n### Generalization and Memory Scalability\r\n\r\nThis experiment was designed to check:\r\n\r\n- if the trained model has learned an implicit copying algorithm that can be generalized to larger input lengths.\r\n- if the learned model is independent of the training memory size and can be scaled-up with memories of larger sizes.\r\n\r\nTo approach that, a 2-layer feedforward model with 15 memory locations was trained on a copy problem in which a single sequence of random binary vectors of lengths between 1 and 10 was presented as input. Details of the training process can be found [here](tasks/copy/).\r\n\r\nThe model was then tested on pairs of increasing sequence lengths and increasing memory sizes with re-training on any of these pairs of parameters, and the fraction of correctly copied sequences out of a batch of 100 was recorded. The model was indeed able to generalize and use the available memory locations effectively without retraining. This is depicted in the following figure which resembles **Extended Data Figure 2** from the paper.\r\n\r\n*Similar figures can be re-generated in the [visualization notebook](tasks/copy/visualization.ipynb)*\r\n\r\n![DNC-Scalability](./docs/imgs/DNC-scalable.png)\r\n\r\n### bAbI Task\r\n\r\nThis experiment was designed to reproduce the paper's results on the bAbI 20QA task. By training a model with the same parameters as DNC1 described in the paper (Extended Data Table 2) on the **en-10k** dataset, the model resulted in error percentages that *mostly* fell within the 1 standard deviation of the means reported in the paper (Extended Data Table 1). The results, and their comparison to the paper's mean results, are shown in the following table. Details about training and reproduction can be found [here](tasks/babi/).\r\n\r\n| Task Name              | Results | Paper's Mean |\r\n| ---------------------- | ------- | ------------ |\r\n| single supporting fact | 0.00%   | 9.0\u00b112.6%    |\r\n| two supporting facts   | 11.88%  | 39.2\u00b120.5%   |\r\n| three supporting facts | 27.80%  | 39.6\u00b116.4%   |\r\n| two arg relations      | 1.40%   | 0.4\u00b10.7%     |\r\n| three arg relations    | 1.70%   | 1.5\u00b11.0%     |\r\n| yes no questions       | 0.50%   | 6.9\u00b17.5%     |\r\n| counting               | 4.90%   | 9.8\u00b17.0%     |\r\n| lists sets             | 2.10%   | 5.5\u00b15.9%     |\r\n| simple negation        | 0.80%   | 7.7\u00b18.3%     |\r\n| indefinite knowledge   | 1.70%   | 9.6\u00b111.4%    |\r\n| basic coreference      | 0.10%   | 3.3\u00b15.7%     |\r\n| conjunction            | 0.00%   | 5.0\u00b16.3%     |\r\n| compound coreference   | 0.40%   | 3.1\u00b13.6%     |\r\n| time reasoning         | 11.80%  | 11.0\u00b17.5%    |\r\n| basic deduction        | 45.44%  | 27.2\u00b120.1%   |\r\n| basic induction        | 56.43%  | 53.6\u00b11.9%    |\r\n| positional reasoning   | 39.02%  | 32.4\u00b18.0%    |\r\n| size reasoning         | 8.68%   | 4.2\u00b11.8%     |\r\n| path finding           | 98.21%  | 64.6\u00b137.4%   |\r\n| agents motivations     | 2.71%   | 0.0\u00b10.1%     |\r\n| **Mean Err.**          | 15.78%  | 16.7\u00b17.6%    |\r\n| **Failed (err. > 5%)** | 8       | 11.2\u00b15.4     |\r\n\r\n",
+            "readme_url": "https://github.com/jiankaiwang/dnc-py3",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Neural Turing Machines",
+            "arxiv": "1410.5401",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1410.5401v2",
+            "abstract": "We extend the capabilities of neural networks by coupling them to external\nmemory resources, which they can interact with by attentional processes. The\ncombined system is analogous to a Turing Machine or Von Neumann architecture\nbut is differentiable end-to-end, allowing it to be efficiently trained with\ngradient descent. Preliminary results demonstrate that Neural Turing Machines\ncan infer simple algorithms such as copying, sorting, and associative recall\nfrom input and output examples.",
+            "authors": [
+                "Alex Graves",
+                "Greg Wayne",
+                "Ivo Danihelka"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "bAbi"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9934262949090609,
+        "task": "Question Answering",
+        "task_prob": 0.7171049970911137
+    }
+}

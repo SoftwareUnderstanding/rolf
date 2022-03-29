@@ -1,0 +1,183 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Shaking Syntactic Trees on the Sesame Street: Multilingual Probing with Controllable Perturbations",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "evtaktasheva",
+                "owner_type": "User",
+                "name": "dependency_extraction",
+                "url": "https://github.com/evtaktasheva/dependency_extraction",
+                "stars": 1,
+                "pushed_at": "2022-02-02 10:18:39+00:00",
+                "created_at": "2021-03-05 14:45:49+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "25573c344a788014990a0ba7806b824c1c863c94",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/evtaktasheva/dependency_extraction/tree/main/data"
+                    }
+                },
+                "num_files": 10
+            },
+            {
+                "type": "code",
+                "name": "install_tools.sh",
+                "sha": "0e16540e5f87a42a0885647f67460796f8711527",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/evtaktasheva/dependency_extraction/blob/main/install_tools.sh"
+                    }
+                },
+                "size": 164
+            },
+            {
+                "type": "code",
+                "name": "probing",
+                "sha": "e53a9d2f6632892b51668f66ec1f291266ae8fa2",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/evtaktasheva/dependency_extraction/tree/main/probing"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "requirements.txt",
+                "sha": "9b379d5b5b9156065a90dce6ae9a595bf21082f3",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/evtaktasheva/dependency_extraction/blob/main/requirements.txt"
+                    }
+                },
+                "size": 105
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "tak_ty",
+            "github_id": "evtaktasheva"
+        },
+        {
+            "name": "Vladislav Mikhailov",
+            "github_id": "vmkhlv"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/evtaktasheva/dependency_extraction",
+            "stars": 1,
+            "issues": true,
+            "readme": "## Shaking Syntactic Trees on the Sesame Street: Multilingual Probing with Controllable Perturbations\n\nThe [paper](http://arxiv.org/abs/2109.14017) is accepted to the 1st Workshop on Multilingual Representation Learning ([MRL](https://www.sites.google.com/view/mrl-2021)) at EMNLP 2021. \n\n\n### Tasks\nThe paper  proposes nine  probing  datasets  organized  by  the  type of controllable text perturbation for three Indo-European languages with a varying degree of word order flexibility:  nglish (West Germanic, analytic), Swedish (North Germanic, analytic), and Russian (Balto-Slavic, fusional).\n\n1. The (**NShift**) task tests the LM sensitivity to *local* perturbations taking into account the syntactic structure.\n2. The (**ClauseShift**) task probes the LM sensitivity to *distant* perturbations at the level of syntactic clauses. \n3. The (**RandomShift**) task tests the LM sensitivity to *global* perturbations obtained by shuffling the word order.\n\n### Models\nThe experiments are run on two 12-layer multilingual Transformer models released by the HuggingFace library:\n\n1. **M-BERT** [(Devlin et al. 2019)](https://arxiv.org/abs/1810.04805), a transformer model of the encoder architecture, trained on multilingual Wikipedia data using the Masked LM (MLM) and Next Sentence Prediction pre-training objectives.\n2. **M-BART** [(Liu et al. 2020)](https://arxiv.org/abs/2001.08210), a sequence-to-sequence model that comprises a BERT encoder and an autoregressive GPT-2 decoder \\cite{radford2019language}. The model is pre-trained on the CC25 corpus in 25 languages using text infilling and sentence shuffling objectives, where it learns to predict masked word spans and reconstruct the permuted input. We use only the encoder in our experiments.\n\n### Experiments\n\n1. **Parameter-free Probing**: We apply two unsupervised probing methods to reconstruct syntactic trees from self-attention (**Self-Attention Probing**) [(Htut et al., 2019)]()) and so-called \"impact\" (**Token Perturbed Masking**) [(Wu et al., 2020)](https://arxiv.org/pdf/2004.14786https://arxiv.org/abs/1911.12246?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%253A+arxiv%252FQSXk+%2528ExcitingAds%2521+cs+updates+on+arXiv.org%2529.pdf)) matrices computed by feeding the MLM models with each sentence `s` and its perturbed version `s'`.\n2. **Representation Analysis**: We use two of the metrics proposed by [(Hessel and Schofield, 2021)](https://aclanthology.org/2021.acl-short.27/) to compare contextualized representations and self-attention matrices produced by the model for each pair of sentences `s` and `s'`. **Token Identifiability** (TI) evaluates the similarity of the LM's contextualized representations of a particular token in `s` and `s'`. **Self-Attention Distance** (SAD) measures if each token in `s` relates to similar words in `s'` by computing row-wise Jensen-Shannon Divergence between the two self-attention matrices.\n3. **Pseudo-perplexity**: Pseudo-perplexity (PPPL) is an intrinsic measure that estimates the probability of a sentence with an MLM similar to that of conventional LMs. We use two PPPL-based measures under [implementation](https://github.com/jhlau/acceptability-prediction-in-context) by  [(Lau et al. 2020)](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00315/96455/How-Furiously-Can-Colorless-Green-Ideas-Sleep) to infer probabilities of the sentences and their perturbed counterparts.\n \n### Positional Encoding\n \nWe aim at analyzing the impact of the PEs on the syntactic probe performance. Towards this end, we consider the following three configurations of PEs of the M-BERT and M-BART models: (1) **absolute**=frozen PEs; (2) **random**=randomly initialized PEs; and (3) **zero**=zeroed PEs.\n\n ### Results\n\n1. **The syntactic sensitivity depends upon language** At present, English remains the focal point of prior research in the field of NLP, leaving other languages understudied. Our probing experiments on the less explored languages with different word order flexibility show that M-BERT and M-BART behave slightly differently in Swedish and Russian.\n2. **Pre-training objectives can help to improve syntactic robustness** Analysis of the M-BERT and M-BART LMs that differ in the pre-training objectives shows that M-BERT achieves higher \u03b4 UUAS performance across all languages as opposed to M-BART pre-trained with the sentence shuffling objective.\n3. **The LMs are less sensitive to more granular perturbations** The results of the parameter-free probing show that M-BERT and M-BART exhibit little to no sensitivity to *local* perturbations within syntactic groups (**NgramShift**) and *distant* perturbations at the level of syntactic clauses (**ClauseShift**). In contrast, the *global* perturbations (**RandomShift**) are best distinguished by the encoders. As the granularity of the syntactic corruption increases, we observe a worse probing performance under all considered interpretation methods.\n4. **M-BERT and M-BART barely use positional information to induce syntactic trees** Our results under different PEs configurations reveal that M-BERT and M-BART do not need the precise position information to restore the syntactic tree from their internal representations. The overall behavior is that zeroed (except for M-BERT) or even randomly initialized PEs can result in the probing performance and one with absolute positions.\n\n\n## Setup and Usage\n\nTBA\n\n## Cite us\n\n```\n@inproceedings{taktasheva-etal-2021-shaking,\n    title = \"Shaking Syntactic Trees on the Sesame Street: Multilingual Probing with Controllable Perturbations\",\n    author = \"Taktasheva, Ekaterina  and\n      Mikhailov, Vladislav  and\n      Artemova, Ekaterina\",\n    booktitle = \"Proceedings of the 1st Workshop on Multilingual Representation Learning\",\n    month = nov,\n    year = \"2021\",\n    address = \"Punta Cana, Dominican Republic\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.mrl-1.17\",\n    pages = \"191--210\",\n    abstract = \"Recent research has adopted a new experimental field centered around the concept of text perturbations which has revealed that shuffled word order has little to no impact on the downstream performance of Transformer-based language models across many NLP tasks. These findings contradict the common understanding of how the models encode hierarchical and structural information and even question if the word order is modeled with position embeddings. To this end, this paper proposes nine probing datasets organized by the type of controllable text perturbation for three Indo-European languages with a varying degree of word order flexibility: English, Swedish and Russian. Based on the probing analysis of the M-BERT and M-BART models, we report that the syntactic sensitivity depends on the language and model pre-training objectives. We also find that the sensitivity grows across layers together with the increase of the perturbation granularity. Last but not least, we show that the models barely use the positional information to induce syntactic trees from their intermediate self-attention and contextualized representations.\",\n}\n```\n",
+            "readme_url": "https://github.com/evtaktasheva/dependency_extraction",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "arxiv": "1810.04805",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1810.04805v2",
+            "abstract": "We introduce a new language representation model called BERT, which stands\nfor Bidirectional Encoder Representations from Transformers. Unlike recent\nlanguage representation models, BERT is designed to pre-train deep\nbidirectional representations from unlabeled text by jointly conditioning on\nboth left and right context in all layers. As a result, the pre-trained BERT\nmodel can be fine-tuned with just one additional output layer to create\nstate-of-the-art models for a wide range of tasks, such as question answering\nand language inference, without substantial task-specific architecture\nmodifications.\n  BERT is conceptually simple and empirically powerful. It obtains new\nstate-of-the-art results on eleven natural language processing tasks, including\npushing the GLUE score to 80.5% (7.7% point absolute improvement), MultiNLI\naccuracy to 86.7% (4.6% absolute improvement), SQuAD v1.1 question answering\nTest F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1\n(5.1 point absolute improvement).",
+            "authors": [
+                "Jacob Devlin",
+                "Ming-Wei Chang",
+                "Kenton Lee",
+                "Kristina Toutanova"
+            ]
+        },
+        {
+            "title": "Shaking Syntactic Trees on the Sesame Street: Multilingual Probing with Controllable Perturbations",
+            "arxiv": "2109.14017",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2109.14017v1",
+            "abstract": "Recent research has adopted a new experimental field centered around the\nconcept of text perturbations which has revealed that shuffled word order has\nlittle to no impact on the downstream performance of Transformer-based language\nmodels across many NLP tasks. These findings contradict the common\nunderstanding of how the models encode hierarchical and structural information\nand even question if the word order is modeled with position embeddings. To\nthis end, this paper proposes nine probing datasets organized by the type of\n\\emph{controllable} text perturbation for three Indo-European languages with a\nvarying degree of word order flexibility: English, Swedish and Russian. Based\non the probing analysis of the M-BERT and M-BART models, we report that the\nsyntactic sensitivity depends on the language and model pre-training\nobjectives. We also find that the sensitivity grows across layers together with\nthe increase of the perturbation granularity. Last but not least, we show that\nthe models barely use the positional information to induce syntactic trees from\ntheir intermediate self-attention and contextualized representations.",
+            "authors": [
+                "Ekaterina Taktasheva",
+                "Vladislav Mikhailov",
+                "Ekaterina Artemova"
+            ]
+        },
+        {
+            "title": "Do Attention Heads in BERT Track Syntactic Dependencies?",
+            "arxiv": "1911.12246",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1911.12246v1",
+            "abstract": "We investigate the extent to which individual attention heads in pretrained\ntransformer language models, such as BERT and RoBERTa, implicitly capture\nsyntactic dependency relations. We employ two methods---taking the maximum\nattention weight and computing the maximum spanning tree---to extract implicit\ndependency relations from the attention weights of each layer/head, and compare\nthem to the ground-truth Universal Dependency (UD) trees. We show that, for\nsome UD relation types, there exist heads that can recover the dependency type\nsignificantly better than baselines on parsed English text, suggesting that\nsome self-attention heads act as a proxy for syntactic structure. We also\nanalyze BERT fine-tuned on two datasets---the syntax-oriented CoLA and the\nsemantics-oriented MNLI---to investigate whether fine-tuning affects the\npatterns of their self-attention, but we do not observe substantial differences\nin the overall dependency relations extracted using our methods. Our results\nsuggest that these models have some specialist attention heads that track\nindividual dependency types, but no generalist head that performs holistic\nparsing significantly better than a trivial baseline, and that analyzing\nattention weights directly may not reveal much of the syntactic knowledge that\nBERT-style models are known to learn.",
+            "authors": [
+                "Phu Mon Htut",
+                "Jason Phang",
+                "Shikha Bordia",
+                "Samuel R. Bowman"
+            ]
+        },
+        {
+            "title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+            "arxiv": "2001.08210",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2001.08210v2",
+            "abstract": "This paper demonstrates that multilingual denoising pre-training produces\nsignificant performance gains across a wide variety of machine translation (MT)\ntasks. We present mBART -- a sequence-to-sequence denoising auto-encoder\npre-trained on large-scale monolingual corpora in many languages using the BART\nobjective. mBART is one of the first methods for pre-training a complete\nsequence-to-sequence model by denoising full texts in multiple languages, while\nprevious approaches have focused only on the encoder, decoder, or\nreconstructing parts of the text. Pre-training a complete model allows it to be\ndirectly fine tuned for supervised (both sentence-level and document-level) and\nunsupervised machine translation, with no task-specific modifications. We\ndemonstrate that adding mBART initialization produces performance gains in all\nbut the highest-resource settings, including up to 12 BLEU points for low\nresource MT and over 5 BLEU points for many document-level and unsupervised\nmodels. We also show it also enables new types of transfer to language pairs\nwith no bi-text or that were not in the pre-training corpus, and present\nextensive analysis of which factors contribute the most to effective\npre-training.",
+            "authors": [
+                "Yinhan Liu",
+                "Jiatao Gu",
+                "Naman Goyal",
+                "Xian Li",
+                "Sergey Edunov",
+                "Marjan Ghazvininejad",
+                "Mike Lewis",
+                "Luke Zettlemoyer"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Wikipedia"
+            },
+            {
+                "name": "UD"
+            },
+            {
+                "name": "SQuAD"
+            },
+            {
+                "name": "GLUE"
+            },
+            {
+                "name": "MultiNLI"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999995675397418,
+        "task": "Machine Translation",
+        "task_prob": 0.9175567284647018
+    }
+}

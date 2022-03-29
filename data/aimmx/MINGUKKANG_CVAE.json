@@ -1,0 +1,172 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Conditional Variaional AutoEncoder(CVAE)-Tensorflow",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "MINGUKKANG",
+                "owner_type": "User",
+                "name": "CVAE",
+                "url": "https://github.com/MINGUKKANG/CVAE",
+                "stars": 15,
+                "pushed_at": "2018-08-13 00:58:02+00:00",
+                "created_at": "2018-08-09 08:46:40+00:00",
+                "language": "Python",
+                "description": "Tensorflow Code for Conditional Variational AutoEncoder",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "CVAE.py",
+                "sha": "9e630d2e98b69aab61d09c0db3636d44b374479a",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/blob/master/CVAE.py"
+                    }
+                },
+                "size": 2454
+            },
+            {
+                "type": "code",
+                "name": "data_utils.py",
+                "sha": "111c4f4c4dd0bdceae370fa97bfaf0e25e1f4b7b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/blob/master/data_utils.py"
+                    }
+                },
+                "size": 11159
+            },
+            {
+                "type": "code",
+                "name": "images",
+                "sha": "50f31591fab66d6d241e6f7d91e0fb8a46b8119d",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/tree/master/images"
+                    }
+                },
+                "num_files": 8
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "71605ef6b84d88f7526c555d8435f7856cc7bc16",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/blob/master/main.py"
+                    }
+                },
+                "size": 6831
+            },
+            {
+                "type": "code",
+                "name": "plot.py",
+                "sha": "5be443d5f2d3f73bd1cc34840e5b11b0580b4716",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/blob/master/plot.py"
+                    }
+                },
+                "size": 1941
+            },
+            {
+                "type": "code",
+                "name": "utils.py",
+                "sha": "109f51678f11612737e077a295db285492ebcacc",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/MINGUKKANG/CVAE/blob/master/utils.py"
+                    }
+                },
+                "size": 1258
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "MingukKANG",
+            "email": "mgkang@postech.ac.kr",
+            "github_id": "MINGUKKANG"
+        }
+    ],
+    "tags": [],
+    "description": "Tensorflow Code for Conditional Variational AutoEncoder",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/MINGUKKANG/CVAE",
+            "stars": 15,
+            "issues": true,
+            "readme": "## Conditional Variaional AutoEncoder(CVAE)-Tensorflow\n\n**I Write the Tensorflow code for CVAE(M1)** , M1 is the Latent Discriminative Model\n\n\n\n**This code has following features**\n1. when we train our model, I use 0.6 dropout rate.\n2. All activation functions are leaky relu.\n3. I use He_initializer for weights initialization.\n\n## Enviroment\n- OS: Ubuntu 16.04\n\n- Graphic Card /RAM : 1080TI /16G\n\n- Python 3.5\n\n- Tensorflow-gpu version:  1.4.0rc2 \n\n- OpenCV 3.4.1\n\n## Schematic of CVAE\n\n![\uc0ac\uc9c41](https://github.com/MINGUKKANG/CVAE/blob/master/images/CVAE.png)\n\n## Code\n\n**1. Conditional Gaussian Encoder**\n```python\ndef conditional_gaussian_encoder(self, X, Y, keep_prob):\n\n    with tf.variable_scope(\"gaussian_encoder\", reuse = tf.AUTO_REUSE):\n        X_input = tf.concat((X,Y), axis =1)\n        net = drop_out(leaky(dense(X_input, self.n_hidden[0], name = \"Dense_1\")), keep_prob)\n        net = drop_out(leaky(dense(net, self.n_hidden[1], name=\"Dense_2\")), keep_prob)\n        net = dense(net, self.n_z*2, name =\"Dense_3\")\n        mean = net[:,:self.n_z]\n        std = tf.nn.softplus(net[:,self.n_z:]) + 1e-6\n\n    return mean, std\n```\n\n**2. Conditional Bernoulli Decoder**\n```python\ndef conditional_bernoulli_decoder(self,Z, Y, keep_prob):\n\n    with tf.variable_scope(\"bernoulli_decoder\", reuse = tf.AUTO_REUSE):\n        z_input = tf.concat((Z,Y), axis = 1)\n        net = drop_out(leaky(dense(z_input, self.n_hidden[2], name = \"Dense_1\")), keep_prob)\n        net = drop_out(leaky(dense(net, self.n_hidden[3], name=\"Dense_2\")), keep_prob)\n        net = tf.nn.sigmoid(dense(net, self.n_out, name = \"Dense_3\"))\n    \n    return net\n```\n\n**3. Conditional Variational AutoEncoder**\n```python\ndef Conditional_Variational_AutoEncoder(self, X, X_noised, Y, keep_prob):\n\n    X_flatten = tf.reshape(X, [-1, self.n_out])\n    X_flatten_noised = tf.reshape(X_noised, [-1, self.n_out])\n\n    mean, std = self.conditional_gaussian_encoder(X_flatten_noised, Y, keep_prob)\n    z = mean + std*tf.random_normal(tf.shape(mean, out_type = tf.int32), 0, 1, dtype = tf.float32)\n\n    X_out = self.conditional_bernoulli_decoder(z, Y, keep_prob)\n    X_out = tf.clip_by_value(X_out, 1e-8, 1 - 1e-8)\n\n    likelihood = tf.reduce_mean(tf.reduce_sum(X_flatten*tf.log(X_out) + (1 - X_flatten)*tf.log(1 - X_out), 1))\n    KL_Div = tf.reduce_mean(0.5 * tf.reduce_sum(1 - tf.log(tf.square(std) + 1e-8)\n                                                + tf.square(mean)\n                                                + tf.square(std), 1))\n\n    Recon_error = -1*likelihood\n    Regul_error = KL_Div\n\n    self.ELBO = Recon_error + Regul_error\n\n    return z, X_out, self.ELBO\n```\n\n## Result\n**1. Denoising and Restoring**\n```\npython main.py --add_noise True\n```\n\n<table align='center'>\n<tr align='center'>\n<td> Original Images </td>\n<td> Images denoised </td>\n<td> Images Restored via CVAE </td>\n</tr>\n<tr>\n<td><img src = 'images/ori_input_images.png' height = '250px'>\n<td><img src = 'images/input_image_noised.png' height = '250px'>\n<td><img src = 'images/Manifold_canvas_75.png' height = '250px'>\n</tr>\n</table>\n\n**2. Manifold Learning Result**\n```\npython main.py --n_z 2 --PMLR True\n```\n<table align='center'>\n<tr align='center'>\n<td> Manifold with a condition of  0 </td>\n<td> Manifold with a condition of  1 </td>\n<td> 2d MNIST Manifold </td>\n</tr>\n<tr>\n<td><img src = 'images/labels0.png' height = '250px'>\n<td><img src = 'images/labels1.png' height = '250px'>\n<td><img src = 'images/2D_latent_space.png' height = '250px'>\n</tr>\n</table>\n\n**3. Conditional Generation**\n```\npython main.py --PARR True\n```\n<table align='center'>\n<tr align='center'>\n</tr>\n<tr>\n<td><img src = 'images/Cond_Generation.png' height = '80px'>\n</tr>\n</table>\n\n## Reference Papers\n**1. https://arxiv.org/abs/1406.5298**\n\n**2. https://arxiv.org/abs/1312.6114**\n\n**3. https://arxiv.org/abs/1606.05908**\n\n## Reference \n\n**1.https://github.com/hwalsuklee/tensorflow-mnist-VAE**\n\n**2.https://github.com/hwalsuklee/tensorflow-mnist-CVAE**\n\n**3.https://github.com/MINGUKKANG/VAE-tensorflow**\n",
+            "readme_url": "https://github.com/MINGUKKANG/CVAE",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Auto-Encoding Variational Bayes",
+            "arxiv": "1312.6114",
+            "year": 2013,
+            "url": "http://arxiv.org/abs/1312.6114v10",
+            "abstract": "How can we perform efficient inference and learning in directed probabilistic\nmodels, in the presence of continuous latent variables with intractable\nposterior distributions, and large datasets? We introduce a stochastic\nvariational inference and learning algorithm that scales to large datasets and,\nunder some mild differentiability conditions, even works in the intractable\ncase. Our contributions is two-fold. First, we show that a reparameterization\nof the variational lower bound yields a lower bound estimator that can be\nstraightforwardly optimized using standard stochastic gradient methods. Second,\nwe show that for i.i.d. datasets with continuous latent variables per\ndatapoint, posterior inference can be made especially efficient by fitting an\napproximate inference model (also called a recognition model) to the\nintractable posterior using the proposed lower bound estimator. Theoretical\nadvantages are reflected in experimental results.",
+            "authors": [
+                "Diederik P Kingma",
+                "Max Welling"
+            ]
+        },
+        {
+            "title": "Semi-Supervised Learning with Deep Generative Models",
+            "arxiv": "1406.5298",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1406.5298v2",
+            "abstract": "The ever-increasing size of modern data sets combined with the difficulty of\nobtaining label information has made semi-supervised learning one of the\nproblems of significant practical importance in modern data analysis. We\nrevisit the approach to semi-supervised learning with generative models and\ndevelop new models that allow for effective generalisation from small labelled\ndata sets to large unlabelled ones. Generative approaches have thus far been\neither inflexible, inefficient or non-scalable. We show that deep generative\nmodels and approximate Bayesian inference exploiting recent advances in\nvariational methods can be used to provide significant improvements, making\ngenerative approaches highly competitive for semi-supervised learning.",
+            "authors": [
+                "Diederik P. Kingma",
+                "Danilo J. Rezende",
+                "Shakir Mohamed",
+                "Max Welling"
+            ]
+        },
+        {
+            "title": "Tutorial on Variational Autoencoders",
+            "arxiv": "1606.05908",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1606.05908v3",
+            "abstract": "In just three years, Variational Autoencoders (VAEs) have emerged as one of\nthe most popular approaches to unsupervised learning of complicated\ndistributions. VAEs are appealing because they are built on top of standard\nfunction approximators (neural networks), and can be trained with stochastic\ngradient descent. VAEs have already shown promise in generating many kinds of\ncomplicated data, including handwritten digits, faces, house numbers, CIFAR\nimages, physical models of scenes, segmentation, and predicting the future from\nstatic images. This tutorial introduces the intuitions behind VAEs, explains\nthe mathematics behind them, and describes some empirical behavior. No prior\nknowledge of variational Bayesian methods is assumed.",
+            "authors": [
+                "Carl Doersch"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "MNIST"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Unknown"
+    }
+}

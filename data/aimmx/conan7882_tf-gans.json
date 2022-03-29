@@ -1,0 +1,213 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "TensorFlow implementation of Generative Adversarial Networks",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "conan7882",
+                "owner_type": "User",
+                "name": "tf-gans",
+                "url": "https://github.com/conan7882/tf-gans",
+                "stars": 7,
+                "pushed_at": "2019-01-23 20:52:57+00:00",
+                "created_at": "2018-08-13 15:09:03+00:00",
+                "language": "Python",
+                "description": "Tensorflow implementation of Generative Adversarial Networks",
+                "license": "MIT License",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "894a44cc066a027465cd26d634948d56d13af9af",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/blob/master/.gitignore"
+                    }
+                },
+                "size": 1203
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "0bc2b6c2437acaaa92a1de6462ca7b7e12849970",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/blob/master/LICENSE"
+                    }
+                },
+                "size": 1064
+            },
+            {
+                "type": "code",
+                "name": "docs",
+                "sha": "3edf03b93911d0fcdb2726c6d15b263fa19b6691",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/tree/master/docs"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "examples",
+                "sha": "6bc7eee65b2f5466bd3c4510667d7d4dbceac832",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/tree/master/examples"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "requirements.txt",
+                "sha": "e4a5ece9958d4bc181c0d240ac5294f093a52a9e",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/blob/master/requirements.txt"
+                    }
+                },
+                "size": 102
+            },
+            {
+                "type": "code",
+                "name": "src",
+                "sha": "0d3ba4338a4973e349ff5dca21d1a85fb036da39",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/conan7882/tf-gans/tree/master/src"
+                    }
+                },
+                "num_files": 6
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Qian Ge",
+            "email": "qge2@ncsu.edu",
+            "github_id": "conan7882"
+        }
+    ],
+    "tags": [
+        "tensorflow",
+        "gan",
+        "generative-adversarial-network",
+        "dcgan",
+        "lsgan",
+        "infogan"
+    ],
+    "description": "Tensorflow implementation of Generative Adversarial Networks",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/conan7882/tf-gans",
+            "stars": 7,
+            "issues": true,
+            "readme": "# TensorFlow implementation of Generative Adversarial Networks\n- This repository contains TensorFlow implementations of GANs inspired by several other repositories of GANs or generative models ([generative-models](https://github.com/wiseodd/generative-models), [tensorflow-generative-model-collections](https://github.com/hwalsuklee/tensorflow-generative-model-collections)).\n- This repository is used for me to learn and experiment on various GANs.\n- All the GANs are tested on [MNIST](http://yann.lecun.com/exdb/mnist/) and [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and the architecture of each GAN is the same as or slightly modified from the original paper to make them compatible for images with size 28 x 28 and 64 x 64.\n- Results of the GAN models implemented in this repository are briefly shown in this page. Implementation details and full results of each GAN can be found in [indvidual pages](docs/) for each model.\n\n## Related implementations:\nHere are my other implementations related to GAN:\n- [Adversarial Autoencoders](https://github.com/conan7882/adversarial-autoencoders-tf)\n- [Pix2Pix](https://github.com/conan7882/pix2pix-tf)\n\n## Requirements\n- Python 3.3+\n- [Tensorflow 1.10+](https://www.tensorflow.org/)\n- [TensorFlow Probability](https://www.tensorflow.org/probability/)\n- [numpy](http://www.numpy.org/)\n- [Scipy](https://www.scipy.org/)\n- [Matplotlib](https://matplotlib.org/)\n- [skimage](https://scikit-image.org/)\n- [pillow](https://pillow.readthedocs.io/en/5.2.x/)\n- [imageio 2.4.1+](http://imageio.github.io/)\n\n\n# Models\n*Name* | *Paper* | *Implementation Details* | *Description* | \n:--: | :---: | :--: | :--- | \nDCGAN | [paper](https://arxiv.org/abs/1511.06434) | [details](docs/dcgan/) | DCGAN improves the GAN performance by using a more advanced architecture than the original GAN, including batchnorm, fully convolutional structure, ReLU and LeakyReLU activations, and removing pooling layers.| \nLSGAN | [paper](https://arxiv.org/abs/1611.04076) | [details](docs/lsgan/) |  LSGAN uses least squares losses instead of original cross entropy losses to pull the generated data close to the real data.\nInfoGAN | [paper](https://arxiv.org/abs/1606.03657) | [details](docs/infogan/) | InfoGAN is able to learn disentangled representations from data in a completely unsupervised manner by maximize the mutual information between a small subset of input latent codes and the generated data.\n<!--BEGAN | [paper](https://arxiv.org/abs/1703.10717) | [details](docs/began/) |\n-->\n\n\n# Usage\n- GAN models are defined in [`src/nets/`](src/nets/).\n- The script [`example/gans.py`](example/gans.py) contains experiments of all the GAN models.\n\n### Preparation\n- Download the MNIST dataset from [here](http://yann.lecun.com/exdb/mnist/) and CelebA from [here](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html).\n- Setup path in [`examples/gans.py`](examples/gans.py): `MNIST_PATH` is the directory to put MNIST dataset and `CELEBA_PATH` is the directory to put CelebA dataset. `SAVE_PATH` is the directory to save output images and trained model.\n\n### Argument\nRun the script [`examples/gans.py`](examples/gans.py) to train GAN models. Here are all the arguments:\n\n* `--train`: Train the model.\n* `--generate`: Randomly sample images from trained model.\n* `--load`: The epoch ID of pre-trained model to be restored.\n* `--gan_type`: Type of GAN for experiment. Default: `dcgan`. Other options: `lsgan`, `infogan`.\n* `--dataset`: Dataset used for experiment. Default: `mnist`. Other options: `celeba`.\n* `--zlen`: Length of input random vector z. Default: `100`\n* `--lr`: Initial learning rate. Default: `2e-4`.\n* `--keep_prob`: Keep probability of dropout. Default: `1.0`.\n* `--bsize`: Batch size. Default: `128`.\n* `--maxepoch`: Max number of epochs. Default: `50`.\n* `--ng`: Number of times of training generator for each step. Default: `1`.\n* `--nd`: Number of times of training discriminator for each step. Default: `1`.\n* `--w_mutual`: Weight of mutual information loss for InfoGAN. Default: `1.0`\n\n### Train models\n- Go to `examples/`, then run\n\n```\npython gans.py --train --gan_type GAN_NAME --dataset DATASET_NAME\n```\nThe trained model and images sampled from the model during training will be saved in `SAVE_PATH`.\n\n<!--### Sample images from trained model\n-->\n# Result\nHere are example results of each GAN model. \nDetails of the implementation and more results for each GAN model can be access by clicking `details` under model names.\n\n## MNIST\n*Name* | *Random Sampling* |*Interpolation* |\n:--: | :---: | :--: |\nDCGAN <br/>[details](docs/dcgan/) | <img src = 'docs/dcgan/figs/mnist/generate_im_20.png' height = '220px' width = '220px'>|  <img src = 'docs/dcgan/figs/mnist/manifoid_23.png' height = '220px' width = '220px'> <img src = 'docs/dcgan/figs/mnist/interpolate_19.png' height = '80px' width = '240px'>\nLSGAN <br/>[details](docs/lsgan/) | <img src = 'docs/lsgan/figs/mnist/generate_im_20.png' height = '220px' width = '220px'> | <img src = 'docs/lsgan/figs/mnist/manifoid_24.png' height = '220px' width = '220px'> <img src = 'docs/lsgan/figs/mnist/interpolate_24.png' height = '80px' width = '240px'>\nInfoGAN <br/>[details](docs/infogan/)  |<img src = 'docs/infogan/figs/mnist/random_sampling_49.png' height = '220px' width = '220px'>  | <img src = 'docs/infogan/figs/mnist/generate_im_49.png' height = '220px' width = '220px'> <img src = 'docs/infogan/figs/mnist/interp_cont_1_49.png' height = '220px' width = '220px'>\n\n## CelebA\n*Name* | *Random Sampling* |*Interpolation* |\n:--: | :---: | :--: |\nDCGAN <br/>[details](docs/dcgan/) | <img src = 'docs/dcgan/figs/face/generate_im_25.png' height = '220px' width = '220px'> | <img src = 'docs/dcgan/figs/face/interpolate_22.png' height = '150px' width = '450px'>\nLSGAN <br/>[details](docs/lsgan/) |  <img src = 'docs/lsgan/figs/face/generate_im_49.png' height = '220px' width = '220px'> | <img src = 'docs/lsgan/figs/face/interpolate_47.png' height = '150px' width = '450px'>\nInfoGAN <br/>[details](docs/infogan/)  | <img src = 'docs/infogan/figs/face/random_sampling_49.png' height = '220px' width = '220px'>| <img src = 'docs/infogan/figs/face/interp_cont_1_25.png' height = '210px' width = '420px'>\n\n\n<!-- *Name* | *MNIST* |*CelebA* |\n:--: | :---: | :--: |\nDCGAN | <img src = 'docs/dcgan/figs/mnist/generate_im_20.png' height = '220px' width = '220px'> <img src = 'docs/dcgan/figs/mnist/manifoid_23.png' height = '220px' width = '220px'> |Random Sampling and interpolation <br/> <img src = 'docs/dcgan/figs/face/generate_im_25.png' height = '220px' width = '220px'> <img src = 'docs/lsgan/figs/face/interpolate_47.png' height = '110px' width = '330px'>\nLSGAN |Random Sampling and interpolation <br/> <img src = 'docs/lsgan/figs/mnist/generate_im_20.png' height = '220px' width = '220px'> <img src = 'docs/lsgan/figs/mnist/manifoid_24.png' height = '220px' width = '220px'> | Random Sampling and interpolation <br/> <img src = 'docs/lsgan/figs/face/generate_im_49.png' height = '220px' width = '220px'> <img src = 'docs/dcgan/figs/face/interpolate_24.png' height = '110px' width = '330px'>\nInfoGAN |Varying categorical latent codes and continuous latent codes <br/> <img src = 'docs/infogan/figs/mnist/generate_im_49.png' height = '220px' width = '220px'> <img src = 'docs/infogan/figs/mnist/interp_cont_1_49.png' height = '220px' width = '220px'> | Random sampling and varying continuous latent codes <br/> <img src = 'docs/infogan/figs/face/random_sampling_49.png' height = '220px' width = '220px'> <img src = 'docs/infogan/figs/face/interp_cont_3_41.png' height = '110px' width = '220px'>\n-->\n# Author\nQian Ge\n",
+            "readme_url": "https://github.com/conan7882/tf-gans",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets",
+            "arxiv": "1606.03657",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1606.03657v1",
+            "abstract": "This paper describes InfoGAN, an information-theoretic extension to the\nGenerative Adversarial Network that is able to learn disentangled\nrepresentations in a completely unsupervised manner. InfoGAN is a generative\nadversarial network that also maximizes the mutual information between a small\nsubset of the latent variables and the observation. We derive a lower bound to\nthe mutual information objective that can be optimized efficiently, and show\nthat our training procedure can be interpreted as a variation of the Wake-Sleep\nalgorithm. Specifically, InfoGAN successfully disentangles writing styles from\ndigit shapes on the MNIST dataset, pose from lighting of 3D rendered images,\nand background digits from the central digit on the SVHN dataset. It also\ndiscovers visual concepts that include hair styles, presence/absence of\neyeglasses, and emotions on the CelebA face dataset. Experiments show that\nInfoGAN learns interpretable representations that are competitive with\nrepresentations learned by existing fully supervised methods.",
+            "authors": [
+                "Xi Chen",
+                "Yan Duan",
+                "Rein Houthooft",
+                "John Schulman",
+                "Ilya Sutskever",
+                "Pieter Abbeel"
+            ]
+        },
+        {
+            "title": "Least Squares Generative Adversarial Networks",
+            "arxiv": "1611.04076",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1611.04076v3",
+            "abstract": "Unsupervised learning with generative adversarial networks (GANs) has proven\nhugely successful. Regular GANs hypothesize the discriminator as a classifier\nwith the sigmoid cross entropy loss function. However, we found that this loss\nfunction may lead to the vanishing gradients problem during the learning\nprocess. To overcome such a problem, we propose in this paper the Least Squares\nGenerative Adversarial Networks (LSGANs) which adopt the least squares loss\nfunction for the discriminator. We show that minimizing the objective function\nof LSGAN yields minimizing the Pearson $\\chi^2$ divergence. There are two\nbenefits of LSGANs over regular GANs. First, LSGANs are able to generate higher\nquality images than regular GANs. Second, LSGANs perform more stable during the\nlearning process. We evaluate LSGANs on five scene datasets and the\nexperimental results show that the images generated by LSGANs are of better\nquality than the ones generated by regular GANs. We also conduct two comparison\nexperiments between LSGANs and regular GANs to illustrate the stability of\nLSGANs.",
+            "authors": [
+                "Xudong Mao",
+                "Qing Li",
+                "Haoran Xie",
+                "Raymond Y. K. Lau",
+                "Zhen Wang",
+                "Stephen Paul Smolley"
+            ]
+        },
+        {
+            "title": "BEGAN: Boundary Equilibrium Generative Adversarial Networks",
+            "arxiv": "1703.10717",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1703.10717v4",
+            "abstract": "We propose a new equilibrium enforcing method paired with a loss derived from\nthe Wasserstein distance for training auto-encoder based Generative Adversarial\nNetworks. This method balances the generator and discriminator during training.\nAdditionally, it provides a new approximate convergence measure, fast and\nstable training and high visual quality. We also derive a way of controlling\nthe trade-off between image diversity and visual quality. We focus on the image\ngeneration task, setting a new milestone in visual quality, even at higher\nresolutions. This is achieved while using a relatively simple model\narchitecture and a standard training procedure.",
+            "authors": [
+                "David Berthelot",
+                "Thomas Schumm",
+                "Luke Metz"
+            ]
+        },
+        {
+            "title": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+            "arxiv": "1511.06434",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1511.06434v2",
+            "abstract": "In recent years, supervised learning with convolutional networks (CNNs) has\nseen huge adoption in computer vision applications. Comparatively, unsupervised\nlearning with CNNs has received less attention. In this work we hope to help\nbridge the gap between the success of CNNs for supervised learning and\nunsupervised learning. We introduce a class of CNNs called deep convolutional\ngenerative adversarial networks (DCGANs), that have certain architectural\nconstraints, and demonstrate that they are a strong candidate for unsupervised\nlearning. Training on various image datasets, we show convincing evidence that\nour deep convolutional adversarial pair learns a hierarchy of representations\nfrom object parts to scenes in both the generator and discriminator.\nAdditionally, we use the learned features for novel tasks - demonstrating their\napplicability as general image representations.",
+            "authors": [
+                "Alec Radford",
+                "Luke Metz",
+                "Soumith Chintala"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "MNIST"
+            },
+            {
+                "name": "CelebA"
+            },
+            {
+                "name": "CUHK"
+            },
+            {
+                "name": "SVHN"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999998452844019,
+        "task": "Image Generation",
+        "task_prob": 0.9835109377292809
+    }
+}

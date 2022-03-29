@@ -1,0 +1,137 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "BWGAN",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "adler-j",
+                "owner_type": "User",
+                "name": "bwgan",
+                "url": "https://github.com/adler-j/bwgan",
+                "stars": 29,
+                "pushed_at": "2019-03-10 11:41:59+00:00",
+                "created_at": "2018-05-23 14:36:48+00:00",
+                "language": "Python",
+                "description": "Code for the paper \"Banach Wasserstein GAN\"",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "cifar10_sobolev.py",
+                "sha": "871c66b97149103025d56bca92da7ff74c59f118",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/adler-j/bwgan/blob/master/cifar10_sobolev.py"
+                    }
+                },
+                "size": 12588
+            },
+            {
+                "type": "code",
+                "name": "sobolev_utils.py",
+                "sha": "1fb1bc4425d590dd2e9e1f31532542f1d2ff3529",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/adler-j/bwgan/blob/master/sobolev_utils.py"
+                    }
+                },
+                "size": 1984
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Jonas Adler",
+            "email": "jonasadl@kth.se",
+            "github_id": "adler-j"
+        },
+        {
+            "name": "Pavel Shevchuk",
+            "email": "iVisualPaul@gmail.com",
+            "github_id": "VisualPaul"
+        }
+    ],
+    "tags": [],
+    "description": "Code for the paper \"Banach Wasserstein GAN\"",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/adler-j/bwgan",
+            "stars": 29,
+            "issues": true,
+            "readme": "# BWGAN\nCode for the paper [Banach Wasserstein GAN](https://arxiv.org/abs/1806.06621).\n\n# Description\nTraditional [WGAN](https://arxiv.org/abs/1701.07875) uses an approximation of the Wasserstein metric to opimize the generator. This Wasserstein metric in turn depends upon an underlying metric on _images_ which is taken to be the <img src=\"https://latex.codecogs.com/svg.latex?%5Cell%5E2\"> norm\n\n<img src=\"https://latex.codecogs.com/svg.latex?%5C%7Cx%5C%7C_%7B2%7D%20%3D%20%5Cleft%28%20%5Csum_%7Bi%3D1%7D%5En%20x_i%5E2%20%5Cright%29%5E%7B1/2%7D\">\n\nThe article extends the theory of [WGAN-GP](https://arxiv.org/abs/1704.00028) to any [Banach space](https://en.wikipedia.org/wiki/Banach_space), while this code can be used to train WGAN over any [Sobolev space](https://en.wikipedia.org/wiki/Sobolev_space) <img src=\"https://latex.codecogs.com/svg.latex?W%5E%7Bs%2C%20p%7D\"> with norm\n\n<img src=\"https://latex.codecogs.com/svg.latex?%5C%7Cf%5C%7C_%7BW%5E%7Bs%2C%20p%7D%7D%20%3D%20%5Cleft%28%20%5Cint_%7B%5COmega%7D%20%5Cleft%28%20%5Cmathcal%7BF%7D%5E%7B-1%7D%20%5Cleft%5B%20%281%20&plus;%20%7C%5Cxi%7C%5E2%29%5E%7Bs/2%7D%20%5Cmathcal%7BF%7D%20f%20%5Cright%5D%28x%29%20%5Cright%29%5Ep%20dx%20%5Cright%29%5E%7B1/p%7D\">\n\nThe parameters _p_ can be used to control the focus on outliers, with high _p_ indicating a strong focus on the worst offenders. _s_ can be used to control focus on small/large scale behaviour, where negative _s_ indicates focus on large scales, while positive _s_ indicates focus on small scales (e.g. edges).\n\n# Results\n\nInception scores for the spaces <img src=\"https://latex.codecogs.com/svg.latex?W%5E%7Bs%2C%202%7D\"> and <img src=\"https://latex.codecogs.com/svg.latex?W%5E%7B0%2C%20p%7D\">:\n\n<img src=\"https://user-images.githubusercontent.com/2202312/40432213-7603b084-5ea9-11e8-894d-b28db89ba1b3.png\" width=\"350\" title=\"Github Logo\"> <img src=\"https://user-images.githubusercontent.com/2202312/40432231-7de2a148-5ea9-11e8-87ec-979b090ab1f2.png\" width=\"350\" title=\"Github Logo\">\n\n\nDependencies\n------------\nThe code has some dependencies that can be easily installed\n\n```bash\n$ pip install https://github.com/adler-j/tensordata/archive/master.zip\n$ pip install https://github.com/adler-j/adler/archive/master.zip\n```\n\nYou also need a recent version of tensorflow in order to use the `tf.contrib.gan` functionality.\n",
+            "readme_url": "https://github.com/adler-j/bwgan",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Wasserstein GAN",
+            "arxiv": "1701.07875",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1701.07875v3",
+            "abstract": "We introduce a new algorithm named WGAN, an alternative to traditional GAN\ntraining. In this new model, we show that we can improve the stability of\nlearning, get rid of problems like mode collapse, and provide meaningful\nlearning curves useful for debugging and hyperparameter searches. Furthermore,\nwe show that the corresponding optimization problem is sound, and provide\nextensive theoretical work highlighting the deep connections to other distances\nbetween distributions.",
+            "authors": [
+                "Martin Arjovsky",
+                "Soumith Chintala",
+                "L\u00e9on Bottou"
+            ]
+        },
+        {
+            "title": "Banach Wasserstein GAN",
+            "arxiv": "1806.06621",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1806.06621v2",
+            "abstract": "Wasserstein Generative Adversarial Networks (WGANs) can be used to generate\nrealistic samples from complicated image distributions. The Wasserstein metric\nused in WGANs is based on a notion of distance between individual images, which\ninduces a notion of distance between probability distributions of images. So\nfar the community has considered $\\ell^2$ as the underlying distance. We\ngeneralize the theory of WGAN with gradient penalty to Banach spaces, allowing\npractitioners to select the features to emphasize in the generator. We further\ndiscuss the effect of some particular choices of underlying norms, focusing on\nSobolev norms. Finally, we demonstrate a boost in performance for an\nappropriate choice of norm on CIFAR-10 and CelebA.",
+            "authors": [
+                "Jonas Adler",
+                "Sebastian Lunz"
+            ]
+        },
+        {
+            "title": "Improved Training of Wasserstein GANs",
+            "arxiv": "1704.00028",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1704.00028v3",
+            "abstract": "Generative Adversarial Networks (GANs) are powerful generative models, but\nsuffer from training instability. The recently proposed Wasserstein GAN (WGAN)\nmakes progress toward stable training of GANs, but sometimes can still generate\nonly low-quality samples or fail to converge. We find that these problems are\noften due to the use of weight clipping in WGAN to enforce a Lipschitz\nconstraint on the critic, which can lead to undesired behavior. We propose an\nalternative to clipping weights: penalize the norm of gradient of the critic\nwith respect to its input. Our proposed method performs better than standard\nWGAN and enables stable training of a wide variety of GAN architectures with\nalmost no hyperparameter tuning, including 101-layer ResNets and language\nmodels over discrete data. We also achieve high quality generations on CIFAR-10\nand LSUN bedrooms.",
+            "authors": [
+                "Ishaan Gulrajani",
+                "Faruk Ahmed",
+                "Martin Arjovsky",
+                "Vincent Dumoulin",
+                "Aaron Courville"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "Wikipedia"
+            },
+            {
+                "name": "CelebA"
+            },
+            {
+                "name": "CIFAR-10"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999680010403801,
+        "task": "Image Generation",
+        "task_prob": 0.9902738597262303
+    }
+}

@@ -1,0 +1,1571 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "x-transformers",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "lucidrains",
+                "owner_type": "User",
+                "name": "x-transformers",
+                "url": "https://github.com/lucidrains/x-transformers",
+                "stars": 1470,
+                "pushed_at": "2022-03-23 15:42:54+00:00",
+                "created_at": "2020-10-24 22:13:25+00:00",
+                "language": "Python",
+                "description": "A simple but complete full-attention transformer with a set of promising experimental features from various papers",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".github",
+                "sha": "05e746b5a733ca27c94fcd43dd4a00e4c40302d7",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/tree/main/.github"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "b6e47617de110dea7ca47e087ff1347cc2646eda",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/blob/main/.gitignore"
+                    }
+                },
+                "size": 1799
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "cad43213602892aadc2290cca7afa74cc9f6af64",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/blob/main/LICENSE"
+                    }
+                },
+                "size": 1066
+            },
+            {
+                "type": "code",
+                "name": "examples",
+                "sha": "73fb613d72bf0b17524876bef274a5bed3e247ab",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/tree/main/examples"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "images",
+                "sha": "078da297574ac43fb2cce15a7e42227388fafcc3",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/tree/main/images"
+                    }
+                },
+                "num_files": 26
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "4aa65d048fd24b53234d5fcf52357e4d3924896a",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/blob/main/setup.py"
+                    }
+                },
+                "size": 763
+            },
+            {
+                "type": "code",
+                "name": "x_transformers",
+                "sha": "5146aef890a78c51cd4221886f5624b96559f723",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/lucidrains/x-transformers/tree/main/x_transformers"
+                    }
+                },
+                "num_files": 4
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Phil Wang",
+            "email": "lucidrains@gmail.com",
+            "github_id": "lucidrains"
+        },
+        {
+            "name": "Gurvinder Singh",
+            "github_id": "gurvindersingh"
+        },
+        {
+            "name": "Jean-Baptiste Cordonnier",
+            "github_id": "jbcdnr"
+        },
+        {
+            "name": "tmphex",
+            "github_id": "tmphex"
+        },
+        {
+            "name": "Adrian Spataru",
+            "github_id": "adrian-spataru"
+        },
+        {
+            "name": "Congcong Wang",
+            "github_id": "wangcongcong123"
+        },
+        {
+            "name": "Had",
+            "github_id": "hadaev8"
+        },
+        {
+            "name": "Kenneth C. Arnold",
+            "email": "ka37@calvin.edu",
+            "github_id": "kcarnold"
+        },
+        {
+            "name": "Stas",
+            "email": "s.slunkov@gmail.com",
+            "github_id": "stas-sl"
+        }
+    ],
+    "tags": [
+        "artificial-intelligence",
+        "deep-learning",
+        "attention-mechanism",
+        "transformers"
+    ],
+    "description": "A simple but complete full-attention transformer with a set of promising experimental features from various papers",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/lucidrains/x-transformers",
+            "stars": 1470,
+            "issues": true,
+            "readme": "## x-transformers\n\n[![PyPI version](https://badge.fury.io/py/x-transformers.svg)](https://badge.fury.io/py/x-transformers)\n\nA concise but fully-featured transformer, complete with a set of promising e**x**perimental features from various papers.\n\n## Install\n\n```bash\n$ pip install x-transformers\n```\n\n## Usage\n\nFull encoder / decoder\n\n```python\nimport torch\nfrom x_transformers import XTransformer\n\nmodel = XTransformer(\n    dim = 512,\n    enc_num_tokens = 256,\n    enc_depth = 6,\n    enc_heads = 8,\n    enc_max_seq_len = 1024,\n    dec_num_tokens = 256,\n    dec_depth = 6,\n    dec_heads = 8,\n    dec_max_seq_len = 1024,\n    tie_token_emb = True      # tie embeddings of encoder and decoder\n)\n\nsrc = torch.randint(0, 256, (1, 1024))\nsrc_mask = torch.ones_like(src).bool()\ntgt = torch.randint(0, 256, (1, 1024))\ntgt_mask = torch.ones_like(tgt).bool()\n\nloss = model(src, tgt, src_mask = src_mask, tgt_mask = tgt_mask) # (1, 1024, 512)\nloss.backward()\n```\n\nDecoder-only (GPT-like)\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 12,\n        heads = 8\n    )\n).cuda()\n\nx = torch.randint(0, 256, (1, 1024)).cuda()\n\nmodel(x) # (1, 1024, 20000)\n```\n\nGPT3 would be approximately the following (but you wouldn't be able to run it anyways)\n\n```python\n\ngpt3 = TransformerWrapper(\n    num_tokens = 50000,\n    max_seq_len = 2048,\n    attn_layers = Decoder(\n        dim = 12288,\n        depth = 96,\n        heads = 96,\n        attn_dim_head = 128\n    )\n).cuda()\n```\n\nEncoder-only (BERT-like)\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 12,\n        heads = 8\n    )\n).cuda()\n\nx = torch.randint(0, 256, (1, 1024)).cuda()\nmask = torch.ones_like(x).bool()\n\nmodel(x, mask = mask) # (1, 1024, 20000)\n```\n\nState of the art image classification\n\n```python\nimport torch\nfrom x_transformers import ViTransformerWrapper, Encoder\n\nmodel = ViTransformerWrapper(\n    image_size = 256,\n    patch_size = 32,\n    num_classes = 1000,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n    )\n)\n\nimg = torch.randn(1, 3, 256, 256)\nmodel(img) # (1, 1000)\n```\n\nImage -> caption\n\n```python\nimport torch\nfrom x_transformers import ViTransformerWrapper, TransformerWrapper, Encoder, Decoder\n\nencoder = ViTransformerWrapper(\n    image_size = 256,\n    patch_size = 32,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8\n    )\n)\n\ndecoder = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        cross_attend = True\n    )\n)\n\nimg = torch.randn(1, 3, 256, 256)\ncaption = torch.randint(0, 20000, (1, 1024))\n\nencoded = encoder(img, return_embeddings = True)\ndecoder(caption, context = encoded) # (1, 1024, 20000)\n```\n\n## Dropouts\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    emb_dropout = 0.1,         # dropout after embedding\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_dropout = 0.1,    # dropout post-attention\n        ff_dropout = 0.1       # feedforward dropout\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\n## Features\n\n### Augmenting Self-attention with Persistent Memory\n\n<img src=\"./images/all-attention.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/1907.01470\n\nProposes adding learned memory key / values prior to attention. They were able to remove feedforwards altogether and attain similar performance to the original transformers. I have found that keeping the feedforwards and adding the memory key / values leads to even better performance.\n\n```python\nfrom x_transformers import Decoder, Encoder\n\nenc = Encoder(\n    dim = 512,\n    depth = 6,\n    heads = 8,\n    attn_num_mem_kv = 16 # 16 memory key / values\n)\n```\n\n### Memory Transformers\n\n<img src=\"./images/memory-transformer.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/2006.11527\n\nProposes adding learned tokens, akin to CLS tokens, named memory tokens, that is passed through the attention layers alongside the input tokens.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    num_memory_tokens = 20, # 20 memory tokens\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8\n    )\n)\n```\n\n### Transformers Without Tears\n\n<img src=\"./images/scalenorm.png\"></img>\n\nhttps://arxiv.org/abs/1910.05895\n\nThey experiment with alternatives to Layer normalization and found one that is both effective and simpler. Researchers have shared with me this leads to faster convergence.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        use_scalenorm = True # set to True to use for all layers\n    )\n)\n```\n\nYou can also use the l2 normalized embeddings proposed as part of `fixnorm`. I have found it leads to improved convergence, when paired with small initialization (proposed by <a href=\"https://github.com/BlinkDL\">BlinkDL</a>). The small initialization will be taken care of as long as `l2norm_embed` is set to `True`\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    l2norm_embed = True,    # set this to True for l2 normalized embedding + small init\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8\n    )\n)\n```\n\n### Root Mean Square Layer Normalization\n\nhttps://arxiv.org/abs/1910.07467\n\nThe authors propose to replace layer normalization with a simpler alternative, without mean centering and the learned bias. An investigative paper found this to be the <a href=\"https://arxiv.org/abs/2102.11972\">best performing normalization variant</a>. It was also used in Deepmind's latest large language models, <a href=\"https://deepmind.com/research/publications/2021/improving-language-models-by-retrieving-from-trillions-of-tokens\">Retro</a> and <a href=\"https://arxiv.org/abs/2112.11446\">Gopher</a>.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        use_rmsnorm = True # set to true to use for all layers\n    )\n)\n```\n\n### GLU Variants Improve Transformer\n\n<img src=\"./images/ffglu.png\"></img>\n\nhttps://arxiv.org/abs/2002.05202\n\nNoam Shazeer paper that explores gating in the feedforward, finding that simple gating with GELU leads to significant improvements. This variant also showed up in the latest mT5 architecture. You should always turn this on (I may eventually turn it on by default).\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        ff_glu = True # set to true to use for all feedforwards\n    )\n)\n```\n\n### ReLU\u00b2\n\nhttps://arxiv.org/abs/2109.08668\n\nThis paper used neural architecture search and found an activation, Relu Squared, that is both simpler and performs better than GELU, in the autoregressive language model setting. I have confirmed this in my independent experiments. However, if one were using the GLU variant from above, GELU still performs better. Pending further corroboration.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        ff_relu_squared = True\n    )\n)\n```\n\n### Rezero Is All You Need\n\n<img src=\"./images/rezero.png\"></img>\n\nhttps://arxiv.org/abs/2003.04887\n\nThis paper proposes to do away with normalization altogether, and instead gate the output of each branch with a single learned scalar, initialized at zero. They demonstrate convergence for very deep networks, convolution or attention, all without normalization.\n\nI have had good results on usual datasets, but had met trouble with convergence on large datasets (GPT3 sized datasets). However, enough researchers have told me they had positive experiences with this that I decided to include it. If you run into trouble, please use Scalenorm instead.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        use_rezero = True # set to true to use for all layers\n    )\n)\n```\n\n### Explicit Sparse Transformer: Concentrated Attention Through Explicit Selection\n\n<img src=\"./images/topk-attention.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/1912.11637\n\nThis paper proposes an efficient way to sparsify attention by zeroing all dot-product query/key values not within the top k values. The show that this cheap method was as effective as other more expensive operations like sparsemax or entmax15. This technique comes with the cost of an extra hyperparameter (the top k values to keep). The paper recommends a value of `k = 8`\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_sparse_topk = 8 # keep only the top 8 values before attention (softmax)\n    )\n)\n```\n\nAlternatively, if you would like to use `entmax15`, you can also do so with one setting as shown below.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_use_entmax15 = True  # use entmax15 for attention step\n    )\n)\n```\n\n### Talking-Heads Attention\n\n<img src=\"./images/talking-heads.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/2003.02436\n\nA Noam Shazeer paper that proposes mixing information between heads pre and post attention (softmax). This comes with the cost of extra memory and compute.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_talking_heads = True  # turn on information exchange between attention heads\n    )\n)\n```\n\n### Collaborative Attention\n\n<img src=\"./images/collaborative-attention.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/2006.16362\n\nShare redundent learned key/query projections accross heads. Collaborative attention reduces the number of parameters but requires slightly more memory and computation. A good compression factor to match the performance of the vanilla multi-head attention is between 0.25 and 0.5.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_collab_heads = True,\n        attn_collab_compression = .3,\n    )\n)\n```\n\n### Attention on Attention for Image Captioning\n\n<img src=\"./images/attention-on-attention.png\"></img>\n\nhttps://arxiv.org/abs/1908.06954\n\nThis paper proposes to add a gated linear unit at the end of the attention layer, further gated by the original queries. Although this is not widely used outside of visual question / answering, I suspect it should lead to improvements after seeing the success of the feedforward GLU variant.\n\nUpdate: After some experimentation, I found this variant actually performs worse, but if it were to be modified to not concatenate the queries before gating, it performs much better. That is what we will be using in this repository.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_on_attn = True  # gate output of attention layer, by queries\n    )\n)\n```\n\n### Intra-attention Gating on Values\n\n<img src=\"./images/gate_values.png\" width=\"400px\"></img>\n\n<a href=\"https://github.com/deepmind/alphafold\">Alphafold2</a> had a peculiar variant of attention where they gate the aggregated values with the input, presumably to have the block have more control over the update.\n\nA quick test shows a small but noticeable improvement, on about the same order as attention on attention.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_gate_values = True  # gate aggregated values with the input\n    )\n)\n```\n\n### Improving Transformer Models by Reordering their Sublayers\n\n<img src=\"./images/sandwich.png\"></img>\n\n<img src=\"./images/sandwich-2.png\"></img>\n\nhttps://arxiv.org/abs/1911.03864\n\nThis paper proposes to break from the normal fixed pattern of alternating attention and feedforwards, but to have blocks of only attention at the beginning followed by blocks of feedforwards at the end. This was further corroborated by a paper by Nvidia that reduces the number of attention layers to be 1/3rd of the feedforwards without loss in performance.\n\nThe amount of interleaving is controlled by a \"sandwich coefficient\", which they found to be optimal at a value of `6`.\n\nYou can experiment with this feature as shown below\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        sandwich_coef = 6  # interleave attention and feedforwards with sandwich coefficient of 6\n    )\n)\n```\n\n### Understanding and Improving Transformer From a Multi-Particle Dynamic System Point of View\n\n<img src=\"./images/macaron-1.png\"></img>\n\n<img src=\"./images/macaron-2.png\"></img>\n\nhttps://arxiv.org/abs/1906.02762\n\nThe authors propose to view the success of transformers from a dynamical systems point of view, and then proposes an improvement based on mathematics of that POV. Specifically, they propose to place the attention layer in between two feedforward layers. This was adopted by a paper using transformers for speech recognition, the <a href=\"https://arxiv.org/abs/2005.08100\">Conformer</a>.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        macaron = True  # use macaron configuration\n    )\n)\n```\n\n### T5's Simplified Relative Positional Encoding\n\nhttps://arxiv.org/abs/1910.10683\n\nT5 is one of the most successful encoder / decoder transformer architectures trained to date. They invented a new simplified relative positional encoding based on learned bias values that are added to the attention matrix pre-softmax. This bias is shared and injected into each attention layer. I have decided to include this because it offers a cheap way to have relative positional encoding (superior to absolute positional), and I have read papers that suggest having positional encoding added to each layer (vs only before the first) is beneficial.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        rel_pos_bias = True  # adds relative positional bias to all attention layers, a la T5\n    )\n)\n```\n\n### Position Infused Attention\n\n<img src=\"./images/pia.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/2005.12872\n\nhttps://ofir.io/shortformer.pdf\n\nIn these two papers, the authors independently figured out a new technique where fixed sinusoidal positional embeddings are injected into the input prior to the queries and keys projection for all layers, leading to \"position infused\" attention, but leaving the actual tokens (values) uncolored by positional embedding. The Shortformer paper uses this property to cache the tokens for simplified recurrent type of transformer that bested Transformer-XL.\n\nI have tested this, and found that it produces better results than plain absolute positional encoding, even in the absence of recurrence. However, I have found that the T5 relative positional bias (also injected into all layers and has the same properties as PIA) performs even better. So given the option, you should just go with T5's `rel_pos_bias` above.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        position_infused_attn = True  # turns on position infused attention\n    )\n)\n```\n\n### Residual Attention\n\n<img src=\"./images/residual_attn.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/2012.11747\n\nThis paper from Google proposes residualizing the pre-attention scores across all layers. At the cost of no extra parameters, they show improvement on top of regular attention networks. If you turn on this setting, be aware that the best results in the paper used post-normalization, in which case a learning warmup will be needed. The authors also reported that they could use a higher learning rate and get even better gains in the same amount of steps. (In the paper they use `2e-4` vs `1e-4` for vanilla transformer)\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Encoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Encoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        pre_norm = False,       # in the paper, residual attention had best results with post-layernorm\n        residual_attn = True    # add residual attention\n    )\n)\n```\n\nI also tried residualizing cross attention and may have noticed an improvement in convergence. You can try it by setting the `cross_residual_attn` keyword to `True`\n\n```python\nimport torch\nfrom x_transformers import XTransformer\n\nmodel = XTransformer(\n    dim = 512,\n    enc_num_tokens = 256,\n    enc_depth = 6,\n    enc_heads = 8,\n    enc_max_seq_len = 1024,\n    dec_num_tokens = 256,\n    dec_depth = 6,\n    dec_heads = 8,\n    dec_max_seq_len = 1024,\n    dec_cross_residual_attn = True     # residualize cross attention\n)\n```\n\n### Transformer-XL recurrence\n\nYou can also do Transformer-XL recurrence, by simply passing in a `max_mem_len` in the `TransformerWrapper` class, and then making sure your `Decoder` has `rel_pos_bias` set to `True`.\n\nThen, you can retrieve the memories at each step with the `return_mems` keyword and pass it to the next iteration.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel_xl = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 512,\n    max_mem_len = 2048,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        rel_pos_bias = True\n    )\n)\n\nseg1 = torch.randint(0, 20000, (1, 512))\nseg2 = torch.randint(0, 20000, (1, 512))\nseg3 = torch.randint(0, 20000, (1, 512))\n\nlogits1, mems1  = model_xl(seg1, return_mems = True)\nlogits2, mems2  = model_xl(seg2, mems = mems1, return_mems = True)\nlogits3, mems3  = model_xl(seg3, mems = mems2, return_mems = True)\n```\n\n### Enhanced recurrence\n\n<img src=\"./images/enhanced-recurrence.png\" width=\"400px\"/>\n\n<a href=\"https://arxiv.org/abs/2012.15688\">This paper</a> proposes a simple technique to enhance the range of Transformer-XL. They simply route the memory segment of a layer to the layer below it, for the next recurrent step. You can enable this by setting `shift_mem_down = 1`. You can also shift down arbitrary number of layers by setting this value to `> 1`.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel_xl = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 512,\n    max_mem_len = 2048,\n    shift_mem_down = 1,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        rotary_pos_emb = True\n    )\n)\n\nseg1 = torch.randint(0, 20000, (1, 512))\nseg2 = torch.randint(0, 20000, (1, 512))\nseg3 = torch.randint(0, 20000, (1, 512))\n\nlogits1, mems1  = model_xl(seg1, return_mems = True)\nlogits2, mems2  = model_xl(seg2, mems = mems1, return_mems = True) # mems1 of layer N are automatically routed to the layer N-1\n```\n\n### Gated residual\n\n<img src=\"./images/gating.png\" width=\"500px\"></img>\n\nhttps://arxiv.org/abs/1910.06764\n\nThe authors propose gating the residual connections in the transformer network and demonstrate increased stability and performance for Transformer-XL in a variety of reinforcement learning tasks.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    max_mem_len = 2048,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 16,\n        gate_residual = True\n    )\n)\n```\n\n### Rotary Positional Embeddings\n\n<img src=\"./images/rotary.png\" width=\"500px\"></img>\n\nDeveloped in Beijing, this new technique quickly gained interest in the NLP circles. In short, it allows you to endow the transformer with relative positional embeddings at the cost of no learned parameters. You apply a rotary operation to the queries and keys prior to their dot product in attention. The big idea is injecting positions through rotations.\n\nHighly recommend that you have this turned on whenever you are working on an ordered sequence.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        rotary_pos_emb = True  # turns on rotary positional embeddings\n    )\n)\n```\n\n### Dynamic Positional Bias\n\n<img src=\"./images/dynamic-pos-bias.png\" width=\"150px\"></img>\n\nThis technique bears roots from the field of vision transformers, where researchers are trying to have relative positions generalize to larger resolutions (without having to retrain the entire network). It was used in two recent papers, <a href=\"https://arxiv.org/abs/2108.00154\">CrossFormer</a>, as well as <a href=\"https://arxiv.org/abs/2111.09883\">SwinV2</a>.\n\n<a href=\"https://github.com/cfoster0\">Charles Foster</a> first tried this for a language model, and found that it works. Later on <a href=\"https://github.com/bob80333\">Eric Engelhart</a> produced experimental results that show the same type of extrapolation holds, even for 1d sequences.\n\nEric trained at sequence lengths of 128, and showed that it generalized well to 1024. In addition, he showed that linear positions was better than log (used in SwinV2), for language.\n\nLinear distances\n\n<img src=\"./images/dynamic-pos-bias-linear.png\" width=\"600px\"></img>\n\nLog distances\n\n<img src=\"./images/dynamic-pos-bias-log.png\" width=\"600px\"></img>\n\nNegative control - Sinusoidal\n\n<img src=\"./images/dynamic-pos-bias-sinusoidal.png\" width=\"600px\"></img>\n\nMore of Eric's experimental results can be found <a href=\"https://github.com/bob80333/investigating_extrapolation\">here</a>\n\nYou can use this type of relative position if you wish to train at smaller sequence lengths and have it generalize to longer ones, for both autoregressive and bidirectional models.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 256,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        dynamic_pos_bias = True,                # set this to True\n        dynamic_pos_bias_log_distance = False   # whether to use log distance, as in SwinV2\n    )\n)\n```\n\n\n### ALiBi Positional Embedding\n\n<a href=\"https://ofir.io/train_short_test_long.pdf\">This paper</a> proposes to simply apply a static linear bias to the attention matrix. The authors show this is not only effective as a relative positional encoding, but also allows the attention net to extrapolate to greater sequences length than what it was trained on, for autoregressive language models.\n\nThis repository also offers a bidirectional variant (nonsymmetric), proposed by the authors <a href=\"https://github.com/ofirpress/attention_with_linear_biases/issues/5\">here</a>.\n\nUpdate: It may be that ALiBi enforces a strong local attention across the heads, and may hinder it from attending at distances greater than 1k. To avoid any issues with global message passing, I've decided to introduce another hyperparameter `alibi_num_heads`, so one can specify less heads for the ALiBi bias\n\nUpdate: There are reports that ALiBi outperform Rotary embeddings for pretraining and downstream fine-tuning.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        alibi_pos_bias = True, # turns on ALiBi positional embedding\n        alibi_num_heads = 4    # only use ALiBi for 4 out of the 8 heads, so other 4 heads can still attend far distances\n    )\n)\n```\n\n### Shifted Tokens\n\nAn <a href=\"https://github.com/BlinkDL\">independent researcher</a> has found that shifting a subset of the feature dimension along the sequence dimension by 1 token helps with convergence (<a href=\"https://zhuanlan.zhihu.com/p/191393788\">Time-mixing</a>). I have tested this for the autoregressive case and can confirm that it leads to greatly improved convergence. This also lines up with <a href=\"https://arxiv.org/abs/2106.07477\">the results</a> of some papers in the vision domain.\n\nTo use it, simply set `shift_tokens = 1` (or to whatever number of shifts you desire). The feature dimension will be divided by `shift_tokens + 1` and then each chunk will be shifted `[0, shift_tokens]` respectively\n\nUpdate: new experiments by @sdtblck suggests this may only work for character-level training\n\nUpdate: after more experiments, it seems that in the context of BPE encoding, with rotary turned on, there is no benefit to shifting. for character-level training, shifting may still improve a tiny bit\n\nUpdate: When doing BPE encoded tokens, it seems that shift of 2 will bottleneck the dimensions (divided by 5). It is recommended you always do a shift of 1, unless if you are working with character level.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        shift_tokens = 1\n    )\n)\n```\n\nIf you want finer control over how much is shifted per block (whether attention or feedforward), simply pass in a tuple of size that is equal to the number of layers.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        shift_tokens = (1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0) # 12 blocks, attention and feedforward alternating, with progressively less shifting\n    )\n)\n```\n\n### Sandwich Norm\n\n<img src=\"./images/sandwich_norm.png\" width=\"400px\"/>\n\nThis technique first made an appearance in <a href=\"https://arxiv.org/abs/2105.13290\">the CoqView paper</a>, a Chinese version of the famous text-to-image transformer DALL-E. They propose, when using pre-layernorm, to add an extra layernorm to all the branch outputs. I have found this to be very effective for a number of projects, when facing instability during training.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        sandwich_norm = True # set this to True\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\n### Normformer\n\n<img src=\"./images/normformer.png\" width=\"400px\"/>\n\nThis <a href=\"https://openreview.net/forum?id=GMYWzWztDx5\">paper</a> uncovers an issue with pre-norm transformers where gradients are mismatched between the early and later layers. They propose 4 changes, of which I will be offering 3.\n\nThe first change is to offer per head scaling after aggregating the values in attention. My experiments show a slight improvement in convergence.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        attn_head_scale = True  # set this to True\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\nThe second change is an extra layernorm right after the activation in the feedforward. I have also verified a slight improvement, at the cost of extra compute.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        ff_post_act_ln = True # set this to True\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\nFor the residual scaling, you simply have to set `scale_residual = True`. I have noticed slight improvements, but occasional instability as well, so use with caution.\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        scale_residual = True # set this to True\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\nThe last change is a layernorm right after the outwards projection in attention. This is actually identical to the sandwich norm proposed by the Coqview paper, so you can use this by simply setting `sandwich_norm = True`, although it would also add it to the feedforward layer.\n\n### Query-Key Normalization\n\n<img src=\"./images/cosine-sim-attention.png\" width=\"400px\"></img>\n\nThis <a href=\"https://arxiv.org/abs/2010.04245\">paper</a> proposes to l2 normalize the queries and keys along the head dimension before the dot product (cosine similarity), with the additional change of the scale being learned rather than static. The normalization prevents the attention operation from overflowing, a perennial problem when training transformers.\n\nThis was validated at scale recently by the training of <a href=\"https://arxiv.org/abs/2111.09883\">a 3B parameter vision transformer</a>. The SwinV2 paper also proposes to change the pre-layernorm to a post-layernorm for further stability.\n\nI have validated that this works just as well as dot product attention in an autoregressive setting, if one were to initialize the temperature as proposed in the QK-norm paper (as a function of the sequence length).\n\nThis flavor of attention also has <a href=\"https://arxiv.org/abs/2111.05498\">a connection</a> to sparse distributed memory. <a href=\"https://www.youtube.com/watch?v=THIIk7LR9_8\">[youtube talk]</a>\n\nYou can use it as follows\n\n```python\nimport torch\nfrom x_transformers import TransformerWrapper, Decoder\n\nmodel = TransformerWrapper(\n    num_tokens = 20000,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 6,\n        heads = 8,\n        use_qk_norm_attn = True, # set this to True\n        qk_norm_attn_seq_len = 1024 # set this to max_seq_len from above\n    )\n)\n\nx = torch.randint(0, 20000, (1, 1024))\nmodel(x)\n```\n\n## Miscellaneous\n\nCross Attention\n\n```python\nimport torch\nfrom x_transformers import Encoder, CrossAttender\n\nenc = Encoder(dim = 512, depth = 6)\nmodel = CrossAttender(dim = 512, depth = 6)\n\nnodes = torch.randn(1, 1, 512)\nnode_masks = torch.ones(1, 1).bool()\n\nneighbors = torch.randn(1, 5, 512)\nneighbor_masks = torch.ones(1, 5).bool()\n\nencoded_neighbors = enc(neighbors, mask = neighbor_masks)\nmodel(nodes, context = encoded_neighbors, mask = node_masks, context_mask = neighbor_masks) # (1, 1, 512)\n\n```\n\nPass in continuous values\n\n```python\nimport torch\nfrom x_transformers import ContinuousTransformerWrapper, Decoder\n\nmodel = ContinuousTransformerWrapper(\n    dim_in = 32,\n    dim_out = 100,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 12,\n        heads = 8\n    )\n)\n\nx = torch.randn((1, 1024, 32))\nmask = torch.ones(1, 1024).bool()\n\nmodel(x, mask = mask) # (1, 1024, 100)\n```\n\nYou can also train a transformer that accepts continuous values autoregressively easily, in the same scheme as done successfully in <a href=\"https://arxiv.org/abs/2112.05329\">this paper</a>\n\n```python\nimport torch\nfrom x_transformers import ContinuousTransformerWrapper, Decoder\nfrom x_transformers import ContinuousAutoregressiveWrapper\n\nmodel = ContinuousTransformerWrapper(\n    dim_in = 777,\n    dim_out = 777,\n    max_seq_len = 1024,\n    attn_layers = Decoder(\n        dim = 512,\n        depth = 12,\n        heads = 8\n    )\n)\n\n# wrap it with the continuous autoregressive wrapper\n\nmodel = ContinuousAutoregressiveWrapper(model)\n\n# mock data\n\nx = torch.randn((1, 1024, 777))\nmask = torch.ones(1, 1024).bool()\n\n# train on a lot of data above\n\nloss = model(x, mask = mask)\nloss.backward\n\n# then generate\n\nstart_emb = torch.randn(1, 777)\ngenerated = model.generate(start_emb, 17) # (17, 777)\n```\n\n## Citations\n\n```bibtex\n@misc{vaswani2017attention,\n    title   = {Attention Is All You Need},\n    author  = {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},\n    year    = {2017},\n    eprint  = {1706.03762},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@article{DBLP:journals/corr/abs-1907-01470,\n    author    = {Sainbayar Sukhbaatar and\n               Edouard Grave and\n               Guillaume Lample and\n               Herv{\\'{e}} J{\\'{e}}gou and\n               Armand Joulin},\n    title     = {Augmenting Self-attention with Persistent Memory},\n    journal   = {CoRR},\n    volume    = {abs/1907.01470},\n    year      = {2019},\n    url       = {http://arxiv.org/abs/1907.01470}\n}\n```\n\n```bibtex\n@article{1910.05895,\n    author  = {Toan Q. Nguyen and Julian Salazar},\n    title   = {Transformers without Tears: Improving the Normalization of Self-Attention},\n    year    = {2019},\n    eprint  = {arXiv:1910.05895},\n    doi     = {10.5281/zenodo.3525484},\n}\n```\n\n```bibtex\n@misc{shazeer2020glu,\n    title   = {GLU Variants Improve Transformer},\n    author  = {Noam Shazeer},\n    year    = {2020},\n    url     = {https://arxiv.org/abs/2002.05202}    \n}\n```\n\n```bibtex\n@misc{bachlechner2020rezero,\n    title   = {ReZero is All You Need: Fast Convergence at Large Depth},\n    author  = {Thomas Bachlechner and Bodhisattwa Prasad Majumder and Huanru Henry Mao and Garrison W. Cottrell and Julian McAuley},\n    year    = {2020},\n    url     = {https://arxiv.org/abs/2003.04887}\n}\n```\n\n```bibtex\n@misc{bhojanapalli2020lowrank,\n    title   = {Low-Rank Bottleneck in Multi-head Attention Models},\n    author  = {Srinadh Bhojanapalli and Chulhee Yun and Ankit Singh Rawat and Sashank J. Reddi and Sanjiv Kumar},\n    year    = {2020},\n    eprint  = {2002.07028}\n}\n```\n\n```bibtex\n@misc{burtsev2020memory,\n    title   = {Memory Transformer}, \n    author  = {Mikhail S. Burtsev and Grigory V. Sapunov},\n    year    = {2020},\n    eprint  = {2006.11527},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{zhao2019explicit,\n    title   = {Explicit Sparse Transformer: Concentrated Attention Through Explicit Selection}, \n    author  = {Guangxiang Zhao and Junyang Lin and Zhiyuan Zhang and Xuancheng Ren and Qi Su and Xu Sun},\n    year    = {2019},\n    eprint  = {1912.11637},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{correia2019adaptively,\n    title   = {Adaptively Sparse Transformers},\n    author  = {Gon\u00e7alo M. Correia and Vlad Niculae and Andr\u00e9 F. T. Martins},\n    year    = {2019},\n    eprint  = {1909.00015},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{shazeer2020talkingheads,\n    title   = {Talking-Heads Attention}, \n    author  = {Noam Shazeer and Zhenzhong Lan and Youlong Cheng and Nan Ding and Le Hou},\n    year    = {2020},\n    eprint  = {2003.02436},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{cordonnier2020multihead,\n    title   = {Multi-Head Attention: Collaborate Instead of Concatenate},\n    author  = {Jean-Baptiste Cordonnier and Andreas Loukas and Martin Jaggi},\n    year    = {2020},\n    eprint  = {2006.16362},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{press2020improving,\n    title   = {Improving Transformer Models by Reordering their Sublayers}, \n    author  = {Ofir Press and Noah A. Smith and Omer Levy},\n    year    = {2020},\n    eprint  = {1911.03864},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{lu2019understanding,\n    title   = {Understanding and Improving Transformer From a Multi-Particle Dynamic System Point of View}, \n    author  = {Yiping Lu and Zhuohan Li and Di He and Zhiqing Sun and Bin Dong and Tao Qin and Liwei Wang and Tie-Yan Liu},\n    year    = {2019},\n    eprint  = {1906.02762},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{ke2020rethinking,\n    title     = {Rethinking Positional Encoding in Language Pre-training},\n    author    = {Guolin Ke and Di He and Tie-Yan Liu},\n    year      = {2020},\n    eprint    = {2006.15595},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{dosovitskiy2020image,\n    title   = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},\n    author  = {Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},\n    year    = {2020},\n    eprint  = {2010.11929},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{huang2019attention,\n    title   = {Attention on Attention for Image Captioning},\n    author  = {Lun Huang and Wenmin Wang and Jie Chen and Xiao-Yong Wei},\n    year    = {2019},\n    eprint  = {1908.06954},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{raffel2020exploring,\n    title   = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer}, \n    author  = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},\n    year    = {2020},\n    eprint  = {1910.10683},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@inproceedings{martins-etal-2020-sparse,\n    title   = \"Sparse Text Generation\",\n    author  = \"Martins, Pedro Henrique  and\n        Marinho, Zita  and\n        Martins, Andr{\\'e} F. T.\",\n    booktitle = \"Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)\",\n    month   = nov,\n    year    = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url     = \"https://www.aclweb.org/anthology/2020.emnlp-main.348\"\n}\n```\n\n```bibtex\n@misc{he2020realformer,\n    title   = {RealFormer: Transformer Likes Residual Attention},\n    author  = {Ruining He and Anirudh Ravula and Bhargav Kanagal and Joshua Ainslie},\n    year    = {2020},\n    eprint  = {2012.11747},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{carion2020endtoend,\n    title   = {End-to-End Object Detection with Transformers},\n    author  = {Nicolas Carion and Francisco Massa and Gabriel Synnaeve and Nicolas Usunier and Alexander Kirillov and Sergey Zagoruyko},\n    year    = {2020},\n    eprint  = {2005.12872},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@misc{press2020shortformer,\n    title   = {Shortformer: Better Language Modeling using Shorter Inputs},\n    author  = {Ofir Press and Noah A. Smith and Mike Lewis},\n    year    = {2020}\n}\n```\n\n```bibtex\n@misc{press2021ALiBi,\n    title   = {Train Short, Test Long: Attention with Linear Biases Enable Input Length Extrapolation},\n    author  = {Ofir Press and Noah A. Smith and Mike Lewis},\n    year    = {2021},\n    url     = {https://ofir.io/train_short_test_long.pdf}\n}\n```\n\n```bibtex\n@misc{parisotto2019stabilizing,\n    title     = {Stabilizing Transformers for Reinforcement Learning},\n    author    = {Emilio Parisotto and H. Francis Song and Jack W. Rae and Razvan Pascanu and Caglar Gulcehre and Siddhant M. Jayakumar and Max Jaderberg and Raphael Lopez Kaufman and Aidan Clark and Seb Noury and Matthew M. Botvinick and Nicolas Heess and Raia Hadsell},\n    year      = {2019},\n    eprint    = {1910.06764},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{narang2021transformer,\n    title       = {Do Transformer Modifications Transfer Across Implementations and Applications?},\n    author      = {Sharan Narang and Hyung Won Chung and Yi Tay and William Fedus and Thibault Fevry and Michael Matena and Karishma Malkan and Noah Fiedel and Noam Shazeer and Zhenzhong Lan and Yanqi Zhou and Wei Li and Nan Ding and Jake Marcus and Adam Roberts and Colin Raffel},\n    year        = {2021},\n    eprint      = {2102.11972},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{zhang2019root,\n    title   = {Root Mean Square Layer Normalization},\n    author  = {Biao Zhang and Rico Sennrich},\n    year    = {2019},\n    eprint  = {1910.07467},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{su2021roformer,\n    title   = {RoFormer: Enhanced Transformer with Rotary Position Embedding},\n    author  = {Jianlin Su and Yu Lu and Shengfeng Pan and Bo Wen and Yunfeng Liu},\n    year    = {2021},\n    eprint  = {2104.09864},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@Article{AlphaFold2021,\n    author  = {Jumper, John and Evans, Richard and Pritzel, Alexander and Green, Tim and Figurnov, Michael and Ronneberger, Olaf and Tunyasuvunakool, Kathryn and Bates, Russ and {\\v{Z}}{\\'\\i}dek, Augustin and Potapenko, Anna and Bridgland, Alex and Meyer, Clemens and Kohl, Simon A A and Ballard, Andrew J and Cowie, Andrew and Romera-Paredes, Bernardino and Nikolov, Stanislav and Jain, Rishub and Adler, Jonas and Back, Trevor and Petersen, Stig and Reiman, David and Clancy, Ellen and Zielinski, Michal and Steinegger, Martin and Pacholska, Michalina and Berghammer, Tamas and Bodenstein, Sebastian and Silver, David and Vinyals, Oriol and Senior, Andrew W and Kavukcuoglu, Koray and Kohli, Pushmeet and Hassabis, Demis},\n    journal = {Nature},\n    title   = {Highly accurate protein structure prediction with {AlphaFold}},\n    year    = {2021},\n    doi     = {10.1038/s41586-021-03819-2},\n    note    = {(Accelerated article preview)},\n}\n```\n\n```bibtex\n@software{peng_bo_2021_5196578,\n    author       = {PENG Bo},\n    title        = {BlinkDL/RWKV-LM: 0.01},\n    month        = {aug},\n    year         = {2021},\n    publisher    = {Zenodo},\n    version      = {0.01},\n    doi          = {10.5281/zenodo.5196578},\n    url          = {https://doi.org/10.5281/zenodo.5196578}\n}\n```\n\n```bibtex\n@misc{csord\u00e1s2021devil,\n    title   = {The Devil is in the Detail: Simple Tricks Improve Systematic Generalization of Transformers},\n    author  = {R\u00f3bert Csord\u00e1s and Kazuki Irie and J\u00fcrgen Schmidhuber},\n    year    = {2021},\n    eprint  = {2108.12284},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{so2021primer,\n    title   = {Primer: Searching for Efficient Transformers for Language Modeling}, \n    author  = {David R. So and Wojciech Ma\u0144ke and Hanxiao Liu and Zihang Dai and Noam Shazeer and Quoc V. Le},\n    year    = {2021},\n    eprint  = {2109.08668},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.LG}\n}\n```\n\n```bibtex\n@misc{ding2021erniedoc,\n    title   = {ERNIE-Doc: A Retrospective Long-Document Modeling Transformer}, \n    author  = {Siyu Ding and Junyuan Shang and Shuohuan Wang and Yu Sun and Hao Tian and Hua Wu and Haifeng Wang},\n    year    = {2021},\n    eprint  = {2012.15688},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{ding2021cogview,\n    title   = {CogView: Mastering Text-to-Image Generation via Transformers},\n    author  = {Ming Ding and Zhuoyi Yang and Wenyi Hong and Wendi Zheng and Chang Zhou and Da Yin and Junyang Lin and Xu Zou and Zhou Shao and Hongxia Yang and Jie Tang},\n    year    = {2021},\n    eprint  = {2105.13290},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n```bibtex\n@inproceedings{anonymous2022normformer,\n    title   = {NormFormer: Improved Transformer Pretraining with Extra Normalization},\n    author  = {Anonymous},\n    booktitle = {Submitted to The Tenth International Conference on Learning Representations },\n    year    = {2022},\n    url     = {https://openreview.net/forum?id=GMYWzWztDx5},\n    note    = {under review}\n}\n```\n\n```bibtex\n@misc{henry2020querykey,\n    title   = {Query-Key Normalization for Transformers},\n    author  = {Alex Henry and Prudhvi Raj Dachapally and Shubham Pawar and Yuxuan Chen},\n    year    = {2020},\n    eprint  = {2010.04245},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CL}\n}\n```\n\n```bibtex\n@misc{liu2021swin,\n    title   = {Swin Transformer V2: Scaling Up Capacity and Resolution},\n    author  = {Ze Liu and Han Hu and Yutong Lin and Zhuliang Yao and Zhenda Xie and Yixuan Wei and Jia Ning and Yue Cao and Zheng Zhang and Li Dong and Furu Wei and Baining Guo},\n    year    = {2021},\n    eprint  = {2111.09883},\n    archivePrefix = {arXiv},\n    primaryClass = {cs.CV}\n}\n```\n\n*solve intelligence... then use that to solve everything else.* - Demis Hassabis\n",
+            "readme_url": "https://github.com/lucidrains/x-transformers",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Query-Key Normalization for Transformers",
+            "arxiv": "2010.04245",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2010.04245v1",
+            "abstract": "Low-resource language translation is a challenging but socially valuable NLP\ntask. Building on recent work adapting the Transformer's normalization to this\nsetting, we propose QKNorm, a normalization technique that modifies the\nattention mechanism to make the softmax function less prone to arbitrary\nsaturation without sacrificing expressivity. Specifically, we apply $\\ell_2$\nnormalization along the head dimension of each query and key matrix prior to\nmultiplying them and then scale up by a learnable parameter instead of dividing\nby the square root of the embedding dimension. We show improvements averaging\n0.928 BLEU over state-of-the-art bilingual benchmarks for 5 low-resource\ntranslation pairs from the TED Talks corpus and IWSLT'15.",
+            "authors": [
+                "Alex Henry",
+                "Prudhvi Raj Dachapally",
+                "Shubham Pawar",
+                "Yuxuan Chen"
+            ]
+        },
+        {
+            "title": "Attention on Attention for Image Captioning",
+            "arxiv": "1908.06954",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1908.06954v2",
+            "abstract": "Attention mechanisms are widely used in current encoder/decoder frameworks of\nimage captioning, where a weighted average on encoded vectors is generated at\neach time step to guide the caption decoding process. However, the decoder has\nlittle idea of whether or how well the attended vector and the given attention\nquery are related, which could make the decoder give misled results. In this\npaper, we propose an Attention on Attention (AoA) module, which extends the\nconventional attention mechanisms to determine the relevance between attention\nresults and queries. AoA first generates an information vector and an attention\ngate using the attention result and the current context, then adds another\nattention by applying element-wise multiplication to them and finally obtains\nthe attended information, the expected useful knowledge. We apply AoA to both\nthe encoder and the decoder of our image captioning model, which we name as AoA\nNetwork (AoANet). Experiments show that AoANet outperforms all previously\npublished methods and achieves a new state-of-the-art performance of 129.8\nCIDEr-D score on MS COCO Karpathy offline test split and 129.6 CIDEr-D (C40)\nscore on the official online testing server. Code is available at\nhttps://github.com/husthuaan/AoANet.",
+            "authors": [
+                "Lun Huang",
+                "Wenmin Wang",
+                "Jie Chen",
+                "Xiao-Yong Wei"
+            ]
+        },
+        {
+            "title": "Improving Transformer Models by Reordering their Sublayers",
+            "arxiv": "1911.03864",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1911.03864v2",
+            "abstract": "Multilayer transformer networks consist of interleaved self-attention and\nfeedforward sublayers. Could ordering the sublayers in a different pattern lead\nto better performance? We generate randomly ordered transformers and train them\nwith the language modeling objective. We observe that some of these models are\nable to achieve better performance than the interleaved baseline, and that\nthose successful variants tend to have more self-attention at the bottom and\nmore feedforward sublayers at the top. We propose a new transformer pattern\nthat adheres to this property, the sandwich transformer, and show that it\nimproves perplexity on multiple word-level and character-level language\nmodeling benchmarks, at no cost in parameters, memory, or training time.\nHowever, the sandwich reordering pattern does not guarantee performance gains\nacross every task, as we demonstrate on machine translation models. Instead, we\nsuggest that further exploration of task-specific sublayer reorderings is\nneeded in order to unlock additional gains.",
+            "authors": [
+                "Ofir Press",
+                "Noah A. Smith",
+                "Omer Levy"
+            ]
+        },
+        {
+            "title": "Multi-Head Attention: Collaborate Instead of Concatenate",
+            "arxiv": "2006.16362",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2006.16362v2",
+            "abstract": "Attention layers are widely used in natural language processing (NLP) and are\nbeginning to influence computer vision architectures. Training very large\ntransformer models allowed significant improvement in both fields, but once\ntrained, these networks show symptoms of over-parameterization. For instance,\nit is known that many attention heads can be pruned without impacting accuracy.\nThis work aims to enhance current understanding on how multiple heads interact.\nMotivated by the observation that attention heads learn redundant key/query\nprojections, we propose a collaborative multi-head attention layer that enables\nheads to learn shared projections. Our scheme decreases the number of\nparameters in an attention layer and can be used as a drop-in replacement in\nany transformer architecture. Our experiments confirm that sharing key/query\ndimensions can be exploited in language understanding, machine translation and\nvision. We also show that it is possible to re-parametrize a pre-trained\nmulti-head attention layer into our collaborative attention layer.\nCollaborative multi-head attention reduces the size of the key and query\nprojections by 4 for same accuracy and speed. Our code is public.",
+            "authors": [
+                "Jean-Baptiste Cordonnier",
+                "Andreas Loukas",
+                "Martin Jaggi"
+            ]
+        },
+        {
+            "title": "Scaling Language Models: Methods, Analysis & Insights from Training Gopher",
+            "arxiv": "2112.11446",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2112.11446v2",
+            "abstract": "Language modelling provides a step towards intelligent communication systems\nby harnessing large repositories of written human knowledge to better predict\nand understand the world. In this paper, we present an analysis of\nTransformer-based language model performance across a wide range of model\nscales -- from models with tens of millions of parameters up to a 280 billion\nparameter model called Gopher. These models are evaluated on 152 diverse tasks,\nachieving state-of-the-art performance across the majority. Gains from scale\nare largest in areas such as reading comprehension, fact-checking, and the\nidentification of toxic language, but logical and mathematical reasoning see\nless benefit. We provide a holistic analysis of the training dataset and\nmodel's behaviour, covering the intersection of model scale with bias and\ntoxicity. Finally we discuss the application of language models to AI safety\nand the mitigation of downstream harms.",
+            "authors": [
+                "Jack W. Rae",
+                "Sebastian Borgeaud",
+                "Trevor Cai",
+                "Katie Millican",
+                "Jordan Hoffmann",
+                "Francis Song",
+                "John Aslanides",
+                "Sarah Henderson",
+                "Roman Ring",
+                "Susannah Young",
+                "Eliza Rutherford",
+                "Tom Hennigan",
+                "Jacob Menick",
+                "Albin Cassirer",
+                "Richard Powell",
+                "George van den Driessche",
+                "Lisa Anne Hendricks",
+                "Maribeth Rauh",
+                "Po-Sen Huang",
+                "Amelia Glaese",
+                "Johannes Welbl",
+                "Sumanth Dathathri",
+                "Saffron Huang",
+                "Jonathan Uesato",
+                "John Mellor",
+                "Irina Higgins",
+                "Antonia Creswell",
+                "Nat McAleese",
+                "Amy Wu",
+                "Erich Elsen",
+                "Siddhant Jayakumar",
+                "Elena Buchatskaya",
+                "David Budden",
+                "Esme Sutherland",
+                "Karen Simonyan",
+                "Michela Paganini",
+                "Laurent Sifre",
+                "Lena Martens",
+                "Xiang Lorraine Li",
+                "Adhiguna Kuncoro",
+                "Aida Nematzadeh",
+                "Elena Gribovskaya",
+                "Domenic Donato",
+                "Angeliki Lazaridou",
+                "Arthur Mensch",
+                "Jean-Baptiste Lespiau",
+                "Maria Tsimpoukelli",
+                "Nikolai Grigorev",
+                "Doug Fritz",
+                "Thibault Sottiaux",
+                "Mantas Pajarskas",
+                "Toby Pohlen",
+                "Zhitao Gong",
+                "Daniel Toyama",
+                "Cyprien de Masson d'Autume",
+                "Yujia Li",
+                "Tayfun Terzi",
+                "Vladimir Mikulik",
+                "Igor Babuschkin",
+                "Aidan Clark",
+                "Diego de Las Casas",
+                "Aurelia Guy",
+                "Chris Jones",
+                "James Bradbury",
+                "Matthew Johnson",
+                "Blake Hechtman",
+                "Laura Weidinger",
+                "Iason Gabriel",
+                "William Isaac",
+                "Ed Lockhart",
+                "Simon Osindero",
+                "Laura Rimell",
+                "Chris Dyer",
+                "Oriol Vinyals",
+                "Kareem Ayoub",
+                "Jeff Stanway",
+                "Lorrayne Bennett",
+                "Demis Hassabis",
+                "Koray Kavukcuoglu",
+                "Geoffrey Irving"
+            ]
+        },
+        {
+            "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+            "arxiv": "2005.08100",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2005.08100v1",
+            "abstract": "Recently Transformer and Convolution neural network (CNN) based models have\nshown promising results in Automatic Speech Recognition (ASR), outperforming\nRecurrent neural networks (RNNs). Transformer models are good at capturing\ncontent-based global interactions, while CNNs exploit local features\neffectively. In this work, we achieve the best of both worlds by studying how\nto combine convolution neural networks and transformers to model both local and\nglobal dependencies of an audio sequence in a parameter-efficient way. To this\nregard, we propose the convolution-augmented transformer for speech\nrecognition, named Conformer. Conformer significantly outperforms the previous\nTransformer and CNN based models achieving state-of-the-art accuracies. On the\nwidely used LibriSpeech benchmark, our model achieves WER of 2.1%/4.3% without\nusing a language model and 1.9%/3.9% with an external language model on\ntest/testother. We also observe competitive performance of 2.7%/6.3% with a\nsmall model of only 10M parameters.",
+            "authors": [
+                "Anmol Gulati",
+                "James Qin",
+                "Chung-Cheng Chiu",
+                "Niki Parmar",
+                "Yu Zhang",
+                "Jiahui Yu",
+                "Wei Han",
+                "Shibo Wang",
+                "Zhengdong Zhang",
+                "Yonghui Wu",
+                "Ruoming Pang"
+            ]
+        },
+        {
+            "title": "GLU Variants Improve Transformer",
+            "arxiv": "2002.05202",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2002.05202v1",
+            "abstract": "Gated Linear Units (arXiv:1612.08083) consist of the component-wise product\nof two linear projections, one of which is first passed through a sigmoid\nfunction. Variations on GLU are possible, using different nonlinear (or even\nlinear) functions in place of sigmoid. We test these variants in the\nfeed-forward sublayers of the Transformer (arXiv:1706.03762)\nsequence-to-sequence model, and find that some of them yield quality\nimprovements over the typically-used ReLU or GELU activations.",
+            "authors": [
+                "Noam Shazeer"
+            ]
+        },
+        {
+            "title": "ReZero is All You Need: Fast Convergence at Large Depth",
+            "arxiv": "2003.04887",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2003.04887v2",
+            "abstract": "Deep networks often suffer from vanishing or exploding gradients due to\ninefficient signal propagation, leading to long training times or convergence\ndifficulties. Various architecture designs, sophisticated residual-style\nnetworks, and initialization schemes have been shown to improve deep signal\npropagation. Recently, Pennington et al. used free probability theory to show\nthat dynamical isometry plays an integral role in efficient deep learning. We\nshow that the simplest architecture change of gating each residual connection\nusing a single zero-initialized parameter satisfies initial dynamical isometry\nand outperforms more complex approaches. Although much simpler than its\npredecessors, this gate enables training thousands of fully connected layers\nwith fast convergence and better test performance for ResNets trained on\nCIFAR-10. We apply this technique to language modeling and find that we can\neasily train 120-layer Transformers. When applied to 12 layer Transformers, it\nconverges 56% faster on enwiki8.",
+            "authors": [
+                "Thomas Bachlechner",
+                "Bodhisattwa Prasad Majumder",
+                "Huanru Henry Mao",
+                "Garrison W. Cottrell",
+                "Julian McAuley"
+            ]
+        },
+        {
+            "title": "Transformers without Tears: Improving the Normalization of Self-Attention",
+            "arxiv": "1910.05895",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1910.05895v2",
+            "abstract": "We evaluate three simple, normalization-centric changes to improve\nTransformer training. First, we show that pre-norm residual connections\n(PreNorm) and smaller initializations enable warmup-free, validation-based\ntraining with large learning rates. Second, we propose $\\ell_2$ normalization\nwith a single scale parameter (ScaleNorm) for faster training and better\nperformance. Finally, we reaffirm the effectiveness of normalizing word\nembeddings to a fixed length (FixNorm). On five low-resource translation pairs\nfrom TED Talks-based corpora, these changes always converge, giving an average\n+1.1 BLEU over state-of-the-art bilingual baselines and a new 32.8 BLEU on\nIWSLT'15 English-Vietnamese. We observe sharper performance curves, more\nconsistent gradient norms, and a linear relationship between activation scaling\nand decoder depth. Surprisingly, in the high-resource setting (WMT'14\nEnglish-German), ScaleNorm and FixNorm remain competitive but PreNorm degrades\nperformance.",
+            "authors": [
+                "Toan Q. Nguyen",
+                "Julian Salazar"
+            ]
+        },
+        {
+            "title": "Root Mean Square Layer Normalization",
+            "arxiv": "1910.07467",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1910.07467v1",
+            "abstract": "Layer normalization (LayerNorm) has been successfully applied to various deep\nneural networks to help stabilize training and boost model convergence because\nof its capability in handling re-centering and re-scaling of both inputs and\nweight matrix. However, the computational overhead introduced by LayerNorm\nmakes these improvements expensive and significantly slows the underlying\nnetwork, e.g. RNN in particular. In this paper, we hypothesize that\nre-centering invariance in LayerNorm is dispensable and propose root mean\nsquare layer normalization, or RMSNorm. RMSNorm regularizes the summed inputs\nto a neuron in one layer according to root mean square (RMS), giving the model\nre-scaling invariance property and implicit learning rate adaptation ability.\nRMSNorm is computationally simpler and thus more efficient than LayerNorm. We\nalso present partial RMSNorm, or pRMSNorm where the RMS is estimated from p% of\nthe summed inputs without breaking the above properties. Extensive experiments\non several tasks using diverse network architectures show that RMSNorm achieves\ncomparable performance against LayerNorm but reduces the running time by 7%~64%\non different models. Source code is available at\nhttps://github.com/bzhangGo/rmsnorm.",
+            "authors": [
+                "Biao Zhang",
+                "Rico Sennrich"
+            ]
+        },
+        {
+            "title": "RealFormer: Transformer Likes Residual Attention",
+            "arxiv": "2012.11747",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2012.11747v3",
+            "abstract": "Transformer is the backbone of modern NLP models. In this paper, we propose\nRealFormer, a simple and generic technique to create Residual Attention Layer\nTransformer networks that significantly outperform the canonical Transformer\nand its variants (BERT, ETC, etc.) on a wide spectrum of tasks including Masked\nLanguage Modeling, GLUE, SQuAD, Neural Machine Translation, WikiHop, HotpotQA,\nNatural Questions, and OpenKP. We also observe empirically that RealFormer\nstabilizes training and leads to models with sparser attention. Source code and\npre-trained checkpoints for RealFormer can be found at\nhttps://github.com/google-research/google-research/tree/master/realformer.",
+            "authors": [
+                "Ruining He",
+                "Anirudh Ravula",
+                "Bhargav Kanagal",
+                "Joshua Ainslie"
+            ]
+        },
+        {
+            "title": "Talking-Heads Attention",
+            "arxiv": "2003.02436",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2003.02436v1",
+            "abstract": "We introduce \"talking-heads attention\" - a variation on multi-head attention\nwhich includes linearprojections across the attention-heads dimension,\nimmediately before and after the softmax operation.While inserting only a small\nnumber of additional parameters and a moderate amount of additionalcomputation,\ntalking-heads attention leads to better perplexities on masked language\nmodeling tasks, aswell as better quality when transfer-learning to language\ncomprehension and question answering tasks.",
+            "authors": [
+                "Noam Shazeer",
+                "Zhenzhong Lan",
+                "Youlong Cheng",
+                "Nan Ding",
+                "Le Hou"
+            ]
+        },
+        {
+            "title": "Understanding and Improving Transformer From a Multi-Particle Dynamic System Point of View",
+            "arxiv": "1906.02762",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1906.02762v1",
+            "abstract": "The Transformer architecture is widely used in natural language processing.\nDespite its success, the design principle of the Transformer remains elusive.\nIn this paper, we provide a novel perspective towards understanding the\narchitecture: we show that the Transformer can be mathematically interpreted as\na numerical Ordinary Differential Equation (ODE) solver for a\nconvection-diffusion equation in a multi-particle dynamic system. In\nparticular, how words in a sentence are abstracted into contexts by passing\nthrough the layers of the Transformer can be interpreted as approximating\nmultiple particles' movement in the space using the Lie-Trotter splitting\nscheme and the Euler's method. Given this ODE's perspective, the rich\nliterature of numerical analysis can be brought to guide us in designing\neffective structures beyond the Transformer. As an example, we propose to\nreplace the Lie-Trotter splitting scheme by the Strang-Marchuk splitting\nscheme, a scheme that is more commonly used and with much lower local\ntruncation errors. The Strang-Marchuk splitting scheme suggests that the\nself-attention and position-wise feed-forward network (FFN) sub-layers should\nnot be treated equally. Instead, in each layer, two position-wise FFN\nsub-layers should be used, and the self-attention sub-layer is placed in\nbetween. This leads to a brand new architecture. Such an FFN-attention-FFN\nlayer is \"Macaron-like\", and thus we call the network with this new\narchitecture the Macaron Net. Through extensive experiments, we show that the\nMacaron Net is superior to the Transformer on both supervised and unsupervised\nlearning tasks. The reproducible codes and pretrained models can be found at\nhttps://github.com/zhuohan123/macaron-net",
+            "authors": [
+                "Yiping Lu",
+                "Zhuohan Li",
+                "Di He",
+                "Zhiqing Sun",
+                "Bin Dong",
+                "Tao Qin",
+                "Liwei Wang",
+                "Tie-Yan Liu"
+            ]
+        },
+        {
+            "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+            "arxiv": "1910.10683",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1910.10683v3",
+            "abstract": "Transfer learning, where a model is first pre-trained on a data-rich task\nbefore being fine-tuned on a downstream task, has emerged as a powerful\ntechnique in natural language processing (NLP). The effectiveness of transfer\nlearning has given rise to a diversity of approaches, methodology, and\npractice. In this paper, we explore the landscape of transfer learning\ntechniques for NLP by introducing a unified framework that converts all\ntext-based language problems into a text-to-text format. Our systematic study\ncompares pre-training objectives, architectures, unlabeled data sets, transfer\napproaches, and other factors on dozens of language understanding tasks. By\ncombining the insights from our exploration with scale and our new ``Colossal\nClean Crawled Corpus'', we achieve state-of-the-art results on many benchmarks\ncovering summarization, question answering, text classification, and more. To\nfacilitate future work on transfer learning for NLP, we release our data set,\npre-trained models, and code.",
+            "authors": [
+                "Colin Raffel",
+                "Noam Shazeer",
+                "Adam Roberts",
+                "Katherine Lee",
+                "Sharan Narang",
+                "Michael Matena",
+                "Yanqi Zhou",
+                "Wei Li",
+                "Peter J. Liu"
+            ]
+        },
+        {
+            "title": "End-to-End Object Detection with Transformers",
+            "arxiv": "2005.12872",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2005.12872v3",
+            "abstract": "We present a new method that views object detection as a direct set\nprediction problem. Our approach streamlines the detection pipeline,\neffectively removing the need for many hand-designed components like a\nnon-maximum suppression procedure or anchor generation that explicitly encode\nour prior knowledge about the task. The main ingredients of the new framework,\ncalled DEtection TRansformer or DETR, are a set-based global loss that forces\nunique predictions via bipartite matching, and a transformer encoder-decoder\narchitecture. Given a fixed small set of learned object queries, DETR reasons\nabout the relations of the objects and the global image context to directly\noutput the final set of predictions in parallel. The new model is conceptually\nsimple and does not require a specialized library, unlike many other modern\ndetectors. DETR demonstrates accuracy and run-time performance on par with the\nwell-established and highly-optimized Faster RCNN baseline on the challenging\nCOCO object detection dataset. Moreover, DETR can be easily generalized to\nproduce panoptic segmentation in a unified manner. We show that it\nsignificantly outperforms competitive baselines. Training code and pretrained\nmodels are available at https://github.com/facebookresearch/detr.",
+            "authors": [
+                "Nicolas Carion",
+                "Francisco Massa",
+                "Gabriel Synnaeve",
+                "Nicolas Usunier",
+                "Alexander Kirillov",
+                "Sergey Zagoruyko"
+            ]
+        },
+        {
+            "title": "Explicit Sparse Transformer: Concentrated Attention Through Explicit Selection",
+            "arxiv": "1912.11637",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1912.11637v1",
+            "abstract": "Self-attention based Transformer has demonstrated the state-of-the-art\nperformances in a number of natural language processing tasks. Self-attention\nis able to model long-term dependencies, but it may suffer from the extraction\nof irrelevant information in the context. To tackle the problem, we propose a\nnovel model called \\textbf{Explicit Sparse Transformer}. Explicit Sparse\nTransformer is able to improve the concentration of attention on the global\ncontext through an explicit selection of the most relevant segments. Extensive\nexperimental results on a series of natural language processing and computer\nvision tasks, including neural machine translation, image captioning, and\nlanguage modeling, all demonstrate the advantages of Explicit Sparse\nTransformer in model performance. We also show that our proposed sparse\nattention method achieves comparable or better results than the previous sparse\nattention method, but significantly reduces training and testing time. For\nexample, the inference speed is twice that of sparsemax in Transformer model.\nCode will be available at\n\\url{https://github.com/lancopku/Explicit-Sparse-Transformer}",
+            "authors": [
+                "Guangxiang Zhao",
+                "Junyang Lin",
+                "Zhiyuan Zhang",
+                "Xuancheng Ren",
+                "Qi Su",
+                "Xu Sun"
+            ]
+        },
+        {
+            "title": "CogView: Mastering Text-to-Image Generation via Transformers",
+            "arxiv": "2105.13290",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2105.13290v3",
+            "abstract": "Text-to-Image generation in the general domain has long been an open problem,\nwhich requires both a powerful generative model and cross-modal understanding.\nWe propose CogView, a 4-billion-parameter Transformer with VQ-VAE tokenizer to\nadvance this problem. We also demonstrate the finetuning strategies for various\ndownstream tasks, e.g. style learning, super-resolution, text-image ranking and\nfashion design, and methods to stabilize pretraining, e.g. eliminating NaN\nlosses. CogView achieves the state-of-the-art FID on the blurred MS COCO\ndataset, outperforming previous GAN-based models and a recent similar work\nDALL-E.",
+            "authors": [
+                "Ming Ding",
+                "Zhuoyi Yang",
+                "Wenyi Hong",
+                "Wendi Zheng",
+                "Chang Zhou",
+                "Da Yin",
+                "Junyang Lin",
+                "Xu Zou",
+                "Zhou Shao",
+                "Hongxia Yang",
+                "Jie Tang"
+            ]
+        },
+        {
+            "title": "S$^2$-MLP: Spatial-Shift MLP Architecture for Vision",
+            "arxiv": "2106.07477",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2106.07477v2",
+            "abstract": "Recently, visual Transformer (ViT) and its following works abandon the\nconvolution and exploit the self-attention operation, attaining a comparable or\neven higher accuracy than CNNs. More recently, MLP-Mixer abandons both the\nconvolution and the self-attention operation, proposing an architecture\ncontaining only MLP layers. To achieve cross-patch communications, it devises\nan additional token-mixing MLP besides the channel-mixing MLP. It achieves\npromising results when training on an extremely large-scale dataset. But it\ncannot achieve as outstanding performance as its CNN and ViT counterparts when\ntraining on medium-scale datasets such as ImageNet1K and ImageNet21K. The\nperformance drop of MLP-Mixer motivates us to rethink the token-mixing MLP. We\ndiscover that the token-mixing MLP is a variant of the depthwise convolution\nwith a global reception field and spatial-specific configuration. But the\nglobal reception field and the spatial-specific property make token-mixing MLP\nprone to over-fitting. In this paper, we propose a novel pure MLP architecture,\nspatial-shift MLP (S$^2$-MLP). Different from MLP-Mixer, our S$^2$-MLP only\ncontains channel-mixing MLP. We utilize a spatial-shift operation for\ncommunications between patches. It has a local reception field and is\nspatial-agnostic. It is parameter-free and efficient for computation. The\nproposed S$^2$-MLP attains higher recognition accuracy than MLP-Mixer when\ntraining on ImageNet-1K dataset. Meanwhile, S$^2$-MLP accomplishes as excellent\nperformance as ViT on ImageNet-1K dataset with considerably simpler\narchitecture and fewer FLOPs and parameters.",
+            "authors": [
+                "Tan Yu",
+                "Xu Li",
+                "Yunfeng Cai",
+                "Mingming Sun",
+                "Ping Li"
+            ]
+        },
+        {
+            "title": "Memory Transformer",
+            "arxiv": "2006.11527",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2006.11527v2",
+            "abstract": "Transformer-based models have achieved state-of-the-art results in many\nnatural language processing tasks. The self-attention architecture allows\ntransformer to combine information from all elements of a sequence into\ncontext-aware representations. However, information about the context is stored\nmostly in the same element-wise representations. This might limit the\nprocessing of properties related to the sequence as a whole more difficult.\nAdding trainable memory to selectively store local as well as global\nrepresentations of a sequence is a promising direction to improve the\nTransformer model. Memory-augmented neural networks (MANNs) extend traditional\nneural architectures with general-purpose memory for representations. MANNs\nhave demonstrated the capability to learn simple algorithms like Copy or\nReverse and can be successfully trained via backpropagation on diverse tasks\nfrom question answering to language modeling outperforming RNNs and LSTMs of\ncomparable complexity. In this work, we propose and study few extensions of the\nTransformer baseline (1) by adding memory tokens to store non-local\nrepresentations, (2) creating memory bottleneck for the global information, (3)\ncontrolling memory update with dedicated layer. We evaluate these memory\naugmented Transformers and demonstrate that presence of memory positively\ncorrelates with the model performance for machine translation and language\nmodelling tasks. Augmentation of pre-trained masked language model with memory\ntokens shows mixed results for tasks from GLUE benchmark. Visualization of\nattention patterns over the memory suggest that it improves the model's ability\nto process a global context.",
+            "authors": [
+                "Mikhail S. Burtsev",
+                "Yuri Kuratov",
+                "Anton Peganov",
+                "Grigory V. Sapunov"
+            ]
+        },
+        {
+            "title": "Swin Transformer V2: Scaling Up Capacity and Resolution",
+            "arxiv": "2111.09883",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2111.09883v1",
+            "abstract": "We present techniques for scaling Swin Transformer up to 3 billion parameters\nand making it capable of training with images of up to 1,536$\\times$1,536\nresolution. By scaling up capacity and resolution, Swin Transformer sets new\nrecords on four representative vision benchmarks: 84.0% top-1 accuracy on\nImageNet-V2 image classification, 63.1/54.4 box/mask mAP on COCO object\ndetection, 59.9 mIoU on ADE20K semantic segmentation, and 86.8% top-1 accuracy\non Kinetics-400 video action classification. Our techniques are generally\napplicable for scaling up vision models, which has not been widely explored as\nthat of NLP language models, partly due to the following difficulties in\ntraining and applications: 1) vision models often face instability issues at\nscale and 2) many downstream vision tasks require high resolution images or\nwindows and it is not clear how to effectively transfer models pre-trained at\nlow resolutions to higher resolution ones. The GPU memory consumption is also a\nproblem when the image resolution is high. To address these issues, we present\nseveral techniques, which are illustrated by using Swin Transformer as a case\nstudy: 1) a post normalization technique and a scaled cosine attention approach\nto improve the stability of large vision models; 2) a log-spaced continuous\nposition bias technique to effectively transfer models pre-trained at\nlow-resolution images and windows to their higher-resolution counterparts. In\naddition, we share our crucial implementation details that lead to significant\nsavings of GPU memory consumption and thus make it feasible to train large\nvision models with regular GPUs. Using these techniques and self-supervised\npre-training, we successfully train a strong 3B Swin Transformer model and\neffectively transfer it to various vision tasks involving high-resolution\nimages or windows, achieving the state-of-the-art accuracy on a variety of\nbenchmarks.",
+            "authors": [
+                "Ze Liu",
+                "Han Hu",
+                "Yutong Lin",
+                "Zhuliang Yao",
+                "Zhenda Xie",
+                "Yixuan Wei",
+                "Jia Ning",
+                "Yue Cao",
+                "Zheng Zhang",
+                "Li Dong",
+                "Furu Wei",
+                "Baining Guo"
+            ]
+        },
+        {
+            "title": "Do Transformer Modifications Transfer Across Implementations and Applications?",
+            "arxiv": "2102.11972",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2102.11972v2",
+            "abstract": "The research community has proposed copious modifications to the Transformer\narchitecture since it was introduced over three years ago, relatively few of\nwhich have seen widespread adoption. In this paper, we comprehensively evaluate\nmany of these modifications in a shared experimental setting that covers most\nof the common uses of the Transformer in natural language processing.\nSurprisingly, we find that most modifications do not meaningfully improve\nperformance. Furthermore, most of the Transformer variants we found beneficial\nwere either developed in the same codebase that we used or are relatively minor\nchanges. We conjecture that performance improvements may strongly depend on\nimplementation details and correspondingly make some recommendations for\nimproving the generality of experimental results.",
+            "authors": [
+                "Sharan Narang",
+                "Hyung Won Chung",
+                "Yi Tay",
+                "William Fedus",
+                "Thibault Fevry",
+                "Michael Matena",
+                "Karishma Malkan",
+                "Noah Fiedel",
+                "Noam Shazeer",
+                "Zhenzhong Lan",
+                "Yanqi Zhou",
+                "Wei Li",
+                "Nan Ding",
+                "Jake Marcus",
+                "Adam Roberts",
+                "Colin Raffel"
+            ]
+        },
+        {
+            "title": "FaceFormer: Speech-Driven 3D Facial Animation with Transformers",
+            "arxiv": "2112.05329",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2112.05329v4",
+            "abstract": "Speech-driven 3D facial animation is challenging due to the complex geometry\nof human faces and the limited availability of 3D audio-visual data. Prior\nworks typically focus on learning phoneme-level features of short audio windows\nwith limited context, occasionally resulting in inaccurate lip movements. To\ntackle this limitation, we propose a Transformer-based autoregressive model,\nFaceFormer, which encodes the long-term audio context and autoregressively\npredicts a sequence of animated 3D face meshes. To cope with the data scarcity\nissue, we integrate the self-supervised pre-trained speech representations.\nAlso, we devise two biased attention mechanisms well suited to this specific\ntask, including the biased cross-modal multi-head (MH) attention and the biased\ncausal MH self-attention with a periodic positional encoding strategy. The\nformer effectively aligns the audio-motion modalities, whereas the latter\noffers abilities to generalize to longer audio sequences. Extensive experiments\nand a perceptual user study show that our approach outperforms the existing\nstate-of-the-arts. The code will be made available.",
+            "authors": [
+                "Yingruo Fan",
+                "Zhaojiang Lin",
+                "Jun Saito",
+                "Wenping Wang",
+                "Taku Komura"
+            ]
+        },
+        {
+            "title": "Augmenting Self-attention with Persistent Memory",
+            "arxiv": "1907.01470",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1907.01470v1",
+            "abstract": "Transformer networks have lead to important progress in language modeling and\nmachine translation. These models include two consecutive modules, a\nfeed-forward layer and a self-attention layer. The latter allows the network to\ncapture long term dependencies and are often regarded as the key ingredient in\nthe success of Transformers. Building upon this intuition, we propose a new\nmodel that solely consists of attention layers. More precisely, we augment the\nself-attention layers with persistent memory vectors that play a similar role\nas the feed-forward layer. Thanks to these vectors, we can remove the\nfeed-forward layer without degrading the performance of a transformer. Our\nevaluation shows the benefits brought by our model on standard character and\nword level language modeling benchmarks.",
+            "authors": [
+                "Sainbayar Sukhbaatar",
+                "Edouard Grave",
+                "Guillaume Lample",
+                "Herve Jegou",
+                "Armand Joulin"
+            ]
+        },
+        {
+            "title": "Stabilizing Transformers for Reinforcement Learning",
+            "arxiv": "1910.06764",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1910.06764v1",
+            "abstract": "Owing to their ability to both effectively integrate information over long\ntime horizons and scale to massive amounts of data, self-attention\narchitectures have recently shown breakthrough success in natural language\nprocessing (NLP), achieving state-of-the-art results in domains such as\nlanguage modeling and machine translation. Harnessing the transformer's ability\nto process long time horizons of information could provide a similar\nperformance boost in partially observable reinforcement learning (RL) domains,\nbut the large-scale transformers used in NLP have yet to be successfully\napplied to the RL setting. In this work we demonstrate that the standard\ntransformer architecture is difficult to optimize, which was previously\nobserved in the supervised learning setting but becomes especially pronounced\nwith RL objectives. We propose architectural modifications that substantially\nimprove the stability and learning speed of the original Transformer and XL\nvariant. The proposed architecture, the Gated Transformer-XL (GTrXL), surpasses\nLSTMs on challenging memory environments and achieves state-of-the-art results\non the multi-task DMLab-30 benchmark suite, exceeding the performance of an\nexternal memory architecture. We show that the GTrXL, trained using the same\nlosses, has stability and performance that consistently matches or exceeds a\ncompetitive LSTM baseline, including on more reactive tasks where memory is\nless critical. GTrXL offers an easy-to-train, simple-to-implement but\nsubstantially more expressive architectural alternative to the standard\nmulti-layer LSTM ubiquitously used for RL agents in partially observable\nenvironments.",
+            "authors": [
+                "Emilio Parisotto",
+                "H. Francis Song",
+                "Jack W. Rae",
+                "Razvan Pascanu",
+                "Caglar Gulcehre",
+                "Siddhant M. Jayakumar",
+                "Max Jaderberg",
+                "Raphael Lopez Kaufman",
+                "Aidan Clark",
+                "Seb Noury",
+                "Matthew M. Botvinick",
+                "Nicolas Heess",
+                "Raia Hadsell"
+            ]
+        },
+        {
+            "title": "ERNIE-Doc: A Retrospective Long-Document Modeling Transformer",
+            "arxiv": "2012.15688",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2012.15688v2",
+            "abstract": "Transformers are not suited for processing long documents, due to their\nquadratically increasing memory and time consumption. Simply truncating a long\ndocument or applying the sparse attention mechanism will incur the context\nfragmentation problem or lead to an inferior modeling capability against\ncomparable model sizes. In this paper, we propose ERNIE-Doc, a document-level\nlanguage pretraining model based on Recurrence Transformers. Two well-designed\ntechniques, namely the retrospective feed mechanism and the enhanced recurrence\nmechanism, enable ERNIE-Doc, which has a much longer effective context length,\nto capture the contextual information of a complete document. We pretrain\nERNIE-Doc to explicitly learn the relationships among segments with an\nadditional document-aware segment-reordering objective. Various experiments\nwere conducted on both English and Chinese document-level tasks. ERNIE-Doc\nimproved the state-of-the-art language modeling result of perplexity to 16.8 on\nWikiText-103. Moreover, it outperformed competitive pretraining models by a\nlarge margin on most language understanding tasks, such as text classification\nand question answering.",
+            "authors": [
+                "Siyu Ding",
+                "Junyuan Shang",
+                "Shuohuan Wang",
+                "Yu Sun",
+                "Hao Tian",
+                "Hua Wu",
+                "Haifeng Wang"
+            ]
+        },
+        {
+            "title": "CrossFormer: A Versatile Vision Transformer Hinging on Cross-scale Attention",
+            "arxiv": "2108.00154",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2108.00154v2",
+            "abstract": "Transformers have made great progress in dealing with computer vision tasks.\nHowever, existing vision transformers do not yet possess the ability of\nbuilding the interactions among features of different scales, which is\nperceptually important to visual inputs. The reasons are two-fold: (1) Input\nembeddings of each layer are equal-scale, so no cross-scale feature can be\nextracted; (2) to lower the computational cost, some vision transformers merge\nadjacent embeddings inside the self-attention module, thus sacrificing\nsmall-scale (fine-grained) features of the embeddings and also disabling the\ncross-scale interactions. To this end, we propose Cross-scale Embedding Layer\n(CEL) and Long Short Distance Attention (LSDA). On the one hand, CEL blends\neach embedding with multiple patches of different scales, providing the\nself-attention module itself with cross-scale features. On the other hand, LSDA\nsplits the self-attention module into a short-distance one and a long-distance\ncounterpart, which not only reduces the computational burden but also keeps\nboth small-scale and large-scale features in the embeddings. Through the above\ntwo designs, we achieve cross-scale attention. Besides, we put forward a\ndynamic position bias for vision transformers to make the popular relative\nposition bias apply to variable-sized images. Hinging on the cross-scale\nattention module, we construct a versatile vision architecture, dubbed\nCrossFormer, which accommodates variable-sized inputs. Extensive experiments\nshow that CrossFormer outperforms the other vision transformers on image\nclassification, object detection, instance segmentation, and semantic\nsegmentation tasks. The code has been released:\nhttps://github.com/cheerss/CrossFormer.",
+            "authors": [
+                "Wenxiao Wang",
+                "Lu Yao",
+                "Long Chen",
+                "Binbin Lin",
+                "Deng Cai",
+                "Xiaofei He",
+                "Wei Liu"
+            ]
+        },
+        {
+            "title": "Primer: Searching for Efficient Transformers for Language Modeling",
+            "arxiv": "2109.08668",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2109.08668v2",
+            "abstract": "Large Transformer models have been central to recent advances in natural\nlanguage processing. The training and inference costs of these models, however,\nhave grown rapidly and become prohibitively expensive. Here we aim to reduce\nthe costs of Transformers by searching for a more efficient variant. Compared\nto previous approaches, our search is performed at a lower level, over the\nprimitives that define a Transformer TensorFlow program. We identify an\narchitecture, named Primer, that has a smaller training cost than the original\nTransformer and other variants for auto-regressive language modeling. Primer's\nimprovements can be mostly attributed to two simple modifications: squaring\nReLU activations and adding a depthwise convolution layer after each Q, K, and\nV projection in self-attention.\n  Experiments show Primer's gains over Transformer increase as compute scale\ngrows and follow a power law with respect to quality at optimal model sizes. We\nalso verify empirically that Primer can be dropped into different codebases to\nsignificantly speed up training without additional tuning. For example, at a\n500M parameter size, Primer improves the original T5 architecture on C4\nauto-regressive language modeling, reducing the training cost by 4X.\nFurthermore, the reduced training cost means Primer needs much less compute to\nreach a target one-shot performance. For instance, in a 1.9B parameter\nconfiguration similar to GPT-3 XL, Primer uses 1/3 of the training compute to\nachieve the same one-shot performance as Transformer. We open source our models\nand several comparisons in T5 to help with reproducibility.",
+            "authors": [
+                "David R. So",
+                "Wojciech Ma\u0144ke",
+                "Hanxiao Liu",
+                "Zihang Dai",
+                "Noam Shazeer",
+                "Quoc V. Le"
+            ]
+        },
+        {
+            "title": "Attention Approximates Sparse Distributed Memory",
+            "arxiv": "2111.05498",
+            "year": 2021,
+            "url": "http://arxiv.org/abs/2111.05498v2",
+            "abstract": "While Attention has come to be an important mechanism in deep learning, there\nremains limited intuition for why it works so well. Here, we show that\nTransformer Attention can be closely related under certain data conditions to\nKanerva's Sparse Distributed Memory (SDM), a biologically plausible associative\nmemory model. We confirm that these conditions are satisfied in pre-trained\nGPT2 Transformer models. We discuss the implications of the Attention-SDM map\nand provide new computational and biological interpretations of Attention.",
+            "authors": [
+                "Trenton Bricken",
+                "Cengiz Pehlevan"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "1706.03762",
+            "year": "2017",
+            "author": [
+                "Vaswani, Ashish",
+                "Shazeer, Noam",
+                "Parmar, Niki",
+                "Uszkoreit, Jakob",
+                "Jones, Llion",
+                "Gomez, Aidan N.",
+                "Kaiser, Lukasz",
+                "Polosukhin, Illia"
+            ],
+            "title": "Attention Is All You Need",
+            "ENTRYTYPE": "misc",
+            "ID": "vaswani2017attention",
+            "authors": [
+                "Vaswani, Ashish",
+                "Shazeer, Noam",
+                "Parmar, Niki",
+                "Uszkoreit, Jakob",
+                "Jones, Llion",
+                "Gomez, Aidan N.",
+                "Kaiser, Lukasz",
+                "Polosukhin, Illia"
+            ]
+        },
+        {
+            "url": "http://arxiv.org/abs/1907.01470",
+            "year": "2019",
+            "volume": "abs/1907.01470",
+            "journal": "CoRR",
+            "title": "Augmenting Self-attention with Persistent Memory",
+            "author": [
+                "Sukhbaatar, Sainbayar",
+                "Grave, Edouard",
+                "Lample, Guillaume",
+                "J{\\'{e}}gou, Herv{\\'{e}}",
+                "Joulin, Armand"
+            ],
+            "ENTRYTYPE": "article",
+            "ID": "DBLP:journals/corr/abs-1907-01470",
+            "authors": [
+                "Sukhbaatar, Sainbayar",
+                "Grave, Edouard",
+                "Lample, Guillaume",
+                "J{\\'{e}}gou, Herv{\\'{e}}",
+                "Joulin, Armand"
+            ]
+        },
+        {
+            "doi": "10.5281/zenodo.3525484",
+            "eprint": "arXiv:1910.05895",
+            "year": "2019",
+            "title": "Transformers without Tears: Improving the Normalization of Self-Attention",
+            "author": [
+                "Nguyen, Toan Q.",
+                "Salazar, Julian"
+            ],
+            "ENTRYTYPE": "article",
+            "ID": "1910.05895",
+            "authors": [
+                "Nguyen, Toan Q.",
+                "Salazar, Julian"
+            ]
+        },
+        {
+            "url": "https://arxiv.org/abs/2002.05202",
+            "year": "2020",
+            "author": [
+                "Shazeer, Noam"
+            ],
+            "title": "GLU Variants Improve Transformer",
+            "ENTRYTYPE": "misc",
+            "ID": "shazeer2020glu",
+            "authors": [
+                "Shazeer, Noam"
+            ]
+        },
+        {
+            "url": "https://arxiv.org/abs/2003.04887",
+            "year": "2020",
+            "author": [
+                "Bachlechner, Thomas",
+                "Majumder, Bodhisattwa Prasad",
+                "Mao, Huanru Henry",
+                "Cottrell, Garrison W.",
+                "McAuley, Julian"
+            ],
+            "title": "ReZero is All You Need: Fast Convergence at Large Depth",
+            "ENTRYTYPE": "misc",
+            "ID": "bachlechner2020rezero",
+            "authors": [
+                "Bachlechner, Thomas",
+                "Majumder, Bodhisattwa Prasad",
+                "Mao, Huanru Henry",
+                "Cottrell, Garrison W.",
+                "McAuley, Julian"
+            ]
+        },
+        {
+            "eprint": "2002.07028",
+            "year": "2020",
+            "author": [
+                "Bhojanapalli, Srinadh",
+                "Yun, Chulhee",
+                "Rawat, Ankit Singh",
+                "Reddi, Sashank J.",
+                "Kumar, Sanjiv"
+            ],
+            "title": "Low-Rank Bottleneck in Multi-head Attention Models",
+            "ENTRYTYPE": "misc",
+            "ID": "bhojanapalli2020lowrank",
+            "authors": [
+                "Bhojanapalli, Srinadh",
+                "Yun, Chulhee",
+                "Rawat, Ankit Singh",
+                "Reddi, Sashank J.",
+                "Kumar, Sanjiv"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "2006.11527",
+            "year": "2020",
+            "author": [
+                "Burtsev, Mikhail S.",
+                "Sapunov, Grigory V."
+            ],
+            "title": "Memory Transformer",
+            "ENTRYTYPE": "misc",
+            "ID": "burtsev2020memory",
+            "authors": [
+                "Burtsev, Mikhail S.",
+                "Sapunov, Grigory V."
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "1912.11637",
+            "year": "2019",
+            "author": [
+                "Zhao, Guangxiang",
+                "Lin, Junyang",
+                "Zhang, Zhiyuan",
+                "Ren, Xuancheng",
+                "Su, Qi",
+                "Sun, Xu"
+            ],
+            "title": "Explicit Sparse Transformer: Concentrated Attention Through Explicit Selection",
+            "ENTRYTYPE": "misc",
+            "ID": "zhao2019explicit",
+            "authors": [
+                "Zhao, Guangxiang",
+                "Lin, Junyang",
+                "Zhang, Zhiyuan",
+                "Ren, Xuancheng",
+                "Su, Qi",
+                "Sun, Xu"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "1909.00015",
+            "year": "2019",
+            "author": [
+                "Correia, Gon\u00e7alo M.",
+                "Niculae, Vlad",
+                "Martins, Andr\u00e9 F. T."
+            ],
+            "title": "Adaptively Sparse Transformers",
+            "ENTRYTYPE": "misc",
+            "ID": "correia2019adaptively",
+            "authors": [
+                "Correia, Gon\u00e7alo M.",
+                "Niculae, Vlad",
+                "Martins, Andr\u00e9 F. T."
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2003.02436",
+            "year": "2020",
+            "author": [
+                "Shazeer, Noam",
+                "Lan, Zhenzhong",
+                "Cheng, Youlong",
+                "Ding, Nan",
+                "Hou, Le"
+            ],
+            "title": "Talking-Heads Attention",
+            "ENTRYTYPE": "misc",
+            "ID": "shazeer2020talkingheads",
+            "authors": [
+                "Shazeer, Noam",
+                "Lan, Zhenzhong",
+                "Cheng, Youlong",
+                "Ding, Nan",
+                "Hou, Le"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2006.16362",
+            "year": "2020",
+            "author": [
+                "Cordonnier, Jean-Baptiste",
+                "Loukas, Andreas",
+                "Jaggi, Martin"
+            ],
+            "title": "Multi-Head Attention: Collaborate Instead of Concatenate",
+            "ENTRYTYPE": "misc",
+            "ID": "cordonnier2020multihead",
+            "authors": [
+                "Cordonnier, Jean-Baptiste",
+                "Loukas, Andreas",
+                "Jaggi, Martin"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "1911.03864",
+            "year": "2020",
+            "author": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Levy, Omer"
+            ],
+            "title": "Improving Transformer Models by Reordering their Sublayers",
+            "ENTRYTYPE": "misc",
+            "ID": "press2020improving",
+            "authors": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Levy, Omer"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "1906.02762",
+            "year": "2019",
+            "author": [
+                "Lu, Yiping",
+                "Li, Zhuohan",
+                "He, Di",
+                "Sun, Zhiqing",
+                "Dong, Bin",
+                "Qin, Tao",
+                "Wang, Liwei",
+                "Liu, Tie-Yan"
+            ],
+            "title": "Understanding and Improving Transformer From a Multi-Particle Dynamic System Point of View",
+            "ENTRYTYPE": "misc",
+            "ID": "lu2019understanding",
+            "authors": [
+                "Lu, Yiping",
+                "Li, Zhuohan",
+                "He, Di",
+                "Sun, Zhiqing",
+                "Dong, Bin",
+                "Qin, Tao",
+                "Wang, Liwei",
+                "Liu, Tie-Yan"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "2006.15595",
+            "year": "2020",
+            "author": [
+                "Ke, Guolin",
+                "He, Di",
+                "Liu, Tie-Yan"
+            ],
+            "title": "Rethinking Positional Encoding in Language Pre-training",
+            "ENTRYTYPE": "misc",
+            "ID": "ke2020rethinking",
+            "authors": [
+                "Ke, Guolin",
+                "He, Di",
+                "Liu, Tie-Yan"
+            ]
+        },
+        {
+            "primaryclass": "cs.CV",
+            "archiveprefix": "arXiv",
+            "eprint": "2010.11929",
+            "year": "2020",
+            "author": [
+                "Dosovitskiy, Alexey",
+                "Beyer, Lucas",
+                "Kolesnikov, Alexander",
+                "Weissenborn, Dirk",
+                "Zhai, Xiaohua",
+                "Unterthiner, Thomas",
+                "Dehghani, Mostafa",
+                "Minderer, Matthias",
+                "Heigold, Georg",
+                "Gelly, Sylvain",
+                "Uszkoreit, Jakob",
+                "Houlsby, Neil"
+            ],
+            "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+            "ENTRYTYPE": "misc",
+            "ID": "dosovitskiy2020image",
+            "authors": [
+                "Dosovitskiy, Alexey",
+                "Beyer, Lucas",
+                "Kolesnikov, Alexander",
+                "Weissenborn, Dirk",
+                "Zhai, Xiaohua",
+                "Unterthiner, Thomas",
+                "Dehghani, Mostafa",
+                "Minderer, Matthias",
+                "Heigold, Georg",
+                "Gelly, Sylvain",
+                "Uszkoreit, Jakob",
+                "Houlsby, Neil"
+            ]
+        },
+        {
+            "primaryclass": "cs.CV",
+            "archiveprefix": "arXiv",
+            "eprint": "1908.06954",
+            "year": "2019",
+            "author": [
+                "Huang, Lun",
+                "Wang, Wenmin",
+                "Chen, Jie",
+                "Wei, Xiao-Yong"
+            ],
+            "title": "Attention on Attention for Image Captioning",
+            "ENTRYTYPE": "misc",
+            "ID": "huang2019attention",
+            "authors": [
+                "Huang, Lun",
+                "Wang, Wenmin",
+                "Chen, Jie",
+                "Wei, Xiao-Yong"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "1910.10683",
+            "year": "2020",
+            "author": [
+                "Raffel, Colin",
+                "Shazeer, Noam",
+                "Roberts, Adam",
+                "Lee, Katherine",
+                "Narang, Sharan",
+                "Matena, Michael",
+                "Zhou, Yanqi",
+                "Li, Wei",
+                "Liu, Peter J."
+            ],
+            "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+            "ENTRYTYPE": "misc",
+            "ID": "raffel2020exploring",
+            "authors": [
+                "Raffel, Colin",
+                "Shazeer, Noam",
+                "Roberts, Adam",
+                "Lee, Katherine",
+                "Narang, Sharan",
+                "Matena, Michael",
+                "Zhou, Yanqi",
+                "Li, Wei",
+                "Liu, Peter J."
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2012.11747",
+            "year": "2020",
+            "author": [
+                "He, Ruining",
+                "Ravula, Anirudh",
+                "Kanagal, Bhargav",
+                "Ainslie, Joshua"
+            ],
+            "title": "RealFormer: Transformer Likes Residual Attention",
+            "ENTRYTYPE": "misc",
+            "ID": "he2020realformer",
+            "authors": [
+                "He, Ruining",
+                "Ravula, Anirudh",
+                "Kanagal, Bhargav",
+                "Ainslie, Joshua"
+            ]
+        },
+        {
+            "primaryclass": "cs.CV",
+            "archiveprefix": "arXiv",
+            "eprint": "2005.12872",
+            "year": "2020",
+            "author": [
+                "Carion, Nicolas",
+                "Massa, Francisco",
+                "Synnaeve, Gabriel",
+                "Usunier, Nicolas",
+                "Kirillov, Alexander",
+                "Zagoruyko, Sergey"
+            ],
+            "title": "End-to-End Object Detection with Transformers",
+            "ENTRYTYPE": "misc",
+            "ID": "carion2020endtoend",
+            "authors": [
+                "Carion, Nicolas",
+                "Massa, Francisco",
+                "Synnaeve, Gabriel",
+                "Usunier, Nicolas",
+                "Kirillov, Alexander",
+                "Zagoruyko, Sergey"
+            ]
+        },
+        {
+            "year": "2020",
+            "author": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Lewis, Mike"
+            ],
+            "title": "Shortformer: Better Language Modeling using Shorter Inputs",
+            "ENTRYTYPE": "misc",
+            "ID": "press2020shortformer",
+            "authors": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Lewis, Mike"
+            ]
+        },
+        {
+            "url": "https://ofir.io/train_short_test_long.pdf",
+            "year": "2021",
+            "author": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Lewis, Mike"
+            ],
+            "title": "Train Short, Test Long: Attention with Linear Biases Enable Input Length Extrapolation",
+            "ENTRYTYPE": "misc",
+            "ID": "press2021ALiBi",
+            "authors": [
+                "Press, Ofir",
+                "Smith, Noah A.",
+                "Lewis, Mike"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "1910.06764",
+            "year": "2019",
+            "author": [
+                "Parisotto, Emilio",
+                "Song, H. Francis",
+                "Rae, Jack W.",
+                "Pascanu, Razvan",
+                "Gulcehre, Caglar",
+                "Jayakumar, Siddhant M.",
+                "Jaderberg, Max",
+                "Kaufman, Raphael Lopez",
+                "Clark, Aidan",
+                "Noury, Seb",
+                "Botvinick, Matthew M.",
+                "Heess, Nicolas",
+                "Hadsell, Raia"
+            ],
+            "title": "Stabilizing Transformers for Reinforcement Learning",
+            "ENTRYTYPE": "misc",
+            "ID": "parisotto2019stabilizing",
+            "authors": [
+                "Parisotto, Emilio",
+                "Song, H. Francis",
+                "Rae, Jack W.",
+                "Pascanu, Razvan",
+                "Gulcehre, Caglar",
+                "Jayakumar, Siddhant M.",
+                "Jaderberg, Max",
+                "Kaufman, Raphael Lopez",
+                "Clark, Aidan",
+                "Noury, Seb",
+                "Botvinick, Matthew M.",
+                "Heess, Nicolas",
+                "Hadsell, Raia"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2102.11972",
+            "year": "2021",
+            "author": [
+                "Narang, Sharan",
+                "Chung, Hyung Won",
+                "Tay, Yi",
+                "Fedus, William",
+                "Fevry, Thibault",
+                "Matena, Michael",
+                "Malkan, Karishma",
+                "Fiedel, Noah",
+                "Shazeer, Noam",
+                "Lan, Zhenzhong",
+                "Zhou, Yanqi",
+                "Li, Wei",
+                "Ding, Nan",
+                "Marcus, Jake",
+                "Roberts, Adam",
+                "Raffel, Colin"
+            ],
+            "title": "Do Transformer Modifications Transfer Across Implementations and Applications?",
+            "ENTRYTYPE": "misc",
+            "ID": "narang2021transformer",
+            "authors": [
+                "Narang, Sharan",
+                "Chung, Hyung Won",
+                "Tay, Yi",
+                "Fedus, William",
+                "Fevry, Thibault",
+                "Matena, Michael",
+                "Malkan, Karishma",
+                "Fiedel, Noah",
+                "Shazeer, Noam",
+                "Lan, Zhenzhong",
+                "Zhou, Yanqi",
+                "Li, Wei",
+                "Ding, Nan",
+                "Marcus, Jake",
+                "Roberts, Adam",
+                "Raffel, Colin"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "1910.07467",
+            "year": "2019",
+            "author": [
+                "Zhang, Biao",
+                "Sennrich, Rico"
+            ],
+            "title": "Root Mean Square Layer Normalization",
+            "ENTRYTYPE": "misc",
+            "ID": "zhang2019root",
+            "authors": [
+                "Zhang, Biao",
+                "Sennrich, Rico"
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "2104.09864",
+            "year": "2021",
+            "author": [
+                "Su, Jianlin",
+                "Lu, Yu",
+                "Pan, Shengfeng",
+                "Wen, Bo",
+                "Liu, Yunfeng"
+            ],
+            "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+            "ENTRYTYPE": "misc",
+            "ID": "su2021roformer",
+            "authors": [
+                "Su, Jianlin",
+                "Lu, Yu",
+                "Pan, Shengfeng",
+                "Wen, Bo",
+                "Liu, Yunfeng"
+            ]
+        },
+        {
+            "note": "(Accelerated article preview)",
+            "doi": "10.1038/s41586-021-03819-2",
+            "year": "2021",
+            "title": "Highly accurate protein structure prediction with {AlphaFold}",
+            "journal": "Nature",
+            "author": [
+                "Jumper, John",
+                "Evans, Richard",
+                "Pritzel, Alexander",
+                "Green, Tim",
+                "Figurnov, Michael",
+                "Ronneberger, Olaf",
+                "Tunyasuvunakool, Kathryn",
+                "Bates, Russ",
+                "{\\v{Z}}{\\'\\i}dek, Augustin",
+                "Potapenko, Anna",
+                "Bridgland, Alex",
+                "Meyer, Clemens",
+                "Kohl, Simon A A",
+                "Ballard, Andrew J",
+                "Cowie, Andrew",
+                "Romera-Paredes, Bernardino",
+                "Nikolov, Stanislav",
+                "Jain, Rishub",
+                "Adler, Jonas",
+                "Back, Trevor",
+                "Petersen, Stig",
+                "Reiman, David",
+                "Clancy, Ellen",
+                "Zielinski, Michal",
+                "Steinegger, Martin",
+                "Pacholska, Michalina",
+                "Berghammer, Tamas",
+                "Bodenstein, Sebastian",
+                "Silver, David",
+                "Vinyals, Oriol",
+                "Senior, Andrew W",
+                "Kavukcuoglu, Koray",
+                "Kohli, Pushmeet",
+                "Hassabis, Demis"
+            ],
+            "ENTRYTYPE": "article",
+            "ID": "AlphaFold2021",
+            "authors": [
+                "Jumper, John",
+                "Evans, Richard",
+                "Pritzel, Alexander",
+                "Green, Tim",
+                "Figurnov, Michael",
+                "Ronneberger, Olaf",
+                "Tunyasuvunakool, Kathryn",
+                "Bates, Russ",
+                "{\\v{Z}}{\\'\\i}dek, Augustin",
+                "Potapenko, Anna",
+                "Bridgland, Alex",
+                "Meyer, Clemens",
+                "Kohl, Simon A A",
+                "Ballard, Andrew J",
+                "Cowie, Andrew",
+                "Romera-Paredes, Bernardino",
+                "Nikolov, Stanislav",
+                "Jain, Rishub",
+                "Adler, Jonas",
+                "Back, Trevor",
+                "Petersen, Stig",
+                "Reiman, David",
+                "Clancy, Ellen",
+                "Zielinski, Michal",
+                "Steinegger, Martin",
+                "Pacholska, Michalina",
+                "Berghammer, Tamas",
+                "Bodenstein, Sebastian",
+                "Silver, David",
+                "Vinyals, Oriol",
+                "Senior, Andrew W",
+                "Kavukcuoglu, Koray",
+                "Kohli, Pushmeet",
+                "Hassabis, Demis"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2108.12284",
+            "year": "2021",
+            "author": [
+                "Csord\u00e1s, R\u00f3bert",
+                "Irie, Kazuki",
+                "Schmidhuber, J\u00fcrgen"
+            ],
+            "title": "The Devil is in the Detail: Simple Tricks Improve Systematic Generalization of Transformers",
+            "ENTRYTYPE": "misc",
+            "ID": "csord\u00e1s2021devil",
+            "authors": [
+                "Csord\u00e1s, R\u00f3bert",
+                "Irie, Kazuki",
+                "Schmidhuber, J\u00fcrgen"
+            ]
+        },
+        {
+            "primaryclass": "cs.LG",
+            "archiveprefix": "arXiv",
+            "eprint": "2109.08668",
+            "year": "2021",
+            "author": [
+                "So, David R.",
+                "Ma\u0144ke, Wojciech",
+                "Liu, Hanxiao",
+                "Dai, Zihang",
+                "Shazeer, Noam",
+                "Le, Quoc V."
+            ],
+            "title": "Primer: Searching for Efficient Transformers for Language Modeling",
+            "ENTRYTYPE": "misc",
+            "ID": "so2021primer",
+            "authors": [
+                "So, David R.",
+                "Ma\u0144ke, Wojciech",
+                "Liu, Hanxiao",
+                "Dai, Zihang",
+                "Shazeer, Noam",
+                "Le, Quoc V."
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "2012.15688",
+            "year": "2021",
+            "author": [
+                "Ding, Siyu",
+                "Shang, Junyuan",
+                "Wang, Shuohuan",
+                "Sun, Yu",
+                "Tian, Hao",
+                "Wu, Hua",
+                "Wang, Haifeng"
+            ],
+            "title": "ERNIE-Doc: A Retrospective Long-Document Modeling Transformer",
+            "ENTRYTYPE": "misc",
+            "ID": "ding2021erniedoc",
+            "authors": [
+                "Ding, Siyu",
+                "Shang, Junyuan",
+                "Wang, Shuohuan",
+                "Sun, Yu",
+                "Tian, Hao",
+                "Wu, Hua",
+                "Wang, Haifeng"
+            ]
+        },
+        {
+            "primaryclass": "cs.CV",
+            "archiveprefix": "arXiv",
+            "eprint": "2105.13290",
+            "year": "2021",
+            "author": [
+                "Ding, Ming",
+                "Yang, Zhuoyi",
+                "Hong, Wenyi",
+                "Zheng, Wendi",
+                "Zhou, Chang",
+                "Yin, Da",
+                "Lin, Junyang",
+                "Zou, Xu",
+                "Shao, Zhou",
+                "Yang, Hongxia",
+                "Tang, Jie"
+            ],
+            "title": "CogView: Mastering Text-to-Image Generation via Transformers",
+            "ENTRYTYPE": "misc",
+            "ID": "ding2021cogview",
+            "authors": [
+                "Ding, Ming",
+                "Yang, Zhuoyi",
+                "Hong, Wenyi",
+                "Zheng, Wendi",
+                "Zhou, Chang",
+                "Yin, Da",
+                "Lin, Junyang",
+                "Zou, Xu",
+                "Shao, Zhou",
+                "Yang, Hongxia",
+                "Tang, Jie"
+            ]
+        },
+        {
+            "note": "under review",
+            "url": "https://openreview.net/forum?id=GMYWzWztDx5",
+            "year": "2022",
+            "booktitle": "Submitted to The Tenth International Conference on Learning Representations ",
+            "author": [
+                "Anonymous, "
+            ],
+            "title": "NormFormer: Improved Transformer Pretraining with Extra Normalization",
+            "ENTRYTYPE": "inproceedings",
+            "ID": "anonymous2022normformer",
+            "authors": [
+                "Anonymous, "
+            ]
+        },
+        {
+            "primaryclass": "cs.CL",
+            "archiveprefix": "arXiv",
+            "eprint": "2010.04245",
+            "year": "2020",
+            "author": [
+                "Henry, Alex",
+                "Dachapally, Prudhvi Raj",
+                "Pawar, Shubham",
+                "Chen, Yuxuan"
+            ],
+            "title": "Query-Key Normalization for Transformers",
+            "ENTRYTYPE": "misc",
+            "ID": "henry2020querykey",
+            "authors": [
+                "Henry, Alex",
+                "Dachapally, Prudhvi Raj",
+                "Pawar, Shubham",
+                "Chen, Yuxuan"
+            ]
+        },
+        {
+            "primaryclass": "cs.CV",
+            "archiveprefix": "arXiv",
+            "eprint": "2111.09883",
+            "year": "2021",
+            "author": [
+                "Liu, Ze",
+                "Hu, Han",
+                "Lin, Yutong",
+                "Yao, Zhuliang",
+                "Xie, Zhenda",
+                "Wei, Yixuan",
+                "Ning, Jia",
+                "Cao, Yue",
+                "Zhang, Zheng",
+                "Dong, Li",
+                "Wei, Furu",
+                "Guo, Baining"
+            ],
+            "title": "Swin Transformer V2: Scaling Up Capacity and Resolution",
+            "ENTRYTYPE": "misc",
+            "ID": "liu2021swin",
+            "authors": [
+                "Liu, Ze",
+                "Hu, Han",
+                "Lin, Yutong",
+                "Yao, Zhuliang",
+                "Xie, Zhenda",
+                "Wei, Yixuan",
+                "Ning, Jia",
+                "Cao, Yue",
+                "Zhang, Zheng",
+                "Dong, Li",
+                "Wei, Furu",
+                "Guo, Baining"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.99951336928991,
+        "task": "Machine Translation",
+        "task_prob": 0.9690580323349758
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "SQuAD"
+            },
+            {
+                "name": "Librispeech"
+            },
+            {
+                "name": "HotpotQA"
+            },
+            {
+                "name": "Natural Questions"
+            },
+            {
+                "name": "GLUE"
+            },
+            {
+                "name": "WikiHop"
+            },
+            {
+                "name": "enwiki8"
+            },
+            {
+                "name": "WikiText-103"
+            },
+            {
+                "name": "CIFAR-10"
+            },
+            {
+                "name": "ADE20K"
+            },
+            {
+                "name": "COCO"
+            }
+        ]
+    }
+}

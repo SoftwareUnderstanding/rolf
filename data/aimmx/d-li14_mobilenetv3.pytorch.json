@@ -1,0 +1,210 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "PyTorch Implementation of MobileNet V3",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "d-li14",
+                "owner_type": "User",
+                "name": "mobilenetv3.pytorch",
+                "url": "https://github.com/d-li14/mobilenetv3.pytorch",
+                "stars": 379,
+                "pushed_at": "2021-02-14 03:23:43+00:00",
+                "created_at": "2019-05-08 17:01:22+00:00",
+                "language": "Python",
+                "description": "74.3% MobileNetV3-Large and 67.2% MobileNetV3-Small model on ImageNet",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "894a44cc066a027465cd26d634948d56d13af9af",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/d-li14/mobilenetv3.pytorch/blob/master/.gitignore"
+                    }
+                },
+                "size": 1203
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "25cacbfe5ec97397ee8d8c7b0ca5548c8870f63c",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/d-li14/mobilenetv3.pytorch/blob/master/LICENSE"
+                    }
+                },
+                "size": 1063
+            },
+            {
+                "type": "code",
+                "name": "mobilenetv3.py",
+                "sha": "3d7e0b3a1b67b0905b2053ebf3cb508971540419",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/d-li14/mobilenetv3.pytorch/blob/master/mobilenetv3.py"
+                    }
+                },
+                "size": 7482
+            },
+            {
+                "type": "code",
+                "name": "pretrained",
+                "sha": "844a4c9ee54293170df735fb2951f88d71cb1fa4",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/d-li14/mobilenetv3.pytorch/tree/master/pretrained"
+                    }
+                },
+                "num_files": 4
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Duo Li",
+            "github_id": "d-li14"
+        },
+        {
+            "name": "Erjan Kalybek",
+            "github_id": "erjanmx"
+        },
+        {
+            "name": "Gemfield",
+            "github_id": "gemfield"
+        }
+    ],
+    "tags": [
+        "mobilenetv3",
+        "pytorch-implementation",
+        "imagenet",
+        "pretrained-models"
+    ],
+    "description": "74.3% MobileNetV3-Large and 67.2% MobileNetV3-Small model on ImageNet",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/d-li14/mobilenetv3.pytorch",
+            "stars": 379,
+            "issues": true,
+            "readme": "# PyTorch Implementation of MobileNet V3\nReproduction of MobileNet V3 architecture as described in [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244) by Andrew Howard, Mark Sandler, Grace Chu, Liang-Chieh Chen, Bo Chen, Mingxing Tan, Weijun Wang, Yukun Zhu, Ruoming Pang, Vijay Vasudevan, Quoc V. Le, Hartwig Adam on ILSVRC2012 benchmark with [PyTorch](pytorch.org) framework.\n\n# Requirements\n## Dataset\nDownload the ImageNet dataset and move validation images to labeled subfolders.\nTo do this, you can use the following script: https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh\n\n# Training recipe\n* *batch size* 1024\n* *epoch* 150\n* *learning rate* 0.4 (ramps up from 0.1 to 0.4 in the first 5 epochs)\n* *LR decay strategy* cosine\n* *weight decay* 0.00004\n* *dropout rate* 0.2 (0.1 for Small-version 0.75)\n* *no weight decay* biases and BN\n* *label smoothing* 0.1 (only for Large-version)\n\n# Models\n| Architecture      | # Parameters | MFLOPs | Top-1 / Top-5 Accuracy (%) |\n| ----------------- | ------------ | ------ | -------------------------- |\n| [MobileNetV3-Large 1.0](https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-large-1cd25616.pth) | 5.483M | 216.60 | 74.280 / 91.928 |\n| [MobileNetV3-Large 0.75](https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-large-0.75-9632d2a8.pth) | 3.994M | 154.57 | 72.842 / 90.846 |\n| [MobileNetV3-Small 1.0](https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-small-55df8e1f.pth) | 2.543M |  56.52 | 67.214 / 87.304 |\n| [MobileNetV3-Small 0.75](https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-small-0.75-86c972c3.pth) | 2.042M |  43.40 | 64.876 / 85.498 |\n\n\n```python\nfrom mobilenetv3 import mobilenetv3_large, mobilenetv3_small\n\nnet_large = mobilenetv3_large()\nnet_small = mobilenetv3_small()\n\nnet_large.load_state_dict(torch.load('pretrained/mobilenetv3-large-1cd25616.pth'))\nnet_small.load_state_dict(torch.load('pretrained/mobilenetv3-small-55df8e1f.pth'))\n```\n\n# Citation\n```\n@InProceedings{Howard_2019_ICCV,\nauthor = {Howard, Andrew and Sandler, Mark and Chu, Grace and Chen, Liang-Chieh and Chen, Bo and Tan, Mingxing and Wang, Weijun and Zhu, Yukun and Pang, Ruoming and Vasudevan, Vijay and Le, Quoc V. and Adam, Hartwig},\ntitle = {Searching for MobileNetV3},\nbooktitle = {The IEEE International Conference on Computer Vision (ICCV)},\nmonth = {October},\nyear = {2019}\n}\n```\nIf you find this implementation helpful in your research, please also consider citing:\n```\n@InProceedings{Li_2019_ICCV,\nauthor = {Li, Duo and Zhou, Aojun and Yao, Anbang},\ntitle = {HBONet: Harmonious Bottleneck on Two Orthogonal Dimensions},\nbooktitle = {The IEEE International Conference on Computer Vision (ICCV)},\nmonth = {October},\nyear = {2019}\n}\n```\n",
+            "readme_url": "https://github.com/d-li14/mobilenetv3.pytorch",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Searching for MobileNetV3",
+            "arxiv": "1905.02244",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1905.02244v5",
+            "abstract": "We present the next generation of MobileNets based on a combination of\ncomplementary search techniques as well as a novel architecture design.\nMobileNetV3 is tuned to mobile phone CPUs through a combination of\nhardware-aware network architecture search (NAS) complemented by the NetAdapt\nalgorithm and then subsequently improved through novel architecture advances.\nThis paper starts the exploration of how automated search algorithms and\nnetwork design can work together to harness complementary approaches improving\nthe overall state of the art. Through this process we create two new MobileNet\nmodels for release: MobileNetV3-Large and MobileNetV3-Small which are targeted\nfor high and low resource use cases. These models are then adapted and applied\nto the tasks of object detection and semantic segmentation. For the task of\nsemantic segmentation (or any dense pixel prediction), we propose a new\nefficient segmentation decoder Lite Reduced Atrous Spatial Pyramid Pooling\n(LR-ASPP). We achieve new state of the art results for mobile classification,\ndetection and segmentation. MobileNetV3-Large is 3.2\\% more accurate on\nImageNet classification while reducing latency by 15\\% compared to MobileNetV2.\nMobileNetV3-Small is 4.6\\% more accurate while reducing latency by 5\\% compared\nto MobileNetV2. MobileNetV3-Large detection is 25\\% faster at roughly the same\naccuracy as MobileNetV2 on COCO detection. MobileNetV3-Large LR-ASPP is 30\\%\nfaster than MobileNetV2 R-ASPP at similar accuracy for Cityscapes segmentation.",
+            "authors": [
+                "Andrew Howard",
+                "Mark Sandler",
+                "Grace Chu",
+                "Liang-Chieh Chen",
+                "Bo Chen",
+                "Mingxing Tan",
+                "Weijun Wang",
+                "Yukun Zhu",
+                "Ruoming Pang",
+                "Vijay Vasudevan",
+                "Quoc V. Le",
+                "Hartwig Adam"
+            ]
+        },
+        {
+            "year": "2019",
+            "month": "October",
+            "booktitle": "The IEEE International Conference on Computer Vision (ICCV)",
+            "title": "Searching for MobileNetV3",
+            "author": [
+                "Howard, Andrew",
+                "Sandler, Mark",
+                "Chu, Grace",
+                "Chen, Liang-Chieh",
+                "Chen, Bo",
+                "Tan, Mingxing",
+                "Wang, Weijun",
+                "Zhu, Yukun",
+                "Pang, Ruoming",
+                "Vasudevan, Vijay",
+                "Le, Quoc V.",
+                "Adam, Hartwig"
+            ],
+            "ENTRYTYPE": "inproceedings",
+            "ID": "Howard_2019_ICCV",
+            "authors": [
+                "Howard, Andrew",
+                "Sandler, Mark",
+                "Chu, Grace",
+                "Chen, Liang-Chieh",
+                "Chen, Bo",
+                "Tan, Mingxing",
+                "Wang, Weijun",
+                "Zhu, Yukun",
+                "Pang, Ruoming",
+                "Vasudevan, Vijay",
+                "Le, Quoc V.",
+                "Adam, Hartwig"
+            ]
+        },
+        {
+            "year": "2019",
+            "month": "October",
+            "booktitle": "The IEEE International Conference on Computer Vision (ICCV)",
+            "title": "HBONet: Harmonious Bottleneck on Two Orthogonal Dimensions",
+            "author": [
+                "Li, Duo",
+                "Zhou, Aojun",
+                "Yao, Anbang"
+            ],
+            "ENTRYTYPE": "inproceedings",
+            "ID": "Li_2019_ICCV",
+            "authors": [
+                "Li, Duo",
+                "Zhou, Aojun",
+                "Yao, Anbang"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "Cityscapes"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9982128655270858,
+        "task": "Image Classification",
+        "task_prob": 0.7308562311695919
+    }
+}

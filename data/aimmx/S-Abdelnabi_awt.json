@@ -1,0 +1,172 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Adversarial Watermarking Transformer (AWT)",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "S-Abdelnabi",
+                "owner_type": "User",
+                "name": "awt",
+                "url": "https://github.com/S-Abdelnabi/awt",
+                "stars": 17,
+                "pushed_at": "2021-07-02 15:13:53+00:00",
+                "created_at": "2021-02-08 20:09:50+00:00",
+                "language": "Jupyter Notebook",
+                "description": "Code for our S&P'21 paper: Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding",
+                "frameworks": [
+                    "NLTK",
+                    "scikit-learn",
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "code",
+                "sha": "71d0cb0b26aba79c62ff5831ae80569b525bc848",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/S-Abdelnabi/awt/tree/main/code"
+                    }
+                },
+                "num_files": 33
+            },
+            {
+                "type": "code",
+                "name": "denoise.PNG",
+                "sha": "9edcdd6038203cc3a0ed54aa28a18f77e7904673",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/S-Abdelnabi/awt/blob/main/denoise.PNG"
+                    }
+                },
+                "size": 137567
+            },
+            {
+                "type": "code",
+                "name": "environment.yml",
+                "sha": "b2ab38127ca7b812ef342b38b04ec3478a41ef3d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/S-Abdelnabi/awt/blob/main/environment.yml"
+                    }
+                },
+                "size": 3397
+            },
+            {
+                "type": "code",
+                "name": "environment_short.yml",
+                "sha": "d84612373bbd8f3d21be9d1725f4e73f6ae827b6",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/S-Abdelnabi/awt/blob/main/environment_short.yml"
+                    }
+                },
+                "size": 143
+            },
+            {
+                "type": "code",
+                "name": "fig.PNG",
+                "sha": "73c39dc483e454f7cb36f4ccb7a6191cf0c0a137",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/S-Abdelnabi/awt/blob/main/fig.PNG"
+                    }
+                },
+                "size": 138928
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Sahar Abdelnabi",
+            "github_id": "S-Abdelnabi"
+        }
+    ],
+    "tags": [],
+    "description": "Code for our S&P'21 paper: Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/S-Abdelnabi/awt",
+            "stars": 17,
+            "issues": true,
+            "readme": "# Adversarial Watermarking Transformer (AWT) #\n- Code for the paper: [Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding](https://arxiv.org/pdf/2009.03015.pdf) \n- Authors: [Sahar Abdelnabi](https://scholar.google.de/citations?user=QEiYbDYAAAAJ&hl=en), [Mario Fritz](https://cispa.saarland/group/fritz/)\n- Videos: [Short video](https://www.youtube.com/watch?v=_Wc2OLVfD7Q), [Full video](https://www.youtube.com/watch?v=3wvgds9bYg4) \n\n## Abstract ## \nRecent advances in natural language generation have introduced powerful language models with high-quality output text. However, this raises concerns about the potential misuse of such models for malicious purposes. In this paper, we study natural language watermarking as a defense to help better mark and trace the provenance of text. We introduce the Adversarial Watermarking Transformer (AWT) with a jointly trained encoder-decoder and adversarial training that, given an input text and a binary message, generates an output text that is unobtrusively encoded with the given message. We further study different training and inference strategies to achieve minimal changes to the semantics and correctness of the input text. AWT is the first end-to-end model to hide data in text by automatically learning -without ground truth- word substitutions\nalong with their locations in order to encode the message. We empirically show that our model is effective in largely preserving text utility and decoding the watermark while hiding its presence against adversaries. Additionally, we demonstrate that our method is robust against a range of attacks.\n\n![alt text](https://github.com/S-Abdelnabi/awt/blob/main/fig.PNG?raw=true)\n\n- - -\n\n## Enviroment ##\n- Main requirements:\n\t- Python 3.7.6\n\t- PyTorch 1.2.0\n- To set it up: \n```javascript\nconda env create --name awt --file=environment.yml\n```\n- - -\n\n## Requirements ##\n\n- Model checkpt of InferSent:\n\t- get the model infersent2.pkl from: [InferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly\n  \n\t- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly\n  \n- Model checkpt of AWD LSTM LM:\n\t- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm))\n  \n- Model checkpt of SBERT:\n\t- Follow instructions from: [sentence-transformer](https://github.com/UKPLab/sentence-transformers)\n- - -\n## Pre-trained models ##\n\n- [AWD-LSTM language model](https://drive.google.com/file/d/1S2-wmZK4JgJEIFpRp1Dy4SuzTqBcLKK7/view?usp=sharing)\n\t- Trained with the fine-tuning step and reaches a comparable perplexity to what was reproted in the [AWD-LSTM paper](https://arxiv.org/pdf/1708.02182.pdf)\n\n- [Full AWT gen](https://drive.google.com/file/d/1q0OAKcHaWHkGvag5_g8tcJ5AF6G1V8s9/view?usp=sharing), [Full AWT disc](https://drive.google.com/file/d/1KiDbi3fZHNYbFwuuW19O2xuIr0e9029y/view?usp=sharing)\n\n- [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)\n\t- DAE trained to denoise non-watermarked text (the noise applied is word replacement and word removing) \n\t\n- [<img src=\"https://render.githubusercontent.com/render/math?math=AWT_\\text{adv}\\_gen\">](https://drive.google.com/file/d/1_gwJ-V8a-B3c8ZbR0g_JhWVcWkk8BP-8/view?usp=sharing), [<img src=\"https://render.githubusercontent.com/render/math?math=AWT_\\text{adv}\\_disc\">](https://drive.google.com/file/d/1hnPsQ1oSIdpMQNTcXO9nDp2SsZqHkId1/view?usp=sharing) \n\t- Another trained model (used for attacks)\n\n- [paired DAE](https://drive.google.com/file/d/1zhzyi1S0w7PcFxp0ECw7L1RiTZHNfASp/view?usp=sharing)\n\t- DAE trained to denoise the watermarked text of <img src=\"https://render.githubusercontent.com/render/math?math=AWT_\\text{adv}\">\n\n- [Classifier](https://drive.google.com/file/d/1tLBT08YxVFnEzQxhhmtA1sbFWLraOgBe/view?usp=sharing)\n\t- A transformer-based classifier trained on the full AWT output (20 samples), tasked to classify between watermarked and non-watermarked text \n\n- Download and place in the current directory.\n\n- - -\n## Dataset ##\n\n- You will need the WikiText-2 (WT2) dataset. Follow the instructions in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) to download it\n\n- - -\n\n## Training AWT ##\n- Phase 1 of training AWT\n```javascript\npython main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epochs 200 --save WT2_mt_noft --optimizer adam --fixed_length 1 --bptt 80 --use_lm_loss 0 --use_semantic_loss 0  --discr_interval 1 --msg_weight 5 --gen_weight 1.5 --reconst_weight 1.5 --scheduler 1\n```\n- Phase 2 of training AWT\n```javascript\npython main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epochs 200 --save WT2_mt_full --optimizer adam --fixed_length 0 --bptt 80  --discr_interval 3 --msg_weight 6 --gen_weight 1 --reconst_weight 2 --scheduler 1 --shared_encoder 1 --use_semantic_loss 1 --sem_weight 6 --resume WT2_mt_noft --use_lm_loss 1 --lm_weight 1.3\n```\n- - -\n\n## Evaluating Effectiveness ##\n- Needs the checkpoints in the current directory \n\n### Sampling ### \n- selecting best sample based on SBERT:\n```javascript\npython evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]\n```\n- selecting the best sample based on LM loss:\n```javascript\npython evaluate_sampling_lm.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]\n```\n- *sentences_agg_number* is the number of segments to accumulate to calculate the *p*-value\n\n### Selective Encoding ###\n- threshold on the increase of the LM loss\n- thresholds used in the paper: 0.45, 0.5, 0.53, 0.59, 0.7 (encodes from 75% to 95% of the sentences)\n- with selective encoding, we use 1-sample\n```javascript\npython evaluate_selective_lm_threshold.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences agg. number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --lm_threshold [threshold] --samples_num 1\n```\n- For selective encoding using SBERT as a metric (sentences with higher SBERT than the threshold will not be used), use: \n```javascript\npython evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num 1 --bert_threshold [dist_threshold]\n```\n### Averaging ###\n- Encode multiple sentences with the same message, decode the msg from each one, average the posterior probabilities \n```javascript\npython evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --avg_cycle [number_of_sentences_to_avg]\n```\n- - -\n\n## Evaluating Robustness ##\n\n### DAE ###\n![alt text](https://github.com/S-Abdelnabi/awt/blob/main/denoise.PNG?raw=true)\n\n#### Training ####\n- To train the denosining-autoencoder as in the paper:\n```javascript\npython main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model1 --batch_size 64 --epochs 2000 --dropoute 0.05 --sub_prob 0.1\n```\n- *sub_prob*: prob. of substituting words during training\n- *dropoute*: embedding dropout prob \n\n#### Evaluate ####\n- Evaluate the DAE on its own on clean data\n\t- apply noise, denoise, then compare to the original text \n```javascript\npython evaluate_denoise_autoenc.py --data data/wikitext-2 --bptt 80 --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200 --sub_prob [sub_noise_prob.]\n```\n#### Attack ####\n- Run the attack:\n\t- First sample from AWT, then input to the DAE, then decode the msg \n```javascript\npython evaluate_denoise_autoenc_attack_greedy.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path  [awt_model_disc] --samples_num [num_samples] --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200\n```\n\n### Random changes ###\n#### Remove ####\n```javascript\npython evaluate_remove_attacks.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --remove_prob [prob_of_removing_words]\n```\n#### Replace ####\n```javascript\npython evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --use_elmo 0 --seed 200 --samples_num [num_samples] --modify_prob [prob_of_replacing_words]\n```\n\n### Re-watermarking ###\n- To implement this attack you need to train a second AWT model with different seed (see our checkpoints)\n```javascript\npython rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]\n```\n- This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again\n- *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*, we use 1 sample in the paper\n\n### De-watermarking ###\n- To implement this attack you need to train a second AWT model with a different seed (see our checkpoints)\n- You then need to train a denoisining autoencoder on input and output pairs of the second de-watermarking model (the data is in under: 'data_dae_pairs')\n```javascript\npython main_train_dae_wm_pairs.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model2 --batch_size 64 --epochs 500 --dropoute 0.05\n```\nwhere '--data' takes the directory containing the training data (found in 'data_classifier')\n- Then you need to apply the denoising autoencoder to the first model (or the second model: <img src=\"https://render.githubusercontent.com/render/math?math=AWT_\\text{adv}\">, in case of the white-box setting).\n```javascript\npython evaluate_dewatermarking_attack.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment  [sentences_agg_number] --gen_path [awt_model_gen_1]  --disc_path  [awt_model_disc_1] --samples_num 1 --autoenc_attack_path [dae_paired_model_path] --use_lm_loss 1 --seed 200 \n```\n- - -\n\n## Evaluating Secrecy ##\nTo run the classification on the full AWT output.\n\n### Classifier training ###\n- First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts. \n\n- To train the classifier in the paper use: \n```javascript\npython main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 300 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1\n```\nwhere '--data' takes the directory containing the training data (found in 'data_classifier')\n\n- To evaluate the classifier (on the generated data used before), use: \n```javascript\npython evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier_name] --seed 200  \n```\n\n- - -\n## Visualization ##\n\n- The code to reproduce the visualization experiments (histogram counts, words change map count, top changed words)\n- You will need to install *wordcloud* for the words maps\n- Follow the notebook files, the needed files of AWT output and the *no discriminator* output can be found under 'visualization/'\n\n- - -\n## Citation ##\n\n- If you find this code helpful, please cite our paper:\n```javascript\n@inproceedings{abdelnabi2020adversarial,\n    title = {Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding},\n    author = {Abdelnabi, Sahar and Fritz, Mario},\n    booktitle = {42nd IEEE Symposium on Security and Privacy},\n    year = {2021}\n}\n```\n- - -\n\n## Acknowledgement ##\n\n- We thank the authors of [InferSent](https://github.com/facebookresearch/InferSent), [sentence-transformer](https://github.com/UKPLab/sentence-transformers), and [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) for their repositories and pre-trained models which we use in our training and experiments. We acknowledge [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) as we use their dataset and parts of our code were modified from theirs. \n\n- - -\n\n\n\n",
+            "readme_url": "https://github.com/S-Abdelnabi/awt",
+            "frameworks": [
+                "NLTK",
+                "scikit-learn",
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding",
+            "arxiv": "2009.03015",
+            "year": 2020,
+            "url": "http://arxiv.org/abs/2009.03015v2",
+            "abstract": "Recent advances in natural language generation have introduced powerful\nlanguage models with high-quality output text. However, this raises concerns\nabout the potential misuse of such models for malicious purposes. In this\npaper, we study natural language watermarking as a defense to help better mark\nand trace the provenance of text. We introduce the Adversarial Watermarking\nTransformer (AWT) with a jointly trained encoder-decoder and adversarial\ntraining that, given an input text and a binary message, generates an output\ntext that is unobtrusively encoded with the given message. We further study\ndifferent training and inference strategies to achieve minimal changes to the\nsemantics and correctness of the input text.\n  AWT is the first end-to-end model to hide data in text by automatically\nlearning -- without ground truth -- word substitutions along with their\nlocations in order to encode the message. We empirically show that our model is\neffective in largely preserving text utility and decoding the watermark while\nhiding its presence against adversaries. Additionally, we demonstrate that our\nmethod is robust against a range of attacks.",
+            "authors": [
+                "Sahar Abdelnabi",
+                "Mario Fritz"
+            ]
+        },
+        {
+            "title": "Regularizing and Optimizing LSTM Language Models",
+            "arxiv": "1708.02182",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1708.02182v1",
+            "abstract": "Recurrent neural networks (RNNs), such as long short-term memory networks\n(LSTMs), serve as a fundamental building block for many sequence learning\ntasks, including machine translation, language modeling, and question\nanswering. In this paper, we consider the specific problem of word-level\nlanguage modeling and investigate strategies for regularizing and optimizing\nLSTM-based models. We propose the weight-dropped LSTM which uses DropConnect on\nhidden-to-hidden weights as a form of recurrent regularization. Further, we\nintroduce NT-ASGD, a variant of the averaged stochastic gradient method,\nwherein the averaging trigger is determined using a non-monotonic condition as\nopposed to being tuned by the user. Using these and other regularization\nstrategies, we achieve state-of-the-art word level perplexities on two data\nsets: 57.3 on Penn Treebank and 65.8 on WikiText-2. In exploring the\neffectiveness of a neural cache in conjunction with our proposed model, we\nachieve an even lower state-of-the-art perplexity of 52.8 on Penn Treebank and\n52.0 on WikiText-2.",
+            "authors": [
+                "Stephen Merity",
+                "Nitish Shirish Keskar",
+                "Richard Socher"
+            ]
+        },
+        {
+            "year": "2021",
+            "booktitle": "42nd IEEE Symposium on Security and Privacy",
+            "author": [
+                "Abdelnabi, Sahar",
+                "Fritz, Mario"
+            ],
+            "title": "Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding",
+            "ENTRYTYPE": "inproceedings",
+            "ID": "abdelnabi2020adversarial",
+            "authors": [
+                "Abdelnabi, Sahar",
+                "Fritz, Mario"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "WikiText-2"
+            },
+            {
+                "name": "Penn Treebank"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999485640171093,
+        "task": "Language Modelling",
+        "task_prob": 0.6924692393163487
+    }
+}

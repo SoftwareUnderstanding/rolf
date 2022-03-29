@@ -1,0 +1,169 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "WGAN-GP-tensorflow",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "changwoolee",
+                "owner_type": "User",
+                "name": "WGAN-GP-tensorflow",
+                "url": "https://github.com/changwoolee/WGAN-GP-tensorflow",
+                "stars": 23,
+                "pushed_at": "2018-04-20 05:27:00+00:00",
+                "created_at": "2018-04-20 05:05:58+00:00",
+                "language": "Python",
+                "description": "Tensorflow Implementation of Paper \"Improved Training of Wasserstein GANs\"",
+                "license": "MIT License",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "cf63e95fbc0ad3f658e7b9270d8638a8513ac235",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/.gitignore"
+                    }
+                },
+                "size": 106
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "85475f4bc1bcf593ffe494c523d02346eece300d",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/LICENSE"
+                    }
+                },
+                "size": 1069
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "1aa204c72a37b7a8706bc5b1f4e8da72aaa1b783",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/main.py"
+                    }
+                },
+                "size": 2445
+            },
+            {
+                "type": "code",
+                "name": "model.py",
+                "sha": "1a2d33b4f1fdfc63a58a6578fb440110844c4e94",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/model.py"
+                    }
+                },
+                "size": 10501
+            },
+            {
+                "type": "code",
+                "name": "ops.py",
+                "sha": "bc3e53e669cf664f0974ecc76c84421955a9b256",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/ops.py"
+                    }
+                },
+                "size": 1411
+            },
+            {
+                "type": "code",
+                "name": "utils.py",
+                "sha": "050bd8ee983a2201c9f3228915ededa7ff38255b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/changwoolee/WGAN-GP-tensorflow/blob/master/utils.py"
+                    }
+                },
+                "size": 9398
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Changwoo Lee",
+            "email": "cwoolee@umich.edu",
+            "github_id": "changwoolee"
+        }
+    ],
+    "tags": [
+        "tensorflow",
+        "gan",
+        "wgan-gp",
+        "wgan",
+        "python",
+        "deep-learning",
+        "deep-neural-networks",
+        "generative-adversarial-network"
+    ],
+    "description": "Tensorflow Implementation of Paper \"Improved Training of Wasserstein GANs\"",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/changwoolee/WGAN-GP-tensorflow",
+            "stars": 23,
+            "issues": true,
+            "readme": "# WGAN-GP-tensorflow\r\n\r\nTensorflow implementation of paper [\"Improved Training of Wasserstein GANs\"](https://arxiv.org/abs/1704.00028).\r\n\r\n![gif](https://thumbs.gfycat.com/VerifiableHonoredHind-size_restricted.gif)\r\n\r\n* 0 epoch\r\n\r\n![epoch0](http://cfile24.uf.tistory.com/image/99DE3E355AD971992E9F3C)\r\n\r\n* 25 epoch\r\n\r\n![img](http://cfile29.uf.tistory.com/image/99274A355AD9719925FEF4)\r\n\r\n* 50 epoch\r\n\r\n![epoch50](http://cfile23.uf.tistory.com/image/9927653B5AD971B537B169)\r\n\r\n* 100 epoch\r\n\r\n![img](http://cfile8.uf.tistory.com/image/996E113B5AD971CB1010F7)\r\n\r\n* 150 epoch\r\n\r\n![img](http://cfile28.uf.tistory.com/image/9999403C5AD971DB2483C5)\r\n\r\n## Prerequisites\r\n\r\n- Python 2.7 or 3.5\r\n- Tensorflow 1.3+\r\n- SciPy\r\n- Aligned&Cropped celebA dataset([download](https://www.dropbox.com/sh/8oqt9vytwxb3s4r/AADSNUu0bseoCKuxuI5ZeTl1a/Img?dl=0))\r\n- (Optional) moviepy (for visualization)\r\n\r\n## Usage\r\n\r\n* Download aligned&cropped celebA dataset([link](https://www.dropbox.com/sh/8oqt9vytwxb3s4r/AADSNUu0bseoCKuxuI5ZeTl1a/Img?dl=0)) and unzip at ./data/img_align_celeba\r\n\r\n* Train:\r\n\r\n  ```\r\n  $ python main.py --train\r\n  ```\r\n\r\n  Or you can set some arguments like:\r\n\r\n  ```\r\n  $ python main.py --dataset=celebA --max_epoch=50 --learning_rate=1e-4 --train\r\n  ```\r\n\r\n* Test:\r\n\r\n  ```\r\n  $ python main.py\r\n  ```\r\n\r\n## Acknowledge\r\n\r\nBased on the implementation [carpedm20/DCGAN-tensorflow](https://github.com/carpedm20/DCGAN-tensorflow), [LynnHo/DCGAN-LSGAN-WGAN-WGAN-GP-Tensorflow](https://github.com/LynnHo/DCGAN-LSGAN-WGAN-WGAN-GP-Tensorflow), [shekkizh/WassersteinGAN.tensorflow](https://github.com/shekkizh/WassersteinGAN.tensorflow) and [igul222/improved_wgan_training](https://github.com/igul222/improved_wgan_training).\r\n",
+            "readme_url": "https://github.com/changwoolee/WGAN-GP-tensorflow",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Improved Training of Wasserstein GANs",
+            "arxiv": "1704.00028",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1704.00028v3",
+            "abstract": "Generative Adversarial Networks (GANs) are powerful generative models, but\nsuffer from training instability. The recently proposed Wasserstein GAN (WGAN)\nmakes progress toward stable training of GANs, but sometimes can still generate\nonly low-quality samples or fail to converge. We find that these problems are\noften due to the use of weight clipping in WGAN to enforce a Lipschitz\nconstraint on the critic, which can lead to undesired behavior. We propose an\nalternative to clipping weights: penalize the norm of gradient of the critic\nwith respect to its input. Our proposed method performs better than standard\nWGAN and enables stable training of a wide variety of GAN architectures with\nalmost no hyperparameter tuning, including 101-layer ResNets and language\nmodels over discrete data. We also achieve high quality generations on CIFAR-10\nand LSUN bedrooms.",
+            "authors": [
+                "Ishaan Gulrajani",
+                "Faruk Ahmed",
+                "Martin Arjovsky",
+                "Vincent Dumoulin",
+                "Aaron Courville"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "CelebA"
+            },
+            {
+                "name": "CIFAR-10"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999983049170487,
+        "task": "Image Generation",
+        "task_prob": 0.9927393610182398
+    }
+}

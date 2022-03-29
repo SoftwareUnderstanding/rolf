@@ -1,0 +1,146 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "CS547 final project",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "YiteWang",
+                "owner_type": "User",
+                "name": "CS547-final-project",
+                "url": "https://github.com/YiteWang/CS547-final-project",
+                "stars": 0,
+                "pushed_at": "2019-12-15 21:54:24+00:00",
+                "created_at": "2019-10-25 21:26:45+00:00",
+                "language": "Python",
+                "description": "CS547 final project",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitattributes",
+                "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/.gitattributes"
+                    }
+                },
+                "size": 66
+            },
+            {
+                "type": "code",
+                "name": "CycleGAN.py",
+                "sha": "385ff3de4b16bf76ae2daa1c51c39ed0c8948127",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/CycleGAN.py"
+                    }
+                },
+                "size": 13721
+            },
+            {
+                "type": "code",
+                "name": "arch.py",
+                "sha": "60c736240517a27744be41e599618e0cc73b5168",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/arch.py"
+                    }
+                },
+                "size": 5183
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "310be63f007969dba07bd4986b0ff7b43e406504",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/main.py"
+                    }
+                },
+                "size": 4193
+            },
+            {
+                "type": "code",
+                "name": "test.py",
+                "sha": "e4b8215b5c2d936b52463add764a89836cfb72f5",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/test.py"
+                    }
+                },
+                "size": 4224
+            },
+            {
+                "type": "code",
+                "name": "utils.py",
+                "sha": "34d24e97156851cd6d4af53889723d8ac3e6b602",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/YiteWang/CS547-final-project/blob/master/utils.py"
+                    }
+                },
+                "size": 2665
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Yite Wang",
+            "github_id": "YiteWang"
+        }
+    ],
+    "tags": [],
+    "description": "CS547 final project",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/YiteWang/CS547-final-project",
+            "stars": 0,
+            "issues": true,
+            "readme": "# CS547 final project\n\n* Team members: Yite Wang (yitew2) , Jing Wu(jingwu6) , Yuchen He(he44), Randy Chase (randyjc2)\n\n### Code structure\n\nThe code consists of  5 python files, which are:\n\n* `Arch.py`: It contains all the functions/classes to create the discriminator and generators. Here we only support resnet generator and 70X70 patch discriminator.\n\n* `Main.py`: It is the main file that takes in all the arguments including all the hyperparameters.\n\n* `Utils.py`: It contains several functions used in training. They include set neural network not update, sample buffer, learning rate scheduler and initialization function for neural networks.\n\n* `CycleGAN.py`: This is the most important part of the code that contains a class which defines the whole training process of cycleGAN. In initialization part, all the neural networks, optimizers and schedulers are created. In start_train() function,   it first loads all the data and first update generator. In the generator training phase, we turned off gradient calculations of discriminators to make computation faster. After that we turned on gradient calculation of discriminators and then update discriminators. The last part of it is saving all the models and losses after every certain number of epochs.\n\n\n### How to use the Code\n\nClone this repo to your machine.\n\nCreate folder `datasets` and put the dataset you want into the folder `datasets`.\n\nNotice the structure under `datasets` is as follows:\n\n```\nvangogh2photo\n\u2502\n\u2514\u2500\u2500\u2500TrainA\n\u2502   \u2502   \n\u2502   \u2514\u2500\u2500\u2500Apple_train\n\u2502       \u2502   pic1.png\n\u2502       \u2502   pic2.png\n\u2502       \u2502   ...\n\u2502    \n\u2502   \n\u2514\u2500\u2500\u2500TrainB\n\u2502   \u2502   \n\u2502   \u2514\u2500\u2500\u2500Orange_train\n\u2502       \u2502   pic1.png\n\u2502       \u2502   pic2.png\n\u2502       \u2502   ...\n\u2502    \n\u2502   \n\u2514\u2500\u2500\u2500TestA\n\u2502   \u2502   \n\u2502   \u2514\u2500\u2500\u2500Apple_test\n\u2502       \u2502   pic1.png\n\u2502       \u2502   pic2.png\n\u2502       \u2502   ...\n\u2502    \n\u2502   \n\u2514\u2500\u2500\u2500TestB\n    \u2502   \n    \u2514\u2500\u2500\u2500Orange_test\n        \u2502   pic1.png\n        \u2502   pic2.png\n        \u2502   ...\n```\n\nAn example modified dataset can be downloaded [here](https://drive.google.com/open?id=1-t9Q2kMwcPxdUe-v6Gy_Kg3LaP68F27K)\n\nThen run the following code in terminal to train:\n\n`python main.py --epochs 200 --decay_epoch 100 --batch_size 2 --training True --testing True --data_name apple2orange`\n\nIf you only want to test:\n\n`python main.py --test_batch_size 1 --testing True --data_name apple2orange`\n\nIf you want to do Monet, you should add identity loss, which needs extra arguments: `--use_id_loss True`\n\nFor more information, check `main.py` or run the following code:\n\n`python main.py -h`\n\n### Reference:\n\n1.Original CycleGAN paper: [arXiv](https://arxiv.org/abs/1703.10593)\n\n2.Original CycleGAN repo: [repo](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)\n\n3.Simple implementation of CycleGAN: [repo](https://github.com/arnab39/cycleGAN-PyTorch)\n",
+            "readme_url": "https://github.com/YiteWang/CS547-final-project",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+            "arxiv": "1703.10593",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1703.10593v7",
+            "abstract": "Image-to-image translation is a class of vision and graphics problems where\nthe goal is to learn the mapping between an input image and an output image\nusing a training set of aligned image pairs. However, for many tasks, paired\ntraining data will not be available. We present an approach for learning to\ntranslate an image from a source domain $X$ to a target domain $Y$ in the\nabsence of paired examples. Our goal is to learn a mapping $G: X \\rightarrow Y$\nsuch that the distribution of images from $G(X)$ is indistinguishable from the\ndistribution $Y$ using an adversarial loss. Because this mapping is highly\nunder-constrained, we couple it with an inverse mapping $F: Y \\rightarrow X$\nand introduce a cycle consistency loss to push $F(G(X)) \\approx X$ (and vice\nversa). Qualitative results are presented on several tasks where paired\ntraining data does not exist, including collection style transfer, object\ntransfiguration, season transfer, photo enhancement, etc. Quantitative\ncomparisons against several prior methods demonstrate the superiority of our\napproach.",
+            "authors": [
+                "Jun-Yan Zhu",
+                "Taesung Park",
+                "Phillip Isola",
+                "Alexei A. Efros"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9998278393221626,
+        "task": "Image-to-Image Translation",
+        "task_prob": 0.9845900506826196
+    }
+}

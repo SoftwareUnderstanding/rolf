@@ -1,0 +1,133 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "BSD 3-Clause \"New\" or \"Revised\" License"
+    },
+    "name": "Adaptation of NICE for inpainting missing data datasets",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "HUJI-Deep",
+                "owner_type": "Organization",
+                "name": "nice",
+                "url": "https://github.com/HUJI-Deep/nice",
+                "stars": 0,
+                "pushed_at": "2016-11-22 19:22:30+00:00",
+                "created_at": "2016-10-09 17:05:48+00:00",
+                "language": "Python",
+                "license": "BSD 3-Clause \"New\" or \"Revised\" License",
+                "frameworks": [
+                    "Theano"
+                ]
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "20ae304791909affbdbab9cdf381cce716c3534c",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/HUJI-Deep/nice/blob/master/LICENSE"
+                    }
+                },
+                "size": 1475
+            },
+            {
+                "type": "code",
+                "name": "__init__.py",
+                "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/HUJI-Deep/nice/blob/master/__init__.py"
+                    }
+                },
+                "size": 0
+            },
+            {
+                "type": "code",
+                "name": "exp",
+                "sha": "e3f58583cc300457cee37e40657682d36f8ce15c",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/HUJI-Deep/nice/tree/master/exp"
+                    }
+                },
+                "num_files": 4
+            },
+            {
+                "type": "code",
+                "name": "pylearn2",
+                "sha": "4178ecadbcb3f1fbab0fc4bc3ef89c95845887c7",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/HUJI-Deep/nice/tree/master/pylearn2"
+                    }
+                },
+                "num_files": 6
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Laurent Dinh",
+            "github_id": "laurent-dinh"
+        },
+        {
+            "name": "Ronen Tamari",
+            "github_id": "ronentk"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/HUJI-Deep/nice",
+            "stars": 0,
+            "issues": false,
+            "readme": "Adaptation of NICE for inpainting missing data datasets\n=======================================================\n\nThis repository extends the original NICE code to support inpainting datasets with general missing data\nsupplied in the form of mask images.\n\n\n\nTraining a model follows the instructions in the original paper- after installing all dependencies, call [`pylearn2/scripts/train.py`](https://github.com/lisa-lab/pylearn2/blob/master/pylearn2/scripts/train.py) on  \n`exp/nice_mnist.yaml`\n\nThe missing data dataset should have one `index.txt` file listing each corrupted image file with its label in Caffe ImageData format, and one `index_mask.txt` file in the same format listing the mask file corresponding to each\ncorrupted image file.\n\nTo inpaint such a dataset, run (for MNIST):\n`` python pylearn2/scripts/mnist_inpainting.py exp/nice_mnist_best.pkl <missing_data_dir> ``\n\nWhere the `.pkl` file is the model generated through training.\n\nThe new dataset will be created at the same location as the missing dataset, under the same name with the addition of `_nice_ip`.\n\nNICE: Non-linear independent components estimation\n==================================================\n\nThis repository contains code (in [`pylearn2/`](https://github.com/laurent-dinh/nice/blob/master/pylearn2/)) and hyperparameters (in [`exp/`](https://github.com/laurent-dinh/nice/blob/master/exp/)) for the paper:\n\n[\"NICE: Non-linear independent components estimation\"](http://arxiv.org/abs/1410.8516) Laurent Dinh, David Krueger, Yoshua Bengio. ArXiv 2014.\n\nPlease cite this paper if you use the code in this repository as part of\na published research project.\n\nWe are an academic lab, not a software company, and have no personnel\ndevoted to documenting and maintaing this research code.\nTherefore this code is offered with minimal support.\nExact reproduction of the numbers in the paper depends on exact\nreproduction of many factors,\nincluding the version of all software dependencies and the choice of\nunderlying hardware (GPU model, etc). We used NVIDA Ge-Force GTX-580\ngraphics cards; other hardware will use different tree structures for\nsummation and incur different rounding error. If you do not reproduce our\nsetup exactly you should expect to need to re-tune your hyperparameters\nslight for your new setup.\n\nMoreover, we have not integrated any unit tests for this code into Theano\nor Pylearn2 so subsequent changes to those libraries may break the code\nin this repository. If you encounter problems with this code, you should\nmake sure that you are using the development branch of [Pylearn2](https://github.com/lisa-lab/pylearn2/) and\n[Theano](https://github.com/Theano/Theano/),\nand use `git checkout` to go to a commit from approximately October 21, 2014. More precisely [`git checkout 3be2a6`](https://github.com/lisa-lab/pylearn2/commit/3be2a6d5ff81273c12023208166b630300eff338) (for Pylearn2) and [`git checkout 165eb4`](https://github.com/Theano/Theano/commit/165eb4e66ab1f5320b2fe67c630a7e76ae5e6526) (for Theano).\n\nThis code itself requires no installation besides making sure that the\n`nice` directory is in a directory in your PYTHONPATH. If\ninstalled correctly, `python -c \"import nice\"` will work. You\nmust also install Pylearn2 and Pylearn2's dependencies (Theano, numpy,\netc.)\n\nCall [`pylearn2/scripts/train.py`](https://github.com/lisa-lab/pylearn2/blob/master/pylearn2/scripts/train.py)\non the various yaml files in this repository\nto train the model for each dataset reported in the paper. The names of\n*.yaml are fairly self-explanatory.",
+            "readme_url": "https://github.com/HUJI-Deep/nice",
+            "frameworks": [
+                "Theano"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "NICE: Non-linear Independent Components Estimation",
+            "arxiv": "1410.8516",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1410.8516v6",
+            "abstract": "We propose a deep learning framework for modeling complex high-dimensional\ndensities called Non-linear Independent Component Estimation (NICE). It is\nbased on the idea that a good representation is one in which the data has a\ndistribution that is easy to model. For this purpose, a non-linear\ndeterministic transformation of the data is learned that maps it to a latent\nspace so as to make the transformed data conform to a factorized distribution,\ni.e., resulting in independent latent variables. We parametrize this\ntransformation so that computing the Jacobian determinant and inverse transform\nis trivial, yet we maintain the ability to learn complex non-linear\ntransformations, via a composition of simple building blocks, each based on a\ndeep neural network. The training criterion is simply the exact log-likelihood,\nwhich is tractable. Unbiased ancestral sampling is also easy. We show that this\napproach yields good generative models on four image datasets and can be used\nfor inpainting.",
+            "authors": [
+                "Laurent Dinh",
+                "David Krueger",
+                "Yoshua Bengio"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "MNIST"
+            },
+            {
+                "name": "Company*"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9988376815388513,
+        "task": "Image Generation",
+        "task_prob": 0.9847337771416098
+    }
+}

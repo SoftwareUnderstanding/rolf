@@ -1,0 +1,180 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "Implementation of https://arxiv.org/abs/1904.00962 for large batch, large learning rate training.",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "cybertronai",
+                "owner_type": "Organization",
+                "name": "pytorch-lamb",
+                "url": "https://github.com/cybertronai/pytorch-lamb",
+                "stars": 297,
+                "pushed_at": "2020-12-09 07:21:03+00:00",
+                "created_at": "2019-04-28 21:42:04+00:00",
+                "language": "Python",
+                "description": "Implementation of  https://arxiv.org/abs/1904.00962",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "17f4b039d7e212f329f4cd47ad2c1956a8643879",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/blob/master/.gitignore"
+                    }
+                },
+                "size": 1709
+            },
+            {
+                "type": "code",
+                "name": ".pylintrc",
+                "sha": "b65d4472263312202a4122a730ccec53fa4ee2ec",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/blob/master/.pylintrc"
+                    }
+                },
+                "size": 178
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "028715978e0ae31c76f117d12c708270983aa619",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/blob/master/LICENSE"
+                    }
+                },
+                "size": 1068
+            },
+            {
+                "type": "code",
+                "name": "images",
+                "sha": "99c000a2c082c5260c448339a1dcccb249213b10",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/tree/master/images"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "pytorch_lamb",
+                "sha": "20001503aa9f53ab8fe29974873e028a8f7b9fbb",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/tree/master/pytorch_lamb"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "ba8f6d683355c39a548df672afc3cc04d6e7c9eb",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/blob/master/setup.py"
+                    }
+                },
+                "size": 589
+            },
+            {
+                "type": "code",
+                "name": "test_lamb.py",
+                "sha": "646250bc3aea0b41827174a236943b967a265cf4",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/cybertronai/pytorch-lamb/blob/master/test_lamb.py"
+                    }
+                },
+                "size": 5206
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Ben Mann",
+            "github_id": "8enmann"
+        },
+        {
+            "name": "Sebastian Bj\u00f6rkqvist",
+            "github_id": "ousou"
+        },
+        {
+            "name": "Yaroslav Bulatov",
+            "email": "yaroslavvb@gmail.com",
+            "github_id": "yaroslavvb"
+        }
+    ],
+    "tags": [],
+    "description": "Implementation of  https://arxiv.org/abs/1904.00962",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/cybertronai/pytorch-lamb",
+            "stars": 297,
+            "issues": true,
+            "readme": "Implementation of https://arxiv.org/abs/1904.00962 for large batch, large learning rate training.\n\nThe paper doesn't specify clamp values for \u03d5, so I use 10.\n\nBonus: TensorboardX logging (example below).\n\n## Try the sample\n```\ngit clone git@github.com:cybertronai/pytorch-lamb.git\ncd pytorch-lamb\npip install -e .\npython test_lamb.py\ntensorboard --logdir=runs\n```\n\n## Sample results\nAt `--lr=.02`, the Adam optimizer is unable to train.\n\nRed: `python test_lamb.py --batch-size=512 --lr=.02 --wd=.01 --log-interval=30 --optimizer=adam`\n\nBlue: `python test_lamb.py --batch-size=512 --lr=.02 --wd=.01 --log-interval=30 --optimizer=lamb`\n![](images/loss.png)\n\n![](images/histogram.png)",
+            "readme_url": "https://github.com/cybertronai/pytorch-lamb",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Large Batch Optimization for Deep Learning: Training BERT in 76 minutes",
+            "arxiv": "1904.00962",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1904.00962v5",
+            "abstract": "Training large deep neural networks on massive datasets is computationally\nvery challenging. There has been recent surge in interest in using large batch\nstochastic optimization methods to tackle this issue. The most prominent\nalgorithm in this line of research is LARS, which by employing layerwise\nadaptive learning rates trains ResNet on ImageNet in a few minutes. However,\nLARS performs poorly for attention models like BERT, indicating that its\nperformance gains are not consistent across tasks. In this paper, we first\nstudy a principled layerwise adaptation strategy to accelerate training of deep\nneural networks using large mini-batches. Using this strategy, we develop a new\nlayerwise adaptive large batch optimization technique called LAMB; we then\nprovide convergence analysis of LAMB as well as LARS, showing convergence to a\nstationary point in general nonconvex settings. Our empirical results\ndemonstrate the superior performance of LAMB across various tasks such as BERT\nand ResNet-50 training with very little hyperparameter tuning. In particular,\nfor BERT training, our optimizer enables use of very large batch sizes of 32868\nwithout any degradation of performance. By increasing the batch size to the\nmemory limit of a TPUv3 Pod, BERT training time can be reduced from 3 days to\njust 76 minutes (Table 1). The LAMB implementation is available at\nhttps://github.com/tensorflow/addons/blob/master/tensorflow_addons/optimizers/lamb.py",
+            "authors": [
+                "Yang You",
+                "Jing Li",
+                "Sashank Reddi",
+                "Jonathan Hseu",
+                "Sanjiv Kumar",
+                "Srinadh Bhojanapalli",
+                "Xiaodan Song",
+                "James Demmel",
+                "Kurt Keutzer",
+                "Cho-Jui Hsieh"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Unknown"
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            }
+        ]
+    }
+}

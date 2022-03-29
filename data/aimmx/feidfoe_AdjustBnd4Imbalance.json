@@ -1,0 +1,218 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Adjusting Decision Boundary for Class Imbalanced Learning",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "feidfoe",
+                "owner_type": "User",
+                "name": "AdjustBnd4Imbalance",
+                "url": "https://github.com/feidfoe/AdjustBnd4Imbalance",
+                "stars": 15,
+                "pushed_at": "2020-05-19 13:00:06+00:00",
+                "created_at": "2019-12-03 06:20:13+00:00",
+                "language": "Python",
+                "description": "Adjust Decision Boundary for Class Imbalanced Learning",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "4ec7696868b9d5b2976382c138b60aea2cb6afdf",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/blob/master/.gitignore"
+                    }
+                },
+                "size": 1138
+            },
+            {
+                "type": "code",
+                "name": ".gitmodules",
+                "sha": "5bcbdeb5bb969258f0f6c90e917ccc600ea6994a",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/blob/master/.gitmodules"
+                    }
+                },
+                "size": 99
+            },
+            {
+                "type": "code",
+                "name": "cifar.py",
+                "sha": "56558a93bfa46e5899e19f90ca699cc1e16c0dc7",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/blob/master/cifar.py"
+                    }
+                },
+                "size": 14528
+            },
+            {
+                "type": "code",
+                "name": "models",
+                "sha": "f88e047a5508793e02a385936845b5aa380793ce",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/tree/master/models"
+                    }
+                },
+                "num_files": 2
+            },
+            {
+                "type": "code",
+                "name": "run_cifar.sh",
+                "sha": "f8ba5eec3896c208681cd74ea758547a3cbb1d9e",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/blob/master/run_cifar.sh"
+                    }
+                },
+                "size": 1585
+            },
+            {
+                "type": "code",
+                "name": "utils",
+                "sha": "e1b1808207a5c5509bed9d53f80f49369d71d3ca",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/feidfoe/AdjustBnd4Imbalance/tree/master/utils"
+                    }
+                },
+                "num_files": 6
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Wei Yang",
+            "email": "platero.yang@gmail.com",
+            "github_id": "bearpaw"
+        },
+        {
+            "name": "Peyton Byungju Kim",
+            "email": "byungju.kim@kaist.ac.kr",
+            "github_id": "feidfoe"
+        },
+        {
+            "name": "hongyi-zhang",
+            "github_id": "hongyi-zhang"
+        },
+        {
+            "name": "lzx1413",
+            "email": "lzx1413@live.cn",
+            "github_id": "lzx1413"
+        }
+    ],
+    "tags": [],
+    "description": "Adjust Decision Boundary for Class Imbalanced Learning",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/feidfoe/AdjustBnd4Imbalance",
+            "stars": 15,
+            "issues": true,
+            "readme": "# Adjusting Decision Boundary for Class Imbalanced Learning\nThis repository is the official PyTorch implementation of WVN-RS, introduced in [Adjusting Decision Boundary for Class Imbalanced Learning](https://ieeexplore.ieee.org/document/9081988).\n\n\n### Requirements\n1. NVIDIA docker : Docker image will be pulled from cloud.\n2. CIFAR dataset : The \"dataset_path\" in run_cifar.sh should be\n```\ncifar10/\n    data_batch_N\n    test_batch\ncifar100/\n    train\n    test\n```\nCIFAR datasets are available [here](https://www.cs.toronto.edu/~kriz/cifar.html).\n\n### How to use\nRun the shell script.\n```\nbash run_cifar.sh\n```\nTo use Weight Vector Normalization (WVN), use --WVN flag. (It is already in the script.)\n\n### Results\n1. *Validation error* on Long-Tailed CIFAR10\n\nImbalance|200|100|50|20|10|1\n:---:|:---:|:---:|:---:|:---:|:---:|:---:\nBaseline   | 35.67 | 29.71 | 22.91 | 16.04 | 13.26 | 6.83\nOver-sample| 32.19 | 28.27 | 21.40 | 15.23 | 12.24 | 6.61\n[Focal](https://arxiv.org/abs/1708.02002)      | 34.71 | 29.62 | 23.28 | 16.77 | 13.19 | 6.60 \n[CB](https://arxiv.org/abs/1901.05555)         | 31.11 | 25.43 | 20.73 | 15.64 | 12.51 | 6.36 \n[LDAM-DRW](https://arxiv.org/abs/1906.07413)   | 28.09 | 22.97 | 17.83 | 14.53 | *11.84* | 6.32 \nBaseline+RS| **27.02** | *21.36* | *17.16* | *13.46* | 11.86 | *6.32* \nWVN+RS     | *27.23* | **20.17** | **16.80** | **12.76** | **10.71** | **6.29** \n\n\n2. *Validation error* on Long-Tailed CIFAR100\n\nImbalance|200|100|50|20|10|1\n:---:|:---:|:---:|:---:|:---:|:---:|:---:\nBaseline   | 64.21 | 60.38 | 55.09 | 48.93 | 43.52 | 29.69\nOver-sample| 66.39 | 61.53 | 56.65 | 49.03 | 43.38 | 29.41\n[Focal](https://arxiv.org/abs/1708.02002)      | 64.38 | 61.31 | 55.68 | 48.05 | 44.22 | *28.52*\n[CB](https://arxiv.org/abs/1901.05555)         | 63.77 | 60.40 | 54.68 | 47.41 | 42.01 | **28.39**\n[LDAM-DRW](https://arxiv.org/abs/1906.07413)   | 61.73 | 57.96 | 52.54 | 47.14 | *41.29* | 28.85\nBaseline+RS| *59.59* | *55.65* | *51.91* | **45.09** | 41.45 | 29.80\nWVN+RS     | **59.48** | **55.50** | **51.80** | *46.12* | **41.02** | 29.22\n\n\n\n\n### Notes\nThis codes use docker image \"feidfoe/pytorch:v.2\" with pytorch version, '0.4.0a0+0640816'.\nThe image only provides basic libraries such as NumPy or PIL.\n\nWVN is implemented on ResNet architecture only.\n\n\n\n#### Baseline repository\nThis repository is forked and modified from [original repo](https://github.com/bearpaw/pytorch-classification).\n\n\n### Contact\n[Byungju Kim](https://feidfoe.github.io/) (byungju.kim@kaist.ac.kr)\n\n\n### BibTeX for Citation\n```\n@ARTICLE{9081988,\n  author={B. {Kim} and J. {Kim}},\n  journal={IEEE Access}, \n  title={Adjusting Decision Boundary for Class Imbalanced Learning}, \n  year={2020},\n  volume={8},\n  number={},\n  pages={81674-81685},}\n```\n",
+            "readme_url": "https://github.com/feidfoe/AdjustBnd4Imbalance",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Class-Balanced Loss Based on Effective Number of Samples",
+            "arxiv": "1901.05555",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1901.05555v1",
+            "abstract": "With the rapid increase of large-scale, real-world datasets, it becomes\ncritical to address the problem of long-tailed data distribution (i.e., a few\nclasses account for most of the data, while most classes are\nunder-represented). Existing solutions typically adopt class re-balancing\nstrategies such as re-sampling and re-weighting based on the number of\nobservations for each class. In this work, we argue that as the number of\nsamples increases, the additional benefit of a newly added data point will\ndiminish. We introduce a novel theoretical framework to measure data overlap by\nassociating with each sample a small neighboring region rather than a single\npoint. The effective number of samples is defined as the volume of samples and\ncan be calculated by a simple formula $(1-\\beta^{n})/(1-\\beta)$, where $n$ is\nthe number of samples and $\\beta \\in [0,1)$ is a hyperparameter. We design a\nre-weighting scheme that uses the effective number of samples for each class to\nre-balance the loss, thereby yielding a class-balanced loss. Comprehensive\nexperiments are conducted on artificially induced long-tailed CIFAR datasets\nand large-scale datasets including ImageNet and iNaturalist. Our results show\nthat when trained with the proposed class-balanced loss, the network is able to\nachieve significant performance gains on long-tailed datasets.",
+            "authors": [
+                "Yin Cui",
+                "Menglin Jia",
+                "Tsung-Yi Lin",
+                "Yang Song",
+                "Serge Belongie"
+            ]
+        },
+        {
+            "title": "Focal Loss for Dense Object Detection",
+            "arxiv": "1708.02002",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1708.02002v2",
+            "abstract": "The highest accuracy object detectors to date are based on a two-stage\napproach popularized by R-CNN, where a classifier is applied to a sparse set of\ncandidate object locations. In contrast, one-stage detectors that are applied\nover a regular, dense sampling of possible object locations have the potential\nto be faster and simpler, but have trailed the accuracy of two-stage detectors\nthus far. In this paper, we investigate why this is the case. We discover that\nthe extreme foreground-background class imbalance encountered during training\nof dense detectors is the central cause. We propose to address this class\nimbalance by reshaping the standard cross entropy loss such that it\ndown-weights the loss assigned to well-classified examples. Our novel Focal\nLoss focuses training on a sparse set of hard examples and prevents the vast\nnumber of easy negatives from overwhelming the detector during training. To\nevaluate the effectiveness of our loss, we design and train a simple dense\ndetector we call RetinaNet. Our results show that when trained with the focal\nloss, RetinaNet is able to match the speed of previous one-stage detectors\nwhile surpassing the accuracy of all existing state-of-the-art two-stage\ndetectors. Code is at: https://github.com/facebookresearch/Detectron.",
+            "authors": [
+                "Tsung-Yi Lin",
+                "Priya Goyal",
+                "Ross Girshick",
+                "Kaiming He",
+                "Piotr Doll\u00e1r"
+            ]
+        },
+        {
+            "title": "Learning Imbalanced Datasets with Label-Distribution-Aware Margin Loss",
+            "arxiv": "1906.07413",
+            "year": 2019,
+            "url": "http://arxiv.org/abs/1906.07413v2",
+            "abstract": "Deep learning algorithms can fare poorly when the training dataset suffers\nfrom heavy class-imbalance but the testing criterion requires good\ngeneralization on less frequent classes. We design two novel methods to improve\nperformance in such scenarios. First, we propose a theoretically-principled\nlabel-distribution-aware margin (LDAM) loss motivated by minimizing a\nmargin-based generalization bound. This loss replaces the standard\ncross-entropy objective during training and can be applied with prior\nstrategies for training with class-imbalance such as re-weighting or\nre-sampling. Second, we propose a simple, yet effective, training schedule that\ndefers re-weighting until after the initial stage, allowing the model to learn\nan initial representation while avoiding some of the complications associated\nwith re-weighting or re-sampling. We test our methods on several benchmark\nvision tasks including the real-world imbalanced dataset iNaturalist 2018. Our\nexperiments show that either of these methods alone can already improve over\nexisting techniques and their combination achieves even better performance\ngains.",
+            "authors": [
+                "Kaidi Cao",
+                "Colin Wei",
+                "Adrien Gaidon",
+                "Nikos Arechiga",
+                "Tengyu Ma"
+            ]
+        },
+        {
+            "pages": "81674-81685",
+            "number": "",
+            "volume": "8",
+            "year": "2020",
+            "title": "Adjusting Decision Boundary for Class Imbalanced Learning",
+            "journal": "IEEE Access",
+            "author": [
+                "{Kim}, B.",
+                "{Kim}, J."
+            ],
+            "ENTRYTYPE": "article",
+            "ID": "9081988",
+            "authors": [
+                "{Kim}, B.",
+                "{Kim}, J."
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9980652717665023,
+        "task": "Object Detection",
+        "task_prob": 0.9558596906317173
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "iNaturalist"
+            }
+        ]
+    }
+}

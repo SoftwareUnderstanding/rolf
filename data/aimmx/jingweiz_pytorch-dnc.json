@@ -1,0 +1,229 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "**Neural Turing Machine** (NTM) &",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "jingweiz",
+                "owner_type": "User",
+                "name": "pytorch-dnc",
+                "url": "https://github.com/jingweiz/pytorch-dnc",
+                "stars": 268,
+                "pushed_at": "2018-02-20 10:38:57+00:00",
+                "created_at": "2017-05-10 21:01:44+00:00",
+                "language": "Python",
+                "description": "Neural Turing Machine (NTM) & Differentiable Neural Computer (DNC) with pytorch & visdom",
+                "license": "MIT License",
+                "frameworks": [
+                    "PyTorch"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "7bbd7db6585d1e00a871ca296e156f6a28896d18",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/blob/master/.gitignore"
+                    }
+                },
+                "size": 48
+            },
+            {
+                "type": "code",
+                "name": "LICENSE.md",
+                "sha": "8017fc58f02544d185c5ad02a84bf64cc5a65b85",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/blob/master/LICENSE.md"
+                    }
+                },
+                "size": 1080
+            },
+            {
+                "type": "code",
+                "name": "assets",
+                "sha": "b20f278d64d78252e6b88f4f3747e23c61ce5a33",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/tree/master/assets"
+                    }
+                },
+                "num_files": 11
+            },
+            {
+                "type": "code",
+                "name": "core",
+                "sha": "6b84a978ee6553ba2ae0d34ee0a3f4135f768721",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/tree/master/core"
+                    }
+                },
+                "num_files": 14
+            },
+            {
+                "type": "code",
+                "name": "logs",
+                "sha": "f3aa77a08ec6a50bb796b6454c28b7b3638a8afe",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/tree/master/logs"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "c11f3267f9743404da44a249f9b6f80014774a66",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/blob/master/main.py"
+                    }
+                },
+                "size": 665
+            },
+            {
+                "type": "code",
+                "name": "models",
+                "sha": "f3aa77a08ec6a50bb796b6454c28b7b3638a8afe",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/tree/master/models"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "utils",
+                "sha": "fd88ba1ea16351c8982fce7cbf74cabdd7a3eba8",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/jingweiz/pytorch-dnc/tree/master/utils"
+                    }
+                },
+                "num_files": 7
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Jingwei Zhang",
+            "email": "zhang@informatik.uni-freiburg.de",
+            "github_id": "jingweiz"
+        }
+    ],
+    "tags": [
+        "ntm",
+        "dnc",
+        "pytorch",
+        "visdom",
+        "external-memory",
+        "deep-learning"
+    ],
+    "description": "Neural Turing Machine (NTM) & Differentiable Neural Computer (DNC) with pytorch & visdom",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/jingweiz/pytorch-dnc",
+            "stars": 268,
+            "issues": true,
+            "readme": "# **Neural Turing Machine** (NTM) &\n# **Differentiable Neural Computer** (DNC) with\n# **pytorch** & **visdom**\n*******\n\n\n* Sample on-line plotting while training(avg loss)/testing(write/read weights & memory)\n  NTM on the copy task (top 2 rows, 1st row converges to sequentially write to lower locations, 2nd row converges to sequentially write to upper locations) and\n  DNC on the repeat-copy task (3rd row) (the write/read weights here are after location focus so are no longer necessarily normalized within each head by design):\n\n<img src=\"/assets/ntm_copy_train_revised_16_0.png\" width=\"205\"/> <img src=\"/assets/ntm_copy_test_revised_16_0.gif\" width=\"600\"/>\n<img src=\"/assets/ntm_copy_train_revised_16_1.png\" width=\"205\"/> <img src=\"/assets/ntm_copy_test_revised_16_1.gif\" width=\"600\"/>\n<img src=\"/assets/dnc_repeat_copy_train_revised_tanh.png\" width=\"205\"/> <img src=\"/assets/dnc_repeat_copy_test_revised.gif\" width=\"600\"/>\n\n\n* Sample loggings while training DNC on the repeat-copy task (we use ```WARNING``` as the logging level currently to get rid of the ```INFO``` printouts from visdom):\n```bash\n[WARNING ] (MainProcess) <===================================>\n[WARNING ] (MainProcess) bash$: python -m visdom.server\n[WARNING ] (MainProcess) http://localhost:8097/env/daim_17051000\n[WARNING ] (MainProcess) <===================================> Agent:\n[WARNING ] (MainProcess) <-----------------------------======> Env:\n[WARNING ] (MainProcess) Creating {repeat-copy | } w/ Seed: 123\n[WARNING ] (MainProcess) Word     {length}:   {4}\n[WARNING ] (MainProcess) Words #  {min, max}: {1, 2}\n[WARNING ] (MainProcess) Repeats  {min, max}: {1, 2}\n[WARNING ] (MainProcess) <-----------------------------======> Circuit:    {Controller, Accessor}\n[WARNING ] (MainProcess) <--------------------------------===> Controller:\n[WARNING ] (MainProcess) LSTMController (\n  (in_2_hid): LSTMCell(70, 64, bias=1)\n)\n[WARNING ] (MainProcess) <--------------------------------===> Accessor:   {WriteHead, ReadHead, Memory}\n[WARNING ] (MainProcess) <-----------------------------------> WriteHeads: {1 heads}\n[WARNING ] (MainProcess) DynamicWriteHead (\n  (hid_2_key): Linear (64 -> 16)\n  (hid_2_beta): Linear (64 -> 1)\n  (hid_2_alloc_gate): Linear (64 -> 1)\n  (hid_2_write_gate): Linear (64 -> 1)\n  (hid_2_erase): Linear (64 -> 16)\n  (hid_2_add): Linear (64 -> 16)\n)\n[WARNING ] (MainProcess) <-----------------------------------> ReadHeads:  {4 heads}\n[WARNING ] (MainProcess) DynamicReadHead (\n  (hid_2_key): Linear (64 -> 64)\n  (hid_2_beta): Linear (64 -> 4)\n  (hid_2_free_gate): Linear (64 -> 4)\n  (hid_2_read_mode): Linear (64 -> 12)\n)\n[WARNING ] (MainProcess) <-----------------------------------> Memory:     {16(batch_size) x 16(mem_hei) x 16(mem_wid)}\n[WARNING ] (MainProcess) <-----------------------------======> Circuit:    {Overall Architecture}\n[WARNING ] (MainProcess) DNCCircuit (\n  (controller): LSTMController (\n    (in_2_hid): LSTMCell(70, 64, bias=1)\n  )\n  (accessor): DynamicAccessor (\n    (write_heads): DynamicWriteHead (\n      (hid_2_key): Linear (64 -> 16)\n      (hid_2_beta): Linear (64 -> 1)\n      (hid_2_alloc_gate): Linear (64 -> 1)\n      (hid_2_write_gate): Linear (64 -> 1)\n      (hid_2_erase): Linear (64 -> 16)\n      (hid_2_add): Linear (64 -> 16)\n    )\n    (read_heads): DynamicReadHead (\n      (hid_2_key): Linear (64 -> 64)\n      (hid_2_beta): Linear (64 -> 4)\n      (hid_2_free_gate): Linear (64 -> 4)\n      (hid_2_read_mode): Linear (64 -> 12)\n    )\n  )\n  (hid_to_out): Linear (128 -> 5)\n)\n[WARNING ] (MainProcess) No Pretrained Model. Will Train From Scratch.\n[WARNING ] (MainProcess) <===================================> Training ...\n[WARNING ] (MainProcess) Reporting       @ Step: 500 | Elapsed Time: 30.609361887\n[WARNING ] (MainProcess) Training Stats:   avg_loss:         0.014866309287\n[WARNING ] (MainProcess) Evaluating      @ Step: 500\n[WARNING ] (MainProcess) Evaluation        Took: 1.6457400322\n[WARNING ] (MainProcess) Iteration: 500; loss_avg: 0.0140423600748\n[WARNING ] (MainProcess) Saving Model    @ Step: 500: /home/zhang/ws/17_ws/pytorch-dnc/models/daim_17051000.pth ...\n[WARNING ] (MainProcess) Saved  Model    @ Step: 500: /home/zhang/ws/17_ws/pytorch-dnc/models/daim_17051000.pth.\n[WARNING ] (MainProcess) Resume Training @ Step: 500\n...\n```\n*******\n\n\n## What is included?\nThis repo currently contains the following algorithms:\n\n- Neural Turing Machines (NTM) [[1]](https://arxiv.org/abs/1410.5401)\n- Differentiable Neural Computers (DNC) [[2]](http://www.nature.com/nature/journal/v538/n7626/full/nature20101.html)\n\nTasks:\n- copy\n- repeat-copy\n\n## Code structure & Naming conventions\nNOTE: we follow the exact code structure as [pytorch-rl](https://github.com/jingweiz/pytorch-rl) so as to make the code easily transplantable.\n* ```./utils/factory.py```\n> We suggest the users refer to ```./utils/factory.py```,\n where we list all the integrated ```Env```, ```Circuit```, ```Agent``` into ```Dict```'s.\n All of the core classes are implemented in ```./core/```.\n The factory pattern in ```./utils/factory.py``` makes the code super clean,\n as no matter what type of ```Circuit``` you want to train,\n or which type of ```Env``` you want to train on,\n all you need to do is to simply modify some parameters in ```./utils/options.py```,\n then the ```./main.py``` will do it all (NOTE: this ```./main.py``` file never needs to be modified).\n* namings\n> To make the code more clean and readable, we name the variables using the following pattern:\n> * ```*_vb```: ```torch.autograd.Variable```'s or a list of such objects\n> * ```*_ts```: ```torch.Tensor```'s or a list of such objects\n> * otherwise: normal python datatypes\n\n\n## Dependencies\n- Python 2.7\n- [PyTorch >=v0.2.0](http://pytorch.org/)\n- [Visdom](https://github.com/facebookresearch/visdom)\n*******\n\n\n## How to run:\nYou only need to modify some parameters in ```./utils/options.py``` to train a new configuration.\n\n* Configure your training in ```./utils/options.py```:\n> * ```line 12```: add an entry into ```CONFIGS``` to define your training (```agent_type```, ```env_type```, ```game```, ```circuit_type```)\n> * ```line 28```: choose the entry you just added\n> * ```line 24-25```: fill in your machine/cluster ID (```MACHINE```) and timestamp (```TIMESTAMP```) to define your training signature (```MACHINE_TIMESTAMP```),\n the corresponding model file and the log file of this training will be saved under this signature (```./models/MACHINE_TIMESTAMP.pth``` & ```./logs/MACHINE_TIMESTAMP.log``` respectively).\n Also the visdom visualization will be displayed under this signature (first activate the visdom server by type in bash: ```python -m visdom.server &```, then open this address in your browser: ```http://localhost:8097/env/MACHINE_TIMESTAMP```)\n> * ```line 28```: to train a model, set ```mode=1``` (training visualization will be under ```http://localhost:8097/env/MACHINE_TIMESTAMP```); to test the model of this current training, all you need to do is to set ```mode=2``` (testing visualization will be under ```http://localhost:8097/env/MACHINE_TIMESTAMP_test```).\n\n* Run:\n> ```python main.py```\n*******\n\n\n## Implementation Notes:\nThe difference between ```NTM``` & ```DNC``` is stated as follows in the\n```DNC```[2] paper:\n> Comparison with the neural Turing machine. The neural Turing machine (NTM) was\nthe predecessor to the DNC described in this work. It used a similar\narchitecture of neural network controller with read\u2013write access to a memory\nmatrix, but differed in the access mechanism used to interface with the memory.\nIn the NTM, content-based addressing was combined with location-based addressing\nto allow the network to iterate through memory locations in order of their\nindices (for example, location n followed by n+1 and so on). This allowed the\nnetwork to store and retrieve temporal sequences in contiguous blocks of memory.\nHowever, there were several drawbacks. First, the NTM has no mechanism to ensure\nthat blocks of allocated memory do not overlap and interfere\u2014a basic problem of\ncomputer memory management. Interference is not an issue for the dynamic memory\nallocation used by DNCs, which provides single free locations at a time,\nirrespective of index, and therefore does not require contiguous blocks. Second,\nthe NTM has no way of freeing locations that have already been written to and,\nhence, no way of reusing memory when processing long sequences. This problem is\naddressed in DNCs by the free gates used for de-allocation. Third, sequential\ninformation is preserved only as long as the NTM continues to iterate through\nconsecutive locations; as soon as the write head jumps to a different part of\nthe memory (using content-based addressing) the order of writes before and after\nthe jump cannot be recovered by the read head. The temporal link matrix used by\nDNCs does not suffer from this problem because it tracks the order in which\nwrites were made.\n\nWe thus make some effort to put those two together in a combined codebase.\nThe classes implemented have the following hierarchy:\n* Agent\n  * Env\n  * Circuit\n    * Controller\n    * Accessor\n      * WriteHead\n      * ReadHead\n      * Memory\n\nThe part where ```NTM``` & ```DNC``` differs is the ```Accessor```, where in the\ncode ```NTM``` uses the ```StaticAccessor```(may not be an appropriate name but\nwe use this to make the code more consistent) and ```DNC``` uses the\n```DynamicAccessor```. Both ```Accessor``` classes use ```_content_focus()```\nand ```_location_focus()```(may not be an appropriate name for ```DNC``` but we\nuse this to make the code more consistent). The ```_content_focus()``` is the\nsame for both classes, but the ```_location_focus()``` for ```DNC``` is much\nmore complicated as it uses ```dynamic allocation``` additionally for write and\n```temporal link``` additionally for read. Those focus (or attention) mechanisms\nare implemented in ```Head``` classes, and those focuses output a ```weight```\nvector for each ```head``` (write/read). Those ```weight``` vectors are then used in\n```_access()``` to interact with the ```external memory```.\n\n## A side note:\nThe sturcture for ```Env``` might look strange as this class was originally\ndesigned for ```reinforcement learning``` settings as in\n[pytorch-rl](https://github.com/jingweiz/pytorch-rl); here we use it for\nproviding datasets for ```supervised learning```, so the ```reward```,\n```action``` and ```terminal``` are always left blank in this repo.\n*******\n\n\n## Repos we referred to during the development of this repo:\n* [deepmind/dnc](https://github.com/deepmind/dnc)\n* [ypxie/pytorch-NeuCom](https://github.com/ypxie/pytorch-NeuCom)\n* [bzcheeseman/pytorch-EMM](https://github.com/bzcheeseman/pytorch-EMM)\n* [DoctorTeeth/diffmem](https://github.com/DoctorTeeth/diffmem)\n* [kaishengtai/torch-ntm](https://github.com/kaishengtai/torch-ntm)\n* [Mostafa-Samir/DNC-tensorflow](https://github.com/Mostafa-Samir/DNC-tensorflow)\n*******\n\n## The following paper might be interesting to take a look:)\n> [Neural SLAM](https://arxiv.org/abs/1706.09520): We present an approach for agents to learn representations of a global map from sensor data, to aid their exploration in new environments. To achieve this, we embed procedures mimicking that of traditional Simultaneous Localization and Mapping (SLAM) into the soft attention based addressing of external memory architectures, in which the external memory acts as an internal representation of the environment. This structure encourages the evolution of SLAM-like behaviors inside a completely differentiable deep neural network. We show that this approach can help reinforcement learning agents to successfully explore new environments where long-term memory is essential. We validate our approach in both challenging grid-world environments and preliminary Gazebo experiments. A video of our experiments can be found at: \\url{https://goo.gl/RfiSxo}.\n\n```\n@article{zhang2017neural,\n  title={Neural SLAM},\n  author={Zhang, Jingwei and Tai, Lei and Boedecker, Joschka and Burgard, Wolfram and Liu, Ming},\n  journal={arXiv preprint arXiv:1706.09520},\n  year={2017}\n}\n\n```\n*******\n\n\n## Citation\nIf you find this library useful and would like to cite it, the following would be appropriate:\n```\n@misc{pytorch-dnc,\n  author = {Zhang, Jingwei},\n  title = {jingweiz/pytorch-dnc},\n  url = {https://github.com/jingweiz/pytorch-dnc},\n  year = {2017}\n}\n```\n",
+            "readme_url": "https://github.com/jingweiz/pytorch-dnc",
+            "frameworks": [
+                "PyTorch"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Neural Turing Machines",
+            "arxiv": "1410.5401",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1410.5401v2",
+            "abstract": "We extend the capabilities of neural networks by coupling them to external\nmemory resources, which they can interact with by attentional processes. The\ncombined system is analogous to a Turing Machine or Von Neumann architecture\nbut is differentiable end-to-end, allowing it to be efficiently trained with\ngradient descent. Preliminary results demonstrate that Neural Turing Machines\ncan infer simple algorithms such as copying, sorting, and associative recall\nfrom input and output examples.",
+            "authors": [
+                "Alex Graves",
+                "Greg Wayne",
+                "Ivo Danihelka"
+            ]
+        },
+        {
+            "title": "Neural SLAM: Learning to Explore with External Memory",
+            "arxiv": "1706.09520",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1706.09520v7",
+            "abstract": "We present an approach for agents to learn representations of a global map\nfrom sensor data, to aid their exploration in new environments. To achieve\nthis, we embed procedures mimicking that of traditional Simultaneous\nLocalization and Mapping (SLAM) into the soft attention based addressing of\nexternal memory architectures, in which the external memory acts as an internal\nrepresentation of the environment. This structure encourages the evolution of\nSLAM-like behaviors inside a completely differentiable deep neural network. We\nshow that this approach can help reinforcement learning agents to successfully\nexplore new environments where long-term memory is essential. We validate our\napproach in both challenging grid-world environments and preliminary Gazebo\nexperiments. A video of our experiments can be found at: https://goo.gl/G2Vu5y.",
+            "authors": [
+                "Jingwei Zhang",
+                "Lei Tai",
+                "Ming Liu",
+                "Joschka Boedecker",
+                "Wolfram Burgard"
+            ]
+        },
+        {
+            "year": "2017",
+            "url": "https://github.com/jingweiz/pytorch-dnc",
+            "title": "jingweiz/pytorch-dnc",
+            "author": [
+                "Zhang, Jingwei"
+            ],
+            "ENTRYTYPE": "misc",
+            "ID": "pytorch-dnc",
+            "authors": [
+                "Zhang, Jingwei"
+            ]
+        },
+        {
+            "title": "deepmind/dnc",
+            "url": "https://github.com/deepmind/dnc"
+        },
+        {
+            "title": "ypxie/pytorch-NeuCom",
+            "url": "https://github.com/ypxie/pytorch-NeuCom"
+        },
+        {
+            "title": "bzcheeseman/pytorch-EMM",
+            "url": "https://github.com/bzcheeseman/pytorch-EMM"
+        },
+        {
+            "title": "DoctorTeeth/diffmem",
+            "url": "https://github.com/DoctorTeeth/diffmem"
+        },
+        {
+            "title": "kaishengtai/torch-ntm",
+            "url": "https://github.com/kaishengtai/torch-ntm"
+        },
+        {
+            "title": "Mostafa-Samir/DNC-tensorflow",
+            "url": "https://github.com/Mostafa-Samir/DNC-tensorflow"
+        }
+    ],
+    "domain": {
+        "domain_type": "Unknown"
+    }
+}

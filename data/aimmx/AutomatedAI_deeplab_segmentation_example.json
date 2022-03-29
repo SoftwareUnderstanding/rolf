@@ -1,0 +1,313 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "DeepLab: Deep Labelling for Semantic Image Segmentation",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "AutomatedAI",
+                "owner_type": "User",
+                "name": "deeplab_segmentation_example",
+                "url": "https://github.com/AutomatedAI/deeplab_segmentation_example",
+                "stars": 1,
+                "pushed_at": "2019-06-05 12:36:07+00:00",
+                "created_at": "2018-09-29 14:37:29+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "894a44cc066a027465cd26d634948d56d13af9af",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/AutomatedAI/deeplab_segmentation_example/blob/master/.gitignore"
+                    }
+                },
+                "size": 1203
+            },
+            {
+                "type": "code",
+                "name": "data",
+                "sha": "92963a03c0321e12c2af72a34cb5aab321080a8b",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/AutomatedAI/deeplab_segmentation_example/tree/master/data"
+                    }
+                },
+                "num_files": 1
+            },
+            {
+                "type": "code",
+                "name": "prediction_support.py",
+                "sha": "e8cf4210af60a1c83aa0676e20c2665d82fb9797",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/AutomatedAI/deeplab_segmentation_example/blob/master/prediction_support.py"
+                    }
+                },
+                "size": 6100
+            },
+            {
+                "type": "code",
+                "name": "prediction_test.py",
+                "sha": "f53c13662b092b646d374530dc32cd5c03b43c96",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/AutomatedAI/deeplab_segmentation_example/blob/master/prediction_test.py"
+                    }
+                },
+                "size": 575
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "automated.ai",
+            "github_id": "AutomatedAI"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/AutomatedAI/deeplab_segmentation_example",
+            "stars": 1,
+            "issues": true,
+            "readme": "# DeepLab: Deep Labelling for Semantic Image Segmentation\n\nThis is a bit of inference code written to take a DeepLab model and test it locally with support functions.  It contains a lightweight model and inferce code for COCO to test locally on your machine. The Readme from DeepLab is shown below as it was not clear it had a License. \n\n```\npython3 prediction_test.py # imports prediction_support and runs the segmentation inference.\n```\n\n# MIT License on the bits I made:\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n \n\n# DeepLab: Deep Labelling for Semantic Image Segmentation\n\nDeepLab is a state-of-art deep learning model for semantic image segmentation,\nwhere the goal is to assign semantic labels (e.g., person, dog, cat and so on)\nto every pixel in the input image. Current implementation includes the following\nfeatures:\n\n1.  DeepLabv1 [1]: We use *atrous convolution* to explicitly control the\n    resolution at which feature responses are computed within Deep Convolutional\n    Neural Networks.\n\n2.  DeepLabv2 [2]: We use *atrous spatial pyramid pooling* (ASPP) to robustly\n    segment objects at multiple scales with filters at multiple sampling rates\n    and effective fields-of-views.\n\n3.  DeepLabv3 [3]: We augment the ASPP module with *image-level feature* [5, 6]\n    to capture longer range information. We also include *batch normalization*\n    [7] parameters to facilitate the training. In particular, we applying atrous\n    convolution to extract output features at different output strides during\n    training and evaluation, which efficiently enables training BN at output\n    stride = 16 and attains a high performance at output stride = 8 during\n    evaluation.\n\n4.  DeepLabv3+ [4]: We extend DeepLabv3 to include a simple yet effective\n    decoder module to refine the segmentation results especially along object\n    boundaries. Furthermore, in this encoder-decoder structure one can\n    arbitrarily control the resolution of extracted encoder features by atrous\n    convolution to trade-off precision and runtime.\n\nIf you find the code useful for your research, please consider citing our latest\nworks:\n\n*   DeepLabv3+:\n\n```\n@article{deeplabv3plus2018,\n  title={Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation},\n  author={Liang-Chieh Chen and Yukun Zhu and George Papandreou and Florian Schroff and Hartwig Adam},\n  journal={arXiv:1802.02611},\n  year={2018}\n}\n```\n\n*   MobileNetv2:\n\n```\n@inproceedings{mobilenetv22018,\n  title={Inverted Residuals and Linear Bottlenecks: Mobile Networks for Classification, Detection and Segmentation},\n  author={Mark Sandler and Andrew Howard and Menglong Zhu and Andrey Zhmoginov and Liang-Chieh Chen},\n  booktitle={CVPR},\n  year={2018}\n}\n```\n\nIn the current implementation, we support adopting the following network\nbackbones:\n\n1.  MobileNetv2 [8]: A fast network structure designed for mobile devices.\n\n2.  Xception [9, 10]: A powerful network structure intended for server-side\n    deployment.\n\nThis directory contains our TensorFlow [11] implementation. We provide codes\nallowing users to train the model, evaluate results in terms of mIOU (mean\nintersection-over-union), and visualize segmentation results. We use PASCAL VOC\n2012 [12] and Cityscapes [13] semantic segmentation benchmarks as an example in\nthe code.\n\n\n\n## Contacts (Maintainers)\n\n*   Liang-Chieh Chen, github: [aquariusjay](https://github.com/aquariusjay)\n*   YuKun Zhu, github: [yknzhu](https://github.com/YknZhu)\n*   George Papandreou, github: [gpapan](https://github.com/gpapan)\n\n## Tables of Contents\n\nDemo:\n\n*   <a href='https://colab.sandbox.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb'>Colab notebook for off-the-shelf inference.</a><br>\n\n## Getting Help\n\nTo get help with issues you may encounter while using the DeepLab Tensorflow\nimplementation, create a new question on\n[StackOverflow](https://stackoverflow.com/) with the tags \"tensorflow\" and\n\"deeplab\".\n\nPlease report bugs (i.e., broken code, not usage questions) to the\ntensorflow/models GitHub [issue\ntracker](https://github.com/tensorflow/models/issues), prefixing the issue name\nwith \"deeplab\".\n\n## References\n\n1.  **Semantic Image Segmentation with Deep Convolutional Nets and Fully Connected CRFs**<br />\n    Liang-Chieh Chen+, George Papandreou+, Iasonas Kokkinos, Kevin Murphy, Alan L. Yuille (+ equal\n    contribution). <br />\n    [[link]](https://arxiv.org/abs/1412.7062). In ICLR, 2015.\n\n2.  **DeepLab: Semantic Image Segmentation with Deep Convolutional Nets,**\n    **Atrous Convolution, and Fully Connected CRFs** <br />\n    Liang-Chieh Chen+, George Papandreou+, Iasonas Kokkinos, Kevin Murphy, and Alan L Yuille (+ equal\n    contribution). <br />\n    [[link]](http://arxiv.org/abs/1606.00915). TPAMI 2017.\n\n3.  **Rethinking Atrous Convolution for Semantic Image Segmentation**<br />\n    Liang-Chieh Chen, George Papandreou, Florian Schroff, Hartwig Adam.<br />\n    [[link]](http://arxiv.org/abs/1706.05587). arXiv: 1706.05587, 2017.\n\n4.  **Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation**<br />\n    Liang-Chieh Chen, Yukun Zhu, George Papandreou, Florian Schroff, Hartwig Adam. arXiv: 1802.02611.<br />\n    [[link]](https://arxiv.org/abs/1802.02611). arXiv: 1802.02611, 2018.\n\n5.  **ParseNet: Looking Wider to See Better**<br />\n    Wei Liu, Andrew Rabinovich, Alexander C Berg<br />\n    [[link]](https://arxiv.org/abs/1506.04579). arXiv:1506.04579, 2015.\n\n6.  **Pyramid Scene Parsing Network**<br />\n    Hengshuang Zhao, Jianping Shi, Xiaojuan Qi, Xiaogang Wang, Jiaya Jia<br />\n    [[link]](https://arxiv.org/abs/1612.01105). In CVPR, 2017.\n\n7.  **Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate shift**<br />\n    Sergey Ioffe, Christian Szegedy <br />\n    [[link]](https://arxiv.org/abs/1502.03167). In ICML, 2015.\n\n8.  **Inverted Residuals and Linear Bottlenecks: Mobile Networks for Classification, Detection and Segmentation**<br />\n    Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, Liang-Chieh Chen<br />\n    [[link]](https://arxiv.org/abs/1801.04381). arXiv:1801.04381, 2018.\n\n9.  **Xception: Deep Learning with Depthwise Separable Convolutions**<br />\n    Fran\u00e7ois Chollet<br />\n    [[link]](https://arxiv.org/abs/1610.02357). In CVPR, 2017.\n\n10. **Deformable Convolutional Networks -- COCO Detection and Segmentation Challenge 2017 Entry**<br />\n    Haozhi Qi, Zheng Zhang, Bin Xiao, Han Hu, Bowen Cheng, Yichen Wei, Jifeng Dai<br />\n    [[link]](http://presentations.cocodataset.org/COCO17-Detect-MSRA.pdf). ICCV COCO Challenge\n    Workshop, 2017.\n\n11. **Tensorflow: Large-Scale Machine Learning on Heterogeneous Distributed Systems**<br />\n    M. Abadi, A. Agarwal, et al. <br />\n    [[link]](https://arxiv.org/abs/1603.04467). arXiv:1603.04467, 2016.\n\n12. **The Pascal Visual Object Classes Challenge \u2013 A Retrospective,** <br />\n    Mark Everingham, S. M. Ali Eslami, Luc Van Gool, Christopher K. I. Williams, John\n    Winn, and Andrew Zisserma. <br />\n    [[link]](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/). IJCV, 2014.\n\n13. **The Cityscapes Dataset for Semantic Urban Scene Understanding**<br />\n    Cordts, Marius, Mohamed Omran, Sebastian Ramos, Timo Rehfeld, Markus Enzweiler, Rodrigo Benenson, Uwe Franke, Stefan Roth, Bernt Schiele. <br />\n    [[link]](https://www.cityscapes-dataset.com/). In CVPR, 2016.\n",
+            "readme_url": "https://github.com/AutomatedAI/deeplab_segmentation_example",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation",
+            "arxiv": "1802.02611",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1802.02611v3",
+            "abstract": "Spatial pyramid pooling module or encode-decoder structure are used in deep\nneural networks for semantic segmentation task. The former networks are able to\nencode multi-scale contextual information by probing the incoming features with\nfilters or pooling operations at multiple rates and multiple effective\nfields-of-view, while the latter networks can capture sharper object boundaries\nby gradually recovering the spatial information. In this work, we propose to\ncombine the advantages from both methods. Specifically, our proposed model,\nDeepLabv3+, extends DeepLabv3 by adding a simple yet effective decoder module\nto refine the segmentation results especially along object boundaries. We\nfurther explore the Xception model and apply the depthwise separable\nconvolution to both Atrous Spatial Pyramid Pooling and decoder modules,\nresulting in a faster and stronger encoder-decoder network. We demonstrate the\neffectiveness of the proposed model on PASCAL VOC 2012 and Cityscapes datasets,\nachieving the test set performance of 89.0\\% and 82.1\\% without any\npost-processing. Our paper is accompanied with a publicly available reference\nimplementation of the proposed models in Tensorflow at\n\\url{https://github.com/tensorflow/models/tree/master/research/deeplab}.",
+            "authors": [
+                "Liang-Chieh Chen",
+                "Yukun Zhu",
+                "George Papandreou",
+                "Florian Schroff",
+                "Hartwig Adam"
+            ]
+        },
+        {
+            "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+            "arxiv": "1502.03167",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1502.03167v3",
+            "abstract": "Training Deep Neural Networks is complicated by the fact that the\ndistribution of each layer's inputs changes during training, as the parameters\nof the previous layers change. This slows down the training by requiring lower\nlearning rates and careful parameter initialization, and makes it notoriously\nhard to train models with saturating nonlinearities. We refer to this\nphenomenon as internal covariate shift, and address the problem by normalizing\nlayer inputs. Our method draws its strength from making normalization a part of\nthe model architecture and performing the normalization for each training\nmini-batch. Batch Normalization allows us to use much higher learning rates and\nbe less careful about initialization. It also acts as a regularizer, in some\ncases eliminating the need for Dropout. Applied to a state-of-the-art image\nclassification model, Batch Normalization achieves the same accuracy with 14\ntimes fewer training steps, and beats the original model by a significant\nmargin. Using an ensemble of batch-normalized networks, we improve upon the\nbest published result on ImageNet classification: reaching 4.9% top-5\nvalidation error (and 4.8% test error), exceeding the accuracy of human raters.",
+            "authors": [
+                "Sergey Ioffe",
+                "Christian Szegedy"
+            ]
+        },
+        {
+            "title": "Xception: Deep Learning with Depthwise Separable Convolutions",
+            "arxiv": "1610.02357",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1610.02357v3",
+            "abstract": "We present an interpretation of Inception modules in convolutional neural\nnetworks as being an intermediate step in-between regular convolution and the\ndepthwise separable convolution operation (a depthwise convolution followed by\na pointwise convolution). In this light, a depthwise separable convolution can\nbe understood as an Inception module with a maximally large number of towers.\nThis observation leads us to propose a novel deep convolutional neural network\narchitecture inspired by Inception, where Inception modules have been replaced\nwith depthwise separable convolutions. We show that this architecture, dubbed\nXception, slightly outperforms Inception V3 on the ImageNet dataset (which\nInception V3 was designed for), and significantly outperforms Inception V3 on a\nlarger image classification dataset comprising 350 million images and 17,000\nclasses. Since the Xception architecture has the same number of parameters as\nInception V3, the performance gains are not due to increased capacity but\nrather to a more efficient use of model parameters.",
+            "authors": [
+                "Fran\u00e7ois Chollet"
+            ]
+        },
+        {
+            "title": "ParseNet: Looking Wider to See Better",
+            "arxiv": "1506.04579",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1506.04579v2",
+            "abstract": "We present a technique for adding global context to deep convolutional\nnetworks for semantic segmentation. The approach is simple, using the average\nfeature for a layer to augment the features at each location. In addition, we\nstudy several idiosyncrasies of training, significantly increasing the\nperformance of baseline networks (e.g. from FCN). When we add our proposed\nglobal feature, and a technique for learning normalization parameters, accuracy\nincreases consistently even over our improved versions of the baselines. Our\nproposed approach, ParseNet, achieves state-of-the-art performance on SiftFlow\nand PASCAL-Context with small additional computational cost over baselines, and\nnear current state-of-the-art performance on PASCAL VOC 2012 semantic\nsegmentation with a simple approach. Code is available at\nhttps://github.com/weiliu89/caffe/tree/fcn .",
+            "authors": [
+                "Wei Liu",
+                "Andrew Rabinovich",
+                "Alexander C. Berg"
+            ]
+        },
+        {
+            "title": "MobileNetV2: Inverted Residuals and Linear Bottlenecks",
+            "arxiv": "1801.04381",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1801.04381v4",
+            "abstract": "In this paper we describe a new mobile architecture, MobileNetV2, that\nimproves the state of the art performance of mobile models on multiple tasks\nand benchmarks as well as across a spectrum of different model sizes. We also\ndescribe efficient ways of applying these mobile models to object detection in\na novel framework we call SSDLite. Additionally, we demonstrate how to build\nmobile semantic segmentation models through a reduced form of DeepLabv3 which\nwe call Mobile DeepLabv3.\n  The MobileNetV2 architecture is based on an inverted residual structure where\nthe input and output of the residual block are thin bottleneck layers opposite\nto traditional residual models which use expanded representations in the input\nan MobileNetV2 uses lightweight depthwise convolutions to filter features in\nthe intermediate expansion layer. Additionally, we find that it is important to\nremove non-linearities in the narrow layers in order to maintain\nrepresentational power. We demonstrate that this improves performance and\nprovide an intuition that led to this design. Finally, our approach allows\ndecoupling of the input/output domains from the expressiveness of the\ntransformation, which provides a convenient framework for further analysis. We\nmeasure our performance on Imagenet classification, COCO object detection, VOC\nimage segmentation. We evaluate the trade-offs between accuracy, and number of\noperations measured by multiply-adds (MAdd), as well as the number of\nparameters",
+            "authors": [
+                "Mark Sandler",
+                "Andrew Howard",
+                "Menglong Zhu",
+                "Andrey Zhmoginov",
+                "Liang-Chieh Chen"
+            ]
+        },
+        {
+            "title": "TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems",
+            "arxiv": "1603.04467",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1603.04467v2",
+            "abstract": "TensorFlow is an interface for expressing machine learning algorithms, and an\nimplementation for executing such algorithms. A computation expressed using\nTensorFlow can be executed with little or no change on a wide variety of\nheterogeneous systems, ranging from mobile devices such as phones and tablets\nup to large-scale distributed systems of hundreds of machines and thousands of\ncomputational devices such as GPU cards. The system is flexible and can be used\nto express a wide variety of algorithms, including training and inference\nalgorithms for deep neural network models, and it has been used for conducting\nresearch and for deploying machine learning systems into production across more\nthan a dozen areas of computer science and other fields, including speech\nrecognition, computer vision, robotics, information retrieval, natural language\nprocessing, geographic information extraction, and computational drug\ndiscovery. This paper describes the TensorFlow interface and an implementation\nof that interface that we have built at Google. The TensorFlow API and a\nreference implementation were released as an open-source package under the\nApache 2.0 license in November, 2015 and are available at www.tensorflow.org.",
+            "authors": [
+                "Mart\u00edn Abadi",
+                "Ashish Agarwal",
+                "Paul Barham",
+                "Eugene Brevdo",
+                "Zhifeng Chen",
+                "Craig Citro",
+                "Greg S. Corrado",
+                "Andy Davis",
+                "Jeffrey Dean",
+                "Matthieu Devin",
+                "Sanjay Ghemawat",
+                "Ian Goodfellow",
+                "Andrew Harp",
+                "Geoffrey Irving",
+                "Michael Isard",
+                "Yangqing Jia",
+                "Rafal Jozefowicz",
+                "Lukasz Kaiser",
+                "Manjunath Kudlur",
+                "Josh Levenberg",
+                "Dan Mane",
+                "Rajat Monga",
+                "Sherry Moore",
+                "Derek Murray",
+                "Chris Olah",
+                "Mike Schuster",
+                "Jonathon Shlens",
+                "Benoit Steiner",
+                "Ilya Sutskever",
+                "Kunal Talwar",
+                "Paul Tucker",
+                "Vincent Vanhoucke",
+                "Vijay Vasudevan",
+                "Fernanda Viegas",
+                "Oriol Vinyals",
+                "Pete Warden",
+                "Martin Wattenberg",
+                "Martin Wicke",
+                "Yuan Yu",
+                "Xiaoqiang Zheng"
+            ]
+        },
+        {
+            "title": "Rethinking Atrous Convolution for Semantic Image Segmentation",
+            "arxiv": "1706.05587",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1706.05587v3",
+            "abstract": "In this work, we revisit atrous convolution, a powerful tool to explicitly\nadjust filter's field-of-view as well as control the resolution of feature\nresponses computed by Deep Convolutional Neural Networks, in the application of\nsemantic image segmentation. To handle the problem of segmenting objects at\nmultiple scales, we design modules which employ atrous convolution in cascade\nor in parallel to capture multi-scale context by adopting multiple atrous\nrates. Furthermore, we propose to augment our previously proposed Atrous\nSpatial Pyramid Pooling module, which probes convolutional features at multiple\nscales, with image-level features encoding global context and further boost\nperformance. We also elaborate on implementation details and share our\nexperience on training our system. The proposed `DeepLabv3' system\nsignificantly improves over our previous DeepLab versions without DenseCRF\npost-processing and attains comparable performance with other state-of-art\nmodels on the PASCAL VOC 2012 semantic image segmentation benchmark.",
+            "authors": [
+                "Liang-Chieh Chen",
+                "George Papandreou",
+                "Florian Schroff",
+                "Hartwig Adam"
+            ]
+        },
+        {
+            "title": "DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs",
+            "arxiv": "1606.00915",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1606.00915v2",
+            "abstract": "In this work we address the task of semantic image segmentation with Deep\nLearning and make three main contributions that are experimentally shown to\nhave substantial practical merit. First, we highlight convolution with\nupsampled filters, or 'atrous convolution', as a powerful tool in dense\nprediction tasks. Atrous convolution allows us to explicitly control the\nresolution at which feature responses are computed within Deep Convolutional\nNeural Networks. It also allows us to effectively enlarge the field of view of\nfilters to incorporate larger context without increasing the number of\nparameters or the amount of computation. Second, we propose atrous spatial\npyramid pooling (ASPP) to robustly segment objects at multiple scales. ASPP\nprobes an incoming convolutional feature layer with filters at multiple\nsampling rates and effective fields-of-views, thus capturing objects as well as\nimage context at multiple scales. Third, we improve the localization of object\nboundaries by combining methods from DCNNs and probabilistic graphical models.\nThe commonly deployed combination of max-pooling and downsampling in DCNNs\nachieves invariance but has a toll on localization accuracy. We overcome this\nby combining the responses at the final DCNN layer with a fully connected\nConditional Random Field (CRF), which is shown both qualitatively and\nquantitatively to improve localization performance. Our proposed \"DeepLab\"\nsystem sets the new state-of-art at the PASCAL VOC-2012 semantic image\nsegmentation task, reaching 79.7% mIOU in the test set, and advances the\nresults on three other datasets: PASCAL-Context, PASCAL-Person-Part, and\nCityscapes. All of our code is made publicly available online.",
+            "authors": [
+                "Liang-Chieh Chen",
+                "George Papandreou",
+                "Iasonas Kokkinos",
+                "Kevin Murphy",
+                "Alan L. Yuille"
+            ]
+        },
+        {
+            "title": "Semantic Image Segmentation with Deep Convolutional Nets and Fully Connected CRFs",
+            "arxiv": "1412.7062",
+            "year": 2014,
+            "url": "http://arxiv.org/abs/1412.7062v4",
+            "abstract": "Deep Convolutional Neural Networks (DCNNs) have recently shown state of the\nart performance in high level vision tasks, such as image classification and\nobject detection. This work brings together methods from DCNNs and\nprobabilistic graphical models for addressing the task of pixel-level\nclassification (also called \"semantic image segmentation\"). We show that\nresponses at the final layer of DCNNs are not sufficiently localized for\naccurate object segmentation. This is due to the very invariance properties\nthat make DCNNs good for high level tasks. We overcome this poor localization\nproperty of deep networks by combining the responses at the final DCNN layer\nwith a fully connected Conditional Random Field (CRF). Qualitatively, our\n\"DeepLab\" system is able to localize segment boundaries at a level of accuracy\nwhich is beyond previous methods. Quantitatively, our method sets the new\nstate-of-art at the PASCAL VOC-2012 semantic image segmentation task, reaching\n71.6% IOU accuracy in the test set. We show how these results can be obtained\nefficiently: Careful network re-purposing and a novel application of the 'hole'\nalgorithm from the wavelet community allow dense computation of neural net\nresponses at 8 frames per second on a modern GPU.",
+            "authors": [
+                "Liang-Chieh Chen",
+                "George Papandreou",
+                "Iasonas Kokkinos",
+                "Kevin Murphy",
+                "Alan L. Yuille"
+            ]
+        },
+        {
+            "title": "Pyramid Scene Parsing Network",
+            "arxiv": "1612.01105",
+            "year": 2016,
+            "url": "http://arxiv.org/abs/1612.01105v2",
+            "abstract": "Scene parsing is challenging for unrestricted open vocabulary and diverse\nscenes. In this paper, we exploit the capability of global context information\nby different-region-based context aggregation through our pyramid pooling\nmodule together with the proposed pyramid scene parsing network (PSPNet). Our\nglobal prior representation is effective to produce good quality results on the\nscene parsing task, while PSPNet provides a superior framework for pixel-level\nprediction tasks. The proposed approach achieves state-of-the-art performance\non various datasets. It came first in ImageNet scene parsing challenge 2016,\nPASCAL VOC 2012 benchmark and Cityscapes benchmark. A single PSPNet yields new\nrecord of mIoU accuracy 85.4% on PASCAL VOC 2012 and accuracy 80.2% on\nCityscapes.",
+            "authors": [
+                "Hengshuang Zhao",
+                "Jianping Shi",
+                "Xiaojuan Qi",
+                "Xiaogang Wang",
+                "Jiaya Jia"
+            ]
+        },
+        {
+            "year": "2018",
+            "booktitle": "CVPR",
+            "author": [
+                "Sandler, Mark",
+                "Howard, Andrew",
+                "Zhu, Menglong",
+                "Zhmoginov, Andrey",
+                "Chen, Liang-Chieh"
+            ],
+            "title": "Inverted Residuals and Linear Bottlenecks: Mobile Networks for Classification, Detection and Segmentation",
+            "ENTRYTYPE": "inproceedings",
+            "ID": "mobilenetv22018",
+            "authors": [
+                "Sandler, Mark",
+                "Howard, Andrew",
+                "Zhu, Menglong",
+                "Zhmoginov, Andrey",
+                "Chen, Liang-Chieh"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "MSRA"
+            },
+            {
+                "name": "Cityscapes"
+            },
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "PASCAL-Person-Part"
+            },
+            {
+                "name": "PASCAL VOC 2012"
+            },
+            {
+                "name": "ImageNet"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.999999654180581,
+        "task": "Semantic Segmentation",
+        "task_prob": 0.9758269781535173
+    }
+}

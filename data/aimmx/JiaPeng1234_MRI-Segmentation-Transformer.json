@@ -1,0 +1,158 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "Overview",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "JiaPeng1234",
+                "owner_type": "User",
+                "name": "MRI-Segmentation-Transformer",
+                "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer",
+                "stars": 8,
+                "pushed_at": "2020-09-10 21:30:42+00:00",
+                "created_at": "2019-08-07 10:32:37+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitattributes",
+                "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/blob/master/.gitattributes"
+                    }
+                },
+                "size": 66
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "ed54b36d7ced190587567a55522ca34998d79aa4",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/blob/master/.gitignore"
+                    }
+                },
+                "size": 113
+            },
+            {
+                "type": "code",
+                "name": "imgs",
+                "sha": "34b15c637c09d3424f930835135d3b3c2efcf1c9",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/tree/master/imgs"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "main.py",
+                "sha": "a4039c909c8c7efb0b87f0ea53389001cd8b97ea",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/blob/master/main.py"
+                    }
+                },
+                "size": 6341
+            },
+            {
+                "type": "code",
+                "name": "medseg_dl",
+                "sha": "0631f07be60a199e26f9bcdf0a1fdccd61a47afb",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/tree/master/medseg_dl"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "a6aea3cb6a92e85b2966ee0ddd00e04701323ee2",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer/blob/master/setup.py"
+                    }
+                },
+                "size": 752
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "PJ",
+            "email": "jiape123456@gmail.com",
+            "github_id": "JiaPeng1234"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer",
+            "stars": 8,
+            "issues": true,
+            "readme": "## Overview\nThis framework is provided to perform pixel-level segmentation of human liver, spleen, pancreas and kidney, based on MR images provided by German National Cohort(NAKO Dataset), using deep-learning method, and visualized the results. It establishes all functionality needed to operate on 3D images with a patch-based architecture.  \n\nNAKO Dataset\uff1a  \n- Over 3400 labeled MRI images from thousands patients\n- Over 500 MRI images for evaluation  \n\n<img src=\"imgs/overview.png\" width=\"30%\">  \n\nUsed network architectures including 3d u-net, non-local neural network, attention u-net are proposed.  \n\nArxiv:  \n\n## Installation\n\nuse pip3 (with a venv)\n\n    pip3 install -e .\n\nif it fails consider\n\n    pip3 install -e . --user\n    \n## Usage\n\nFor training use\n\n    nohup python3 -u train.py > file_out 2> file_err &\n    \nFor prediction use\n\n    nohup python3 -u evaluate.py > file_out 2> file_err &\n\n## Algorithm\n### non-local neural network\nInspired by the popular NLP Transformer architecture proposed by Google in 2017, an architecture of similar idea is proposed for image processing, the non-local neural networks.  \n\nIt can capture the long-range dependencies between pixels more properly, check the paper from Wang Xiaolong https://arxiv.org/abs/1711.07971  \n\nIts architecture as following:  \n\n<img src=\"imgs/non-local.PNG\" width=\"70%\">\n\n### 3d U-net as baseline\nBaseline architecture is a 4-stages 3d u-net, as following:  \n\n<img src=\"imgs/u-net.PNG\" width=\"70%\">  \n\n## Results\nAchieve an average accurancy of 97% of all classes.  \n\n<img src=\"imgs/results1.png\" width=\"60%\">  \n\n<img src=\"imgs/exp001shape.PNG\" width=\"50%\"> \n",
+            "readme_url": "https://github.com/JiaPeng1234/MRI-Segmentation-Transformer",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Non-local Neural Networks",
+            "arxiv": "1711.07971",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1711.07971v3",
+            "abstract": "Both convolutional and recurrent operations are building blocks that process\none local neighborhood at a time. In this paper, we present non-local\noperations as a generic family of building blocks for capturing long-range\ndependencies. Inspired by the classical non-local means method in computer\nvision, our non-local operation computes the response at a position as a\nweighted sum of the features at all positions. This building block can be\nplugged into many computer vision architectures. On the task of video\nclassification, even without any bells and whistles, our non-local models can\ncompete or outperform current competition winners on both Kinetics and Charades\ndatasets. In static image recognition, our non-local models improve object\ndetection/segmentation and pose estimation on the COCO suite of tasks. Code is\navailable at https://github.com/facebookresearch/video-nonlocal-net .",
+            "authors": [
+                "Xiaolong Wang",
+                "Ross Girshick",
+                "Abhinav Gupta",
+                "Kaiming He"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "MR"
+            },
+            {
+                "name": "Charades"
+            },
+            {
+                "name": "COCO"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9675486398592295,
+        "task": "Object Detection",
+        "task_prob": 0.7942523410871487
+    }
+}

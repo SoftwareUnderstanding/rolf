@@ -1,0 +1,198 @@
+{
+    "visibility": {
+        "visibility": "public",
+        "license": "MIT License"
+    },
+    "name": "Keras-Transformer",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "kpot",
+                "owner_type": "User",
+                "name": "keras-transformer",
+                "url": "https://github.com/kpot/keras-transformer",
+                "stars": 515,
+                "pushed_at": "2020-05-30 16:54:21+00:00",
+                "created_at": "2018-09-26 19:25:15+00:00",
+                "language": "Python",
+                "description": "Keras library for building (Universal) Transformers, facilitating BERT and GPT models",
+                "license": "MIT License",
+                "frameworks": [
+                    "Keras",
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".gitignore",
+                "sha": "e84b2e5d6f831e58e0e02e6642bad77f496716ff",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/blob/master/.gitignore"
+                    }
+                },
+                "size": 75
+            },
+            {
+                "type": "code",
+                "name": "LICENSE",
+                "sha": "394864eae04de72c3d81ed8aa9477d91fd3891e3",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/blob/master/LICENSE"
+                    }
+                },
+                "size": 1121
+            },
+            {
+                "type": "code",
+                "name": "example",
+                "sha": "7c465b7cfcf3e8081869948d3f94c5ebf53b500c",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/tree/master/example"
+                    }
+                },
+                "num_files": 11
+            },
+            {
+                "type": "code",
+                "name": "keras_transformer",
+                "sha": "520b9c452d6eb467f7496e13dddbc7bf7208afe9",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/tree/master/keras_transformer"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "fd816cad7e665779abc603bac77a0ec9a2d29027",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/blob/master/setup.py"
+                    }
+                },
+                "size": 1204
+            },
+            {
+                "type": "code",
+                "name": "tests",
+                "sha": "8fe7571f5c73a0c4f4438e0b65b84017479d3077",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/kpot/keras-transformer/tree/master/tests"
+                    }
+                },
+                "num_files": 1
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Kirill Mavreshko",
+            "email": "kimavr@gmail.com",
+            "github_id": "kpot"
+        }
+    ],
+    "tags": [],
+    "description": "Keras library for building (Universal) Transformers, facilitating BERT and GPT models",
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/kpot/keras-transformer",
+            "stars": 515,
+            "issues": true,
+            "readme": "Keras-Transformer\n=================\n\nKeras-transformer is a Python library implementing nuts and bolts,\nfor building (Universal) Transformer models using [Keras](http://keras.io),\nand equipped with [examples](#language-modelling-examples-with-bert-and-gpt)\nof how it can be applied.\n\nThe library supports:\n\n* positional encoding and embeddings,\n* attention masking,\n* memory-compressed attention,\n* ACT (adaptive computation time),\n* a general implementation of [BERT][3] (because the Transformer\n  is mainly applied to NLP tasks).\n\nIt allows you to piece together a multi-step Transformer model\nin a flexible way, for example:\n\n```python\ntransformer_block = TransformerBlock(\n    name='transformer',\n    num_heads=8,\n    residual_dropout=0.1,\n    attention_dropout=0.1,\n    use_masking=True)\nadd_coordinate_embedding = TransformerCoordinateEmbedding(\n    transformer_depth,\n    name='coordinate_embedding')\n    \noutput = transformer_input # shape: (<batch size>, <sequence length>, <input size>)\nfor step in range(transformer_depth):\n    output = transformer_block(\n        add_coordinate_embedding(output, step=step))\n```\n\n\nAll pieces of the model (like self-attention, activation function,\nlayer normalization) are available as Keras layers, so, if necessary,\nyou can build your version of Transformer, by re-arranging them\ndifferently or replacing some of them.\n\nThe (Universal) Transformer is a deep learning architecture\ndescribed in arguably one of the most impressive DL papers of 2017 and 2018:\nthe \"[Attention is all you need][1]\" and the \"[Universal Transformers][2]\"\nby Google Research and Google Brain teams.\n\nThe authors brought the idea of recurrent multi-head self-attention,\nwhich has inspired a big wave of new research models that keep coming ever since.\nThese models demonstrate new state-of-the-art results in various NLP tasks,\nincluding translation, parsing, question answering, and even some algorithmic tasks.\n\nInstallation\n------------\nTo install the library you need to clone the repository\n\n    git clone https://github.com/kpot/keras-transformer.git\n\nthen switch to the cloned directory and run pip\n\n    cd keras-transformer\n    pip install .\n\nPlease note that the project requires Python >= 3.6.\n\nLanguage modelling examples with BERT and GPT\n---------------------------------------------\nThis repository contains simple [examples](./example) showing how\nKeras-transformer works.\nIt's not a rigorous evaluation of the model's capabilities,\nbut rather a demonstration on how to use the code.\n\nThe code trains [simple language-modeling networks](./example/models.py) on the\n[WikiText-2](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset)\ndataset and evaluates their perplexity. The model is either a [vanilla\nTransformer][1], or an [Adaptive Universal Transformer][2] (by default)\nwith five layers, each can be trained using either:\n\n* [Generative pre-training][4] (GPT), which involves using masked self-attention\n  to prevent the model from \"looking into the future\".\n* [BERT][3], which doesn't restrict self-attention, allowing the model\n  to fill the gaps using both left and right context.\n\n\nTo launch the code, you will first need to install the requirements listed\nin [example/requirements.txt](./example/requirements.txt). Assuming you work\nfrom a Python virtual environment, you can do this by running\n\n    pip install -r example/requirements.txt\n\nYou will also need to make sure you have a backend for Keras.\nFor instance, you can install Tensorflow (the sample was tested using\nTensorflow and PlaidML as backends):\n\n    pip install tensorflow\n\nNow you can launch the GPT example as\n\n    python -m example.run_gpt --save lm_model.h5\n\nto see all command line options and their default values, try\n\n    python -m example.run_gpt --help\n\nIf all goes well, after launching the example you should see\nthe perplexity falling with each epoch.\n\n    Building vocabulary: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 36718/36718 [00:04<00:00, 7642.33it/s]\n    Learning BPE...Done\n    Building BPE vocabulary: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 36718/36718 [00:06<00:00, 5743.74it/s]\n    Train on 9414 samples, validate on 957 samples\n    Epoch 1/50\n    9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 - perplexity: 1044.2455\n        - val_loss: 6.3167 - val_perplexity: 406.5031\n    ...\n\nAfter 200 epochs (~5 hours) of training on GeForce 1080 Ti, I've got\nvalidation perplexity about 51.61 and test perplexity 50.82. The score\ncan be further improved, but that is not the point of this demo.\n\nBERT model example can be launched similarly\n\n    python -m example.run_bert --save lm_model.h5 --model vanilla\n\nbut you will need to be patient. BERT easily achieves better performance\nthan GPT, but requires much more training time to converge.\n\n[1]: https://arxiv.org/abs/1706.03762 \"Attention Is All You Need\"\n[2]: https://arxiv.org/abs/1807.03819 \"Universal Transformers\"\n[3]: https://arxiv.org/abs/1810.04805 \"BERT: Pre-training of Deep Bidirectional Transformers for\nLanguage Understanding\"\n[4]: https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf\n     \"Improving Language Understanding by Generative Pre-Training\"\n",
+            "readme_url": "https://github.com/kpot/keras-transformer",
+            "frameworks": [
+                "Keras",
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Attention Is All You Need",
+            "arxiv": "1706.03762",
+            "year": 2017,
+            "url": "http://arxiv.org/abs/1706.03762v5",
+            "abstract": "The dominant sequence transduction models are based on complex recurrent or\nconvolutional neural networks in an encoder-decoder configuration. The best\nperforming models also connect the encoder and decoder through an attention\nmechanism. We propose a new simple network architecture, the Transformer, based\nsolely on attention mechanisms, dispensing with recurrence and convolutions\nentirely. Experiments on two machine translation tasks show these models to be\nsuperior in quality while being more parallelizable and requiring significantly\nless time to train. Our model achieves 28.4 BLEU on the WMT 2014\nEnglish-to-German translation task, improving over the existing best results,\nincluding ensembles by over 2 BLEU. On the WMT 2014 English-to-French\ntranslation task, our model establishes a new single-model state-of-the-art\nBLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction\nof the training costs of the best models from the literature. We show that the\nTransformer generalizes well to other tasks by applying it successfully to\nEnglish constituency parsing both with large and limited training data.",
+            "authors": [
+                "Ashish Vaswani",
+                "Noam Shazeer",
+                "Niki Parmar",
+                "Jakob Uszkoreit",
+                "Llion Jones",
+                "Aidan N. Gomez",
+                "Lukasz Kaiser",
+                "Illia Polosukhin"
+            ]
+        },
+        {
+            "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "arxiv": "1810.04805",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1810.04805v2",
+            "abstract": "We introduce a new language representation model called BERT, which stands\nfor Bidirectional Encoder Representations from Transformers. Unlike recent\nlanguage representation models, BERT is designed to pre-train deep\nbidirectional representations from unlabeled text by jointly conditioning on\nboth left and right context in all layers. As a result, the pre-trained BERT\nmodel can be fine-tuned with just one additional output layer to create\nstate-of-the-art models for a wide range of tasks, such as question answering\nand language inference, without substantial task-specific architecture\nmodifications.\n  BERT is conceptually simple and empirically powerful. It obtains new\nstate-of-the-art results on eleven natural language processing tasks, including\npushing the GLUE score to 80.5% (7.7% point absolute improvement), MultiNLI\naccuracy to 86.7% (4.6% absolute improvement), SQuAD v1.1 question answering\nTest F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1\n(5.1 point absolute improvement).",
+            "authors": [
+                "Jacob Devlin",
+                "Ming-Wei Chang",
+                "Kenton Lee",
+                "Kristina Toutanova"
+            ]
+        },
+        {
+            "title": "Universal Transformers",
+            "arxiv": "1807.03819",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1807.03819v3",
+            "abstract": "Recurrent neural networks (RNNs) sequentially process data by updating their\nstate with each new data point, and have long been the de facto choice for\nsequence modeling tasks. However, their inherently sequential computation makes\nthem slow to train. Feed-forward and convolutional architectures have recently\nbeen shown to achieve superior results on some sequence modeling tasks such as\nmachine translation, with the added advantage that they concurrently process\nall inputs in the sequence, leading to easy parallelization and faster training\ntimes. Despite these successes, however, popular feed-forward sequence models\nlike the Transformer fail to generalize in many simple tasks that recurrent\nmodels handle with ease, e.g. copying strings or even simple logical inference\nwhen the string or formula lengths exceed those observed at training time. We\npropose the Universal Transformer (UT), a parallel-in-time self-attentive\nrecurrent sequence model which can be cast as a generalization of the\nTransformer model and which addresses these issues. UTs combine the\nparallelizability and global receptive field of feed-forward sequence models\nlike the Transformer with the recurrent inductive bias of RNNs. We also add a\ndynamic per-position halting mechanism and find that it improves accuracy on\nseveral tasks. In contrast to the standard Transformer, under certain\nassumptions, UTs can be shown to be Turing-complete. Our experiments show that\nUTs outperform standard Transformers on a wide range of algorithmic and\nlanguage understanding tasks, including the challenging LAMBADA language\nmodeling task where UTs achieve a new state of the art, and machine translation\nwhere UTs achieve a 0.9 BLEU improvement over Transformers on the WMT14 En-De\ndataset.",
+            "authors": [
+                "Mostafa Dehghani",
+                "Stephan Gouws",
+                "Oriol Vinyals",
+                "Jakob Uszkoreit",
+                "\u0141ukasz Kaiser"
+            ]
+        }
+    ],
+    "training": {
+        "datasets": [
+            {
+                "name": "WikiText-2"
+            },
+            {
+                "name": "SQuAD"
+            },
+            {
+                "name": "GLUE"
+            },
+            {
+                "name": "MultiNLI"
+            }
+        ]
+    },
+    "domain": {
+        "domain_type": "Natural Language Processing",
+        "domain_prob": 0.9999999995565463,
+        "task": "Machine Translation",
+        "task_prob": 0.9530081926760787
+    }
+}

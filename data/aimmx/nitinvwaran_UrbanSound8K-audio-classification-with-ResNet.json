@@ -1,0 +1,161 @@
+{
+    "visibility": {
+        "visibility": "public"
+    },
+    "name": "UrbanSound8K Audio Classification and Speech Command Dataset Classification with ResNet-18",
+    "definition": {
+        "code": [
+            {
+                "type": "repo",
+                "repo_type": "github",
+                "owner": "nitinvwaran",
+                "owner_type": "User",
+                "name": "UrbanSound8K-audio-classification-with-ResNet",
+                "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet",
+                "stars": 38,
+                "pushed_at": "2018-07-24 10:27:32+00:00",
+                "created_at": "2018-05-05 21:16:48+00:00",
+                "language": "Python",
+                "frameworks": [
+                    "TensorFlow"
+                ]
+            },
+            {
+                "type": "code",
+                "name": ".idea",
+                "sha": "26bbb24ae4ce80b0b938e0688d54511157510c82",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/tree/master/.idea"
+                    }
+                },
+                "num_files": 5
+            },
+            {
+                "type": "code",
+                "name": "habits.egg-info",
+                "sha": "83bbf71a9c73f8de688488a3d3b035d60e78e963",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/tree/master/habits.egg-info"
+                    }
+                },
+                "num_files": 6
+            },
+            {
+                "type": "code",
+                "name": "habits",
+                "sha": "a4bd2dfd0b4629653801c1780bf2c7905540acf1",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/tree/master/habits"
+                    }
+                },
+                "num_files": 9
+            },
+            {
+                "type": "code",
+                "name": "misc",
+                "sha": "4e8e94d8771f0cd8c30b75c2dc72a759608b7fc6",
+                "filetype": "dir",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/tree/master/misc"
+                    }
+                },
+                "num_files": 13
+            },
+            {
+                "type": "code",
+                "name": "setup.py",
+                "sha": "4e134d05a32166c83fea691f34daaffe81c8d038",
+                "filetype": "file",
+                "connection": {
+                    "name": "github_url",
+                    "source": {
+                        "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/setup.py"
+                    }
+                },
+                "size": 437
+            }
+        ]
+    },
+    "authors": [
+        {
+            "name": "Nitin Venkateswaran",
+            "email": "nitin.vwaran@gmail.com",
+            "github_id": "nitinvwaran"
+        }
+    ],
+    "tags": [],
+    "extraction": [
+        {
+            "type": "github",
+            "url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet",
+            "stars": 38,
+            "issues": true,
+            "readme": "# UrbanSound8K Audio Classification and Speech Command Dataset Classification with ResNet-18\n\nThis project aims to classify the environmental sounds from the UrbanSound8K dataset, using a ResNet-18 architecture. <br />\nIn addition, Google's Speech Command Dataset is also classified using the ResNet-18 architecture. <br />\n\n**URBANSOUND8K DATASET** <br /> \n\n**APPROACH 1:** <br/>\nThis is a standard train-dev-test split on all the 8732 datapoints from the dataset.  <br />\n\nThe test, validation, and train accuracies from the approach are reported below. Data is split into train-dev-test split of roughly 60-20-20 <br/> <br />\n\n**1. Test Accuracy: 77.61%** <br/>\nThis is the best test accuracy reported using a standard train-dev-test split. \n<br/>\n\n\n**2. Training Accuracy: 100%**\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/accuracy_resnet_18.PNG) <br />\n\n**3. Validation Accuracy: 77.26%**\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/accuracy_resnet_validation.PNG) <br /> <br />\n\n\n**APPROACH 2:** <br/>\nThis is the dataset creator's recommended approach: 10-fold Cross Validation, using all data in each fold for training and validation.  <br />\nThe average of the validation accuracy, training accuracy, and training loss across 10-folds is taken at the end of each epoch. <br />\nThe per-fold validation accuracy, training accuracy, and training loss are also reported. <br/>\nNo test accuracy is reported as no test data is available.\n<br /> <br />\nThe **training accuracy** reaches 100% within 51 folds. <br />\nThe **average training accuracy** reaches 100% within 5 epochs. <br />\nThe **average validation accuracy** reaches 99.78% after 9 epochs <br />\n\n**1. Validation-accuracy per-fold**\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/accuracy_valid_fold.PNG)\n<br/>\n\n**2. Average Vaildation accuracy per epoch**\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/avg_valid_accuracy.PNG)\n<br/> <br/>\n\n\n**SPEECH COMMANDS DATASET** <br />\n\n1. **Test Accuracy is 87.10%** (~ 11,004 datapoints)\nThis is the test accuracy on a sample of 11,004 voice files\n\n2. **Training Accuracy is 98.47%** (84,845  datapoints)\nThis is the training accuracy after 30 epochs\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/train_accuracy_30_epochs.PNG)\n\n3. **Validation Accuracy is 90.17%** (9,980 datapoints)\nThis is the validation accuracy after 30 epochs\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/valid_accuracy_30_epochs.PNG)\n\n\n**GENERAL COMMENTS ABOUT DATA PREPARATION. MODELING, AND ACKNOWLEDGEMENTS** <br/>\n\n**UrbanSound 8K Dataset** <br />\nThe UrbanSound8K dataset information can be found here: https://urbansounddataset.weebly.com/urbansound8k.html <br />\nThis dataset contains 8732 labeled sound excerpts (<=4s) of urban sounds from 10 classes: air_conditioner, car_horn, children_playing, dog_bark, drilling, enginge_idling, gun_shot, jackhammer, siren, and street_music.\n\n**Speech Commands DataSet** <br />\nThe Speech Commands Dataset contains just over 100K speech keywords in 35 labels. <br />\nThis can be found in the link: https://storage.cloud.google.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz <br />\nThis is the dataset released by Google Research, related to Keyword Spotting. The paper about the dataset is here: https://arxiv.org/pdf/1804.03209.pdf <br/> \n\n**Residual Networks** <br />\nThe ResNet-18 architecture is the residual network architecture with 18 layers. More information on Residual Networks can be found in the link to the paper:  ('Deep Residual Learning for Image Recognition': https://arxiv.org/abs/1512.03385). <br /> Residual Networks were initially used for Image Object Detection and Image Classification. \n\n**ResNet-18 on UrbanSound8K and Speech Commands Dataset** <br />\nInspired by work from Google Research for Audio Classification ('CNN Architectures for Large Scale Audio Classification': https://ai.google/research/pubs/pub45611), this github project was born with the idea to use Residual Networks for Audio Classification of Environmental Sound data such as the UrbanSound8K. The ResNet-18 layer was selected, with the aim to create a smaller model that could be optimized and deployed for smaller devices such as Mobile Phone and Raspberry Pi. \n\nThe original ResNet building block is used (Convolution -> Batch Normalization -> ReLU -> Convolution -> Batch Normalization -> Shortcut Addition -> ReLU), as can be seen modeled in the below diagram <br /> (Source: Kaiming He et. al, 'Identity Mappings in Deep Residual Networks') <br />\n![alt text](https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet/blob/master/misc/original_resnet_block.PNG)\n\n**Data Pre-Processing** <br />\nThe following Data pre-processing steps were applied:\n1. All .wav files were downsampled to 16KHz with single (Mono) channel\n2. Spectogram was extracted from the audio signal, and a Mel Filterbank was applied to the raw spectogram (using the librosa package).\n   The number of Mel Filterbanks applied is 128.\n3. Log of the Mel Filterbanks was taken, after adding a small offset (1e-10)\n4. The number of frames is extracted from each .wav file. Any frames after the 75th frame from the .wav file are discarded. If the .wav file has less than 75 frames, zero padding is applied. To generate the frames, the default settings from the librosa package were used.\n5. Batch-size of 250 was selected, to give the inputs to the model as [250,75,128] ([batch_size, frame_length, number_mel_filterbanks_frequecies]\n\n<br />\n\n**Model, Optimizer, and Loss details**\n1. Resnet-18 Model is used with ResNet v1 block, with the final layer being a dense layer for 10 classes.\n2. Adam Optimizer is used with initial learning rate of 0.01.\n3. Categorical Cross-Entropy Loss is used with mean reduction.\n4. Full-batch-size is used for training and gradient descent, given the small dataset size. \n5. Model is run through 100 epochs in APPROACH 1.\n<br />\n\n**Acknowledgements** <br />\nThe tensorflow building blocks for the ResNet-18 architecture were adapted from the following github account: https://github.com/dalgu90/resnet-18-tensorflow. The adaptation is a simpler version of the original residual network building blocks from the github account.\n\n\n",
+            "readme_url": "https://github.com/nitinvwaran/UrbanSound8K-audio-classification-with-ResNet",
+            "frameworks": [
+                "TensorFlow"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "title": "Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition",
+            "arxiv": "1804.03209",
+            "year": 2018,
+            "url": "http://arxiv.org/abs/1804.03209v1",
+            "abstract": "Describes an audio dataset of spoken words designed to help train and\nevaluate keyword spotting systems. Discusses why this task is an interesting\nchallenge, and why it requires a specialized dataset that is different from\nconventional datasets used for automatic speech recognition of full sentences.\nSuggests a methodology for reproducible and comparable accuracy metrics for\nthis task. Describes how the data was collected and verified, what it contains,\nprevious versions and properties. Concludes by reporting baseline results of\nmodels trained on this dataset.",
+            "authors": [
+                "Pete Warden"
+            ]
+        },
+        {
+            "title": "Deep Residual Learning for Image Recognition",
+            "arxiv": "1512.03385",
+            "year": 2015,
+            "url": "http://arxiv.org/abs/1512.03385v1",
+            "abstract": "Deeper neural networks are more difficult to train. We present a residual\nlearning framework to ease the training of networks that are substantially\ndeeper than those used previously. We explicitly reformulate the layers as\nlearning residual functions with reference to the layer inputs, instead of\nlearning unreferenced functions. We provide comprehensive empirical evidence\nshowing that these residual networks are easier to optimize, and can gain\naccuracy from considerably increased depth. On the ImageNet dataset we evaluate\nresidual nets with a depth of up to 152 layers---8x deeper than VGG nets but\nstill having lower complexity. An ensemble of these residual nets achieves\n3.57% error on the ImageNet test set. This result won the 1st place on the\nILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100\nand 1000 layers.\n  The depth of representations is of central importance for many visual\nrecognition tasks. Solely due to our extremely deep representations, we obtain\na 28% relative improvement on the COCO object detection dataset. Deep residual\nnets are foundations of our submissions to ILSVRC & COCO 2015 competitions,\nwhere we also won the 1st places on the tasks of ImageNet detection, ImageNet\nlocalization, COCO detection, and COCO segmentation.",
+            "authors": [
+                "Kaiming He",
+                "Xiangyu Zhang",
+                "Shaoqing Ren",
+                "Jian Sun"
+            ]
+        }
+    ],
+    "domain": {
+        "domain_type": "Computer Vision",
+        "domain_prob": 0.9999832933745642,
+        "task": "Object Detection",
+        "task_prob": 0.9710081484316314
+    },
+    "training": {
+        "datasets": [
+            {
+                "name": "ImageNet"
+            },
+            {
+                "name": "ImageNet Detection"
+            },
+            {
+                "name": "COCO"
+            },
+            {
+                "name": "CIFAR-10"
+            },
+            {
+                "name": "ILSVRC 2015"
+            }
+        ]
+    }
+}
