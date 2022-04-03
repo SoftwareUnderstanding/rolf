@@ -97,8 +97,9 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 	#print(score)
 	del scores['fit_time']
 	del scores['score_time']
-	for i in scores:	# compute metrics 
-		scores[i] = np.append(scores[i] ,score[i.split("test_")[-1]](model, X_test, y_test))
-		res[i.split("test_")[-1]+'_overall'] = scores[i][-1]
+	print(scores)
+	#for i in scores:	# compute metrics 
+	#	scores[i] = np.append(scores[i] ,score[i.split("test_")[-1]](model, X_test, y_test))
+	#	res[i.split("test_")[-1]+'_overall'] = scores[i][-1]
 	
 	return pd.DataFrame(data=res.values(), index=res.keys()).T, model
