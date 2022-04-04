@@ -49,7 +49,7 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 		pipeline = Pipeline(
 			[
 				("vect", CountVectorizer()),
-				("clf", LinearSVC(max_iter=10000)),
+				("clf", LinearSVC(max_iter=900000)),
 			]
 		)
 		parameters = {
@@ -62,7 +62,7 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 			"vect__ngram_range": ((1, 1), (1, 2)),  # unigrams or bigrams
 		}
 
-		search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=2, error_score=-1, return_train_score=True, refit='f1_weighted', scoring=['accuracy', 'f1_macro' 'f1_weighted', 'recall_macro', 'recall_weighted', 'precision_macro', 'precision_weighted'])
+		search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=2, error_score=-1, return_train_score=True, refit='f1_weighted', scoring=['accuracy', 'f1_macro', 'f1_weighted', 'recall_macro', 'recall_weighted', 'precision_macro', 'precision_weighted'])
 		search.fit(x_train, y_train)
 		print("Best parameter (CV score=%0.3f):" % search.best_score_)
 		print(search.best_params_)
