@@ -1,4 +1,4 @@
-import csv
+return_estimator=Trueimport csv
 from decimal import Decimal
 import json
 from typing import Callable, Dict, Iterable, Set
@@ -71,7 +71,7 @@ class Comparator:
 		return self.stats.copy()
 		
 if __name__ == '__main__':
-	comparator = Comparator('data/csoc_output_transformed.csv', prediction_fieldname='Csoc_predictions')#, transformer=lambda x: csoc_transform_predictions(x, {'graph g': 'graphs', 'graph theory': 'graphs'}))
+	comparator = Comparator('data/csoc_output_transformed.csv', prediction_fieldname='Csoc_predictions', transformer=lambda x: csoc_transform_predictions(x, {'sequential programming': 'sequential', 'graph theory': 'graphs', 'digital audio': 'audio'}))
 	#comparator = Comparator('data/demo1_predictions/demo1.csv')
 	#comparator = Comparator('data/aimmx_output_transformed.csv')
 	print(json.dumps(comparator.compare(), indent=4))

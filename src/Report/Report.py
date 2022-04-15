@@ -67,9 +67,9 @@ def report(clf, train_name, test_name, x_train, y_train, X_test, y_test, label, 
 	model = clf
 	model.fit(x_train, y_train)
 	features = model[:-1].get_feature_names_out()
-	print(f'{label}: ', file=open("output.txt", "a"))
-	for i in features:
-		print(f'{i}', file=open("output.txt", "a"))
+	#print(f'{label}: ', file=open("output.txt", "a"))
+	#for i in features:
+	#	print(f'{i}', file=open("output.txt", "a"))
 	y_pred = model.predict(X_test)#>0.5).astype(int)
 
 	if save:
