@@ -1,14 +1,13 @@
 #from os import remove
+import logthis
 import pandas as pd
 #from keras.preprocessing.text import text_to_word_sequence
-from numpy import loadtxt
 import string
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import re
 import numpy as np
-import nltk
 import inflect
 import contractions
 from bs4 import BeautifulSoup
@@ -48,13 +47,15 @@ class Preprocessor:
 		stop_words += ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'hundred', 'thousand', 'and']
 		stop_words += ['network', 'install', 'run', 'file', 'use', 'result', 'paper', 'python', 'using', 'code', 'model', 'train', 'implementation', 'use']
 		stop_words += ['data', 'dataset', 'example', 'build', 'learn', 'download', 'obj']
+		#stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
+		#stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
 		return [word for word in text if not word in stop_words]
 		
 	def remove_codeblocks(self, text):
 		return re.sub('```.*?```', ' ', text)
 
 	def remove_punctuation(self, text):
-		res = re.sub(r'[^\w\s]', ' ', text)
+		res = re.sub(r'[^\w\s]|\_', ' ', text)
 		return res
 
 	def remove_non_ascii(self, words):
@@ -122,7 +123,6 @@ class Preprocessor:
 			lemmas.append(lemma)
 		return lemmas
 
-
 	def remove_one_char_and_number_words(self, text):
 		res = [word for word in text if word.isdigit() == False and len(word) > 2]
 		return res
@@ -155,57 +155,33 @@ class Preprocessor:
 
 	def run(self):
 		NEWCOLNAME = TEXT
-		
-		#Remove codeblocks
-		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: self.remove_codeblocks(x))
-		
-		#Remove links
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_links2(x))
+		self.data[NEWCOLNAME]= self.data[TEXT].apply(lambda x: x)
 
-		#Remove tags
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.denoise_text(x))
+		pipeline = {
+			'remove codeblocks': lambda x: self.remove_codeblocks(x),
+			'remove links': lambda x : self.remove_links2(x),
+			'remove tags': lambda x : self.denoise_text(x),
+			'remove punctuations': lambda x: self.remove_punctuation(x),
+			'transform to lowercase': lambda x: x.lower(),
+			#'replace numbers': lambda x : self.replace_numbers(word_tokenize(x)),
+			'remove non-ascii characters': lambda x : self.remove_non_ascii(word_tokenize(x)),
+			'lemmatize verbs': lambda x : self.lemmatize_verbs(x),
+			'lemmatize nouns': lambda x : self.lemmatize_nouns(x),
+			'lemmatize adjectives': lambda x : self.lemmatize_adjectives(x),
+			'remove stop_words': lambda x : self.remove_stop_words(x),
+			'remove tokens only containing numbers or two char': lambda x : self.remove_one_char_and_number_words(x),
+			#'keep only common words': lambda x : self.keep_only_common(x),
+			#'stemming': lambda x: self.stemming(x, PorterStemmer()),
+			'join tokens': lambda x: ' '.join(x),
+		}
 
-		#Remove punctuation
-		self.data[NEWCOLNAME]= self.data[NEWCOLNAME].apply(lambda x: self.remove_punctuation(x))
+		i = 0
+		for key, val in pipeline.items():
+			i += 1
+			logthis.say(f'Preprocessing: Process {i}/{len(pipeline.keys())}. Process name: "{key}". ')
+			self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(val)
 
-		#Transfor to lowercase
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x: x.lower())
-
-		#Replace numbers
-		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.replace_numbers(word_tokenize(x)))
-
-		#Remove none ascii
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_non_ascii(word_tokenize(x)))
-
-		#Lemmatize verbs
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_verbs(x))
-
-		#Lemmatize nouns
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_nouns(x))
-
-		#Lemmatize adjectives
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.lemmatize_adjectives(x))
-
-		#Remove stop words
-		#stop_words += ['html', 'one', 'two', 'three', 'etc', 'x64', 'instead', 'repository', 'please', 'also', 'project', 'google', 'following', 'get', 'see']
-		#stop_words += ['likely', 'may', 'want', '110m', 'like', 'made', 'example', 'able', 'first', 'however', 'need', 'make', 'new', 'reference']
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_stop_words(x))
-
-
-		# Remove tokens only containing numbers or two char
-		self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.remove_one_char_and_number_words(x))
-
-		#Keep only common words
-		#self.data[NEWCOLNAME] = self.data[NEWCOLNAME].apply(lambda x : self.keep_only_common(x))
-
-		#Stemming
-		#porter_stemmer = PorterStemmer()
-		#self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: self.stemming(x, porter_stemmer))
-		
-		#Join tokens
-		self.data[NEWCOLNAME]=self.data[NEWCOLNAME].apply(lambda x: ' '.join(x))
+		#Drop empty rows
+		logthis.say("Preprocessing: drop empty rows.")
 		self.data.drop(self.data[self.data[NEWCOLNAME] == np.nan].index, inplace=True)
 		self.data.drop(self.data[self.data[NEWCOLNAME] == ''].index, inplace=True)
-		#print('Final: \n', self.data.head())
-
-		
