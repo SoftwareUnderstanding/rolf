@@ -9,7 +9,7 @@ import logthis
 from Preprocessor import Preprocessor
 from Evaluation.evaluation import Evaluator
 from Evaluation.prediction import Predictor
-from collectreadmes import ReadmeCollector
+import collectreadmes
 
 BASE_CATEGORIES = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
 
@@ -56,17 +56,22 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(prog="python src/final.py", description='Perform all the methods of the program.')
 	subparsers = parser.add_subparsers(dest='command', help="Select the command to perform.")
 	
-	parser_collect_readmes = subparsers.add_parser('collect_readmes', help="Collect readme files, create dataset.")
-	parser_collect_readmes.add_argument("--input_mode", help="Set input mode.", required=True, choices=ReadmeCollector.input_modes)
-	parser_collect_readmes.add_argument("--category", help="Set category of input url. (Required if url is given)", required='url' in sys.argv)
-	parser_collect_readmes.add_argument("--input", help="Set input.", required=True)
-	parser_collect_readmes.add_argument('--link_mode', help='Set mode of links.', required=True, choices=ReadmeCollector.link_modes)
-	parser_collect_readmes.add_argument("--githublinks_file", help='Give file to save collected githubs from awesome lists.', required='awesomelist' in sys.argv)
+	parser_collect_readmes = subparsers.add_parser('collect_readmes', help="Collect readme files, create dataset.",
+		description="Collect readmes from collected urls from given file rows.",
+		epilog ="""Example: python3 src/collectreadmes.py --input_mode csvfile --input data/awesome_lists_links/awesome_lists.csv 
+					--githublinks_file data/awesome_lists_links/repos1.csv --awesome_list_mode 
+					--readme_folder data/awesome_lists_links/readme --outfolder data/new_datasets"""
+	)
+	parser_collect_readmes.add_argument("--input_mode", required=True, choices=collectreadmes.ReadmeCollector.input_modes, help="Set input mode. The input can be given by a csvfile or an url in comand line.")
+	parser_collect_readmes.add_argument("--input", required=True, help="Give the input.")
+	parser_collect_readmes.add_argument("--category", required='url' in sys.argv, help="Set category of input url. (Required if url input_mode is used)")
+	parser_collect_readmes.add_argument('--awesome_list_mode', action=argparse.BooleanOptionalAction, default=False, help='Set mode of links to awesome list.')
+	parser_collect_readmes.add_argument("--githublinks_file", help='Give file to save collected githubs if awesome lists are given.')
 	parser_collect_readmes.add_argument('--readme_folder', required=True, help='Path to the folder where readme files will be saved per category.')
 	parser_collect_readmes.add_argument('--outfolder', required=True, help='Path to the folder, where database per category will be saved.')
-	parser_collect_readmes.add_argument('--redownload', default=False, help='Do not redownload the readmes.', action=argparse.BooleanOptionalAction)
+	parser_collect_readmes.add_argument('--redownload', help='Redownload the readmes.', action=argparse.BooleanOptionalAction, default=False)
 	parser_collect_readmes.add_argument('--input_delimiter', help='Set delimiter of input csv file (default: ";").', default=';')
-	
+
 	parser_preprocess = subparsers.add_parser('preprocess', help="Preprocess given csv data file.")
 	parser_preprocess.add_argument('--preprocess_file', required=True, help='Name of .csv the file with the preprocessed data. The file will be saved in the same filename with "_preprocessed" suffix.')
 
@@ -104,21 +109,22 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 
 	if args.command == 'collect_readmes':
-		collector = ReadmeCollector()
-
+		collector = collectreadmes.ReadmeCollector()
 		if args.input_mode == 'csvfile':
 			collector.addCategoriesFromCsvFile(args.input, args.input_delimiter)
 		elif args.input_mode == 'url':
 			collector.addCategory(args.category, [args.input])
 
-		if args.link_mode == 'awesomelist':
-			collector.collectCategoriesFromAwesomeLists()
-			collector.dumpGithubLinks(args.githublinks_file)
+		if args.awesome_list_mode:
+			collector.mapAwesomeListsToGithubLinks()
+			if args.githublinks_file:
+				collector.dumpGithubLinks(args.githublinks_file)
 
 		if args.redownload:
 			collector.downloadReadmeFiles(args.readme_folder)
 
 		collector.createDatabase(args.outfolder, args.readme_folder)
+
 	elif args.command == 'preprocess':
 		preprocess_file(args.preprocess_file)
 	elif args.command == 'train_test_split':
