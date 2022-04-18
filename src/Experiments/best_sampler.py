@@ -1,4 +1,5 @@
 #from sklearn.pipeline import Pipeline
+from typing import List
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
@@ -10,6 +11,8 @@ from imblearn.under_sampling import RandomUnderSampler
 from sklearn.linear_model import LogisticRegression
 from imblearn.pipeline import make_pipeline, Pipeline
 from sklearn.model_selection import cross_validate
+
+from src.ResultStorage import ResultStorage
 
 
 TEXT = "Text"
@@ -45,12 +48,15 @@ def get_sampling_strategy(df_train, categories: list, cat: str):
 	logthis.say(f'Sampling strategy: {str(sampling_stratgy)}',)
 	return sampling_stratgy
 
-def train_models(train: str, test: str, categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]):
+def train_models(train: str, test: str, out_folder: str, results_file:str, categories: List[str] = None, evaluation_metric: str = "test_f1-score_mean") -> None:
+	if categories is None:
+		categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
 	logthis.say(f'Read files\nTrain dataset: {train} \nTest dataset: {test}')
 	df_train = pd.read_csv(train, sep=';')
 	df_train = df_train.drop(columns = 'Repo')
 	logthis.say('Read done')
 	for i, cat in enumerate(categories):
+		result_storage = ResultStorage(train, test, cat, evaluation_metric)
 		ind = i + 1
 		logthis.say(f'Train test split starts for {cat=} category {ind}/{len(categories)}')
 		x_train = df_train[TEXT].astype('U')
@@ -105,4 +111,5 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 		#print(df)
 		df.to_csv('data/search/sampler_search_'+ cat + '.csv', sep=';')
 
-train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')
+if __name__ == "__main__":
+	train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')

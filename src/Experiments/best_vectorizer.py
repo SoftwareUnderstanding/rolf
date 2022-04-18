@@ -1,3 +1,4 @@
+from typing import List
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -7,6 +8,8 @@ import pandas as pd
 import numpy as np
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
+
+from src.ResultStorage import ResultStorage
 
 TEXT = "Text"
 LABEL = "Label"
@@ -19,7 +22,9 @@ def filter_dataframe(df, cat):
 			row[LABEL] = 'Other'	
 	#print(f'{cat} filtered {count} rows in training dataset')
 
-def train_models(train: str, test: str, categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]):
+def train_models(train: str, test: str, out_folder: str, results_file:str, categories: List[str] = None, evaluation_metric: str = "test_f1-score_mean") -> None:
+	if categories is None:
+		categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
 	logthis.say(f'Read files\nTrain dataset: {train} \nTest dataset: {test}')
 	df_train = pd.read_csv(train, sep=';')
 	df_test = pd.read_csv(test, sep = ';')
@@ -27,6 +32,8 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 	df_train = df_train.drop(columns = 'Repo')
 	logthis.say('Read done')
 	for i, cat in enumerate(categories):
+		result_storage = ResultStorage(train, test, cat, evaluation_metric)
+
 		ind = i + 1
 		logthis.say(f'Train test split starts for {cat=} category {ind}/{len(categories)}')
 		x_train = df_train[TEXT].astype('U')
@@ -69,4 +76,5 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 		df = pd.DataFrame(search.cv_results_)
 		df.to_csv('data/search/vectorizer_search_'+ cat + '.csv', sep=';')
 
-train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')
+if __name__ == "__main__":
+	train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')

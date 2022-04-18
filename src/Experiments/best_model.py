@@ -1,5 +1,6 @@
 from cgi import print_environ
 from time import time
+from typing import List
 from sklearn.model_selection import GridSearchCV
 import pandas as pd
 from sklearn import datasets
@@ -21,6 +22,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.calibration import CalibratedClassifierCV
 import logthis
+
+from src.ResultStorage import ResultStorage
 
 TEXT = "Text"
 LABEL = "Label"
@@ -61,7 +64,9 @@ def get_sampling_strategy(df_train, categories: list, cat: str):
 
 
 
-def train_models(train: str, test: str, categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]):
+def train_models(train: str, test: str, out_folder: str, results_file:str, categories: List[str] = None, evaluation_metric: str = "test_f1-score_mean") -> None:
+	if categories is None:
+		categories = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
 	logthis.say(f'Read files\nTrain dataset: {train} \nTest dataset: {test}')
 	df_train = pd.read_csv(train, sep=';')
 	df_test = pd.read_csv(test, sep = ';')
@@ -88,6 +93,8 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 		y_train = np.ravel(y_train)
 		y_test = np.ravel(y_test)
 		logthis.say(f'Filtering done')
+
+		result_storage = ResultStorage(train, test, cat, evaluation_metric)
 
 		logthis.say(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
@@ -181,4 +188,5 @@ def train_models(train: str, test: str, categories = ["Natural Language Processi
 		df = pd.DataFrame(search.cv_results_)
 		df.to_csv('data/search/model_linearsvc_search_'+ cat + '.csv', sep=';')
 
-train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')
+if __name__ == "__main__":
+	train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')

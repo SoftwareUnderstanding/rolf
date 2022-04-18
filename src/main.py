@@ -84,6 +84,7 @@ if __name__ == "__main__":
 	parser_train_models.add_argument('--results_file', required=True, help='Path to the file where results will be saved.')
 	parser_train_models.add_argument('--out_folder', required=True, help='Path to the folder where models will be saved.')
 	parser_train_models.add_argument('--evaluation_metric', default='test_f1-score_mean', help='Name of the key for evaliuation (default: "f1-score_overall").')
+	parser_train_models.add_argument('--gridsearch', default='nogridsearch', choices=['nogridsearch', 'bestmodel', 'bestsampler', 'bestvectorizer', 'all'], help='Set gridsearch mode. (default: nogridsearch)')
 	parser_train_models_categories = parser_train_models.add_mutually_exclusive_group(required=False)
 	parser_train_models_categories.add_argument('--all_categories', nargs="+", help=f'List of all categories used. Use only if you want not the basic categories. {BASE_CATEGORIES=}')
 	parser_train_models_categories.add_argument('--additional_categories', nargs="+", help=f'List of categories adding to basic categories. {BASE_CATEGORIES=}')
@@ -125,10 +126,23 @@ if __name__ == "__main__":
 	elif args.command == 'merge_csv':
 		merge_csv_files(args.files, args.outfile)
 	if args.command == 'train_models':
-		from train import train_models
 		categories = getCategories(BASE_CATEGORIES, args.all_categories, args.additional_categories)
 		logthis.say(f"{categories=}")
-		train_models(args.train_set, args.test_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
+		if args.gridsearch == 'nogridsearch':
+			import train
+			train.train_models(args.train_set, args.test_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
+		elif args.gridsearch == 'bestvectorizer':
+			import Experiments.best_vectorizer
+			Experiments.best_vectorizer.train_models(args.train_set, args.test_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
+		elif args.gridsearch == 'bestsampler':
+			import Experiments.best_sampler
+			Experiments.best_sampler.train_models()
+		elif args.gridsearch == 'bestmodel':
+			import Experiments.best_model
+			Experiments.best_model.train_models()
+		elif args.gridsearch == 'all':
+			#TODO
+			pass
 	if args.command == 'predict':
 		predictor = Predictor(args.inputfolder, args.test_set, args.outfile)
 		predictor.predict()
