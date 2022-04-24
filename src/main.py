@@ -6,21 +6,24 @@ import argparse
 from sklearn.model_selection import train_test_split
 import logthis
 
-from Preprocessor import Preprocessor
+from preprocessing import preprocess_file
+from util.utils import BASE_CATEGORIES, getCategories
 from Evaluation.evaluation import Evaluator
 from Evaluation.prediction import Predictor
 import collectreadmes
 
-BASE_CATEGORIES = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
-
-def preprocess_file(filename: str):
-	logthis.say('Preprocessing starts.')
-	df = pd.read_csv(filename, sep=';')
-	Preprocessor(df).run()
-	df.to_csv(filename.replace('.csv', '_preprocessed.csv'), sep=';', index=False)
-	logthis.say('Preprocessing done.')
-
 def train_test_split_file(filename: str, test_size: float = 0.2, new_category: bool = True) -> None:
+	"""
+	Performs train-test split on the given csv file with given ratio. Saves the files next to the input file with "_train.csv" and 
+	"_test.csv" suffixes.
+
+	Params
+	---------
+	filename: (str) Path to the input csv file.
+	test_size: (float) Test dataset ratio. (default: 0.2)
+	new_category: (bool) If False, splits the data into repositories with only one category (train) and with multiple categories (test).
+		If True, splits depending on test_size parameter. (default: True)
+	"""
 	logthis.say('Train test set separation starts.')
 	df: pd.DataFrame = pd.read_csv(filename, sep=';')
 	if new_category:
@@ -33,6 +36,14 @@ def train_test_split_file(filename: str, test_size: float = 0.2, new_category: b
 	logthis.say('Train test set separation done.')
 
 def merge_csv_files(files: List[str], outfile: str) -> None:
+	"""
+	Merges multiple csv files with same columns into one. Used to merge new train and test dataset into old ones.
+
+	Params
+	--------
+	files: (List[str]) List of paths of the filenames to merge.
+	outfile: (str) Path to the output file.
+	"""
 	logthis.say('Merging files starts.')
 	data: pd.DataFrame = pd.DataFrame([], columns=['Label', 'Repo', 'Text'])
 	num_files = len(files)
@@ -43,14 +54,6 @@ def merge_csv_files(files: List[str], outfile: str) -> None:
 	logthis.say(f'Write data to {outfile}')
 	data.to_csv(outfile, sep=';', index=False)
 	logthis.say('Merging files done.')
-
-def getCategories(base_categories: List[str], all_categories: List[str], additional_categories: List[str]) -> List[str]:
-	if all_categories:
-		return all_categories.copy()
-	elif additional_categories:
-		return base_categories.copy() + additional_categories.copy()
-	else:
-		return base_categories.copy()
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(prog="python src/final.py", description='Perform all the methods of the program.')
@@ -81,7 +84,7 @@ if __name__ == "__main__":
 
 	parser_merge_csv = subparsers.add_parser('merge_csv', help='Merge given csv files into one.')
 	parser_merge_csv.add_argument('--files', required=True, nargs="+", help='List of csv files to merge with the same header row and ";" delimiter.')
-	parser_merge_csv.add_argument('--outfile', required=True, help='Path to outfile csv file with the results.')
+	parser_merge_csv.add_argument('--outfile', required=True, help='Path to output csv file with the results.')
 
 	parser_train_models = subparsers.add_parser('train_models', help='Train the models.')
 	parser_train_models.add_argument('--train_set', required=True, help='Name of the csv file containing train set.')
@@ -149,11 +152,11 @@ if __name__ == "__main__":
 			#TODO
 			pass
 	if args.command == 'predict':
-		predictor = Predictor(args.inputfolder, args.test_set, args.outfile)
-		predictor.predict()
+		predictor = Predictor(args.inputfolder, args.test_set, args.outfile).predict()
 	if args.command == 'evaluate':
 		categories = getCategories(BASE_CATEGORIES, args.all_categories, args.additional_categories)
 		logthis.say(f"{categories=}")
 		evaluator = Evaluator(args.inputfile, set(categories))
-		with open(args.outfile, 'w') as f:
-			json.dump(evaluator.evaluate(), f, indent=4)
+		evaluator.evaluate()
+		evaluator.dumpStats(args.outfile)
+
