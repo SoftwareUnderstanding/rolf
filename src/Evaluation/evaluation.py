@@ -22,7 +22,7 @@ class Evaluator:
 		self.inputfile = input_path
 		self.transformer = transformer
 		self.categories = set([cat.lower() for cat in categories]) if categories is not None else {'natural language processing', 'general', 'sequential', 'computer vision', 'reinforcement learning', 'graphs', 'audio'}
-		self.stat_fields = ['tp', 'tn', 'fp', 'fn']
+		self.stat_fields = ['tp', 'tn', 'fp', 'fn', 'support']
 		self.resetStats()
 		self.prediction_fieldnames = prediction_fieldname
 
@@ -38,9 +38,11 @@ class Evaluator:
 		with open(self.inputfile) as f:
 			self.reader = csv.DictReader(f, delimiter=';')
 			for row in self.reader:
+				self.stats['overall']['support'] += 1
 				predictions = self.transformer(row[self.prediction_fieldnames].split(','))
 				labels = [cat.lower() for cat in row['Labels'].split(',')]
 				for category in self.categories:
+					self.stats[category]['support'] += 1
 					if category in predictions:
 						if category in labels:
 							self.stats['overall']['tp'] += 1
@@ -60,6 +62,7 @@ class Evaluator:
 			if self.stats[category]['tp'] != 0 or self.stats[category]['fp'] != 0:
 				for key in self.stat_fields:
 					self.stats['overall_presentonly'][key] += self.stats[category][key]
+				self.stats['overall_presentonly']['support'] += self.stats['overall']['support']
 
 		for key, val in self.stats.items():
 			self.stats[key]['precision'] = f"{val['tp']/(1 + val['tp'] + val['fp']):.2f}"

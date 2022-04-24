@@ -175,10 +175,9 @@ def train_models(train: str, test: str, out_folder: str, results_file:str, categ
 			('tfidf', TfidfVectorizer(max_df=1.0, min_df=0.0, max_features=None, ngram_range=(1, 2))),
             ('linearSVC', CalibratedClassifierCV(LinearSVC()))])
 		param_grid = {
-			'linearSVC__C': [0.00001, 0.0001, 0.0005],
-            'linearSVC__dual': (True, False), 'random_state': [1],
-            'linearSVC__additional_parameter1': [0.90, 0.80, 0.60, 0.30],
-            'linearSVC__additional_parameter2': [20, 30]
+			'linearSVC__base_estimator__C': [0.00001, 0.0001, 0.0005],
+            'linearSVC__base_estimator__dual': (True, False), 
+			'linearSVC__base_estimator__random_state': [1]
 		}
 		logthis.say(pipeline.get_params().keys())
 		search = GridSearchCV(pipeline, param_grid, n_jobs=-1, verbose=2, error_score=-1, return_train_score=True, refit='f1_weighted', scoring=['accuracy', 'f1_macro', 'f1_weighted', 'recall_macro', 'recall_weighted', 'precision_macro', 'precision_weighted'])
@@ -189,4 +188,4 @@ def train_models(train: str, test: str, out_folder: str, results_file:str, categ
 		df.to_csv('data/search/model_linearsvc_search_'+ cat + '.csv', sep=';')
 
 if __name__ == "__main__":
-	train_models('data/readme_new_preprocessed_train.csv', 'data/readme_new_preprocessed_test.csv')
+	train_models('data/train_test_data/readme_new_preprocessed_train.csv', 'data/train_test_data/readme_new_preprocessed_test.csv', 'data/search/', 'search_model.csv', ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"])

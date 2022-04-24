@@ -85,7 +85,6 @@ if __name__ == "__main__":
 
 	parser_train_models = subparsers.add_parser('train_models', help='Train the models.')
 	parser_train_models.add_argument('--train_set', required=True, help='Name of the csv file containing train set.')
-	parser_train_models.add_argument('--test_set', required=True, help='Name of the csv file containing test set.')
 	parser_train_models.add_argument('--results_file', required=True, help='Path to the file where results will be saved.')
 	parser_train_models.add_argument('--out_folder', required=True, help='Path to the folder where models will be saved.')
 	parser_train_models.add_argument('--evaluation_metric', default='test_f1-score_mean', help='Name of the key for evaliuation (default: "f1-score_overall").')
@@ -136,7 +135,7 @@ if __name__ == "__main__":
 		logthis.say(f"{categories=}")
 		if args.gridsearch == 'nogridsearch':
 			import train
-			train.train_models(args.train_set, args.test_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
+			train.train_models(args.train_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
 		elif args.gridsearch == 'bestvectorizer':
 			import Experiments.best_vectorizer
 			Experiments.best_vectorizer.train_models(args.train_set, args.test_set, args.out_folder, args.results_file, categories, args.evaluation_metric)
