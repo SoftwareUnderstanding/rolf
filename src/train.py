@@ -98,7 +98,7 @@ def train_models(train: str, out_folder: str, results_file:str, categories: List
 		#countvect = CountVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=10000, lowercase=True)
 		#tfidf = TfidfVectorizer(analyzer="word",token_pattern=r'\w{1,}', max_features=10000, lowercase=True)
 
-		result_storage = ResultStorage(train, cat, evaluation_metric)
+		result_storage = ResultStorage(cat, evaluation_metric)
 
 		logthis.say(f'Logistic regression starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
