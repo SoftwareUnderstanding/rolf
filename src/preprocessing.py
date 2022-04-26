@@ -177,15 +177,15 @@ class Preprocessor:
 			'remove tags': lambda x : self.denoise_text(x),
 			'remove punctuations': lambda x: self.remove_punctuation(x),
 			'transform to lowercase': lambda x: x.lower(),
-			#'replace numbers': lambda x : self.replace_numbers(word_tokenize(x)),
+			#######'replace numbers': lambda x : self.replace_numbers(word_tokenize(x)),
 			'remove non-ascii characters': lambda x : self.remove_non_ascii(word_tokenize(x)),
 			'lemmatize verbs': lambda x : self.lemmatize_verbs(x),
 			'lemmatize nouns': lambda x : self.lemmatize_nouns(x),
 			'lemmatize adjectives': lambda x : self.lemmatize_adjectives(x),
 			'remove stop_words': lambda x : self.remove_stop_words(x),
 			'remove tokens only containing numbers or two char': lambda x : self.remove_short_and_number_words(x),
-			#'keep only common words': lambda x : self.keep_only_common(x),
-			#'stemming': lambda x: self.stemming(x, PorterStemmer()),
+			#######'keep only common words': lambda x : self.keep_only_common(x),
+			#######'stemming': lambda x: self.stemming(x, PorterStemmer()),
 			'join tokens': lambda x: ' '.join(x),
 		}
 
@@ -206,7 +206,7 @@ def preprocess_file(filename: str) -> None:
 	and saves the preprocessed data next to the original file with "_preprocessed.csv" suffix.
 
 	Params
-	---------
+	---------		
 	filename: (str) Path to the input csv file.
 	"""
 	logthis.say('Preprocessing starts.')

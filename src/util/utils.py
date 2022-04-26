@@ -1,6 +1,6 @@
 from typing import List
 
-BASE_CATEGORIES = ["Natural Language Processing", "Computer Vision", "Sequential", "Audio", "Graphs", "Reinforcement Learning"]
+BASE_CATEGORIES = ["Audio", "Sequential","Graphs", "Reinforcement Learning", "Natural Language Processing", "Computer Vision"]
 
 def getCategories(base_categories: List[str], all_categories: List[str], additional_categories: List[str]) -> List[str]:
 	"""

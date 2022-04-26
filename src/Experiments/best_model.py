@@ -173,7 +173,7 @@ def train_models(train: str, test: str, out_folder: str, results_file:str, categ
 		logthis.say(f'LinearSVC starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
 			('tfidf', TfidfVectorizer(max_df=1.0, min_df=0.0, max_features=None, ngram_range=(1, 2))),
-            ('linearSVC', CalibratedClassifierCV(LinearSVC()))])
+            ('linearSVC', LinearSVC()	)])
 		param_grid = {
 			'linearSVC__base_estimator__C': [0.00001, 0.0001, 0.0005],
             'linearSVC__base_estimator__dual': (True, False), 

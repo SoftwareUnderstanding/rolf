@@ -97,7 +97,6 @@ def report(clf, train_name, x_train, y_train, label, name='classifier', cv=5, di
 	#print(score)
 	del scores['fit_time']
 	del scores['score_time']
-	print(scores)
 	#for i in scores:	# compute metrics 
 	#	scores[i] = np.append(scores[i] ,score[i.split("test_")[-1]](model, X_test, y_test))
 	#	res[i.split("test_")[-1]+'_overall'] = scores[i][-1]
