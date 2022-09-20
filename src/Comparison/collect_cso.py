@@ -7,9 +7,9 @@ def getRepoNameFromGitHubUrl(url: str) -> str:
 	return '_'.join(url.split('/')[-2:])
 
 if __name__ == '__main__':
-	cc = CSOClassifier(modules = "both", enhancement = "first", explanation = True, delete_outliers=True)
+	cc = CSOClassifier(modules = "both", enhancement = "all", explanation = True, delete_outliers=True)
 
-	reader = csv.DictReader(open("data/readme_new_preprocessed_test.csv"), delimiter=';')
+	reader = csv.DictReader(open("data/train_test_data/readme_new_preprocessed_test.csv"), delimiter=';')
 	data = {}
 	ind = 0
 	for row in reader:
@@ -22,12 +22,12 @@ if __name__ == '__main__':
 		}
 		ind += 1
 
-	path = Path("data/csoc_output.csv")
+	path = Path("data/comparison_data/csoc_output_all.csv")
 	new = not path.exists()
 	writer = csv.DictWriter(open(path, 'a+'), delimiter=';', fieldnames=['Label', 'Repo', 'CSOS'])
 	if new:
 		writer.writeheader()
-	outpath = Path('data/csoc')
+	outpath = Path('data/csoc_all')
 	outpath.mkdir(parents=True, exist_ok=True)
 	results = cc.batch_run(data, workers=8)
 	print(results)

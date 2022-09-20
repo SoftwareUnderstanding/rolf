@@ -216,7 +216,7 @@ for i, cat in enumerate(categories):
 
     history = model.fit(X_train_Glove, y_train,
                             validation_data=(X_test_Glove,y_test),
-                            epochs=1,
+                            epochs=100,
                             batch_size=2,
                             verbose=1)
 

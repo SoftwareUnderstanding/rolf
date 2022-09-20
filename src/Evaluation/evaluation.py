@@ -40,14 +40,14 @@ def csoc_transform_predictions(predictions: Iterable[str], transform_dict: Dict[
 	(Set[str]): Set of transformed items.
 	"""
 	ret = set()
-	logthis.say('original: ', predictions)
+	logthis.say('original: '+ str(predictions))
 	for prediction in predictions:
 		pred = prediction.lower()
 		if pred in transform_dict:
 			ret.add(transform_dict[pred])
 		else:
 			ret.add(pred)
-	logthis.say('mapped: ', ret)
+	logthis.say('mapped: '+ str(ret))
 	return ret
 
 class Evaluator:

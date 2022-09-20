@@ -12,7 +12,7 @@ from Evaluation.evaluation import Evaluator
 from Evaluation.prediction import Predictor
 import collectreadmes
 
-def train_test_split_file(filename: str, test_size: float = 0.2, new_category: bool = True) -> None:
+def train_test_split_file(filename, test_size = 0.2, new_category = True):
 	"""
 	Performs train-test split on the given csv file with given ratio. Saves the files next to the input file with "_train.csv" and 
 	"_test.csv" suffixes.
@@ -35,7 +35,7 @@ def train_test_split_file(filename: str, test_size: float = 0.2, new_category: b
 	test.to_csv(filename.replace('.csv', '_test.csv'), sep=';', index=False)
 	logthis.say('Train test set separation done.')
 
-def merge_csv_files(files: List[str], outfile: str) -> None:
+def merge_csv_files(files: List[str], outfile: str):
 	"""
 	Merges multiple csv files with same columns into one. Used to merge new train and test dataset into old ones.
 
@@ -68,11 +68,11 @@ if __name__ == "__main__":
 	parser_collect_readmes.add_argument("--input_mode", required=True, choices=collectreadmes.ReadmeCollector.input_modes, help="Set input mode. The input can be given by a csvfile or an url in comand line.")
 	parser_collect_readmes.add_argument("--input", required=True, help="Give the input.")
 	parser_collect_readmes.add_argument("--category", required='url' in sys.argv, help="Set category of input url. (Required if url input_mode is used)")
-	parser_collect_readmes.add_argument('--awesome_list_mode', action=argparse.BooleanOptionalAction, default=False, help='Set mode of links to awesome list.')
+	parser_collect_readmes.add_argument('--awesome_list_mode', action='store_true', default=False, help='Set mode of links to awesome list.')
 	parser_collect_readmes.add_argument("--githublinks_file", help='Give file to save collected githubs if awesome lists are given.')
 	parser_collect_readmes.add_argument('--readme_folder', required=True, help='Path to the folder where readme files will be saved per category.')
 	parser_collect_readmes.add_argument('--outfolder', required=True, help='Path to the folder, where database per category will be saved.')
-	parser_collect_readmes.add_argument('--redownload', help='Redownload the readmes.', action=argparse.BooleanOptionalAction, default=False)
+	parser_collect_readmes.add_argument('--redownload', help='Redownload the readmes.', action='store_true', default=False)
 	parser_collect_readmes.add_argument('--input_delimiter', help='Set delimiter of input csv file (default: ";").', default=';')
 
 	parser_preprocess = subparsers.add_parser('preprocess', help="Preprocess given csv data file.")

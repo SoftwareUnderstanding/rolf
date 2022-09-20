@@ -1,0 +1,41 @@
+# legacystamps
+[![CI](https://github.com/tikk3r/legacystamps/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/tikk3r/legacystamps/actions)
+[![license](https://img.shields.io/pypi/l/legacystamps?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
+![pyversion](https://img.shields.io/pypi/pyversions/legacystamps?style=flat)
+[![pkgversion](https://img.shields.io/pypi/v/legacystamps?style=flat)](https://pypi.org/project/legacystamps/)
+[![ascl](https://img.shields.io/badge/ascl-ascl%3A2204.003-blue)](http://ascl.net/2204.003)
+
+
+A tiny Python module to allow easy retrieval of a cutout from the Legacy survey.
+
+## Installation
+This package can be installed simply by running `pip install legacystamps`. It can also  be installed manually with `python setup.py install`.
+
+## Usage
+To use it in a script, import and use the module as follows. To get a FITS cutout:
+
+```python
+import legacystamps
+legacystamps.download(ra=ra, dec=dec, mode='fits', bands='grz', size=cutsize)
+```
+
+or to get a JPEG cutout:
+```python
+import legacystamps
+legacystamps.download(ra=ra, dec=dec, mode='jpeg', bands='grz', size=cutsize)
+```
+
+It can also run standalone. See `legacystamps.py -h` for available options after installation.
+
+## Requirements
+The following packages are required:
+
+* requests
+* tqdm
+
+## Acknowledgements
+If you use legacystamps in your work, please consider acknowledging this package through
+
+    This work made use of the legacystamps package (https://github.com/tikk3r/legacystamps).
+
+and the acknowledgements associated to https://legacysurvey.org/.

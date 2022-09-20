@@ -59,10 +59,10 @@ def report(clf, train_name, x_train, y_train, label, name='classifier', cv=5, di
 
 	try:
 		scores = cross_validate(clf, x_train, y_train, scoring=score,
-			cv=cv, return_train_score=True, n_jobs=-1,  fit_params=fit_params)
+			return_train_score=True, n_jobs=-1,  fit_params=fit_params)
 	except:
 		scores = cross_validate(clf, x_train, y_train, scoring=score,
-			cv=cv, return_train_score=True,  fit_params=fit_params)
+			return_train_score=True,  fit_params=fit_params)
 	#print(scores)
 	# Train test on the overall data
 	model = clf

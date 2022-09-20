@@ -1,0 +1,2 @@
+# simuTrans
+Exoplanet transit simulator.
