@@ -187,4 +187,28 @@ optional arguments:
                         'Graphs', 'Reinforcement Learning']	
 ```
 
+
+## Install poetry environment
+
+After cloning the repository execute:
+
+```
+cd rolf
+poetry install
+```
+
+(If poetry is not installed, execute: ```pip install poetry``` first)
+
+Once the instalation is finishes, activate the environment using the command:
+
+```
+poetry shell
+```
+
+If this does not works, activate the environment manually:
+
+```
+source ~/.cache/pypoetry/virtualenvs/rolf-*/bin/activate
+```
+
 For any questions please contact: jenifer.girl.98@gmail.com
