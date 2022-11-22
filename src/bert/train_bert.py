@@ -118,7 +118,8 @@ if __name__ == "__main__":
         verbose=1
     )
         
-    print(history.history.keys())
+    logthis.say(history.history.keys())
+    
     # summarize history for accuracy
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
@@ -128,6 +129,7 @@ if __name__ == "__main__":
     plt.legend(['train', 'val'], loc='upper left')
     plt.save('bert_accuracy.png')
     # summarize history for loss
+    
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model loss')
@@ -135,3 +137,4 @@ if __name__ == "__main__":
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
     plt.save('bert_loss.png')
+
