@@ -14,7 +14,7 @@
 # softsim: name of repo
 mkdir /home/u951/u951196/rolf/data/model_1000/
 
-module purge && module load Python/3.10.6-GCCcore-10.3.0 && module load CUDA/11.3.1
+module purge && module load Python/3.10.4-GCCcore-10.3.0 && module load CUDA/11.3.1
 
 source ~/.cache/pypoetry/virtualenvs/rolf-*/bin/activate
 
