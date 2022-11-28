@@ -80,7 +80,7 @@ def build_model(bert_layer, max_len=512):
 if __name__ == "__main__":
     sys.argv=['preserve_unused_tokens=False']
     flags.FLAGS(sys.argv)
-    max_len = 250
+    max_len = 500
     
     train_data, test_data = load_data()
     
@@ -106,13 +106,13 @@ if __name__ == "__main__":
     model = build_model(bert_layer, max_len=max_len)
     logthis.say(model.summary())
 
-    checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1000/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
+    checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1001/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
     earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=5, verbose=1)
 
     history = model.fit(
         train_input, train_labels,
         validation_split=0.2,
-        epochs=50,
+        epochs=200,
         callbacks=[checkpoint, earlystopping],
         batch_size=32,
         verbose=1
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.save('bert_accuracy.png')
+    plt.savefig('bert_accuracy.png')
     # summarize history for loss
     
     plt.plot(history.history['loss'])
@@ -136,5 +136,4 @@ if __name__ == "__main__":
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.save('bert_loss.png')
-
+    plt.savefig('bert_loss.png')
