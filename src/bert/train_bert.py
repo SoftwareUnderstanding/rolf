@@ -127,7 +127,7 @@ if __name__ == "__main__":
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.savefig('bert_accuracy.png')
+    plt.savefig('/home/u951/u951196/rolf/data/model_1001/bert_accuracy.png')
     # summarize history for loss
     
     plt.plot(history.history['loss'])
@@ -136,4 +136,4 @@ if __name__ == "__main__":
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.savefig('bert_loss.png')
+    plt.savefig('/home/u951/u951196/rolf/data/model_1001/bert_loss.png')

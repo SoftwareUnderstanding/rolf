@@ -124,10 +124,10 @@ if __name__ == "__main__":
     y_data = df[['Label']].to_numpy().reshape(-1)
     
     label = preprocessing.LabelEncoder()
-    y_data = label.fit_transform(df['Label'])
-    y_data = to_categorical(y_data)
+    df['Label'] = label.fit_transform(df['Label'])
+    df['Label'] = to_categorical(df['Label'])
     
-    categories = y_data.reshape(-1)
+    categories = df[['Label']].values.reshape(-1)
     n_categories = len(categories)
     
     category_to_id = {}
@@ -161,12 +161,12 @@ if __name__ == "__main__":
         model = build_model(n_categories, strategy)
         model.summary()
         print('Training...')
-        checkpoint = tf.keras.callbacks.ModelCheckpoint('roberta_model.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
+        checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1002/roberta_model.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
         earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=5, verbose=1)
         history = model.fit(X_train,
                             y_train,
-                            epochs=2,
-                            batch_size=4,
+                            epochs=10,
+                            batch_size=32,
                             callbacks=[checkpoint, earlystopping],
                             verbose=1,
                             validation_data=(X_test, y_test))
@@ -178,7 +178,7 @@ if __name__ == "__main__":
         plt.ylabel('accuracy')
         plt.xlabel('epoch')
         plt.legend(['train', 'val'], loc='upper left')
-        plt.savefig('roberta_accuracy.png')
+        plt.savefig('/home/u951/u951196/rolf/data/model_1002/roberta_accuracy.png')
         # summarize history for loss
         
         plt.plot(history.history['loss'])
@@ -187,6 +187,6 @@ if __name__ == "__main__":
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'val'], loc='upper left')
-        plt.savefig('roberta_loss.png')
+        plt.savefig('/home/u951/u951196/rolf/data/model_1002/roberta_loss.png')
     
     
