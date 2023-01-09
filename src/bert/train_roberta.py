@@ -166,7 +166,7 @@ if __name__ == "__main__":
         history = model.fit(X_train,
                             y_train,
                             epochs=10,
-                            batch_size=32,
+                            batch_size=32       ,
                             callbacks=[checkpoint, earlystopping],
                             verbose=1,
                             validation_data=(X_test, y_test))

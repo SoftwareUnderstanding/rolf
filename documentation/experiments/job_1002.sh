@@ -18,6 +18,6 @@ module purge && module load Python/3.10.4-GCCcore-11.3.0-bare && module load CUD
 
 source ~/.cache/pypoetry/virtualenvs/rolf-*/bin/activate
 
-srun python3 /home/u951/u951196/rolf/src/bert/train_roberta.py
+srun python3 /home/u951/u951196/rolf/src/bert/train_bert.py
 
 deactivate

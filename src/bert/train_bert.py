@@ -13,6 +13,10 @@ from bert import tokenization
 import logthis
 import sys
 from absl import flags
+from sklearn.utils import shuffle as sh
+from imblearn.under_sampling import RandomUnderSampler
+import pickle
+import seaborn as sns
 
 
 logthis.say(f"Version: {tf.__version__}")
@@ -27,11 +31,27 @@ def load_data():
     train_data = train_data.drop(columns = 'Repo')
     train_data = train_data.drop(train_data[train_data.Label == 'General'].index)
 
+    X = train_data[['Text']]
+    y = train_data[['Label']]
+    rus = RandomUnderSampler(random_state=42, sampling_strategy='majority')
+    X, y = rus.fit_resample(X, y)
+    train_data = pd.concat([X, y], axis=1)
+    train_data = sh(train_data)
+    print(train_data[['Label']].value_counts())
+    
     test_data = pd.read_csv('data/train_test_data/readme_new_preprocessed_test.csv',sep=';')
     test_data = test_data.drop(columns = 'Repo')
     test_data = test_data.drop(test_data[test_data.Label == 'General'].index)
 
     return train_data, test_data
+
+
+def encoding_the_labels(train_data):
+    label = preprocessing.LabelEncoder()
+    y = label.fit_transform(train_data['Label'])
+    print('0, 1, 2, 3, 4, 5: ', label.inverse_transform([0, 1, 2, 3, 4, 5]))
+    y = to_categorical(y)
+    return label, y
 
 
 def bert_encode(texts, tokenizer, max_len=512):
@@ -77,6 +97,25 @@ def build_model(bert_layer, max_len=512):
     return model
 
 
+def plot_confusion_matrix(X_test, y_test, model):
+    y_pred = model.predict(X_test)
+    y_pred = [np.argmax(i) for i in model.predict(X_test)]
+
+    con_mat = tf.math.confusion_matrix(labels=y_test, predictions=y_pred).numpy()
+
+    con_mat_norm = np.around(con_mat.astype('float') / con_mat.sum(axis=1)[:, np.newaxis], decimals=2)
+    label_names = list(range(len(con_mat_norm)))
+
+    con_mat_df = pd.DataFrame(con_mat_norm,
+                              index=label_names, 
+                              columns=label_names)
+
+    figure = plt.figure(figsize=(10, 10))
+    sns.heatmap(con_mat_df, cmap=plt.cm.Blues, annot=True)
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+
 if __name__ == "__main__":
     sys.argv=['preserve_unused_tokens=False']
     flags.FLAGS(sys.argv)
@@ -84,11 +123,14 @@ if __name__ == "__main__":
     
     train_data, test_data = load_data()
     
-    label = preprocessing.LabelEncoder()
-    y = label.fit_transform(train_data['Label'])
-    y = to_categorical(y)
+    
+    label, y = encoding_the_labels(train_data)
+    #label = preprocessing.LabelEncoder()
+    #y = label.fit_transform(train_data['Label'])
+    #y = to_categorical(y)
 
-    m_url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2'
+    # m_url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2'
+    m_url = 'https://tfhub.dev/google/small_bert/bert_uncased_L-2_H-512_A-8/2'
     bert_layer = hub.KerasLayer(m_url, trainable=True)
 
     tf.gfile = tf.io.gfile
@@ -106,8 +148,8 @@ if __name__ == "__main__":
     model = build_model(bert_layer, max_len=max_len)
     logthis.say(model.summary())
 
-    checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1001/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
-    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=5, verbose=1)
+    checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1002/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
+    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10, verbose=1)
 
     history = model.fit(
         train_input, train_labels,
@@ -117,7 +159,9 @@ if __name__ == "__main__":
         batch_size=32,
         verbose=1
     )
-        
+    
+    with open('/=/home/u951/u951196/rolf/data/model_1002/history.json', 'wb') as file_pi:
+        pickle.dump(history.history, file_pi)
     logthis.say(history.history.keys())
     
     # summarize history for accuracy
@@ -127,7 +171,8 @@ if __name__ == "__main__":
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.savefig('/home/u951/u951196/rolf/data/model_1001/bert_accuracy.png')
+    plt.savefig('/home/u951/u951196/rolf/data/model_1002/bert_accuracy.png')
+    plt.clf()
     # summarize history for loss
     
     plt.plot(history.history['loss'])
@@ -136,4 +181,4 @@ if __name__ == "__main__":
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'val'], loc='upper left')
-    plt.savefig('/home/u951/u951196/rolf/data/model_1001/bert_loss.png')
+    plt.savefig('/home/u951/u951196/rolf/data/model_1002/bert_loss.png')
