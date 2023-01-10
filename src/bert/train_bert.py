@@ -129,8 +129,8 @@ if __name__ == "__main__":
     #y = label.fit_transform(train_data['Label'])
     #y = to_categorical(y)
 
-    # m_url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2'
-    m_url = 'https://tfhub.dev/google/small_bert/bert_uncased_L-2_H-512_A-8/2'
+    m_url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/2'
+    # m_url = 'https://tfhub.dev/google/small_bert/bert_uncased_L-2_H-512_A-8/2'
     bert_layer = hub.KerasLayer(m_url, trainable=True)
 
     tf.gfile = tf.io.gfile
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     logthis.say(model.summary())
 
     checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1002/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
-    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10, verbose=1)
+    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=20, verbose=1)
 
     history = model.fit(
         train_input, train_labels,
