@@ -160,7 +160,7 @@ if __name__ == "__main__":
         verbose=1
     )
     
-    with open('/=/home/u951/u951196/rolf/data/model_1002/history.json', 'wb') as file_pi:
+    with open('/home/u951/u951196/rolf/data/model_1002/history.json', 'wb') as file_pi:
         pickle.dump(history.history, file_pi)
     logthis.say(history.history.keys())
     
