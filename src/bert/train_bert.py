@@ -119,7 +119,7 @@ def plot_confusion_matrix(X_test, y_test, model):
 if __name__ == "__main__":
     sys.argv=['preserve_unused_tokens=False']
     flags.FLAGS(sys.argv)
-    max_len = 500
+    max_len = 300
     
     train_data, test_data = load_data()
     
