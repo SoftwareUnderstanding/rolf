@@ -156,7 +156,7 @@ if __name__ == "__main__":
         validation_split=0.2,
         epochs=200,
         callbacks=[checkpoint, earlystopping],
-        batch_size=32,
+        batch_size=16,
         verbose=1
     )
     
