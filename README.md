@@ -1,4 +1,4 @@
-# Research sOftware cLassification Framework (ROLF)
+# Research sOftware cLassification Framework (ROLF) [![DOI](https://zenodo.org/badge/413199643.svg)](https://zenodo.org/badge/latestdoi/413199643)
 
 ## Introduction
 
