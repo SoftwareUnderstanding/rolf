@@ -1,12 +1,13 @@
 import numpy as np 
 import pandas as pd
-from typing import List
+from typing import List, Dict
 import os
 os.system("wget --quiet https://raw.githubusercontent.com/tensorflow/models/master/official/nlp/bert/tokenization.py")
 import tensorflow as tf
 import tensorflow_hub as hub
 from keras.utils import to_categorical
 from sklearn import preprocessing
+from bert.tokenization import bert_tokenization as tokenization
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 os.system("pip3 install bert-tensorflow==1.0.1")
@@ -36,16 +37,17 @@ def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: st
 	#print(df[df[LABEL] != 'Other'].groupby(LABEL).size().sum())
 	if cat_size > df.groupby('Label').size().sum() - cat_size:
 		cat_size = df.groupby('Label').size().sum() - cat_size
-	other_cat_size = int(cat_size/(len(categories)+1))+1
+	#other_cat_size = int(cat_size/(len(categories)+1))+1
+	other_cat_size = cat_size
 	sampling_strategy = {}
 	change = 0
-	for c in categories+['Other', 'General']:
+	for c in categories:
 		if c == cat:
 			sampling_strategy[c] = cat_size
 		elif c not in categories+['Other']:
 			sampling_strategy[c] = 0
 		else:
-			s = other_cat_size+change
+			s = other_cat_size
 			sampling_strategy[c] = min(s, sizes[indexes.index(c)])
 			change = 0
 			if sampling_strategy[c] < s:
@@ -65,7 +67,7 @@ def load_data():
 
     X = train_data[['Text']]
     y = train_data[['Label']]
-    cats = y.unique()
+    cats = list(train_data['Label'].unique())
     sampling_strategy = get_sampling_strategy(train_data, cats, 'Natural Language Processing')
     rus = RandomUnderSampler(random_state=42, sampling_strategy=sampling_strategy)
     X, y = rus.fit_resample(X, y)
