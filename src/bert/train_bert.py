@@ -189,14 +189,14 @@ if __name__ == "__main__":
     logthis.say(model.summary())
 
     checkpoint = tf.keras.callbacks.ModelCheckpoint('/home/u951/u951196/rolf/data/model_1002/model_bert.h5', monitor='val_accuracy', save_best_only=True, verbose=1)
-    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=20, verbose=1)
+    earlystopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=5, verbose=1)
 
     history = model.fit(
         train_input, train_labels,
         validation_split=0.2,
         epochs=200,
         callbacks=[checkpoint, earlystopping],
-        batch_size=16,
+        batch_size=8,
         verbose=1
     )
     
