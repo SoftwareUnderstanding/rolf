@@ -1,5 +1,6 @@
 import numpy as np 
 import pandas as pd
+from typing import List
 import os
 os.system("wget --quiet https://raw.githubusercontent.com/tensorflow/models/master/official/nlp/bert/tokenization.py")
 import tensorflow as tf
@@ -26,6 +27,37 @@ gpu = "available" if tf.config.list_physical_devices("GPU") else "NOT AVAILABLE"
 logthis.say(f"GPU is {gpu}")
 
 
+def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: str) -> Dict[str, int]:
+	df =df_train.drop(df_train[df_train['Label'] == 'General'].index)
+	sizes = df.groupby('Label').size()
+	indexes = list(sizes.index)
+	cat_size = sizes[indexes.index(cat)]
+	# If the category is bigger than the sum of the other categories
+	#print(df[df[LABEL] != 'Other'].groupby(LABEL).size().sum())
+	if cat_size > df.groupby('Label').size().sum() - cat_size:
+		cat_size = df.groupby('Label').size().sum() - cat_size
+	other_cat_size = int(cat_size/(len(categories)+1))+1
+	sampling_strategy = {}
+	change = 0
+	for c in categories+['Other', 'General']:
+		if c == cat:
+			sampling_strategy[c] = cat_size
+		elif c not in categories+['Other']:
+			sampling_strategy[c] = 0
+		else:
+			s = other_cat_size+change
+			sampling_strategy[c] = min(s, sizes[indexes.index(c)])
+			change = 0
+			if sampling_strategy[c] < s:
+				change += s - sampling_strategy[c]
+			if sizes[indexes.index(c)] < other_cat_size:
+				change += other_cat_size - sizes[indexes.index(c)]
+			else: 
+				change += 0
+	logthis.say(f'Sampling strategy: {str(sampling_strategy)}',)
+	return sampling_strategy
+
+
 def load_data():
     train_data = pd.read_csv('data/train_test_data/readme_new_preprocessed_train.csv',sep=';')
     train_data = train_data.drop(columns = 'Repo')
@@ -33,7 +65,9 @@ def load_data():
 
     X = train_data[['Text']]
     y = train_data[['Label']]
-    rus = RandomUnderSampler(random_state=42, sampling_strategy='majority')
+    cats = y.unique()
+    sampling_strategy = get_sampling_strategy(train_data, cats, 'Natural Language Processing')
+    rus = RandomUnderSampler(random_state=42, sampling_strategy=sampling_strategy)
     X, y = rus.fit_resample(X, y)
     train_data = pd.concat([X, y], axis=1)
     train_data = sh(train_data)
@@ -86,13 +120,19 @@ def build_model(bert_layer, max_len=512):
     clf_output = sequence_output[:, 0, :]
     
     lay = tf.keras.layers.Dense(64, activation='relu')(clf_output)
-    lay = tf.keras.layers.Dropout(0.2)(lay)
-    lay = tf.keras.layers.Dense(32, activation='relu')(lay)
-    lay = tf.keras.layers.Dropout(0.2)(lay)
+    lay = tf.keras.layers.Dropout(0.3)(lay)
+    lay = tf.keras.layers.Dense(16, activation='relu')(lay)
+    lay = tf.keras.layers.Dropout(0.3)(lay)
     out = tf.keras.layers.Dense(6, activation='softmax')(lay)
     
+    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+        initial_learning_rate=2e-5,
+        decay_steps=10000,
+        decay_rate=0.5)
+    
     model = tf.keras.models.Model(inputs=[input_word_ids, input_mask, segment_ids], outputs=out)
-    model.compile(tf.keras.optimizers.Adam(lr=2e-5), loss='categorical_crossentropy', metrics=['accuracy'])
+    #model.compile(tf.keras.optimizers.Adam(lr=2e-5), loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(tf.keras.optimizers.Adam(learning_rate=lr_schedule), loss='categorical_crossentropy', metrics=['accuracy'])
     
     return model
 
