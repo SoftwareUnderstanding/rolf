@@ -11,7 +11,7 @@ from bert.tokenization import bert_tokenization as tokenization
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 os.system("pip3 install bert-tensorflow==1.0.1")
-from bert import tokenization
+from bert.tokenization import bert_tokenization as tokenization
 import logthis
 import sys
 from absl import flags
