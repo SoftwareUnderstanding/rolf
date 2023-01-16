@@ -212,5 +212,3 @@ If this does not works, activate the environment manually:
 ```
 source ~/.cache/pypoetry/virtualenvs/rolf-*/bin/activate
 ```
-
-For any questions please contact: jenifer.girl.98@gmail.com
