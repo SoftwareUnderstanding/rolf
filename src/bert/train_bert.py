@@ -125,7 +125,7 @@ def build_model(bert_layer, max_len=512):
     lay = tf.keras.layers.Dropout(0.3)(lay)
     lay = tf.keras.layers.Dense(16, activation='relu')(lay)
     lay = tf.keras.layers.Dropout(0.3)(lay)
-    out = tf.keras.layers.Dense(6, activation='softmax')(lay)
+    out = tf.keras.layers.Dense(7, activation='softmax')(lay)
     
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
         initial_learning_rate=2e-5,
