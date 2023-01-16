@@ -61,7 +61,7 @@ def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: st
 
 
 def load_data():
-    train_data = pd.read_csv('data/train_test_data/readme_new_preprocessed_train.csv',sep=';')
+    train_data = pd.read_csv('data/train_test_data/readme_negative_samples_preprocessed_train.csv',sep=';')
     train_data = train_data.drop(columns = 'Repo')
     train_data = train_data.drop(train_data[train_data.Label == 'General'].index)
 
@@ -75,7 +75,7 @@ def load_data():
     train_data = sh(train_data)
     print(train_data[['Label']].value_counts())
     
-    test_data = pd.read_csv('data/train_test_data/readme_new_preprocessed_test.csv',sep=';')
+    test_data = pd.read_csv('data/train_test_data/readme_negative_samples_preprocessed_test.csv',sep=';')
     test_data = test_data.drop(columns = 'Repo')
     test_data = test_data.drop(test_data[test_data.Label == 'General'].index)
 
