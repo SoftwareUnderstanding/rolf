@@ -58,11 +58,11 @@ def merge_csv_files(files: List[str], outfile: str):
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(prog="python src/final.py", description='Perform all the methods of the program.')
 	subparsers = parser.add_subparsers(dest='command', help="Select the command to perform.")
-	
+
 	parser_collect_readmes = subparsers.add_parser('collect_readmes', help="Collect readme files, create dataset.",
 		description="Collect readmes from collected urls from given file rows.",
-		epilog ="""Example: python3 src/collectreadmes.py --input_mode csvfile --input data/awesome_lists_links/awesome_lists.csv 
-					--githublinks_file data/awesome_lists_links/repos1.csv --awesome_list_mode 
+		epilog ="""Example: python3 src/collectreadmes.py --input_mode csvfile --input data/awesome_lists_links/awesome_lists.csv
+					--githublinks_file data/awesome_lists_links/repos1.csv --awesome_list_mode
 					--readme_folder data/awesome_lists_links/readme --outfolder data/new_datasets"""
 	)
 	parser_collect_readmes.add_argument("--input_mode", required=True, choices=collectreadmes.ReadmeCollector.input_modes, help="Set input mode. The input can be given by a csvfile or an url in comand line.")

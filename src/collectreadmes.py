@@ -25,7 +25,7 @@ class ReadmeCollector:
 
 	def __init__(self):
 		self.__categories: defaultdict[str, List[str]] = defaultdict(list)
-		
+
 	def __getReadmeUrlFromGithubUrl(self, github_url: str) -> str:
 		"""
 		Generates the url of readme file for the given github url.
@@ -43,12 +43,12 @@ class ReadmeCollector:
 	def __getReadmeText(self, github_url: str) -> Union[str, None]:
 		"""
 		Gets the text for the given github repo or None if not found by the method.
-		Tries 'README.md' and 'readme.md' files in root folder of repo. 
+		Tries 'README.md' and 'readme.md' files in root folder of repo.
 
 		Params
 		-----------
 		github_url: (str) The github url.
-		
+
 		Return
 		----------
 		(str) The text of the readme or None if not found.
@@ -82,11 +82,11 @@ class ReadmeCollector:
 	def getRepoNameFromGitHubUrl(self, url: str) -> str:
 		"""
 		Generates a repository name from the given github url.
-		
+
 		Params
 		--------
 		url: (str) The url to generate the name from.
-		
+
 		Return
 		--------
 		(str) The generated repository name.
@@ -109,7 +109,7 @@ class ReadmeCollector:
 		"""
 		Function to add every category and it's link to the categories Dict.
 		At this step the links could be awesome list links or github links.
-		
+
 		Params
 		---------
 		path: (str) Path to the csv file containing the data with 'Label', 'Repo' headers
@@ -144,7 +144,7 @@ class ReadmeCollector:
 		Params
 		----------
 		input_url: (str) The url where the github urls will be collected from.
-		
+
 		Return
 		----------
 		(Set[str]) Set of the github urls collected.
@@ -156,11 +156,11 @@ class ReadmeCollector:
 				if 'github.com' in found[0]:
 					github_urls.add(found[0])
 		return github_urls
-	
+
 	def downloadReadmeFiles(self, readmes_folder: str) -> None:
 		"""
 		Downloads all the readme files per category. Creates a folder for each category in the given folder.
-		
+
 		Params
 		---------
 		readmes_folder: (str) Path to the folder where the readmes will be saved.
@@ -177,7 +177,7 @@ class ReadmeCollector:
 	def dumpGithubLinks(self, outfile: str) -> None:
 		"""
 		Dumps (in append mode) github links into a csvfile. Fields: ('Label': category, 'Repo': github url).
-		
+
 		Params
 		---------
 		outfile: (str) Path to the file where links will be dumped.
@@ -198,14 +198,14 @@ class ReadmeCollector:
 			df = pd.DataFrame([], columns=fieldnames)
 		df = pd.concat([df, pd.DataFrame(data)])
 		df.drop_duplicates(inplace=True)
-		df.to_csv(path, sep=';', index=False)		
+		df.to_csv(path, sep=';', index=False)
 
 	def createDatabase(self, outfolder: str, readmes_folder: str) -> None:
 		"""
 		Looks for the readme files containing readme text linked to the github urls stored in __categories.
 		Generates a database per category from the readme texts ready for preprocessing or training.
 		If database exists, only appends the new readme texts.
-		
+
 		Params
 		---------
 		outfolder: (str) The folder where the databases are stored per category folders.
@@ -246,22 +246,22 @@ if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser("python src/collect_readmes.py",
 		description="Collect readmes from collected urls from given file rows.",
-		epilog ="""Example: python3 src/collectreadmes.py --input_mode csvfile --input data/awesome_lists_links/awesome_lists.csv 
-					--githublinks_file data/awesome_lists_links/repos1.csv --awesome_list_mode 
+		epilog ="""Example: python3 src/collectreadmes.py --input_mode csvfile --input data/awesome_lists_links/awesome_lists.csv
+					--githublinks_file data/awesome_lists_links/repos1.csv --awesome_list_mode
 					--readme_folder data/awesome_lists_links/readme --outfolder data/new_datasets""")
-	
+
 	parser.add_argument("--input_mode", required=True, choices=ReadmeCollector.input_modes, help="Set input mode. The input can be given by a csvfile or an url in comand line.")
 	parser.add_argument("--input", required=True, help="Give the input.")
 	parser.add_argument("--category", required='url' in sys.argv, help="Set category of input url. (Required if url input_mode is used)")
 
 	parser.add_argument('--awesome_list_mode', action=argparse.BooleanOptionalAction, default=False, help='Set mode of links to awesome list.')
 	parser.add_argument("--githublinks_file", help='Give file to save collected githubs if awesome lists are given.')
-	
+
 	parser.add_argument('--readme_folder', required=True, help='Path to the folder where readme files will be saved per category.')
 	parser.add_argument('--outfolder', required=True, help='Path to the folder, where database per category will be saved.')
 	parser.add_argument('--redownload', help='Redownload the readmes.', action=argparse.BooleanOptionalAction, default=False)
 	parser.add_argument('--input_delimiter', help='Set delimiter of input csv file (default: ";").', default=';')
-	
+
 	args = parser.parse_args()
 
 	collector = ReadmeCollector()

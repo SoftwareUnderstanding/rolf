@@ -13,14 +13,14 @@ def cross_validate_NN(model, X, y, X_test, y_test,name="NN", fit_params=None, sc
     Function create a metric report automatically with cross_validate function.
     @param model: (model) neural network model
     @param X: (list or matrix or tensor) training X data
-    @param y: (list) label data 
+    @param y: (list) label data
     @param X_test: (list or matrix or tensor) testing X data
-    @param y_test: (list) label test data 
+    @param y_test: (list) label test data
     @param name: (string) name of the model (default classifier)
-    @param fit_aparams: (dict) add parameters for model fitting 
+    @param fit_aparams: (dict) add parameters for model fitting
     @param scoring: (dict) dictionary of metrics and names
     @param n_splits: (int) number of fold for cross-validation (default 5)
-    @return: (pandas.dataframe) dataframe containing all the results of the metrics 
+    @return: (pandas.dataframe) dataframe containing all the results of the metrics
     for each fold and the mean and std for each of them
     '''
     # ---- Parameters initialisation
@@ -29,23 +29,23 @@ def cross_validate_NN(model, X, y, X_test, y_test,name="NN", fit_params=None, sc
     k = 1
     np.random.seed(seed)
     kfold = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=seed)
-    
+
     # Creation of list for each metric
     if scoring==None:        # create a dictionary if none is passed
         dic_score = {}
-    if scoring!=None:        # save the dict 
+    if scoring!=None:        # save the dict
         dic_score = scoring.copy()
-    
+
     dic_score["fit_time"] = None   # initialisation for time fitting and scoring
     dic_score["score_time"] = None
     scorer = {}
-    for i in dic_score.keys(): 
+    for i in dic_score.keys():
         scorer[i] = []
-    
+
     index = ["Model"]
     results = [name]
     # ---- Loop on k-fold for cross-valisation
-    for train, test in kfold.split(X, y):   # training NN on each fold 
+    for train, test in kfold.split(X, y):   # training NN on each fold
         # create model
         print(f"k-fold : {k}")
         _model = tf.keras.models.clone_model(model)
