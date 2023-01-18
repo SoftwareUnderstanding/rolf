@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import pandas as pd
 from typing import List, Dict
 import os
@@ -54,7 +54,7 @@ def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: st
 				change += s - sampling_strategy[c]
 			if sizes[indexes.index(c)] < other_cat_size:
 				change += other_cat_size - sizes[indexes.index(c)]
-			else: 
+			else:
 				change += 0
 	logthis.say(f'Sampling strategy: {str(sampling_strategy)}',)
 	return sampling_strategy
@@ -74,7 +74,7 @@ def load_data():
     train_data = pd.concat([X, y], axis=1)
     train_data = sh(train_data)
     print(train_data[['Label']].value_counts())
-    
+
     test_data = pd.read_csv('data/train_test_data/readme_base_semantic_web_preprocessed_test.csv',sep=';')
     test_data = test_data.drop(columns = 'Repo')
     test_data = test_data.drop(test_data[test_data.Label == 'General'].index)
@@ -94,48 +94,48 @@ def bert_encode(texts, tokenizer, max_len=512):
     all_tokens = []
     all_masks = []
     all_segments = []
-    
+
     for text in texts:
         text = tokenizer.tokenize(text)
-        
+
         text = text[:max_len-2]
         input_sequence = ["[CLS]"] + text + ["[SEP]"]
         pad_len = max_len-len(input_sequence)
-        
+
         tokens = tokenizer.convert_tokens_to_ids(input_sequence) + [0] * pad_len
         pad_masks = [1] * len(input_sequence) + [0] * pad_len
         segment_ids = [0] * max_len
-        
+
         all_tokens.append(tokens)
         all_masks.append(pad_masks)
         all_segments.append(segment_ids)
-        
+
     return np.array(all_tokens), np.array(all_masks), np.array(all_segments)
 
 def build_model(bert_layer, max_len=512):
     input_word_ids = tf.keras.Input(shape=(max_len,), dtype=tf.int32, name="input_word_ids")
     input_mask = tf.keras.Input(shape=(max_len,), dtype=tf.int32, name="input_mask")
     segment_ids = tf.keras.Input(shape=(max_len,), dtype=tf.int32, name="segment_ids")
-    
+
     pooled_output, sequence_output = bert_layer([input_word_ids, input_mask, segment_ids])
-    
+
     clf_output = sequence_output[:, 0, :]
-    
+
     lay = tf.keras.layers.Dense(64, activation='relu')(clf_output)
     lay = tf.keras.layers.Dropout(0.3)(lay)
     lay = tf.keras.layers.Dense(16, activation='relu')(lay)
     lay = tf.keras.layers.Dropout(0.3)(lay)
     out = tf.keras.layers.Dense(7, activation='softmax')(lay)
-    
+
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
         initial_learning_rate=2e-5,
         decay_steps=10000,
         decay_rate=0.5)
-    
+
     model = tf.keras.models.Model(inputs=[input_word_ids, input_mask, segment_ids], outputs=out)
     #model.compile(tf.keras.optimizers.Adam(lr=2e-5), loss='categorical_crossentropy', metrics=['accuracy'])
     model.compile(tf.keras.optimizers.Adam(learning_rate=lr_schedule), loss='categorical_crossentropy', metrics=['accuracy'])
-    
+
     return model
 
 
@@ -149,7 +149,7 @@ def plot_confusion_matrix(X_test, y_test, model):
     label_names = list(range(len(con_mat_norm)))
 
     con_mat_df = pd.DataFrame(con_mat_norm,
-                              index=label_names, 
+                              index=label_names,
                               columns=label_names)
 
     figure = plt.figure(figsize=(10, 10))
@@ -162,10 +162,9 @@ if __name__ == "__main__":
     sys.argv=['preserve_unused_tokens=False']
     flags.FLAGS(sys.argv)
     max_len = 300
-    
+
     train_data, test_data = load_data()
-    
-    
+
     label, y = encoding_the_labels(train_data)
     #label = preprocessing.LabelEncoder()
     #y = label.fit_transform(train_data['Label'])
@@ -179,7 +178,7 @@ if __name__ == "__main__":
     vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
     do_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
     tokenizer = tokenization.FullTokenizer(vocab_file, do_lower_case)
-    
+
     train_input = bert_encode(train_data.Text.values, tokenizer, max_len=max_len)
     test_input = bert_encode(test_data.Text.values, tokenizer, max_len=max_len)
     train_labels = y
@@ -201,11 +200,11 @@ if __name__ == "__main__":
         batch_size=8,
         verbose=1
     )
-    
+
     with open('/home/u951/u951196/rolf/data/model_1002/history.json', 'wb') as file_pi:
         pickle.dump(history.history, file_pi)
     logthis.say(history.history.keys())
-    
+
     # summarize history for accuracy
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
@@ -216,7 +215,7 @@ if __name__ == "__main__":
     plt.savefig('/home/u951/u951196/rolf/data/model_1002/bert_accuracy.png')
     plt.clf()
     # summarize history for loss
-    
+
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model loss')

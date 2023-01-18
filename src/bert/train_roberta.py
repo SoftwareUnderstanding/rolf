@@ -115,21 +115,21 @@ if __name__ == "__main__":
     session = tf.compat.v1.InteractiveSession(config=tf.compat.v1.ConfigProto(gpu_options=gpu_options))
     sys.argv=['preserve_unused_tokens=False']
     flags.FLAGS(sys.argv)
-    
+
     strategy = get_strategy()
-    
+
     df, test_data = load_data()
-    
+
     X_data = df[['Text']].to_numpy().reshape(-1)
     y_data = df[['Label']].to_numpy().reshape(-1)
-    
+
     label = preprocessing.LabelEncoder()
     df['Label'] = label.fit_transform(df['Label'])
     df['Label'] = to_categorical(df['Label'])
-    
+
     categories = df[['Label']].values.reshape(-1)
     n_categories = len(categories)
-    
+
     category_to_id = {}
     category_to_name = {}
 
@@ -140,23 +140,22 @@ if __name__ == "__main__":
             category_id = len(category_to_id)
             category_to_id[c] = category_id
             category_to_name[category_id] = c
-        
+
         y_data[index] = category_id
 
     # Display dictionary
     category_to_name
-    
+
     X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.3, random_state=777) 
-    
+
     tokenizer = RobertaTokenizer.from_pretrained(MODEL_NAME)
-    
+
     X_train = roberta_encode(X_train, tokenizer)
     X_test = roberta_encode(X_test, tokenizer)
 
     y_train = np.asarray(y_train, dtype='int32')
     y_test = np.asarray(y_test, dtype='int32')
-    
-    
+
     with strategy.scope():
         model = build_model(n_categories, strategy)
         model.summary()
@@ -170,7 +169,7 @@ if __name__ == "__main__":
                             callbacks=[checkpoint, earlystopping],
                             verbose=1,
                             validation_data=(X_test, y_test))
-        
+
         # summarize history for accuracy
         plt.plot(history.history['accuracy'])
         plt.plot(history.history['val_accuracy'])
@@ -180,7 +179,7 @@ if __name__ == "__main__":
         plt.legend(['train', 'val'], loc='upper left')
         plt.savefig('/home/u951/u951196/rolf/data/model_1002/roberta_accuracy.png')
         # summarize history for loss
-        
+
         plt.plot(history.history['loss'])
         plt.plot(history.history['val_loss'])
         plt.title('model loss')
@@ -188,5 +187,3 @@ if __name__ == "__main__":
         plt.xlabel('epoch')
         plt.legend(['train', 'val'], loc='upper left')
         plt.savefig('/home/u951/u951196/rolf/data/model_1002/roberta_loss.png')
-    
-    
