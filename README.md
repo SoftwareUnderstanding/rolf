@@ -1,4 +1,4 @@
-# Research sOftware cLassification Framework (ROLF) 
+# Research sOftware cLassification Framework (ROLF)
 
 [![DOI](https://zenodo.org/badge/413199643.svg)](https://zenodo.org/badge/latestdoi/413199643)
 
@@ -18,7 +18,7 @@ Extracting the software category/categories helps group software projects with s
 
 ## Usage
 
-Possibly option: 
+Possibly option:
 
 ```
 usage: python src/main.py [-h] {collect-readmes,
@@ -124,7 +124,7 @@ optional arguments:
 
 ```
 python3 src/main.py train-models -h
-usage: python src/main.py train-models [-h] 
+usage: python src/main.py train-models [-h]
     --train-set TRAIN-SET
     --test-set TEST-SET
     --results-file RESULTS-FILE
@@ -186,7 +186,7 @@ optional arguments:
                         Vision', 'Sequential', 'Audio', 'Graphs', 'Reinforcement Learning']
   --additional-categories ADDITIONAL-CATEGORIES [ADDITIONAL-CATEGORIES ...]
                         List of categories adding to basic categories. BASE-CATEGORIES=['Natural Language Processing', 'Computer Vision', 'Sequential', 'Audio',
-                        'Graphs', 'Reinforcement Learning']	
+                        'Graphs', 'Reinforcement Learning']
 ```
 
 

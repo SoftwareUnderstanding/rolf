@@ -2,6 +2,10 @@ import argparse
 import csv
 from pathlib import Path
 import pickle
+import numpy as np
+import tensorflow as tf
+import tensorflow_hub as hub
+from bert.tokenization import bert_tokenization as tokenization
 
 class Predictor:
 	"""
@@ -30,11 +34,6 @@ class Predictor:
 		self.models_path = Path(models_path)
 		self.data_path = data_path
 		self.bert = bert
-		if bert:
-			import tensorflow as tf
-			import tensorflow_hub as hub
-			import numpy as np
-			from bert.tokenization import bert_tokenization as tokenization
 		if out_path is not None:
 			self.out_path = Path(out_path)
 		else:
@@ -78,18 +77,18 @@ class Predictor:
 		all_tokens = []
 		all_masks = []
 		all_segments = []
-		
+
 		for text in texts:
 			text = tokenizer.tokenize(text)
-			
+
 			text = text[:max_len-2]
 			input_sequence = ["[CLS]"] + text + ["[SEP]"]
 			pad_len = max_len-len(input_sequence)
-			
+
 			tokens = tokenizer.convert_tokens_to_ids(input_sequence) + [0] * pad_len
 			pad_masks = [1] * len(input_sequence) + [0] * pad_len
 			segment_ids = [0] * max_len
-			
+
 			all_tokens.append(tokens)
 			all_masks.append(pad_masks)
 			all_segments.append(segment_ids)
@@ -174,7 +173,7 @@ if __name__ == '__main__':
 	parser_predict.add_argument('--test_set', required=True, help='Name of the csv file containing the test set.')
 	parser_predict.add_argument('--outfile', required=True, help='Path to output csv file with the results.')
 	parser_predict.add_argument('--bert', action=argparse.BooleanOptionalAction)
-	
+
 	args = parser_predict.parse_args()
 
 	predictor = Predictor(args.inputfolder, args.test_set, args.outfile, args.bert).predict()
