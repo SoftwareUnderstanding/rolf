@@ -14,9 +14,9 @@ Possibly option:
 ```
 usage: python src/main.py [-h] {collect-readmes,
                                  preprocess,
-                                 train-test-split,
+                                 train_test_split,
                                  merge-csv,
-                                 train-models,
+                                 train_models,
                                  predict,
                                  evaluate}
 
@@ -86,12 +86,12 @@ optional arguments:
 ### Train test split
 
 ```
-python3 src/main.py train-test-split -h
-usage: python src/main.py train-test-split [-h] --train-test-file TRAIN-TEST-FILE [--test-size TEST-SIZE]
+python3 src/main.py train_test_split -h
+usage: python src/main.py train_test_split [-h] --train_test_file TRAIN_TEST_FILE [--test-size TEST-SIZE]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --train-test-file TRAIN-TEST-FILE
+  --train_test_file TRAIN_TEST_FILE
                         Name of the file to split.
   --test-size TEST-SIZE
                         Size of the test set (default: 0.2).
@@ -114,31 +114,29 @@ optional arguments:
 ### Train models
 
 ```
-python3 src/main.py train-models -h
-usage: python src/main.py train-models [-h]
-    --train-set TRAIN-SET
-    --test-set TEST-SET
-    --results-file RESULTS-FILE
-    --out-folder OUT-FOLDER
-    [--evaluation-metric EVALUATION-METRIC]
+python3 src/main.py train_models -h
+usage: python src/main.py train_models [-h]
+    --train_set TRAIN_SET
+    --results_file RESULTS_FILE
+    --out_folder OUT_FOLDER
+    [--evaluation_metric EVALUATION_METRIC]
     [--gridsearch {nogridsearch,bestmodel,bestsampler,bestvectorizer,all}]
-    [--all-categories ALL-CATEGORIES [ALL-CATEGORIES ...] | --additional-categories ADDITIONAL-CATEGORIES [ADDITIONAL-CATEGORIES ...]]
+    [--all_categories ALL-CATEGORIES [ALL_CATEGORIES ...] | --additional-categories ADDITIONAL-CATEGORIES [ADDITIONAL-CATEGORIES ...]]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --train-set TRAIN-SET
+  --train_set TRAIN_SET
                         Name of the csv file containing train set.
-  --test-set TEST_SET   Name of the csv file containing test set.
-  --results-file RESULTS-FILE
+  --results_file RESULTS_FILE
                         Path to the file where results will be saved.
-  --out-folder OUT-FOLDER
+  --out_folder OUT_FOLDER
                         Path to the folder where models will be saved.
   --evaluation-metric EVALUATION-METRIC
                         Name of the key for evaluation (default: "f1-score_overall").
-  --all-categories ALL-CATEGORIES [ALL-CATEGORIES ...]
+  --all_categories ALL_CATEGORIES [ALL_CATEGORIES ...]
                         List of all categories used. Use only if you want not the basic categories. BASE-CATEGORIES=['Natural Language Processing', 'Computer
                         Vision', 'Sequential', 'Audio', 'Graphs', 'Reinforcement Learning']
-  --additional-categories ADDITIONAL-CATEGORIES [ADDITIONAL-CATEGORIES ...]
+  --additional_categories ADDITIONAL_CATEGORIES [ADDITIONAL_CATEGORIES ...]
                         List of categories adding to basic categories. BASE-CATEGORIES=['Natural Language Processing', 'Computer Vision', 'Sequential', 'Audio',
                         'Graphs', 'Reinforcement Learning']
 ```

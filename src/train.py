@@ -41,7 +41,7 @@ CV_splits = 5
 def filter_dataframe(df: pd.DataFrame, category: str) -> None:
 	for ind, row in df.iterrows():
 		if category != str(row[LABEL]):
-			row[LABEL] = 'Other'	
+			row[LABEL] = 'Other'
 	#print(f'{cat} filtered {count} rows in training dataset')
 
 def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: str) -> Dict[str, int]:
@@ -69,7 +69,7 @@ def get_sampling_strategy(df_train: pd.DataFrame, categories: List[str], cat: st
 				change += s - sampling_strategy[c]
 			if sizes[indexes.index(c)] < other_cat_size:
 				change += other_cat_size - sizes[indexes.index(c)]
-			else: 
+			else:
 				change += 0
 	logthis.say(f'Sampling strategy: {str(sampling_strategy)}',)
 	return sampling_strategy
