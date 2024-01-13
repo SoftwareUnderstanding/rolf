@@ -22,6 +22,7 @@ from ResultStorage import ResultStorage
 #import fasttext
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.calibration import CalibratedClassifierCV
 
 #from Vectorizing.CountVectorizer import getCountVectorizer
 #from Vectorizing.TF_IDF_Vectorizer import getWordLevelVectorizer, getNGramLevelVectorizer
@@ -178,14 +179,14 @@ def train_models(train: str, out_folder: str, results_file:str, categories: List
 		logthis.say(f'LinearSVC starts for {cat=} category {ind}/{len(categories)}')
 		pipeline = Pipeline([
 			('countvect', CountVectorizer(max_df=0.9, min_df=0.1, max_features=None, ngram_range=(1, 1))),
-            ('linear_svc', LinearSVC(C=0.0001, dual=False))])
+            ('linear_svc', CalibratedClassifierCV(LinearSVC(C=0.0001, dual=False)))])
 		result_storage.processResult(*Report.report(pipeline, train, x_train[TEXT], y_train, cat, name='Linear_SVC_Count_Vectors_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		#logthis.say('###################################################')
 		#logthis.say(pipeline.get_params())
 		#logthis.say('###################################################')
 		pipeline = Pipeline([
 			('tfidf', TfidfVectorizer(max_df=0.9, min_df=0.1, max_features=None, ngram_range=(1, 1))),
-            ('linear_svc', LinearSVC(C=0.0001, dual=False))])
+            ('linear_svc', CalibratedClassifierCV(LinearSVC(C=0.0001, dual=False)))])
 		result_storage.processResult(*Report.report(pipeline, train, x_train[TEXT], y_train, cat, name='Linear_SVC_TFIDF_RandomUnder', cv=CV_splits, dict_scoring=Report.score_metrics, save=False))
 		#logthis.say('###################################################')
 		#logthis.say(pipeline.get_params())
