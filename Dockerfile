@@ -21,5 +21,5 @@ COPY app /root/app
 COPY trained_models /root/trained_models
 WORKDIR /root
 
-EXPOSE 8080
+EXPOSE 5551
 CMD ["python3", "-u", "app/rolf.py"]
