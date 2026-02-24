@@ -9,7 +9,6 @@ import logthis
 from preprocessing import preprocess_file
 from util.utils import BASE_CATEGORIES, getCategories
 from Evaluation.evaluation import Evaluator
-from Evaluation.prediction import Predictor
 import collectreadmes
 
 def train_test_split_file(filename, test_size = 0.2, new_category = True):
@@ -56,7 +55,7 @@ def merge_csv_files(files: List[str], outfile: str):
 	logthis.say('Merging files done.')
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(prog="python src/final.py", description='Perform all the methods of the program.')
+	parser = argparse.ArgumentParser(prog="python src/main.py", description='Perform all the methods of the program.')
 	subparsers = parser.add_subparsers(dest='command', help="Select the command to perform.")
 
 	parser_collect_readmes = subparsers.add_parser('collect_readmes', help="Collect readme files, create dataset.",
@@ -152,6 +151,7 @@ if __name__ == "__main__":
 			#TODO
 			pass
 	if args.command == 'predict':
+		from Evaluation.prediction import Predictor
 		predictor = Predictor(args.inputfolder, args.test_set, args.outfile).predict()
 	if args.command == 'evaluate':
 		categories = getCategories(BASE_CATEGORIES, args.all_categories, args.additional_categories)
